@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\components\\modals\\confirmation",
+    "\\src\\app\\components\\modals\\logout",
+    "\\src\\app\\shared\\ui",
+    "\\src\\app\\shared\\_services"
+  ],
+  "SelectedNode": "\\src\\app\\components",
+  "PreviewInSolutionExplorer": false
+}

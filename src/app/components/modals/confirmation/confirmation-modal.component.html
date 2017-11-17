@@ -1,0 +1,21 @@
+<form name="formModal" (ngSubmit)="submit()">
+
+    <div class="modal-header">
+        <h3 class="modal-title"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Confirmation</h3>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body" id="modal-body">
+        <p>{{data}}</p>
+    </div>
+
+    <div class="modal-footer" style="justify-content: space-between;">
+        <button type="button" class="btn btn-interact-outline float-left pull-left" (click)="activeModal.dismiss('Close click')">Cancel</button>
+        <button type="submit" class="btn btn-interact" aria-label="Close" [disabled]="waiting" [ngClass]="{'btn-waiting':waiting}">
+            <i class="fa fa-check" aria-hidden="true"></i> Confirm
+        </button>
+    </div>
+
+</form>

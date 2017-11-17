@@ -1,0 +1,20 @@
+/** Reducer actions for the API store */
+export enum StoreActionsApi {
+	RESET = 'RESET',
+	INTERACTION = 'INTERACTION',
+	STATE_CHANGE = 'STATE_CHANGE',
+	RESET_ERRORS = 'RESET_ERRORS',
+	RESET_SUCCESS = 'RESET_SUCCESS',
+	GET_COMPLETE = 'GET_COMPLETE',
+	POST_COMPLETE = 'POST_COMPLETE',
+	PUT_COMPLETE = 'PUT_COMPLETE',
+	DELETE_COMPLETE = 'DELETE_COMPLETE'
+}
+
+/** Reducer actions for the UI store */
+export enum StoreActionsUi {
+	RESET = 'RESET',
+	REHYDRATE = 'REHYDRATE',
+	MODAL_OPEN = 'MODAL_OPEN',
+	MODAL_UNLOAD = 'MODAL_UNLOAD'
+}
