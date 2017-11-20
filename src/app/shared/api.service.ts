@@ -21,7 +21,9 @@ export class ApiService extends BaseApiStore {
     ) {
         super(httpSvc, storeSvc, routerSvc);
      
-    }
+	  }
+
+
     /*
     //public user = (update?: boolean) => this.getStore(ApiMap.user.endpoint + 'getuserprofile/', ApiMap.user, update);
     public user = {

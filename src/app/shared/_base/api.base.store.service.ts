@@ -34,7 +34,7 @@ export class BaseApiStore {
      * @param url - The URL location of the webapi
      * @param updateCache - Refresh the version in the cache
      */
-	protected get<T>(url: string, updateCache: boolean = false): Observable<T> {
+	public get<T>(url: string, updateCache: boolean = false): Observable<T> {
 		// If this request is not in the cache or updateCache was requested (default behavior), load content into cache
 		if (!this.cache[url] || updateCache) {
 			this.cache[url] = this.http.get(url, this.getHeaders())
@@ -90,7 +90,7 @@ export class BaseApiStore {
      * @param url - The URL location of the webapi
      * @param data - The data to pass to the server
      */
-	protected post<T>(url: string, data): Observable<T> {
+	public post<T>(url: string, data): Observable<T> {
 		return this.http.post(url, data, this.getHeaders()).map(res => res.text() ? res.json() : {});
 	} // end post
 
@@ -134,7 +134,7 @@ export class BaseApiStore {
      * @param url - The URL location of the webapi
      * @param data - The data to pass to the server
      */
-	protected put<T>(url: string, data: any): Observable<any> {
+	public put<T>(url: string, data: any): Observable<any> {
         return this.http.put(url, data, this.getHeaders()).map(res => res.text() ? res.json() : {});
 	} // end post
 
@@ -179,16 +179,16 @@ export class BaseApiStore {
 	 * @param url - The URL location of the webapi
 	 * @param data - The data to pass to the server
 	 */
-	protected delete<T>(url: string, data: any): Observable<T> {
+	public delete<T>(url: string, data: any): Observable<T> {
 		return this.http.delete(url, this.getHeaders()).map(res => res.text() ? res.json() : {});
 	} // end post
 
-    /**
-     * Make a DELETE request
-     * @param url - The URL location of the webapi
-     * @param apiMap - The ApiMap object
-     * @param element - The element or collection of elements being deleted
-     */
+  /**
+  * Make a DELETE request
+  * @param url - The URL location of the webapi
+  * @param apiMap - The ApiMap object
+  * @param element - The element or collection of elements being deleted
+  */
 	protected deleteStore<T>(url: string, apiMap: IStore.ApiMap, element:any | any[]): Observable<T> {
 		// Set status to modifying
 		let newState: IStore.ApiStatus = { modifying: true, modified: false, modifyError: false };
