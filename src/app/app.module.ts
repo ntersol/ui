@@ -1,5 +1,11 @@
+// @angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, PreloadAllModules } from '@angular/router';
+import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
+
+// 3rd party tools
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Bootstrap
 import { StoreModule } from '@ngrx/store';
 import { DatePipe, CurrencyPipe } from '@angular/common';
@@ -7,9 +13,16 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
 
 
 import { AppComponent } from './app.component';
+import { ROUTES } from './app.routes';
 
-import { } from '@routes';
-import { LogoutModalComponent, ConfirmationModalComponent } from '@components';
+import {
+	NoContentComponent, LoginComponent, HomeComponent
+} from '@routes';
+
+import {
+	FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
+	LogoutModalComponent, ConfirmationModalComponent
+} from '@components';
 
 // Shared
 import {
@@ -39,6 +52,14 @@ enableProdMode();
 
 
 // Application wide providers
+export const APP_COMPONENTS = [
+	NoContentComponent, LoginComponent, HomeComponent,
+
+	FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
+	LogoutModalComponent, ConfirmationModalComponent
+];
+
+// Application wide providers
 export const APP_PROVIDERS = [
 	BaseApiStore,
 	GlobalErrorHandler,
@@ -62,15 +83,22 @@ export const APP_PROVIDERS = [
 
 
 @NgModule({
-  declarations: [
-	  AppComponent,
-	  LogoutModalComponent, ConfirmationModalComponent,
+	declarations: [
+		AppComponent,
+	  APP_COMPONENTS,
 
 	  SafeHtmlPipe, PhoneNumberPipe
   ],
-  imports: [
+	imports: [
+    // @angular
 	  BrowserModule,
-	  StoreModule.forRoot({ api: StoreApiReducer, ui: StoreUIReducer }),// Inject stores here
+	  FormsModule,
+	  ReactiveFormsModule,
+	  HttpModule,
+	  
+	  RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+	  NgbModule.forRoot(),// Bootstrap
+	  StoreModule.forRoot({ api: StoreApiReducer, ui: StoreUIReducer }),// NGRX
   ],
   providers: [APP_PROVIDERS],
   bootstrap: [AppComponent],

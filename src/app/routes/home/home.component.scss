@@ -1,0 +1,14 @@
+/*styles for home content only*/
+#homepage{
+    img{position: relative;top: -2px;}
+    .drag-fill{
+        position:relative;
+        .file-upload{position:absolute;top:0;bottom:0;left:0;right:0;z-index:5;}
+    }
+
+    .tree{position:relative;overflow-y: scroll}
+    .combo{
+        .tree{height:500px;overflow-y:scroll;}
+        .grid{}
+    }
+}
