@@ -6,12 +6,12 @@ import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstr
 import { Router} from '@angular/router';
 import { Http } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { IStore, StoreActionsApi, ApiMap, BaseApiStore } from '@shared';
+import { IStore, ApiActions, ApiMap, ApiHttpService } from '@shared';
 
 import { LogoutModalComponent } from '@components';
 
 @Injectable()
-export class AuthService extends BaseApiStore {
+export class AuthService extends ApiHttpService {
 
     public sessionExpired: boolean = false;
     public modalDuration: number = 120; // 120 How long to show the modal window

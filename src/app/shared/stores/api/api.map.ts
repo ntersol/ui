@@ -10,31 +10,21 @@ import { IStore } from '../store.d';
 import { ApiProps } from './api.properties';
 // IStore.ApiMap
 
-export const ApiMap: IStore.ApiMapObj = {
+export const ApiMap: IStore.ApiMapping = {
 
-    //Example
-    //userSettings: {
-    //    endpoint: 'userSetting/',
-    //    storeProperty: ApiProps.userSettings,
-    //    uniqueId: ['configSetting'],
-    //    map: (settings: M4Pipe.UserSetting[]) => {
-    //      let dictionary = {};
-    //      settings.forEach(setting => dictionary[setting.configSetting] = setting.configValue)
-    //      return {
-    //        src: settings,
-    //        lookup: dictionary
-    //      }
-    //    },
-    //    mapSrc: 'src'
-    //},
     // Example
     users: {
         endpoint: 'https://jsonplaceholder.typicode.com/users',
         storeProperty: ApiProps.users,
         uniqueId: 'id',
-        //mapSrc: '',
-        //map: (elements) => {
-        //	return elements;
-        //}
+        mapSrc: 'src',
+		map: (users:any[]) => {
+			let dict = {};
+			users.forEach(user => dict[user.id] = user)
+			return {
+				src: users,
+				dict: dict
+			};
+        }
     },
 }

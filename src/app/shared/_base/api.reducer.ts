@@ -1,7 +1,7 @@
-import { IStore, StoreActionsApi, ApiState } from 'app-shared';
+import { IStore, ApiActions, ApiStore } from 'app-shared';
 
 
-export function StoreApiReducer(state = ApiState, { type, payload }) {
+export function ApiReducer(state = ApiStore, { type, payload }) {
     //console.log('STORE REDUCER:', type, payload);
 
 	let srcData;
@@ -9,32 +9,11 @@ export function StoreApiReducer(state = ApiState, { type, payload }) {
     switch (type) {
         
         // Reset State
-		case StoreActionsApi.RESET:
-			return ApiState;
-
-        // State change
-		case StoreActionsApi.STATE_CHANGE:
-			state._state[payload.apiMap.storeProperty] = Object.assign({}, state._state[payload.apiMap.storeProperty], payload.newState);
-			break;
-
-		// Reset API errors
-		case StoreActionsApi.RESET_ERRORS:
-			Object.keys(state._state).forEach(key => {
-				state._state[key].modifyError = false;
-				state._state[key] = Object.assign({}, state._state[key]);
-			});
-			break;
-
-		// Reset API errors
-		case StoreActionsApi.RESET_SUCCESS:
-			Object.keys(state._state).forEach(key => {
-				state._state[key].modified = false;
-				state._state[key] = Object.assign({}, state._state[key]);
-			});
-			break;
+		case ApiActions.RESET:
+			return ApiStore;
 
         // Get response
-		case StoreActionsApi.GET_COMPLETE:
+		case ApiActions.GET_COMPLETE:
             // If response is an array
             if (Array.isArray(payload.data)) {
 				state[payload.apiMap.storeProperty] = [...payload.data];
@@ -52,7 +31,7 @@ export function StoreApiReducer(state = ApiState, { type, payload }) {
 			break;
 
         // Post response
-		case StoreActionsApi.POST_COMPLETE:
+		case ApiActions.POST_COMPLETE:
 			
             // If a map and mapSrc element are present, grab the unfiltered content from the mapSrc property. Otherwise just get data straight out of the store
 			srcData = (payload.apiMap.map && payload.apiMap.mapSrc) ? state[payload.apiMap.storeProperty][payload.apiMap.mapSrc] : state[payload.apiMap.storeProperty];
@@ -86,7 +65,7 @@ export function StoreApiReducer(state = ApiState, { type, payload }) {
 			break;
 
 		// PUT response
-		case StoreActionsApi.PUT_COMPLETE:
+		case ApiActions.PUT_COMPLETE:
 			//console.warn('PUT_COMPLETE', payload)
 
 			// If a map and mapSrc element are present, grab the unfiltered content from the mapSrc property. Otherwise just get data straight out of the store
@@ -130,7 +109,7 @@ export function StoreApiReducer(state = ApiState, { type, payload }) {
 			break;
 
 		// Delete response
-		case StoreActionsApi.DELETE_COMPLETE:
+		case ApiActions.DELETE_COMPLETE:
 			//console.warn('Delete Reducer ', payload)
 
             // If a map and mapSrc element are present, grab the unfiltered content from the mapSrc property. Otherwise just get data straight out of the store

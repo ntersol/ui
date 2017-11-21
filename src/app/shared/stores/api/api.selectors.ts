@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { IStore, ApiMap, ApiProps } from '@shared';// HttpClient, 
 import { Observable, BehaviorSubject } from "rxjs";
 
-
 @Injectable()
 export class ApiSelectors {
     //Sample Slices
@@ -12,23 +11,23 @@ export class ApiSelectors {
     //  this.store.select(store => store.api.defaultLayout),
     //  (pipeline, defaultLayout) => ({ pipeline, defaultLayout })
     //);
-    //public currentLayout = (): Observable<M4Pipe.Layout> => this.store.select(store => store.api.defaultLayout);
-  
+    // Single store call
+    //public users$ = this.store.select(store => store.api.users);
 
-    /** Get a combined observable of the store state and data */
-    public getDataState = (apiProp: ApiProps): Observable<IStore.DataState> => Observable.combineLatest(
-        this.store.select(store => store.api[apiProp]),
-        this.store.select(store => store.api._state[apiProp]),
-        (data, state) => ({ data, state })
-    );
-    /** Get the API state but not data */
-    public getState = (apiProp: string): Observable<IStore.ApiStatus> => this.store.select(store => store.api._state[apiProp]);
-    /** Get the data but not API state */
-	  public getData = (apiProp: string): Observable<any> => this.store.select(store => store.api[apiProp]);
-    
+    /** Users store selection */
+	public users$ = this.store.select(store => store.api.users);
+
+	/** Get the API state using api props */
+	public getState$ = (apiProp: ApiProps): Observable<IStore.ApiStatus> => this.store.select(store => store.apiStatus[apiProp]);
+    /** Get the API data using api props */
+	public getData$ = (apiProp: ApiProps): Observable<any> => this.store.select(store => store.api[apiProp]);
 
     constructor(
         private store: Store<IStore.root>
-    ) {
+	) {
+        // Output store contents
+		this.store.select(store => store.api).subscribe(res => console.log('Store API State ', res));
+		this.store.select(store => store.apiStatus).subscribe(res => console.log('Store API Status State ', res));
+		this.store.select(store => store.ui).subscribe(res => console.log('Store UI State ', res));
     }
 }

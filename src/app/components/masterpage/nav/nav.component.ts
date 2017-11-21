@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentChecked, AfterViewChecked, AfterViewInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { ApiService, ApiProps, AuthService } from 'app-shared';
 import { Observable } from 'rxjs/Observable';
@@ -7,9 +7,9 @@ import { Observable } from 'rxjs/Observable';
     selector: 'nav-component',
     templateUrl: './nav.component.html'
 })
-export class NavComponent implements OnInit, AfterViewChecked {
+export class NavComponent implements OnInit{
 
-
+    /** Is the dropdown menu open on mobile */
     public isOpen: boolean = false;
 
     constructor(
@@ -23,8 +23,4 @@ export class NavComponent implements OnInit, AfterViewChecked {
 		
     }
 
-    public ngAfterViewChecked(): void {
-     
-    }
-    
 }

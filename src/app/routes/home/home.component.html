@@ -1,4 +1,66 @@
 <div class="container-fluid">
-  Hello World
+
+    <div class="card mb-3">
+        <div class="card-header p-2">
+            <button class="btn btn-icon btn-sm" (click)="usersRefresh()" *ngIf="usersState$ | async as state" [disabled]="state.loading">
+            <i class="fa fa-refresh"></i></button>
+        </div>
+    </div>
+
+    <api-state [state]="state" [toaster]="true" [showSuccess]="false" *ngIf="usersState$ | async as state">
+        <div class="row" *ngIf="users$ | async as users">
+            <div class="col-12 col-lg-9">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Website</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users.src"><!-- Data from array is mapped, note the .src -->
+                            <td>{{user.username}}</td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.website}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.phone}}</td>
+                            <td><a (click)="userEdit(user)">Edit</a></td>
+                            <td><a (click)="userDelete(user)">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 col-lg-3">
+                <div class="card">
+                    <div class="card-block">
+                        <h2 *ngIf="!isEditing">Add User</h2>
+                        <h2 *ngIf="isEditing">Updating User</h2>
+                        <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
+                            <field-component [frmGroup]="formMain" frmControl="username" label="Username"></field-component>
+                            <field-component [frmGroup]="formMain" frmControl="name" label="Name"></field-component>
+                            <field-component [frmGroup]="formMain" frmControl="website" label="Website"></field-component>
+                            <field-component [frmGroup]="formMain" frmControl="email" label="Email"></field-component>
+                            <field-component [frmGroup]="formMain" frmControl="phone" label="Phone"></field-component>
+                            <button type="submit" class="btn btn-interact float-right" [disabled]="state.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : state.modifying }">
+                                <ng-container *ngIf="!isEditing">
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i> Add User
+                                </ng-container>
+                                <ng-container *ngIf="isEditing">
+                                    <i class="fa fa-user" aria-hidden="true"></i> Update User
+                                </ng-container>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </api-state>
+
 </div>
 
