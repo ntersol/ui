@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from "rxjs";
 
-import { Http } from '@angular/http';
+//import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IStore, ApiActions, ApiMap, ApiHttpService, ApiSelectors  } from '@shared';
+import { IStore, ApiActions, ApiMap, ApiHttpService, ApiSelectors, AppSettings } from '@shared';
 import { Store } from '@ngrx/store';
 
 
@@ -11,12 +12,13 @@ import { Store } from '@ngrx/store';
 export class ApiService extends ApiHttpService {
 
     constructor(
-        private httpSvc: Http,
-        private storeSvc: Store<IStore.root>,
-        private routerSvc: Router,
-        public select: ApiSelectors
-    ) {
-        super(httpSvc, storeSvc, routerSvc);
+		private http: HttpClient,
+        private store: Store<IStore.root>,
+        private router: Router,
+		public select: ApiSelectors,
+		private settings: AppSettings
+	) {
+		super(http, store, router);
 	}
 
     /** Sample store usage */
@@ -32,7 +34,7 @@ export class ApiService extends ApiHttpService {
     * Reset all errors in the api state
     */
     public resetErrors(): void {
-	    this.storeSvc.dispatch({
+	    this.store.dispatch({
 		    type: ApiActions.RESET_ERRORS,
 		    payload: null
 	    });// Update store with new state
@@ -42,7 +44,7 @@ export class ApiService extends ApiHttpService {
     * Reset all errors in the api state
     */
     public resetSuccess(): void {
-	    this.storeSvc.dispatch({
+	    this.store.dispatch({
 		    type: ApiActions.RESET_SUCCESS,
 		    payload: null
 	    });// Update store with new state

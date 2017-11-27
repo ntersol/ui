@@ -20,7 +20,7 @@ export function ApiReducer(state = ApiStore, { type, payload }) {
 			}
             // If response is an object
 			else if (typeof payload.data == 'object') {
-				state[payload.apiMap.storeProperty] = Object.assign({}, payload.data);
+				state[payload.apiMap.storeProperty] = { ...payload.data };
 			}
             // If response is an string, create/load into dictionary
 			else if (typeof payload.data == 'string') {
@@ -44,7 +44,6 @@ export function ApiReducer(state = ApiStore, { type, payload }) {
 			else if (srcData && typeof payload.data === 'object') {
 				/* TODO: Figure out how to do upserts. Maybe pass an additional prop
 				if (payload.data[payload.apiMap.uniqueId]) {
-					console.warn('Upsert ', payload);
 
 				} else {
 					srcData = [payload.data, ...srcData];
@@ -55,7 +54,7 @@ export function ApiReducer(state = ApiStore, { type, payload }) {
 			}
 			// If destination is an object and response is an object, replace current instance
 			else if (typeof srcData === 'object' && typeof payload.data === 'object') {
-				srcData = Object.assign({}, payload.data);
+				srcData = { ...payload.data };
 			} else {
 				console.error('POST_COMPLETE was not an object or an array, please write a condition for this in the api.reducer')
 			}
@@ -98,8 +97,8 @@ export function ApiReducer(state = ApiStore, { type, payload }) {
 			}
 			// If destination is an object and response is an object, replace current instance
 			else if (typeof srcData === 'object' && typeof payload.data === 'object') {
-				console.warn('Replace object')
-				srcData = Object.assign({}, payload.data);
+				//console.warn('Replace object')
+				srcData = { ...payload.data };
 			} else {
 				console.error('PUT_COMPLETE was not an object or an array, please write a condition for this in the api.reducer')
 			}
@@ -118,7 +117,6 @@ export function ApiReducer(state = ApiStore, { type, payload }) {
 			// If destination is an array and response is an array, loop through the destination array and update all entries with the new ones
 			if (Array.isArray(srcData) && Array.isArray(payload.data)) {
 				//console.warn('Delete array from array')
-				//console.warn('Looping 1', payload.data)
 				for (let i = 0; i < payload.data.length; i++) { // Loop through payload
 					for (let j = 0; j < srcData.length; j++) { // Loop through response object
 						//console.warn('Looping 2', payload.data[i][payload.apiMap.uniqueId], srcData[j][payload.apiMap.uniqueId]);

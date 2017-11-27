@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, PreloadAllModules } from '@angular/router';
-import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
+//import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // 3rd party tools
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Bootstrap
@@ -38,11 +39,13 @@ import {
 import {
 	ApiHttpService,
 	GlobalErrorHandler,
+	HttpInterceptorService,
 	LoggingService,
 	AuthService,
 	UtilitiesService,
 	ApiService,
 	ApiSelectors,
+	AppSettings,
 	UIModalService,
 	UIService,
 	UISelectors,
@@ -72,12 +75,13 @@ export const APP_COMPONENTS = [
 // Application wide providers
 export const APP_PROVIDERS = [
 	ApiHttpService,
-	GlobalErrorHandler,
+	HttpInterceptorService,
 	LoggingService,
 	AuthService,
 	UtilitiesService,
 	ApiService,
 	ApiSelectors,
+	AppSettings,
 	UIModalService,
 	UIService,
 	UISelectors,
@@ -93,25 +97,32 @@ export const APP_PROVIDERS = [
 
 
 @NgModule({
-	declarations: [
-		AppComponent,
-	  APP_COMPONENTS,
+    declarations: [
+	    AppComponent,
+	    APP_COMPONENTS,
 
-	  SafeHtmlPipe, PhoneNumberPipe
-  ],
-	imports: [
+	    SafeHtmlPipe, PhoneNumberPipe
+    ],
+    imports: [
     // @angular
-	  BrowserModule,
-	  FormsModule,
-	  ReactiveFormsModule,
-	  HttpModule,
-	  
-	  RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-	  NgbModule.forRoot(),// Bootstrap
-	  StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: StoreUIReducer}),// NGRX
-  ],
-  providers: [APP_PROVIDERS],
-  bootstrap: [AppComponent],
-  entryComponents: [LogoutModalComponent, ConfirmationModalComponent]
+	    BrowserModule,
+	    FormsModule,
+	    ReactiveFormsModule,
+	    //HttpModule,
+	    HttpClientModule,
+	    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+	    NgbModule.forRoot(),// Bootstrap
+	    StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: StoreUIReducer}),// NGRX
+    ],
+    providers: [
+	    APP_PROVIDERS,
+        {
+		    provide: HTTP_INTERCEPTORS,
+		    useClass: HttpInterceptorService,
+		    multi: true
+	    }
+    ],
+    bootstrap: [AppComponent],
+    entryComponents: [LogoutModalComponent, ConfirmationModalComponent]
 })
 export class AppModule { }

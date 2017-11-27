@@ -5,9 +5,11 @@ export * from './_base/api.http.service';
 export * from './_base/api.reducer';
 export * from './_base/api-status.store';
 export * from './_base/api-status.reducer';
-export * from './_interceptors/error.interceptor';
 export * from './_base/api.actions';
+export * from './_interceptors/error.interceptor';
+export * from './_interceptors/http.interceptor';
 
+export * from './app.settings';
 
 // Pipes
 export * from './_pipes/safehtml.pipe';
@@ -23,6 +25,7 @@ export * from './stores/api/api.store';
 export * from './stores/api/api.map';
 export * from './stores/api/api.properties';
 export * from './stores/api/api.selectors';
+
 export * from './api.service';
 
 // Store Typings
