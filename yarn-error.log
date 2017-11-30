@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @mello-labs/ui
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add https://github.com/JerrolKrause/mello-labs-api-tools
 
 PATH: 
   C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\system32\wbem;C:\windows\system32\windowspowershell\v1.0\;c:\program files\interactive intelligence\icuserapps\;c:\program files (x86)\interactive intelligence\icuserapps\;c:\program files (x86)\interactive intelligence\inin trace initialization\;c:\program files\microsoft sql server\120\tools\binn\;c:\program files\microsoft sql server\client sdk\odbc\110\tools\binn\;c:\program files (x86)\microsoft sql server\120\tools\binn\;c:\program files\microsoft sql server\120\dts\binn\;c:\program files (x86)\microsoft sql server\120\tools\binn\managementstudio\;c:\program files (x86)\microsoft sql server\120\dts\binn\;c:\program files\microsoft\web platform installer\;c:\program files\git\cmd;c:\program files\microsoft sql server\130\tools\binn\;C:\Program Files (x86)\Interactive Intelligence\BusinessManagerApps\;C:\Program Files (x86)\Common Files\Crystal Decisions\2.0\bin\;C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\;C:\Program Files\dotnet\;C:\Program Files (x86)\Microsoft Team Foundation Server 2015 Power Tools\;C:\Program Files (x86)\Skype\Phone\;C:\Users\jkrause\e2e;C:\Program Files\Git\cmd;C:\Program Files (x86)\WebEx\Productivity Tools;C:\Program Files (x86)\Yarn\bin;C:\Program Files\nodejs\;C:\Users\jkrause\.dnx\bin;C:\Ruby22\bin;C:\Users\jkrause\AppData\Local\atom\bin;C:\Program Files (x86)\Rico Suter\NSwagStudio\;C:\Users\jkrause\AppData\Local\Yarn\bin;C:\Users\jkrause\AppData\Roaming\npm
@@ -38,6 +38,7 @@ npm manifest:
       "@angular/platform-browser": "^5.0.0",
       "@angular/platform-browser-dynamic": "^5.0.0",
       "@angular/router": "^5.0.0",
+      "@mello-labs/api-tools": "https://github.com/JerrolKrause/mello-labs-api-tools",
       "@mello-labs/ui": "https://github.com/JerrolKrause/mello-labs-ui",
       "@ng-bootstrap/ng-bootstrap": "1.0.0-beta.5",
       "@ngrx/store": "^4.1.1",
@@ -232,6 +233,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@angular/router/-/router-5.0.2.tgz#be104fb091bcec418dd3d854f8af64a03e5c679d"
     dependencies:
       tslib "^1.7.1"
+  
+  "@mello-labs/api-tools@https://github.com/JerrolKrause/mello-labs-api-tools":
+    version "0.1.0"
+    resolved "https://github.com/JerrolKrause/mello-labs-api-tools#521a6d0363b6480592bc1c779aac1a38a8a75282"
   
   "@mello-labs/ui@https://github.com/JerrolKrause/mello-labs-ui":
     version "1.0.0"
@@ -6234,14 +6239,4 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.18.tgz#8cecb3977fcd1b3090562ff4570e2847e752b48d"
 
 Trace: 
-  Error: https://registry.npmjs.org/@mello-labs%2fui: SSL Error: UNABLE_TO_GET_ISSUER_CERT_LOCALLY
-      at Request.module.exports.Request.onRequestResponse (C:\Program Files (x86)\Yarn\lib\cli.js:123852:24)
-      at emitOne (events.js:116:13)
-      at ClientRequest.emit (events.js:211:7)
-      at HTTPParser.parserOnIncomingClient [as onIncoming] (_http_client.js:551:21)
-      at HTTPParser.parserOnHeadersComplete (_http_common.js:117:23)
-      at TLSSocket.socketOnData (_http_client.js:440:20)
-      at emitOne (events.js:116:13)
-      at TLSSocket.emit (events.js:211:7)
-      at addChunk (_stream_readable.js:263:12)
-      at readableAddChunk (_stream_readable.js:250:11)
+  Error: https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz: ENOENT: no such file or directory, open 'C:\Users\jkrause\AppData\Local\Yarn\cache\v1\npm-lodash-4.17.4-78203a4d1c328ae1d86dca6460e369b57f4055ae\fp\memoize.js'

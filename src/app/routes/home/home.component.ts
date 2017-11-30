@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy{
     
 	constructor(
 		private api: ApiService,
-		private ui: UIService,
+		public ui: UIService,
 		private fb: FormBuilder
 	) {
 	}

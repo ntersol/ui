@@ -26,8 +26,8 @@ export class ApiSelectors {
         private store: Store<IStore.root>
 	) {
         // Output store contents
-		this.store.select(store => store.api).subscribe(res => console.log('Store API State ', res));
-		this.store.select(store => store.apiStatus).subscribe(res => console.log('Store API Status State ', res));
-		this.store.select(store => store.ui).subscribe(res => console.log('Store UI State ', res));
+		//this.store.select(store => store.api).subscribe(res => console.log('Store API State ', res));
+		//this.store.select(store => store.apiStatus).subscribe(res => console.log('Store API Status State ', res));
+		//this.store.select(store => store.ui).subscribe(res => console.log('Store UI State ', res));
     }
 }

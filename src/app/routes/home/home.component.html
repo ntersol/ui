@@ -9,7 +9,7 @@
 
     <api-state [state]="state" [toaster]="true" [showSuccess]="false" *ngIf="usersState$ | async as state">
         <div class="row" *ngIf="users$ | async as users">
-            <div class="col-12 col-lg-9">
+            <div class="col-12 col-lg-8 col-xl-9">
                 <table class="table table-sm">
                     <thead>
                         <tr>
@@ -35,17 +35,17 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-12 col-lg-3">
+            <div class="col-12 col-lg-4 col-xl-3">
                 <div class="card">
                     <div class="card-block">
                         <h2 *ngIf="!isEditing">Add User</h2>
                         <h2 *ngIf="isEditing">Updating User</h2>
                         <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
-                            <field-component [frmGroup]="formMain" frmControl="username" label="Username"></field-component>
-                            <field-component [frmGroup]="formMain" frmControl="name" label="Name"></field-component>
-                            <field-component [frmGroup]="formMain" frmControl="website" label="Website"></field-component>
-                            <field-component [frmGroup]="formMain" frmControl="email" label="Email"></field-component>
-                            <field-component [frmGroup]="formMain" frmControl="phone" label="Phone"></field-component>
+                            <field-component [frmGroup]="formMain" frmControl="username" label="Username" [labelColumns]="4"></field-component>
+                            <field-component [frmGroup]="formMain" frmControl="name" label="Name" [labelColumns]="4"></field-component>
+                            <field-component [frmGroup]="formMain" frmControl="website" label="Website" [labelColumns]="4"></field-component>
+                            <field-component [frmGroup]="formMain" frmControl="email" label="Email" [labelColumns]="4"></field-component>
+                            <field-component [frmGroup]="formMain" frmControl="phone" label="Phone" [labelColumns]="4"></field-component>
                             <button type="submit" class="btn btn-interact float-right" [disabled]="state.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : state.modifying }">
                                 <ng-container *ngIf="!isEditing">
                                     <i class="fa fa-user-plus" aria-hidden="true"></i> Add User
@@ -58,6 +58,7 @@
                     </div>
                 </div>
             </div>
+
 
         </div>
     </api-state>

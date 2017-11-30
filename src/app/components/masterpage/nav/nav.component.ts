@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { ApiService, ApiProps, AuthService } from 'app-shared';
+import { ApiService, ApiProps, AuthService } from '@shared';
 import { Observable } from 'rxjs/Observable';
 
 @Component({

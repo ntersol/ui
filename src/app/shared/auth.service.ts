@@ -1,20 +1,15 @@
 import { Injectable } from '@angular/core';
-//import { Http, Response } from '@angular/http';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from "rxjs";
 import 'rxjs/add/operator/map';
 import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
-
-//import { Http } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
-
 import { Store } from '@ngrx/store';
-import { IStore, ApiActions, ApiMap, ApiHttpService, AppSettings } from '@shared';
 
-import { LogoutModalComponent } from '@components';
+import { IStore, ApiMap, AppSettings } from '@shared';
 
 @Injectable()
-export class AuthService extends ApiHttpService {
+export class AuthService {
     /** Is session expired */
 	public sessionExpired: boolean = false;
     /** How long to show the modal window */
@@ -33,14 +28,13 @@ export class AuthService extends ApiHttpService {
 		private store: Store<IStore.root>,
 		private settings: AppSettings
     ) {
-		super(http, store, router);
     }
 
     /**
      * Log the user in
      * @param data
      */
-    public logIn(data): Observable<Response> {
+    public logIn(data) {
 		let url = this.settings.apiUrl + '/authentication/login';
 		return this.http.post(url, data).map((response: any) => {
 			this.settings.token = response.data.token;
@@ -93,7 +87,7 @@ export class AuthService extends ApiHttpService {
     private launchLogoutModal(): void {
         // console.log('launchLogoutModal');
         clearTimeout(this.sessionTimer);
-        this.logOutModal = this.modalService.open(LogoutModalComponent, <any>{ size: 'md' });
+        this.logOutModal = this.modalService.open('LogoutModalComponent', <any>{ size: 'md' });
         this.logOutModal.componentInstance.modalDuration = this.modalDuration; // Pass duration to timeout modal
 
         // When the modal is closed via log out button
@@ -110,7 +104,6 @@ export class AuthService extends ApiHttpService {
      * Log the user out. Clear stored data and redirect to login page
      */
 	public logOut(): void {
-		this.cache = {};
 		clearTimeout(this.sessionTimer);
 		window.localStorage.removeItem('token');
 		window.sessionStorage.removeItem('token');

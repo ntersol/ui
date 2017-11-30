@@ -7,8 +7,8 @@ import { IStore, StoreActionsUi,  } from '@shared';// HttpClient,
 import { UISelectors } from '../stores/ui/ui.selectors';
 import { ApiService } from '../api.service';
 
-
-import { LogoutModalComponent, ConfirmationModalComponent } from '@components';
+// List modals here by component name
+type modals = 'LogoutModalComponent';
 
 
 @Injectable()
@@ -16,14 +16,6 @@ export class UIModalService {
 
 	/** Reference to the currently open modal. Used to interact with the open modal instance */
 	public modalRef;
-
-    /** List of all modals available in the app */
-	private list = {
-        // Library Components
-		LogoutModalComponent: LogoutModalComponent,
-		ConfirmationModalComponent: ConfirmationModalComponent,
-        // App Components
-	}
 
 	constructor(
 		private modalService: NgbModal,
@@ -35,7 +27,7 @@ export class UIModalService {
 		this.select.modal$.subscribe((modal: any) => {
 			if (modal && Object.keys(modal).length) {
 				// Store reference to the modal instance
-				this.modalRef = this.modalService.open(this.list[modal.modalId], modal.options);
+				this.modalRef = this.modalService.open(modal, modal.options);
                 // Add any passed in data to the modal instance after it has opened
 				if (modal.data) {
 					this.modalRef.componentInstance.data = modal.data;
@@ -55,7 +47,7 @@ export class UIModalService {
      * @param options - Modal options
      * @param data - Any data to pass to the modal component
      */
-	public open(modalId: string, options?: any, data?: any, data2?:any): void {
+	public open(modalId: modals, options?: any, data?: any, data2?:any): void {
 		if (options && options.size == 'xl') {
 			options.windowClass += ' modal-xl';
 		}

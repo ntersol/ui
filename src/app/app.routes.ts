@@ -6,7 +6,7 @@ import {
 } from '@routes';
 
 import { LayoutMainComponent } from '@components';
-import { AuthGuard } from 'app-shared';
+import { AuthGuard } from '@shared';
 
 
 const titleSlug: string = ' | Mello Labs'; // Append to page title - TODO: Migrate to an environment variable

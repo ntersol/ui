@@ -5,7 +5,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
-import { AuthService, LoggingService } from 'app-shared';
+import { AuthService } from '@shared';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +18,7 @@ export class AppComponent {
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
 		private title: Title,
-		private authService: AuthService,
-		private loggingService: LoggingService
+		private authService: AuthService
 	) {
 		this.routeChange();
 	}
@@ -40,7 +39,6 @@ export class AppComponent {
 			.mergeMap(route => route.data)
 			.subscribe((event) => {
 				this.title.setTitle(event['title']) // Change document title
-				this.loggingService.trackEvent('Page Viewed', { "Page Name": event['title'] }) // Log the page change
                 // If not on the login page and not local dev, update the token
 				if (window.location.host != 'localhost:4200' && this.router.url.toLowerCase().indexOf('login') == -1) {
 					this.authService.refreshTokenUpdate(); // On Route change, refresh authentication token

@@ -3,22 +3,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, PreloadAllModules } from '@angular/router';
-//import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// 3rd party tools
+// 3rd Party Tools
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Bootstrap
 import { StoreModule } from '@ngrx/store';
 import { DatePipe, CurrencyPipe } from '@angular/common';
+
+// Mello Labs Tools
+import { ApiToolsModule, ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
+import { FormToolsModule } from '@mello-labs/form-tools';
+import { UtilitiesModule } from '@mello-labs/utilities';
 
 // Main entrypoint component
 import { AppComponent } from './app.component';
 // Routing Module
 import { ROUTES } from './app.routes';
+
 // Enables faster prod mode, does disable some dirty error checking though
 import { enableProdMode, ErrorHandler } from '@angular/core';
-enableProdMode();
-
+//enableProdMode();
 
 // Routes
 import {
@@ -28,57 +32,44 @@ import {
 // Components
 import {
 	FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
-	LogoutModalComponent, ConfirmationModalComponent,
-    // Api Tools
-	ApiStateComponent, ApiErrorComponent,
-	// Form tools
-	FieldComponent, FileUploadComponent
+	LogoutModalComponent
 } from '@components';
 
 // Shared
 import {
-	ApiHttpService,
 	GlobalErrorHandler,
-	HttpInterceptorService,
-	LoggingService,
 	AuthService,
-	UtilitiesService,
 	ApiService,
 	ApiSelectors,
 	AppSettings,
 	UIModalService,
 	UIService,
 	UISelectors,
+
 	// Interceptors
 	AuthGuard,
-	
+	HttpInterceptorService,
 
-	ApiReducer,
-	ApiStatusReducer,
+    // Reducers
 	StoreUIReducer,
 
 	// Pipes
 	SafeHtmlPipe,
-	PhoneNumberPipe } from '@shared';
+	PhoneNumberPipe
+} from '@shared';
     
 // Application wide providers
 export const APP_COMPONENTS = [
 	NoContentComponent, LoginComponent, HomeComponent,
 
 	FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
-	LogoutModalComponent, ConfirmationModalComponent,
-
-	ApiStateComponent, ApiErrorComponent,
-	FieldComponent, FileUploadComponent
+	LogoutModalComponent
 ];
 
 // Application wide providers
 export const APP_PROVIDERS = [
-	ApiHttpService,
 	HttpInterceptorService,
-	LoggingService,
 	AuthService,
-	UtilitiesService,
 	ApiService,
 	ApiSelectors,
 	AppSettings,
@@ -89,6 +80,7 @@ export const APP_PROVIDERS = [
 	// Pipes
 	DatePipe, CurrencyPipe, SafeHtmlPipe,
 	PhoneNumberPipe,
+
 	{// Global exception handler
 		provide: ErrorHandler,
 		useClass: GlobalErrorHandler
@@ -100,19 +92,19 @@ export const APP_PROVIDERS = [
     declarations: [
 	    AppComponent,
 	    APP_COMPONENTS,
-
 	    SafeHtmlPipe, PhoneNumberPipe
     ],
     imports: [
-    // @angular
 	    BrowserModule,
-	    FormsModule,
-	    ReactiveFormsModule,
-	    //HttpModule,
+	    FormsModule, ReactiveFormsModule,
 	    HttpClientModule,
 	    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-	    NgbModule.forRoot(),// Bootstrap
-	    StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: StoreUIReducer}),// NGRX
+		NgbModule.forRoot(),// Bootstrap
+		StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: StoreUIReducer }),// NGRX
+        // Mello Labs
+		ApiToolsModule.forRoot(),
+		FormToolsModule.forRoot(),
+		UtilitiesModule.forRoot()
     ],
     providers: [
 	    APP_PROVIDERS,
@@ -123,6 +115,6 @@ export const APP_PROVIDERS = [
 	    }
     ],
     bootstrap: [AppComponent],
-    entryComponents: [LogoutModalComponent, ConfirmationModalComponent]
+    entryComponents: [LogoutModalComponent]
 })
 export class AppModule { }
