@@ -1,6 +1,6 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, enableProdMode, ErrorHandler  } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -13,7 +13,7 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
 // Mello Labs Tools
 import { ApiToolsModule, ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
 import { FormToolsModule } from '@mello-labs/form-tools';
-import { UtilitiesModule } from '@mello-labs/utilities';
+import { UtilitiesModule, ConfirmationModalComponent, LogoutModalComponent } from '@mello-labs/utilities';
 
 // Main entrypoint component
 import { AppComponent } from './app.component';
@@ -21,8 +21,7 @@ import { AppComponent } from './app.component';
 import { ROUTES } from './app.routes';
 
 // Enables faster prod mode, does disable some dirty error checking though
-import { enableProdMode, ErrorHandler } from '@angular/core';
-//enableProdMode();
+enableProdMode();
 
 // Routes
 import {
@@ -32,7 +31,9 @@ import {
 // Components
 import {
 	FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
-	LogoutModalComponent
+
+	LaunchModalComponent
+	//LogoutModalComponent
 } from '@components';
 
 // Shared
@@ -63,7 +64,7 @@ export const APP_COMPONENTS = [
 	NoContentComponent, LoginComponent, HomeComponent,
 
 	FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
-	LogoutModalComponent
+	LaunchModalComponent
 ];
 
 // Application wide providers
@@ -114,7 +115,7 @@ export const APP_PROVIDERS = [
 		    multi: true
 	    }
     ],
-    bootstrap: [AppComponent],
-    entryComponents: [LogoutModalComponent]
+	bootstrap: [AppComponent],
+	entryComponents: [ConfirmationModalComponent, LogoutModalComponent]
 })
 export class AppModule { }

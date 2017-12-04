@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy{
 	}
     
 	public ngOnInit() {
+
         // Get users and load into store
 		this.api.users.get().subscribe();
         // Formgroup
@@ -42,6 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy{
 			username: ['', [Validators.required]],
 			website: ['', []],
 		});
+
 	}
 
     /**
@@ -65,6 +67,7 @@ export class HomeComponent implements OnInit, OnDestroy{
      * @param user
      */
 	public userDelete(user) {
+		console.log('Delete User');
 		this.api.users.delete(user).subscribe();
 	}
 

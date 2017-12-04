@@ -30,7 +30,11 @@
                             <td>{{user.email}}</td>
                             <td>{{user.phone}}</td>
                             <td><a (click)="userEdit(user)">Edit</a></td>
-                            <td><a (click)="userDelete(user)">Delete</a></td>
+                            <td>
+                            <launch-modal modal="ConfirmationModalComponent" [isButton]="false" [persist]="true" size="lg" [data]="'Really delete '+ user.name +'?'" dataAlt="Delete User" (onSuccess)="userDelete(user)">
+                            Delete
+                            </launch-modal>
+                           </td>
                         </tr>
                     </tbody>
                 </table>

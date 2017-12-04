@@ -1,53 +1,76 @@
 import { Injectable } from '@angular/core';
 
+// Enum of app setting properties
+enum Props {
+	token = 'token',
+	apiUrl = 'apiUrl',
+	userName = 'userName',
+}
+
 @Injectable()
 export class AppSettings {
 
-    // Getter/setters for app settings. Will read/write to app settings and on app load will try to reload from localstorage
+	// Getter/setters for app settings. Will read/write to app settings and on app load will try to reload from localstorage/sessionstorage
 
 	/** API token for EPS */
-	private _token: string ;
+	private _token: string = null;
 	/** API token for EPS */
 	public get token(): string {
-		if (!this._token && window.localStorage.getItem('token')) {
-			this._token = window.localStorage.getItem('token');
-		}
-		return this._token;
+		return this.propGet(Props.token);
 	}
-	public set token(token: string) {
-		window.localStorage.setItem('token', token);
-		this._token = token;
+	public set token(value: string) {
+		this.propSet(Props.token, value);
 	}
 
 	/** Web Api Url */
-	private _apiUrl: string;
+	private _apiUrl: string = null;
 	/** Web Api Url */
 	public get apiUrl(): string {
-		if (!this._apiUrl && window.localStorage.getItem('apiUrl')) {
-			this._apiUrl = window.localStorage.getItem('apiUrl');
-		}
-		return this._apiUrl;
+		return this.propGet(Props.apiUrl);
 	}
-	public set apiUrl(apiUrl: string) {
-		window.localStorage.setItem('apiUrl', apiUrl);
-		this._apiUrl = apiUrl;
+	public set apiUrl(value: string) {
+		this.propSet(Props.apiUrl, value);
 	}
 
 	/** Username */
-	private _userName: string;
+	private _userName: string = null;
 	/** Username */
 	public get userName(): string {
-		if (!this._userName && window.localStorage.getItem('userName')) {
-			this._userName = window.localStorage.getItem('userName');
-		}
-		return this.userName;
+		return this.propGet(Props.userName);
 	}
-	public set userName(userName: string) {
-		window.localStorage.setItem('userName', userName);
-		this._userName = userName;
+	public set userName(value: string) {
+		this.propSet(Props.userName, value);
 	}
 
 	constructor(
-	) {}
+	) {
+	}
+
+    /**
+     * Return a property. Loads it from this service first if available, if not looks in localstorage, if not there either return null
+     * @param prop - App settings property
+     * @param location - Location of locally stored prop, either sessionStorage or localStorage
+     */
+	private propGet(prop: string, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
+		if (!this['_' + prop] && window[location].getItem(prop)) {
+			this['_' + prop] = window[location].getItem(prop); 
+		}
+		return this['_' + prop] || null;
+	}
+
+    /**
+     * Set an app settings property. Write to localstorage if present, delete from localstorage if null
+     * @param prop - App settings property
+     * @param location - Location of locally stored prop, either sessionStorage or localStorage
+     */
+	private propSet(prop: string, value: string, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
+		if (value) {
+			window[location].setItem(prop, value);
+			this['_' + prop] = value;
+		} else {
+			window[location].removeItem(prop);
+			this['_' + prop] = null;
+		}
+	}
 
 }

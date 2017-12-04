@@ -18,9 +18,9 @@ export class ApiSelectors {
 	public users$ = this.store.select(store => store.api.users);
 
 	/** Get the API state using api props */
-	public getState$ = (apiProp: ApiProps): Observable<IStore.ApiStatus> => this.store.select(store => store.apiStatus[apiProp]);
+	public getState$ = (apiProp: ApiProps) => this.store.select(store => store.apiStatus[apiProp]);
     /** Get the API data using api props */
-	public getData$ = (apiProp: ApiProps): Observable<any> => this.store.select(store => store.api[apiProp]);
+	public getData$ = (apiProp: ApiProps) => this.store.select(store => store.api[apiProp]);
 
     constructor(
         private store: Store<IStore.root>

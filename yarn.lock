@@ -157,9 +157,9 @@
   dependencies:
     tslib "^1.7.1"
 
-"@mello-labs/api-tools@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@mello-labs/api-tools/-/api-tools-0.1.3.tgz#54bb46284b42225fbd13f26f4fea002a5d724834"
+"@mello-labs/api-tools@^0.1.6":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@mello-labs/api-tools/-/api-tools-0.1.8.tgz#fefc5da5f56b34a6430e42144b3c8960781a80ba"
 
 "@mello-labs/form-tools@^0.1.6":
   version "0.1.6"
@@ -168,6 +168,10 @@
 "@mello-labs/ui@^0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@mello-labs/ui/-/ui-0.1.3.tgz#a3d1f9ec5445f7b1f98f70956073e70fbb59d349"
+
+"@mello-labs/utilities@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@mello-labs/utilities/-/utilities-0.1.3.tgz#8279f6d97cc81e3562138eda6c58cbb6c3b4d04e"
 
 "@ng-bootstrap/ng-bootstrap@1.0.0-beta.5":
   version "1.0.0-beta.5"

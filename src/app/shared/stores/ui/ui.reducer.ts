@@ -17,12 +17,12 @@ export function StoreUIReducer(state = initialState, { type, payload }) {
 	switch (type) {
 
 		case StoreActionsUi.REHYDRATE:
-			state = Object.assign({}, payload);
+			state = { ...payload }
 			saveState();
 			break;
      
 		case StoreActionsUi.MODAL_OPEN:
-			state.modal = Object.assign({}, payload);
+			state.modal = { ...payload }
 			saveState();
 			break;
 		case StoreActionsUi.MODAL_UNLOAD:
