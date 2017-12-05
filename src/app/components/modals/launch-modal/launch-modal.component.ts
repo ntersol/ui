@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UIService } from '@shared';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 /**
 <launch-modal [isButton]="false" classes="btn btn-icon" modal="LoanDetailsModalComponent" size="lg" [data]="someData" [dataAlt]="someData"
     (onSuccess)="doSomething($event)">

@@ -23,16 +23,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of users.src"><!-- Data from array is mapped, note the .src -->
+                        <tr *ngFor="let user of users.src"><!-- Data from array is mapped, note the .src  -->
                             <td>{{user.username}}</td>
                             <td>{{user.name}}</td>
                             <td>{{user.website}}</td>
                             <td>{{user.email}}</td>
-                            <td>{{user.phone}}</td>
+                            <td>{{user.phone | phonenumber}}</td>
                             <td><a (click)="userEdit(user)">Edit</a></td>
                             <td>
                             <launch-modal modal="ConfirmationModalComponent" [isButton]="false" [persist]="true" size="lg" [data]="'Really delete '+ user.name +'?'" dataAlt="Delete User" (onSuccess)="userDelete(user)">
-                            Delete
+                                Delete
                             </launch-modal>
                            </td>
                         </tr>

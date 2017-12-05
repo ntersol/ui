@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from "rxjs";
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { IStore, ApiMap, ApiSelectors, AppSettings } from '@shared';//, ApiHttpService
 import { Store } from '@ngrx/store';
 

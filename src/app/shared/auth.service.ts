@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, RoutesRecognized, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription } from "rxjs";
+import { Observable } from "rxjs/Observable";
+import { Subscription } from "rxjs/Subscription";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';
 import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';

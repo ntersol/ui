@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'header-component',

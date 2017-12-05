@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { FormControl, Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { Observable, Subject, BehaviorSubject, Subscription } from "rxjs";
-import 'rxjs/add/operator/map';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Subscription } from "rxjs/Subscription";
 import { ApiService, UIService, ApiProps} from '@shared';
 
 @Component({
@@ -18,7 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy{
 	public formMain: FormGroup;
 	public isEditing: boolean;
 
-    /** Hold subs for unsub */
+    /** Hold subs for unsub */ 
 	private subs: Subscription[] = [];
     
 	constructor(
@@ -29,7 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy{
 	}
     
 	public ngOnInit() {
-
+		
         // Get users and load into store
 		this.api.users.get().subscribe();
         // Formgroup

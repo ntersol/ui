@@ -8,8 +8,7 @@ export * from './interceptors/error.interceptor';
 export * from './interceptors/http.interceptor';
 
 // Pipes
-export * from './_pipes/safehtml.pipe';
-export * from './_pipes/phoneNumber.pipe';
+
 
 // Services
 export * from './auth.service';

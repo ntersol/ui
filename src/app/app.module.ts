@@ -13,7 +13,7 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
 // Mello Labs Tools
 import { ApiToolsModule, ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
 import { FormToolsModule } from '@mello-labs/form-tools';
-import { UtilitiesModule, ConfirmationModalComponent, LogoutModalComponent } from '@mello-labs/utilities';
+import { UtilitiesModule } from '@mello-labs/utilities';
 
 // Main entrypoint component
 import { AppComponent } from './app.component';
@@ -31,9 +31,8 @@ import {
 // Components
 import {
 	FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
-
+	ConfirmationModalComponent, LogoutModalComponent, 
 	LaunchModalComponent
-	//LogoutModalComponent
 } from '@components';
 
 // Shared
@@ -55,16 +54,17 @@ import {
 	StoreUIReducer,
 
 	// Pipes
-	SafeHtmlPipe,
-	PhoneNumberPipe
+
 } from '@shared';
-    
+
 // Application wide providers
 export const APP_COMPONENTS = [
 	NoContentComponent, LoginComponent, HomeComponent,
 
 	FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
-	LaunchModalComponent
+	LaunchModalComponent,
+
+	ConfirmationModalComponent, LogoutModalComponent 
 ];
 
 // Application wide providers
@@ -79,9 +79,8 @@ export const APP_PROVIDERS = [
 	UISelectors,
 	AuthGuard,
 	// Pipes
-	DatePipe, CurrencyPipe, SafeHtmlPipe,
-	PhoneNumberPipe,
-
+	DatePipe, CurrencyPipe,
+    
 	{// Global exception handler
 		provide: ErrorHandler,
 		useClass: GlobalErrorHandler
@@ -92,8 +91,7 @@ export const APP_PROVIDERS = [
 @NgModule({
     declarations: [
 	    AppComponent,
-	    APP_COMPONENTS,
-	    SafeHtmlPipe, PhoneNumberPipe
+		APP_COMPONENTS
     ],
     imports: [
 	    BrowserModule,
@@ -102,10 +100,11 @@ export const APP_PROVIDERS = [
 	    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
 		NgbModule.forRoot(),// Bootstrap
 		StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: StoreUIReducer }),// NGRX
+
         // Mello Labs
 		ApiToolsModule.forRoot(),
 		FormToolsModule.forRoot(),
-		UtilitiesModule.forRoot()
+		UtilitiesModule.forRoot() 
     ],
     providers: [
 	    APP_PROVIDERS,
@@ -116,6 +115,8 @@ export const APP_PROVIDERS = [
 	    }
     ],
 	bootstrap: [AppComponent],
-	entryComponents: [ConfirmationModalComponent, LogoutModalComponent]
+	entryComponents: [
+		 ConfirmationModalComponent, LogoutModalComponent    
+	]
 })
 export class AppModule { }

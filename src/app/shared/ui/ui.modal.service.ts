@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, BehaviorSubject } from "rxjs";
-
+import { Observable } from "rxjs/Observable";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Store } from '@ngrx/store';
 import { IStore, StoreActionsUi, ApiService, UISelectors, AppSettings } from '@shared';// HttpClient,
 
-import { ConfirmationModalComponent, LogoutModalComponent } from '@mello-labs/utilities';
+//import { ConfirmationModalComponent, LogoutModalComponent } from '@mello-labs/utilities';
 
 /*
 this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you want to delete this user?', 'Delete User').result.then(
@@ -27,8 +27,8 @@ export class UIModalService {
 	public modalRef$: BehaviorSubject<any> = new BehaviorSubject(null);
     /** List of component references of available modals */
 	public modalList = {
-		ConfirmationModalComponent: ConfirmationModalComponent,
-		LogoutModalComponent: LogoutModalComponent
+		//ConfirmationModalComponent: ConfirmationModalComponent,
+		//LogoutModalComponent: LogoutModalComponent
 	}
 
 	constructor(

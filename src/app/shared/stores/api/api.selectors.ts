@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IStore, ApiMap, ApiProps } from '@shared';// HttpClient, 
-import { Observable, BehaviorSubject } from "rxjs";
+import { IStore, ApiProps } from '@shared';// HttpClient,
 
 @Injectable()
 export class ApiSelectors {

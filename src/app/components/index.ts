@@ -8,4 +8,5 @@ export * from './masterpage/footer/footer.component';
 
 // Modals
 export * from './modals/launch-modal/launch-modal.component';
-//export * from './modals/logout/logout-modal.component';
+export * from './modals/confirmation/confirmation-modal.component';
+export * from './modals/logout/logout-modal.component';

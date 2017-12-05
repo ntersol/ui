@@ -9,8 +9,7 @@ import { AuthService } from '@shared';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
 
@@ -39,7 +38,7 @@ export class AppComponent {
 			.mergeMap(route => route.data)
 			.subscribe((event) => {
 				this.title.setTitle(event['title']) // Change document title
-                // If not on the login page and not local dev, update the token
+				// If not on the login page and not local dev, update the token
 				if (window.location.host != 'localhost:4200' && this.router.url.toLowerCase().indexOf('login') == -1) {
 					this.authService.refreshTokenUpdate(); // On Route change, refresh authentication token
 				}

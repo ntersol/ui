@@ -1,8 +1,4 @@
 import { Injectable } from '@angular/core';
-import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, BehaviorSubject } from "rxjs";
-import 'rxjs/add/operator/map';
-
 import { Store } from '@ngrx/store';
 import { IStore, StoreActionsUi } from '@shared';// HttpClient, 
 
