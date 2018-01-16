@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Router, RoutesRecognized, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs/Observable";
-import { Subscription } from "rxjs/Subscription";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';
-import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 
-import { IStore, ApiMap, AppSettings, UIService } from '@shared';
+import { IStore, AppSettings, UIService } from '@shared';
 
 @Injectable()
 export class AuthService {
+    // If this app does not yet have an auth endpoint, set to false. This will allow dev to proceed since a token is required by the route guard
+    private hasAuthEndpoint: boolean = false;
+    /** Location of auth endpoint */
+    private authUrl = '/authentication/login';
+
     /** Is session expired */
 	public sessionExpired: boolean = false;
     /** How long to show the modal window */
@@ -19,11 +22,11 @@ export class AuthService {
     /** Holds the logout session timer */
 	public sessionTimer: any = null; // 
     /** Holds reference to logout modal */
-	public logOutModal: NgbModalRef;
+    public logOutModal: NgbModalRef;
     /** The http call so a token can be refreshed with a callback and success method */
 	public refreshToken = this.http.put(this.settings.apiUrl + '/authentication/token', null);
 	/** If a token is passed in without logging in no timer duration is present. Default to this */
-	private setTimerDefaultSeconds: number = 3; // 5 minutes
+	private setTimerDefaultSeconds: number = 5; // 5 minutes
 
     constructor(
 		private http: HttpClient,
@@ -35,17 +38,16 @@ export class AuthService {
 		private ui: UIService
 	) {
 		// If token is passed in via query param, update settings. Standard query param: /#/?token=123456
-		this.route.queryParams.subscribe(queryParams => {
-			if (queryParams.token) {
-				this.settings.token = queryParams.token;
-				this.setTimer(this.setTimerDefaultSeconds); // Start the session timer with the default time
-			}
-		})
+        this.route.queryParams.subscribe(queryParams => {
+            if (queryParams.token) {
+                this.settings.token = queryParams.token;
+                this.setTimer(this.setTimerDefaultSeconds); // Start the session timer with the default time
+            }
+        });
 
 		// If a token is passed in via matrix notation params, update app settings. Need to use matrix notation /#/route;token=123456456456
 		this.router.events.subscribe(val => {
 			if (val instanceof RoutesRecognized && val.state.root.firstChild.params.token) {
-				console.log(val.state.root.firstChild.params)
 				this.settings.token = val.state.root.firstChild.params.token;
 				this.setTimer(this.setTimerDefaultSeconds); // Start the session timer with the default time
 			}
@@ -57,7 +59,18 @@ export class AuthService {
      * @param data
      */
     public logIn(data) {
-		let url = this.settings.apiUrl + '/authentication/login';
+        let url = this.settings.apiUrl + this.authUrl;
+
+        // If no auth endpoint set up yet, use a get and set the token properties so the rest of the app can work
+        if (!this.hasAuthEndpoint) {
+            return this.http.get('assets/mock-data/login.json').map((response: any) => {
+                this.settings.token = response.data.token;
+                this.sessionExpired = false;
+                this.setTimer(response.data.expirationSeconds);
+                return response;
+            });
+        }
+		// Auth point is configured
 		return this.http.post(url, data).map((response: any) => {
 			this.settings.token = response.data.token;
             this.sessionExpired = false;
@@ -92,7 +105,7 @@ export class AuthService {
      * Set a countdown timer that pops a modal window when the user is close to session timeout
      * @param ExpirationSeconds
      */
-    private setTimer(ExpirationSeconds: number): void {
+    private setTimer(expirationSeconds: number): void {
         // console.log('Setting session timer to ', ExpirationSeconds, ' seconds');
         clearTimeout(this.sessionTimer);
         // ExpirationSeconds = 20;
@@ -100,7 +113,7 @@ export class AuthService {
             // console.log('Timer Expired');
 			  this.sessionExpired = true;
             this.launchLogoutModal();
-        }, (ExpirationSeconds - this.modalDuration * 2) * 1000); // Double the modal duration to add a buffer between server countdown and browser countdown
+        }, (expirationSeconds - this.modalDuration * 2) * 1000); // Double the modal duration to add a buffer between server countdown and browser countdown
     } // end SetTimer
 
     /**

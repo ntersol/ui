@@ -12,19 +12,20 @@ import { ApiProps } from './api.properties';
 
 export const ApiMap: IStore.ApiMapping = {
 
-    // Example
-    users: {
-        endpoint: 'https://jsonplaceholder.typicode.com/users',
-        storeProperty: ApiProps.users,
-        uniqueId: 'id',
-        mapSrc: 'src',
-		map: (users:any[]) => {
-			let dict = {};
-			users.forEach(user => dict[user.id] = user)
-			return {
-				src: users,
-				dict: dict
-			};
-        }
-    },
+  // Example
+  users: {
+    endpoint: 'https://jsonplaceholder.typicode.com/users',
+    storeProperty: ApiProps.users,
+    uniqueId: 'id',
+    mapSrc: 'src',
+    map: (users: any[]) => {
+      // Sample dictionary mapping based on id property
+      let dict = {};
+      users.forEach(user => dict[user.id] = user);
+      return {
+        src: users,
+        dict: dict
+      };
+    }
+  },
 }

@@ -1,27 +1,39 @@
-# AngularStarter
+# Mello Labs Angular Starter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.2.
+A rapid starter project for creating Angular single page apps. Contains Angular 5, Typescript, Bootstrap 4, Ng-Bootstrap & Ngrx-Store 4 (Redux). Built with Angular CLI.
 
-## Development server
+## Quick Start
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+# Clone the repo
+# --depth 1 removes all but one .git commit history
+git clone --depth 1 https://github.com/JerrolKrause/mello-labs-angular-starter.git
 
-## Code scaffolding
+# Change directory to the repo. Rename project as necessary.
+cd mello-labs-angular-starter
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Install the repo with yarn or npm
+yarn or npm i
+```
 
-## Build
+## Usage
+See Angular CLI github page for full usage: https://github.com/angular/angular-cli
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+```bash
+# Serve dev on http://localhost:4200/
+ng serve
 
-## Running unit tests
+# Build for prod
+ng build --prod
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Localizing Your App
+Add global environment variables in `src > app > shared > app.settings.ts`
 
-## Running end-to-end tests
+When your authentication API is available, go to `src > app > shared > auth.service.ts`
+- Set `hasAuthEndpoint` property to true
+- Set `authUrl` property to your endpoint location
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+In `src > app > shared > api.service.ts`
+- Set `envSettingsUrlProd` property to location of environment settings
+- Update `appSettingsUpdate` method to hydrate environment settings into app settings

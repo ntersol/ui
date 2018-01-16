@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from "rxjs/Observable";
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Store } from '@ngrx/store';
 import { IStore, StoreActionsUi, ApiService, UISelectors, AppSettings } from '@shared';// HttpClient,
 
-//import { ConfirmationModalComponent, LogoutModalComponent } from '@mello-labs/utilities';
+import { ConfirmationModalComponent, LogoutModalComponent } from '@components';
 
-/*
+/** Sample Usage: 
 this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you want to delete this user?', 'Delete User').result.then(
 	() => console.log('Modal Closed'),
 	() => console.log('Modal Dismissed'));
@@ -27,8 +26,8 @@ export class UIModalService {
 	public modalRef$: BehaviorSubject<any> = new BehaviorSubject(null);
     /** List of component references of available modals */
 	public modalList = {
-		//ConfirmationModalComponent: ConfirmationModalComponent,
-		//LogoutModalComponent: LogoutModalComponent
+		ConfirmationModalComponent: ConfirmationModalComponent,
+		LogoutModalComponent: LogoutModalComponent
 	}
 
 	constructor(
@@ -39,9 +38,9 @@ export class UIModalService {
 		private settings: AppSettings
 	) {
 		// Subscribe to the modal in the store and launch store modal if data is found. Also make sure token is present
-		this.select.modal$.subscribe((modal: any) => {
+        this.select.modal$.subscribe((modal: any) => {
             // Make sure modal exists AND that a token is present in app settings. This prevents a modal from persisting after logout
-			if (modal && Object.keys(modal).length && this.settings.token) {
+            if (modal && Object.keys(modal).length && this.settings.token) {
 				// Store reference to the modal instance
 				let modalRef = this.modalService.open(this.modalList[modal.modalId], modal.options);
 				// Add any passed in data to the modal instance after it has opened
@@ -53,7 +52,7 @@ export class UIModalService {
 				}
 				this.modalRef$.next(modalRef);
 				this.onClose();
-			}
+            }
 		});
 	}
     
@@ -65,8 +64,9 @@ export class UIModalService {
      * @param data Primary set of data to pass to the modal
      * @param dataAlt Secondary set of data to pass to the modal
      */
-	public open(modalId: modals, persist: boolean = false, size: 'sm' | 'lg' | 'xl' | 'full' = 'lg', data?: any, dataAlt?: any) {
-		let windowClass;
+    public open(modalId: modals, persist: boolean = false, size: 'sm' | 'lg' | 'xl' | 'full' = 'lg', data?: any, dataAlt?: any) {
+        console.log('Opening modal', modalId)
+		let windowClass = '';
 		if (size == 'xl') {
 			windowClass += ' modal-xl';
 		}
@@ -75,11 +75,19 @@ export class UIModalService {
 		}
 
         // If persist is set, load this modal into the store so state is managed by the UI store
-		if (persist) {
-			this.store.dispatch({ type: StoreActionsUi.MODAL_OPEN, payload: { modalId: modalId, options: { size: <any>size, windowClass: windowClass }, data: data, dataAlt: dataAlt } })
-		}
+        if (persist) {
+            this.store.dispatch({
+                type: StoreActionsUi.MODAL_OPEN,
+                payload: {
+                    modalId: modalId,
+                    options: { size: <any>size, windowClass: windowClass },
+                    data: data,
+                    dataAlt: dataAlt
+                }
+            });
+        }
         // If persist is not set
-		else {
+        else {
 			this.modalRef = this.modalService.open(this.modalList[modalId], { size: <any>size, windowClass: windowClass });
 			if (data) {
 				this.modalRef.componentInstance.data = data;

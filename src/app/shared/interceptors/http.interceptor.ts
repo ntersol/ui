@@ -5,18 +5,18 @@ import { AppSettings } from '@shared';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
-    /**
-     * 
-     * @param settings
-     */
-	constructor(
-		private settings: AppSettings
-	) {}
-    
-	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		const authReq = req.clone({
-			headers: req.headers.set('Authorization', 'Bearer ' + this.settings.token)
-		});
-		return next.handle(authReq);
-	}
+  /**
+   * 
+   * @param settings
+   */
+  constructor(
+    private settings: AppSettings
+  ) { }
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const authReq = req.clone({
+      headers: req.headers.set('Authorization', 'Bearer ' + this.settings.token)
+    });
+    return next.handle(authReq);
+  }
 }

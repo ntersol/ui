@@ -50,14 +50,17 @@ export class LaunchModalComponent implements OnInit, OnDestroy {
 	) {
 	}
 
-	ngOnInit() {	}
+	ngOnInit() {
+        //console.log(this)
+	}
 
 	
     /**
     * Open a modal window
     * Attach a success function and pass any relevant data to the modal component
     */
-	public openModal() {
+    public openModal() {
+        console.log('openModal')
 		if (this.size == 'xl'){
 			this.windowClass += ' modal-xl';
 		}
