@@ -25,7 +25,7 @@
     "@mello-labs/api-tools": "^0.1.8",
     "@mello-labs/form-tools": "^0.1.17",
     "@mello-labs/ui": "^0.1.8",
-    "@mello-labs/utilities": "^0.1.8",
+    "@mello-labs/utilities": "^0.1.9",
     "@ng-bootstrap/ng-bootstrap": "1.0.0-beta.6",
     "@ngrx/store": "^4.1.1",
     "bootstrap": "4.0.0-alpha.6",

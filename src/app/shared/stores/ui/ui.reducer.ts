@@ -1,4 +1,5 @@
-import { IStore, StoreActionsUi } from '@shared';
+import { IStore } from 'src/app/shared/stores/store';
+import { StoreActionsUi } from 'src/app/shared/stores/ui/ui.actions';
 
 
 //Define initial store state : State.main

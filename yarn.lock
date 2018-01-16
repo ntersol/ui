@@ -164,17 +164,17 @@
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/@mello-labs/api-tools/-/api-tools-0.1.8.tgz#fefc5da5f56b34a6430e42144b3c8960781a80ba"
 
-"@mello-labs/form-tools@^0.1.16":
-  version "0.1.16"
-  resolved "https://registry.yarnpkg.com/@mello-labs/form-tools/-/form-tools-0.1.16.tgz#60e5b81c0e92bb57ff9e42b6dffb06277b1bbe59"
+"@mello-labs/form-tools@^0.1.17":
+  version "0.1.17"
+  resolved "https://registry.yarnpkg.com/@mello-labs/form-tools/-/form-tools-0.1.17.tgz#f6f030fc733cd08d345d87e873cf4a24658dc3af"
 
 "@mello-labs/ui@^0.1.8":
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/@mello-labs/ui/-/ui-0.1.8.tgz#dc3ee32f1bc356cfa5be1fd5e8dc1954f6b90484"
 
-"@mello-labs/utilities@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@mello-labs/utilities/-/utilities-0.1.8.tgz#88372a92dd352e51968e580bf61f8711931a1e4a"
+"@mello-labs/utilities@^0.1.9":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@mello-labs/utilities/-/utilities-0.1.9.tgz#47ad5b64f9113b320e74ffe58b8a202d302e88c3"
 
 "@ng-bootstrap/ng-bootstrap@1.0.0-beta.6":
   version "1.0.0-beta.6"

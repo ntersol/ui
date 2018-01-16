@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router, RoutesRecognized, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/interval';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/interval';
 
-import { IStore, AppSettings, UIService } from '@shared';
+import { IStore } from 'src/app/shared';
+import { AppSettings } from 'src/app/shared/app.settings';
+import { UIService } from 'src/app/shared/ui.service';
 
 @Injectable()
 export class AuthService {

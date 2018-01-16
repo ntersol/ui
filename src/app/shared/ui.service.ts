@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IStore, StoreActionsUi } from '@shared';// HttpClient, 
 
+import { IStore } from 'src/app/shared/stores/store';
+import { StoreActionsUi } from 'src/app/shared/stores/ui/ui.actions';
 import { UIModalService } from './ui/ui.modal.service';
 import { UISelectors } from './stores/ui/ui.selectors';
 

@@ -2,9 +2,14 @@ import { Injectable } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Store } from '@ngrx/store';
-import { IStore, StoreActionsUi, ApiService, UISelectors, AppSettings } from '@shared';// HttpClient,
 
-import { ConfirmationModalComponent, LogoutModalComponent } from '@components';
+import { IStore } from 'src/app/shared/stores/store';
+import { StoreActionsUi } from 'src/app/shared/stores/ui/ui.actions';
+import { AppSettings } from 'src/app/shared/app.settings';
+import { ApiService } from 'src/app/shared/api.service';
+
+import { ConfirmationModalComponent } from 'src/app/components/modals/confirmation/confirmation-modal.component';
+import { LogoutModalComponent } from 'src/app/components/modals/logout/logout-modal.component';
 
 /** Sample Usage: 
 this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you want to delete this user?', 'Delete User').result.then(
@@ -16,15 +21,14 @@ this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you
 // List modals here by component name
 type modals = 'LogoutModalComponent' | 'ConfirmationModalComponent';
 
-
 @Injectable()
 export class UIModalService {
 
 	/** Reference to the STATIC currently open modal. This reference is used for static non persistant modals */
 	public modalRef: NgbModalRef;
-    /** Reference to the STORE OBSERVABLE currently open modal. This reference is used for modals persisted in the UI store */
+	/** Reference to the STORE OBSERVABLE currently open modal. This reference is used for modals persisted in the UI store */
 	public modalRef$: BehaviorSubject<any> = new BehaviorSubject(null);
-    /** List of component references of available modals */
+	/** List of component references of available modals */
 	public modalList = {
 		ConfirmationModalComponent: ConfirmationModalComponent,
 		LogoutModalComponent: LogoutModalComponent
@@ -32,15 +36,14 @@ export class UIModalService {
 
 	constructor(
 		private modalService: NgbModal,
-		private select: UISelectors,
 		private store: Store<IStore.root>,
 		private api: ApiService,
 		private settings: AppSettings
 	) {
 		// Subscribe to the modal in the store and launch store modal if data is found. Also make sure token is present
-        this.select.modal$.subscribe((modal: any) => {
-            // Make sure modal exists AND that a token is present in app settings. This prevents a modal from persisting after logout
-            if (modal && Object.keys(modal).length && this.settings.token) {
+		this.store.select(store => store.ui.modal).subscribe((modal: any) => {
+			// Make sure modal exists AND that a token is present in app settings. This prevents a modal from persisting after logout
+			if (modal && Object.keys(modal).length && this.settings.token) {
 				// Store reference to the modal instance
 				let modalRef = this.modalService.open(this.modalList[modal.modalId], modal.options);
 				// Add any passed in data to the modal instance after it has opened
@@ -52,20 +55,19 @@ export class UIModalService {
 				}
 				this.modalRef$.next(modalRef);
 				this.onClose();
-            }
+			}
 		});
 	}
-    
-    /**
-     * Open a modal window
-     * @param modalId The class name of the modal window
-     * @param persist Should the modal persist on reload or otherwise have its state managed by the UI store
-     * @param size Modal size
-     * @param data Primary set of data to pass to the modal
-     * @param dataAlt Secondary set of data to pass to the modal
-     */
-    public open(modalId: modals, persist: boolean = false, size: 'sm' | 'lg' | 'xl' | 'full' = 'lg', data?: any, dataAlt?: any) {
-        console.log('Opening modal', modalId)
+
+	/**
+	 * Open a modal window
+	 * @param modalId The class name of the modal window
+	 * @param persist Should the modal persist on reload or otherwise have its state managed by the UI store
+	 * @param size Modal size
+	 * @param data Primary set of data to pass to the modal
+	 * @param dataAlt Secondary set of data to pass to the modal
+	 */
+	public open(modalId: modals, persist: boolean = false, size: 'sm' | 'lg' | 'xl' | 'full' = 'lg', data?: any, dataAlt?: any) {
 		let windowClass = '';
 		if (size == 'xl') {
 			windowClass += ' modal-xl';
@@ -74,20 +76,20 @@ export class UIModalService {
 			windowClass += ' modal-full';
 		}
 
-        // If persist is set, load this modal into the store so state is managed by the UI store
-        if (persist) {
-            this.store.dispatch({
-                type: StoreActionsUi.MODAL_OPEN,
-                payload: {
-                    modalId: modalId,
-                    options: { size: <any>size, windowClass: windowClass },
-                    data: data,
-                    dataAlt: dataAlt
-                }
-            });
-        }
-        // If persist is not set
-        else {
+		// If persist is set, load this modal into the store so state is managed by the UI store
+		if (persist) {
+			this.store.dispatch({
+				type: StoreActionsUi.MODAL_OPEN,
+				payload: {
+					modalId: modalId,
+					options: { size: <any>size, windowClass: windowClass },
+					data: data,
+					dataAlt: dataAlt
+				}
+			});
+		}
+		// If persist is not set
+		else {
 			this.modalRef = this.modalService.open(this.modalList[modalId], { size: <any>size, windowClass: windowClass });
 			if (data) {
 				this.modalRef.componentInstance.data = data;
@@ -99,9 +101,9 @@ export class UIModalService {
 		return this.modalRef;
 	}
 
-    /**
-     * When the modal window is closed, remove from store
-     */
+	/**
+	 * When the modal window is closed, remove from store
+	 */
 	private onClose() {
 		this.modalRef$.subscribe(modal => {
 			// Wait for promise that is returned when modal is closed or dismissed

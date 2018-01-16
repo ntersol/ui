@@ -57,7 +57,7 @@
     "styleExt": "scss",
     "component": {},
     "build": {
-        "showCircularDependencies": false,
+        "showCircularDependencies": true,
         "preserveSymlinks": true
     }
   }

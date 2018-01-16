@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { IStore, ApiMap, ApiSelectors, AppSettings } from '@shared';//, ApiHttpService
 import { Store } from '@ngrx/store';
-
 import { ApiHttpService, ApiActions } from '@mello-labs/api-tools';
 import { Observable } from 'rxjs/Observable';
+
+import { IStore } from 'src/app/shared/stores/store';
+import { ApiMap } from 'src/app/shared/stores/api/api.map';
+import { AppSettings } from 'src/app/shared/app.settings';
+import { ApiSelectors } from 'src/app/shared/stores/api/api.selectors';
 
 @Injectable()
 export class ApiService extends ApiHttpService {

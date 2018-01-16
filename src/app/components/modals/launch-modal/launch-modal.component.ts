@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UIService } from '@shared';
 import { Subscription } from 'rxjs/Subscription';
-/**
+
+import { UIService } from '@shared';
+
+/** Sample Usage:
 <launch-modal [isButton]="false" classes="btn btn-icon" modal="LoanDetailsModalComponent" size="lg" [data]="someData" [dataAlt]="someData"
     (onSuccess)="doSomething($event)">
                     <div class="icons-app icons-app-loan_info"></div>
@@ -60,7 +62,6 @@ export class LaunchModalComponent implements OnInit, OnDestroy {
     * Attach a success function and pass any relevant data to the modal component
     */
     public openModal() {
-        console.log('openModal')
 		if (this.size == 'xl'){
 			this.windowClass += ' modal-xl';
 		}
