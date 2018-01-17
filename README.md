@@ -28,12 +28,16 @@ ng build --prod
 ```
 
 ## Localizing Your App
-Add global environment variables in `src > app > shared > app.settings.ts`
+`src > app > shared > app.settings.ts`
+-Add global environment variables in 
 
-When your authentication API is available, go to `src > app > shared > auth.service.ts`
-- Set `hasAuthEndpoint` property to true
+`src > app > shared > auth.service.ts`
+- Set `hasAuthEndpoint` property to true if auth endpoint is available, otherwise leave false for dev
 - Set `authUrl` property to your endpoint location
 
-In `src > app > shared > api.service.ts`
+`src > app > shared > api.service.ts`
 - Set `envSettingsUrlProd` property to location of environment settings
 - Update `appSettingsUpdate` method to hydrate environment settings into app settings
+
+`src > index.html`
+-Update any header changes to the html in this file. IE logo, navigation, etc.
