@@ -41,3 +41,13 @@ ng build --prod
 
 `src > index.html`
 -Update any header changes to the html in this file. IE logo, navigation, etc.
+
+## Useful Commands
+```bash
+# Serve prod after running ng build --prod. Requires http server when you can install with `npm install http-server -g`
+http-server ./dist -o
+ng serve --prod
+
+# Update all npm packages
+npm install -g npm-check-updates && ncu -a && npm i
+```

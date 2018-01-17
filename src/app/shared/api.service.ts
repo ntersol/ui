@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ApiHttpService, ApiActions } from '@mello-labs/api-tools';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
 
 import { IStore } from 'src/app/shared/stores/store';
 import { ApiMap } from 'src/app/shared/stores/api/api.map';
@@ -52,7 +53,7 @@ export class ApiService extends ApiHttpService {
 	  */
 	public appSettingsGet(update?: boolean): Observable<any> {
 		// If app is localhost:4200, use local settings settings instead
-		const envUrl = window.location.host == 'localhost:4200' ? this.envSettingsUrlDev : this.envSettingsUrlProd;
+		const envUrl = window.location.host == 'localhost:4200' || window.location.host == 'localhost:8080' ? this.envSettingsUrlDev : this.envSettingsUrlProd;
 		return this.get(envUrl, update).catch(error => {
 			if (error.status == 401 || error.status == 403) {
 				error.errorMsg = 'Unable to get start up settings ';
