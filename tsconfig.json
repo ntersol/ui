@@ -13,9 +13,9 @@
 		],
 		"baseUrl": ".",
 		"paths": {
-			"@shared": [ "./src/app/shared" ],
 			"@routes": [ "./src/app/routes" ],
-			"@components": [ "./src/app/components" ]
+			"@components": [ "./src/app/components" ],
+			"@shared": [ "./src/app/shared" ]
 		},
 		"lib": [
 			"es2017",

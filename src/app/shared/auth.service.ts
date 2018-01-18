@@ -13,7 +13,7 @@ import { UIService } from 'src/app/shared/ui.service';
 @Injectable()
 export class AuthService {
     // If this app does not yet have an auth endpoint, set to false. This will allow dev to proceed since a token is required by the route guard
-    private hasAuthEndpoint: boolean = false;
+    public hasAuthEndpoint: boolean = false;
     /** Location of auth endpoint */
     private authUrl = '/authentication/login';
 

@@ -53,7 +53,8 @@ export class ApiService extends ApiHttpService {
 	  */
 	public appSettingsGet(update?: boolean): Observable<any> {
 		// If app is localhost:4200, use local settings settings instead
-		const envUrl = window.location.host == 'localhost:4200' || window.location.host == 'localhost:8080' ? this.envSettingsUrlDev : this.envSettingsUrlProd;
+
+		const envUrl = this.settings.isDev ? this.envSettingsUrlDev : this.envSettingsUrlProd;
 		return this.get(envUrl, update).catch(error => {
 			if (error.status == 401 || error.status == 403) {
 				error.errorMsg = 'Unable to get start up settings ';

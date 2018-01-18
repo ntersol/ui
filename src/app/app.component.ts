@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
-import { AuthService } from '@shared';
+import { AuthService, AppSettings } from '@shared';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,8 @@ export class AppComponent {
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
 		private title: Title,
-		private authService: AuthService
+		private authService: AuthService,
+		private settings: AppSettings
 	) {
 		this.routeChange();
 	}
@@ -38,8 +39,8 @@ export class AppComponent {
 			.mergeMap(route => route.data)
 			.subscribe((event) => {
 				this.title.setTitle(event['title']) // Change document title
-				// If not on the login page and not local dev, update the token
-				if (window.location.host != 'localhost:4200' && this.router.url.toLowerCase().indexOf('login') == -1) {
+				// If auth endpoint is available and not on the login page
+				if (this.authService.hasAuthEndpoint && this.router.url.toLowerCase().indexOf('login') == -1) {
 					this.authService.refreshTokenUpdate(); // On Route change, refresh authentication token
 				}
 			});

@@ -11,8 +11,12 @@ export class NavComponent {
     public isOpen: boolean = false;
 
     constructor(
-        public auth: AuthService
+        private auth: AuthService
     ) {
-    }
+	}
+
+	public logOut() {
+		this.auth.logOut();
+	}
     
 }

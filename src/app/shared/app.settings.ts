@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 
-// Enum of app setting properties
+// Enum of app setting properties. Only needed if using the propGet and propSet methods in this file
 enum Props {
 	token = 'token',
 	apiUrl = 'apiUrl',
 	userName = 'userName',
 }
 
+// Getter/setters for app settings. Will read/write to app settings and on app load will try to reload from localstorage/sessionstorage
 @Injectable()
 export class AppSettings {
 
-	// Getter/setters for app settings. Will read/write to app settings and on app load will try to reload from localstorage/sessionstorage
+	/** Development domains. Used for the isDev property to help set/disable functionality that may not be available yet */
+	private domainsDev:string[] = ['localhost:4200', '127.0.0.1:8080'];
 
+	/** Is this application in a development environment as defined by domainsDev and window.location.host */
+	public get isDev(): boolean {
+		return this.domainsDev.includes(window.location.host);
+	}
+	
 	/** API token for EPS */
 	private _token: string = null;
 	/** API token for EPS */
