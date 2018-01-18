@@ -13,8 +13,11 @@ git clone --depth 1 https://github.com/JerrolKrause/mello-labs-angular-starter.g
 cd mello-labs-angular-starter
 
 # Install the repo with yarn or npm
-yarn or npm i
+yarn
+npm i
 ```
+For initial login, any text in the username and password box will work. Be sure to add your auth endpoint as outlined below under localizing your app.
+
 
 ## Usage
 See Angular CLI github page for full usage: https://github.com/angular/angular-cli
@@ -32,7 +35,7 @@ ng serve --prod
 
 ## Localizing Your App
 `src > app > shared > app.settings.ts`
-- Add global environment variables in 
+- Add global environment variables
 - Update any development domains
 
 `src > app > shared > auth.service.ts`
