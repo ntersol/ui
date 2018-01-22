@@ -4,6 +4,8 @@ import { NgModule, enableProdMode, ErrorHandler } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker'
+import { environment } from '../environments/environment';
 
 // 3rd Party Tools
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Bootstrap
@@ -94,11 +96,14 @@ export const APP_PROVIDERS = [
     APP_COMPONENTS
   ],
   imports: [
+	// Angular
     BrowserModule,
     FormsModule, ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-    NgbModule.forRoot(),// Bootstrap
+	RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+	environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
+
+    NgbModule.forRoot(),// ng-bootstrap
     StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: StoreUIReducer }),// NGRX
 
     // Mello Labs
