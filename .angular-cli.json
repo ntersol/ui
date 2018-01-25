@@ -61,7 +61,7 @@
 		},
 		"build": {
 			"preserveSymlinks": true,
-			"showCircularDependencies": true
+			"showCircularDependencies": false
 		}
 	}
 }

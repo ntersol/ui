@@ -1,71 +1,82 @@
 <div id="home" class="container-fluid" *ngIf="{ state: usersState$ | async, users: users$ | async } as routeData">
 
-    <div class="card mb-3">
-        <div class="card-header p-2">
-            <button class="btn btn-icon btn-sm" (click)="usersRefresh()" [disabled]="routeData?.state?.loading">
-            <i class="fa fa-refresh"></i></button>
-        </div>
-    </div>
+	<div class="card mb-3">
+		<div class="card-header p-2">
+			<button class="btn btn-icon btn-sm mr-2" (click)="usersRefresh()" [disabled]="routeData?.state?.loading">
+				<i class="fa fa-refresh"></i>
+			</button>
+			<!-- Filter datatable -->
+			<form class="form-inline mr-2 d-inline-block mr-2">
+				<label class="icon search" style="position:relative;">
+					<input class="form-control form-control-sm filterSearch" type="text" name="userSearchTerm" placeholder="Search users" [(ngModel)]="userSearchTerm" />
+					<a (click)="userSearchTerm = null" *ngIf="userSearchTerm" style="position:absolute;right: 10px;"><i class="fa fa-remove"></i></a>
+				</label>
+			</form>
+		</div>
 
-    <api-state [state]="routeData?.state" [toaster]="true" [showSuccess]="false" *ngIf="routeData?.state">
-        <div class="row">
-            <div class="col-12 col-lg-8 col-xl-9">
-                <div class="alert alert-warning icon" *ngIf="!routeData?.users?.src?.length">No users found</div>
-                <table class="table table-sm" *ngIf="routeData?.users?.src?.length">
-                    <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Name</th>
-                        <th>Website</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let user of routeData.users.src"><!-- Data from array is mapped, note the .src  -->
-                        <td>{{user.username}}</td>
-                        <td>{{user.name}}</td>
-                        <td>{{user.website}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.phone | phonenumber}}</td>
-                        <td><a (click)="userEdit(user)">Edit</a></td>
-                        <td>
-                            <launch-modal modal="ConfirmationModalComponent" [isButton]="false" [persist]="true" size="lg" [data]="'Really delete '+ user.name +'?'" dataAlt="Delete User" (onSuccess)="userDelete(user)">
-                                Delete
-                            </launch-modal>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-12 col-lg-4 col-xl-3">
-                <div class="card">
-                    <div class="card-block">
-                        <h2 *ngIf="!isEditing">Add User</h2>
-                        <h2 *ngIf="isEditing">Updating User</h2>
-                        <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
-                            <field-component [frmGroup]="formMain" frmControl="username" label="Username" [labelColumns]="4"></field-component>
-                            <field-component [frmGroup]="formMain" frmControl="name" label="Name" [labelColumns]="4"></field-component>
-                            <field-component [frmGroup]="formMain" frmControl="website" label="Website" [labelColumns]="4"></field-component>
-                            <field-component [frmGroup]="formMain" frmControl="email" label="Email" [labelColumns]="4"></field-component>
-                            <field-component [frmGroup]="formMain" frmControl="phone" label="Phone" [labelColumns]="4"></field-component>
-                            <button type="submit" class="btn btn-interact float-right" [disabled]="routeData.state.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : routeData.state.modifying }">
-                                <ng-container *ngIf="!isEditing">
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i> Add User
-                                </ng-container>
-                                <ng-container *ngIf="isEditing">
-                                    <i class="fa fa-user" aria-hidden="true"></i> Update User
-                                </ng-container>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+	</div>
 
-        </div>
-    </api-state>
+	<api-state [state]="routeData?.state" [toaster]="true" [showSuccess]="false" *ngIf="routeData?.state">
+		<div class="row">
+			<div class="col-12 col-lg-8 col-xl-9">
+				
+				<div class="alert alert-warning icon" *ngIf="!routeData?.users?.src?.length">No users found</div>
+				<table class="table table-sm" *ngIf="(routeData?.users?.src | filter:userSearchTerm:'name' | debounce) as usersFiltered">
+					<thead>
+						<tr>
+							<th>Username</th>
+							<th>Name</th>
+							<th>Website</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let user of usersFiltered">
+							<!-- Data from array is mapped, note the .src  -->
+							<td>{{user.username}}</td>
+							<td>{{user.name}}</td>
+							<td>{{user.website}}</td>
+							<td>{{user.email}}</td>
+							<td>{{user.phone | phonenumber}}</td>
+							<td><a (click)="userEdit(user)">Edit</a></td>
+							<td>
+								<launch-modal modal="ConfirmationModalComponent" [isButton]="false" [persist]="true" size="lg" [data]="'Really delete '+ user.name +'?'" dataAlt="Delete User" (onSuccess)="userDelete(user)">
+									Delete
+								</launch-modal>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-12 col-lg-4 col-xl-3">
+				<div class="card">
+					<div class="card-block">
+						<h2 *ngIf="!isEditing">Add User</h2>
+						<h2 *ngIf="isEditing">Updating User</h2>
+						<form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
+							<field-component [frmGroup]="formMain" frmControl="username" label="Username" [labelColumns]="4"></field-component>
+							<field-component [frmGroup]="formMain" frmControl="name" label="Name" [labelColumns]="4"></field-component>
+							<field-component [frmGroup]="formMain" frmControl="website" label="Website" [labelColumns]="4"></field-component>
+							<field-component [frmGroup]="formMain" frmControl="email" label="Email" [labelColumns]="4"></field-component>
+							<field-component [frmGroup]="formMain" frmControl="phone" label="Phone" [labelColumns]="4"></field-component>
+							<button type="submit" class="btn btn-interact float-right" [disabled]="routeData.state.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : routeData.state.modifying }">
+								<ng-container *ngIf="!isEditing">
+									<i class="fa fa-user-plus" aria-hidden="true"></i> Add User
+								</ng-container>
+								<ng-container *ngIf="isEditing">
+									<i class="fa fa-user" aria-hidden="true"></i> Update User
+								</ng-container>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</api-state>
 
 </div>
 

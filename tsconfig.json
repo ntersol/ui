@@ -15,7 +15,10 @@
 		"paths": {
 			"@routes": [ "./src/app/routes" ],
 			"@components": [ "./src/app/components" ],
-			"@shared": [ "./src/app/shared" ]
+			"@shared": [ "./src/app/shared" ],
+			"@modals": [ "./src/app/components/modals" ],
+			"@ui": [ "./src/app/shared/ui" ],
+			"@api": [ "./src/app/shared/api" ]
 		},
 		"lib": [
 			"es2017",

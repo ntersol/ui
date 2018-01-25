@@ -1,13 +1,13 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'layout-main',
-  templateUrl: './layout-main.component.html'
+		selector: 'layout-main',
+		templateUrl: './layout-main.component.html'
 })
-export class LayoutMainComponent{
+export class LayoutMainComponent {
 
-    constructor(
-    ) {
-    }
+		constructor(
+		) {
+		}
 
 }

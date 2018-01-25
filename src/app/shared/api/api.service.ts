@@ -6,13 +6,20 @@ import { ApiHttpService, ApiActions } from '@mello-labs/api-tools';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 
-import { IStore } from 'src/app/shared/stores/store';
-import { ApiMap } from 'src/app/shared/stores/api/api.map';
-import { AppSettings } from 'src/app/shared/app.settings';
-import { ApiSelectors } from 'src/app/shared/stores/api/api.selectors';
+import { AppSettings, IStore } from '@shared';
+import { ApiMap } from './api.map';
+import { ApiProps } from './api.properties';
 
 @Injectable()
 export class ApiService extends ApiHttpService {
+
+		/** Users store selection */
+		public users$ = this.store.select(store => store.api.users);
+
+		/** Get the API state using api props */
+		public getState$ = (apiProp: ApiProps) => this.store.select(store => store.apiStatus[apiProp]);
+		/** Get the API data using api props */
+		public getData$ = (apiProp: ApiProps) => this.store.select(store => store.api[apiProp]);
 
 	/** Location of prod app environment settings */
 	public envSettingsUrlProd = '/api/config'; // Localize
@@ -23,12 +30,11 @@ export class ApiService extends ApiHttpService {
 		private http: HttpClient,
 		private store: Store<IStore.root>,
 		private router: Router,
-		public select: ApiSelectors,
 		private settings: AppSettings
 	) {
 		super(http, store, router);
 		// On instantiation, load environment settings
-		this.appSettingsGet().subscribe(settings => this.appSettingsUpdate(settings));
+		this.appSettingsGet().subscribe(settings => this.appSettingsUpdate(settings), error => console.error('Unable to get env settings', error));
 	}
 
 	/** Sample store usage */

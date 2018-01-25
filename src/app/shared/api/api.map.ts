@@ -6,7 +6,7 @@ Adding a new endpoints:
 */
 
 //import IStore
-import { IStore } from '../store.d';
+import { IStore } from '@shared';
 import { ApiProps } from './api.properties';
 // IStore.ApiMap
 
