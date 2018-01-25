@@ -34,6 +34,9 @@ ng serve --prod
 ```
 
 ## Localizing Your App
+`src > environments > environment.prod.ts`
+- Change the `appName` property in this file
+
 `src > app > shared > app.settings.ts`
 - Add global environment variables
 - Update any development domains
@@ -51,6 +54,7 @@ ng serve --prod
 
 `src > ngsw-config.json`
 -Update any dependencies needed for the service worker. Use asset groups for site resources, use dataGroups for API calls
+
 
 ## Useful Info
 Serve prod after running `ng build --prod` with non CLI based http server. Requires http server when you can install with `npm install http-server -g`

@@ -8,8 +8,9 @@ import {
 import { LayoutMainComponent } from '@components';
 import { AuthGuard } from '@shared';
 
+import { environment } from '../environments/environment.prod'
 
-const titleSlug: string = ' | Mello Labs'; // Append to page title - TODO: Migrate to an environment variable
+const titleSlug: string = ' | ' + environment.appName;
 
 export const ROUTES: Routes = [
   // Routes without masterpage or that do not need to be authenticated need to go first
