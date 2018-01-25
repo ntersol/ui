@@ -49,6 +49,9 @@ ng serve --prod
 `src > index.html`
 -Update any header changes to the html in this file. IE logo, navigation, etc. This is a poor man's app-Shell since ng-bootstrap isn't compatible with SSR
 
+`src > ngsw-config.json`
+-Update any dependencies needed for the service worker. Use asset groups for site resources, use dataGroups for API calls
+
 ## Useful Info
 Serve prod after running `ng build --prod` with non CLI based http server. Requires http server when you can install with `npm install http-server -g`
 ```bash
