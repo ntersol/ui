@@ -45,7 +45,7 @@
 	"dataGroups": [
 		{
 			"name": "api-users",
-			"urls": { "https://jsonplaceholder.typicode.com/": { "match": "prefix" } },
+			"urls": [ "https://jsonplaceholder.typicode.com/" ],
 			"cacheConfig": {
 				"strategy": "freshness",
 				"maxSize": 360000000,
