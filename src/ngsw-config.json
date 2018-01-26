@@ -7,7 +7,9 @@
 			"resources": {
 				"files": [
 					"/favicon.ico",
-					"/index.html"
+					"/index.html",
+					"/apple-touch-icon.png",
+					"/safari-pinned-tab.svg"
 				],
 				"versionedFiles": [
 					"/*.bundle.css",
@@ -43,11 +45,11 @@
 	"dataGroups": [
 		{
 			"name": "api-users",
-			"urls": [ "/users" ],
+			"urls": { "https://jsonplaceholder.typicode.com/": { "match": "prefix" } },
 			"cacheConfig": {
 				"strategy": "freshness",
-				"maxSize": 100,
-				"maxAge": "1h",
+				"maxSize": 360000000,
+				"maxAge": "4h",
 				"timeout": "5s"
 			}
 		}

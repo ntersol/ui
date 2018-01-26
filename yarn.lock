@@ -160,6 +160,12 @@
   dependencies:
     tslib "^1.7.1"
 
+"@angular/service-worker@^5.2.2":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-5.2.2.tgz#bb0f174292bfce953af6ff971499c846e4d4f991"
+  dependencies:
+    tslib "^1.7.1"
+
 "@mello-labs/api-tools@^0.1.8":
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/@mello-labs/api-tools/-/api-tools-0.1.8.tgz#fefc5da5f56b34a6430e42144b3c8960781a80ba"

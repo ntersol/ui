@@ -29,9 +29,9 @@ export class AppComponent implements OnInit {
 		ngOnInit() {
 				this.routeChange();
 				if (this.swUpdate.isEnabled) {
-						console.log('SW Enabled');
+						console.log('Service worker enabled');
 						this.swUpdate.available.subscribe(() => {
-								console.log('SW Update Found');
+								console.log('SW update available.');
 								this.modals.open('ConfirmationModalComponent', false, 'lg', `A new version of ${environment.appName} is available, would you like to update to the latest version?`).result.then(
 										() => window.location.reload(),
 										() => console.warn('User is on an outdated version of the application'));

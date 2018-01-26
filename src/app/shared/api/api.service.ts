@@ -22,9 +22,9 @@ export class ApiService extends ApiHttpService {
 		public getData$ = (apiProp: ApiProps) => this.store.select(store => store.api[apiProp]);
 
 	/** Location of prod app environment settings */
-	public envSettingsUrlProd = '/api/config'; // Localize
+	public envSettingsUrlProd = 'api/config'; // Localize
 	/** Location of dev app environment settings */
-	public envSettingsUrlDev = '/assets/mock-data/env-settings.json';
+	public envSettingsUrlDev = 'assets/mock-data/env-settings.json';
 
 	constructor(
 		private http: HttpClient,
