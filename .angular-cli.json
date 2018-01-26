@@ -9,7 +9,10 @@
 			"outDir": "dist",
 			"assets": [
 				"assets",
-				"favicon.ico"
+				"manifest.json",
+				"favicon.ico",
+				"apple-touch-icon.png",
+				"safari-pinned-tab.svg"
 			],
 			"index": "index.html",
 			"main": "main.ts",

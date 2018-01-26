@@ -24,13 +24,14 @@ export class AppComponent implements OnInit {
 				private swUpdate: SwUpdate,
 				private modals: UIModalService
 		) {
-				
 		}
 
 		ngOnInit() {
 				this.routeChange();
 				if (this.swUpdate.isEnabled) {
+						console.log('SW Enabled');
 						this.swUpdate.available.subscribe(() => {
+								console.log('SW Update Found');
 								this.modals.open('ConfirmationModalComponent', false, 'lg', `A new version of ${environment.appName} is available, would you like to update to the latest version?`).result.then(
 										() => window.location.reload(),
 										() => console.warn('User is on an outdated version of the application'));

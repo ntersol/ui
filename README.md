@@ -34,6 +34,15 @@ ng serve --prod
 ```
 
 ## Localizing Your App
+`src > manifest.json`
+- Change the site info in this file to be specific to your app. Make sure the start Url property matches your production URL
+
+`src > assets > icons`
+- Change these icons to ones for your app
+
+`src > ` `apple-touch-icon` + `favicon.ico` + `safari-pinned-tab.svg`
+- Change these icons to ones for your app
+
 `src > environments > environment.prod.ts`
 - Change the `appName` property in this file
 
