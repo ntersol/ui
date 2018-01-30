@@ -9,8 +9,7 @@ Available online @ https://jerrolkrause.github.io/mello-labs-angular-starter/#/.
 
 ```bash
 # Clone the repo
-# --depth 1 removes all but one .git commit history
-git clone --depth 1 https://github.com/JerrolKrause/mello-labs-angular-starter.git
+git clone https://github.com/JerrolKrause/mello-labs-angular-starter.git
 
 # Change directory to the repo. Rename project as necessary
 cd mello-labs-angular-starter
@@ -34,6 +33,9 @@ ng build --prod
 
 # Build and serve prod
 ng serve --prod
+
+# Deploy dist folder to git pages. Be sure to update deploy script in package.json
+npm run deploy
 ```
 
 ## Localizing Your App
