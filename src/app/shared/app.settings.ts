@@ -54,11 +54,11 @@ export class AppSettings {
 	) {
 	}
 
-    /**
-     * Return a property. Loads it from this service first if available, if not looks in localstorage, if not there either return null
-     * @param prop - App settings property
-     * @param location - Location of locally stored prop, either sessionStorage or localStorage
-     */
+	/**
+	* Return a property. Loads it from this service first if available, if not looks in localstorage, if not there either return null
+	* @param prop - App settings property
+	* @param location - Location of locally stored prop, either sessionStorage or localStorage
+	*/
 	private propGet(prop: string, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
 		if (!this['_' + prop] && window[location].getItem(prop)) {
 			this['_' + prop] = window[location].getItem(prop);
@@ -66,11 +66,11 @@ export class AppSettings {
 		return this['_' + prop] || null;
 	}
 
-    /**
-     * Set an app settings property. Write to localstorage if present, delete from localstorage if null
-     * @param prop - App settings property
-     * @param location - Location of locally stored prop, either sessionStorage or localStorage
-     */
+	/**
+	* Set an app settings property. Write to localstorage if present, delete from localstorage if null
+	* @param prop - App settings property
+	* @param location - Location of locally stored prop, either sessionStorage or localStorage
+	*/
 	private propSet(prop: string, value: string, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
 		if (value) {
 			window[location].setItem(prop, value);
