@@ -11,54 +11,54 @@ import { AuthService } from '@shared';
 import { UIModalService } from '@ui';
 
 @Component({
-		selector: 'app-root',
-		templateUrl: './app.component.html'
+  selector: 'app-root',
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
 
-		constructor(
-				private router: Router,
-				private activatedRoute: ActivatedRoute,
-				private title: Title,
-				private authService: AuthService,
-				private swUpdate: SwUpdate,
-				private modals: UIModalService
-		) {
-		}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private title: Title,
+    private authService: AuthService,
+    private swUpdate: SwUpdate,
+    private modals: UIModalService
+  ) {
+  }
 
-		ngOnInit() {
-				this.routeChange();
-				if (this.swUpdate.isEnabled) {
-						console.log('Service worker enabled');
-						this.swUpdate.available.subscribe(() => {
-								console.log('SW update available.');
-								this.modals.open('ConfirmationModalComponent', false, 'lg', `A new version of ${environment.appName} is available, would you like to update to the latest version?`).result.then(
-										() => window.location.reload(),
-										() => console.warn('User is on an outdated version of the application'));
-						});
-				}
-		}
+  ngOnInit() {
+    this.routeChange();
+    if (this.swUpdate.isEnabled) {
+      console.log('Service worker enabled');
+      this.swUpdate.available.subscribe(() => {
+        console.log('SW update available.');
+        this.modals.open('ConfirmationModalComponent', false, 'lg', `A new version of ${environment.appName} is available, would you like to update to the latest version?`).result.then(
+          () => window.location.reload(),
+          () => console.warn('User is on an outdated version of the application'));
+      });
+    }
+  }
 
-		/**
-		* Actions to perform on route change
-		* Page titles are in app.routes.ts
-		*/
-		public routeChange() {
-				this.router.events
-						.filter(event => event instanceof NavigationEnd)
-						.map(() => this.activatedRoute)
-						.map(route => {
-								while (route.firstChild) route = route.firstChild;
-								return route;
-						})
-						.filter(route => route.outlet === 'primary')
-						.mergeMap(route => route.data)
-						.subscribe((event) => {
-								this.title.setTitle(event['title']) // Change document title
-								// If auth endpoint is available and not on the login page
-								if (this.authService.hasAuthEndpoint && this.router.url.toLowerCase().indexOf('login') == -1) {
-										this.authService.refreshTokenUpdate(); // On Route change, refresh authentication token
-								}
-						});
-		} // end routeChange
+  /**
+  * Actions to perform on route change
+  * Page titles are in app.routes.ts
+  */
+  public routeChange() {
+    this.router.events
+      .filter(event => event instanceof NavigationEnd)
+      .map(() => this.activatedRoute)
+      .map(route => {
+        while (route.firstChild) route = route.firstChild;
+        return route;
+      })
+      .filter(route => route.outlet === 'primary')
+      .mergeMap(route => route.data)
+      .subscribe((event) => {
+        this.title.setTitle(event['title']) // Change document title
+        // If auth endpoint is available and not on the login page
+        if (this.authService.hasAuthEndpoint && this.router.url.toLowerCase().indexOf('login') == -1) {
+          this.authService.refreshTokenUpdate(); // On Route change, refresh authentication token
+        }
+      });
+  } // end routeChange
 }
