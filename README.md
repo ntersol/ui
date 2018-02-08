@@ -1,6 +1,6 @@
 # Mello Labs Angular Starter
 
-A rapid starter project for creating Angular single page apps. Contains Angular 5, lodash, Bootstrap 4, Ng-Bootstrap & Ngrx-Store 4 (Redux). Built with Angular CLI.
+A rapid starter project for creating Angular single page apps. Contains Angular 5, lodash, Bootstrap 4, Ng-Bootstrap & Ngrx-Store (Redux). Built with Angular CLI.
 
 Available online @ https://jerrolkrause.github.io/mello-labs-angular-starter/#/. 
 
@@ -27,7 +27,7 @@ See Angular CLI github page for full usage: https://github.com/angular/angular-c
 # Serve dev on http://localhost:4200/
 ng serve
 
-# Build for prod
+# Build for prod. Files will appear in the dist folder
 ng build --prod
 
 # Build and serve prod
@@ -55,6 +55,7 @@ npm run update
 
 `src > environments > environment.prod.ts`
 - Change the `appName` property in this file
+- Enable the service worker if desired, default is off
 
 `src > app > shared > app.settings.ts`
 - Add global environment variables
@@ -76,7 +77,7 @@ npm run update
 
 
 ## Useful Info
-Serve prod after running `ng build --prod` with non CLI based http server. Requires http server when you can install with `npm install http-server -g`
+Serve prod after running `ng build --prod` with non CLI based http server. Requires http server when you can install with `npm install http-server -g`. Useful for testing service worker.
 ```bash
 http-server ./dist -o
 ```
@@ -86,7 +87,7 @@ Update all npm packages
 npm install -g npm-check-updates && ncu -a && npm i
 ```
 
-When working with Yarn Link and your local NPM package src folders (uncompiled .ts), use the following boilerplate in your root tsconfig so that Angular CLI will compile and build on save and not throw an Angular package error
+When working with Yarn/NPM Link and your local NPM package src folders (uncompiled .ts), use the following boilerplate in your root tsconfig so that Angular CLI will compile and build on save and not throw an Angular package error
 ```bash
 "include": [
 	"src/**/*",

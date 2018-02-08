@@ -7,8 +7,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';
 
 import { UIModalService } from '@ui';
-import { IStore } from './store';
-import { AppSettings } from './app.settings';
+import { IStore } from '../stores/store';
+import { AppSettings } from '../app.settings';
 
 @Injectable()
 export class AuthService {

@@ -13,10 +13,10 @@ export * from './pipes/filter.pipe';
 export * from './pipes/debounce.pipe';
 
 // Store Typings
-export * from './store.d';
+export * from './stores/store.d';
 
 // Services
-export * from './auth.service';
+export * from './services/auth.service';
 
 
 
