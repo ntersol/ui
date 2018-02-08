@@ -2,8 +2,7 @@
 
 A rapid starter project for creating Angular single page apps. Contains Angular 5, lodash, Bootstrap 4, Ng-Bootstrap & Ngrx-Store 4 (Redux). Built with Angular CLI.
 
-Available online @ https://jerrolkrause.github.io/mello-labs-angular-starter/#/. Just enter anything into the login and PWD boxes.
-
+Available online @ https://jerrolkrause.github.io/mello-labs-angular-starter/#/. 
 
 ## Quick Start
 
