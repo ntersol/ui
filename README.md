@@ -39,6 +39,9 @@ npm run deploy
 ```
 
 ## Localizing Your App
+`package.json`
+- If using github pages, update the `npm run deploy` command in this file to include the correct slug. IE replace `/mello-labs-angular-starter/` with your url
+
 `src > manifest.json`
 - Change the site info in this file to be specific to your app. Make sure the start Url property matches your production URL
 
