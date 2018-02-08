@@ -36,6 +36,9 @@ ng serve --prod
 
 # Deploy dist folder to git pages. Be sure to update deploy script in package.json
 npm run deploy
+
+# Update all Angular packages to the latest version
+npm run update
 ```
 
 ## Localizing Your App
