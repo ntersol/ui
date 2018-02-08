@@ -27,28 +27,28 @@ enableProdMode();
 
 // Routes
 import {
-	NoContentComponent, LoginComponent, HomeComponent
+  NoContentComponent, LoginComponent, HomeComponent
 } from '@routes';
 
 // Components
 import {
-	FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
-	ConfirmationModalComponent, LogoutModalComponent,
-	LaunchModalComponent
+  FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
+  ConfirmationModalComponent, LogoutModalComponent,
+  LaunchModalComponent
 } from '@components';
 
 // Shared
 import {
-	GlobalErrorHandler,
-	AuthService,
-	AppSettings,
+  GlobalErrorHandler,
+  AuthService,
+  AppSettings,
 
-	// Interceptors
-	AuthGuard,
-	HttpInterceptorService,
+  // Interceptors
+  AuthGuard,
+  HttpInterceptorService,
 
-	// Pipes
-	FilterPipe, DebouncePipe
+  // Pipes
+  FilterPipe, DebouncePipe
 } from '@shared';
 
 
@@ -57,68 +57,68 @@ import { ApiService } from '@api';
 
 // Application wide providers
 export const APP_COMPONENTS = [
-	NoContentComponent, LoginComponent, HomeComponent,
+  NoContentComponent, LoginComponent, HomeComponent,
 
-	FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
-	LaunchModalComponent,
+  FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
+  LaunchModalComponent,
 
-	ConfirmationModalComponent, LogoutModalComponent
+  ConfirmationModalComponent, LogoutModalComponent
 ];
 
 // Application wide providers
 export const APP_PROVIDERS = [
-	HttpInterceptorService,
-	AuthService,
-	ApiService,
-	AppSettings,
-	UIModalService,
-	UIStoreService,
-	AuthGuard,
+  HttpInterceptorService,
+  AuthService,
+  ApiService,
+  AppSettings,
+  UIModalService,
+  UIStoreService,
+  AuthGuard,
 
-	// Angular Pipes
-	DatePipe, CurrencyPipe,
+  // Angular Pipes
+  DatePipe, CurrencyPipe,
 
-	{// Global exception handler
-		provide: ErrorHandler,
-		useClass: GlobalErrorHandler
-	},
+  {// Global exception handler
+    provide: ErrorHandler,
+    useClass: GlobalErrorHandler
+  },
 ];
 
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		APP_COMPONENTS,
-		//Pipes
-		FilterPipe, DebouncePipe
-	],
-	imports: [
-		// Angular
-		BrowserModule,
-		FormsModule, ReactiveFormsModule,
-		HttpClientModule,
-		RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.serviceWorker }),
+  declarations: [
+    AppComponent,
+    APP_COMPONENTS,
+    //Pipes
+    FilterPipe, DebouncePipe
+  ],
+  imports: [
+    // Angular
+    BrowserModule,
+    FormsModule, ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.serviceWorker }),
 
-		NgbModule.forRoot(),// ng-bootstrap
-		StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }),// NGRX
+    NgbModule.forRoot(),// ng-bootstrap
+    StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }),// NGRX
 
-		// Mello Labs
-		ApiToolsModule.forRoot(),
-		FormToolsModule.forRoot(),
-		UtilitiesModule.forRoot()
-	],
-	providers: [
-		APP_PROVIDERS,
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: HttpInterceptorService,
-			multi: true
-		}
-	],
-	bootstrap: [AppComponent],
-	entryComponents: [
-		ConfirmationModalComponent, LogoutModalComponent
-	]
+    // Mello Labs
+    ApiToolsModule.forRoot(),
+    FormToolsModule.forRoot(),
+    UtilitiesModule.forRoot()
+  ],
+  providers: [
+    APP_PROVIDERS,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ConfirmationModalComponent, LogoutModalComponent
+  ]
 })
 export class AppModule { }

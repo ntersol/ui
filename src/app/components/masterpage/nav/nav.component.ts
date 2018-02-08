@@ -2,21 +2,21 @@ import { Component } from '@angular/core';
 import { AuthService } from '@shared';
 
 @Component({
-		selector: 'nav-component',
-		templateUrl: './nav.component.html'
+  selector: 'nav-component',
+  templateUrl: './nav.component.html'
 })
 export class NavComponent {
 
-		/** Is the dropdown menu open on mobile */
-		public isOpen: boolean = false;
+  /** Is the dropdown menu open on mobile */
+  public isOpen: boolean = false;
 
-		constructor(
-				private auth: AuthService
-		) {
-		}
+  constructor(
+    private auth: AuthService
+  ) {
+  }
 
-		public logOut() {
-				this.auth.logOut();
-		}
+  public logOut() {
+    this.auth.logOut();
+  }
 
 }
