@@ -3,6 +3,9 @@
 // App Settings
 export * from './app.settings';
 
+// Services
+export * from './services/auth.service';
+
 // Base services and interceptors
 export * from './interceptors/error.interceptor';
 export * from './interceptors/http.interceptor';
@@ -15,8 +18,7 @@ export * from './pipes/debounce.pipe';
 // Store Typings
 export * from './stores/store.d';
 
-// Services
-export * from './services/auth.service';
+
 
 // Directives
 export * from './directives/full-screen.directive';

@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';
 
 import { UIModalService } from '@ui';
+import { ApiService } from '@api';
 import { IStore } from '../stores/store';
 import { AppSettings } from '../app.settings';
 
@@ -37,7 +38,8 @@ export class AuthService {
     private route: ActivatedRoute,
     private store: Store<IStore.root>,
     private settings: AppSettings,
-    private modals: UIModalService
+    private modals: UIModalService,
+    private api: ApiService
   ) {
     // If token is passed in via query param, update settings. Standard query param: /#/?token=123456
     this.route.queryParams.subscribe(queryParams => {
@@ -140,6 +142,7 @@ export class AuthService {
   public logOut(): void {
     clearTimeout(this.sessionTimer);
     this.settings.token = null;
+    this.api.resetStore(); // Clear out all API data on log out for security
     // Don't throw a redirect url if this is the dashboard since that is default on login
     let returnUrl = this.router.url != '/' ? this.router.url : null;
     this.router.navigate(['/login'], { queryParams: { returnUrl: returnUrl } });

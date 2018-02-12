@@ -33,6 +33,10 @@ export class ApiService extends ApiHttpService {
     private settings: AppSettings
   ) {
     super(http, store, router);
+
+    // Output store changes to console
+    //this.store.subscribe(store => console.log(store));
+
     // On instantiation, load environment settings
     this.appSettingsGet().subscribe(settings => this.appSettingsUpdate(settings), error => console.error('Unable to get env settings', error));
   }
@@ -71,6 +75,16 @@ export class ApiService extends ApiHttpService {
         return Observable.throw(error);
       }
     });
+  }
+
+  /**
+   * Reset the store, clear out all held state and data
+   */
+  public resetStore() {
+    this.store.dispatch({
+      type: ApiActions.RESET,
+      payload: null
+    });// Update store with new state
   }
 
   /**
