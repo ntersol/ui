@@ -1,8 +1,10 @@
 import { Directive, ElementRef, AfterViewInit, OnChanges, HostBinding, Input } from '@angular/core';
-//let height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
 type overflow = 'auto' | 'hidden' | 'inherit' | 'initial' | 'overlay' | 'scroll' | 'visible';
 
+/**
+ * Resizes the attached DOM element to full all vertical space below it's current position
+ */
 @Directive({
   selector: '[appFullScreen]',
   host: {
@@ -71,3 +73,4 @@ export class FullScreenDirective implements AfterViewInit, OnChanges {
   }
 
 }
+//let height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
