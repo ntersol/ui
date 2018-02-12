@@ -140,7 +140,9 @@ export class AuthService {
   public logOut(): void {
     clearTimeout(this.sessionTimer);
     this.settings.token = null;
-    this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
+    // Don't throw a redirect url if this is the dashboard since that is default on login
+    let returnUrl = this.router.url != '/' ? this.router.url : null;
+    this.router.navigate(['/login'], { queryParams: { returnUrl: returnUrl } });
   } // end LogOut
 
 }
