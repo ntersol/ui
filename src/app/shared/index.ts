@@ -18,5 +18,6 @@ export * from './stores/store.d';
 // Services
 export * from './services/auth.service';
 
-
+// Directives
+export * from './directives/full-screen.directive';
 

@@ -48,7 +48,10 @@ import {
   HttpInterceptorService,
 
   // Pipes
-  FilterPipe, DebouncePipe
+  FilterPipe, DebouncePipe,
+
+  // Directives
+  FullScreenDirective
 } from '@shared';
 
 
@@ -90,7 +93,7 @@ export const APP_PROVIDERS = [
     AppComponent,
     APP_COMPONENTS,
     //Pipes
-    FilterPipe, DebouncePipe
+    FilterPipe, DebouncePipe, FullScreenDirective
   ],
   imports: [
     // Angular
