@@ -18,6 +18,8 @@ export class GlobalErrorHandler implements ErrorHandler {
     if (!error.errorMsg) {
       // On application error, clear ui state so it's not refreshed
       window.localStorage.removeItem('ui');
+      window.localStorage.removeItem('token');
+      window.sessionStorage.clear(); // Clear out any tokens or session data
 
       // Create error message, limit to 600 characters and add current page location
       let errorConcat = 'Error at ' + window.location.href + '. '
