@@ -18,8 +18,12 @@ export class FullScreenDirective implements AfterViewInit, OnChanges {
   /** Current height of element */
   public height: number;
 
-  /** How much to offset the bottom of the grid. Helpful to accomodate for a horizontal scrollbar */
-  @Input() offset: number = 21;
+  /** How much to offset the top of the grid. Will adjust automatically if null */
+  @Input() offsetTop: number = null;
+  /** How much to offset the bottom of the grid */
+  @Input() offsetBottom: number = 21;
+  /** What percent of the viewport height to display, default is 100% */
+  @Input() percent: number = 100;
   /** How to handle overflow Y */
   @Input() overflowY: overflow = 'auto';
   /** How to handle overflow X */
@@ -55,8 +59,14 @@ export class FullScreenDirective implements AfterViewInit, OnChanges {
   private calcHeight() {
     // Make sure DOM is ready
     if (this.elem && this.elem.nativeElement) {
-      let offsetTop = Math.round(this.elem.nativeElement.getBoundingClientRect().top + this.offset);
-      this.elem.nativeElement.style['height'] = 'calc(100vh - ' + offsetTop + 'px)';
+      // Get offset top automatically
+      let offsetTop = Math.round(this.elem.nativeElement.getBoundingClientRect().top + this.offsetBottom);
+      // If offset top override is set, use that
+      if (this.offsetTop != null) {
+        offsetTop = this.offsetTop + this.offsetBottom;
+      }
+
+      this.elem.nativeElement.style['height'] = 'calc(' + this.percent + 'vh - ' + offsetTop + 'px)';
       this.elem.nativeElement.style['overflow-y'] = this.overflowY;
       this.elem.nativeElement.style['overflow-x'] = this.overflowX;
       this.height = Math.floor(this.elem.nativeElement.getBoundingClientRect().height);
@@ -69,7 +79,7 @@ export class FullScreenDirective implements AfterViewInit, OnChanges {
   private onResize() {
     setTimeout(() => {
       this.calcHeight();
-    },100);
+    }, 100);
   }
 
 }
