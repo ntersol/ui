@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DatePipe, CurrencyPipe } from '@angular/common';
-import { ServiceWorkerModule } from '@angular/service-worker'
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 // 3rd Party Tools
@@ -92,8 +92,12 @@ export const APP_PROVIDERS = [
   declarations: [
     AppComponent,
     APP_COMPONENTS,
-    //Pipes
-    FilterPipe, DebouncePipe, FullScreenDirective
+
+    // Pipes
+    FilterPipe, DebouncePipe,
+
+    // Directives
+    FullScreenDirective
   ],
   imports: [
     // Angular
@@ -103,8 +107,8 @@ export const APP_PROVIDERS = [
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.serviceWorker }),
 
-    NgbModule.forRoot(),// ng-bootstrap
-    StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }),// NGRX
+    NgbModule.forRoot(), // ng-bootstrap
+    StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX
 
     // Mello Labs
     ApiToolsModule.forRoot(),

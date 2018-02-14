@@ -2,12 +2,12 @@ import { Component, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'confirmation-modal',
+  selector: 'app-confirmation-modal',
   templateUrl: './confirmation-modal.component.html'
 })
 export class ConfirmationModalComponent {
 
-  public waiting: boolean = false;
+  public waiting = false;
   public error: {
     errorMsg?: string;
     headers?: object;
@@ -34,6 +34,6 @@ export class ConfirmationModalComponent {
     this.waiting = true;
     this.error = null;
     this.activeModal.close('Success');
-  }//end submit
+  } // end submit
 
 }

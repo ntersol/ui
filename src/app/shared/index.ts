@@ -18,8 +18,5 @@ export * from './pipes/debounce.pipe';
 // Store Typings
 export * from './stores/store.d';
 
-
-
 // Directives
 export * from './directives/full-screen.directive';
-

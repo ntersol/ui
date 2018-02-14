@@ -5,7 +5,7 @@ Adding a new endpoints:
 3. Add the end data location in the main store state in api.state.ts
 */
 
-//import IStore
+// import IStore
 import { IStore } from '@shared';
 import { ApiProps } from './api.properties';
 // IStore.ApiMap
@@ -20,7 +20,7 @@ export const ApiMap: IStore.ApiMapping = {
     mapSrc: 'src',
     map: (users: any[]) => {
       // Sample dictionary mapping based on id property
-      let dict = {};
+      const dict = {};
       users.forEach(user => dict[user.id] = user);
       return {
         src: users,
@@ -28,4 +28,4 @@ export const ApiMap: IStore.ApiMapping = {
       };
     }
   },
-}
+};

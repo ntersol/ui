@@ -5,14 +5,15 @@ import { Subscription } from 'rxjs/Subscription';
 import { UIModalService } from '@ui';
 
 /** Sample Usage:
-<launch-modal [isButton]="false" classes="btn btn-icon" modal="LoanDetailsModalComponent" size="lg" [data]="someData" [dataAlt]="someData"
+<launch-modal  classes="btn btn-icon"
+    modal="LoanDetailsModalComponent" size="lg" [data]="someData" [dataAlt]="someData" [isButton]="false"
     (onSuccess)="doSomething($event)">
-                    <div class="icons-app icons-app-loan_info"></div>
+        <div class="icons-app icons-app-loan_info"></div>
 </launch-modal>
 */
 
 @Component({
-  selector: 'launch-modal',
+  selector: 'app-launch-modal',
   template: `<button class="{{classes}}" (click)="openModal()" *ngIf="isButton" [disabled]="disabled">
                 <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
             </button>
@@ -23,23 +24,23 @@ import { UIModalService } from '@ui';
 })
 export class LaunchModalComponent implements OnInit, OnDestroy {
   /** Is this a button tag or an a link */
-  @Input() isButton: boolean = true; // 
+  @Input() isButton = true; // 
   /** The modal component name to launch */
   @Input() modal: string;
   /** Should the modal persist on reload */
-  @Input() persist: boolean = false;
+  @Input() persist = false;
   /** Any model data that needs to be passed to the modal component */
   @Input() data: any;
   /** Any model data that needs to be passed to the modal component */
   @Input() dataAlt: any;
   /** CSS classes to apply to the button */
-  @Input() classes: string = ''; // 
+  @Input() classes = ''; // 
   /** Default size of the modal, can be sm/md/lg/xl/full */
   @Input() size: 'sm' | 'lg' | 'xl' | 'full' = 'lg';
   /** Is the button or a tag disabled */
-  @Input() disabled: boolean = false;
+  @Input() disabled = false;
   /** Add a class to the window object */
-  @Input() windowClass: string = '';
+  @Input() windowClass = '';
 
   @Output() onSuccess: EventEmitter<any> = new EventEmitter(); // A method to emit events to pass up to parent
   @Output() onDismiss: EventEmitter<any> = new EventEmitter(); // A method to emit events to pass up to parent
@@ -60,31 +61,31 @@ export class LaunchModalComponent implements OnInit, OnDestroy {
   * Attach a success function and pass any relevant data to the modal component
   */
   public openModal() {
-    if (this.size == 'xl') {
+    if (this.size === 'xl') {
       this.windowClass += ' modal-xl';
     }
-    if (this.size == 'full') {
+    if (this.size === 'full') {
       this.windowClass += ' modal-full';
     }
 
-    let modal = this.modals.open(<any>this.modal, this.persist, this.size, this.data, this.dataAlt);
+    const modal = this.modals.open(<any>this.modal, this.persist, this.size, this.data, this.dataAlt);
     // If static modal
     if (modal) {
       modal.result.then(
         reason => this.onSuccess.emit(reason),
         reason => this.onDismiss.emit(reason));
-    }
-    // If observable modal. KNOWN BUG: If the page is refreshed and the app is dependent on an onSuccess method, that method will not be persisted
-    else {
-      this.sub = this.modals.modalRef$.subscribe(modal => {
-        if (modal) {
-          modal.result.then(
+    } else {
+      // If observable modal. KNOWN BUG: If the page is refreshed and the app is dependent on an onSuccess method
+      // that method will not be persisted
+      this.sub = this.modals.modalRef$.subscribe(modalElem => {
+        if (modalElem) {
+          modalElem.result.then(
             reason => this.onSuccess.emit(reason),
             reason => this.onDismiss.emit(reason));
         }
       });
     }
-  }//end openModal
+  } // end openModal
 
   ngOnDestroy() {
     if (this.sub) {

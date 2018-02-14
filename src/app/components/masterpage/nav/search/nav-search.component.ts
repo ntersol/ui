@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'nav-search',
+  selector: 'app-nav-search',
   templateUrl: './nav-search.component.html'
 })
 export class NavSearchComponent implements OnInit {
@@ -21,7 +21,7 @@ export class NavSearchComponent implements OnInit {
 
   public submit(): void {
     console.warn(this.search);
-    this.router.navigate(['./search'])
+    this.router.navigate(['./search']);
   }
 
 }

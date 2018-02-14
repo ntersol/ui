@@ -7,7 +7,7 @@ import { ApiService } from '@api';
 import { UIStoreService } from '@ui';
 
 @Component({
-  selector: 'login',
+  selector: 'app-login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
@@ -15,9 +15,9 @@ export class LoginComponent implements OnInit {
   public formMain: FormGroup;
   public waiting: boolean;
   public errorApi: IErrorApi;
-  public showErrorDetails: boolean = false;
+  public showErrorDetails = false;
   public sessionExpired: boolean = this.authService.sessionExpired;
-  public showPassword: boolean = false;
+  public showPassword = false;
   public returnUrl: string;
 
   constructor(
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.route.queryParams.subscribe(params => {
-      if (params.session == 'expired') {
+      if (params.session === 'expired') {
         this.sessionExpired = true;
       }
     }).unsubscribe();

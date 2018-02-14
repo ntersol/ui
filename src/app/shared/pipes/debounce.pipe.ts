@@ -3,7 +3,7 @@ import { Pipe, PipeTransform, ChangeDetectorRef, NgZone } from '@angular/core';
  * Debounce a value so that the input is only allowed to change within a specified time frame. Default is 300ms
  */
 @Pipe({ name: 'debounce', pure: false })
-export class DebouncePipe {
+export class DebouncePipe implements PipeTransform  {
 
   private currentValue: any = null;
   private transformValue: any = null;
@@ -16,7 +16,7 @@ export class DebouncePipe {
   }
 
   transform(value: any, debounceTime?: number): any {
-    if (this.currentValue == null) {
+    if (this.currentValue === null) {
       this.currentValue = value;
       return value;
     }
@@ -35,7 +35,7 @@ export class DebouncePipe {
           this.transformValue = null;
           this.changeDetector.markForCheck();
         });
-      }, typeof debounceTime == 'number' ? debounceTime : 300);
+      }, typeof debounceTime === 'number' ? debounceTime : 300);
     }
     return this.currentValue;
   }

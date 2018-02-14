@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { IStore, AppSettings } from '@shared';
 import { ApiService } from '@api';
@@ -29,7 +29,7 @@ export class UIModalService {
   public modalList = {
     ConfirmationModalComponent: ConfirmationModalComponent,
     LogoutModalComponent: LogoutModalComponent
-  }
+  };
 
   constructor(
     private modalService: NgbModal,
@@ -38,11 +38,11 @@ export class UIModalService {
     private settings: AppSettings
   ) {
     // Subscribe to the modal in the store and launch store modal if data is found. Also make sure token is present
-    this.store.select(store => store.ui.modal).subscribe((modal: any) => {
+    this.store.select(storeElem => storeElem.ui.modal).subscribe((modal: any) => {
       // Make sure modal exists AND that a token is present in app settings. This prevents a modal from persisting after logout
       if (modal && Object.keys(modal).length && this.settings.token) {
         // Store reference to the modal instance
-        let modalRef = this.modalService.open(this.modalList[modal.modalId], modal.options);
+        const modalRef = this.modalService.open(this.modalList[modal.modalId], modal.options);
         // Add any passed in data to the modal instance after it has opened
         if (modal.data) {
           modalRef.componentInstance.data = modal.data;
@@ -66,10 +66,10 @@ export class UIModalService {
    */
   public open(modalId: modals, persist: boolean = false, size: 'sm' | 'lg' | 'xl' | 'full' = 'lg', data?: any, dataAlt?: any) {
     let windowClass = '';
-    if (size == 'xl') {
+    if (size === 'xl') {
       windowClass += ' modal-xl';
     }
-    if (size == 'full') {
+    if (size === 'full') {
       windowClass += ' modal-full';
     }
 
@@ -84,9 +84,8 @@ export class UIModalService {
           dataAlt: dataAlt
         }
       });
-    }
-    // If persist is not set
-    else {
+    } else {
+      // If persist is not set
       this.modalRef = this.modalService.open(this.modalList[modalId], { size: <any>size, windowClass: windowClass });
       if (data) {
         this.modalRef.componentInstance.data = data;

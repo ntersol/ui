@@ -1,15 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from 'rxjs/Subscription';
 
 import { ApiService, ApiProps } from '@api';
 import { UIStoreService } from '@ui';
 
 @Component({
-  selector: 'home',
+  selector: 'app-home',
   styleUrls: ['./home.component.scss'],
   templateUrl: './home.component.html',
-  //encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit, OnDestroy {
@@ -82,9 +82,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.formMain.reset(); // Reset form after completion
         this.isEditing = false;
       });
-    }
-    // If creating, use post
-    else {
+    } else {
+      // If creating, use post
       this.api.users.post(this.formMain.value).subscribe(success => this.formMain.reset());
     }
   }

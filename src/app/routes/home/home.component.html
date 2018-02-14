@@ -44,9 +44,9 @@
                 <td>{{user.phone | phonenumber}}</td>
                 <td class="hidden-md-down hidden-lg-down"><a (click)="userEdit(user)">Edit</a></td>
                 <td class="hidden-md-down hidden-lg-down">
-                  <launch-modal modal="ConfirmationModalComponent" [isButton]="false" [persist]="true" size="lg" [data]="'Really delete '+ user.name +'?'" dataAlt="Delete User" (onSuccess)="userDelete(user)">
+                  <app-launch-modal modal="ConfirmationModalComponent" [isButton]="false" [persist]="true" size="lg" [data]="'Really delete '+ user.name +'?'" dataAlt="Delete User" (onSuccess)="userDelete(user)">
                     Delete
-                  </launch-modal>
+                  </app-launch-modal>
                 </td>
               </tr>
             </tbody>

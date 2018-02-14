@@ -13,15 +13,16 @@ import { AppSettings } from '../app.settings';
 
 @Injectable()
 export class AuthService {
-  // If this app does not yet have an auth endpoint, set to false. This will allow dev to proceed since a token is required by the route guard
-  public hasAuthEndpoint: boolean = false;
+  // If this app does not yet have an auth endpoint, set to false.
+  // This will allow dev to proceed since a token is required by the route guard
+  public hasAuthEndpoint = false;
   /** Location of auth endpoint */
   private authUrl = '/authentication/login';
 
   /** Is session expired */
-  public sessionExpired: boolean = false;
+  public sessionExpired = false;
   /** How long to show the modal window */
-  public modalDuration: number = 12; // 120 
+  public modalDuration = 12; // 120 
   /** Holds the logout session timer */
   public sessionTimer: any = null; // 
   /** Holds reference to logout modal */
@@ -29,7 +30,7 @@ export class AuthService {
   /** The http call so a token can be refreshed with a callback and success method */
   public refreshToken = this.http.put(this.settings.apiUrl + '/authentication/token', null);
   /** If a token is passed in without logging in no timer duration is present. Default to this */
-  private setTimerDefaultSeconds: number = 5; // 5 minutes
+  private setTimerDefaultSeconds = 5; // 5 minutes
 
   constructor(
     private http: HttpClient,
@@ -49,7 +50,8 @@ export class AuthService {
       }
     });
 
-    // If a token is passed in via matrix notation params, update app settings. Need to use matrix notation /#/route;token=123456456456
+    // If a token is passed in via matrix notation params, update app settings.
+    // Need to use matrix notation /#/route;token=123456456456
     this.router.events.subscribe(val => {
       if (val instanceof RoutesRecognized && val.state.root.firstChild.params.token) {
         this.settings.token = val.state.root.firstChild.params.token;
@@ -63,7 +65,7 @@ export class AuthService {
    * @param data
    */
   public logIn(data) {
-    let url = this.settings.apiUrl + this.authUrl;
+    const url = this.settings.apiUrl + this.authUrl;
 
     // If no auth endpoint set up yet, use a get and set the token properties so the rest of the app can work
     if (!this.hasAuthEndpoint) {
@@ -89,9 +91,9 @@ export class AuthService {
   public refreshTokenUpdate(): void {
     this.refreshToken.subscribe(
       (response: any) => {
-        //Make sure a token is present before it is replaced
+        // Make sure a token is present before it is replaced
         if (this.settings.token) {
-          //console.log('Refreshing token', response);
+          // console.log('Refreshing token', response);
           this.sessionExpired = false;
           this.settings.token = response.data.token;
           this.setTimer(response.data.expirationSeconds);
@@ -99,10 +101,10 @@ export class AuthService {
         return true;
       },
       (response: any) => {
-        //console.log('Error refreshing token');
+        // console.log('Error refreshing token');
         this.logOut();
       }
-    )
+    );
   } // end RefreshToken
 
   /**
@@ -117,7 +119,8 @@ export class AuthService {
       // console.log('Timer Expired');
       this.sessionExpired = true;
       this.launchLogoutModal();
-    }, (expirationSeconds - this.modalDuration * 2) * 1000); // Double the modal duration to add a buffer between server countdown and browser countdown
+      // Double the modal duration to add a buffer between server countdown and browser countdown
+    }, (expirationSeconds - this.modalDuration * 2) * 1000); 
   } // end SetTimer
 
   /**
@@ -129,7 +132,7 @@ export class AuthService {
     this.modals.open('LogoutModalComponent', false, 'lg', this.modalDuration).result.then((closeReason) => {
       this.logOut();
     }, (dismissReason) => {// When modal is dismissed
-      if (dismissReason != 'norefresh') {
+      if (dismissReason !== 'norefresh') {
         this.refreshTokenUpdate();
       }
     });
@@ -144,7 +147,7 @@ export class AuthService {
     this.settings.token = null;
     this.api.resetStore(); // Clear out all API data on log out for security
     // Don't throw a redirect url if this is the dashboard since that is default on login
-    let returnUrl = this.router.url != '/' ? this.router.url : null;
+    const returnUrl = this.router.url !== '/' ? this.router.url : null;
     this.router.navigate(['/login'], { queryParams: { returnUrl: returnUrl } });
   } // end LogOut
 

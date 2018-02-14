@@ -1,4 +1,4 @@
-import { Directive, ElementRef, AfterViewInit, OnChanges, HostBinding, Input } from '@angular/core';
+import { Directive, ElementRef, AfterViewInit, OnChanges, HostBinding, Input, HostListener } from '@angular/core';
 
 type overflow = 'auto' | 'hidden' | 'inherit' | 'initial' | 'overlay' | 'scroll' | 'visible';
 
@@ -6,10 +6,7 @@ type overflow = 'auto' | 'hidden' | 'inherit' | 'initial' | 'overlay' | 'scroll'
  * Resizes the attached DOM element to full all vertical space below it's current position
  */
 @Directive({
-  selector: '[appFullScreen]',
-  host: {
-    '(window:resize)': 'onResize()'
-  }
+  selector: '[appFullScreen]'
 })
 export class FullScreenDirective implements AfterViewInit, OnChanges {
 
@@ -21,13 +18,19 @@ export class FullScreenDirective implements AfterViewInit, OnChanges {
   /** How much to offset the top of the grid. Will adjust automatically if null */
   @Input() offsetTop: number = null;
   /** How much to offset the bottom of the grid */
-  @Input() offsetBottom: number = 21;
+  @Input() offsetBottom = 21;
   /** What percent of the viewport height to display, default is 100% */
-  @Input() percent: number = 100;
+  @Input() percent = 100;
   /** How to handle overflow Y */
   @Input() overflowY: overflow = 'auto';
   /** How to handle overflow X */
   @Input() overflowX: overflow = 'hidden';
+
+  @HostListener('window:resize') onResize() {
+    setTimeout(() => {
+      this.calcHeight();
+    }, 100);
+  }
 
   constructor(
     el: ElementRef
@@ -73,14 +76,5 @@ export class FullScreenDirective implements AfterViewInit, OnChanges {
     }
   }
 
-  /**
-   * On window resize, wrap in setTimeout to ensure resize already happened
-   */
-  private onResize() {
-    setTimeout(() => {
-      this.calcHeight();
-    }, 100);
-  }
-
 }
-//let height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+// let height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;

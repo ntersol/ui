@@ -13,18 +13,28 @@ import { ApiProps } from './api.properties';
 @Injectable()
 export class ApiService extends ApiHttpService {
 
-  /** Users store selection */
-  public users$ = this.store.select(store => store.api.users);
-
-  /** Get the API state using api props */
-  public getState$ = (apiProp: ApiProps) => this.store.select(store => store.apiStatus[apiProp]);
-  /** Get the API data using api props */
-  public getData$ = (apiProp: ApiProps) => this.store.select(store => store.api[apiProp]);
-
   /** Location of prod app environment settings */
   public envSettingsUrlProd = 'api/config'; // Localize
   /** Location of dev app environment settings */
   public envSettingsUrlDev = 'assets/mock-data/env-settings.json';
+
+  // API endpoints
+  /** Users endpoint */
+  public users = {
+    get: (update?: boolean) => this.getStore(ApiMap.users.endpoint, ApiMap.users, update),
+    getOne: (user, update?: boolean) => this.getStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, update),
+    post: (user) => this.postStore(ApiMap.users.endpoint, ApiMap.users, user),
+    put: (user) => this.putStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
+    delete: (user) => this.deleteStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user)
+  };
+
+  // Store selectors
+  /** Users store selection */
+  public users$ = this.store.select(store => store.api.users);
+  /** Get the API state using api props */
+  public getState$ = (apiProp: ApiProps) => this.store.select(store => store.apiStatus[apiProp]);
+  /** Get the API data using api props */
+  public getData$ = (apiProp: ApiProps) => this.store.select(store => store.api[apiProp]);
 
   constructor(
     private http: HttpClient,
@@ -35,19 +45,12 @@ export class ApiService extends ApiHttpService {
     super(http, store, router);
 
     // Output store changes to console
-    //this.store.subscribe(store => console.log(store));
+    // this.store.subscribe(store => console.log(store));
 
     // On instantiation, load environment settings
-    this.appSettingsGet().subscribe(settings => this.appSettingsUpdate(settings), error => console.error('Unable to get env settings', error));
-  }
-
-  /** Sample store usage */
-  public users = {
-    get: (update?: boolean) => this.getStore(ApiMap.users.endpoint, ApiMap.users, update),
-    getOne: (user, update?: boolean) => this.getStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, update),
-    post: (user) => this.postStore(ApiMap.users.endpoint, ApiMap.users, user),
-    put: (user) => this.putStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
-    delete: (user) => this.deleteStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user)
+    this.appSettingsGet().subscribe(
+      appSettings => this.appSettingsUpdate(appSettings),
+      error => console.error('Unable to get env settings', error));
   }
 
   /**
@@ -66,7 +69,7 @@ export class ApiService extends ApiHttpService {
 
     const envUrl = this.settings.isDev ? this.envSettingsUrlDev : this.envSettingsUrlProd;
     return this.get(envUrl, update).catch(error => {
-      if (error.status == 401 || error.status == 403) {
+      if (error.status === 401 || error.status === 403) {
         error.errorMsg = 'Unable to get start up settings ';
         sessionStorage.clear();
         this.router.navigate(['/']);
@@ -84,7 +87,7 @@ export class ApiService extends ApiHttpService {
     this.store.dispatch({
       type: ApiActions.RESET,
       payload: null
-    });// Update store with new state
+    }); // Update store with new state
   }
 
   /**
@@ -94,7 +97,7 @@ export class ApiService extends ApiHttpService {
     this.store.dispatch({
       type: ApiActions.RESET_ERRORS,
       payload: null
-    });// Update store with new state
+    }); // Update store with new state
   }
 
   /**
@@ -104,7 +107,7 @@ export class ApiService extends ApiHttpService {
     this.store.dispatch({
       type: ApiActions.RESET_SUCCESS,
       payload: null
-    });// Update store with new state
+    }); // Update store with new state
   }
 
 }
