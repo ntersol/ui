@@ -13,7 +13,7 @@ enum Props {
 export class AppSettings {
 
   /** Development domains. Used for the isDev property to help set/disable functionality that may not be available yet */
-  private domainsDev: string[] = ['localhost:4200', '127.0.0.1:8080', 'jerrolkrause.github.io'];
+  private domainsDev: string[] = ['localhost:4200', '127.0.0.1:8080', 'jerrolkrause.github.io','localhost:49152'];
 
   /** Is this application in a development environment as defined by domainsDev and window.location.host */
   public get isDev(): boolean {

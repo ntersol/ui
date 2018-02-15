@@ -27,7 +27,7 @@ enableProdMode();
 
 // Routes
 import {
-  NoContentComponent, LoginComponent, HomeComponent
+  NoContentComponent, LoginComponent, HomeComponent, QaComponent
 } from '@routes';
 
 // Components
@@ -60,7 +60,7 @@ import { ApiService } from '@api';
 
 // Application wide providers
 export const APP_COMPONENTS = [
-  NoContentComponent, LoginComponent, HomeComponent,
+  NoContentComponent, LoginComponent, HomeComponent, QaComponent,
 
   FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent,
   LaunchModalComponent,
@@ -97,7 +97,7 @@ export const APP_PROVIDERS = [
     FilterPipe, DebouncePipe,
 
     // Directives
-    FullScreenDirective
+    FullScreenDirective,
   ],
   imports: [
     // Angular

@@ -3,6 +3,7 @@ import {
   HomeComponent,
   NoContentComponent,
   LoginComponent,
+  QaComponent
 } from '@routes';
 
 import { LayoutMainComponent } from '@components';
@@ -23,6 +24,7 @@ export const ROUTES: Routes = [
     path: '', component: LayoutMainComponent,
     children: [
       { path: '', component: HomeComponent, data: { title: 'Dashboard' + titleSlug }, canActivate: [AuthGuard], },
+      { path: 'qa', component: QaComponent, data: { title: 'E2E Testing' + titleSlug }, canActivate: [AuthGuard], },
       { path: '**', component: NoContentComponent, data: { title: 'Page Not Found' + titleSlug }, canActivate: [AuthGuard], },
     ]
   },

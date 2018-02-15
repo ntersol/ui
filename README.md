@@ -10,8 +10,10 @@ Available online @ https://jerrolkrause.github.io/mello-labs-angular-starter/#/.
 # Clone the repo
 git clone https://github.com/JerrolKrause/mello-labs-angular-starter.git
 
-# Change directory to the repo. Rename project as necessary
-cd mello-labs-angular-starter
+# Rename directory from `mello-labs-angular-starter` to `your-app`
+
+# Change directory to the repo
+cd your-app
 
 # Install the repo with yarn or npm
 yarn
@@ -32,6 +34,12 @@ ng build --prod
 
 # Build and serve prod
 ng serve --prod
+
+# Run e2e protractor tests
+ng e2e
+
+# Run e2e protractor tests without rebuilding every time (faster)
+ng e2e -s false
 
 # Deploy dist folder to git pages. Be sure to update deploy script in package.json
 npm run deploy

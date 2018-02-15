@@ -5,11 +5,11 @@ import { Subscription } from 'rxjs/Subscription';
 import { UIModalService } from '@ui';
 
 /** Sample Usage:
-<launch-modal  classes="btn btn-icon"
+<app-launch-modal  classes="btn btn-icon"
     modal="LoanDetailsModalComponent" size="lg" [data]="someData" [dataAlt]="someData" [isButton]="false"
     (onSuccess)="doSomething($event)">
         <div class="icons-app icons-app-loan_info"></div>
-</launch-modal>
+</app-launch-modal>
 */
 
 @Component({
