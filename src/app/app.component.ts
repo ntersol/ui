@@ -7,7 +7,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
-import { AuthService } from '@shared';
+import { AuthService, ServiceWorkerService } from '@shared';
 import { UIModalService } from '@ui';
 
 @Component({
@@ -22,23 +22,24 @@ export class AppComponent implements OnInit {
     private title: Title,
     private authService: AuthService,
     private swUpdate: SwUpdate,
-    private modals: UIModalService
+    private modals: UIModalService,
+    private sw: ServiceWorkerService
   ) {
   }
 
   ngOnInit() {
     this.routeChange();
-    if (this.swUpdate.isEnabled) {
-      console.log('Service worker enabled');
-      this.swUpdate.available.subscribe(() => {
-        console.log('SW update available.');
-        this.modals.open('ConfirmationModalComponent', false, 'lg',
-          `A new version of ${environment.appName} is available, would you like to update to the latest version?`)
-          .result.then(
-          () => window.location.reload(),
-          () => console.warn('User is on an outdated version of the application'));
-      });
-    }
+    //if (this.swUpdate.isEnabled) {
+    //  console.log('Service worker enabled');
+    //  this.swUpdate.available.subscribe(() => {
+    //    console.log('SW update available.');
+    //    this.modals.open('ConfirmationModalComponent', false, 'lg',
+    //      `A new version of ${environment.appName} is available, would you like to update to the latest version?`)
+    //      .result.then(
+    //      () => window.location.reload(),
+    //      () => console.warn('User is on an outdated version of the application'));
+    //  });
+    //}
   }
 
   /**

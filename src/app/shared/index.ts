@@ -5,6 +5,7 @@ export * from './app.settings';
 
 // Services
 export * from './services/auth.service';
+export * from './services/service-worker.service';
 
 // Base services and interceptors
 export * from './interceptors/error.interceptor';

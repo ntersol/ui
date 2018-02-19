@@ -39,13 +39,17 @@ import {
 
 // Shared
 import {
-  GlobalErrorHandler,
-  AuthService,
+  // App settings
   AppSettings,
 
-  // Interceptors
+  // Services
   AuthGuard,
+  ServiceWorkerService,
+
+  // Interceptors
   HttpInterceptorService,
+  GlobalErrorHandler,
+  AuthService,
 
   // Pipes
   FilterPipe, DebouncePipe,
@@ -77,6 +81,7 @@ export const APP_PROVIDERS = [
   UIModalService,
   UIStoreService,
   AuthGuard,
+  ServiceWorkerService,
 
   // Angular Pipes
   DatePipe, CurrencyPipe,

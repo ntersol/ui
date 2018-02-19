@@ -7,9 +7,9 @@ exports.config = {
   allScriptsTimeout: 11000,
   // Comment out All tests and uncomment/change one of the other lines to only run a few tests
   specs: [
-    './e2e/**/*.e2e-spec.ts', // All tests
+    //'./e2e/**/*.e2e-spec.ts', // All tests
     //'./e2e/routes/login/**/*.e2e-spec.ts'  // Login route only
-    //'./e2e/components/**/*.e2e-spec.ts' // Components only
+    './e2e/components/pipes/**/*.e2e-spec.ts' // Components only
   ],
   capabilities: {
     'browserName': 'chrome'
