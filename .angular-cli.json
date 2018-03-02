@@ -60,8 +60,9 @@
 	},
 	"defaults": {
 		"styleExt": "scss",
-		"component": {
-		},
+    "component": {
+      "changeDetection": "OnPush"
+    },
 		"build": {
 			"preserveSymlinks": true,
 			"showCircularDependencies": false

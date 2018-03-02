@@ -45,6 +45,7 @@ import {
   // Services
   AuthGuard,
   ServiceWorkerService,
+  PostMessageService,
 
   // Interceptors
   HttpInterceptorService,
@@ -52,7 +53,7 @@ import {
   AuthService,
 
   // Pipes
-  FilterPipe, DebouncePipe,
+  FilterPipe, DebouncePipe, StringPipe,
 
   // Directives
   FullScreenDirective
@@ -82,6 +83,7 @@ export const APP_PROVIDERS = [
   UIStoreService,
   AuthGuard,
   ServiceWorkerService,
+  PostMessageService,
 
   // Angular Pipes
   DatePipe, CurrencyPipe,
@@ -99,7 +101,7 @@ export const APP_PROVIDERS = [
     APP_COMPONENTS,
 
     // Pipes
-    FilterPipe, DebouncePipe,
+    FilterPipe, DebouncePipe, StringPipe,
 
     // Directives
     FullScreenDirective,

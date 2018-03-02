@@ -18,7 +18,8 @@
       "@shared": [ "./src/app/shared" ],
       "@modals": [ "./src/app/components/modals" ],
       "@ui": [ "./src/app/shared/stores/ui" ],
-      "@api": [ "./src/app/shared/stores/api" ]
+      "@api": [ "./src/app/shared/stores/api" ],
+      "@utils": [ "./src/app/shared/utils" ]
     },
     "lib": [
       "es2017",
