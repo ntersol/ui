@@ -10,6 +10,7 @@
         <form [formGroup]="formMain" novalidate (ngSubmit)="onLogin()">
           <div class="card-block">
             <error *ngIf="errorApi" [error]="errorApi" [showDetails]="showErrorDetails"></error>
+            <div class="alert alert-warning icon" *ngIf="loggedout">You have successfully logged out.</div>
             <div class="alert alert-danger icon" *ngIf="sessionExpired">Session expired, please log in again.</div>
             <p>Please enter your username and password.</p>
             <field-component [frmGroup]="formMain" frmControl="userName" label="Username" type="text" classes="login"></field-component>

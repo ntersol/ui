@@ -26,7 +26,6 @@ export class PostMessageService {
   /**
    * Activates the post message listener
    * @param allowedDomains - Allowable domains to whitelist message responses. Based on window.location.origin
-   * @param allowOwnDomain - Allow this app to receive broadcasts from itself. Used for multi app instances that need to share data
    */
   public listenForMessages(allowedDomains?: string[]) {
     // Set allowed domains to receive messages from
@@ -76,7 +75,7 @@ export class PostMessageService {
   private messageReceived(event: MessageEvent) {
     if (event.data && event.data.type != 'webpackOk' && event.origin != window.location.origin) {
       let msg = ObjectUtils.sanitize(event.data);
-      if (this.allowedDomains && this.allowedDomains.includes(event.origin) || !this.allowedDomains) {
+      if (this.allowedDomains && this.allowedDomains.indexOf(event.origin) || !this.allowedDomains) {
         this.postMessage$.next(msg);
       } else {
         console.error('Message from unauthorized source');

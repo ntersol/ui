@@ -1,24 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { AuthService, AppSettings } from '@shared';
 import { ApiService } from '@api';
 import { UIStoreService } from '@ui';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   public formMain: FormGroup;
   public waiting: boolean;
   public errorApi: IErrorApi;
   public showErrorDetails = false;
-  public sessionExpired: boolean = this.authService.sessionExpired;
+  public sessionExpired: boolean;
+  public loggedout: boolean;
   public showPassword = false;
   public returnUrl: string;
+
+  public subs: Subscription[] = []
 
   constructor(
     private authService: AuthService,
@@ -42,18 +46,23 @@ export class LoginComponent implements OnInit {
       hasLogin = true;
     }
 
-    this.route.queryParams.subscribe(params => {
-      if (params.session === 'expired') {
-        this.sessionExpired = true;
-      }
-    }).unsubscribe();
+    this.subs.push(
+      this.route.queryParams.subscribe(params => {
+        if (params.session === 'expired') {
+          this.sessionExpired = true;
+        }
+        if (params.session === 'loggedout') {
+          this.loggedout = true;
+        }
+      })
+    );
 
     window.clearTimeout(this.authService.sessionTimer); // When the page is loaded, clear any legacy timeouts
     this.authService.logOutModal = null; // Get rid of logout modal if it persists
 
     this.formMain = this.fb.group({ // <-- the parent FormGroup
-      userName: [isLogin || '', [Validators.required]],
-      password: ['', [Validators.required]],
+      userName: [isLogin || 'juser', [Validators.required]],
+      password: ['password', [Validators.required]],
       remember: [hasLogin]
     });
 
@@ -82,6 +91,7 @@ export class LoginComponent implements OnInit {
       (success) => {
         this.settings.userName = this.formMain.value.userName;
         this.router.navigate([this.returnUrl]);
+        this.waiting = false;
       },
       (error) => {
         error.errorMsg = 'Error logging in.';
@@ -97,4 +107,7 @@ export class LoginComponent implements OnInit {
 
   } // end onSubmit
 
+  ngOnDestroy() {
+    if (this.subs.length) { this.subs.forEach(sub => sub.unsubscribe()) }
+  }
 }

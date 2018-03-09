@@ -45,7 +45,7 @@ export class ApiService extends ApiHttpService {
     super(http, store, router);
 
     // Output store changes to console
-    // this.store.subscribe(store => console.log(store));
+    // this.store.subscribe(store => console.log(JSON.parse(JSON.stringify(store))));
 
     // On instantiation, load environment settings
     this.appSettingsGet().subscribe(
@@ -84,6 +84,7 @@ export class ApiService extends ApiHttpService {
    * Reset the store, clear out all held state and data
    */
   public resetStore() {
+    this.cache = {}; // Clear cache
     this.store.dispatch({
       type: ApiActions.RESET,
       payload: null

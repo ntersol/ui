@@ -147,8 +147,8 @@ export class AuthService {
     this.settings.token = null;
     this.api.resetStore(); // Clear out all API data on log out for security
     // Don't throw a redirect url if this is the dashboard since that is default on login
-    const returnUrl = this.router.url !== '/' ? this.router.url : null;
-    this.router.navigate(['/login'], { queryParams: { returnUrl: returnUrl } });
+    const returnUrl = this.router.url !== '/' && this.router.url !== '/login' ? this.router.url.split('?')[0] : null;
+    this.router.navigate(['/login'], { queryParams: { returnUrl: returnUrl, session: 'loggedout' } });
   } // end LogOut
 
 }
