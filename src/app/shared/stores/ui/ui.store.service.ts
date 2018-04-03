@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { IStore } from '@shared';
+import { AppStore } from '@shared';
 import { UIStoreActions } from './ui.store.actions';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class UIStoreService {
 
   public modal$ = this.store.select(store => store.ui.modal);
 
-  constructor(private store: Store<IStore.root>) {
+  constructor(private store: Store<AppStore.Root>) {
     // Rehydrate UI state from localstorage
     if (window.localStorage.getItem('ui')) {
       this.storeStateRestore(JSON.parse(window.localStorage.getItem('ui')));
@@ -25,7 +25,7 @@ export class UIStoreService {
    * Save the UI store state to localstorage for persistance
    * @param state
    */
-  private storeStateSave(state: IStore.ui) {
+  private storeStateSave(state: AppStore.Ui) {
     /** Which properties of the store properties to NOT persist or save to local storage */
     const ignoreProps = ['loanHasUpdate', 'forms'];
     const stateNew: any = { ...state };

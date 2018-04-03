@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { AppSettings, AppSettingsProps } from 'src/app/shared';
+import { AppSettings} from 'src/app/shared';
 import { environment } from '@env';
+
+interface EnvSettings {
+  ApiUrl: string,
+  ApiNamespace: string,
+  SignalRUrl: string,
+}
 
 @Injectable()
 export class AppConfigService {
@@ -10,14 +16,15 @@ export class AppConfigService {
   constructor(
     private settings: AppSettings,
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
   /**
    * Set all env settings in app settings
    * @param settings
    */
-  public appSettingsUpdate(settings: { [key in AppSettingsProps]: string }) {
-    this.settings.apiUrl = settings.apiUrl;
+  public appSettingsUpdate(settings: EnvSettings) {
+    this.settings.apiUrl = settings.ApiUrl;
   }
 
   /**

@@ -1,10 +1,10 @@
-export declare namespace IStore {
+export declare namespace AppStore {
   /*************************
    * App specific interfaces
    *************************/
 
   /** API Store */
-  interface api {
+  interface Api {
     //users?: any[]; // Store response
     // Example of Store typing with mapped response
     users?: Mapped<{
@@ -23,7 +23,7 @@ export declare namespace IStore {
   }
 
   /** UI Store */
-  interface ui {
+  interface Ui {
     modal?: {
       modalId: string;
       options: {};
@@ -36,14 +36,14 @@ export declare namespace IStore {
    *************************/
 
   /** The root store which contains the other stores */
-  interface root {
-    api?: api;
-    ui?: ui;
-    apiStatus?: apiStatus;
+  interface Root {
+    api?: Api;
+    ui?: Ui;
+    apiStatus?: ApiStatuses;
   }
 
   /** API status store */
-  interface apiStatus {
+  interface ApiStatuses {
     [key: string]: ApiStatus;
   }
 

@@ -51,6 +51,7 @@ import {
   ServiceWorkerService,
   PostMessageService,
   AppConfigService,
+  AppCommsService,
 
   // Interceptors
   HttpInterceptorService,
@@ -61,6 +62,7 @@ import {
   FilterPipe,
   DebouncePipe,
   StringPipe,
+  SortPipe,
 
   // Directives
   FullScreenDirective,
@@ -100,6 +102,7 @@ export const APP_PROVIDERS = [
   ServiceWorkerService,
   PostMessageService,
   AppConfigService,
+  AppCommsService,
 
   // Angular Pipes
   DatePipe,
@@ -121,6 +124,7 @@ export const APP_PROVIDERS = [
     FilterPipe,
     DebouncePipe,
     StringPipe,
+    SortPipe,
 
     // Directives
     FullScreenDirective,

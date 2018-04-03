@@ -1,8 +1,8 @@
-import { IStore } from '@shared';
+import { AppStore } from '@shared';
 import { UIStoreActions } from './ui.store.actions';
 
 // Define initial store state : State.main
-const initialState: IStore.ui = {
+const initialState: AppStore.Ui = {
   modal: null,
 };
 

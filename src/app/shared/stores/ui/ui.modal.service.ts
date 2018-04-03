@@ -3,7 +3,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { IStore, AppSettings } from '@shared';
+import { AppStore, AppSettings } from '@shared';
 import { ApiService } from '@api';
 import { UIStoreActions } from './ui.store.actions';
 
@@ -25,14 +25,14 @@ export class UIModalService {
   /** Reference to the STORE OBSERVABLE currently open modal. This reference is used for modals persisted in the UI store */
   public modalRef$: BehaviorSubject<any> = new BehaviorSubject(null);
   /** List of component references of available modals */
-  public modalList: {[key:string]:any} = {
+  public modalList: {[key: string]: any} = {
     ConfirmationModalComponent: ConfirmationModalComponent,
     LogoutModalComponent: LogoutModalComponent,
   };
 
   constructor(
     private modalService: NgbModal,
-    private store: Store<IStore.root>,
+    private store: Store<AppStore.Root>,
     private api: ApiService,
     private settings: AppSettings,
   ) {

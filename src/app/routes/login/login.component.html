@@ -13,8 +13,8 @@
             <div class="alert alert-warning icon" *ngIf="loggedout">You have successfully logged out.</div>
             <div class="alert alert-danger icon" *ngIf="sessionExpired">Session expired, please log in again.</div>
             <p>Please enter your username and password.</p>
-            <field-component [frmGroup]="formMain" frmControl="userName" label="Username" type="text" classes="login"></field-component>
-            <field-component [frmGroup]="formMain" frmControl="password" label="Password" type="password" classes="password"></field-component>
+            <app-field-component [frmGroup]="formMain" frmControl="userName" label="Username" type="text" classes="login"></app-field-component>
+            <app-field-component [frmGroup]="formMain" frmControl="password" label="Password" type="password" classes="password"></app-field-component>
             <div class="row">
               <div class="form-check col-12 col-md-9 push-md-3">
                 <label class="form-check-label">
@@ -26,8 +26,8 @@
             <!--
             <hr/>
             <p><strong>QA Options</strong></p>
-            <field-component [frmGroup]="formMain" frmControl="channelId" label="Channel ID" type="text"></field-component>
-            <field-component [frmGroup]="formMain" frmControl="screenId" label="Screen ID" type="text"></field-component>
+            <app-field-component [frmGroup]="formMain" frmControl="channelId" label="Channel ID" type="text"></app-field-component>
+            <app-field-component [frmGroup]="formMain" frmControl="screenId" label="Screen ID" type="text"></app-field-component>
             -->
           </div>
           <div class="card-footer text-right">

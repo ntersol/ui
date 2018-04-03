@@ -5,9 +5,11 @@ import { Store } from '@ngrx/store';
 import { ApiHttpService, ApiStatusActions } from '@mello-labs/api-tools';
 import 'rxjs/add/observable/throw';
 
-import { AppSettings, IStore } from '@shared';
+import { AppSettings, AppStore } from '@shared';
 import { ApiMap } from './api.map';
 import { ApiActions } from './api.actions';
+
+import { User } from '@models';
 
 @Injectable()
 export class ApiService extends ApiHttpService {
@@ -15,11 +17,11 @@ export class ApiService extends ApiHttpService {
   // API endpoints
   /** Users endpoint */
   public users = {
-    get: (update?: boolean) => this.getStore(ApiMap.users.endpoint, ApiMap.users, update),
-    getOne: (user: any, update?: boolean) => this.getStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, update),
-    post: (user: any) => this.postStore(ApiMap.users.endpoint, ApiMap.users, user),
-    put: (user: any) => this.putStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
-    delete: (user: any) => this.deleteStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
+    get: (update?: boolean) => this.getStore<User[]>(ApiMap.users.endpoint, ApiMap.users, update),
+    getOne: (user: User, update?: boolean) => this.getStore<User>(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, update),
+    post: (user: User) => this.postStore<User>(ApiMap.users.endpoint, ApiMap.users, user),
+    put: (user: User) => this.putStore<User>(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
+    delete: (user: User) => this.deleteStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
   };
 
   // Store selectors
@@ -31,7 +33,7 @@ export class ApiService extends ApiHttpService {
   public getData$ = (apiProp: ApiActions) => this.store.select(store => store.api[apiProp]);
 
   constructor(
-    private store: Store<IStore.root>,
+    private store: Store<AppStore.Root>,
     private http: HttpClient,
     private router: Router,
     private settings: AppSettings,
@@ -41,7 +43,6 @@ export class ApiService extends ApiHttpService {
     // Output store changes to console
     // this.store.subscribe(store => console.log(JSON.parse(JSON.stringify(store))));
   }
-
   
 
   /**
