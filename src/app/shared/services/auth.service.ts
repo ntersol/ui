@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router, RoutesRecognized, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngrx/store';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';
 
 import { UIModalService } from '@ui';
 import { ApiService } from '@api';
-import { IStore } from '../stores/store';
 import { AppSettings } from '../app.settings';
 
 @Injectable()
@@ -22,9 +20,9 @@ export class AuthService {
   /** Is session expired */
   public sessionExpired = false;
   /** How long to show the modal window */
-  public modalDuration = 12; // 120 
+  public modalDuration = 12; // 120
   /** Holds the logout session timer */
-  public sessionTimer: any = null; // 
+  public sessionTimer: any = null; //
   /** Holds reference to logout modal */
   public logOutModal: NgbModalRef;
   /** The http call so a token can be refreshed with a callback and success method */
@@ -34,13 +32,11 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store<IStore.root>,
     private settings: AppSettings,
     private modals: UIModalService,
-    private api: ApiService
+    private api: ApiService,
   ) {
     // If token is passed in via query param, update settings. Standard query param: /#/?token=123456
     this.route.queryParams.subscribe(queryParams => {
@@ -64,7 +60,7 @@ export class AuthService {
    * Log the user in
    * @param data
    */
-  public logIn(data) {
+  public logIn(data:any) {
     const url = this.settings.apiUrl + this.authUrl;
 
     // If no auth endpoint set up yet, use a get and set the token properties so the rest of the app can work
@@ -83,7 +79,7 @@ export class AuthService {
       this.setTimer(response.data.expirationSeconds);
       return response;
     });
-  }// end LogIn
+  } // end LogIn
 
   /**
    * Refresh the token
@@ -100,10 +96,10 @@ export class AuthService {
         }
         return true;
       },
-      (response: any) => {
+      () => {
         // console.log('Error refreshing token');
         this.logOut();
-      }
+      },
     );
   } // end RefreshToken
 
@@ -120,7 +116,7 @@ export class AuthService {
       this.sessionExpired = true;
       this.launchLogoutModal();
       // Double the modal duration to add a buffer between server countdown and browser countdown
-    }, (expirationSeconds - this.modalDuration * 2) * 1000); 
+    }, (expirationSeconds - this.modalDuration * 2) * 1000);
   } // end SetTimer
 
   /**
@@ -129,26 +125,30 @@ export class AuthService {
   private launchLogoutModal(): void {
     clearTimeout(this.sessionTimer);
     // Open log out modal window
-    this.modals.open('LogoutModalComponent', false, 'lg', this.modalDuration).result.then((closeReason) => {
-      this.logOut();
-    }, (dismissReason) => {// When modal is dismissed
-      if (dismissReason !== 'norefresh') {
-        this.refreshTokenUpdate();
-      }
-    });
-
+    this.modals.open('LogoutModalComponent', false, 'lg', this.modalDuration).result.then(
+      () => {
+        this.logOut();
+      },
+      dismissReason => {
+        // When modal is dismissed
+        if (dismissReason !== 'norefresh') {
+          this.refreshTokenUpdate();
+        }
+      },
+    );
   } // end launchLogoutModal
 
   /**
    * Log the user out. Clear stored data and redirect to login page
    */
-  public logOut(): void {
+  public logOut(showLogoutMessage = false): void {
     clearTimeout(this.sessionTimer);
     this.settings.token = null;
     this.api.resetStore(); // Clear out all API data on log out for security
     // Don't throw a redirect url if this is the dashboard since that is default on login
     const returnUrl = this.router.url !== '/' && this.router.url !== '/login' ? this.router.url.split('?')[0] : null;
-    this.router.navigate(['/login'], { queryParams: { returnUrl: returnUrl, session: 'loggedout' } });
+    // Determine whether or not to show the log out message
+    const queryParams = showLogoutMessage ? { returnUrl: returnUrl, session: 'loggedout' } : { returnUrl: returnUrl };
+    this.router.navigate(['/login'], { queryParams: queryParams });
   } // end LogOut
-
 }

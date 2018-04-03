@@ -1,51 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { SwUpdate } from '@angular/service-worker';
 import { Title } from '@angular/platform-browser';
-import { environment } from '../environments/environment.prod';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
 import { AuthService, ServiceWorkerService } from '@shared';
-import { UIModalService } from '@ui';
+//import { UIModalService } from '@ui';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private title: Title,
     private authService: AuthService,
-    private swUpdate: SwUpdate,
-    private modals: UIModalService,
-    private sw: ServiceWorkerService
-  ) {
-  }
+    private sw: ServiceWorkerService,
+  ) {}
 
   ngOnInit() {
     this.routeChange();
-    //if (this.swUpdate.isEnabled) {
-    //  console.log('Service worker enabled');
-    //  this.swUpdate.available.subscribe(() => {
-    //    console.log('SW update available.');
-    //    this.modals.open('ConfirmationModalComponent', false, 'lg',
-    //      `A new version of ${environment.appName} is available, would you like to update to the latest version?`)
-    //      .result.then(
-    //      () => window.location.reload(),
-    //      () => console.warn('User is on an outdated version of the application'));
-    //  });
-    //}
+    if (this.sw.isEnabled) {
+      this.sw.pollForUpdates();
+    }
   }
 
   /**
-  * Actions to perform on route change
-  * Page titles are in app.routes.ts
-  */
+   * Actions to perform on route change
+   * Page titles are in app.routes.ts
+   */
   public routeChange() {
     this.router.events
       .filter(event => event instanceof NavigationEnd)
@@ -58,7 +44,7 @@ export class AppComponent implements OnInit {
       })
       .filter(route => route.outlet === 'primary')
       .mergeMap(route => route.data)
-      .subscribe((event) => {
+      .subscribe(event => {
         this.title.setTitle(event['title']); // Change document title
         // If auth endpoint is available and not on the login page
         if (this.authService.hasAuthEndpoint && this.router.url.toLowerCase().indexOf('login') === -1) {

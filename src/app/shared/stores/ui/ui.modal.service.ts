@@ -20,22 +20,21 @@ type modals = 'LogoutModalComponent' | 'ConfirmationModalComponent';
 
 @Injectable()
 export class UIModalService {
-
   /** Reference to the STATIC currently open modal. This reference is used for static non persistant modals */
   public modalRef: NgbModalRef;
   /** Reference to the STORE OBSERVABLE currently open modal. This reference is used for modals persisted in the UI store */
   public modalRef$: BehaviorSubject<any> = new BehaviorSubject(null);
   /** List of component references of available modals */
-  public modalList = {
+  public modalList: {[key:string]:any} = {
     ConfirmationModalComponent: ConfirmationModalComponent,
-    LogoutModalComponent: LogoutModalComponent
+    LogoutModalComponent: LogoutModalComponent,
   };
 
   constructor(
     private modalService: NgbModal,
     private store: Store<IStore.root>,
     private api: ApiService,
-    private settings: AppSettings
+    private settings: AppSettings,
   ) {
     // Subscribe to the modal in the store and launch store modal if data is found. Also make sure token is present
     this.store.select(storeElem => storeElem.ui.modal).subscribe((modal: any) => {
@@ -64,7 +63,13 @@ export class UIModalService {
    * @param data Primary set of data to pass to the modal
    * @param dataAlt Secondary set of data to pass to the modal
    */
-  public open(modalId: modals, persist: boolean = false, size: 'sm' | 'lg' | 'xl' | 'full' = 'lg', data?: any, dataAlt?: any) {
+  public open(
+    modalId: modals,
+    persist: boolean = false,
+    size: 'sm' | 'lg' | 'xl' | 'full' = 'lg',
+    data?: any,
+    dataAlt?: any,
+  ) {
     let windowClass = '';
     if (size === 'xl') {
       windowClass += ' modal-xl';
@@ -81,8 +86,8 @@ export class UIModalService {
           modalId: modalId,
           options: { size: <any>size, windowClass: windowClass },
           data: data,
-          dataAlt: dataAlt
-        }
+          dataAlt: dataAlt,
+        },
       });
     } else {
       // If persist is not set
@@ -103,17 +108,19 @@ export class UIModalService {
   private onClose() {
     this.modalRef$.subscribe(modal => {
       // Wait for promise that is returned when modal is closed or dismissed
-      modal.result.then((closeReason) => {
-        this.store.dispatch({ type: UIStoreActions.MODAL_UNLOAD, payload: null });
-        this.api.resetErrors();
-        this.api.resetSuccess();
-      }, (dismissReason) => {
-        // On modal dismiss, which is closed without performing an action
-        this.store.dispatch({ type: UIStoreActions.MODAL_UNLOAD, payload: null });
-        this.api.resetErrors();
-        this.api.resetSuccess();
-      });
+      modal.result.then(
+        () => {
+          this.store.dispatch({ type: UIStoreActions.MODAL_UNLOAD, payload: null });
+          this.api.resetErrors();
+          this.api.resetSuccess();
+        },
+        () => {
+          // On modal dismiss, which is closed without performing an action
+          this.store.dispatch({ type: UIStoreActions.MODAL_UNLOAD, payload: null });
+          this.api.resetErrors();
+          this.api.resetSuccess();
+        },
+      );
     });
   }
-
 }

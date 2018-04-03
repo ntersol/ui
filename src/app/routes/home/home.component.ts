@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 
-import { ApiService, ApiProps } from '@api';
+import { ApiService, ApiActions } from '@api';
 import { UIStoreService } from '@ui';
 
 @Component({
@@ -10,27 +10,20 @@ import { UIStoreService } from '@ui';
   styleUrls: ['./home.component.scss'],
   templateUrl: './home.component.html',
   // encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, OnDestroy {
-
   public users$ = this.api.users$;
-  public usersState$ = this.api.getState$(ApiProps.users);
+  public usersState$ = this.api.getState$(ApiActions.users);
   public formMain: FormGroup;
   public isEditing: boolean;
 
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
 
-  constructor(
-    private api: ApiService,
-    public ui: UIStoreService,
-    private fb: FormBuilder
-  ) {
-  }
+  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder) {}
 
   public ngOnInit() {
-
     // Get users and load into store
     this.api.users.get().subscribe();
 
@@ -45,7 +38,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       username: ['', [Validators.required]],
       website: ['', []],
     });
-
   }
 
   /**
@@ -59,7 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Load user into editing pane
    * @param user
    */
-  public userEdit(user) {
+  public userEdit(user:any) {
     this.formMain.patchValue(user);
     this.isEditing = true;
   }
@@ -68,7 +60,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Delete user
    * @param user
    */
-  public userDelete(user) {
+  public userDelete(user: any) {
     this.api.users.delete(user).subscribe();
   }
 
@@ -78,19 +70,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   public userSubmit() {
     // If editing, use put
     if (this.isEditing) {
-      this.api.users.put(this.formMain.value).subscribe(success => {
+      this.api.users.put(this.formMain.value).subscribe(() => {
         this.formMain.reset(); // Reset form after completion
         this.isEditing = false;
       });
     } else {
       // If creating, use post
-      this.api.users.post(this.formMain.value).subscribe(success => this.formMain.reset());
+      this.api.users.post(this.formMain.value).subscribe(() => this.formMain.reset());
     }
   }
 
-
   ngOnDestroy() {
-    if (this.subs.length) { this.subs.forEach(sub => sub.unsubscribe()); } // Unsub
+    if (this.subs.length) {
+      this.subs.forEach(sub => sub.unsubscribe());
+    } // Unsub
   }
-
 }

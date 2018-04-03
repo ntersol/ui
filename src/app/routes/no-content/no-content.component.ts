@@ -7,8 +7,6 @@ import { Component } from '@angular/core';
         <h1>404: page missing</h1>
         <p><a href="/#/">Click here to go to the homepage.</a></p>
     </div>
-  `
+  `,
 })
-export class NoContentComponent {
-
-}
+export class NoContentComponent {}

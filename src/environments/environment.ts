@@ -4,6 +4,11 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
+  appName: 'Mello Labs Angular Starter',
   production: false,
-  serviceWorker: false
+  serviceWorker: false,
+  /** Location to get environment variables */
+  envSettingsUrl: 'assets/mock-data/env-settings.json',
+  /** Which UI store properties to not write to localstorage */
+  uiStoreIgnoreProps: <string[]>[],
 };

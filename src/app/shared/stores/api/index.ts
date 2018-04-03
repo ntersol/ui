@@ -1,3 +1,3 @@
 export * from './api.map';
-export * from './api.properties';
+export * from './api.actions';
 export * from './api.service';

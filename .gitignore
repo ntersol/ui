@@ -41,3 +41,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+obj/
+mello-labs-angular-starter.csproj
+App.config

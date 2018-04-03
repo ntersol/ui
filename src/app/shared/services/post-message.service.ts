@@ -1,27 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
 
+import { AppSettings } from '@shared';
 import { ObjectUtils } from '@utils';
 
 interface Message {
   event?: string;
   payload?: any;
+}
+
+interface MessageComplete extends Message {
   token?: string;
+  appId?: number;
 }
 
 @Injectable()
 export class PostMessageService {
-
   /** Postmessage response */
   public postMessage$: Subject<Message> = new Subject();
   /** Holds postmessage event listener */
-  private postMessageListener;
+  private postMessageListener: any;
   /** An array of domains to accept postmessage responses from, based on window.location.origin */
   private allowedDomains: string[];
+  /** Generate a random number to identify this app. Used to drop same domain postmessages */
+  private appId = Math.floor(Math.random() * 10000000);
 
-  constructor() {
-  }
+  constructor(private settings: AppSettings) { }
 
   /**
    * Activates the post message listener
@@ -42,30 +46,45 @@ export class PostMessageService {
     return this.postMessage$;
   }
 
+  /**
+   * Stop listening for postmessage events
+   */
+  public stopListening() {
+    window.removeEventListener('message', this.postMessageListener);
+  }
 
   /**
-   * Send a message to another tab in the current browser. That tab must be listening in order to receive.
-   * @param target - Set the postmessage target
+   * Post a message from an embedded iframe to its parent
    * @param message - The message payload
-   * @param urlTarget - The destination URL. Will only post to this url. Default is broadcast to all which only impacts target:url
-   * @param id - If target is set to iframe, supply the CSS ID without the #. IE iframeMe if <iframe #id="iframeMe">
+   * @param urlTarget - If the target url is known, only post to that domain. Otherwise its *
    */
-  public postMessage(target: 'iframe' | 'parent' | 'url', message: Message, urlTarget: string = '*', id?: string) {
-    let msg = ObjectUtils.sanitize(message);
-    switch (target) {
-      // Target specific url
-      case ('url'):
-        window.postMessage(msg, urlTarget);
-        break;
-      // Embedded iframe
-      case ('iframe'):
-        (<any>document).getElementById(id).contentWindow.postMessage(msg, urlTarget);
-        break;
-      // Parent of current app if in an iframe
-      case ('parent'):
-        window.parent.postMessage(msg, urlTarget);
-        break;
+  public postMessageToParent(message: Message, urlTarget: string = '*') {
+    if (window.parent) {
+      window.parent.postMessage(this.addMetadata(message), urlTarget);
     }
+  }
+
+  /**
+   * Post a message to an embedded iframe
+   * @param id - a CSS ID of the iframe. IE 'messageTarget' of <iframe id="messageTarget"></iframe>
+   * @param message - The message payload
+   * @param urlTarget  - If the target url is known, only post to that domain. Otherwise its *
+   */
+  public postMessageToIframe(id: string, message: Message, urlTarget: string = '*') {
+    // Make sure the element is on the DOM
+    if ((<any>document).getElementById(id) && (<any>document).getElementById(id).contentWindow) {
+      (<any>document).getElementById(id).contentWindow.postMessage(this.addMetadata(message), urlTarget);
+    }
+  }
+
+  /**
+   * Post a message to window object reference
+   * @param reference - A window reference either created by window.open or if existing, window.opened
+   * @param message - The message payload
+   * @param urlTarget  - If the target url is known, only post to that domain. Otherwise its *
+   */
+  public postMessageToWindow(reference: Window, message: Message, urlTarget: string = '*') {
+    reference.postMessage(this.addMetadata(message), urlTarget);
   }
 
   /**
@@ -73,14 +92,28 @@ export class PostMessageService {
    * @param event - The event passed from the event listener
    */
   private messageReceived(event: MessageEvent) {
-    if (event.data && event.data.type != 'webpackOk' && event.origin != window.location.origin) {
-      let msg = ObjectUtils.sanitize(event.data);
-      if (this.allowedDomains && this.allowedDomains.indexOf(event.origin) || !this.allowedDomains) {
+    // Scrub webpackOk events and same appId origination
+    if (event.data && event.data.type !== 'webpackOk' && event.data.appId !== this.appId) {
+      // Sanitize incoming payload
+      const msg: MessageComplete = ObjectUtils.sanitize(event.data);
+      // Check if allowable domains
+      if ((this.allowedDomains && this.allowedDomains.indexOf(event.origin) !== -1) || !this.allowedDomains) {
         this.postMessage$.next(msg);
       } else {
         console.error('Message from unauthorized source');
       }
     }
   }
-  
+
+  /**
+   * Add metadata to the postmessage payload. IE the token and appId
+   * @param msg
+   */
+  private addMetadata(msg: Message): MessageComplete {
+    return {
+      ...ObjectUtils.sanitize(msg),
+      appId: this.appId,
+      token: this.settings.token,
+    };
+  }
 }

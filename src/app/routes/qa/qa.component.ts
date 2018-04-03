@@ -3,15 +3,25 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-qa',
   templateUrl: './qa.component.html',
-  styleUrls: ['./qa.component.scss']
+  styleUrls: ['./qa.component.scss'],
 })
 export class QaComponent implements OnInit {
-
   public launchModalWorks: boolean;
 
-  public filterFruit;
-  public filterFruitMore;
-  public fruits = ['Apple', 'Orange', 'Kiwi', 'Marionberries', 'Loganberries', 'Mangostein', 'Peach', 'Pear', 'Blackberries','Strawberries'];
+  public filterFruit:any;
+  public filterFruitMore: any;
+  public fruits = [
+    'Apple',
+    'Orange',
+    'Kiwi',
+    'Marionberries',
+    'Loganberries',
+    'Mangostein',
+    'Peach',
+    'Pear',
+    'Blackberries',
+    'Strawberries',
+  ];
   public fruitsMore = [
     { name: 'Apple' },
     { name: 'Orange' },
@@ -22,18 +32,16 @@ export class QaComponent implements OnInit {
     { name: 'Peach' },
     { name: 'Pear' },
     { name: 'Blackberries' },
-    { name: 'Strawberries' }
+    { name: 'Strawberries' },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  public launchModalSuccess(event) {
-    if (event){
+  public launchModalSuccess(event: any) {
+    if (event) {
       this.launchModalWorks = true;
     }
   }
-
 }

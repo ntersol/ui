@@ -3,10 +3,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-confirmation-modal',
-  templateUrl: './confirmation-modal.component.html'
+  templateUrl: './confirmation-modal.component.html',
 })
 export class ConfirmationModalComponent {
-
   public waiting = false;
   public error: {
     errorMsg?: string;
@@ -23,9 +22,7 @@ export class ConfirmationModalComponent {
   public dataAlt: any; // Data is actually passed through the modal service not here
   public onSuccess: EventEmitter<any> = new EventEmitter();
 
-  constructor(
-    public activeModal: NgbActiveModal
-  ) { }
+  constructor(public activeModal: NgbActiveModal) {}
 
   /**
    * Submit the form
@@ -35,5 +32,4 @@ export class ConfirmationModalComponent {
     this.error = null;
     this.activeModal.close('Success');
   } // end submit
-
 }

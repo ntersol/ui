@@ -1,4 +1,4 @@
-import { Directive, ElementRef, AfterViewInit, OnChanges, HostBinding, Input, HostListener } from '@angular/core';
+import { Directive, ElementRef, AfterViewInit, OnChanges, Input, HostListener } from '@angular/core';
 
 type overflow = 'auto' | 'hidden' | 'inherit' | 'initial' | 'overlay' | 'scroll' | 'visible';
 
@@ -6,10 +6,9 @@ type overflow = 'auto' | 'hidden' | 'inherit' | 'initial' | 'overlay' | 'scroll'
  * Resizes the attached DOM element to full all vertical space below it's current position
  */
 @Directive({
-  selector: '[appFullScreen]'
+  selector: '[appFullScreen]',
 })
 export class FullScreenDirective implements AfterViewInit, OnChanges {
-
   /** DOM reference */
   public elem: ElementRef;
   /** Current height of element */
@@ -26,15 +25,14 @@ export class FullScreenDirective implements AfterViewInit, OnChanges {
   /** How to handle overflow X */
   @Input() overflowX: overflow = 'hidden';
 
-  @HostListener('window:resize') onResize() {
+  @HostListener('window:resize')
+  onResize() {
     setTimeout(() => {
       this.calcHeight();
     }, 100);
   }
 
-  constructor(
-    el: ElementRef
-  ) {
+  constructor(el: ElementRef) {
     this.elem = el;
   }
 
@@ -75,6 +73,5 @@ export class FullScreenDirective implements AfterViewInit, OnChanges {
       this.height = Math.floor(this.elem.nativeElement.getBoundingClientRect().height);
     }
   }
-
 }
 // let height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;

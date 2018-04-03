@@ -1,10 +1,5 @@
 import { Routes } from '@angular/router';
-import {
-  HomeComponent,
-  NoContentComponent,
-  LoginComponent,
-  QaComponent
-} from '@routes';
+import { HomeComponent, NoContentComponent, LoginComponent, QaComponent } from '@routes';
 
 import { LayoutMainComponent } from '@components';
 import { AuthGuard } from '@shared';
@@ -21,11 +16,17 @@ export const ROUTES: Routes = [
   // Routes that use masterpage go here
   // canActivate with AuthGuard determines if this is an authenticated only route
   {
-    path: '', component: LayoutMainComponent,
+    path: '',
+    component: LayoutMainComponent,
     children: [
-      { path: '', component: HomeComponent, data: { title: 'Dashboard' + titleSlug }, canActivate: [AuthGuard], },
-      { path: 'qa', component: QaComponent, data: { title: 'E2E Testing' + titleSlug }, canActivate: [AuthGuard], },
-      { path: '**', component: NoContentComponent, data: { title: 'Page Not Found' + titleSlug }, canActivate: [AuthGuard], },
-    ]
+      { path: '', component: HomeComponent, data: { title: 'Dashboard' + titleSlug }, canActivate: [AuthGuard] },
+      { path: 'qa', component: QaComponent, data: { title: 'E2E Testing' + titleSlug }, canActivate: [AuthGuard] },
+      {
+        path: '**',
+        component: NoContentComponent,
+        data: { title: 'Page Not Found' + titleSlug },
+        canActivate: [AuthGuard],
+      },
+    ],
   },
 ];

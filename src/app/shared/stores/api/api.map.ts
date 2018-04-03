@@ -7,25 +7,25 @@ Adding a new endpoints:
 
 // import IStore
 import { IStore } from '@shared';
-import { ApiProps } from './api.properties';
+import { ApiActions } from './api.actions';
+
 // IStore.ApiMap
 
 export const ApiMap: IStore.ApiMapping = {
-
   // Example
   users: {
     endpoint: '//jsonplaceholder.typicode.com/users',
-    storeProperty: ApiProps.users,
+    storeProperty: ApiActions.users,
     uniqueId: 'id',
     mapSrc: 'src',
     map: (users: any[]) => {
       // Sample dictionary mapping based on id property
-      const dict = {};
-      users.forEach(user => dict[user.id] = user);
+      const dict: {[key: string]: any} = {};
+      users.forEach(user => (dict[user.id] = user));
       return {
         src: users,
-        dict: dict
+        dict: dict,
       };
-    }
+    },
   },
 };
