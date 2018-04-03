@@ -50,6 +50,7 @@ import {
   AuthGuard,
   ServiceWorkerService,
   PostMessageService,
+  AppConfigService,
 
   // Interceptors
   HttpInterceptorService,
@@ -98,6 +99,7 @@ export const APP_PROVIDERS = [
   AuthGuard,
   ServiceWorkerService,
   PostMessageService,
+  AppConfigService,
 
   // Angular Pipes
   DatePipe,
@@ -142,31 +144,27 @@ export const APP_PROVIDERS = [
   ],
   providers: [
     APP_PROVIDERS,
-    { provide: APP_INITIALIZER, useFactory: AppInit, deps: [AppSettings], multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
       multi: true,
     },
+    { provide: APP_INITIALIZER, useFactory: AppInit, deps: [AppSettings, AppConfigService], multi: true },
   ],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationModalComponent, LogoutModalComponent],
 })
 export class AppModule {}
-export function AppInit(settings: any): () => Promise<any> {
-  console.log(settings.token);
-  return (): Promise<any> => {
-    return new Promise((resolve, reject: any) => {
-      console.log(`onAppInit1:: inside promise`);
 
-      setTimeout(() => {
-        console.log(`onAppInit1:: inside setTimeout`);
-        // doing something
-        // ...
-        resolve();
-        reject();
-
-      }, 3000);
-    });
-  };
+/**
+ * Check if environment settings are already present, if not load first before the rest of the app
+ * @param settings - App settings
+ * @param config - Config service
+ */
+export function AppInit(settings: AppSettings, config: AppConfigService): () => Promise<any> {
+  if (settings.apiUrl) {
+    return (): Promise<any> => new Promise(resolve => resolve());
+  } else {
+    return (): Promise<any> => config.loadEnvSettings();
+  }
 }

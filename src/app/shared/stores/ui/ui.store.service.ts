@@ -26,7 +26,6 @@ export class UIStoreService {
    * @param state
    */
   private storeStateSave(state: IStore.ui) {
-    console.log('saveStoreState', state);
     /** Which properties of the store properties to NOT persist or save to local storage */
     const ignoreProps = ['loanHasUpdate', 'forms'];
     const stateNew: any = { ...state };

@@ -7,6 +7,7 @@ export * from './app.settings';
 export * from './services/auth.service';
 export * from './services/service-worker.service';
 export * from './services/post-message.service';
+export * from './services/app-config.service';
 
 // Base services and interceptors
 export * from './interceptors/error.interceptor';

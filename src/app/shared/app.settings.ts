@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
 // Enum of app setting properties. Only needed if using the propGet and propSet methods in this file
-enum Props {
+export enum AppSettingsProps {
   token = 'token',
   apiUrl = 'apiUrl',
   userName = 'userName',
@@ -24,44 +24,44 @@ export class AppSettings {
   private _token: string | null = null;
   /** API token for EPS */
   public get token(): string | null {
-    return this._token || this.propGet(Props.token);
+    return this._token || this.propGet(AppSettingsProps.token);
   }
   public set token(value: string | null) {
     this._token = value;
-    this.propSet(Props.token, value);
+    this.propSet(AppSettingsProps.token, value);
   }
 
   /** Web Api Url */
   private _apiUrl: string | null = null;
   /** Web Api Url */
   public get apiUrl(): string | null {
-    return this._apiUrl || this.propGet(Props.apiUrl);
+    return this._apiUrl || this.propGet(AppSettingsProps.apiUrl);
   }
   public set apiUrl(value: string | null) {
     this._apiUrl = value;
-    this.propSet(Props.apiUrl, value);
+    this.propSet(AppSettingsProps.apiUrl, value);
   }
 
   /** Username */
   private _lnkey: string | null = null;
   /** Username */
   public get lnkey(): string | null {
-    return this._lnkey || this.propGet(Props.lnkey);
+    return this._lnkey || this.propGet(AppSettingsProps.lnkey);
   }
   public set lnkey(value: string | null) {
     this._lnkey = value;
-    this.propSet(Props.lnkey, value);
+    this.propSet(AppSettingsProps.lnkey, value);
   }
 
   /** Username */
   private _userName: string | null = null;
   /** Username */
   public get userName(): string | null {
-    return this._userName || this.propGet(Props.userName);
+    return this._userName || this.propGet(AppSettingsProps.userName);
   }
   public set userName(value: string | null) {
     this._userName = value;
-    this.propSet(Props.userName, value);
+    this.propSet(AppSettingsProps.userName, value);
   }
 
   constructor() { }
