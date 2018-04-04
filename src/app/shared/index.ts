@@ -15,7 +15,7 @@ export * from './interceptors/error.interceptor';
 export * from './interceptors/http.interceptor';
 
 // Guards
-export * from './guards/auth-guard.interceptor';
+export * from './guards/auth.guard';
 
 // Pipes
 export * from './pipes/filter.pipe';

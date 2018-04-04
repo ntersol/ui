@@ -7,7 +7,7 @@ export const environment = {
   appName: 'Mello Labs Angular Starter',
   production: false,
   serviceWorker: false,
-  /** List of local dev domains */
+  /** List of local dev domains. Used for working locally when backend is not yet available */
   devDomains: <string[]>['localhost:4200', '127.0.0.1:8080', 'jerrolkrause.github.io'],
   /** Location to get environment variables */
   envSettingsUrl: 'assets/mock-data/env-settings.json',

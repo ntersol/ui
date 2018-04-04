@@ -47,7 +47,6 @@ import {
   AppSettings,
 
   // Services
-  AuthGuard,
   ServiceWorkerService,
   PostMessageService,
   AppConfigService,
@@ -57,6 +56,9 @@ import {
   HttpInterceptorService,
   GlobalErrorHandler,
   AuthService,
+
+  // Guards
+  AuthGuard,
 
   // Pipes
   FilterPipe,
