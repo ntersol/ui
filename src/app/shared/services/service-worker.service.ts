@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class ServiceWorkerService {
-  
   /** Is SW enabled by environent props? */
   public isEnabled = environment.serviceWorker;
   /** Notify app when a new version is available */
@@ -18,15 +17,13 @@ export class ServiceWorkerService {
   /** Has the modal been popped already? */
   private modalPopped = false;
 
-  constructor(private sw: SwUpdate, private modals: UIModalService, private zone: NgZone) {
-  }
+  constructor(private sw: SwUpdate, private modals: UIModalService, private zone: NgZone) {}
 
   /**
    * Start polling for SW updates
    */
   public pollForUpdates() {
     if (this.sw.isEnabled) {
-
       // On initial load, check if service worker is available first
       this.sw.available.subscribe(() => {
         //console.log('Update available');
@@ -53,14 +50,14 @@ export class ServiceWorkerService {
   public openModal() {
     this.modals
       .open(
-      'ConfirmationModalComponent',
-      false,
-      'lg',
-      `A new version of ${environment.appName} is available, would you like to update to the latest version?`,
-    )
+        'ConfirmationModalComponent',
+        false,
+        'lg',
+        `A new version of ${environment.appName} is available, would you like to update to the latest version?`,
+      )
       .result.then(
-      () => this.sw.activateUpdate(),
-      () => console.warn('User is on an outdated version of the application'),
-    );
+        () => this.sw.activateUpdate(),
+        () => console.warn('User is on an outdated version of the application'),
+      );
   }
 }

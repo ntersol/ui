@@ -60,7 +60,7 @@ export class AuthService {
    * Log the user in
    * @param data
    */
-  public logIn(data:any) {
+  public logIn(data: any) {
     const url = this.settings.apiUrl + this.authUrl;
 
     // If no auth endpoint set up yet, use a get and set the token properties so the rest of the app can work

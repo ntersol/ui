@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Load user into editing pane
    * @param user
    */
-  public userEdit(user:any) {
+  public userEdit(user: any) {
     this.formMain.patchValue(user);
     this.isEditing = true;
   }

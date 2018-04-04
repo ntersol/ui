@@ -23,11 +23,9 @@ export class AppCommsService {
   //private allowedDomains: string[] = [window.location.origin];
   ///** Hold subs for unsub */
   //private subs: Subscription[] = [];
-
   //constructor(private messaging: PostMessageService, private settings: AppSettings, private ui: UIStoreService) {
   //  this.commsEnable();
   //}
-
   ///**
   // * Start listening for app communication
   // */
@@ -37,7 +35,6 @@ export class AppCommsService {
   //    Observable.combineLatest([this.ui.multiDocs$, this.ui.multiScreen$, this.ui.docViewerGuids$]).subscribe(res =>
   //      this.resyncUI(),
   //    ),
-
   //    // Listen for any interapp communication on same domain
   //    this.messaging.listenForMessages(this.allowedDomains).subscribe(message => {
   //      // console.log('Message Received', message);
@@ -57,10 +54,8 @@ export class AppCommsService {
   //      }
   //    }),
   //  ];
-
   //  // Manage the state of multiscreen functionality
   //  this.multiScreenState();
-
   //  // When this window is closed, tell parent to end multiscreen
   //  window.onbeforeunload = () => {
   //    if (window.opener) {
@@ -68,7 +63,6 @@ export class AppCommsService {
   //    }
   //  };
   //}
-
   ///**
   // * Disable app communication
   // */
@@ -77,7 +71,6 @@ export class AppCommsService {
   //    this.subs.forEach(sub => sub.unsubscribe());
   //  }
   //}
-
   ///**
   // * Resync the UI state between multiple instances of the web app
   // */
@@ -88,7 +81,6 @@ export class AppCommsService {
   //    this.messaging.postMessageToWindow(window.opener, { event: MessageActions.RESYNC_UI, payload: null });
   //  }
   //}
-
   ///**
   // * Manage the state of multiscreen functionality
   // */

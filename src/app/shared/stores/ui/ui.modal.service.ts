@@ -25,7 +25,7 @@ export class UIModalService {
   /** Reference to the STORE OBSERVABLE currently open modal. This reference is used for modals persisted in the UI store */
   public modalRef$: BehaviorSubject<any> = new BehaviorSubject(null);
   /** List of component references of available modals */
-  public modalList: {[key: string]: any} = {
+  public modalList: { [key: string]: any } = {
     ConfirmationModalComponent: ConfirmationModalComponent,
     LogoutModalComponent: LogoutModalComponent,
   };

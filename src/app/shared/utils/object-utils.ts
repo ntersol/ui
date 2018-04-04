@@ -11,7 +11,7 @@ export class ObjectUtils {
    */
   static cleanup(obj: any) {
     return (function prune(current) {
-      _.forOwn(current, function (value: any, key: any) {
+      _.forOwn(current, function(value: any, key: any) {
         if (
           _.isUndefined(value) ||
           _.isNull(value) ||

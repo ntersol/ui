@@ -15,8 +15,7 @@ export class LogoutModalComponent implements OnInit, OnDestroy {
   public data = 120; // Data is actually passed through the modal service not here
   public dataAlt: any; // Data is actually passed through the modal service not here
 
-  constructor(public activeModal: NgbActiveModal) {
-  }
+  constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit() {
     this.counter = this.data; // How long to display the modal window

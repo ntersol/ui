@@ -1,23 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { AppSettings} from 'src/app/shared';
+import { AppSettings } from 'src/app/shared';
 import { environment } from '@env';
 
 interface EnvSettings {
-  ApiUrl: string,
-  ApiNamespace: string,
-  SignalRUrl: string,
+  ApiUrl: string;
+  ApiNamespace: string;
+  SignalRUrl: string;
 }
 
 @Injectable()
 export class AppConfigService {
-
-  constructor(
-    private settings: AppSettings,
-    private http: HttpClient
-  ) {
-  }
+  constructor(private settings: AppSettings, private http: HttpClient) {}
 
   /**
    * Set all env settings in app settings
@@ -41,5 +36,4 @@ export class AppConfigService {
         return Promise.resolve();
       });
   }
-
 }

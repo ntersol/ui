@@ -64,7 +64,7 @@ export class AppSettings {
     this.propSet(AppSettingsProps.userName, value);
   }
 
-  constructor() { }
+  constructor() {}
 
   /**
    * Return a property. Loads it from this service first if available, if not looks in localstorage, if not there either return null

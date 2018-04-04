@@ -25,7 +25,7 @@ export class PostMessageService {
   /** Generate a random number to identify this app. Used to drop same domain postmessages */
   private appId = Math.floor(Math.random() * 10000000);
 
-  constructor(private settings: AppSettings) { }
+  constructor(private settings: AppSettings) {}
 
   /**
    * Activates the post message listener

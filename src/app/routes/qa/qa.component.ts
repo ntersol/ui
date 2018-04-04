@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class QaComponent implements OnInit {
   public launchModalWorks: boolean;
 
-  public filterFruit:any;
+  public filterFruit: any;
   public filterFruitMore: any;
   public fruits = [
     'Apple',

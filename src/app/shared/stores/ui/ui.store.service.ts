@@ -4,7 +4,6 @@ import { AppStore } from '@shared';
 import { UIStoreActions } from './ui.store.actions';
 import { environment } from '@env';
 
-
 @Injectable()
 export class UIStoreService {
   public selectors = {
@@ -18,7 +17,7 @@ export class UIStoreService {
     if (window.localStorage.getItem('ui')) {
       this.storeStateRestore(JSON.parse(window.localStorage.getItem('ui')));
     }
-    
+
     // On UI store changes, persist to localstorage
     this.store.select(storeRoot => storeRoot.ui).subscribe(uiState => this.storeStateSave(uiState));
   }

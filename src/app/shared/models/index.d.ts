@@ -12,9 +12,7 @@
   - Leave everything else blank or unchecked here
  */
 
-
 export declare namespace Models {
-
   export interface User {
     id?: number;
     name?: string;
@@ -28,17 +26,14 @@ export declare namespace Models {
       geo?: {
         lat?: string;
         lng?: string;
-      }
-    },
+      };
+    };
     phone?: string;
     website?: string;
     company?: {
       name?: string;
       catchPhrase?: string;
       bs?: string;
-    }
+    };
   }
-
 }
-
-

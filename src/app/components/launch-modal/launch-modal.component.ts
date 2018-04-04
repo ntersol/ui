@@ -71,7 +71,10 @@ export class LaunchModalComponent implements OnInit, OnDestroy {
       // that method will not be persisted
       this.sub = this.modals.modalRef$.subscribe(modalElem => {
         if (modalElem) {
-          modalElem.result.then((reason: any) => this.onSuccess.emit(reason), (reason: any) => this.onDismiss.emit(reason));
+          modalElem.result.then(
+            (reason: any) => this.onSuccess.emit(reason),
+            (reason: any) => this.onDismiss.emit(reason),
+          );
         }
       });
     }
