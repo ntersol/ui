@@ -35,6 +35,9 @@ ng build --prod
 # Build and serve prod
 ng serve --prod
 
+# Run prettier which will format the code in the entire projects
+npm run format
+
 # Run e2e protractor tests
 ng e2e
 
@@ -61,27 +64,35 @@ npm run update
 `src > ` `apple-touch-icon` + `favicon.ico` + `safari-pinned-tab.svg`
 - Change these icons to ones for your app
 
+`src > environments > environment.ts`
 `src > environments > environment.prod.ts`
-- Change the `appName` property in this file
-- Enable the service worker if desired, default is off
+- Localize environment settings and properties in these files
 
 `src > app > shared > app.settings.ts`
-- Add global environment variables
-- Update any development domains
+- Add global persistant environment variables
 
 `src > app > shared > auth.service.ts`
 - Set `hasAuthEndpoint` property to true if auth endpoint is available, otherwise leave false for dev
 - Set `authUrl` property to your endpoint location
 
-`src > app > shared > api.service.ts`
-- Set `envSettingsUrlProd` property to location of environment settings
-- Update `appSettingsUpdate` method to hydrate environment settings into app settings
 
 `src > index.html`
--Update any header changes to the html in this file. IE logo, navigation, etc. This is a poor man's app-Shell since ng-bootstrap isn't compatible with SSR
+- Update any header changes to the html in this file. IE logo, navigation, etc. This is a poor man's app-Shell since ng-bootstrap isn't compatible with SSR
 
 `src > ngsw-config.json`
--Update any dependencies needed for the service worker. Use asset groups for site resources, use dataGroups for API calls
+- Update any dependencies needed for the service worker. Use asset groups for site resources, use dataGroups for API calls
+
+`src > shared > guards > auth-guard`
+- When out of alpha/prototype phase, remove `(this.settings.isDev) ||`
+
+
+## Useful Tools
+
+Javascript Prettier for Visual Studio, works the same as the `npm run format`
+https://marketplace.visualstudio.com/items?itemName=MadsKristensen.JavaScriptPrettier
+
+Typescript Linting in Visual Studio without having to run `ng lint` in the command line. Note that this requires the project to be in a solution to work.
+https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebAnalyzer
 
 
 ## Useful Info
