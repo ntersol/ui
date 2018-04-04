@@ -66,7 +66,7 @@ npm run update
 
 `src > environments > environment.ts`
 `src > environments > environment.prod.ts`
-- Localize environment settings and properties in these files
+- Localize environment settings and properties in these files. Enable/disable app functionality as needed.
 
 `src > app > shared > app.settings.ts`
 - Add global persistant environment variables
@@ -74,7 +74,6 @@ npm run update
 `src > app > shared > auth.service.ts`
 - Set `hasAuthEndpoint` property to true if auth endpoint is available, otherwise leave false for dev
 - Set `authUrl` property to your endpoint location
-
 
 `src > index.html`
 - Update any header changes to the html in this file. IE logo, navigation, etc. This is a poor man's app-Shell since ng-bootstrap isn't compatible with SSR
@@ -89,10 +88,10 @@ npm run update
 ## Useful Tools
 
 Javascript Prettier for Visual Studio, works the same as the `npm run format`
-https://marketplace.visualstudio.com/items?itemName=MadsKristensen.JavaScriptPrettier
+- https://marketplace.visualstudio.com/items?itemName=MadsKristensen.JavaScriptPrettier
 
 Typescript Linting in Visual Studio without having to run `ng lint` in the command line. Note that this requires the project to be in a solution to work.
-https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebAnalyzer
+- https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebAnalyzer
 
 
 ## Useful Info
