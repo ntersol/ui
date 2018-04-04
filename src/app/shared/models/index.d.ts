@@ -1,6 +1,7 @@
 /**
  * Generate models with NSwagStudio: https://github.com/RSuter/NSwag/wiki/NSwagStudio
- * Make sure to point at the docs url NOT the url in the browser, IE http://localhost:57462/swagger/docs/v1
+ * Make sure to point at the docs url in the top green header
+ * IE http://localhost:57462/swagger/docs/v1
  * not http://localhost:57462/swagger/ui/index#/
 
  Config Options:
@@ -10,9 +11,11 @@
   - Type Style: Interface
   - Null Value: Null
   - Leave everything else blank or unchecked here
+
  */
 
 export declare namespace Models {
+
   export interface User {
     id?: number;
     name?: string;
@@ -36,4 +39,5 @@ export declare namespace Models {
       bs?: string;
     };
   }
+
 }

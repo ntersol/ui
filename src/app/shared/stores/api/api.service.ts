@@ -13,6 +13,12 @@ import { Models } from '@models';
 
 @Injectable()
 export class ApiService extends ApiHttpService {
+
+  /** Collection of API store selectors. Can be moved to own service if this gets too big */
+  public selectors = {
+    users$: this.store.select(store => store.api.users)
+  }
+
   // API endpoints
   /** Users endpoint */
   public users = {
@@ -24,14 +30,11 @@ export class ApiService extends ApiHttpService {
     delete: (user: Models.User) => this.deleteStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
   };
 
-  // Store selectors
-  /** Users store selection */
-  public users$ = this.store.select(store => store.api.users);
-  /** Get the API state using api props */
-  public getState$ = (apiProp: ApiActions) => this.store.select(store => store.apiStatus[apiProp]);
   /** Get the API data using api props */
   public getData$ = (apiProp: ApiActions) => this.store.select(store => store.api[apiProp]);
-
+  /** Get the API state using api props */
+  public getState$ = (apiProp: ApiActions) => this.store.select(store => store.apiStatus[apiProp]);
+ 
   constructor(
     private store: Store<AppStore.Root>,
     private http: HttpClient,
@@ -39,10 +42,11 @@ export class ApiService extends ApiHttpService {
     private settings: AppSettings,
   ) {
     super(<any>http, <any>store, <any>router);
-
     // Output store changes to console
     // this.store.subscribe(store => console.log(JSON.parse(JSON.stringify(store))));
   }
+
+  
 
   /**
    * Reset the store, clear out all held state and data

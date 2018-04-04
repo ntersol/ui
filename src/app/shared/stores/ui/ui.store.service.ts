@@ -6,11 +6,11 @@ import { environment } from '@env';
 
 @Injectable()
 export class UIStoreService {
-  public selectors = {
-    // selectors$: this.store.select(store => store.ui.modal);
-  };
 
-  public modal$ = this.store.select(store => store.ui.modal);
+  /** Collection of UI store selectors. Can be moved to own service if this gets too big */
+  public selectors = {
+    modal$: this.store.select(store => store.ui.modal)
+  };
 
   constructor(private store: Store<AppStore.Root>) {
     // Rehydrate UI state from localstorage
