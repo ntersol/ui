@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '@env';
 import * as _ from 'lodash';
 
 // Enum of app setting properties. Only needed if using the propGet and propSet methods in this file
@@ -13,11 +14,10 @@ export enum AppSettingsProps {
 @Injectable()
 export class AppSettings {
   /** Development domains. Used for the isDev property to help set/disable functionality that may not be available yet */
-  private domainsDev: string[] = ['localhost:4206', '127.0.0.1:8080', 'jerrolkrause.github.io', 'localhost:49152'];
-
+  
   /** Is this application in a development environment as defined by domainsDev and window.location.host */
   public get isDev(): boolean {
-    return _.includes(this.domainsDev, window.location.host);
+    return _.includes(environment.devDomains, window.location.host);
   }
 
   /** API token for EPS */

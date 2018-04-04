@@ -11,6 +11,7 @@ import { ApiActions } from './api.actions';
 
 import { Models } from '@models';
 
+
 @Injectable()
 export class ApiService extends ApiHttpService {
 
@@ -42,11 +43,10 @@ export class ApiService extends ApiHttpService {
     private settings: AppSettings,
   ) {
     super(<any>http, <any>store, <any>router);
+    
     // Output store changes to console
     // this.store.subscribe(store => console.log(JSON.parse(JSON.stringify(store))));
   }
-
-  
 
   /**
    * Reset the store, clear out all held state and data
