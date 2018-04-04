@@ -2,81 +2,81 @@
 
   <div class="card mb-3">
     <div class="card-header p-2">
+
+      <div class="float-right">
+        <div ngbDropdown placement="bottom-right" #myDrop="ngbDropdown">
+          <button  ngbDropdownToggle class="btn btn-sm btn-primary">
+            <i class="fa fa-user mr-1"></i>
+            Add/Edit User
+          </button>
+          <div ngbDropdownMenu style="width: 500px;" class="p-3" (click)="$event.stopPropagation();">
+            <a class="float-right" (click)="userStopEdit()" *ngIf="isEditing"><i class="fa fa-user-plus" aria-hidden="true"></i> Add New User</a>
+            <h2 *ngIf="!isEditing"> <i class="fa fa-user-plus" aria-hidden="true"></i> Add User</h2>
+            <h2 *ngIf="isEditing"><i class="fa fa-user" aria-hidden="true"></i> Updating User</h2>
+            <hr/>
+            <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
+              <app-field-component [frmGroup]="formMain" frmControl="username" label="Username" [labelColumns]="4"></app-field-component>
+              <app-field-component [frmGroup]="formMain" frmControl="name" label="Name" [labelColumns]="4"></app-field-component>
+              <app-field-component [frmGroup]="formMain" frmControl="website" label="Website" [labelColumns]="4"></app-field-component>
+              <app-field-component [frmGroup]="formMain" frmControl="email" label="Email" [labelColumns]="4"></app-field-component>
+              <app-field-component [frmGroup]="formMain" frmControl="phone" label="Phone" [labelColumns]="4"></app-field-component>
+              <button type="submit" class="btn btn-interact float-right" [disabled]="routeData.state.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : routeData.state.modifying }">
+                <ng-container *ngIf="!isEditing">
+                  <i class="fa fa-user-plus" aria-hidden="true"></i> Add User
+                </ng-container>
+                <ng-container *ngIf="isEditing">
+                  <i class="fa fa-user" aria-hidden="true"></i> Update User
+                </ng-container>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
       <button class="btn btn-icon btn-sm mr-2" (click)="usersRefresh()" [disabled]="routeData?.state?.loading">
         <i class="fa fa-refresh"></i>
       </button>
+      
       <!-- Filter datatable -->
-      <form class="form-inline mr-2 d-inline-block mr-2">
-        <label class="icon search" style="position:relative;">
-          <input class="form-control form-control-sm filterSearch" type="text" name="userSearchTerm" placeholder="Search users" [(ngModel)]="userSearchTerm" />
-          <a (click)="userSearchTerm = null" *ngIf="userSearchTerm" style="position:absolute;right: 10px;"><i class="fa fa-remove"></i></a>
+      <form class="form-inline mr-3 d-inline-block">
+        <label class="icon filter" style="position:relative;">
+          <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter name or website" [ngModel]="filterGlobal.term" (ngModelChange)="onfilterGlobal($event)" data-qa="hp-filter-global" />
+          <a (click)="filterGlobal.term = null; onfilterGlobal()" *ngIf="filterGlobal.term" style="position:absolute;right: 10px;"><i class="fa fa-remove"></i></a>
         </label>
       </form>
     </div>
-
   </div>
 
-  <div appFullScreen>
+  <div>
     <api-state [state]="routeData?.state" [toaster]="true" [showSuccess]="false" *ngIf="routeData?.state">
-      <div class="row">
-        <div class="col-12 col-lg-8 col-xl-9">
 
-          <div class="alert alert-warning icon" *ngIf="!routeData?.users?.src?.length">No users found</div>
-          <table class="table table-sm" *ngIf="(routeData?.users?.src | filter:userSearchTerm:'name' | debounce) as usersFiltered">
-            <thead>
-              <tr>
-                <th class="hidden-md-down">Username</th>
-                <th>Name</th>
-                <th class="hidden-md-down">Website</th>
-                <th class="hidden-md-down">Email</th>
-                <th>Phone</th>
-                <th class="hidden-md-down hidden-lg-down"></th>
-                <th class="hidden-md-down hidden-lg-down"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let user of usersFiltered">
-                <!-- Data from array is mapped, note the .src  -->
-                <td class="hidden-md-down">{{user.username}}</td>
-                <td>{{user.name}}</td>
-                <td class="hidden-md-down">{{user.website}}</td>
-                <td class="hidden-md-down">{{user.email}}</td>
-                <td>{{user.phone | phonenumber}}</td>
-                <td class="hidden-md-down hidden-lg-down"><a (click)="userEdit(user)">Edit</a></td>
-                <td class="hidden-md-down hidden-lg-down">
-                  <app-launch-modal modal="ConfirmationModalComponent" [isButton]="false" [persist]="true" size="lg" [data]="'Really delete '+ user.name +'?'" dataAlt="Delete User" (onSuccess)="userDelete(user)">
-                    Delete
-                  </app-launch-modal>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-12 col-lg-4 col-xl-3">
-          <div class="card">
-            <div class="card-body">
-              <h2 *ngIf="!isEditing">Add User</h2>
-              <h2 *ngIf="isEditing">Updating User</h2>
-              <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
-                <app-field-component [frmGroup]="formMain" frmControl="username" label="Username" [labelColumns]="4"></app-field-component>
-                <app-field-component [frmGroup]="formMain" frmControl="name" label="Name" [labelColumns]="4"></app-field-component>
-                <app-field-component [frmGroup]="formMain" frmControl="website" label="Website" [labelColumns]="4"></app-field-component>
-                <app-field-component [frmGroup]="formMain" frmControl="email" label="Email" [labelColumns]="4"></app-field-component>
-                <app-field-component [frmGroup]="formMain" frmControl="phone" label="Phone" [labelColumns]="4"></app-field-component>
-                <button type="submit" class="btn btn-interact float-right" [disabled]="routeData.state.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : routeData.state.modifying }">
-                  <ng-container *ngIf="!isEditing">
-                    <i class="fa fa-user-plus" aria-hidden="true"></i> Add User
-                  </ng-container>
-                  <ng-container *ngIf="isEditing">
-                    <i class="fa fa-user" aria-hidden="true"></i> Update User
-                  </ng-container>
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-
+      <div style="position:relative;height:calc(100vh - 165px)">
+        <div class="alert alert-warning icon" *ngIf="!routeData?.users?.src?.length">No users found</div>
+        <datagrid #datagrid *ngIf="routeData?.users?.src?.length"
+                  [rows]="routeData.users.src"
+                  [columns]="columns"
+                  [state]="state"
+                  [options]="options"
+                  [filterGlobal]="filterGlobal"
+                  (onStateChange)="onStateChange($event)"
+                  (onRowsSelected)="onRowsSelected($event)"
+                  (onRowUpdated)="onRowUpdated($event)">
+     
+          <!-- Custom templates, prop corresponds to column property -->
+          <datagrid-column prop="LNKey">
+            <!-- Header template -->
+            <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
+              {{column.name}}
+            </ng-template>
+            <!-- Cell template -->
+            <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
+              <strong>{{value}}</strong> - {{column.prop}}
+            </ng-template>
+          </datagrid-column>
+        </datagrid>
       </div>
+
+
     </api-state>
   </div>
 </div>

@@ -11,14 +11,12 @@ import { ApiActions } from './api.actions';
 
 import { Models } from '@models';
 
-
 @Injectable()
 export class ApiService extends ApiHttpService {
-
   /** Collection of API store selectors. Can be moved to own service if this gets too big */
   public selectors = {
-    users$: this.store.select(store => store.api.users)
-  }
+    users$: this.store.select(store => store.api.users),
+  };
 
   // API endpoints
   /** Users endpoint */
@@ -35,7 +33,7 @@ export class ApiService extends ApiHttpService {
   public getData$ = (apiProp: ApiActions) => this.store.select(store => store.api[apiProp]);
   /** Get the API state using api props */
   public getState$ = (apiProp: ApiActions) => this.store.select(store => store.apiStatus[apiProp]);
- 
+
   constructor(
     private store: Store<AppStore.Root>,
     private http: HttpClient,
@@ -43,7 +41,7 @@ export class ApiService extends ApiHttpService {
     private settings: AppSettings,
   ) {
     super(<any>http, <any>store, <any>router);
-    
+
     // Output store changes to console
     // this.store.subscribe(store => console.log(JSON.parse(JSON.stringify(store))));
   }

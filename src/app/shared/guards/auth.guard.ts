@@ -10,12 +10,13 @@ export class AuthGuard implements CanActivate {
   canActivate() {
     if (
       // If NOT in production and is on dev domain
-      (this.settings.isDev) || // Remove this line when out of dev/prototype phase for additional security
+      this.settings.isDev || // Remove this line when out of dev/prototype phase for additional security
       // OR a token and an api url are present
-      (this.settings.token && this.settings.apiUrl)) {
+      (this.settings.token && this.settings.apiUrl)
+    ) {
       return true; // logged in and has apiUrl so set true
     }
     this.auth.logOut();
-    return false; 
+    return false;
   }
 }

@@ -4,11 +4,8 @@ import { AppStore } from '@shared';
 import { UIStoreActions } from './ui.store.actions';
 import { environment } from '@env';
 
-
-
 @Injectable()
 export class UIStoreService {
-
   /** Collection of UI store selectors. Can be moved to own service if this gets too big */
   public selectors = {
     modal$: this.store.select(store => store.ui.modal),
@@ -23,7 +20,7 @@ export class UIStoreService {
     if (window.localStorage.getItem('ui')) {
       this.storeStateRestore(JSON.parse(window.localStorage.getItem('ui')));
     }
-    
+
     // On UI store changes, persist to localstorage
     this.store.select(storeRoot => storeRoot.ui).subscribe(uiState => this.storeStateSave(uiState));
   }

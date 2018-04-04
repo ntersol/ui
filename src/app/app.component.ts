@@ -8,7 +8,6 @@ import 'rxjs/add/operator/mergeMap';
 import { environment } from '@env';
 import { AuthService, ServiceWorkerService, AppCommsService } from '@shared';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,7 +19,7 @@ export class AppComponent implements OnInit {
     private title: Title,
     private authService: AuthService,
     private sw: ServiceWorkerService,
-    private comms: AppCommsService
+    private comms: AppCommsService,
   ) {}
 
   ngOnInit() {

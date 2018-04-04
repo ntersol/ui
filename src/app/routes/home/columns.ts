@@ -1,0 +1,43 @@
+export const columns = [
+  {
+    prop: 'username',
+    label: 'Username',
+    columnType: 'string',
+    width: 70,
+    canSort: true,
+    canGroup: true,
+    canFilter: true,
+  },
+  {
+    prop: 'name',
+    label: 'Name',
+    columnType: 'string',
+    canSort: true,
+    canGroup: true,
+    canFilter: true,
+  },
+  {
+    prop: 'email',
+    label: 'Email',
+    columnType: 'string',
+    canSort: true,
+    canGroup: true,
+    canFilter: true,
+  },
+  {
+    prop: 'phone',
+    label: 'Phone',
+    columnType: 'string',
+    canSort: true,
+    canGroup: true,
+    canFilter: true,
+  },
+  {
+    prop: 'website',
+    label: 'Website',
+    columnType: 'string',
+    canSort: true,
+    canGroup: true,
+    canFilter: true,
+  },
+];

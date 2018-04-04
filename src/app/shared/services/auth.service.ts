@@ -42,7 +42,7 @@ export class AuthService {
       if (queryParams.token) {
         this.settings.token = queryParams.token;
         this.setTimer(this.setTimerDefaultSeconds); // Start the session timer with the default time
-      } 
+      }
     });
 
     // If a token is passed in via matrix notation params, update app settings.

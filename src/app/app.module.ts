@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Bootstrap
 import { StoreModule } from '@ngrx/store';
 
 // Mello Labs Tools
+import { DatagridModule } from '@mello-labs/datagrid';
 import { ApiToolsModule, ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
 import { FormToolsModule } from '@mello-labs/form-tools';
 import { UtilitiesModule } from '@mello-labs/utilities';
@@ -144,6 +145,7 @@ export const APP_PROVIDERS = [
     StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX
 
     // Mello Labs
+    DatagridModule.forRoot(),
     ApiToolsModule.forRoot(),
     FormToolsModule.forRoot(),
     UtilitiesModule.forRoot(),

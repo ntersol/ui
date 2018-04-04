@@ -4,7 +4,7 @@ import { UIStoreActions } from './ui.store.actions';
 // Define initial store state : State.main
 const initialState: AppStore.Ui = {
   modal: null,
-  multiScreen: false
+  multiScreen: false,
 };
 
 export function UIStoreReducer(state = initialState, { type, payload }: any) {

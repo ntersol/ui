@@ -14,7 +14,7 @@ export enum AppSettingsProps {
 @Injectable()
 export class AppSettings {
   /** Development domains. Used for the isDev property to help set/disable functionality that may not be available yet */
-  
+
   /** Is this application in a development environment as defined by domainsDev and window.location.host */
   public get isDev(): boolean {
     return _.includes(environment.devDomains, window.location.host);

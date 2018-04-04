@@ -18,12 +18,10 @@ export enum MessageActions {
  */
 @Injectable()
 export class AppCommsService {
-
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
 
-  constructor(private messaging: PostMessageService, private settings: AppSettings, private ui: UIStoreService) {
-  }
+  constructor(private messaging: PostMessageService, private settings: AppSettings, private ui: UIStoreService) {}
 
   /**
    * Start listening for app communication
@@ -31,9 +29,7 @@ export class AppCommsService {
   public commsEnable() {
     this.subs = [
       // Watch UI Store changes and fire the resync UI method to update store state in all instances
-      Observable.combineLatest([this.ui.selectors.multiScreen$]).subscribe(() =>
-        this.resyncUI(),
-      ),
+      Observable.combineLatest([this.ui.selectors.multiScreen$]).subscribe(() => this.resyncUI()),
       // Listen for any interapp communication on same domain
       this.messaging.listenForMessages(environment.appCommDomains).subscribe(message => {
         switch (message.event) {

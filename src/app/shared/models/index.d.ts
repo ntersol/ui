@@ -15,7 +15,6 @@
  */
 
 export declare namespace Models {
-
   export interface User {
     id?: number;
     name?: string;
@@ -39,5 +38,4 @@ export declare namespace Models {
       bs?: string;
     };
   }
-
 }
