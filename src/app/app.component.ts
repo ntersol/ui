@@ -5,8 +5,9 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
-import { AuthService, ServiceWorkerService } from '@shared';
-//import { UIModalService } from '@ui';
+import { environment } from '@env';
+import { AuthService, ServiceWorkerService, AppCommsService } from '@shared';
+
 
 @Component({
   selector: 'app-root',
@@ -19,12 +20,16 @@ export class AppComponent implements OnInit {
     private title: Title,
     private authService: AuthService,
     private sw: ServiceWorkerService,
+    private comms: AppCommsService
   ) {}
 
   ngOnInit() {
     this.routeChange();
-    if (this.sw.isEnabled) {
+    if (environment.serviceWorker) {
       this.sw.pollForUpdates();
+    }
+    if (environment.hasAppComms) {
+      this.comms.commsEnable();
     }
   }
 
@@ -47,7 +52,7 @@ export class AppComponent implements OnInit {
       .subscribe(event => {
         this.title.setTitle(event['title']); // Change document title
         // If auth endpoint is available and not on the login page
-        if (this.authService.hasAuthEndpoint && this.router.url.toLowerCase().indexOf('login') === -1) {
+        if (environment.hasAuthEndpoint && this.router.url.toLowerCase().indexOf('login') === -1) {
           this.authService.refreshTokenUpdate(); // On Route change, refresh authentication token
         }
       });

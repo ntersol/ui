@@ -7,6 +7,12 @@ export const environment = {
   appName: 'Mello Labs Angular Starter',
   production: false,
   serviceWorker: false,
+  /** Is this app going to communicate with other domains or instances of itself for multiscreen usage? */
+  hasAppComms: false,
+  /** Which domains to whitelist app messaging for security. Default same domain */
+  appCommDomains: <string[]>[window.location.origin],
+  /** Is authentication available. If not use workaround for initial login */
+  hasAuthEndpoint: false,
   /** List of local dev domains. Used for working locally when backend is not yet available */
   devDomains: <string[]>['localhost:4200', '127.0.0.1:8080', 'jerrolkrause.github.io'],
   /** Location to get environment variables */

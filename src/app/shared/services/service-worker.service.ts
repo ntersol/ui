@@ -6,8 +6,6 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class ServiceWorkerService {
-  /** Is SW enabled by environent props? */
-  public isEnabled = environment.serviceWorker;
   /** Notify app when a new version is available */
   public updateAvailable$ = new BehaviorSubject(false);
   /** Holds set interval */

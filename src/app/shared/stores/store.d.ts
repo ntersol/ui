@@ -29,6 +29,7 @@ export declare namespace AppStore {
       options: {};
       data: any;
     };
+    multiScreen: boolean
   }
 
   /*************************

@@ -3,12 +3,12 @@
 <div class="container mt-3">
 
   <div class="row">
-    <div class="col col-12 col-lg-6 push-lg-3">
+    <div class="col col-12 col-lg-6 offset-lg-3">
       <h1 class="title"><i class="fa fa-user"></i> Sign-In</h1>
       <div class="card">
 
         <form [formGroup]="formMain" novalidate (ngSubmit)="onLogin()">
-          <div class="card-block">
+          <div class="card-body">
             <error *ngIf="errorApi" [error]="errorApi" [showDetails]="showErrorDetails"></error>
             <div class="alert alert-warning icon" *ngIf="loggedout">You have successfully logged out.</div>
             <div class="alert alert-danger icon" *ngIf="sessionExpired">Session expired, please log in again.</div>
@@ -16,11 +16,13 @@
             <app-field-component [frmGroup]="formMain" frmControl="userName" label="Username" type="text" classes="login"></app-field-component>
             <app-field-component [frmGroup]="formMain" frmControl="password" label="Password" type="password" classes="password"></app-field-component>
             <div class="row">
-              <div class="form-check col-12 col-md-9 push-md-3">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input remember" formControlName="remember" />
-                  Remember my username
-                </label>
+              <div class=" col-12 col-md-9 offset-md-3">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input remember" formControlName="remember" />
+                    Remember my username
+                  </label>
+                </div>
               </div>
             </div>
             <!--

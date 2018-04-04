@@ -5,15 +5,14 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';
 
+import { environment } from '@env';
+
 import { UIModalService } from '@ui';
 import { ApiService } from '@api';
 import { AppSettings } from '../app.settings';
 
 @Injectable()
 export class AuthService {
-  // If this app does not yet have an auth endpoint, set to false.
-  // This will allow dev to proceed since a token is required by the route guard
-  public hasAuthEndpoint = false;
   /** Location of auth endpoint */
   private authUrl = '/authentication/login';
 
@@ -43,7 +42,7 @@ export class AuthService {
       if (queryParams.token) {
         this.settings.token = queryParams.token;
         this.setTimer(this.setTimerDefaultSeconds); // Start the session timer with the default time
-      }
+      } 
     });
 
     // If a token is passed in via matrix notation params, update app settings.
@@ -64,7 +63,7 @@ export class AuthService {
     const url = this.settings.apiUrl + this.authUrl;
 
     // If no auth endpoint set up yet, use a get and set the token properties so the rest of the app can work
-    if (!this.hasAuthEndpoint) {
+    if (!environment.hasAuthEndpoint) {
       return this.http.get('assets/mock-data/login.json').map((response: any) => {
         this.settings.token = response.data.token;
         this.sessionExpired = false;

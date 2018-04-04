@@ -54,7 +54,7 @@
         </div>
         <div class="col-12 col-lg-4 col-xl-3">
           <div class="card">
-            <div class="card-block">
+            <div class="card-body">
               <h2 *ngIf="!isEditing">Add User</h2>
               <h2 *ngIf="isEditing">Updating User</h2>
               <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">

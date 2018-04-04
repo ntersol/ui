@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService, ServiceWorkerService } from '@shared';
 
+import { environment } from '@env';
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -10,7 +12,7 @@ export class NavComponent {
   public isOpen = false;
 
   // Is the service worker enabled
-  public hasSW = this.sw.isEnabled;
+  public hasSW = environment.serviceWorker;
   // Does the app have an update
   public hasUpdate$ = this.sw.updateAvailable$;
 

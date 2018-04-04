@@ -4,6 +4,7 @@ import { UIStoreActions } from './ui.store.actions';
 // Define initial store state : State.main
 const initialState: AppStore.Ui = {
   modal: null,
+  multiScreen: false
 };
 
 export function UIStoreReducer(state = initialState, { type, payload }: any) {
@@ -15,13 +16,16 @@ export function UIStoreReducer(state = initialState, { type, payload }: any) {
       state = { ...payload };
       uiHasChange = true;
       break;
-
     case UIStoreActions.MODAL_OPEN:
       state.modal = { ...payload };
       uiHasChange = true;
       break;
     case UIStoreActions.MODAL_UNLOAD:
       state.modal = null;
+      uiHasChange = true;
+      break;
+    case UIStoreActions.MULTISCREEN_TOGGLE:
+      state.multiScreen = payload !== null ? payload : !state.multiScreen;
       uiHasChange = true;
       break;
   }

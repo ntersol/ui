@@ -4,22 +4,35 @@ import { AppStore } from '@shared';
 import { UIStoreActions } from './ui.store.actions';
 import { environment } from '@env';
 
+
+
 @Injectable()
 export class UIStoreService {
 
   /** Collection of UI store selectors. Can be moved to own service if this gets too big */
   public selectors = {
-    modal$: this.store.select(store => store.ui.modal)
+    modal$: this.store.select(store => store.ui.modal),
+    multiScreen$: this.store.select(store => store.ui.multiScreen),
   };
+
+  /** Holds the reference to a window opened programmatically. Used by appComms for multiscreen state */
+  public screen: Window;
 
   constructor(private store: Store<AppStore.Root>) {
     // Rehydrate UI state from localstorage
     if (window.localStorage.getItem('ui')) {
       this.storeStateRestore(JSON.parse(window.localStorage.getItem('ui')));
     }
-
+    
     // On UI store changes, persist to localstorage
     this.store.select(storeRoot => storeRoot.ui).subscribe(uiState => this.storeStateSave(uiState));
+  }
+
+  /**
+   * Toggle multiscreen view
+   */
+  public multiScreenToggle(multiScreen: boolean | null = null) {
+    this.store.dispatch({ type: UIStoreActions.MULTISCREEN_TOGGLE, payload: multiScreen });
   }
 
   /**
