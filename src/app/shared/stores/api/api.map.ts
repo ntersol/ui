@@ -8,7 +8,7 @@ Adding a new endpoints:
 // import IStore
 import { AppStore } from '@shared';
 import { ApiActions } from './api.actions';
-import { User } from '@models';
+import { Models } from '@models';
 // IStore.ApiMap
 
 export const ApiMap: AppStore.ApiMapping = {
@@ -18,9 +18,9 @@ export const ApiMap: AppStore.ApiMapping = {
     storeProperty: ApiActions.users,
     uniqueId: 'id',
     mapSrc: 'src',
-    map: (users: User[]) => {
+    map: (users: Models.User[]) => {
       // Sample dictionary mapping based on id property
-      const dict: { [key: string]: any } = {};
+      const dict: { [key: string]: Models.User } = {};
       users.forEach(user => (dict[user.id] = user));
       return {
         src: users,

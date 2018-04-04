@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppStore } from '@shared';
 import { UIStoreActions } from './ui.store.actions';
+import { environment } from '@env';
+
 
 @Injectable()
 export class UIStoreService {
@@ -16,7 +18,7 @@ export class UIStoreService {
     if (window.localStorage.getItem('ui')) {
       this.storeStateRestore(JSON.parse(window.localStorage.getItem('ui')));
     }
-
+    
     // On UI store changes, persist to localstorage
     this.store.select(storeRoot => storeRoot.ui).subscribe(uiState => this.storeStateSave(uiState));
   }
@@ -27,11 +29,10 @@ export class UIStoreService {
    */
   private storeStateSave(state: AppStore.Ui) {
     /** Which properties of the store properties to NOT persist or save to local storage */
-    const ignoreProps = ['loanHasUpdate', 'forms'];
     const stateNew: any = { ...state };
     // Delete any keys that should not be persisted
     for (const key in stateNew) {
-      if (stateNew.hasOwnProperty(key) && ignoreProps.indexOf(key) !== -1 && stateNew[key]) {
+      if (stateNew.hasOwnProperty(key) && environment.uiStoreIgnoreProps.indexOf(key) !== -1 && stateNew[key]) {
         delete stateNew[key];
       }
     }

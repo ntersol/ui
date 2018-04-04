@@ -9,7 +9,7 @@ import { AppSettings, AppStore } from '@shared';
 import { ApiMap } from './api.map';
 import { ApiActions } from './api.actions';
 
-import { User } from '@models';
+import { Models } from '@models';
 
 @Injectable()
 export class ApiService extends ApiHttpService {
@@ -17,11 +17,11 @@ export class ApiService extends ApiHttpService {
   // API endpoints
   /** Users endpoint */
   public users = {
-    get: (update?: boolean) => this.getStore<User[]>(ApiMap.users.endpoint, ApiMap.users, update),
-    getOne: (user: User, update?: boolean) => this.getStore<User>(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, update),
-    post: (user: User) => this.postStore<User>(ApiMap.users.endpoint, ApiMap.users, user),
-    put: (user: User) => this.putStore<User>(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
-    delete: (user: User) => this.deleteStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
+    get: (update?: boolean) => this.getStore<Models.User[]>(ApiMap.users.endpoint, ApiMap.users, update),
+    getOne: (user: Models.User, update?: boolean) => this.getStore<Models.User>(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, update),
+    post: (user: Models.User) => this.postStore<Models.User>(ApiMap.users.endpoint, ApiMap.users, user),
+    put: (user: Models.User) => this.putStore<Models.User>(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
+    delete: (user: Models.User) => this.deleteStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
   };
 
   // Store selectors

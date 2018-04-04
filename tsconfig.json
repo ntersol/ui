@@ -24,7 +24,7 @@
       "@api": [ "./src/app/shared/stores/api" ],
       "@utils": [ "./src/app/shared/utils" ],
       "@env": [ "./src/environments/environment.ts" ],
-      "@models": [ "./src/app/shared/models" ]
+      "@models": [ "./src/app/shared/models/index.d" ]
     },
     "skipLibCheck": true,
     "sourceMap": true,
