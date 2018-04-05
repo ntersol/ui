@@ -7,7 +7,7 @@
  Config Options:
   - Set namespace to "Models"
   - TS version 2.7
-  - Generate DTo types: Checked
+  - Generate DTO types: Checked
   - Type Style: Interface
   - Null Value: Null
   - Leave everything else blank or unchecked here

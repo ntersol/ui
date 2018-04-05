@@ -139,7 +139,7 @@ export const APP_PROVIDERS = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.serviceWorker }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
 
     NgbModule.forRoot(), // ng-bootstrap
     StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX

@@ -27,7 +27,7 @@ export class AppConfigService {
    */
   public loadEnvSettings(): Promise<any> {
     return this.http
-      .get(environment.envSettingsUrl)
+      .get(environment.endpoints.envConfig)
       .toPromise()
       .then((data: any) => this.appSettingsUpdate(data))
       .catch((err: any) => {

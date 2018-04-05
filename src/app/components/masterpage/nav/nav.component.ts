@@ -12,7 +12,7 @@ export class NavComponent {
   public isOpen = false;
 
   // Is the service worker enabled
-  public hasSW = environment.serviceWorker;
+  public hasSW = environment.settings.enableServiceWorker;
   // Does the app have an update
   public hasUpdate$ = this.sw.updateAvailable$;
 

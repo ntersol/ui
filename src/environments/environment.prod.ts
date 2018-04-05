@@ -1,17 +1,40 @@
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `.angular-cli.json`.
+
 export const environment = {
-  appName: 'Mello Labs Angular Starter',
+
   production: true,
-  serviceWorker: false,
-  /** Is this app going to communicate with other domains or instances of itself for multiscreen usage? */
-  hasAppComms: false,
-  /** Which domains to whitelist app messaging for security. Default same domain */
-  appCommDomains: <string[]>[window.location.origin],
-  /** Is authentication available. If not use workaround for initial login */
-  hasAuthEndpoint: false,
-  /** List of local dev domains. Keep empty in prod file. */
-  devDomains: <string[]>[],
-  /** Location to get environment variables */
-  envSettingsUrl: 'api/config',
-  /** Which UI store properties to not write to localstorage */
-  uiStoreIgnoreProps: <string[]>[],
+
+  properties: {
+    /** Name of application */
+    appName: 'Mello Labs Angular Starter <PROD>',
+  },
+  settings: {
+    /** Is an authentication endpoint available. If so make sure to update the endpoints in this file */
+    enableAuth: false,
+    /** Enable service worker functionality */
+    enableServiceWorker: false,
+    /** Is this app going to communicate with other domains or instances of itself for multiscreen usage? If so, whitelist domains in the domains.listenTo property*/
+    enableAppComms: false,
+  },
+  domains: {
+    /** List of dev domains to check for the isDev property in appSettings */
+    // dev: <string[]>['jerrolkrause.github.io'],
+    /** If App Comms is enabled, whitelist domains to accept messages from here */
+    listenTo: <string[]>[window.location.origin],
+  },
+  endpoints: {
+    /** Location to get environment and config settings */
+    envConfig: 'assets/mock-data/env-settings.json',
+    /** Login endpoint */
+    authLogin: '/authentication/login',
+    /** Refresh token endpoint */
+    authTokenRefresh: '/authentication/token',
+  },
+  state: {
+    /** Which UI store properties to not write to localstorage. IE do not persist confidential/personal information */
+    uiStoreBlacklist: <string[]>[],
+  }
 };

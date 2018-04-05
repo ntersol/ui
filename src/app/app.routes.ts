@@ -4,9 +4,9 @@ import { HomeComponent, NoContentComponent, LoginComponent, QaComponent } from '
 import { LayoutMainComponent } from '@components';
 import { AuthGuard } from '@shared';
 
-import { environment } from '../environments/environment.prod';
+import { environment } from '@env';
 
-const titleSlug: string = ' | ' + environment.appName;
+const titleSlug: string = ' | ' + environment.properties.appName;
 
 export const ROUTES: Routes = [
   // Routes without masterpage or that do not need to be authenticated need to go first

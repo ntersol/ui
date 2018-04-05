@@ -50,8 +50,8 @@ export class ServiceWorkerService {
       .open(
         'ConfirmationModalComponent',
         false,
-        'lg',
-        `A new version of ${environment.appName} is available, would you like to update to the latest version?`,
+      'lg',
+        `A new version of ${environment.properties.appName} is available, would you like to update to the latest version?`,
       )
       .result.then(
         () => this.sw.activateUpdate(),

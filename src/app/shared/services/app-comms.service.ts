@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { PostMessageService } from './post-message.service';
@@ -29,9 +28,9 @@ export class AppCommsService {
   public commsEnable() {
     this.subs = [
       // Watch UI Store changes and fire the resync UI method to update store state in all instances
-      Observable.combineLatest([this.ui.selectors.multiScreen$]).subscribe(() => this.resyncUI()),
-      // Listen for any interapp communication on same domain
-      this.messaging.listenForMessages(environment.appCommDomains).subscribe(message => {
+      this.ui.selectors.uiState$.subscribe(() => this.resyncUI()),
+      // Listen for any interapp communication set by the listenTo env settings
+      this.messaging.listenForMessages(environment.domains.listenTo).subscribe(message => {
         switch (message.event) {
           // Resync any UI Changes
           case MessageActions.RESYNC_UI:

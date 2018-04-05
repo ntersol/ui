@@ -78,7 +78,7 @@ export class ApiService extends ApiHttpService {
   }
 
   /**
-   * Fix a big with TS where super calls don't count as usage
+   * Fix a bug with TS where super calls don't count as usage
    */
   public fixTS() {
     console.log(this.http, this.router, this.settings);

@@ -8,6 +8,7 @@ import { environment } from '@env';
 export class UIStoreService {
   /** Collection of UI store selectors. Can be moved to own service if this gets too big */
   public selectors = {
+    uiState$: this.store.select(store => store.ui),
     modal$: this.store.select(store => store.ui.modal),
     multiScreen$: this.store.select(store => store.ui.multiScreen),
   };
@@ -22,7 +23,7 @@ export class UIStoreService {
     }
 
     // On UI store changes, persist to localstorage
-    this.store.select(storeRoot => storeRoot.ui).subscribe(uiState => this.storeStateSave(uiState));
+    this.selectors.uiState$.subscribe(uiState => this.storeStateSave(uiState));
   }
 
   /**
@@ -31,6 +32,11 @@ export class UIStoreService {
   public multiScreenToggle(multiScreen: boolean | null = null) {
     this.store.dispatch({ type: UIStoreActions.MULTISCREEN_TOGGLE, payload: multiScreen });
   }
+
+  /**  Reload the latest UI state from localstorage */
+  public storeStateRestore = (uiState: any) => {
+    this.store.dispatch({ type: UIStoreActions.REHYDRATE, payload: uiState });
+  };
 
   /**
    * Save the UI store state to localstorage for persistance
@@ -41,15 +47,10 @@ export class UIStoreService {
     const stateNew: any = { ...state };
     // Delete any keys that should not be persisted
     for (const key in stateNew) {
-      if (stateNew.hasOwnProperty(key) && environment.uiStoreIgnoreProps.indexOf(key) !== -1 && stateNew[key]) {
+      if (stateNew.hasOwnProperty(key) && environment.state.uiStoreBlacklist.indexOf(key) !== -1 && stateNew[key]) {
         delete stateNew[key];
       }
     }
     window.localStorage.setItem('ui', JSON.stringify(stateNew));
   }
-
-  /**  Reload the last UI state from localstorage */
-  public storeStateRestore = (uiState: any) => {
-    this.store.dispatch({ type: UIStoreActions.REHYDRATE, payload: uiState });
-  };
 }

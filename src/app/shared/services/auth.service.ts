@@ -13,9 +13,6 @@ import { AppSettings } from '../app.settings';
 
 @Injectable()
 export class AuthService {
-  /** Location of auth endpoint */
-  private authUrl = '/authentication/login';
-
   /** Is session expired */
   public sessionExpired = false;
   /** How long to show the modal window */
@@ -25,7 +22,7 @@ export class AuthService {
   /** Holds reference to logout modal */
   public logOutModal: NgbModalRef;
   /** The http call so a token can be refreshed with a callback and success method */
-  public refreshToken = this.http.put(this.settings.apiUrl + '/authentication/token', null);
+  public refreshToken = this.http.put(this.settings.apiUrl + environment.endpoints.authTokenRefresh, null);
   /** If a token is passed in without logging in no timer duration is present. Default to this */
   private setTimerDefaultSeconds = 5; // 5 minutes
 
@@ -60,10 +57,8 @@ export class AuthService {
    * @param data
    */
   public logIn(data: any) {
-    const url = this.settings.apiUrl + this.authUrl;
-
     // If no auth endpoint set up yet, use a get and set the token properties so the rest of the app can work
-    if (!environment.hasAuthEndpoint) {
+    if (!environment.settings.enableAuth) {
       return this.http.get('assets/mock-data/login.json').map((response: any) => {
         this.settings.token = response.data.token;
         this.sessionExpired = false;
@@ -71,6 +66,7 @@ export class AuthService {
         return response;
       });
     }
+    const url = this.settings.apiUrl + environment.endpoints.authLogin; 
     // Auth point is configured
     return this.http.post(url, data).map((response: any) => {
       this.settings.token = response.data.token;

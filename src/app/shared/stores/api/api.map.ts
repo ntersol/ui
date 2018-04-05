@@ -9,7 +9,6 @@ Adding a new endpoints:
 import { AppStore } from '@shared';
 import { ApiActions } from './api.actions';
 import { Models } from '@models';
-// IStore.ApiMap
 
 export const ApiMap: AppStore.ApiMapping = {
   // Example
