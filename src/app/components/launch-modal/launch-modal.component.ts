@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { UIModalService } from '@ui';
+import { UIModalService } from '$ui';
 
 /** Sample Usage:
 <app-launch-modal  classes="btn btn-icon"

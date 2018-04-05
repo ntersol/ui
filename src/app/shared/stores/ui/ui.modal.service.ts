@@ -3,11 +3,11 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { AppStore, AppSettings } from '@shared';
-import { ApiService } from '@api';
+import { AppStore, AppSettings } from '$shared';
+import { ApiService } from '$api';
 import { UIStoreActions } from './ui.store.actions';
 
-import { ConfirmationModalComponent, LogoutModalComponent } from '@modals';
+import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
 
 /** Sample Usage: 
 this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you want to delete this user?', 'Delete User').result.then(

@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { PostMessageService } from './post-message.service';
 import { UIStoreService } from 'src/app/shared/stores/ui';
 
-import { environment } from '@env';
-import { AppSettings } from '@shared';
+import { environment } from '$env';
+import { AppSettings } from '$shared';
 
 export enum MessageActions {
   RESYNC_UI = 'RESYNC_UI',

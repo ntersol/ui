@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router';
-import { HomeComponent, NoContentComponent, LoginComponent, QaComponent } from '@routes';
+import { HomeComponent, NoContentComponent, LoginComponent, QaComponent } from '$routes';
 
-import { LayoutMainComponent } from '@components';
-import { AuthGuard } from '@shared';
-
-import { environment } from '@env';
+import { LayoutMainComponent } from '$components';
+import { AuthGuard } from '$shared';
+import { environment } from '$env';
 
 const titleSlug: string = ' | ' + environment.properties.appName;
 

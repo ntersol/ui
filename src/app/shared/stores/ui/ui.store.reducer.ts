@@ -1,4 +1,4 @@
-import { AppStore } from '@shared';
+import { AppStore } from '$shared';
 import { UIStoreActions } from './ui.store.actions';
 
 // Define initial store state : State.main

@@ -5,8 +5,8 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
-import { environment } from '@env';
-import { AuthService, ServiceWorkerService, AppCommsService } from '@shared';
+import { environment } from '$env';
+import { AuthService, ServiceWorkerService, AppCommsService } from '$shared';
 
 @Component({
   selector: 'app-root',

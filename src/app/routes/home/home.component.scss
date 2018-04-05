@@ -1,9 +1,11 @@
 /*styles for home content only*/
 #app-home {
-
-
-  @media (max-width: 991.98px){
-    .card-header label{margin-bottom:0;}
-    .card-header .form-control{width: 130px;}
+  @media (max-width: 991.98px) {
+    .card-header label {
+      margin-bottom: 0;
+    }
+    .card-header .form-control {
+      width: 130px;
+    }
   }
 }

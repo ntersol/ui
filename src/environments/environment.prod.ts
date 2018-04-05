@@ -4,7 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-
   production: true,
 
   properties: {
@@ -20,8 +19,6 @@ export const environment = {
     enableAppComms: false,
   },
   domains: {
-    /** List of dev domains to check for the isDev property in appSettings */
-    // dev: <string[]>['jerrolkrause.github.io'],
     /** If App Comms is enabled, whitelist domains to accept messages from here */
     listenTo: <string[]>[window.location.origin],
   },
@@ -36,5 +33,5 @@ export const environment = {
   state: {
     /** Which UI store properties to not write to localstorage. IE do not persist confidential/personal information */
     uiStoreBlacklist: <string[]>[],
-  }
+  },
 };

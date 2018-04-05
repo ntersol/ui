@@ -63,14 +63,14 @@
                   (onRowUpdated)="onRowUpdated($event)">
      
           <!-- Custom templates, prop corresponds to column property -->
-          <datagrid-column prop="LNKey">
+          <datagrid-column prop="phone">
             <!-- Header template -->
             <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
-              {{column.name}}
+              <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
             </ng-template>
             <!-- Cell template -->
             <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-              <strong>{{value}}</strong> - {{column.prop}}
+              <a href="tel:{{value | phoneNumber : true}}">{{value | phoneNumber}}</a>
             </ng-template>
           </datagrid-column>
         </datagrid>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService, ServiceWorkerService } from '@shared';
+import { AuthService, ServiceWorkerService } from '$shared';
 
-import { environment } from '@env';
+import { environment } from '$env';
 
 @Component({
   selector: 'app-nav',

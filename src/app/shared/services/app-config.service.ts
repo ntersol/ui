@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { AppSettings } from 'src/app/shared';
-import { environment } from '@env';
+import { environment } from '$env';
 
 interface EnvSettings {
   ApiUrl: string;

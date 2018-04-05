@@ -16,7 +16,6 @@ import { StoreModule } from '@ngrx/store';
 import { DatagridModule } from '@mello-labs/datagrid';
 import { ApiToolsModule, ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
 import { FormToolsModule } from '@mello-labs/form-tools';
-import { UtilitiesModule } from '@mello-labs/utilities';
 
 // Main entrypoint component
 import { AppComponent } from './app.component';
@@ -27,7 +26,7 @@ import { ROUTES } from './app.routes';
 enableProdMode();
 
 // Routes
-import { NoContentComponent, LoginComponent, HomeComponent, QaComponent } from '@routes';
+import { NoContentComponent, LoginComponent, HomeComponent, QaComponent } from '$routes';
 
 // Components
 import {
@@ -40,7 +39,7 @@ import {
   ConfirmationModalComponent,
   LogoutModalComponent,
   LaunchModalComponent,
-} from '@components';
+} from '$components';
 
 // Shared
 import {
@@ -66,13 +65,15 @@ import {
   DebouncePipe,
   StringPipe,
   SortPipe,
+  SafeHtmlPipe,
+  PhoneNumberPipe,
 
   // Directives
   FullScreenDirective,
-} from '@shared';
+} from '$shared';
 
-import { UIModalService, UIStoreService, UIStoreReducer } from '@ui';
-import { ApiService } from '@api';
+import { UIModalService, UIStoreService, UIStoreReducer } from '$ui';
+import { ApiService } from '$api';
 
 // Application wide providers
 export const APP_COMPONENTS = [
@@ -111,8 +112,8 @@ export const APP_PROVIDERS = [
   DatePipe,
   CurrencyPipe,
 
+  // Global exception handler
   {
-    // Global exception handler
     provide: ErrorHandler,
     useClass: GlobalErrorHandler,
   },
@@ -131,6 +132,10 @@ export const APP_PROVIDERS = [
 
     // Directives
     FullScreenDirective,
+
+    SafeHtmlPipe,
+
+    PhoneNumberPipe,
   ],
   imports: [
     // Angular
@@ -148,7 +153,6 @@ export const APP_PROVIDERS = [
     DatagridModule.forRoot(),
     ApiToolsModule.forRoot(),
     FormToolsModule.forRoot(),
-    UtilitiesModule.forRoot(),
   ],
   providers: [
     APP_PROVIDERS,

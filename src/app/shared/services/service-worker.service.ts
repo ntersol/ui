@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { UIModalService } from '@ui';
+import { UIModalService } from '$ui';
 import { environment } from '../../../environments/environment.prod';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
@@ -50,8 +50,10 @@ export class ServiceWorkerService {
       .open(
         'ConfirmationModalComponent',
         false,
-      'lg',
-        `A new version of ${environment.properties.appName} is available, would you like to update to the latest version?`,
+        'lg',
+        `A new version of ${
+          environment.properties.appName
+        } is available, would you like to update to the latest version?`,
       )
       .result.then(
         () => this.sw.activateUpdate(),

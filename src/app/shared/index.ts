@@ -22,6 +22,8 @@ export * from './pipes/filter.pipe';
 export * from './pipes/debounce.pipe';
 export * from './pipes/string.pipe';
 export * from './pipes/sort.pipe';
+export * from './pipes/safe-html.pipe';
+export * from './pipes/phone-number.pipe';
 
 // Store Typings
 export * from './stores/store.d';

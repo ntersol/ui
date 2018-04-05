@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppStore } from '@shared';
+import { AppStore } from '$shared';
 import { UIStoreActions } from './ui.store.actions';
-import { environment } from '@env';
+import { environment } from '$env';
 
 @Injectable()
 export class UIStoreService {

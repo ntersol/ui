@@ -5,10 +5,10 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/interval';
 
-import { environment } from '@env';
+import { environment } from '$env';
 
-import { UIModalService } from '@ui';
-import { ApiService } from '@api';
+import { UIModalService } from '$ui';
+import { ApiService } from '$api';
 import { AppSettings } from '../app.settings';
 
 @Injectable()
@@ -66,7 +66,7 @@ export class AuthService {
         return response;
       });
     }
-    const url = this.settings.apiUrl + environment.endpoints.authLogin; 
+    const url = this.settings.apiUrl + environment.endpoints.authLogin;
     // Auth point is configured
     return this.http.post(url, data).map((response: any) => {
       this.settings.token = response.data.token;

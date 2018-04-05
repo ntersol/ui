@@ -5,11 +5,11 @@ import { Store } from '@ngrx/store';
 import { ApiHttpService, ApiStatusActions } from '@mello-labs/api-tools';
 import 'rxjs/add/observable/throw';
 
-import { AppSettings, AppStore } from '@shared';
+import { AppSettings, AppStore } from '$shared';
 import { ApiMap } from './api.map';
 import { ApiActions } from './api.actions';
 
-import { Models } from '@models';
+import { Models } from '$models';
 
 @Injectable()
 export class ApiService extends ApiHttpService {
