@@ -55,6 +55,16 @@ npm run update
 `package.json`
 - If using github pages, update the `npm run deploy` command in this file to include the correct slug. IE replace `/mello-labs-angular-starter/` with your url
 
+`src > environments > environment.ts` && 
+`src > environments > environment.prod.ts`
+- Localize environment settings and properties in these files. Enable/disable app functionality as needed.
+
+`src > app > shared > app.settings.ts`
+- Add global/change persistant environment variables
+
+`src > index.html`
+- Update any header changes to the html in this file. IE logo, navigation, etc. This is a poor man's app-Shell since ng-bootstrap isn't compatible with SSR
+
 `src > manifest.json`
 - Change the site info in this file to be specific to your app. Make sure the start Url property matches your production URL
 
@@ -64,25 +74,8 @@ npm run update
 `src > ` `apple-touch-icon` + `favicon.ico` + `safari-pinned-tab.svg`
 - Change these icons to ones for your app
 
-`src > environments > environment.ts`
-`src > environments > environment.prod.ts`
-- Localize environment settings and properties in these files. Enable/disable app functionality as needed.
-
-`src > app > shared > app.settings.ts`
-- Add global persistant environment variables
-
-`src > app > shared > auth.service.ts`
-- Set `hasAuthEndpoint` property to true if auth endpoint is available, otherwise leave false for dev
-- Set `authUrl` property to your endpoint location
-
-`src > index.html`
-- Update any header changes to the html in this file. IE logo, navigation, etc. This is a poor man's app-Shell since ng-bootstrap isn't compatible with SSR
-
 `src > ngsw-config.json`
 - Update any dependencies needed for the service worker. Use asset groups for site resources, use dataGroups for API calls
-
-`src > shared > guards > auth-guard`
-- When out of alpha/prototype phase, remove `(this.settings.isDev) ||`
 
 
 ## Useful Tools
