@@ -9,7 +9,7 @@ import { UIStoreActions } from './ui.store.actions';
 
 import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
 
-/** Sample Usage: 
+/** Sample Usage:
 this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you want to delete this user?', 'Delete User').result.then(
 	() => console.log('Modal Closed'),
 	() => console.log('Modal Dismissed'));

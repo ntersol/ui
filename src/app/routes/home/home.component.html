@@ -70,7 +70,7 @@
             </ng-template>
             <!-- Cell template -->
             <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-              <a href="tel:{{value | phoneNumber : true}}">{{value | phoneNumber}}</a>
+              <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
             </ng-template>
           </datagrid-column>
         </datagrid>

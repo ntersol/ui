@@ -24,7 +24,6 @@ export class ServiceWorkerService {
     if (this.sw.isEnabled) {
       // On initial load, check if service worker is available first
       this.sw.available.subscribe(() => {
-        //console.log('Update available');
         this.updateAvailable$.next(true);
         window.clearInterval(this.counter);
         if (!this.modalPopped) {
@@ -37,7 +36,6 @@ export class ServiceWorkerService {
       this.zone.runOutsideAngular(() => {
         this.counter = window.setInterval(() => {
           this.zone.run(() => {
-            //console.log("Checking for new version of the app 7");
             this.sw.checkForUpdate();
           });
         }, this.checkInterval * 1000 * 60);

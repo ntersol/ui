@@ -8,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class StringPipe implements PipeTransform {
   transform(value: any): any {
     // Is object
-    if (!Array.isArray(value) && typeof value == 'object') {
+    if (!Array.isArray(value) && typeof value === 'object') {
       return JSON.stringify(value);
     } else {
       // Everything else

@@ -11,7 +11,6 @@ export enum AppSettingsProps {
 // Getter/setters for app settings. Will read/write to app settings and on app load will try to reload from localstorage/sessionstorage
 @Injectable()
 export class AppSettings {
-  
   /** API token for EPS */
   private _token: string | null = null;
   /** API token for EPS */

@@ -70,7 +70,6 @@ export class GlobalErrorHandler implements ErrorHandler {
 
   /**
    * Log the error to an API
-   
   private logError(errorMsg: string) {
     const http = new XMLHttpRequest();
     const params = 'NEEDKEY=' + errorMsg;
