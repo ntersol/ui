@@ -1,17 +1,17 @@
 export const columns = [
   {
-    prop: 'username',
-    label: 'Username',
+    prop: 'name',
+    label: 'Name',
     columnType: 'string',
-    width: 70,
     canSort: true,
     canGroup: true,
     canFilter: true,
   },
   {
-    prop: 'name',
-    label: 'Name',
+    prop: 'username',
+    label: 'Username',
     columnType: 'string',
+    width: 70,
     canSort: true,
     canGroup: true,
     canFilter: true,

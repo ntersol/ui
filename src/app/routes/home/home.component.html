@@ -1,4 +1,4 @@
-<div id="home" class="container-fluid" *ngIf="{ state: usersState$ | async, users: users$ | async } as routeData">
+<div id="app-home" class="container-fluid" *ngIf="{ state: usersState$ | async, users: users$ | async } as routeData">
 
   <div class="card mb-3">
     <div class="card-header p-2">
@@ -41,7 +41,7 @@
       <form class="form-inline mr-3 d-inline-block">
         <label class="icon filter" style="position:relative;">
           <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter name or website" [ngModel]="filterGlobal.term" (ngModelChange)="onfilterGlobal($event)" data-qa="hp-filter-global" />
-          <a (click)="filterGlobal.term = null; onfilterGlobal()" *ngIf="filterGlobal.term" style="position:absolute;right: 10px;"><i class="fa fa-remove"></i></a>
+          <a (click)="filterGlobal.term = null; onfilterGlobal()" *ngIf="filterGlobal.term" style="position:absolute;right: 10px;top: 4px;"><i class="fa fa-remove"></i></a>
         </label>
       </form>
     </div>
