@@ -14,7 +14,7 @@ export const environment = {
   /** Is authentication available. If not use workaround for initial login */
   hasAuthEndpoint: false,
   /** List of local dev domains. Used for working locally when backend is not yet available */
-  devDomains: <string[]>['localhost:4200', '127.0.0.1:8080', 'jerrolkrause.github.io'],
+  devDomains: <string[]>['localhost:4200', '127.0.0.1:8080', 'localhost:49152', 'jerrolkrause.github.io'],
   /** Location to get environment variables */
   envSettingsUrl: 'assets/mock-data/env-settings.json',
   /** Which UI store properties to not write to localstorage */
