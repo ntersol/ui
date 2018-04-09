@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.routeChange();
     if (environment.settings.enableServiceWorker) {
-      this.sw.pollForUpdates();
+      this.sw.enable();
     }
     if (environment.settings.enableAppComms) {
       this.comms.commsEnable();

@@ -24,7 +24,8 @@ export class AppConfigService {
   public appSettingsUpdate(settings: Models.EnvSettings) {
     // Loop through all env properties passed by web api
     Object.keys(settings).forEach(key => {
-      // Check to make sure this prop has been declared in app.settings
+      // Check to make sure this prop has been declared in app.settings and is not undefined
+      // If defined, updated prop value
       // If not throw error
       let currentVal = (<Settings>this.settings)[_.camelCase(key)];
       if (currentVal !== undefined) {

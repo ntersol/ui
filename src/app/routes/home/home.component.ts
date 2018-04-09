@@ -106,8 +106,8 @@ export class HomeComponent implements OnInit, OnDestroy {
    * When the state has been changed (grouping/filtering/sorting/etc)
    * @param event
    */
-  public onStateChange(state: Datagrid.State) {
-    console.log('onStateChange', JSON.stringify(state));
+  public onStateChange( /** state: Datagrid.State */) {
+    // console.log('onStateChange', JSON.stringify(state));
   }
 
   /**
@@ -126,8 +126,8 @@ export class HomeComponent implements OnInit, OnDestroy {
    * When a row has been edited
    * @param event
    */
-  public onRowUpdated(users: Models.User[]) {
-    console.log('onRowUpdated', users);
+  public onRowUpdated(/** users: Models.User[] */) {
+    // console.log('onRowUpdated', users);
   }
 
   /**
