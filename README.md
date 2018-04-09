@@ -60,7 +60,7 @@ npm run update
 - Localize environment settings and properties in these files. Enable/disable app functionality as needed.
 
 `src > app > shared > app.settings.ts`
-- Add/change app & environment variables
+- Add/change global app & environment variables
 
 `src > index.html`
 - Update any header changes to the html in this file. IE logo, navigation, etc. This is a poor man's app-Shell since ng-bootstrap isn't compatible with SSR
