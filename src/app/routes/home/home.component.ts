@@ -106,7 +106,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * When the state has been changed (grouping/filtering/sorting/etc)
    * @param event
    */
-  public onStateChange( /** state: Datagrid.State */) {
+  public onStateChange(/** state: Datagrid.State */) {
     // console.log('onStateChange', JSON.stringify(state));
   }
 

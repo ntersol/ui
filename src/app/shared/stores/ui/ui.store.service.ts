@@ -36,7 +36,7 @@ export class UIStoreService {
   /**  Reload the latest UI state from localstorage */
   public storeStateRestore = (uiState: any) => {
     this.store.dispatch({ type: UIStoreActions.REHYDRATE, payload: uiState });
-  }
+  };
 
   /**
    * Save the UI store state to localstorage for persistance
