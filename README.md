@@ -55,12 +55,12 @@ npm run update
 `package.json`
 - If using github pages, update the `npm run deploy` command in this file to include the correct slug. IE replace `/mello-labs-angular-starter/` with your url
 
-`src > environments > environment.ts` && 
+`src > environments > environment.ts` +
 `src > environments > environment.prod.ts`
 - Localize environment settings and properties in these files. Enable/disable app functionality as needed.
 
 `src > app > shared > app.settings.ts`
-- Add global/change persistant environment variables
+- Add/change app & environment variables
 
 `src > index.html`
 - Update any header changes to the html in this file. IE logo, navigation, etc. This is a poor man's app-Shell since ng-bootstrap isn't compatible with SSR

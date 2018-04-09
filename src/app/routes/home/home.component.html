@@ -9,17 +9,17 @@
             <i class="fa fa-user mr-1"></i>
             Add/Edit User
           </button>
-          <div ngbDropdownMenu style="width: 500px;" class="p-3" (click)="$event.stopPropagation();">
+          <div ngbDropdownMenu id="dropdownUser" style="min-width:320px;" class="p-3" (click)="$event.stopPropagation();">
             <a class="float-right" (click)="userStopEdit()" *ngIf="isEditing"><i class="fa fa-user-plus" aria-hidden="true"></i> Add New User</a>
             <h2 *ngIf="!isEditing"> <i class="fa fa-user-plus" aria-hidden="true"></i> Add User</h2>
             <h2 *ngIf="isEditing"><i class="fa fa-user" aria-hidden="true"></i> Updating User</h2>
             <hr/>
             <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
-              <app-field-component [frmGroup]="formMain" frmControl="username" label="Username" [labelColumns]="4"></app-field-component>
-              <app-field-component [frmGroup]="formMain" frmControl="name" label="Name" [labelColumns]="4"></app-field-component>
-              <app-field-component [frmGroup]="formMain" frmControl="website" label="Website" [labelColumns]="4"></app-field-component>
-              <app-field-component [frmGroup]="formMain" frmControl="email" label="Email" [labelColumns]="4"></app-field-component>
-              <app-field-component [frmGroup]="formMain" frmControl="phone" label="Phone" [labelColumns]="4"></app-field-component>
+              <app-field-component [frmGroup]="formMain" frmControl="username" label="Username" [labelColumns]="5"></app-field-component>
+              <app-field-component [frmGroup]="formMain" frmControl="name" label="Name" [labelColumns]="5"></app-field-component>
+              <app-field-component [frmGroup]="formMain" frmControl="website" label="Website" [labelColumns]="5"></app-field-component>
+              <app-field-component [frmGroup]="formMain" frmControl="email" label="Email" [labelColumns]="5"></app-field-component>
+              <app-field-component [frmGroup]="formMain" frmControl="phone" label="Phone" [labelColumns]="5"></app-field-component>
               <button type="submit" class="btn btn-interact float-right" [disabled]="routeData.state.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : routeData.state.modifying }">
                 <ng-container *ngIf="!isEditing">
                   <i class="fa fa-user-plus" aria-hidden="true"></i> Add User

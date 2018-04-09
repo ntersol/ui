@@ -1,11 +1,13 @@
 /*styles for home content only*/
 #app-home {
+  #dropdownUser{}
   @media (max-width: 991.98px) {
     .card-header label {
       margin-bottom: 0;
     }
-    .card-header .form-control {
+    .card-header .form-inline .form-control {
       width: 130px;
     }
   }
+  
 }
