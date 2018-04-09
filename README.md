@@ -75,7 +75,7 @@ npm run update
 - Change these icons to ones for your app
 
 `src > ngsw-config.json`
-- Update any dependencies needed for the service worker. Use asset groups for site resources, use dataGroups for API calls
+- Update any dependencies needed for the service worker. Use asset groups for site resources & use dataGroups for API calls
 
 
 ## Useful Tools
