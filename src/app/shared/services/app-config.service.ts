@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as _ from 'lodash';
 
 import { AppSettings } from 'src/app/shared';
 import { environment } from '$env';
+import { Models } from '$models';
 
-interface EnvSettings {
-  ApiUrl: string;
-  ApiNamespace: string;
-  SignalRUrl: string;
+interface Settings {
+  [key: string]: any;
 }
 
+/**
+ * Manages receiving and setting initial environment settings
+ */
 @Injectable()
 export class AppConfigService {
   constructor(private settings: AppSettings, private http: HttpClient) {}
@@ -18,8 +21,18 @@ export class AppConfigService {
    * Set all env settings in app settings
    * @param settings
    */
-  public appSettingsUpdate(settings: EnvSettings) {
-    this.settings.apiUrl = settings.ApiUrl;
+  public appSettingsUpdate(settings: Models.EnvSettings) {
+    // Loop through all env properties passed by web api
+    Object.keys(settings).forEach(key => {
+      // Check to make sure this prop has been declared in app.settings
+      // If not throw error
+      let currentVal = (<Settings>this.settings)[_.camelCase(key)];
+      if (currentVal !== undefined) {
+        currentVal = (<Settings>settings)[key];
+      } else {
+        console.error(_.camelCase(key), `is not present in app settings`);
+      }
+    });
   }
 
   /**

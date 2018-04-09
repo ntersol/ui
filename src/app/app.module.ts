@@ -72,7 +72,10 @@ import {
   FullScreenDirective,
 } from '$shared';
 
+// UI Store
 import { UIModalService, UIStoreService, UIStoreReducer } from '$ui';
+
+// API Store
 import { ApiService } from '$api';
 
 // Application wide providers

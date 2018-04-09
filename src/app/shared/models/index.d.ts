@@ -15,6 +15,14 @@
  */
 
 export declare namespace Models {
+
+  /** Initial environment settings received from web api*/
+  interface EnvSettings {
+    ApiUrl: string;
+    ApiNamespace: string;
+    SignalRUrl: string;
+  }
+
   export interface User {
     id?: number;
     name?: string;
