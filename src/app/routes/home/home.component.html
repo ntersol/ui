@@ -4,8 +4,16 @@
     <div class="card-header p-2">
 
       <div class="float-right">
-        <div ngbDropdown placement="bottom-right" #myDrop="ngbDropdown">
-          <button  ngbDropdownToggle class="btn btn-sm btn-primary">
+
+        <button class="btn btn-sm btn-secondary mr-1 d-inline-block"
+                title="Toggle multi-screen view"
+                [ngClass]="{ 'enabled' : ui.selectors.multiScreen$ | async }"
+                (click)="ui.multiScreenToggle()">
+          <i aria-hidden="true" class="fa fa-external-link-square"></i>
+        </button>
+
+        <div ngbDropdown placement="bottom-right" #myDrop="ngbDropdown" class="d-inline-block">
+          <button ngbDropdownToggle class="btn btn-sm btn-primary">
             <i class="fa fa-user mr-1"></i>
             Add/Edit User
           </button>
@@ -13,7 +21,7 @@
             <a class="float-right" (click)="userStopEdit()" *ngIf="isEditing"><i class="fa fa-user-plus" aria-hidden="true"></i> Add New User</a>
             <h2 *ngIf="!isEditing"> <i class="fa fa-user-plus" aria-hidden="true"></i> Add User</h2>
             <h2 *ngIf="isEditing"><i class="fa fa-user" aria-hidden="true"></i> Updating User</h2>
-            <hr/>
+            <hr />
             <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
               <app-field-component [frmGroup]="formMain" frmControl="username" label="Username" [labelColumns]="5"></app-field-component>
               <app-field-component [frmGroup]="formMain" frmControl="name" label="Name" [labelColumns]="5"></app-field-component>
@@ -55,7 +63,7 @@
         <datagrid #datagrid *ngIf="routeData?.users?.src?.length"
                   [rows]="routeData.users.src"
                   [columns]="columns"
-                  [state]="state"
+                  [state]="{}"
                   [options]="options"
                   [filterGlobal]="filterGlobal"
                   (onStateChange)="onStateChange($event)"

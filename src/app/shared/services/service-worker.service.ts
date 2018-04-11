@@ -13,13 +13,13 @@ export class ServiceWorkerService {
   /** Holds set interval */
   private counter: any;
   /** Check for update this many minutes */
-  private checkInterval = .05; //
+  private checkInterval = 1; //
   /** Has the modal been popped already? */
   private modalPopped = false;
   /** Hold SW sub */
   private sub: Subscription;
 
-  constructor(private sw: SwUpdate, private modals: UIModalService, private zone: NgZone) { }
+  constructor(private sw: SwUpdate, private modals: UIModalService, private zone: NgZone) {}
 
   /**
    * Enable service worker functionality which includes polling for updates
@@ -65,28 +65,27 @@ export class ServiceWorkerService {
     });
   }
 
-
   /**
    * Open the modal asking the user to update
    */
   public openModal() {
     this.modals
       .open(
-      'ConfirmationModalComponent',
-      false,
-      'lg',
-      `A new version of ${
-      environment.properties.appName
-      } is available, would you like to update to the latest version?`,
-    )
+        'ConfirmationModalComponent',
+        false,
+        'lg',
+        `A new version of ${
+          environment.properties.appName
+        } is available, would you like to update to the latest version?`,
+      )
       .result.then(
-      () => {
-        this.sw.activateUpdate();
-        this.updateAvailable$.next(false);
-        this.pollForUpdates();
-        this.modalPopped = false;
-      },
-      () => console.warn('User is on an outdated version of the application'),
-    );
+        () => {
+          this.sw.activateUpdate();
+          this.updateAvailable$.next(false);
+          this.pollForUpdates();
+          this.modalPopped = false;
+        },
+        () => console.warn('User is on an outdated version of the application'),
+      );
   }
 }

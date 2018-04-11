@@ -16,8 +16,8 @@ export const environment = {
     /** Enable service worker functionality */
     enableServiceWorker: false,
     /** Is this app going to communicate with other domains or instances of itself for multiscreen usage?
-    * If so, whitelist domains in the domains.listenTo property */
-    enableAppComms: false,
+     * If so, whitelist domains in the domains.listenTo property */
+    enableAppComms: true,
   },
   domains: {
     /** If App Comms is enabled, whitelist domains to accept messages from here */

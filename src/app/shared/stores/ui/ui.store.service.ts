@@ -8,7 +8,8 @@ import { environment } from '$env';
 export class UIStoreService {
   /** Collection of UI store selectors. Can be moved to own service if this gets too big */
   public selectors = {
-    uiState$: this.store.select(store => store.ui),
+    // uiState$: this.store.select(store => store.ui),
+    saveState$: this.store.select(store => store.ui.saveState),
     modal$: this.store.select(store => store.ui.modal),
     multiScreen$: this.store.select(store => store.ui.multiScreen),
   };
@@ -23,7 +24,7 @@ export class UIStoreService {
     }
 
     // On UI store changes, persist to localstorage
-    this.selectors.uiState$.subscribe(uiState => this.storeStateSave(uiState));
+    this.selectors.saveState$.subscribe(uiState => this.storeStateSave(uiState));
   }
 
   /**
@@ -43,14 +44,14 @@ export class UIStoreService {
    * @param state
    */
   private storeStateSave(state: AppStore.Ui) {
-    /** Which properties of the store properties to NOT persist or save to local storage */
-    const stateNew: any = { ...state };
-    // Delete any keys that should not be persisted
-    for (const key in stateNew) {
-      if (stateNew.hasOwnProperty(key) && environment.state.uiStoreBlacklist.indexOf(key) !== -1 && stateNew[key]) {
-        delete stateNew[key];
+    if (state) {
+      // Delete any keys that should not be persisted
+      for (const key in state) {
+        if (state.hasOwnProperty(key) && environment.state.uiStoreBlacklist.indexOf(key) !== -1 && (<any>state)[key]) {
+          delete (<any>state)[key];
+        }
       }
+      window.localStorage.setItem('ui', JSON.stringify(state));
     }
-    window.localStorage.setItem('ui', JSON.stringify(stateNew));
   }
 }

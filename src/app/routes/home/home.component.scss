@@ -1,6 +1,7 @@
 /*styles for home content only*/
 #app-home {
-  #dropdownUser{}
+  #dropdownUser {
+  }
   @media (max-width: 991.98px) {
     .card-header label {
       margin-bottom: 0;
@@ -9,5 +10,4 @@
       width: 130px;
     }
   }
-  
 }

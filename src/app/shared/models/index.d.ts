@@ -15,7 +15,6 @@
  */
 
 export declare namespace Models {
-
   /** Initial environment settings received from web api*/
   interface EnvSettings {
     ApiUrl: string;
