@@ -24,11 +24,13 @@ export declare namespace AppStore {
 
   /** UI Store */
   interface Ui {
-    modal?: {
+    /** A static snapshot of the UI store, used mainly for multiscreen usage */
+    saveState: Ui | null;
+    modal: {
       modalId: string;
       options: {};
       data: any;
-    };
+    } | null;
     multiScreen: boolean;
   }
 

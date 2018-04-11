@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     primaryKey: 'id',
   };
 
-  public state: Datagrid.State = {};
+  // public state: Datagrid.State = {};
   public columns: Datagrid.Column[] = columns;
 
   /** Hold subs for unsub */

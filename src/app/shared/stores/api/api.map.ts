@@ -18,6 +18,15 @@ export const ApiMap: AppStore.ApiMapping = {
     uniqueId: 'id',
     mapSrc: 'src',
     map: (users: Models.User[]) => {
+      // Add some extra users to verify virtual scroll
+      users = [...users, ...users, ...users, ...users, ...users, ...users, ...users, ...users, ...users, ...users, ];
+      // Update instances and ID
+      users = users.map((user, i) => {
+        return {
+          ...user,
+        id: i
+        };
+      });
       // Sample dictionary mapping based on id property
       const dict: { [key: string]: Models.User } = {};
       users.forEach(user => (dict[user.id] = user));
