@@ -1,3 +1,5 @@
+import { Models } from '$models';
+
 export declare namespace AppStore {
   /*************************
    * App specific interfaces
@@ -7,19 +9,12 @@ export declare namespace AppStore {
   interface Api {
     //users?: any[]; // Store response
     // Example of Store typing with mapped response
-    users?: Mapped<{
-      user: string;
-      email: string;
-      name: string;
-      phone: string;
-      username: string;
-      website: string;
-    }>;
+    users: Models.User[] | null;
   }
 
   /** The API Map */
   export interface ApiMapping {
-    users?: ApiMap;
+    users: ApiMap;
   }
 
   /** UI Store */
@@ -40,9 +35,9 @@ export declare namespace AppStore {
 
   /** The root store which contains the other stores */
   interface Root {
-    api?: Api;
-    ui?: Ui;
-    apiStatus?: ApiStatuses;
+    api: Api;
+    ui: Ui;
+    apiStatus: ApiStatuses;
   }
 
   /** API status store */
@@ -53,7 +48,7 @@ export declare namespace AppStore {
   /** Example pattern for data that is mapped before being passed into the store */
   interface Mapped<T> {
     /** Unaltered source of API response */
-    src?: T[];
+    src: T[];
     /** A dictionary organized by the primary key */
     dict?: { [key: string]: T };
     /** A deduped array arranged into a dictionary by primary key */
@@ -62,27 +57,27 @@ export declare namespace AppStore {
 
   interface StateStatuses {
     // Example
-    users?: ApiStatus;
+    users: ApiStatus | null;
   }
 
   interface ApiStatus {
-    loading?: boolean;
-    loaded?: boolean;
-    loadError?: any;
+    loading: boolean;
+    loaded: boolean;
+    loadError: any;
 
-    modifying?: boolean;
-    modified?: boolean;
-    modifyError?: any;
+    modifying: boolean;
+    modified: boolean;
+    modifyError: any;
   }
 
   /** Maps the relationship between the store and the API. Automates all the interaction. */
   export interface ApiMap {
     /** The location of the rest API endpoint */
-    endpoint?: string;
+    endpoint: string;
     /** The location/property of where to put the API response into the store */
-    storeProperty?: string;
+    storeProperty: string;
     /** A unique ID of each object in the collection. Also supports an array of strings if multiple unique ID's are needed in the event of a single key not being enough. */
-    uniqueId?: string | string[];
+    uniqueId: string | string[];
     /** A callback function to modify the API response before it is inserted into the store */
     map?: any;
     /** If a map callback function is specified, this is the key for the location of the original unfiltered list of items. This is necessary to update the mapped list in the store without a GET all */

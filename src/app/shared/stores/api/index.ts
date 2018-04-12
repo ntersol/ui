@@ -1,3 +1,4 @@
 export * from './api.map';
 export * from './api.actions';
-export * from './api.service';
+export * from './api.store.service';
+export * from './api.selectors.service';

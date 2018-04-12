@@ -7,7 +7,7 @@
 
         <button class="btn btn-sm btn-secondary mr-1 d-inline-block"
                 title="Toggle multi-screen view"
-                [ngClass]="{ 'enabled' : ui.selectors.multiScreen$ | async }"
+                [ngClass]="{ 'enabled' : ui.select.multiScreen$ | async }"
                 (click)="ui.multiScreenToggle()">
           <i aria-hidden="true" class="fa fa-external-link-square"></i>
         </button>
@@ -59,9 +59,9 @@
     <api-state [state]="routeData?.state" [toaster]="true" [showSuccess]="false" *ngIf="routeData?.state">
 
       <div style="position:relative;height:calc(100vh - 165px)">
-        <div class="alert alert-warning icon" *ngIf="!routeData?.users?.src?.length">No users found</div>
-        <datagrid #datagrid *ngIf="routeData?.users?.src?.length"
-                  [rows]="routeData.users.src"
+        <div class="alert alert-warning icon" *ngIf="!routeData?.users?.length">No users found</div>
+        <datagrid #datagrid *ngIf="routeData?.users?.length"
+                  [rows]="routeData.users"
                   [columns]="columns"
                   [state]="{}"
                   [options]="options"

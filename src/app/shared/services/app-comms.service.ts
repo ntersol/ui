@@ -27,7 +27,7 @@ export class AppCommsService {
   public commsEnable() {
     this.subs = [
       // Watch UI Store changes and fire the resync UI method to update store state in all instances
-      this.ui.selectors.saveState$.subscribe(() => this.resyncUI()),
+      this.ui.select.saveState$.subscribe(() => this.resyncUI()),
       // Listen for any interapp communication set by the listenTo env settings
       this.messaging.listenForMessages(environment.domains.listenTo).subscribe(message => {
         switch (message.event) {
@@ -87,7 +87,7 @@ export class AppCommsService {
     // Get current path
     const slug = window.location.origin + window.location.pathname;
     this.subs.push(
-      this.ui.selectors.multiScreen$.subscribe(multiScreen => {
+      this.ui.select.multiScreen$.subscribe(multiScreen => {
         // If multiscreen is present and a window is not yet open and has not been closed
         if (multiScreen && !this.ui.screen && !window.opener) {
           setTimeout(() => {
