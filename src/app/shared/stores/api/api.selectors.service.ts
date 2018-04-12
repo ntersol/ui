@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store, createSelector } from '@ngrx/store';
+import * as _ from 'lodash';
 
 import { Models } from '$models';
 import { AppStore } from '$shared';
@@ -12,23 +13,17 @@ const usersDuped = createSelector(
   usersSrc,
   (users2) => {
     if (users2) {
-      return [...users2, ...users2, ...users2, ...users2, ...users2, ...users2, ...users2, ...users2]
-        .map((user, i) => {
-        return {
-          ...user,
-          id: i
-        };
-      });
+      let users2New: Models.User[] = [];
+      _.times(20, () => users2New = [...users2New, ...users2]);
+      return users2New.map((user, i) => Object.assign({}, user, { id: i }));
     }
   });
 // Map users down to a dictionary based on ID
 const usersMapped = createSelector(
-  usersSrc,
+  usersDuped,
   (users2) => {
     if (users2) {
-      const dict: { [key: string]: Models.User } = {};
-      users2.forEach(user => (dict[user.id] = user));
-      return dict;
+      return _.keyBy(users2, 'id');
     }
   });
 
@@ -46,6 +41,7 @@ export class ApiSelectorsService {
 
   constructor(
     private store: Store<AppStore.Root>,
-  ) { }
+  ) {
+  }
 
 }
