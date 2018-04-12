@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppStore } from '$shared';
-import { UIStoreActions } from './ui.store.actions';
+
 import { environment } from '$env';
+import { AppStore } from '$shared';
+import { UIStoreActions } from './ui.actions';
+import { UiSelectorsService } from './ui.selectors.service';
 
 @Injectable()
 export class UIStoreService {
-  /** Collection of UI store selectors. Can be moved to own service if this gets too big */
-  public selectors = {
-    // uiState$: this.store.select(store => store.ui),
-    saveState$: this.store.select(store => store.ui.saveState),
-    modal$: this.store.select(store => store.ui.modal),
-    multiScreen$: this.store.select(store => store.ui.multiScreen),
-  };
 
   /** Holds the reference to a window opened programmatically. Used by appComms for multiscreen state */
   public screen: Window;
 
-  constructor(private store: Store<AppStore.Root>) {
-    // Rehydrate UI state from localstorage
+  constructor(
+    private store: Store<AppStore.Root>,
+    /** UI Store Selectors */
+    public select: UiSelectorsService) {
+
+    // Rehydrate UI state from localstorage on instantiation
     if (window.localStorage.getItem('ui')) {
       this.storeStateRestore(JSON.parse(window.localStorage.getItem('ui')));
     }
 
     // On UI store changes, persist to localstorage
-    this.selectors.saveState$.subscribe(uiState => this.storeStateSave(uiState));
+    this.select.saveState$.subscribe(uiState => this.storeStateSave(uiState));
   }
 
   /**

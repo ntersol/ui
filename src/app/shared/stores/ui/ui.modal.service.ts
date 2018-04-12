@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { AppStore, AppSettings } from '$shared';
 import { ApiService } from '$api';
-import { UIStoreActions } from './ui.store.actions';
+import { UIStoreActions } from './ui.actions';
 
 import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
 

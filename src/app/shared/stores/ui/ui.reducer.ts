@@ -1,5 +1,5 @@
 import { AppStore } from '$shared';
-import { UIStoreActions } from './ui.store.actions';
+import { UIStoreActions } from './ui.actions';
 
 // Define initial store state : State.main
 const initialState: AppStore.Ui = {

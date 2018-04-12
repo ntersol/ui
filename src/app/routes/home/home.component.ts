@@ -17,8 +17,9 @@ import { columns } from './columns';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  public users$ = this.api.selectors.users$;
-  public usersState$ = this.api.getState$(ApiActions.users);
+
+  public users$ = this.api.select.users$;
+  public usersState$ = this.api.select.getState$(ApiActions.users);
   public formMain: FormGroup;
   public isEditing: boolean;
 

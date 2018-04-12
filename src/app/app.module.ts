@@ -73,12 +73,12 @@ import {
 } from '$shared';
 
 // UI Store
-import { UIModalService, UIStoreService, UIStoreReducer } from '$ui';
+import { UIModalService, UIStoreService, UIStoreReducer, UiSelectorsService } from '$ui';
 
 // API Store
-import { ApiService } from '$api';
+import { ApiService, ApiSelectorsService } from '$api';
 
-// Application wide providers
+// Components
 export const APP_COMPONENTS = [
   NoContentComponent,
   LoginComponent,
@@ -99,17 +99,23 @@ export const APP_COMPONENTS = [
 
 // Application wide providers
 export const APP_PROVIDERS = [
-  HttpInterceptorService,
-  AuthService,
-  ApiService,
   AppSettings,
+
+  ApiService,
+  ApiSelectorsService,
+
   UIModalService,
   UIStoreService,
+  UiSelectorsService,
   AuthGuard,
+
+  AuthService,
   ServiceWorkerService,
   PostMessageService,
   AppConfigService,
   AppCommsService,
+
+  HttpInterceptorService,
 
   // Angular Pipes
   DatePipe,
@@ -159,6 +165,7 @@ export const APP_PROVIDERS = [
   ],
   providers: [
     APP_PROVIDERS,
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
