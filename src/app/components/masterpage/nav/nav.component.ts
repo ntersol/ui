@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService, ServiceWorkerService } from '$shared';
+import { AuthService, ServiceWorkerService, AppSettings } from '$shared';
+import * as _ from 'lodash';
 
 import { environment } from '$env';
 
@@ -10,13 +11,14 @@ import { environment } from '$env';
 export class NavComponent {
   /** Is the dropdown menu open on mobile */
   public isOpen = false;
-
-  // Is the service worker enabled
+  /** Turn the username into title case */
+  public userName = _.startCase(_.toLower(this.settings.userName));
+  /**  Is the service worker enabled */
   public hasSW = environment.settings.enableServiceWorker;
-  // Does the app have an update
+  /**   Does the app have an update */
   public hasUpdate$ = this.sw.updateAvailable$;
 
-  constructor(private auth: AuthService, private sw: ServiceWorkerService) {}
+  constructor(private auth: AuthService, private sw: ServiceWorkerService, private settings: AppSettings) {}
 
   public updateApp() {
     this.sw.openModal();
