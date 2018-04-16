@@ -15,7 +15,7 @@ const usersDuped = createSelector(
     if (users2) {
       let users2New: Models.User[] = [];
       _.times(20, () => users2New = [...users2New, ...users2]);
-      return users2New.map((user, i) => Object.assign({}, user, { id: i }));
+      return users2New.map((user, i) => Object.assign({}, user, { id: i, new: _.random(0,10) >3 ? true : false }));
     }
   });
 // Map users down to a dictionary based on ID

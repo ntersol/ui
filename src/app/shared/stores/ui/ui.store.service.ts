@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 import { environment } from '$env';
 import { AppStore } from '$shared';
@@ -24,6 +25,17 @@ export class UIStoreService {
 
     // On UI store changes, persist to localstorage
     this.select.saveState$.subscribe(uiState => this.storeStateSave(uiState));
+  }
+
+  /**
+   * Change the visible tab of a tabset
+   * USAGE: <ngb-tabset (tabChange)="ui.tabChange('HOME',$event)" [activeId]="ui.select.tabActive$('HOME') | async">
+   * Make sure all tabs have an id: <ngb-tab id="tab-1">
+   * @param tabInstanceId - A name or unique identifier for this tab instance
+   * @param tabId - The tabChange event supplied by ng-boostrap
+   */
+  public tabChange(tabInstanceId: string, tabId: NgbTabChangeEvent) {
+    this.store.dispatch({ type: UIStoreActions.TAB_CHANGE, payload: { tabInstanceId: tabInstanceId, tabId: tabId.nextId } });
   }
 
   /**
