@@ -1,10 +1,10 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, enableProdMode, APP_INITIALIZER } from '@angular/core';
-
+import { RouterModule, PreloadAllModules } from '@angular/router';
 // Main entrypoint component
 import { AppComponent } from './app.component';
-
+import { ROUTES } from './app.routes';
 // Enables faster prod mode, does disable some dirty error checking though
 enableProdMode();
 
@@ -39,6 +39,8 @@ export const APP_COMPONENTS = [
   declarations: [APP_COMPONENTS],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+
     // Shared Modules
     SharedModule.forRoot(),
     ComponentsModule.forRoot(),

@@ -1,6 +1,5 @@
 import { NgModule, ModuleWithProviders, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, PreloadAllModules } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,11 +13,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Bootstrap
 import { StoreModule } from '@ngrx/store';
 
 // Mello Labs Tools
-// import { DatagridModule } from '@mello-labs/datagrid';
 import { ApiToolsModule, ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
 import { FormToolsModule } from '@mello-labs/form-tools';
 
-import { ROUTES } from '../app.routes';
+// import { ROUTES } from '../app.routes';
 
 // UI Store
 import { UIModalService, UIStoreService, UiSelectorsService, UIStoreReducer } from '$ui'; // , UIStoreReducer
@@ -105,7 +103,6 @@ export const APP_EXPORTS = [
     ReactiveFormsModule,
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
 
     // Vendor
     NgbModule.forRoot(),
@@ -116,16 +113,7 @@ export const APP_EXPORTS = [
   ],
   providers: [APP_PROVIDERS],
   declarations: [APP_EXPORTS],
-  exports: [
-    APP_EXPORTS,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    // DatagridModule,
-    ApiToolsModule,
-    FormToolsModule,
-  ],
+  exports: [APP_EXPORTS, FormsModule, ReactiveFormsModule, NgbModule, ApiToolsModule, FormToolsModule],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

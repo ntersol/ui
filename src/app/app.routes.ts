@@ -1,16 +1,27 @@
 import { Routes } from '@angular/router';
-import { HomeComponent, NoContentComponent, LoginComponent, QaComponent } from '$routes';
+import { NoContentComponent, LoginComponent, QaComponent } from '$routes'; // HomeComponent,
 
 import { LayoutMainComponent } from '$components';
 import { AuthGuard } from '$shared';
 import { environment } from '$env';
 
-const titleSlug: string = ' | ' + environment.properties.appName;
-
 export const ROUTES: Routes = [
   // Routes without masterpage or that do not need to be authenticated need to go first
-  { path: 'login', component: LoginComponent, data: { title: 'Please Log In' + titleSlug } },
-  // { path: 'loan/:LNKey', component: HomeComponent, data: { title: 'Dashboard' + titleSlug }, canActivate: [AuthGuard], },
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: { title: 'Please Log In' + ' | ' + environment.properties.appName },
+  },
+  // Example route param
+  // {
+  //  path: 'loan/:LNKey',
+  //  component: HomeComponent,
+  //  data: { title: 'Dashboard' + ' | ' + environment.properties.appName },
+  //  canActivate: [AuthGuard],
+  // },
+
+  // Homepage lazy load implementation.
+  { path: '', loadChildren: './routes/home/home.module#HomeModule' },
 
   // Routes that use masterpage go here
   // canActivate with AuthGuard determines if this is an authenticated only route
@@ -18,12 +29,24 @@ export const ROUTES: Routes = [
     path: '',
     component: LayoutMainComponent,
     children: [
-      { path: '', component: HomeComponent, data: { title: 'Dashboard' + titleSlug }, canActivate: [AuthGuard] },
-      { path: 'qa', component: QaComponent, data: { title: 'E2E Testing' + titleSlug }, canActivate: [AuthGuard] },
+      // Homepage non-lazy load implementation. Add HomeComponent to app.module if using this method
+      // {
+      //  path: '',
+      //  component: HomeComponent,
+      //  data: { title: 'Dashboard' + ' | ' + environment.properties.appName },
+      //  canActivate: [AuthGuard]
+      // },
+
+      {
+        path: 'qa',
+        component: QaComponent,
+        data: { title: 'E2E Testing' + ' | ' + environment.properties.appName },
+        canActivate: [AuthGuard],
+      },
       {
         path: '**',
         component: NoContentComponent,
-        data: { title: 'Page Not Found' + titleSlug },
+        data: { title: 'Page Not Found' + ' | ' + environment.properties.appName },
         canActivate: [AuthGuard],
       },
     ],

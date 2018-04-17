@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { RouterModule } from '@angular/router';
 // Components
 import {
   FooterComponent,
@@ -35,7 +35,7 @@ export const APP_COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, RouterModule],
   declarations: [APP_COMPONENTS],
   exports: [APP_COMPONENTS],
   entryComponents: [APP_MODALS],
