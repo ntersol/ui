@@ -1,108 +1,55 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, enableProdMode, APP_INITIALIZER } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, PreloadAllModules } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { DatePipe, CurrencyPipe } from '@angular/common';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-
-// 3rd Party Tools
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Bootstrap
-import { StoreModule } from '@ngrx/store';
-
-// Mello Labs Tools
-import { DatagridModule } from '@mello-labs/datagrid';
-import { ApiToolsModule, ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
-import { FormToolsModule } from '@mello-labs/form-tools';
-
 // Main entrypoint component
 import { AppComponent } from './app.component';
-// Routing Module
 import { ROUTES } from './app.routes';
-
 // Enables faster prod mode, does disable some dirty error checking though
 enableProdMode();
 
-// Routes
-import { NoContentComponent, LoginComponent, HomeComponent, QaComponent } from '$routes';
-
-// Components
-import {
-  FooterComponent,
-  HeaderComponent,
-  LayoutMainComponent,
-  LayoutSingleComponent,
-  NavComponent,
-  NavSearchComponent,
-  ConfirmationModalComponent,
-  LogoutModalComponent,
-  LaunchModalComponent,
-} from '$components';
+// Import modules directly and NOT from barrels
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ComponentsModule } from 'src/app/components/components.module';
+import { HomeModule } from 'src/app/routes/home/home.module';
 
 // Shared
 import {
   // App settings
   AppSettings,
-
   // Services
   AppConfigService,
-  SharedModule,
+  // SharedModule,
 } from '$shared';
 
-// UI Store
-import { UIStoreReducer } from '$ui';
+// Routes
+import { LoginComponent, NoContentComponent, QaComponent } from '$routes';
 
 // Components
 export const APP_COMPONENTS = [
-  NoContentComponent,
+  // App component
+  AppComponent,
+  // Routes
   LoginComponent,
-  HomeComponent,
+  NoContentComponent,
   QaComponent,
-
-  FooterComponent,
-  HeaderComponent,
-  LayoutMainComponent,
-  LayoutSingleComponent,
-  NavComponent,
-  NavSearchComponent,
-  LaunchModalComponent,
-
-  ConfirmationModalComponent,
-  LogoutModalComponent,
 ];
 
 @NgModule({
-  declarations: [AppComponent, APP_COMPONENTS],
+  declarations: [APP_COMPONENTS],
   imports: [
-    // Angular
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
 
-    // External dependencies
-    NgbModule.forRoot(), // ng-bootstrap
-    StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX
-
-    // App Modules
+    // Shared Modules
     SharedModule.forRoot(),
+    ComponentsModule.forRoot(),
 
-    // Mello Labs
-    DatagridModule.forRoot(),
-    ApiToolsModule.forRoot(),
-    FormToolsModule.forRoot(),
+    HomeModule.forRoot(),
   ],
-  providers: [
-    DatePipe,
-    CurrencyPipe,
-    { provide: APP_INITIALIZER, useFactory: AppInit, deps: [AppSettings, AppConfigService], multi: true },
-  ],
+  providers: [{ provide: APP_INITIALIZER, useFactory: AppInit, deps: [AppSettings, AppConfigService], multi: true }],
   bootstrap: [AppComponent],
-  entryComponents: [ConfirmationModalComponent, LogoutModalComponent],
+  entryComponents: [],
 })
 export class AppModule {}
 
