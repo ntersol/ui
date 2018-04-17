@@ -1,10 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-// 3rd Party Tools
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Bootstrap
 
 // Components
 import {
@@ -19,6 +14,9 @@ import {
 
 // Components
 import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
+
+// Shared module with all dependencies
+import { SharedModule } from 'src/app/shared';
 
 // All Modals
 export const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];
@@ -37,7 +35,7 @@ export const APP_COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, NgbModule.forRoot()],
+  imports: [CommonModule, SharedModule],
   declarations: [APP_COMPONENTS],
   exports: [APP_COMPONENTS],
   entryComponents: [APP_MODALS],

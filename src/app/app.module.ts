@@ -8,7 +8,8 @@ import { AppComponent } from './app.component';
 // Enables faster prod mode, does disable some dirty error checking though
 enableProdMode();
 
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 // Shared
 import {
@@ -19,13 +20,8 @@ import {
   // SharedModule,
 } from '$shared';
 
-console.assert(SharedModule, "Uhoh, Something was not defined, likely part of a circular reference loop, app.module");
-
 // Routes
 import { LoginComponent, NoContentComponent, QaComponent, HomeComponent } from '$routes';
-
-// Components Module
-import { ComponentsModule } from '$components';
 
 // Components
 export const APP_COMPONENTS = [

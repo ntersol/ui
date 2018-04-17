@@ -8,4 +8,3 @@ export * from './modals';
 export * from './launch-modal/launch-modal.component';
 
 // Components Module
-export * from './components.module';
