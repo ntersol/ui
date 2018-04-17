@@ -12,7 +12,13 @@ import { HomeComponent } from './home.component';
 import { routing } from './home.routes';
 
 @NgModule({
-  imports: [CommonModule, SharedModule, ComponentsModule, DatagridModule.forRoot(), routing],
+  imports: [
+    CommonModule,
+    SharedModule,
+    ComponentsModule,
+    DatagridModule.forRoot(),
+    routing
+  ],
   declarations: [HomeComponent],
   exports: [HomeComponent],
   entryComponents: [],
