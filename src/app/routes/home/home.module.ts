@@ -7,19 +7,20 @@ import { DatagridModule } from '@mello-labs/datagrid';
 import { SharedModule } from 'src/app/shared';
 import { ComponentsModule } from 'src/app/components/components.module';
 
+import { HomeComponent } from './home.component';
+
 @NgModule({
   imports: [
     CommonModule,
 
     SharedModule,
     ComponentsModule,
-    
+
     // Mello Labs
     DatagridModule.forRoot(),
-    
   ],
-  declarations: [],
-  exports: []
+  declarations: [HomeComponent],
+  exports: [],
 })
 export class HomeModule {
   static forRoot(): ModuleWithProviders {

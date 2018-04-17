@@ -14,7 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Bootstrap
 import { StoreModule } from '@ngrx/store';
 
 // Mello Labs Tools
-import { DatagridModule } from '@mello-labs/datagrid';
+// import { DatagridModule } from '@mello-labs/datagrid';
 import { ApiToolsModule, ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
 import { FormToolsModule } from '@mello-labs/form-tools';
 
@@ -110,25 +110,21 @@ export const APP_EXPORTS = [
     // Vendor
     NgbModule.forRoot(),
     StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX
-    DatagridModule.forRoot(),
+    // DatagridModule.forRoot(),
     ApiToolsModule.forRoot(),
     FormToolsModule.forRoot(),
   ],
-  providers: [
-    APP_PROVIDERS,
-  ],
-  declarations: [
-    APP_EXPORTS,
-  ],
+  providers: [APP_PROVIDERS],
+  declarations: [APP_EXPORTS],
   exports: [
     APP_EXPORTS,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    DatagridModule,
+    // DatagridModule,
     ApiToolsModule,
-    FormToolsModule
+    FormToolsModule,
   ],
 })
 export class SharedModule {

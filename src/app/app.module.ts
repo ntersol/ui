@@ -8,8 +8,10 @@ import { AppComponent } from './app.component';
 // Enables faster prod mode, does disable some dirty error checking though
 enableProdMode();
 
+// Import modules directly and NOT from barrels
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { HomeModule } from 'src/app/routes/home/home.module';
 
 // Shared
 import {
@@ -21,14 +23,14 @@ import {
 } from '$shared';
 
 // Routes
-import { LoginComponent, NoContentComponent, QaComponent, HomeComponent } from '$routes';
+import { LoginComponent, NoContentComponent, QaComponent } from '$routes';
 
 // Components
 export const APP_COMPONENTS = [
   // App component
   AppComponent,
+  // Routes
   LoginComponent,
-  HomeComponent,
   NoContentComponent,
   QaComponent,
 ];
@@ -39,7 +41,9 @@ export const APP_COMPONENTS = [
     BrowserModule,
     // Shared Modules
     SharedModule.forRoot(),
-    ComponentsModule.forRoot()
+    ComponentsModule.forRoot(),
+
+    HomeModule.forRoot(),
   ],
   providers: [{ provide: APP_INITIALIZER, useFactory: AppInit, deps: [AppSettings, AppConfigService], multi: true }],
   bootstrap: [AppComponent],
