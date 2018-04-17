@@ -6,11 +6,11 @@ const initialState: AppStore.Ui = {
   saveState: null,
   modal: null,
   multiScreen: false,
-  tabsActive: {}
+  tabsActive: {},
 };
 
 export function UIStoreReducer(state = initialState, { type, payload }: any) {
-   // console.log('UI REDUCER:', type, payload);
+  // console.log('UI REDUCER:', type, payload);
 
   // Determines if the UI state needs to be saved
   let needSave = false;

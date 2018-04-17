@@ -9,15 +9,14 @@ import { UiSelectorsService } from './ui.selectors.service';
 
 @Injectable()
 export class UIStoreService {
-
   /** Holds the reference to a window opened programmatically. Used by appComms for multiscreen state */
   public screen: Window;
 
   constructor(
     private store: Store<AppStore.Root>,
     /** UI Store Selectors */
-    public select: UiSelectorsService) {
-
+    public select: UiSelectorsService,
+  ) {
     // Rehydrate UI state from localstorage on instantiation
     if (window.localStorage.getItem('ui')) {
       this.storeStateRestore(JSON.parse(window.localStorage.getItem('ui')));
@@ -35,7 +34,10 @@ export class UIStoreService {
    * @param tabId - The tabChange event supplied by ng-boostrap
    */
   public tabChange(tabInstanceId: string, tabId: NgbTabChangeEvent) {
-    this.store.dispatch({ type: UIStoreActions.TAB_CHANGE, payload: { tabInstanceId: tabInstanceId, tabId: tabId.nextId } });
+    this.store.dispatch({
+      type: UIStoreActions.TAB_CHANGE,
+      payload: { tabInstanceId: tabInstanceId, tabId: tabId.nextId },
+    });
   }
 
   /**
@@ -48,7 +50,7 @@ export class UIStoreService {
   /**  Reload the latest UI state from localstorage */
   public storeStateRestore = (uiState: any) => {
     this.store.dispatch({ type: UIStoreActions.REHYDRATE, payload: uiState });
-  }
+  };
 
   /**
    * Save the UI store state to localstorage for persistance

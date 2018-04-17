@@ -1,4 +1,6 @@
-export const columns = [
+import { Datagrid } from '@mello-labs/datagrid';
+
+export const columns: Datagrid.Column[] = [
   {
     prop: 'name',
     label: 'Name',
@@ -6,6 +8,12 @@ export const columns = [
     canSort: true,
     canGroup: true,
     canFilter: true,
+    canReorder: true,
+    canResize: true,
+    canDelete: true,
+    canPinLeft: true,
+    canEdit: true,
+    canSearch: true,
   },
   {
     prop: 'username',
@@ -15,6 +23,12 @@ export const columns = [
     canSort: true,
     canGroup: true,
     canFilter: true,
+    canReorder: true,
+    canResize: true,
+    canDelete: true,
+    canPinLeft: true,
+    canEdit: true,
+    canSearch: true,
   },
   {
     prop: 'email',
@@ -23,6 +37,12 @@ export const columns = [
     canSort: true,
     canGroup: true,
     canFilter: true,
+    canReorder: true,
+    canResize: true,
+    canDelete: true,
+    canPinLeft: true,
+    canEdit: true,
+    canSearch: true,
   },
   {
     prop: 'phone',
@@ -31,6 +51,12 @@ export const columns = [
     canSort: true,
     canGroup: true,
     canFilter: true,
+    canReorder: true,
+    canResize: true,
+    canDelete: true,
+    canPinLeft: true,
+    canEdit: true,
+    canSearch: true,
   },
   {
     prop: 'website',
@@ -39,5 +65,11 @@ export const columns = [
     canSort: true,
     canGroup: true,
     canFilter: true,
+    canReorder: true,
+    canResize: true,
+    canDelete: true,
+    canPinLeft: true,
+    canEdit: true,
+    canSearch: true,
   },
 ];

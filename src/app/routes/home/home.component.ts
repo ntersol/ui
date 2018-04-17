@@ -17,7 +17,6 @@ import { columns } from './columns';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, OnDestroy {
-
   public users$ = this.api.select.users$;
   public usersState$ = this.api.select.getState$(ApiActions.users);
   public formMain: FormGroup;
