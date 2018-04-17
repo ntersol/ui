@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Datagrid } from '@mello-labs/datagrid';
@@ -13,11 +13,10 @@ import { columns } from './columns';
   selector: 'app-home',
   styleUrls: ['./home.component.scss'],
   templateUrl: './home.component.html',
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, OnDestroy {
-
   public users$ = this.api.select.users$;
   public usersState$ = this.api.select.getState$(ApiActions.users);
   public formMain: FormGroup;

@@ -6,10 +6,11 @@ const initialState: AppStore.Ui = {
   saveState: null,
   modal: null,
   multiScreen: false,
+  tabsActive: {},
 };
 
 export function UIStoreReducer(state = initialState, { type, payload }: any) {
-   // console.log('UI REDUCER:', type, payload);
+  // console.log('UI REDUCER:', type, payload);
 
   // Determines if the UI state needs to be saved
   let needSave = false;
@@ -24,6 +25,10 @@ export function UIStoreReducer(state = initialState, { type, payload }: any) {
       break;
     case UIStoreActions.MODAL_UNLOAD:
       state.modal = null;
+      needSave = true;
+      break;
+    case UIStoreActions.TAB_CHANGE:
+      state.tabsActive[payload.tabInstanceId] = payload.tabId;
       needSave = true;
       break;
     case UIStoreActions.MULTISCREEN_TOGGLE:

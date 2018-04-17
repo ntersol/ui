@@ -44,7 +44,7 @@
       <button class="btn btn-icon btn-sm mr-2" (click)="usersRefresh()" [disabled]="routeData?.state?.loading">
         <i class="fa fa-refresh"></i>
       </button>
-      
+
       <!-- Filter datatable -->
       <form class="form-inline mr-3 d-inline-block">
         <label class="icon filter" style="position:relative;">
@@ -55,37 +55,83 @@
     </div>
   </div>
 
-  <div>
-    <api-state [state]="routeData?.state" [toaster]="true" [showSuccess]="false" *ngIf="routeData?.state">
 
-      <div style="position:relative;height:calc(100vh - 165px)">
-        <div class="alert alert-warning icon" *ngIf="!routeData?.users?.length">No users found</div>
-        <datagrid #datagrid *ngIf="routeData?.users?.length"
-                  [rows]="routeData.users"
-                  [columns]="columns"
-                  [state]="{}"
-                  [options]="options"
-                  [filterGlobal]="filterGlobal"
-                  (onStateChange)="onStateChange($event)"
-                  (onRowsSelected)="onRowsSelected($event)"
-                  (onRowUpdated)="onRowUpdated($event)">
-     
-          <!-- Custom templates, prop corresponds to column property -->
-          <datagrid-column prop="phone">
-            <!-- Header template -->
-            <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
-              <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
-            </ng-template>
-            <!-- Cell template -->
-            <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-              <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
-            </ng-template>
-          </datagrid-column>
-        </datagrid>
-      </div>
+  <api-state [state]="routeData?.state" [toaster]="true" [showSuccess]="false" *ngIf="routeData?.state">
+
+    <div class="alert alert-warning icon" *ngIf="!routeData?.users?.length">No users found</div>
+
+    <ngb-tabset class="nav-tabs-sm"
+                *ngIf="routeData?.users?.length"
+                (tabChange)="ui.tabChange('HOME', $event)"
+                [activeId]="ui.select.tabActive$('HOME') | async">
+      <ngb-tab id="tab-1">
+        <ng-template ngbTabTitle>
+          <i class="fa fa-user-plus" aria-hidden="true"></i> New Users <small><em>({{ (routeData.users | filter: true : 'new').length }})</em></small>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <div style="position:relative;height:calc(100vh - 185px)">
+
+            <datagrid #datagrid 
+                      [rows]="routeData.users | filter: true : 'new'"
+                      [columns]="columns"
+                      [state]="{}"
+                      [options]="options"
+                      [filterGlobal]="filterGlobal"
+                      (onStateChange)="onStateChange($event)"
+                      (onRowsSelected)="onRowsSelected($event)"
+                      (onRowUpdated)="onRowUpdated($event)">
+
+              <!-- Custom templates, prop corresponds to column property -->
+              <datagrid-column prop="phone">
+                <!-- Header template -->
+                <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
+                  <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
+                </ng-template>
+                <!-- Cell template -->
+                <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
+                  <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
+                </ng-template>
+              </datagrid-column>
+            </datagrid>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab-2">
+        <ng-template ngbTabTitle>
+          <i class="fa fa-users" aria-hidden="true"></i> Returning Users <small><em>({{ (routeData.users | filter: false : 'new').length }})</em></small>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <div style="position:relative;height:calc(100vh - 185px)">
+
+            <datagrid #datagrid
+                      [rows]="routeData.users | filter: false : 'new'"
+                      [columns]="columns"
+                      [state]="{}"
+                      [options]="options"
+                      [filterGlobal]="filterGlobal"
+                      (onStateChange)="onStateChange($event)"
+                      (onRowsSelected)="onRowsSelected($event)"
+                      (onRowUpdated)="onRowUpdated($event)">
+
+              <!-- Custom templates, prop corresponds to column property -->
+              <datagrid-column prop="phone">
+                <!-- Header template -->
+                <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
+                  <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
+                </ng-template>
+                <!-- Cell template -->
+                <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
+                  <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
+                </ng-template>
+              </datagrid-column>
+            </datagrid>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+
+  </api-state>
 
 
-    </api-state>
-  </div>
 </div>
 

@@ -1,9 +1,9 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, enableProdMode, ErrorHandler, APP_INITIALIZER } from '@angular/core';
+import { NgModule, enableProdMode, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, PreloadAllModules } from '@angular/router';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -47,36 +47,12 @@ import {
   AppSettings,
 
   // Services
-  ServiceWorkerService,
-  PostMessageService,
   AppConfigService,
-  AppCommsService,
-
-  // Interceptors
-  HttpInterceptorService,
-  GlobalErrorHandler,
-  AuthService,
-
-  // Guards
-  AuthGuard,
-
-  // Pipes
-  FilterPipe,
-  DebouncePipe,
-  StringPipe,
-  SortPipe,
-  SafeHtmlPipe,
-  PhoneNumberPipe,
-
-  // Directives
-  FullScreenDirective,
+  SharedModule,
 } from '$shared';
 
 // UI Store
-import { UIModalService, UIStoreService, UIStoreReducer, UiSelectorsService } from '$ui';
-
-// API Store
-import { ApiService, ApiSelectorsService } from '$api';
+import { UIStoreReducer } from '$ui';
 
 // Components
 export const APP_COMPONENTS = [
@@ -97,55 +73,8 @@ export const APP_COMPONENTS = [
   LogoutModalComponent,
 ];
 
-// Application wide providers
-export const APP_PROVIDERS = [
-  AppSettings,
-
-  ApiService,
-  ApiSelectorsService,
-
-  UIModalService,
-  UIStoreService,
-  UiSelectorsService,
-  AuthGuard,
-
-  AuthService,
-  ServiceWorkerService,
-  PostMessageService,
-  AppConfigService,
-  AppCommsService,
-
-  HttpInterceptorService,
-
-  // Angular Pipes
-  DatePipe,
-  CurrencyPipe,
-
-  // Global exception handler
-  {
-    provide: ErrorHandler,
-    useClass: GlobalErrorHandler,
-  },
-];
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    APP_COMPONENTS,
-
-    // Pipes
-    FilterPipe,
-    DebouncePipe,
-    StringPipe,
-    SortPipe,
-
-    // Directives
-    FullScreenDirective,
-
-    SafeHtmlPipe,
-
-    PhoneNumberPipe,
-  ],
+  declarations: [AppComponent, APP_COMPONENTS],
   imports: [
     // Angular
     BrowserModule,
@@ -155,8 +84,12 @@ export const APP_PROVIDERS = [
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
 
+    // External dependencies
     NgbModule.forRoot(), // ng-bootstrap
     StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX
+
+    // App Modules
+    SharedModule.forRoot(),
 
     // Mello Labs
     DatagridModule.forRoot(),
@@ -164,13 +97,8 @@ export const APP_PROVIDERS = [
     FormToolsModule.forRoot(),
   ],
   providers: [
-    APP_PROVIDERS,
-
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorService,
-      multi: true,
-    },
+    DatePipe,
+    CurrencyPipe,
     { provide: APP_INITIALIZER, useFactory: AppInit, deps: [AppSettings, AppConfigService], multi: true },
   ],
   bootstrap: [AppComponent],

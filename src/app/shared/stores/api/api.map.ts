@@ -14,7 +14,7 @@ export const ApiMap: AppStore.ApiMapping = {
   users: {
     endpoint: '//jsonplaceholder.typicode.com/users',
     storeProperty: ApiActions.users,
-    uniqueId: 'id'
+    uniqueId: 'id',
   },
 
   /*

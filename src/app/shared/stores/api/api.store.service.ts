@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { ApiHttpService, ApiStatusActions } from '@mello-labs/api-tools';
 import 'rxjs/add/observable/throw';
 
-import { AppSettings, AppStore } from '$shared';
+import { AppStore } from '$shared';
 import { ApiSelectorsService } from './api.selectors.service';
 import { ApiMap } from './api.map';
 
@@ -13,7 +13,6 @@ import { Models } from '$models';
 
 @Injectable()
 export class ApiService extends ApiHttpService {
-
   /** Users endpoint */
   public users = {
     get: (update?: boolean) => this.getStore<Models.User[]>(ApiMap.users.endpoint, ApiMap.users, update),
@@ -28,9 +27,8 @@ export class ApiService extends ApiHttpService {
     private store: Store<AppStore.Root>,
     private http: HttpClient,
     private router: Router,
-    private settings: AppSettings,
     /** API Store Selectors */
-    public select: ApiSelectorsService
+    public select: ApiSelectorsService,
   ) {
     super(<any>http, <any>store, <any>router);
 
@@ -73,6 +71,6 @@ export class ApiService extends ApiHttpService {
    * Fix a bug with TS where super calls don't count as usage
    */
   public fixTS() {
-    console.log(this.http, this.router, this.settings);
+    console.log(this.http, this.router);
   }
 }
