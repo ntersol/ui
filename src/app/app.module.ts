@@ -1,28 +1,28 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, enableProdMode, APP_INITIALIZER } from '@angular/core';
-import { RouterModule, PreloadAllModules } from '@angular/router';
+import { RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
+
+import { environment } from '$env';
+
 // Main entrypoint component
 import { AppComponent } from './app.component';
 import { ROUTES } from './app.routes';
 // Enables faster prod mode, does disable some dirty error checking though
 enableProdMode();
 
-// Import modules directly and NOT from barrels
+// Import modules directly and NOT from barrels to avoid DI issues
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { HomeModule } from 'src/app/routes/home/home.module';
 
 // Shared
 import {
-  // App settings
-  AppSettings,
-  // Services
-  AppConfigService,
-  // SharedModule,
+  AppSettings, // App settings
+  AppConfigService, // App config/env settings
 } from '$shared';
 
-// Routes
+// Non-lazy loaded routes
 import { LoginComponent, NoContentComponent, QaComponent } from '$routes';
 
 // Components
@@ -39,7 +39,10 @@ export const APP_COMPONENTS = [
   declarations: [APP_COMPONENTS],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(ROUTES, {
+      useHash: true,
+      preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading
+    }),
 
     // Shared Modules
     SharedModule.forRoot(),

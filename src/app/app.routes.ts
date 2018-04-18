@@ -3,14 +3,13 @@ import { NoContentComponent, LoginComponent, QaComponent } from '$routes'; // Ho
 
 import { LayoutMainComponent } from '$components';
 import { AuthGuard } from '$shared';
-import { environment } from '$env';
 
 export const ROUTES: Routes = [
   // Routes without masterpage or that do not need to be authenticated need to go first
   {
     path: 'login',
     component: LoginComponent,
-    data: { title: 'Please Log In' + ' | ' + environment.properties.appName },
+    data: { title: 'Please Log In' },
   },
   // Example route param
   // {
@@ -29,7 +28,7 @@ export const ROUTES: Routes = [
     path: '',
     component: LayoutMainComponent,
     children: [
-      // Homepage non-lazy load implementation. Add HomeComponent to app.module if using this method
+      // Homepage non-lazy load implementation
       // {
       //  path: '',
       //  component: HomeComponent,
@@ -40,13 +39,13 @@ export const ROUTES: Routes = [
       {
         path: 'qa',
         component: QaComponent,
-        data: { title: 'E2E Testing' + ' | ' + environment.properties.appName },
+        data: { title: 'E2E Testing' },
         canActivate: [AuthGuard],
       },
       {
         path: '**',
         component: NoContentComponent,
-        data: { title: 'Page Not Found' + ' | ' + environment.properties.appName },
+        data: { title: 'Page Not Found' },
         canActivate: [AuthGuard],
       },
     ],
