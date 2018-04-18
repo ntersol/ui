@@ -1,8 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { environment } from '$env';
-
 import { HomeComponent } from './home.component';
 import { AuthGuard } from 'src/app/shared';
 import { LayoutMainComponent } from 'src/app/components';
@@ -15,7 +13,7 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
-        data: { title: 'Dashboard' + ' | ' + environment.properties.appName },
+        data: { title: 'Dashboard' },
         canActivate: [AuthGuard],
       },
     ],

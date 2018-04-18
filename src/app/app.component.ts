@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
       .filter(route => route.outlet === 'primary')
       .mergeMap(route => route.data)
       .subscribe(event => {
-        this.title.setTitle(event['title']); // Change document title
+        this.title.setTitle(event['title'] + ' | ' + environment.properties.appName); // Change document title
         // If auth endpoint is available and not on the login page
         if (environment.settings.enableAuth && this.router.url.toLowerCase().indexOf('login') === -1) {
           this.authService.refreshTokenUpdate(); // On Route change, refresh authentication token

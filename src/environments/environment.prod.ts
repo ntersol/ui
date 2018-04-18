@@ -18,6 +18,8 @@ export const environment = {
     /** Is this app going to communicate with other domains or instances of itself for multiscreen usage?
      * If so, whitelist domains in the domains.listenTo property */
     enableAppComms: true,
+    /** Should lazy loaded routes be preloaded on app instantiation? If false will be loaded on demand */
+    preloadRoutes: true,
   },
   domains: {
     /** If App Comms is enabled, whitelist domains to accept messages from here */
