@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as _ from 'lodash';
 
-import { AppSettings } from 'src/app/shared';
+import { AppSettings } from '../app.settings';
 import { environment } from '$env';
 import { Models } from '$models';
 
@@ -15,7 +15,7 @@ interface Settings {
  */
 @Injectable()
 export class AppConfigService {
-  constructor(private settings: AppSettings, private http: HttpClient) {}
+  constructor(private settings: AppSettings, private http: HttpClient) { }
 
   /**
    * Set all env settings in app settings
@@ -27,13 +27,15 @@ export class AppConfigService {
       // Check to make sure this prop has been declared in app.settings and is not undefined
       // If defined, updated prop value
       // If not throw error
-      let currentVal = (<Settings>this.settings)[_.camelCase(key)];
-      if (currentVal !== undefined) {
-        currentVal = (<Settings>settings)[key];
+      let appSetting = (<Settings>this.settings);
+      let appKey = _.camelCase(key);
+      if (appSetting[appKey] !== undefined) {
+        appSetting[appKey] = (<Settings>settings)[key];
       } else {
         console.error(_.camelCase(key), `is not present in app settings`);
       }
     });
+
   }
 
   /**

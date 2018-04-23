@@ -1,7 +1,9 @@
 /*styles for home content only*/
 #app-home {
-  #dropdownUser {
-  }
+
+  // Shadow piecing combinator example, applies styling to children without viewencapsulation none
+  ::ng-deep .datagrid-cell-data-content{}
+
   @media (max-width: 991.98px) {
     .card-header label {
       margin-bottom: 0;

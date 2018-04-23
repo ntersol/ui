@@ -12,9 +12,9 @@ import { ROUTES } from './app.routes';
 enableProdMode();
 
 // Import modules directly and NOT from barrels to avoid DI issues
-import { SharedModule } from 'src/app/shared/shared.module';
-import { ComponentsModule } from 'src/app/components/components.module';
-import { HomeModule } from 'src/app/routes/home/home.module';
+import { SharedModule } from './shared/shared.module';
+import { ComponentsModule } from './components/components.module';
+import { HomeModule } from './routes/home/home.module';
 
 // Shared
 import {

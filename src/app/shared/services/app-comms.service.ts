@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { PostMessageService } from './post-message.service';
-import { UIStoreService } from 'src/app/shared/stores/ui';
+import { UIStoreService } from '$ui';
 
 import { environment } from '$env';
 
