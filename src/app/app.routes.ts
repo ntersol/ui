@@ -11,16 +11,14 @@ export const ROUTES: Routes = [
     component: LoginComponent,
     data: { title: 'Please Log In' },
   },
+
   // Example route param
   // {
   //  path: 'loan/:LNKey',
   //  component: HomeComponent,
-  //  data: { title: 'Dashboard' + ' | ' + environment.properties.appName },
+  //  data: { title: 'Dashboard'},
   //  canActivate: [AuthGuard],
   // },
-
-  // Homepage lazy load implementation.
-  { path: '', loadChildren: './routes/home/home.module#HomeModule' },
 
   // Routes that use masterpage go here
   // canActivate with AuthGuard determines if this is an authenticated only route
@@ -28,11 +26,12 @@ export const ROUTES: Routes = [
     path: '',
     component: LayoutMainComponent,
     children: [
+
       // Homepage non-lazy load implementation
       // {
       //  path: '',
       //  component: HomeComponent,
-      //  data: { title: 'Dashboard' + ' | ' + environment.properties.appName },
+      //  data: { title: 'Dashboard' },
       //  canActivate: [AuthGuard]
       // },
 
@@ -42,6 +41,15 @@ export const ROUTES: Routes = [
         data: { title: 'E2E Testing' },
         canActivate: [AuthGuard],
       },
+
+      // Example for lazy loaded module with route params
+      // Currently bugged. If routeparam is child module instead of app.routes.ts then the app breaks
+      // { path: 'users/:empowerGuid', loadChildren: './routes/users/users.module#UsersModule', canActivate: [AuthGuard] },
+      // { path: 'users', loadChildren: './routes/users/users.module#UsersModule', canActivate: [AuthGuard] },
+
+      // Empty path string for homepage ('') needs to be LAST otherwise it catches all other routes
+      { path: '', pathMatch: 'full', loadChildren: './routes/home/home.module#HomeModule', canActivate: [AuthGuard] },
+
       {
         path: '**',
         component: NoContentComponent,

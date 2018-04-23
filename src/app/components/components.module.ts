@@ -16,7 +16,7 @@ import {
 import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
 
 // Shared module with all dependencies
-import { SharedModule } from 'src/app/shared';
+import { SharedModule } from '$shared';
 
 // All Modals
 export const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];

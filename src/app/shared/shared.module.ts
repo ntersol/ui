@@ -9,17 +9,13 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
 import { environment } from '$env';
 
 // 3rd Party Tools
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; // Bootstrap
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
-
 // Mello Labs Tools
 import { ApiToolsModule, ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
 import { FormToolsModule } from '@mello-labs/form-tools';
-
-// import { ROUTES } from '../app.routes';
-
 // UI Store
-import { UIModalService, UIStoreService, UiSelectorsService, UIStoreReducer } from '$ui'; // , UIStoreReducer
+import { UIModalService, UIStoreService, UiSelectorsService, UIStoreReducer } from '$ui';
 // API Store
 import { ApiService, ApiSelectorsService } from '$api';
 
@@ -54,6 +50,7 @@ import {
   FullScreenDirective,
 } from '$shared';
 
+// Providers/services/interceptors/guards
 export const APP_PROVIDERS = [
   AppSettings,
   ApiService,
@@ -83,8 +80,9 @@ export const APP_PROVIDERS = [
   },
 ];
 
-// Pipes
-export const APP_EXPORTS = [
+// Pipes + Directives
+export const APP_PIPES_DIRECTIVES = [
+  // Directives
   FullScreenDirective,
   // Pipes
   FilterPipe,
@@ -105,15 +103,16 @@ export const APP_EXPORTS = [
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
 
     // Vendor
-    NgbModule.forRoot(),
+    NgbModule.forRoot(), // ng-bootstrap
     StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX
-    // DatagridModule.forRoot(),
+    // Mello Labs Tools
     ApiToolsModule.forRoot(),
     FormToolsModule.forRoot(),
   ],
   providers: [APP_PROVIDERS],
-  declarations: [APP_EXPORTS],
-  exports: [APP_EXPORTS, FormsModule, ReactiveFormsModule, NgbModule, ApiToolsModule, FormToolsModule],
+  declarations: [APP_PIPES_DIRECTIVES],
+  // Export 3rd party dependencies so they are available in the rest of the app
+  exports: [APP_PIPES_DIRECTIVES, FormsModule, ReactiveFormsModule, NgbModule, ApiToolsModule, FormToolsModule],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
@@ -123,4 +122,3 @@ export class SharedModule {
     };
   }
 }
-// console.log(SharedModule)

@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { DatagridModule } from '@mello-labs/datagrid';
 
 // Shared module with all dependencies. Import directly and NOT from a barrel
-import { SharedModule } from 'src/app/shared';
-import { ComponentsModule } from 'src/app/components/components.module';
+import { SharedModule } from '$shared';
+import { ComponentsModule } from '$components';
 
 // Home component and routing
 import { HomeComponent } from './home.component';

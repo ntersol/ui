@@ -40,11 +40,11 @@
     "fullTemplateTypeCheck": true,
     "preserveWhitespaces": false
   },
-  "include": [
-    "src/**/*",
-    "node_modules/@mello-labs/form-tools/**/*",
-    "node_modules/@mello-labs/api-tools/**/*",
-    "node_modules/@mello-labs/datagrid/**/*",
-    "node_modules/@mello-labs/utilities/**/*"
-  ]
+  //"include": [
+  //  "src/**/*",
+  //  "node_modules/@mello-labs/form-tools/**/*",
+  //  "node_modules/@mello-labs/api-tools/**/*",
+  //  "node_modules/@mello-labs/datagrid/**/*",
+  //  "node_modules/@mello-labs/utilities/**/*"
+  //]
 }

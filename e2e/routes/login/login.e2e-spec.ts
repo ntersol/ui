@@ -27,14 +27,14 @@ describe('Login Page', () => {
 
   it('should have login button be disabled by default', () => {
     let subject = element(by.css('form button[type="submit"]'));
-    let result = true;
+    // let result = true;
     expect<any>(subject.isEnabled()).toEqual(false);
   });
 
   it('should show password in plain text after clicking Show Password', () => {
     element(by.css('form .toggle-pwd')).click();
     let subject = element(by.css('form .password')).getAttribute('type')
-    let result = 'eat@joes.com';
+    // let result = 'eat@joes.com';
     expect<any>(subject).toEqual('text');
   });
 
@@ -42,7 +42,7 @@ describe('Login Page', () => {
     element(by.css('form .login')).sendKeys('eat@joes.com');
     element(by.css('form .password')).sendKeys('123456');
     let subject = element(by.css('form button[type="submit"]'));
-    let result = true;
+    // let result = true;
     expect<any>(subject.isEnabled()).toEqual(true);
   });
 
