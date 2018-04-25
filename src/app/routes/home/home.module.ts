@@ -5,16 +5,15 @@ import { DatagridModule } from '@mello-labs/datagrid';
 
 // Shared module with all dependencies. Import directly and NOT from a barrel
 import { SharedModule } from '$shared';
-import { ComponentsModule } from '$components';
 
 // Home component and routing
 import { HomeComponent } from './home.component';
 import { routing } from './home.routes';
 
 @NgModule({
-  imports: [CommonModule, SharedModule, ComponentsModule, DatagridModule.forRoot(), routing],
+  imports: [CommonModule, SharedModule, DatagridModule.forRoot(), routing],
   declarations: [HomeComponent],
-  exports: [HomeComponent],
+  exports: [],
   entryComponents: [],
 })
 export class HomeModule {

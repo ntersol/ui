@@ -72,4 +72,5 @@ export const columns: Datagrid.Column[] = [
     canEdit: true,
     canSearch: true,
   },
+
 ];
