@@ -2,7 +2,7 @@
  * Generate models with NSwagStudio: https://github.com/RSuter/NSwag/wiki/NSwagStudio
  * Make sure to point at the docs url in the top green header
  * IE http://localhost:57462/swagger/docs/v1
- * not http://localhost:57462/swagger/ui/index#/
+ * NOT http://localhost:57462/swagger/ui/index#/
 
  Config Options:
   - Set namespace to "Models"
