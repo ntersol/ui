@@ -1,25 +1,44 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, enableProdMode, APP_INITIALIZER } from '@angular/core';
+import { NgModule, enableProdMode, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 import { RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { environment } from '$env';
+// Global vendor modules
+import { StoreModule } from '@ngrx/store';
+
+// Mello Labs Tools
+import { ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
+import { UIStoreReducer } from '$ui';
 
 // Main entrypoint component
 import { AppComponent } from './app.component';
 import { ROUTES } from './app.routes';
+import { environment } from '$env';
+
 // Enables faster prod mode, does disable some dirty error checking though
 enableProdMode();
-
-// Import modules directly and NOT from barrels to avoid DI issues
-import { SharedModule } from './shared/shared.module';
-import { ComponentsModule } from './components/components.module';
-import { HomeModule } from './routes/home/home.module';
 
 // Shared
 import {
   AppSettings, // App settings
   AppConfigService, // App config/env settings
+  // Services
+  ServiceWorkerService,
+  PostMessageService,
+  AppCommsService,
+  AuthService,
+
+  // Interceptors
+  HttpInterceptorService,
+  GlobalErrorHandler,
+
+  // Guards
+  AuthGuard,
+
+  // Shared Module
+  SharedModule
 } from '$shared';
 
 // Non-lazy loaded routes
@@ -35,26 +54,68 @@ export const APP_COMPONENTS = [
   QaComponent,
 ];
 
+// UI Store
+import { UIModalService, UIStoreService, UiSelectorsService } from '$ui';
+// API Store
+import { ApiService, ApiSelectorsService } from '$api';
+
+// Components
+export const APP_PROVIDERS = [
+  AppSettings, // App settings
+  AppConfigService, // App config/env settings
+  // Global services
+  ServiceWorkerService,
+  PostMessageService,
+  AppCommsService,
+  AuthService,
+  // Store services
+  ApiService,
+  ApiSelectorsService,
+  UIModalService,
+  UIStoreService,
+  UiSelectorsService,
+
+  HttpInterceptorService,
+  AuthGuard,
+
+  // Global error handling
+  {
+    provide: ErrorHandler,
+    useClass: GlobalErrorHandler,
+  },
+  // HTTP interceptor
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpInterceptorService,
+    multi: true,
+  },
+];
+
 @NgModule({
   declarations: [APP_COMPONENTS],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES, {
       useHash: true,
-      preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading
+      preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,
     }),
 
-    // Shared Modules
-    SharedModule.forRoot(),
-    ComponentsModule.forRoot(),
+    StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
 
-    HomeModule.forRoot(),
+    // Shared Module
+    SharedModule.forRoot(),
+
   ],
-  providers: [{ provide: APP_INITIALIZER, useFactory: AppInit, deps: [AppSettings, AppConfigService], multi: true }],
+  providers: [
+    APP_PROVIDERS,
+    { provide: APP_INITIALIZER, useFactory: AppInit, deps: [AppSettings, AppConfigService], multi: true },
+  ],
   bootstrap: [AppComponent],
   entryComponents: [],
 })
-export class AppModule {}
+export class AppModule { }
 
 /**
  * Check if environment settings are already present, if not load first before the rest of the app

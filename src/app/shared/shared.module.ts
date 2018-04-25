@@ -1,43 +1,48 @@
-import { NgModule, ModuleWithProviders, ErrorHandler } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { DatePipe, CurrencyPipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
-import { environment } from '$env';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 
 // 3rd Party Tools
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { StoreModule } from '@ngrx/store';
 // Mello Labs Tools
-import { ApiToolsModule, ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
+import { ApiToolsModule } from '@mello-labs/api-tools';
 import { FormToolsModule } from '@mello-labs/form-tools';
-// UI Store
-import { UIModalService, UIStoreService, UiSelectorsService, UIStoreReducer } from '$ui';
-// API Store
-import { ApiService, ApiSelectorsService } from '$api';
 
-// Shared
+// Components
 import {
-  // App settings
-  AppSettings,
+  FooterComponent,
+  HeaderComponent,
+  LayoutMainComponent,
+  LayoutSingleComponent,
+  NavComponent,
+  NavSearchComponent,
+  LaunchModalComponent,
+} from '$components';
 
-  // Services
-  ServiceWorkerService,
-  PostMessageService,
-  AppConfigService,
-  AppCommsService,
-  AuthService,
+// Components
+import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
 
-  // Interceptors
-  HttpInterceptorService,
-  GlobalErrorHandler,
+// All Modals
+export const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];
 
-  // Guards
-  AuthGuard,
+// Components
+export const APP_COMPONENTS = [
+  FooterComponent,
+  HeaderComponent,
+  LayoutMainComponent,
+  LayoutSingleComponent,
+  NavComponent,
+  NavSearchComponent,
+  LaunchModalComponent,
 
+  ...APP_MODALS,
+];
+
+// Pipes + Directives
+import {
   // Pipes
   FilterPipe,
   DebouncePipe,
@@ -49,36 +54,6 @@ import {
   // Directives
   FullScreenDirective,
 } from '$shared';
-
-// Providers/services/interceptors/guards
-export const APP_PROVIDERS = [
-  AppSettings,
-  ApiService,
-  ApiSelectorsService,
-  UIModalService,
-  UIStoreService,
-  UiSelectorsService,
-  ServiceWorkerService,
-  PostMessageService,
-  AppConfigService,
-  AppCommsService,
-  AuthService,
-  HttpInterceptorService,
-  AuthGuard,
-  DatePipe,
-  CurrencyPipe,
-  // Global error handling
-  {
-    provide: ErrorHandler,
-    useClass: GlobalErrorHandler,
-  },
-  // HTTP interceptor
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttpInterceptorService,
-    multi: true,
-  },
-];
 
 // Pipes + Directives
 export const APP_PIPES_DIRECTIVES = [
@@ -97,28 +72,35 @@ export const APP_PIPES_DIRECTIVES = [
   imports: [
     // Angular
     CommonModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
 
     // Vendor
     NgbModule.forRoot(), // ng-bootstrap
-    StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX
+
     // Mello Labs Tools
     ApiToolsModule.forRoot(),
     FormToolsModule.forRoot(),
   ],
-  providers: [APP_PROVIDERS],
-  declarations: [APP_PIPES_DIRECTIVES],
-  // Export 3rd party dependencies so they are available in the rest of the app
-  exports: [APP_PIPES_DIRECTIVES, FormsModule, ReactiveFormsModule, NgbModule, ApiToolsModule, FormToolsModule],
+  providers: [DatePipe, CurrencyPipe],
+  declarations: [APP_COMPONENTS, APP_PIPES_DIRECTIVES],
+  exports: [
+    APP_COMPONENTS,
+    APP_PIPES_DIRECTIVES,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    ApiToolsModule,
+    FormToolsModule,
+  ],
+  entryComponents: [APP_MODALS],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [APP_PROVIDERS],
+      providers: [],
     };
   }
 }

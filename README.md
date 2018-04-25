@@ -27,7 +27,7 @@ See Angular CLI github page for full usage: https://github.com/angular/angular-c
 
 ```bash
 # Serve dev on http://localhost:4200/
-ng serve
+ng serve -aot // Aot flag needed to fix Angular CLI bug with lazy loaded routes
 
 # Build for prod. Files will appear in the dist folder
 ng build --prod
