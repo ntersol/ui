@@ -25,12 +25,10 @@ export class FilterPipe implements PipeTransform {
 
     return arr.filter(elem => {
       // If hasProp is specified, return or exclude items based on whether or not that property exists
-      if (hasProp === true || hasProp === false) {
-        if (hasProp === true) {
-          return elem.hasOwnProperty(objProp) ? true : false;
-        } else if (hasProp === false) {
-          return elem.hasOwnProperty(objProp) ? false : true;
-        }
+      if (hasProp === true) {
+        return elem.hasOwnProperty(objProp) ? true : false;
+      } else if (hasProp === false) {
+        return elem.hasOwnProperty(objProp) ? false : true;
       } else {
         // If objProp was supplied, search the prop within the object, otherwise its a string array and search that
         const stringSearch = objProp ? simplifyString(elem[objProp]) : simplifyString(elem);
