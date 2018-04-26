@@ -40,6 +40,7 @@
     "fullTemplateTypeCheck": true,
     "preserveWhitespaces": false
   },
+  "exclude": [ "e2e" ],
   "include": [
     "src/**/*",
     "node_modules/@mello-labs/form-tools/**/*",
