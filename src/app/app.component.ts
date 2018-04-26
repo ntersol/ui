@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
 import { environment } from '$env';
-import { AuthService, ServiceWorkerService, AppCommsService } from '$shared';
+import { AuthService, ServiceWorkerService, AppCommsService, AppConfigService } from '$shared';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +20,14 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private sw: ServiceWorkerService,
     private comms: AppCommsService,
+    private config: AppConfigService
   ) {}
 
   ngOnInit() {
     this.routeChange();
+    // Always refresh env settings after app load even if already present in localstorage
+    // This protects against env setting getting stale when bypassing the app initializer
+    this.config.loadEnvSettings();
     if (environment.settings.enableServiceWorker) {
       this.sw.enable();
     }
