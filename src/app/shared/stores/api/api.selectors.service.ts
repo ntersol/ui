@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Store, createSelector } from '@ngrx/store';
-import * as _ from 'lodash';
 
 import { Models } from '$models';
 import { AppStore } from '$shared';
 import { ApiActions } from './api.actions';
 import { Observable } from 'rxjs/Observable';
+
+const times = require('lodash/times');
+const keyBy = require('lodash/keyBy');
+const random = require('lodash/random');
 
 // Users
 const usersSrc = (state: AppStore.Root) => state.api.users;
@@ -13,14 +16,14 @@ const usersSrc = (state: AppStore.Root) => state.api.users;
 const usersDuped = createSelector(usersSrc, users2 => {
   if (users2) {
     let users2New: Models.User[] = [];
-    _.times(20, () => (users2New = [...users2New, ...users2]));
-    return users2New.map((user, i) => Object.assign({}, user, { id: i, new: _.random(0, 10) > 3 ? true : false }));
+    times(20, () => (users2New = [...users2New, ...users2]));
+    return users2New.map((user, i) => Object.assign({}, user, { id: i, new:random(0, 10) > 3 ? true : false }));
   }
 });
 // Map users down to a dictionary based on ID
 const usersMapped = createSelector(usersDuped, users2 => {
   if (users2) {
-    return _.keyBy(users2, 'id');
+    return keyBy(users2, 'id');
   }
 });
 

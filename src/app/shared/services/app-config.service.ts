@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import * as _ from 'lodash';
 
 import { AppSettings } from '../app.settings';
 import { environment } from '$env';
 import { Models } from '$models';
+
+const camelCase = require('lodash/camelCase');
 
 interface Settings {
   [key: string]: any;
@@ -28,11 +29,11 @@ export class AppConfigService {
       // If defined, updated prop value
       // If not throw error
       let appSetting = (<Settings>this.settings);
-      let appKey = _.camelCase(key);
+      let appKey = camelCase(key);
       if (appSetting[appKey] !== undefined) {
         appSetting[appKey] = (<Settings>settings)[key];
       } else {
-        console.error(_.camelCase(key), `is not present in app settings`);
+        console.error(camelCase(key), `is not present in app settings`);
       }
     });
 
