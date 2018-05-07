@@ -3,7 +3,7 @@ import { Store, createSelector } from '@ngrx/store';
 
 import { Models } from '$models';
 import { AppStore } from '$shared';
-import { ApiActions } from './api.actions';
+import { ApiProps } from './api.props';
 import { Observable } from 'rxjs/Observable';
 
 const times = require('lodash/times');
@@ -33,9 +33,9 @@ export class ApiSelectorsService {
   public usersMapped$ = this.store.select(usersMapped);
 
   /** Get the API data using api props */
-  public getData$ = (apiProp: ApiActions) => this.store.select(store => store.api[apiProp]);
+  public getData$ = (apiProp: ApiProps) => this.store.select(store => store.api[apiProp]);
   /** Get the API state using api props */
-  public getState$ = (apiProp: ApiActions) => this.store.select(store => store.apiStatus[apiProp]);
+  public getState$ = (apiProp: ApiProps) => this.store.select(store => store.apiStatus[apiProp]);
 
   constructor(private store: Store<AppStore.Root>) { }
 
@@ -44,8 +44,8 @@ export class ApiSelectorsService {
    * Returns a single unified API status for one or more API status calls.
    * Useful for when the app needs multiple http calls and you only want a single status for all
    * USAGE: this.api.getStatuses([
-      this.api.select.getState$(ApiActions.pod),
-      this.api.select.getState$(ApiActions.productType),
+      this.api.select.getState$(ApiProps.pod),
+      this.api.select.getState$(ApiProps.productType),
     ])
    * @param statuses - A single observable or an array of observables
    */

@@ -7,13 +7,13 @@ Adding a new endpoints:
 
 // import IStore
 import { AppStore } from '$shared';
-import { ApiActions } from './api.actions';
+import { ApiProps } from './api.props';
 
 export const ApiMap: AppStore.ApiMapping = {
   // Users Example
   users: {
     endpoint: '//jsonplaceholder.typicode.com/users',
-    storeProperty: ApiActions.users,
+    storeProperty: ApiProps.users,
     uniqueId: 'id',
   },
 
