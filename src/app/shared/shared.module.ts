@@ -50,6 +50,7 @@ import {
   SortPipe,
   SafeHtmlPipe,
   PhoneNumberPipe,
+  CountPipe,
 
   // Directives
   FullScreenDirective,
@@ -66,6 +67,7 @@ export const APP_PIPES_DIRECTIVES = [
   SortPipe,
   SafeHtmlPipe,
   PhoneNumberPipe,
+  CountPipe
 ];
 
 @NgModule({
@@ -84,7 +86,7 @@ export const APP_PIPES_DIRECTIVES = [
     FormToolsModule.forRoot(),
   ],
   providers: [DatePipe, CurrencyPipe],
-  declarations: [APP_COMPONENTS, APP_PIPES_DIRECTIVES],
+  declarations: [APP_COMPONENTS, APP_PIPES_DIRECTIVES, CountPipe],
   exports: [
     APP_COMPONENTS,
     APP_PIPES_DIRECTIVES,
