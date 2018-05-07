@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+// Usage: {{ value | count }}
 @Pipe({
   name: 'count'
 })
