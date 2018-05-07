@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-// Usage: {{value | phoneNumber: true}}
+// Usage: {{ value | phoneNumber: true }}
 @Pipe({
   name: 'phoneNumber',
 })

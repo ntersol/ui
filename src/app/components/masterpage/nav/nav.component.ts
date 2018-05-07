@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService, ServiceWorkerService, AppSettings } from '$shared';
-import * as _ from 'lodash';
-
 import { environment } from '$env';
+
+const startCase = require('lodash/startCase');
+const toLower = require('lodash/toLower');
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +13,7 @@ export class NavComponent {
   /** Is the dropdown menu open on mobile */
   public isOpen = false;
   /** Turn the username into title case */
-  public userName = _.startCase(_.toLower(this.settings.userName));
+  public userName = startCase(toLower(this.settings.userName));
   /**  Is the service worker enabled */
   public hasSW = environment.settings.enableServiceWorker;
   /**   Does the app have an update */

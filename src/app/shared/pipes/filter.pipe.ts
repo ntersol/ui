@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 /**
  * Filters an array of strings or an array of objects
- * USAGE:  | filter: 'John' // Look for John in string array
- * USAGE:  | filter: 'John' : 'fullName' // Look for John in property of fullName in array of objects
- * USAGE:  | filter: '*' : 'fullName' : true // Return all objects with proprety of fullName regardless of value
+ * USAGE: {{ val | filter: 'John' }} // Look for John in string array
+ * USAGE: {{ val | filter: 'John' : 'fullName' }} // Look for John in property of fullName in array of objects
+ * USAGE: {{ val | filter: '*' : 'fullName' : true }} // Return all objects with proprety of fullName regardless of value
  */
 @Pipe({
   name: 'filter',
