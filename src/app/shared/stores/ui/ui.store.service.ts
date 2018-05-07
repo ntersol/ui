@@ -23,7 +23,7 @@ export class UIStoreService {
     }
 
     // On UI store changes, persist to localstorage
-    this.select.saveState$.subscribe(uiState => this.storeStateSave(uiState));
+    this.select.saveState$.subscribe((uiState: AppStore.Ui) => this.storeStateSave(uiState));
   }
 
   /**
@@ -34,22 +34,19 @@ export class UIStoreService {
    * @param tabId - The tabChange event supplied by ng-boostrap
    */
   public tabChange(tabInstanceId: string, tabId: NgbTabChangeEvent) {
-    this.store.dispatch({
-      type: UIStoreActions.TAB_CHANGE,
-      payload: { tabInstanceId: tabInstanceId, tabId: tabId.nextId },
-    });
+    this.store.dispatch(UIStoreActions.TAB_CHANGE({ tabInstanceId: tabInstanceId, tabId: tabId.nextId }));
   }
 
   /**
    * Toggle multiscreen view
    */
   public multiScreenToggle(multiScreen: boolean | null = null) {
-    this.store.dispatch({ type: UIStoreActions.MULTISCREEN_TOGGLE, payload: multiScreen });
+    this.store.dispatch(UIStoreActions.MULTISCREEN_TOGGLE(multiScreen));
   }
 
   /**  Reload the latest UI state from localstorage */
-  public storeStateRestore = (uiState: any) => {
-    this.store.dispatch({ type: UIStoreActions.REHYDRATE, payload: uiState });
+  public storeStateRestore = (uiState: AppStore.Ui) => {
+    this.store.dispatch(UIStoreActions.REHYDRATE(uiState));
   };
 
   /**

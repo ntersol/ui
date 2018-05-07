@@ -80,15 +80,12 @@ export class UIModalService {
 
     // If persist is set, load this modal into the store so state is managed by the UI store
     if (persist) {
-      this.store.dispatch({
-        type: UIStoreActions.MODAL_OPEN,
-        payload: {
-          modalId: modalId,
-          options: { size: <any>size, windowClass: windowClass },
-          data: data,
-          dataAlt: dataAlt,
-        },
-      });
+      this.store.dispatch(UIStoreActions.MODAL_OPEN({
+        modalId: modalId,
+        options: { size: <any>size, windowClass: windowClass },
+        data: data,
+        dataAlt: dataAlt,
+      }));
     } else {
       // If persist is not set
       this.modalRef = this.modalService.open(this.modalList[modalId], { size: <any>size, windowClass: windowClass });
@@ -110,13 +107,13 @@ export class UIModalService {
       // Wait for promise that is returned when modal is closed or dismissed
       modal.result.then(
         () => {
-          this.store.dispatch({ type: UIStoreActions.MODAL_UNLOAD, payload: null });
+          this.store.dispatch(UIStoreActions.MODAL_UNLOAD(null));
           this.api.resetErrors();
           this.api.resetSuccess();
         },
         () => {
           // On modal dismiss, which is closed without performing an action
-          this.store.dispatch({ type: UIStoreActions.MODAL_UNLOAD, payload: null });
+          this.store.dispatch(UIStoreActions.MODAL_UNLOAD(null));
           this.api.resetErrors();
           this.api.resetSuccess();
         },
