@@ -1,8 +1,8 @@
+import { Action } from '@ngrx/store';
 import { isType } from 'typescript-fsa';
+
 import { AppStore } from '$shared';
 import { UIStoreActions } from './ui.actions';
-
-import { Action } from 'typescript-fsa';
 
 // Define initial store state : State.main
 const initialState: AppStore.Ui = {
@@ -12,7 +12,7 @@ const initialState: AppStore.Ui = {
   tabsActive: {},
 };
 
-export function UIStoreReducer(state = initialState, action: Action<any>) {
+export function UIStoreReducer(state = initialState, action: Action) {
   // console.log('UI REDUCER:', action);
 
   if (isType(action, UIStoreActions.REHYDRATE)) {
@@ -35,8 +35,7 @@ export function UIStoreReducer(state = initialState, action: Action<any>) {
     state.multiScreen = action.payload !== null ? action.payload : !state.multiScreen;
   }
 
-  // If the namespace is the UI store
-  // Do not save state on rehydrate
+  // If the action namespace is the UI store and NOT the rehydrate action
   if (action.type && action.type.split('/')[0] === 'ui' && action.type !== UIStoreActions.REHYDRATE.type) {
     const saveState = { ...state };
     delete saveState.saveState;
