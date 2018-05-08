@@ -80,12 +80,14 @@ export class UIModalService {
 
     // If persist is set, load this modal into the store so state is managed by the UI store
     if (persist) {
-      this.store.dispatch(UIStoreActions.MODAL_OPEN({
-        modalId: modalId,
-        options: { size: <any>size, windowClass: windowClass },
-        data: data,
-        dataAlt: dataAlt,
-      }));
+      this.store.dispatch(
+        UIStoreActions.MODAL_OPEN({
+          modalId: modalId,
+          options: { size: <any>size, windowClass: windowClass },
+          data: data,
+          dataAlt: dataAlt,
+        }),
+      );
     } else {
       // If persist is not set
       this.modalRef = this.modalService.open(this.modalList[modalId], { size: <any>size, windowClass: windowClass });

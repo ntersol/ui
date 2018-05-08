@@ -13,10 +13,10 @@ const initialState: AppStore.Ui = {
 };
 
 export function UIStoreReducer(state = initialState, action: Action) {
-  // console.log('UI REDUCER:', action);
+   console.log('UI REDUCER:', action);
 
   if (isType(action, UIStoreActions.REHYDRATE)) {
-    state = { ...initialState, ...action.payload }; 
+    state = { ...initialState, ...action.payload };
   }
 
   if (isType(action, UIStoreActions.MODAL_OPEN)) {
@@ -36,7 +36,7 @@ export function UIStoreReducer(state = initialState, action: Action) {
   }
 
   // If the action namespace is the UI store and NOT the rehydrate action
-  if (action.type && action.type.split('/')[0] === 'ui' && action.type !== UIStoreActions.REHYDRATE.type) {
+  if (action.type && action.type.split('/')[0] === 'ui' && !isType(action, UIStoreActions.REHYDRATE)) {
     const saveState = { ...state };
     delete saveState.saveState;
     state.saveState = JSON.parse(JSON.stringify(saveState));
