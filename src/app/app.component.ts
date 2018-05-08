@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private sw: ServiceWorkerService,
     private comms: AppCommsService,
-    private config: AppConfigService
+    private config: AppConfigService,
   ) {}
 
   ngOnInit() {

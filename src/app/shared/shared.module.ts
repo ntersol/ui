@@ -67,7 +67,7 @@ export const APP_PIPES_DIRECTIVES = [
   SortPipe,
   SafeHtmlPipe,
   PhoneNumberPipe,
-  CountPipe
+  CountPipe,
 ];
 
 @NgModule({

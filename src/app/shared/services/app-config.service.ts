@@ -16,7 +16,7 @@ interface Settings {
  */
 @Injectable()
 export class AppConfigService {
-  constructor(private settings: AppSettings, private http: HttpClient) { }
+  constructor(private settings: AppSettings, private http: HttpClient) {}
 
   /**
    * Set all env settings in app settings
@@ -28,15 +28,14 @@ export class AppConfigService {
       // Check to make sure this prop has been declared in app.settings and is not undefined
       // If defined, updated prop value
       // If not throw error
-      let appSetting = (<Settings>this.settings);
-      let appKey = camelCase(key);
+      const appSetting = <Settings>this.settings;
+      const appKey = camelCase(key);
       if (appSetting[appKey] !== undefined) {
         appSetting[appKey] = (<Settings>settings)[key];
       } else {
         console.error(camelCase(key), `is not present in app settings`);
       }
     });
-
   }
 
   /**

@@ -26,7 +26,6 @@ export const ROUTES: Routes = [
     path: '',
     component: LayoutMainComponent,
     children: [
-
       // Homepage non-lazy load implementation
       // {
       //  path: '',
