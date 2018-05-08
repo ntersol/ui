@@ -3,7 +3,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Datagrid } from '@mello-labs/datagrid';
 
-import { ApiService, ApiActions } from '$api';
+import { ApiService, ApiProps } from '$api';
 import { UIStoreService } from '$ui';
 import { Models } from '$models';
 import { DesktopUtils } from '$utils';
@@ -17,7 +17,7 @@ import { columns } from './columns';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public users$ = this.api.select.users$;
-  public usersState$ = this.api.select.getState$(ApiActions.users);
+  public usersState$ = this.api.select.getState$(ApiProps.users);
   public formMain: FormGroup;
   public isEditing: boolean;
 

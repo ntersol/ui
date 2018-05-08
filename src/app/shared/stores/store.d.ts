@@ -21,11 +21,12 @@ export declare namespace AppStore {
   interface Ui {
     /** A static snapshot of the UI store, used mainly for multiscreen usage */
     saveState: Ui | null;
-    tabsActive: { [key: string]: number };
+    tabsActive: { [key: string]: string };
     modal: {
       modalId: string;
       options: {};
       data: any;
+      dataAlt: any;
     } | null;
     multiScreen: boolean;
   }

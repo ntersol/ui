@@ -1,5 +1,5 @@
 /** String enum of store properties/primary keys */
-export enum ApiActions {
+export enum ApiProps {
   // Example
   users = 'users',
 }

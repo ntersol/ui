@@ -3,49 +3,53 @@ import { Store, createSelector } from '@ngrx/store';
 
 import { Models } from '$models';
 import { AppStore } from '$shared';
-import { ApiActions } from './api.actions';
+import { ApiProps } from './api.props';
 import { Observable } from 'rxjs/Observable';
 
 const times = require('lodash/times');
 const keyBy = require('lodash/keyBy');
 const random = require('lodash/random');
 
-// Users
-const usersSrc = (state: AppStore.Root) => state.api.users;
-// Duplicate the number of users
-const usersDuped = createSelector(usersSrc, users2 => {
-  if (users2) {
-    let users2New: Models.User[] = [];
-    times(20, () => (users2New = [...users2New, ...users2]));
-    return users2New.map((user, i) => Object.assign({}, user, { id: i, new:random(0, 10) > 3 ? true : false }));
-  }
-});
-// Map users down to a dictionary based on ID
-const usersMapped = createSelector(usersDuped, users2 => {
-  if (users2) {
-    return keyBy(users2, 'id');
-  }
-});
+// Mapped/source selectors for reuse or transforming data
+const selectors = {
+  usersDuped: createSelector(
+    (state: AppStore.Root) => state.api.users,
+    users => {
+      if (users) {
+        let usersNew: Models.User[] = [];
+        times(20, () => (usersNew = [...usersNew, ...users]));
+        return usersNew.map((user, i) => Object.assign({}, user, { id: i, new: random(0, 10) > 3 ? true : false }));
+      }
+    },
+  ),
+  usersMapped: createSelector(
+    (state: AppStore.Root) => state.api.users,
+    users => {
+      if (users) {
+        return keyBy(users, 'id');
+      }
+    },
+  ),
+};
 
 @Injectable()
 export class ApiSelectorsService {
-  public users$ = this.store.select(usersDuped);
-  public usersMapped$ = this.store.select(usersMapped);
+  public users$ = this.store.select(selectors.usersDuped);
+  public usersMapped$ = this.store.select(selectors.usersMapped);
 
   /** Get the API data using api props */
-  public getData$ = (apiProp: ApiActions) => this.store.select(store => store.api[apiProp]);
+  public getData$ = (apiProp: ApiProps) => this.store.select(store => store.api[apiProp]);
   /** Get the API state using api props */
-  public getState$ = (apiProp: ApiActions) => this.store.select(store => store.apiStatus[apiProp]);
+  public getState$ = (apiProp: ApiProps) => this.store.select(store => store.apiStatus[apiProp]);
 
-  constructor(private store: Store<AppStore.Root>) { }
-
+  constructor(private store: Store<AppStore.Root>) {}
 
   /**
    * Returns a single unified API status for one or more API status calls.
    * Useful for when the app needs multiple http calls and you only want a single status for all
    * USAGE: this.api.getStatuses([
-      this.api.select.getState$(ApiActions.pod),
-      this.api.select.getState$(ApiActions.productType),
+      this.api.select.getState$(ApiProps.pod),
+      this.api.select.getState$(ApiProps.productType),
     ])
    * @param statuses - A single observable or an array of observables
    */
@@ -71,7 +75,6 @@ export class ApiSelectorsService {
           if (statusSingle && statusSingle.loadError) {
             loadError = statusSingle.loadError;
           }
-
         });
 
         // Figure out which status state to return
@@ -80,21 +83,21 @@ export class ApiSelectorsService {
           return {
             loading: false,
             loaded: false,
-            loadError: loadError
+            loadError: loadError,
           };
         } else if (loading) {
           // If no errors but any endpoint is still loading, return loading
           return {
             loading: true,
             loaded: false,
-            loadError: false
+            loadError: false,
           };
         } else if (loaded && !loading && !loadError) {
           // If all endpoints return loaded and no errors of loading, return loaded
           return {
             loading: false,
             loaded: true,
-            loadError: false
+            loadError: false,
           };
         } else {
           return null;

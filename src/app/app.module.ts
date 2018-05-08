@@ -38,7 +38,7 @@ import {
   AuthGuard,
 
   // Shared Module
-  SharedModule
+  SharedModule,
 } from '$shared';
 
 // Non-lazy loaded routes
@@ -106,7 +106,6 @@ export const APP_PROVIDERS = [
 
     // Shared Module
     SharedModule.forRoot(),
-
   ],
   providers: [
     APP_PROVIDERS,
@@ -115,7 +114,7 @@ export const APP_PROVIDERS = [
   bootstrap: [AppComponent],
   entryComponents: [],
 })
-export class AppModule { }
+export class AppModule {}
 
 /**
  * Check if environment settings are already present, if not load first before the rest of the app
