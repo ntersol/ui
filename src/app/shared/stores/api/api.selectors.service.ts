@@ -4,7 +4,8 @@ import { Store, createSelector } from '@ngrx/store';
 import { Models } from '$models';
 import { AppStore } from '$shared';
 import { ApiProps } from './api.props';
-import { Observable } from 'rxjs/Observable';
+import { Observable, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 const times = require('lodash/times');
 const keyBy = require('lodash/keyBy');
@@ -57,54 +58,56 @@ export class ApiSelectorsService {
     // If this is an array, pass the array, if single load into array for combineLatest
     const statusesNew = Array.isArray(statuses) ? statuses : [statuses];
 
-    return Observable.combineLatest(statusesNew).map(status => {
-      if (status) {
-        // Set default globals. Used to create final end state
-        let loading = false;
-        let loaded = false;
-        let loadError = false;
+    return combineLatest(statusesNew).pipe(
+      map(status => {
+        if (status) {
+          // Set default globals. Used to create final end state
+          let loading = false;
+          let loaded = false;
+          let loadError = false;
 
-        // Loop through all input statuses and rollup individual status to global status
-        status.forEach(statusSingle => {
-          if (statusSingle && statusSingle.loading) {
-            loading = true;
-          }
-          if (statusSingle && statusSingle.loaded) {
-            loaded = true;
-          }
-          if (statusSingle && statusSingle.loadError) {
-            loadError = statusSingle.loadError;
-          }
-        });
+          // Loop through all input statuses and rollup individual status to global status
+          status.forEach(statusSingle => {
+            if (statusSingle && statusSingle.loading) {
+              loading = true;
+            }
+            if (statusSingle && statusSingle.loaded) {
+              loaded = true;
+            }
+            if (statusSingle && statusSingle.loadError) {
+              loadError = statusSingle.loadError;
+            }
+          });
 
-        // Figure out which status state to return
-        // If any errors, return an error state
-        if (loadError) {
-          return {
-            loading: false,
-            loaded: false,
-            loadError: loadError,
-          };
-        } else if (loading) {
-          // If no errors but any endpoint is still loading, return loading
-          return {
-            loading: true,
-            loaded: false,
-            loadError: false,
-          };
-        } else if (loaded && !loading && !loadError) {
-          // If all endpoints return loaded and no errors of loading, return loaded
-          return {
-            loading: false,
-            loaded: true,
-            loadError: false,
-          };
+          // Figure out which status state to return
+          // If any errors, return an error state
+          if (loadError) {
+            return {
+              loading: false,
+              loaded: false,
+              loadError: loadError,
+            };
+          } else if (loading) {
+            // If no errors but any endpoint is still loading, return loading
+            return {
+              loading: true,
+              loaded: false,
+              loadError: false,
+            };
+          } else if (loaded && !loading && !loadError) {
+            // If all endpoints return loaded and no errors of loading, return loaded
+            return {
+              loading: false,
+              loaded: true,
+              loadError: false,
+            };
+          } else {
+            return null;
+          }
         } else {
           return null;
         }
-      } else {
-        return null;
-      }
-    });
+      }),
+    );
   }
 }

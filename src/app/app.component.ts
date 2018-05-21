@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
+import { map, filter, mergeMap } from 'rxjs/operators';
 
 import { environment } from '$env';
 import { AuthService, ServiceWorkerService, AppCommsService, AppConfigService } from '$shared';
@@ -42,16 +40,18 @@ export class AppComponent implements OnInit {
    */
   public routeChange() {
     this.router.events
-      .filter(event => event instanceof NavigationEnd)
-      .map(() => this.activatedRoute)
-      .map(route => {
-        while (route.firstChild) {
-          route = route.firstChild;
-        }
-        return route;
-      })
-      .filter(route => route.outlet === 'primary')
-      .mergeMap(route => route.data)
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        map(() => this.activatedRoute),
+        map(route => {
+          while (route.firstChild) {
+            route = route.firstChild;
+          }
+          return route;
+        }),
+        filter(route => route.outlet === 'primary'),
+        mergeMap(route => route.data),
+      )
       .subscribe(event => {
         this.title.setTitle(event['title'] + ' | ' + environment.properties.appName); // Change document title
         // If auth endpoint is available and not on the login page

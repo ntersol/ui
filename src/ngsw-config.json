@@ -1,66 +1,66 @@
 {
-		"index": "/index.html",
-		"routes": {
-				"/": {
-						"match": "exact"
-				},
-				"/login": {
-						"prefix": true
-				}
-		},
-		"assetGroups": [
-				{
-						"name": "app",
-						"installMode": "prefetch",
-						"resources": {
-								"files": [
-										"/favicon.ico",
-										"/index.html",
-										"/apple-touch-icon.png",
-										"/safari-pinned-tab.svg",
-										"/manifest.json"
-								],
-								"versionedFiles": [
-										"/*.bundle.css",
-										"/*.bundle.js",
-										"/*.chunk.js"
-								]
-						}
-				},
-				{
-						"name": "fonts",
-						"installMode": "lazy",
-						"resources": {
-								"versionedFiles": [
-										"/*.woff",
-										"/*.woff2",
-										"/*.ttf",
-										"/*.svg",
-										"/*.eot"
-								]
-						}
-				},
-				{
-						"name": "assets",
-						"installMode": "lazy",
-						"updateMode": "prefetch",
-						"resources": {
-								"files": [
-										"/assets/**"
-								]
-						}
-				}
-		],
-		"dataGroups": [
-				{
-						"name": "api-users",
-						"urls": [ "https://jsonplaceholder.typicode.com/" ],
-						"cacheConfig": {
-								"strategy": "freshness",
-								"maxSize": 360000000,
-								"maxAge": "4h",
-								"timeout": "5s"
-						}
-				}
-		]
+  "index": "/index.html",
+  "routes": {
+    "/": {
+      "match": "exact"
+    },
+    "/login": {
+      "prefix": true
+    }
+  },
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/apple-touch-icon.png",
+          "/safari-pinned-tab.svg",
+          "/manifest.json"
+        ],
+        "versionedFiles": [
+          "/*.bundle.css",
+          "/*.bundle.js",
+          "/*.chunk.js"
+        ]
+      }
+    },
+    {
+      "name": "fonts",
+      "installMode": "lazy",
+      "resources": {
+        "versionedFiles": [
+          "/*.woff",
+          "/*.woff2",
+          "/*.ttf",
+          "/*.svg",
+          "/*.eot"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**"
+        ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-users",
+      "urls": [ "https://jsonplaceholder.typicode.com/" ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 360000000,
+        "maxAge": "4h",
+        "timeout": "5s"
+      }
+    }
+  ]
 }

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router, RoutesRecognized, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/interval';
+
+import { map } from 'rxjs/operators';
 
 import { environment } from '$env';
 
@@ -59,21 +59,25 @@ export class AuthService {
   public logIn(data: any) {
     // If no auth endpoint set up yet, use a get and set the token properties so the rest of the app can work
     if (!environment.settings.enableAuth) {
-      return this.http.get('assets/mock-data/login.json').map((response: any) => {
+      return this.http.get('assets/mock-data/login.json').pipe(
+        map((response: any) => {
+          this.settings.token = response.data.token;
+          this.sessionExpired = false;
+          this.setTimer(response.data.expirationSeconds);
+          return response;
+        }),
+      );
+    }
+    const url = this.settings.apiUrl + environment.endpoints.authLogin;
+    // Auth point is configured
+    return this.http.post(url, data).pipe(
+      map((response: any) => {
         this.settings.token = response.data.token;
         this.sessionExpired = false;
         this.setTimer(response.data.expirationSeconds);
         return response;
-      });
-    }
-    const url = this.settings.apiUrl + environment.endpoints.authLogin;
-    // Auth point is configured
-    return this.http.post(url, data).map((response: any) => {
-      this.settings.token = response.data.token;
-      this.sessionExpired = false;
-      this.setTimer(response.data.expirationSeconds);
-      return response;
-    });
+      }),
+    );
   } // end LogIn
 
   /**
