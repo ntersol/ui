@@ -4,7 +4,9 @@ import { CanActivate } from '@angular/router';
 import { AppSettings, AuthService } from '$shared';
 import { environment } from '$env';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthGuard implements CanActivate {
   constructor(private settings: AppSettings, private auth: AuthService) {}
 

@@ -19,7 +19,9 @@ this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you
 // List modals here by component name
 type modals = 'LogoutModalComponent' | 'ConfirmationModalComponent';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UIModalService {
   /** Reference to the STATIC currently open modal. This reference is used for static non persistant modals */
   public modalRef: NgbModalRef;

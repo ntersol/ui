@@ -33,7 +33,9 @@ const selectors = {
   ),
 };
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ApiSelectorsService {
   public users$ = this.store.select(selectors.usersDuped);
   public usersMapped$ = this.store.select(selectors.usersMapped);

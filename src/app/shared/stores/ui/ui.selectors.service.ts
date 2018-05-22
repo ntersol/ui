@@ -3,7 +3,9 @@ import { Store } from '@ngrx/store';
 
 import { AppStore } from '$shared';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UiSelectorsService {
   public saveState$ = this.store.select(store => store.ui.saveState);
   public modal$ = this.store.select(store => store.ui.modal);

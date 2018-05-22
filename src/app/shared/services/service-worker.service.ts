@@ -5,7 +5,9 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { UIModalService } from '$ui';
 import { environment } from '$env';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ServiceWorkerService {
   /** Notify app when a new version is available */
   public updateAvailable$ = new BehaviorSubject(false);

@@ -7,7 +7,9 @@ import { AppStore } from '$shared';
 import { UIStoreActions } from './ui.actions';
 import { UiSelectorsService } from './ui.selectors.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UIStoreService {
   /** Holds the reference to a window opened programmatically. Used by appComms for multiscreen state */
   public screen: Window;

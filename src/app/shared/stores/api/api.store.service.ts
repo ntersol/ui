@@ -10,7 +10,9 @@ import { ApiMap } from './api.map';
 
 import { Models } from '$models';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ApiService extends ApiHttpService {
   /** Users endpoint */
   public users = {
