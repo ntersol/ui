@@ -9,8 +9,7 @@
     "ng": "ng",
     "build": "ng build",
     "build:prod": "ng build --target=production --environment=prod",
-    "deploy": "ng build -prod --base-href /mello-labs-angular-starter/ && angular-cli-ghpages --no-silent",
-    "update": "yarn add @angular/animations @angular/common @angular/compiler @angular/core @angular/forms @angular/http @angular/platform-browser @angular/platform-browser-dynamic @angular/router @angular/service-worker @angular/compiler-cli @angular/language-service",
+    "deploy": "ng build --prod --base-href /mello-labs-angular-starter/ && angular-cli-ghpages --no-silent",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
