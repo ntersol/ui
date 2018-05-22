@@ -13,7 +13,7 @@ const initialState: AppStore.Ui = {
 };
 
 export function UIStoreReducer(state = initialState, action: Action) {
-   console.log('UI REDUCER:', action);
+  // console.log('UI REDUCER:', action);
 
   if (isType(action, UIStoreActions.REHYDRATE)) {
     state = { ...initialState, ...action.payload };

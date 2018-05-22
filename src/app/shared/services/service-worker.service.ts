@@ -1,10 +1,9 @@
 import { Injectable, NgZone } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { UIModalService } from '$ui';
 import { environment } from '$env';
-import { Subscription } from 'rxjs/Subscription';
 
 @Injectable()
 export class ServiceWorkerService {

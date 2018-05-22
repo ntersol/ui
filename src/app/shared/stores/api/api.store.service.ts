@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ApiHttpService, ApiStatusActions } from '@mello-labs/api-tools';
-import 'rxjs/add/observable/throw';
 
 import { AppStore } from '$shared';
 import { ApiSelectorsService } from './api.selectors.service';
