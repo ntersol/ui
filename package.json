@@ -37,9 +37,9 @@
     "@angular/platform-browser-dynamic": "6.0.2",
     "@angular/router": "6.0.2",
     "@angular/service-worker": "6.0.2",
-    "@mello-labs/api-tools": "3.0.0",
-    "@mello-labs/datagrid": "1.0.1",
-    "@mello-labs/form-tools": "1.1.0",
+    "@mello-labs/api-tools": "4.0.0",
+    "@mello-labs/datagrid": "2.0.0",
+    "@mello-labs/form-tools": "2.0.0",
     "@mello-labs/ui": "1.2.0",
     "@ng-bootstrap/ng-bootstrap": "2.0.0",
     "@ngrx/store": "6.0.0-beta.3",
@@ -74,8 +74,8 @@
     "prettier": "1.11.1",
     "protractor": "5.1.2",
     "ts-node": "3.2.0",
-    "tslint": "5.7.0",
-    "tslint-angular": "1.1.1",
+    "tslint": "5.10.0",
+    "tslint-angular": "1.1.2",
     "typescript": "2.7.2"
   }
 }
