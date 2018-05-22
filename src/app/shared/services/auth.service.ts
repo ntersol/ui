@@ -11,7 +11,9 @@ import { UIModalService } from '$ui';
 import { ApiService } from '$api';
 import { AppSettings } from '../app.settings';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
   /** Is session expired */
   public sessionExpired = false;

@@ -14,7 +14,9 @@ interface MessageComplete extends Message {
   appId?: number;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class PostMessageService {
   /** Postmessage response */
   public postMessage$: Subject<Message> = new Subject();

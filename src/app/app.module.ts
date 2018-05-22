@@ -24,18 +24,10 @@ enableProdMode();
 import {
   AppSettings, // App settings
   AppConfigService, // App config/env settings
-  // Services
-  ServiceWorkerService,
-  PostMessageService,
-  AppCommsService,
-  AuthService,
 
   // Interceptors
   HttpInterceptorService,
   GlobalErrorHandler,
-
-  // Guards
-  AuthGuard,
 
   // Shared Module
   SharedModule,
@@ -54,30 +46,13 @@ export const APP_COMPONENTS = [
   QaComponent,
 ];
 
-// UI Store
-import { UIModalService, UIStoreService, UiSelectorsService } from '$ui';
-// API Store
-import { ApiService, ApiSelectorsService } from '$api';
-
 // Components
 export const APP_PROVIDERS = [
   AppSettings, // App settings
   AppConfigService, // App config/env settings
-  // Global services
-  ServiceWorkerService,
-  PostMessageService,
-  AppCommsService,
-  AuthService,
-  // Store services
-  ApiService,
-  ApiSelectorsService,
-  UIModalService,
-  UIStoreService,
-  UiSelectorsService,
-
+  
   HttpInterceptorService,
-  AuthGuard,
-
+ 
   // Global error handling
   {
     provide: ErrorHandler,

@@ -14,7 +14,9 @@ export enum MessageActions {
 /**
  * Manages communication between multiple app instances or apps that live on separate domains
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AppCommsService {
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
