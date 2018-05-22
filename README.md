@@ -1,6 +1,6 @@
 # Mello Labs Angular Starter
 
-A rapid starter project for creating Angular single page apps. Contains Angular 5, lodash, Bootstrap 4, Ng-Bootstrap & Ngrx-Store (Redux). Built with Angular CLI.
+A rapid starter project for creating Angular single page apps. Contains Angular 6, lodash, Bootstrap 4, Ng-Bootstrap & Ngrx-Store (Redux). Built with Angular CLI.
 
 Available online @ https://jerrolkrause.github.io/mello-labs-angular-starter/#/. 
 
@@ -27,7 +27,7 @@ See Angular CLI github page for full usage: https://github.com/angular/angular-c
 
 ```bash
 # Serve dev on http://localhost:4200/
-ng serve -aot // Aot flag needed to fix Angular CLI bug with lazy loaded routes
+ng serve --aot // Aot flag needed to fix Angular CLI bug with lazy loaded routes
 
 # Build for prod. Files will appear in the dist folder
 ng build --prod
@@ -35,20 +35,20 @@ ng build --prod
 # Build and serve prod
 ng serve --prod
 
-# Run prettier which will format the code in the entire projects
+# Run prettier which will format the code in the entire project
 npm run format
 
 # Run e2e protractor tests
 ng e2e
 
 # Run e2e protractor tests without rebuilding every time (faster)
-ng e2e -s false
+ng e2e --s false
+
+# Update NPM dependencies via Angular CLI
+ng update
 
 # Deploy dist folder to git pages. Be sure to update deploy script in package.json
 npm run deploy
-
-# Update all Angular packages to the latest version
-npm run update
 ```
 
 ## Localizing Your App
