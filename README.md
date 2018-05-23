@@ -19,7 +19,6 @@ cd your-app
 yarn
 npm i
 ```
-For initial login, any text in the username and password box will work. Be sure to add your auth endpoint as outlined below under localizing your app.
 
 
 ## Usage
@@ -27,7 +26,7 @@ See Angular CLI github page for full usage: https://github.com/angular/angular-c
 
 ```bash
 # Serve dev on http://localhost:4200/
-ng serve --aot // Aot flag needed to fix Angular CLI bug with lazy loaded routes
+ng serve --aot
 
 # Build for prod. Files will appear in the dist folder
 ng build --prod
