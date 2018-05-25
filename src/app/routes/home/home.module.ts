@@ -11,7 +11,7 @@ import { HomeComponent } from './home.component';
 import { routing } from './home.routes';
 
 @NgModule({
-  imports: [CommonModule, SharedModule, DatagridModule.forRoot(), routing],
+  imports: [CommonModule, SharedModule.forRoot(), DatagridModule.forRoot(), routing],
   declarations: [HomeComponent],
   exports: [],
   entryComponents: [],

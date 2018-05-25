@@ -40,11 +40,4 @@
     "preserveWhitespaces": false
   },
   "exclude": [ "e2e" ]
-  //"include": [
-  //  "src/**/*",
-  //  "node_modules/@mello-labs/form-tools/**/*",
-  //  "node_modules/@mello-labs/api-tools/**/*",
-  //  "node_modules/@mello-labs/datagrid/**/*",
-  //  "node_modules/@mello-labs/utilities/**/*"
-  //]
 }
