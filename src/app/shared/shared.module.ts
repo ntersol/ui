@@ -1,45 +1,12 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 
-// 3rd Party Tools
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// Mello Labs Tools
-import { ApiToolsModule } from '@mello-labs/api-tools';
-import { FormToolsModule } from '@mello-labs/form-tools';
-
-// Components
+// Components Module
 import {
-  FooterComponent,
-  HeaderComponent,
-  LayoutMainComponent,
-  LayoutSingleComponent,
-  NavComponent,
-  NavSearchComponent,
-  LaunchModalComponent,
+  ComponentsModule
 } from '$components';
-
-// Components
-import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
-
-// All Modals
-export const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];
-
-// Components
-export const APP_COMPONENTS = [
-  FooterComponent,
-  HeaderComponent,
-  LayoutMainComponent,
-  LayoutSingleComponent,
-  NavComponent,
-  NavSearchComponent,
-  LaunchModalComponent,
-
-  ...APP_MODALS,
-];
 
 // Pipes + Directives
 import {
@@ -58,8 +25,6 @@ import {
 
 // Pipes + Directives
 export const APP_PIPES_DIRECTIVES = [
-  // Directives
-  FullScreenDirective,
   // Pipes
   FilterPipe,
   DebouncePipe,
@@ -68,35 +33,25 @@ export const APP_PIPES_DIRECTIVES = [
   SafeHtmlPipe,
   PhoneNumberPipe,
   CountPipe,
+
+  // Directives
+  FullScreenDirective,
 ];
 
 @NgModule({
   imports: [
     // Angular
     CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-
-    // Vendor
-    NgbModule.forRoot(), // ng-bootstrap
-
-    // Mello Labs Tools
-    ApiToolsModule.forRoot(),
-    FormToolsModule.forRoot(),
+    
+    ComponentsModule
   ],
   providers: [DatePipe, CurrencyPipe],
-  declarations: [APP_COMPONENTS, APP_PIPES_DIRECTIVES, CountPipe],
+  declarations: [APP_PIPES_DIRECTIVES],
   exports: [
-    APP_COMPONENTS,
     APP_PIPES_DIRECTIVES,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    ApiToolsModule,
-    FormToolsModule,
+    ComponentsModule
   ],
-  entryComponents: [APP_MODALS],
+  entryComponents: [],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
