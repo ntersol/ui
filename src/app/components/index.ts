@@ -1,3 +1,6 @@
+// Components module
+export * from './components.module';
+
 // Masterpage
 export * from './masterpage';
 
