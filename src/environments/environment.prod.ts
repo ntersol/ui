@@ -14,7 +14,7 @@ export const environment = {
     /** Is an authentication endpoint available. If so make sure to update the endpoints in this file */
     enableAuth: false,
     /** Enable service worker functionality */
-    enableServiceWorker: false,
+    enableServiceWorker: true,
     /** Is this app going to communicate with other domains or instances of itself for multiscreen usage?
      * If so, whitelist domains in the domains.listenTo property */
     enableAppComms: true,
