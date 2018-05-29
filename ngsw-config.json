@@ -1,29 +1,28 @@
 {
   "index": "/index.html",
-  "routes": {
+  "routing": {
+    "index": "/index.html",
     "/": {
       "match": "exact"
     },
     "/login": {
-      "prefix": true
+      "prefix": false
     }
   },
+  
   "assetGroups": [
     {
       "name": "app",
       "installMode": "prefetch",
       "resources": {
         "files": [
-          "/favicon.ico",
           "/index.html",
+          "/favicon.ico",
           "/apple-touch-icon.png",
           "/safari-pinned-tab.svg",
-          "/manifest.json"
-        ],
-        "versionedFiles": [
-          "/*.bundle.css",
-          "/*.bundle.js",
-          "/*.chunk.js"
+          "/*.css",
+          "/*.js",
+          "/*.js"
         ]
       }
     },
@@ -31,7 +30,7 @@
       "name": "fonts",
       "installMode": "lazy",
       "resources": {
-        "versionedFiles": [
+        "files": [
           "/*.woff",
           "/*.woff2",
           "/*.ttf",
@@ -53,13 +52,15 @@
   ],
   "dataGroups": [
     {
-      "name": "api-users",
-      "urls": [ "https://jsonplaceholder.typicode.com/" ],
+      "name": "api",
+      "urls": [
+        "https://jsonplaceholder.typicode.com/**",
+        "/users"
+      ],
       "cacheConfig": {
         "strategy": "freshness",
-        "maxSize": 360000000,
-        "maxAge": "4h",
-        "timeout": "5s"
+        "maxSize": 100000,
+        "maxAge": "3d"
       }
     }
   ]

@@ -50,9 +50,9 @@ export const APP_COMPONENTS = [
 export const APP_PROVIDERS = [
   AppSettings, // App settings
   AppConfigService, // App config/env settings
-  
+
   HttpInterceptorService,
- 
+
   // Global error handling
   {
     provide: ErrorHandler,
@@ -77,7 +77,7 @@ export const APP_PROVIDERS = [
     }),
 
     StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
+    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
 
     // Shared Module
     SharedModule.forRoot(),

@@ -27,9 +27,6 @@ export class ServiceWorkerService {
    */
   public enable() {
     if (this.sw.isEnabled) {
-      // Check for update immediately on app load
-      this.sw.checkForUpdate();
-
       // On initial load, check if service worker is available first
       this.sub = this.sw.available.subscribe(() => {
         this.updateAvailable$.next(true);
@@ -39,6 +36,8 @@ export class ServiceWorkerService {
           this.modalPopped = true;
         }
       });
+      // Check for update immediately on app load
+      this.sw.checkForUpdate();
       this.pollForUpdates();
     }
   }
@@ -54,14 +53,11 @@ export class ServiceWorkerService {
   /**
    * Start polling for SW updates
    */
-  private pollForUpdates() {
-    // For some reason, running the interval inside Angular prevents the SW from registering
-    // Running the interval outside the zone fixes this
+  public pollForUpdates() {
+    // Service worker/zone.js has issue with setInterval https://github.com/angular/angular/issues/20970
     this.zone.runOutsideAngular(() => {
       this.counter = window.setInterval(() => {
-        this.zone.run(() => {
-          this.sw.checkForUpdate();
-        });
+        this.zone.run(() => this.sw.checkForUpdate());
       }, this.checkInterval * 1000 * 60);
     });
   }
@@ -81,10 +77,11 @@ export class ServiceWorkerService {
       )
       .result.then(
         () => {
-          this.sw.activateUpdate();
-          this.updateAvailable$.next(false);
-          this.pollForUpdates();
-          this.modalPopped = false;
+          window.location.reload();
+          // this.sw.activateUpdate();
+          // this.updateAvailable$.next(false);
+          // this.pollForUpdates();
+          // this.modalPopped = false;
         },
         () => console.warn('User is on an outdated version of the application'),
       );

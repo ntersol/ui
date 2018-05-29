@@ -57,14 +57,7 @@ export const APP_COMPONENTS = [
   ],
   providers: [],
   declarations: [APP_COMPONENTS],
-  exports: [
-    APP_COMPONENTS,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    ApiToolsModule,
-    FormToolsModule,
-  ],
+  exports: [APP_COMPONENTS, FormsModule, ReactiveFormsModule, NgbModule, ApiToolsModule, FormToolsModule],
   entryComponents: [APP_MODALS],
 })
 export class ComponentsModule {

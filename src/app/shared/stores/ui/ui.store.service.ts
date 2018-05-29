@@ -49,7 +49,7 @@ export class UIStoreService {
   /**  Reload the latest UI state from localstorage */
   public storeStateRestore = (uiState: AppStore.Ui) => {
     this.store.dispatch(UIStoreActions.REHYDRATE(uiState));
-  };
+  }
 
   /**
    * Save the UI store state to localstorage for persistance
