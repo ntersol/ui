@@ -42,7 +42,6 @@ export const ROUTES: Routes = [
       },
 
       // Example for lazy loaded module with route params
-      // Currently bugged. If routeparam is child module instead of app.routes.ts then the app breaks
       // { path: 'users/:empowerGuid', loadChildren: './routes/users/users.module#UsersModule', canActivate: [AuthGuard] },
       // { path: 'users', loadChildren: './routes/users/users.module#UsersModule', canActivate: [AuthGuard] },
 

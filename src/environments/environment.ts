@@ -19,7 +19,7 @@ export const environment = {
      * If so, whitelist domains in the domains.listenTo property */
     enableAppComms: true,
     /** Should lazy loaded routes be preloaded on app instantiation? If false will be loaded on demand */
-    preloadRoutes: true,
+    preloadRoutes: false,
   },
   domains: {
     /** If App Comms is enabled, whitelist domains to accept messages from here */

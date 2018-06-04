@@ -31,8 +31,9 @@ ng serve --aot
 # Build for prod. Files will appear in the dist folder
 ng build --prod
 
-# Build and serve prod
-ng serve --prod
+# Serve prod build at http://127.0.0.1:8080/#/.
+# Requires http server which can be installed with `npm install http-server -g`
+npm run prod
 
 # Run prettier which will format the code in the entire project
 npm run format
@@ -51,6 +52,7 @@ npm run deploy
 ```
 
 ## Localizing Your App
+
 `package.json`
 - If using github pages, update the `npm run deploy` command in this file to include the correct slug. IE replace `/mello-labs-angular-starter/` with your url
 
@@ -87,15 +89,12 @@ Typescript Linting in Visual Studio without having to run `ng lint` in the comma
 
 
 ## Useful Info
-Serve prod after running `ng build --prod` with non CLI based http server. Requires http server when you can install with `npm install http-server -g`. Useful for testing service worker.
-```bash
-http-server ./dist -o
-```
 
-Update all npm packages
-```bash
-npm install -g npm-check-updates && ncu -a && npm i
-```
+Lazy load libraries. Normally libraries that are shared between lazy loaded routes are all bundled into a single master bundle. This approach will bundle them separately.
+- Add a module in `app > components > lazy-libs > *` that imports the library and then exports it
+- Export the module in the barrel file in `app > components > lazy-libs > index.ts`
+- In angular.json, add the path to the module in `projects > architect > build > options > lazyModules`
+- In the module where the library is needed, import the lazy loaded module from the barrel like `import { DatagridLazyModule } from '$lazy';` and then add to the ngModule imports array
 
 When working with Yarn/NPM Link and your local NPM package src folders (uncompiled .ts), use the following boilerplate in your root tsconfig so that Angular CLI will compile and build on save and not throw an Angular package error
 ```bash
