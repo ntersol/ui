@@ -1,17 +1,21 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DatagridModule } from '@mello-labs/datagrid';
-
-// Shared module with all dependencies. Import directly and NOT from a barrel
+import { DatagridLazyModule } from '$lazy';
 import { SharedModule } from '$shared';
 
 // Home component and routing
 import { HomeComponent } from './home.component';
 import { routing } from './home.routes';
 
+
 @NgModule({
-  imports: [CommonModule, SharedModule, DatagridModule.forRoot(), routing],
+  imports: [
+    CommonModule,
+    SharedModule,
+    routing,
+    DatagridLazyModule
+  ],
   declarations: [HomeComponent],
   exports: [],
   entryComponents: [],
