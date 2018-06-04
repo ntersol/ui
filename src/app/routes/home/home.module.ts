@@ -8,14 +8,8 @@ import { SharedModule } from '$shared';
 import { HomeComponent } from './home.component';
 import { routing } from './home.routes';
 
-
 @NgModule({
-  imports: [
-    CommonModule,
-    SharedModule,
-    routing,
-    DatagridLazyModule
-  ],
+  imports: [CommonModule, SharedModule, routing, DatagridLazyModule],
   declarations: [HomeComponent],
   exports: [],
   entryComponents: [],

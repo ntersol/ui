@@ -6,13 +6,8 @@ import { DatagridModule } from '@mello-labs/datagrid';
 // For lazy loaded libraries, be sure to add a reference in angular.json in
 // projects > architect > build > options > lazyModules
 @NgModule({
-  imports: [
-    CommonModule,
-    DatagridModule
-  ],
+  imports: [CommonModule, DatagridModule],
   declarations: [],
-  exports: [
-   DatagridModule
-  ]
+  exports: [DatagridModule],
 })
-export class DatagridLazyModule { }
+export class DatagridLazyModule {}
