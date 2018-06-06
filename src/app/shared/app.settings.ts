@@ -16,11 +16,10 @@ type Propkey = keyof typeof AppSettingsProps;
 // Getter/setters for app settings. Will read/write to app settings and on app load will try to reload from localstorage/sessionstorage
 @Injectable()
 export class AppSettings {
-
   private localProp = 'settings';
   private pad = 100;
-  private localStorage: {[key in AppSettingsProps]?: string } = {};
-  private sessionStorage: {[key in AppSettingsProps]?: string } = {};
+  private localStorage: { [key in AppSettingsProps]?: string } = {};
+  private sessionStorage: { [key in AppSettingsProps]?: string } = {};
 
   /** API token for EPS */
   private _token: string | null = null;
@@ -68,7 +67,7 @@ export class AppSettings {
   }
 
   constructor() {
-    if (window.sessionStorage.getItem(this.localProp)){
+    if (window.sessionStorage.getItem(this.localProp)) {
       this.sessionStorage = this.settingsRestore(window.sessionStorage.getItem(this.localProp));
     }
     if (window.localStorage.getItem(this.localProp)) {
@@ -82,14 +81,12 @@ export class AppSettings {
    * @param location - Location of locally stored prop, either sessionStorage or localStorage
    */
   private propGet(propKey: Propkey, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
-
     if (location === 'sessionStorage' && this.sessionStorage[propKey]) {
       return this.sessionStorage[propKey];
-    } else if (this.localStorage[propKey]){
+    } else if (this.localStorage[propKey]) {
       return this.localStorage[propKey];
     }
     return null;
-    
   }
 
   /**
@@ -97,8 +94,11 @@ export class AppSettings {
    * @param prop - App settings property
    * @param location - Location of locally stored prop, either sessionStorage or localStorage
    */
-  private propSet(propKey: Propkey, value: string | null, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
-
+  private propSet(
+    propKey: Propkey,
+    value: string | null,
+    location: 'localStorage' | 'sessionStorage' = 'localStorage',
+  ) {
     if (location === 'sessionStorage') {
       this.sessionStorage[propKey] = value;
       window.sessionStorage.setItem(this.localProp, this.settingsSave(this.sessionStorage));
@@ -106,7 +106,6 @@ export class AppSettings {
       this.localStorage[propKey] = value;
       window.localStorage.setItem(this.localProp, this.settingsSave(this.localStorage));
     }
-
   }
 
   /**
@@ -114,7 +113,7 @@ export class AppSettings {
    * @param state
    */
   private settingsSave(state: Object) {
-    if (state){
+    if (state) {
       let str = JSON.stringify(state);
       if (environment.settings.obfuscate) {
         str = StringUtils.pad(str, this.pad, this.pad);
@@ -128,7 +127,7 @@ export class AppSettings {
    * Return an object that has been de-obfusicated
    * @param state
    */
-  private settingsRestore(state: string)  {
+  private settingsRestore(state: string) {
     if (state) {
       let str = state;
       if (environment.settings.obfuscate) {
@@ -139,5 +138,4 @@ export class AppSettings {
       return obj;
     }
   }
-
 }
