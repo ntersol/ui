@@ -11,9 +11,17 @@ export enum AppSettingsProps {
   lnkey = 'lnkey',
 }
 
+type Propkey = keyof typeof AppSettingsProps;
+
 // Getter/setters for app settings. Will read/write to app settings and on app load will try to reload from localstorage/sessionstorage
 @Injectable()
 export class AppSettings {
+
+  private localProp = 'settings';
+  private pad = 100;
+  private localStorage: {[key in AppSettingsProps]?: string } = {};
+  private sessionStorage: {[key in AppSettingsProps]?: string } = {};
+
   /** API token for EPS */
   private _token: string | null = null;
   /** API token for EPS */
@@ -32,6 +40,7 @@ export class AppSettings {
     return this._apiUrl || this.propGet(AppSettingsProps.apiUrl);
   }
   public set apiUrl(value: string | null) {
+    // console.log('apiUrl', value);
     this._apiUrl = value;
     this.propSet(AppSettingsProps.apiUrl, value);
   }
@@ -59,6 +68,12 @@ export class AppSettings {
   }
 
   constructor() {
+    if (window.sessionStorage.getItem(this.localProp)){
+      this.sessionStorage = this.settingsRestore(window.sessionStorage.getItem(this.localProp));
+    }
+    if (window.localStorage.getItem(this.localProp)) {
+      this.localStorage = this.settingsRestore(window.localStorage.getItem(this.localProp));
+    }
   }
 
   /**
@@ -66,17 +81,15 @@ export class AppSettings {
    * @param prop - App settings property
    * @param location - Location of locally stored prop, either sessionStorage or localStorage
    */
-  private propGet(propKey: string, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
-    const prop = environment.settings.obfuscate ? StringUtils.obfuscateAdd(propKey) : propKey;
+  private propGet(propKey: Propkey, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
 
-    let value = window[location].getItem(prop) || null;
-    // Obfuscate and pad
-    if (value && environment.settings.obfuscate) {
-      value = StringUtils.obfuscateRemove(window[location].getItem(prop));
-      value = StringUtils.trim(value, 10, 10);
+    if (location === 'sessionStorage' && this.sessionStorage[propKey]) {
+      return this.sessionStorage[propKey];
+    } else if (this.localStorage[propKey]){
+      return this.localStorage[propKey];
     }
-
-    return value;
+    return null;
+    
   }
 
   /**
@@ -84,20 +97,46 @@ export class AppSettings {
    * @param prop - App settings property
    * @param location - Location of locally stored prop, either sessionStorage or localStorage
    */
-  private propSet(propKey: string, value: string | null, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
-    let prop = propKey;
-    let val = value;
-    // Obfuscate and pad
-    if (value && environment.settings.obfuscate) {
-      prop = StringUtils.obfuscateAdd(propKey);
-      val = StringUtils.pad(val, 10, 10);
-      val = StringUtils.obfuscateAdd(value);
+  private propSet(propKey: Propkey, value: string | null, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
+
+    if (location === 'sessionStorage') {
+      this.sessionStorage[propKey] = value;
+      window.sessionStorage.setItem(this.localProp, this.settingsSave(this.sessionStorage));
+    } else {
+      this.localStorage[propKey] = value;
+      window.localStorage.setItem(this.localProp, this.settingsSave(this.localStorage));
     }
 
-    if (value) {
-      window[location].setItem(prop, val);
-    } else {
-      window[location].removeItem(prop);
+  }
+
+  /**
+   * Return an object that has been obfusicated into a string
+   * @param state
+   */
+  private settingsSave(state: Object) {
+    if (state){
+      let str = JSON.stringify(state);
+      if (environment.settings.obfuscate) {
+        str = StringUtils.pad(str, this.pad, this.pad);
+        str = StringUtils.obfuscateAdd(str);
+      }
+      return str;
+    }
+  }
+
+  /**
+   * Return an object that has been de-obfusicated
+   * @param state
+   */
+  private settingsRestore(state: string)  {
+    if (state) {
+      let str = state;
+      if (environment.settings.obfuscate) {
+        str = StringUtils.obfuscateRemove(state);
+        str = StringUtils.trim(str, this.pad, this.pad);
+      }
+      const obj = JSON.parse(str);
+      return obj;
     }
   }
 
