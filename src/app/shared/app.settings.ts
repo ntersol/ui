@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+import { StringUtils } from '$utils';
+import { environment } from '$env';
+
 // Enum of app setting properties. Only needed if using the propGet and propSet methods in this file
 export enum AppSettingsProps {
   token = 'token',
@@ -55,7 +58,8 @@ export class AppSettings {
     this.propSet(AppSettingsProps.userName, value);
   }
 
-  constructor() {}
+  constructor() {
+  }
 
   /**
    * Return a property. Loads it from this service first if available, if not looks in localstorage, if not there either return null
@@ -63,7 +67,16 @@ export class AppSettings {
    * @param location - Location of locally stored prop, either sessionStorage or localStorage
    */
   private propGet(propKey: string, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
-    return window[location].getItem(propKey) || null;
+    const prop = environment.settings.obfuscate ? StringUtils.obfuscateAdd(propKey) : propKey;
+
+    let value = window[location].getItem(prop) || null;
+    // Obfuscate and pad
+    if (value && environment.settings.obfuscate) {
+      value = StringUtils.obfuscateRemove(window[location].getItem(prop));
+      value = StringUtils.trim(value, 10, 10);
+    }
+
+    return value;
   }
 
   /**
@@ -71,11 +84,21 @@ export class AppSettings {
    * @param prop - App settings property
    * @param location - Location of locally stored prop, either sessionStorage or localStorage
    */
-  private propSet(prop: string, value: string | null, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
+  private propSet(propKey: string, value: string | null, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
+    let prop = propKey;
+    let val = value;
+    // Obfuscate and pad
+    if (value && environment.settings.obfuscate) {
+      prop = StringUtils.obfuscateAdd(propKey);
+      val = StringUtils.pad(val, 10, 10);
+      val = StringUtils.obfuscateAdd(value);
+    }
+
     if (value) {
-      window[location].setItem(prop, value);
+      window[location].setItem(prop, val);
     } else {
       window[location].removeItem(prop);
     }
   }
+
 }
