@@ -16,7 +16,9 @@ type Propkey = keyof typeof AppSettingsProps;
 // Getter/setters for app settings. Will read/write to app settings and on app load will try to reload from localstorage/sessionstorage
 @Injectable()
 export class AppSettings {
+  /** Property to store app settings in local or session storage */
   private localProp = 'settings';
+  /** If obfusicated, pad settings with this many characters */
   private pad = 100;
   private localStorage: { [key in AppSettingsProps]?: string } = {};
   private sessionStorage: { [key in AppSettingsProps]?: string } = {};
@@ -44,7 +46,7 @@ export class AppSettings {
     this.propSet(AppSettingsProps.apiUrl, value);
   }
 
-  /** Username */
+  /** Loan number */
   private _lnkey: string | null = null;
   /** Username */
   public get lnkey(): string | null {
