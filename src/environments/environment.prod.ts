@@ -20,6 +20,8 @@ export const environment = {
     enableAppComms: true,
     /** Should lazy loaded routes be preloaded on app instantiation? If false will be loaded on demand */
     preloadRoutes: false,
+    /** Should data that is written to localstorage (such as app settings and store state) be obfuscated? */
+    obfuscate: true,
   },
   domains: {
     /** If App Comms is enabled, whitelist domains to accept messages from here */

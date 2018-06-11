@@ -46,26 +46,6 @@ export const APP_COMPONENTS = [
   QaComponent,
 ];
 
-// Components
-export const APP_PROVIDERS = [
-  AppSettings, // App settings
-  AppConfigService, // App config/env settings
-
-  HttpInterceptorService,
-
-  // Global error handling
-  {
-    provide: ErrorHandler,
-    useClass: GlobalErrorHandler,
-  },
-  // HTTP interceptor
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttpInterceptorService,
-    multi: true,
-  },
-];
-
 @NgModule({
   declarations: [APP_COMPONENTS],
   imports: [
@@ -83,8 +63,28 @@ export const APP_PROVIDERS = [
     SharedModule.forRoot(),
   ],
   providers: [
-    APP_PROVIDERS,
-    { provide: APP_INITIALIZER, useFactory: AppInit, deps: [AppSettings, AppConfigService], multi: true },
+    AppSettings, // App settings
+    AppConfigService, // App config/env settings
+
+    // Global error handling
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    },
+    // HTTP interceptor for auth
+    HttpInterceptorService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true,
+    },
+    // App initializer for startup
+    {
+      provide: APP_INITIALIZER,
+      useFactory: AppInit,
+      deps: [AppSettings, AppConfigService],
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
   entryComponents: [],
