@@ -28,6 +28,7 @@ export class UIStoreService {
       let str = window.localStorage.getItem('ui');
       // Remove obfusucation if is set
       if (environment.settings.obfuscate) {
+        str = StringUtils.charShift(str, -10);
         str = StringUtils.obfuscateRemove(str);
         str = StringUtils.trim(str, this.pad, this.pad);
       }
@@ -38,6 +39,8 @@ export class UIStoreService {
 
     // On UI store changes, persist to localstorage
     this.select.saveState$.subscribe((uiState: AppStore.Ui) => this.storeStateSave(uiState));
+
+    
   }
 
   /**
@@ -82,6 +85,7 @@ export class UIStoreService {
       if (environment.settings.obfuscate) {
         str = StringUtils.pad(str, this.pad, this.pad);
         str = StringUtils.obfuscateAdd(str);
+        str = StringUtils.charShift(str, 10);
       }
       // Set to localstorage
       window.localStorage.setItem('ui', str);
