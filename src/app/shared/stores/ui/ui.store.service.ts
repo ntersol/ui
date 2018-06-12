@@ -39,8 +39,6 @@ export class UIStoreService {
 
     // On UI store changes, persist to localstorage
     this.select.saveState$.subscribe((uiState: AppStore.Ui) => this.storeStateSave(uiState));
-
-    
   }
 
   /**
@@ -64,7 +62,7 @@ export class UIStoreService {
   /**
    *  Reload the latest UI state from localstorage
    */
-  public storeStateRestore = (uiState: AppStore.Ui) => {
+  public storeStateRestore(uiState: AppStore.Ui) {
     this.store.dispatch(UIStoreActions.REHYDRATE(uiState));
   }
 

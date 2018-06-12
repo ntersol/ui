@@ -83,9 +83,13 @@ export class StringUtils {
     return str;
   }
 
-  // Hello World
+  /**
+   * Shifts the characters in a string to new ones based on the offset amount
+   * @param str
+   * @param offsetAmount
+   */
   static charShift(str: string, offsetAmount: number = 1) {
-    const charsList = ' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-=[{]}\|;:",<.>/?';
+    const charsList = ' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-=[{]}|;:",<.>/?';
     let strNew = '';
 
     // Loop through all the chars in the string
@@ -94,7 +98,7 @@ export class StringUtils {
       const charCurrent = str.charAt(i);
       // Position of current character in charList
       let charNewIndex = charsList.indexOf(charCurrent);
-      
+
       // Make sure the character is in the charsList
       if (charNewIndex !== -1) {
         // If the character index plus the offset exceed the string length, get it to wrap via modulus
@@ -110,15 +114,12 @@ export class StringUtils {
 
         // Get the new offset character from charsList, add to string
         strNew += charsList.charAt(charNewIndex);
-
       } else {
         // If char is not in the charList, don't shift it
         strNew += charCurrent;
       }
-
     }
 
     return strNew;
   }
-
 }
