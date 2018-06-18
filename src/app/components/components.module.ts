@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // Mello Labs Tools
 import { ApiToolsModule } from '@mello-labs/api-tools';
 import { FormToolsModule } from '@mello-labs/form-tools';
+import { ModalsModule } from './modals/modals.module';
 
 // Components import
 import {
@@ -21,12 +22,6 @@ import {
   LaunchModalComponent,
 } from '$components';
 
-// Modals import
-import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
-
-// Models to include
-export const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];
-
 // Components to include
 export const APP_COMPONENTS = [
   FooterComponent,
@@ -36,8 +31,6 @@ export const APP_COMPONENTS = [
   NavComponent,
   NavSearchComponent,
   LaunchModalComponent,
-
-  ...APP_MODALS,
 ];
 
 @NgModule({
@@ -47,6 +40,7 @@ export const APP_COMPONENTS = [
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    ModalsModule.forRoot(),
 
     // Vendor
     NgbModule.forRoot(),
@@ -58,7 +52,6 @@ export const APP_COMPONENTS = [
   providers: [],
   declarations: [APP_COMPONENTS],
   exports: [APP_COMPONENTS, FormsModule, ReactiveFormsModule, NgbModule, ApiToolsModule, FormToolsModule],
-  entryComponents: [APP_MODALS],
 })
 export class ComponentsModule {
   static forRoot(): ModuleWithProviders {
