@@ -12,10 +12,13 @@ import { UiSelectorsService } from './ui.selectors.service';
   providedIn: 'root',
 })
 export class UIStoreService {
-  private pad = 100;
-
+  /** Location of UI store in localstorage */
+  public uiProp = 'ui';
   /** Holds the reference to a window opened programmatically. Used by appComms for multiscreen state */
   public screen: Window;
+
+  /** Obfuscate reference */
+  private pad = 100;
 
   constructor(
     private store: Store<AppStore.Root>,
@@ -23,14 +26,21 @@ export class UIStoreService {
     public select: UiSelectorsService,
   ) {
     // Rehydrate UI state from localstorage on instantiation
-    if (window.localStorage.getItem('ui')) {
+    if (window.localStorage.getItem(this.uiProp)) {
       // Get UI state from localstorage
-      let str = window.localStorage.getItem('ui');
+      let str = window.localStorage.getItem(this.uiProp);
       // Remove obfusucation if is set
       if (environment.settings.obfuscate) {
-        str = StringUtils.charShift(str, -10);
-        str = StringUtils.obfuscateRemove(str);
-        str = StringUtils.trim(str, this.pad, this.pad);
+        // If de-obfuscating errors out, remove ui store state and fail gracefully
+        try {
+          str = StringUtils.charShift(str, -10);
+          str = StringUtils.obfuscateRemove(str);
+          str = StringUtils.trim(str, this.pad, this.pad);
+        } catch (err) {
+          console.error(err)
+          window.localStorage.removeItem(this.uiProp);
+        }
+        
       }
       // Convert to JSON
       const uiState: AppStore.Ui = JSON.parse(str);
@@ -86,7 +96,7 @@ export class UIStoreService {
         str = StringUtils.charShift(str, 10);
       }
       // Set to localstorage
-      window.localStorage.setItem('ui', str);
+      window.localStorage.setItem(this.uiProp, str);
     }
   }
 }
