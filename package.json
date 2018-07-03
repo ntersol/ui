@@ -1,5 +1,5 @@
 {
-  "name": "mello-labs-angular-starter",
+  "name": "mello-labs-processor-dashboard",
   "version": "2.2.0",
   "license": "MIT",
   "scripts": {
@@ -10,7 +10,7 @@
     "build": "ng build",
     "prod": "http-server ./dist -o -g",
     "build:prod": "ng build --target=production --environment=prod",
-    "deploy": "ng build --prod --base-href /mello-labs-angular-starter/ && angular-cli-ghpages --no-silent",
+    "deploy": "ng build --prod --base-href /mello-labs-processor-dashboard/ && angular-cli-ghpages --no-silent",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
