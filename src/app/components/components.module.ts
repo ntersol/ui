@@ -40,10 +40,12 @@ export const APP_COMPONENTS = [
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    ModalsModule.forRoot(),
 
     // Vendor
     NgbModule.forRoot(),
+
+    // Modals
+    ModalsModule.forRoot(),
 
     // Mello Labs Tools
     ApiToolsModule.forRoot(),
@@ -51,7 +53,7 @@ export const APP_COMPONENTS = [
   ],
   providers: [],
   declarations: [APP_COMPONENTS],
-  exports: [APP_COMPONENTS, FormsModule, ReactiveFormsModule, NgbModule, ApiToolsModule, FormToolsModule],
+  exports: [APP_COMPONENTS],
 })
 export class ComponentsModule {
   static forRoot(): ModuleWithProviders {

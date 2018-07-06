@@ -37,10 +37,9 @@ export class UIStoreService {
           str = StringUtils.obfuscateRemove(str);
           str = StringUtils.trim(str, this.pad, this.pad);
         } catch (err) {
-          console.error(err)
+          console.error(err);
           window.localStorage.removeItem(this.uiProp);
         }
-        
       }
       // Convert to JSON
       const uiState: AppStore.Ui = JSON.parse(str);

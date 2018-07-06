@@ -17,6 +17,7 @@
     "outDir": "./dist/out-tsc",
     "paths": {
       "$routes": [ "./src/app/routes" ],
+      "$site": [ "./src/app/site.module" ],
       "$shared": [ "./src/app/shared" ],
       "$components": [ "./src/app/components" ],
       "$modals": [ "./src/app/components/modals" ],

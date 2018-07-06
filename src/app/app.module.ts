@@ -28,13 +28,11 @@ import {
   // Interceptors
   HttpInterceptorService,
   GlobalErrorHandler,
-
-  // Shared Module
-  SharedModule,
 } from '$shared';
 
 // Non-lazy loaded routes
 import { LoginComponent, NoContentComponent, QaComponent } from '$routes';
+import { SiteModule } from '$site';
 
 // Components
 export const APP_COMPONENTS = [
@@ -59,8 +57,7 @@ export const APP_COMPONENTS = [
     StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
 
-    // Shared Module
-    SharedModule.forRoot(),
+    SiteModule.forRoot(),
   ],
   providers: [
     AppSettings, // App settings
