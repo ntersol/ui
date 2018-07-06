@@ -8,7 +8,7 @@ import { UIStoreService } from '$ui';
 import { Models } from '$models';
 import { DesktopUtils } from '$utils';
 import { columns } from './columns';
-import { HomeService } from 'src/app/routes/home/shared/home.service';
+import { HomeService } from './shared/home.service';
 
 @Component({
   selector: 'app-home',
@@ -37,7 +37,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     primaryKey: 'id',
   };
 
-  // public state: Datagrid.State = {};
   public columns: Datagrid.Column[] = columns;
 
   /** Hold subs for unsub */
