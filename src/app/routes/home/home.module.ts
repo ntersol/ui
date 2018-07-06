@@ -6,12 +6,14 @@ import { SiteModule } from '$site'; // Site modules
 // import { DatagridModule } from '@mello-labs/datagrid'; // Non-lazy load implementation
 
 // Home component and routing
-import { HomeComponent } from './home.component';
 import { routing } from './home.routes';
+import { HomeComponent } from './home.component';
+import { HomeService } from './shared/home.service';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, DatagridLazyModule],
   declarations: [HomeComponent],
+  providers: [HomeService],
   exports: [],
   entryComponents: [],
 })
