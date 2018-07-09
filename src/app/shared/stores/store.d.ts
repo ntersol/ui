@@ -6,10 +6,10 @@ export declare namespace AppStore {
    *************************/
 
   /** API Store */
-  interface Api {
+  export interface Api {
     //users?: any[]; // Store response
     // Example of Store typing with mapped response
-    users: Models.User[] | null;
+    users: ApiState<Models.User[]> | null;
   }
 
   /** The API Map */
@@ -18,7 +18,7 @@ export declare namespace AppStore {
   }
 
   /** UI Store */
-  interface Ui {
+  export interface Ui {
     /** A static snapshot of the UI store, used mainly for multiscreen usage */
     saveState: Ui | null;
     tabsActive: { [key: string]: string };
@@ -62,14 +62,21 @@ export declare namespace AppStore {
     users: ApiStatus | null;
   }
 
-  interface ApiStatus {
-    loading: boolean;
-    loaded: boolean;
-    loadError: any;
+  export interface ApiState<T> {
+    loading?: boolean;
+    data?: T;
+    error?: any;
+    modifying?: boolean;
+  }
 
-    modifying: boolean;
-    modified: boolean;
-    modifyError: any;
+  interface ApiStatus {
+    loading?: boolean;
+    loaded?: boolean;
+    loadError?: any;
+
+    modifying?: boolean;
+    modified?: boolean;
+    modifyError?: any;
   }
 
   /** Maps the relationship between the store and the API. Automates all the interaction. */

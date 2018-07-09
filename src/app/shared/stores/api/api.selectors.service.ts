@@ -18,16 +18,17 @@ const selectors = {
     users => {
       if (users) {
         let usersNew: Models.User[] = [];
-        times(20, () => (usersNew = [...usersNew, ...users]));
-        return usersNew.map((user, i) => Object.assign({}, user, { id: i, new: random(0, 10) > 3 ? true : false }));
+        times(20, () => (usersNew = [...usersNew, ...users.data]));
+        const usersNew2 = usersNew.map((user, i) => Object.assign({}, user, { id: i, new: random(0, 10) > 3 ? true : false }));
+        return { ...users, data: usersNew2 };
       }
     },
   ),
   usersMapped: createSelector(
     (state: AppStore.Root) => state.api.users,
     users => {
-      if (users) {
-        return keyBy(users, 'id');
+      if (users.data) {
+        return keyBy(users.data, 'id');
       }
     },
   ),

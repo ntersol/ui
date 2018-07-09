@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ApiToolsModule } from '@mello-labs/api-tools';
+// import { ApiToolsModule } from '@mello-labs/api-tools';
 import { FormToolsModule } from '@mello-labs/form-tools';
 
 import { SharedModule } from '$shared';
@@ -19,7 +19,7 @@ import { ComponentsModule } from '$components';
     // Vendors
     NgbModule.forRoot(),
     // Mello Labs Tools
-    ApiToolsModule.forRoot(),
+    // ApiToolsModule.forRoot(),
     FormToolsModule.forRoot(),
     // Global components
     ComponentsModule.forRoot(),
@@ -32,7 +32,7 @@ import { ComponentsModule } from '$components';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    ApiToolsModule,
+    // ApiToolsModule,
     FormToolsModule,
     SharedModule,
     ComponentsModule,

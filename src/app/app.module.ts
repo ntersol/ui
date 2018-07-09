@@ -9,8 +9,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
 
 // Mello Labs Tools
-import { ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
+import { ApiStatusReducer } from '@mello-labs/api-tools';
 import { UIStoreReducer } from '$ui';
+import { ApiReducer } from '$api';
 
 // Main entrypoint component
 import { AppComponent } from './app.component';

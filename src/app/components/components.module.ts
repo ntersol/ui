@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Mello Labs Tools
-import { ApiToolsModule } from '@mello-labs/api-tools';
+// import { ApiToolsModule } from '@mello-labs/api-tools';
 import { FormToolsModule } from '@mello-labs/form-tools';
 import { ModalsModule } from './modals/modals.module';
 
@@ -21,6 +21,7 @@ import {
   NavSearchComponent,
   LaunchModalComponent,
 } from '$components';
+import { ApiStateComponent } from './api-state/api-state.component';
 
 // Components to include
 export const APP_COMPONENTS = [
@@ -31,6 +32,8 @@ export const APP_COMPONENTS = [
   NavComponent,
   NavSearchComponent,
   LaunchModalComponent,
+
+  ApiStateComponent
 ];
 
 @NgModule({
@@ -48,7 +51,7 @@ export const APP_COMPONENTS = [
     ModalsModule.forRoot(),
 
     // Mello Labs Tools
-    ApiToolsModule.forRoot(),
+    //ApiToolsModule.forRoot(),
     FormToolsModule.forRoot(),
   ],
   providers: [],

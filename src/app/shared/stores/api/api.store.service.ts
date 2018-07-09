@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ApiHttpService, ApiStatusActions } from '@mello-labs/api-tools';
+import { ApiStatusActions } from '@mello-labs/api-tools';
 
 import { AppStore } from '$shared';
 import { ApiSelectorsService } from './api.selectors.service';
 import { ApiMap } from './api.map';
 
 import { Models } from '$models';
+import { ApiHttpService } from '../http.base.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class ApiService extends ApiHttpService {
       this.getStore<Models.User>(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, update),
     post: (user: Models.User) => this.postStore<Models.User>(ApiMap.users.endpoint, ApiMap.users, user),
     put: (user: Models.User) => this.putStore<Models.User>(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
-    delete: (user: Models.User) => this.deleteStore(ApiMap.users.endpoint + '/' + user.id, ApiMap.users, user),
+    delete: (user: Models.User) => this.deleteStore(ApiMap.users.endpoint + '/' + user.id + '123', ApiMap.users, user),
   };
 
   constructor(
@@ -34,7 +35,7 @@ export class ApiService extends ApiHttpService {
     super(<any>http, <any>store, <any>router);
 
     // Output store changes to console
-    // this.store.subscribe(store => console.log(JSON.parse(JSON.stringify(store))));
+    this.store.subscribe(store2 => console.log(JSON.parse(JSON.stringify(store2.api))));
   }
 
   /**
