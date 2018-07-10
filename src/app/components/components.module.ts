@@ -1,14 +1,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-// 3rd Party Tools
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { VendorModule } from '../vendor.module';
 
-// Mello Labs Tools
-// import { ApiToolsModule } from '@mello-labs/api-tools';
-import { FormToolsModule } from '@mello-labs/form-tools';
 import { ModalsModule } from './modals/modals.module';
 
 // Components import
@@ -40,19 +34,12 @@ export const APP_COMPONENTS = [
   imports: [
     // Angular
     CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-
-    // Vendor
-    NgbModule.forRoot(),
-
+    
     // Modals
     ModalsModule.forRoot(),
 
-    // Mello Labs Tools
-    //ApiToolsModule.forRoot(),
-    FormToolsModule.forRoot(),
+    // Vendors
+    VendorModule
   ],
   providers: [],
   declarations: [APP_COMPONENTS],
