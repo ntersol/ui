@@ -69,12 +69,12 @@
                 [activeId]="ui.select.tabActive$('HOME') | async">
       <ngb-tab id="tab-1">
         <ng-template ngbTabTitle>
-          <i class="fa fa-user-plus" aria-hidden="true"></i> New Users <small><em>({{ routeData.users.data | filter: true : 'new' | count }})</em></small>
+          <i class="fa fa-user-plus" aria-hidden="true"></i> New Users <small><em>({{ routeData.users.data | count }})</em></small>
         </ng-template>
         <ng-template ngbTabContent>
           <div style="position:relative;height:calc(100vh - 190px)">
             <datagrid #datagrid
-                      [rows]="routeData.users.data | filter: true : 'new'"
+                      [rows]="routeData.users.data"
                       [columns]="columns"
                       [state]="{}"
                       [options]="options"
@@ -100,13 +100,13 @@
       </ngb-tab>
       <ngb-tab id="tab-2">
         <ng-template ngbTabTitle>
-          <i class="fa fa-users" aria-hidden="true"></i> Returning Users <small><em>({{ routeData?.users?.data | filter: false : 'new' | count }})</em></small>
+          <i class="fa fa-users" aria-hidden="true"></i> Returning Users <small><em>({{ routeData?.users?.data | count }})</em></small>
         </ng-template>
         <ng-template ngbTabContent>
           <div style="position:relative;height:calc(100vh - 190px)">
 
             <datagrid #datagrid
-                      [rows]="routeData.users.data | filter: false : 'new'"
+                      [rows]="routeData.users.data"
                       [columns]="columns"
                       [state]="{}"
                       [options]="options"

@@ -3,7 +3,7 @@ import { ApiUtils } from '$utils';
 import { AppStore } from '../store';
 
 export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}, { type, payload }: any) {
-  // console.log(type, payload);
+  // console.log('ApiReducer', type, payload);
 
   let srcData: any;
 
@@ -19,17 +19,23 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
 
     // State Change: Loading
     case ApiStatusActions.STATE_LOADING:
-      state[payload.apiMap.storeProperty] = { ...state[payload.apiMap.storeProperty], loading: true, error: false };
+      state[payload.apiMap.storeProperty] = {
+        ...state[payload.apiMap.storeProperty], loading: true, error: false
+      };
       break;
 
     // State Change: Modifying via put/post/delete
     case ApiStatusActions.STATE_MODIFYING:
-      state[payload.apiMap.storeProperty] = { ...state[payload.apiMap.storeProperty], modifying: true, error: false };
+      state[payload.apiMap.storeProperty] = {
+        ...state[payload.apiMap.storeProperty], modifying: true, error: false, success: false
+      };
       break;
 
     // State Change: Error
     case ApiStatusActions.STATE_ERROR:
-      state[payload.apiMap.storeProperty] = { ...state[payload.apiMap.storeProperty], modifying: false, loading: false, error: payload.data };
+      state[payload.apiMap.storeProperty] = {
+        ...state[payload.apiMap.storeProperty], modifying: false, loading: false, error: payload.data
+      };
       break;
 
     // GET
@@ -65,7 +71,9 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
         payload.apiMap.map && payload.apiMap.mapSrc ? payload.apiMap.map(srcData) : srcData;
 
       // Update State
-      state[payload.apiMap.storeProperty] = { ...state[payload.apiMap.storeProperty], loading: false, error: false, modifying: false };
+      state[payload.apiMap.storeProperty] = {
+        ...state[payload.apiMap.storeProperty], loading: false, error: false, modifying: false, success: true
+      };
       break;
 
     // POST
@@ -93,7 +101,9 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
         payload.apiMap.map && payload.apiMap.mapSrc ? payload.apiMap.map(srcData) : srcData;
 
       // Update State
-      state[payload.apiMap.storeProperty] = { ...state[payload.apiMap.storeProperty], loading: false, error: false, modifying: false };
+      state[payload.apiMap.storeProperty] = {
+        ...state[payload.apiMap.storeProperty], loading: false, error: false, modifying: false, success: true
+      };
       break;
 
     // PUT
@@ -114,7 +124,9 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
         payload.apiMap.map && payload.apiMap.mapSrc ? payload.apiMap.map(srcData) : srcData;
 
       // Update State
-      state[payload.apiMap.storeProperty] = { ...state[payload.apiMap.storeProperty], loading: false, error: false, modifying: false };
+      state[payload.apiMap.storeProperty] = {
+        ...state[payload.apiMap.storeProperty], loading: false, error: false, modifying: false, success: true
+      };
       break;
 
     // DELETE
@@ -135,7 +147,9 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
         payload.apiMap.map && payload.apiMap.mapSrc ? payload.apiMap.map(srcData) : srcData;
 
       // Update State
-      state[payload.apiMap.storeProperty] = { ...state[payload.apiMap.storeProperty], loading: false, error: false, modifying: false };
+      state[payload.apiMap.storeProperty] = {
+        ...state[payload.apiMap.storeProperty], loading: false, error: false, modifying: false, success: true
+      };
       break;
   }
 

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Observable, of, combineLatest } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, share } from 'rxjs/operators';
 
 import { ApiStatusActions } from './api/api.actions';
@@ -37,7 +37,7 @@ export class ApiHttpService {
    * @param updateCache - Refresh the version in the cache
    */
   protected getStore<T>(url: string, apiMap?: AppStore.ApiMap, updateCache = false): Observable<T> {
-    console.log('getStore');
+
     // If this request is not in the cache or updateCache was requested (default behavior), load content into cache
     if (this.cache[url] == null || updateCache) {
 
@@ -211,67 +211,6 @@ export class ApiHttpService {
     );
   } // end post
 
-  /**
-   * Returns a single unified API status for one or more API status calls.
-   * Useful for when the app needs multiple http calls and you only want a single status for all
-   * @param statuses - A single observable or an array of observables
-   */
-  public getStatuses(statuses: Observable<AppStore.ApiStatus> | Observable<AppStore.ApiStatus>[]) {
-    // If this is an array, pass the array, if single load into array for combineLatest
-    const statusesNew: Observable<AppStore.ApiStatus>[] = Array.isArray(statuses) ? statuses : [statuses];
-
-    return combineLatest(statusesNew).pipe(
-      map(status => {
-        if (status) {
-          // Set default globals. Used to create final end state
-          let loading = false;
-          let loaded = false;
-          let loadError = false;
-
-          // Loop through all input statuses and rollup individual status to global status
-          status.forEach(statusSingle => {
-            if (statusSingle && statusSingle.loading) {
-              loading = true;
-            }
-            if (statusSingle && statusSingle.loaded) {
-              loaded = true;
-            }
-            if (statusSingle && statusSingle.loadError) {
-              loadError = statusSingle.loadError;
-            }
-          });
-
-          // Figure out which status state to return
-          // If any errors, return an error state
-          if (loadError) {
-            return {
-              loading: false,
-              loaded: false,
-              loadError: loadError,
-            };
-          } else if (loading) {
-            // If no errors but any endpoint is still loading, return loading
-            return {
-              loading: true,
-              loaded: false,
-              loadError: false,
-            };
-          } else if (loaded && !loading && !loadError) {
-            // If all endpoints return loaded and no errors of loading, return loaded
-            return {
-              loading: false,
-              loaded: true,
-              loadError: false,
-            };
-          } else {
-            return null;
-          }
-        } else {
-          return null;
-        }
-      }),
-    );
-  }
 
   /**
    * When an authentication check fails

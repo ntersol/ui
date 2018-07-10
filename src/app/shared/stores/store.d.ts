@@ -39,12 +39,6 @@ export declare namespace AppStore {
   interface Root {
     api: Api;
     ui: Ui;
-    apiStatus: ApiStatuses;
-  }
-
-  /** API status store */
-  interface ApiStatuses {
-    [key: string]: ApiStatus;
   }
 
   /** Example pattern for data that is mapped before being passed into the store */
@@ -67,16 +61,7 @@ export declare namespace AppStore {
     data?: T;
     error?: any;
     modifying?: boolean;
-  }
-
-  interface ApiStatus {
-    loading?: boolean;
-    loaded?: boolean;
-    loadError?: any;
-
-    modifying?: boolean;
-    modified?: boolean;
-    modifyError?: any;
+    success?: boolean;
   }
 
   /** Maps the relationship between the store and the API. Automates all the interaction. */

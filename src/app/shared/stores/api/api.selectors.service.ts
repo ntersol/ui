@@ -1,29 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Store, createSelector } from '@ngrx/store';
 
-import { Models } from '$models';
+// import { Models } from '$models';
 import { AppStore } from '$shared';
-import { ApiProps } from './api.props';
-import { Observable, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+// import { Observable, combineLatest } from 'rxjs';
+// import { map } from 'rxjs/operators';
 
-const times = require('lodash/times');
 const keyBy = require('lodash/keyBy');
-const random = require('lodash/random');
 
 // Mapped/source selectors for reuse or transforming data
 const selectors = {
-  usersDuped: createSelector(
-    (state: AppStore.Root) => state.api.users,
-    users => {
-      if (users) {
-        let usersNew: Models.User[] = [];
-        times(20, () => (usersNew = [...usersNew, ...users.data]));
-        const usersNew2 = usersNew.map((user, i) => Object.assign({}, user, { id: i, new: random(0, 10) > 3 ? true : false }));
-        return { ...users, data: usersNew2 };
-      }
-    },
-  ),
   usersMapped: createSelector(
     (state: AppStore.Root) => state.api.users,
     users => {
@@ -38,13 +24,8 @@ const selectors = {
   providedIn: 'root',
 })
 export class ApiSelectorsService {
-  public users$ = this.store.select(selectors.usersDuped);
+  public users$ = this.store.select(store => store.api.users);
   public usersMapped$ = this.store.select(selectors.usersMapped);
-
-  /** Get the API data using api props */
-  public getData$ = (apiProp: ApiProps) => this.store.select(store => store.api[apiProp]);
-  /** Get the API state using api props */
-  public getState$ = (apiProp: ApiProps) => this.store.select(store => store.apiStatus[apiProp]);
 
   constructor(private store: Store<AppStore.Root>) {}
 
@@ -56,8 +37,8 @@ export class ApiSelectorsService {
       this.api.select.getState$(ApiProps.productType),
     ])
    * @param statuses - A single observable or an array of observables
-   */
-  public getStatuses(statuses: Observable<AppStore.ApiStatus>[]) {
+  
+  public getStatuses(statuses: Observable<AppStore.ApiState>[]) {
     // If this is an array, pass the array, if single load into array for combineLatest
     const statusesNew = Array.isArray(statuses) ? statuses : [statuses];
 
@@ -113,4 +94,5 @@ export class ApiSelectorsService {
       }),
     );
   }
+   */
 }
