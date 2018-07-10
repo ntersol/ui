@@ -45,12 +45,11 @@ export class ApiHttpService {
       this.storeSvc.dispatch({type: ApiStatusActions.STATE_LOADING, payload: { apiMap: apiMap }}); 
       this.cache[url] = this.httpSvc.get(url).pipe(
         map(res => {
-          const data = apiMap.map ? apiMap.map(res) : res;
           this.storeSvc.dispatch({
             type: ApiStatusActions.GET_COMPLETE,
-            payload: { apiMap: apiMap, data: data },
+            payload: { apiMap: apiMap, data: res },
           }); // Load content into store
-          return data;
+          return res;
         }),
         catchError(error => {
           if (error.status === 401 || error.status === 403) {
@@ -187,6 +186,7 @@ export class ApiHttpService {
   protected deleteStore<T>(url: string, apiMap: AppStore.ApiMap, element: T | T[]) {
     // Update store with new state
     this.storeSvc.dispatch({ type: ApiStatusActions.STATE_MODIFYING, payload: { apiMap: apiMap } });
+
     // Delete doesn't natively support a body so this adds it in for deleting collections or other uncommon operations
     return this.httpSvc.request('delete', url, { body: element }).pipe(
       // return this.httpSvc.delete(url, , { body: element }) // Does not work with body, add back in when it does
@@ -211,13 +211,19 @@ export class ApiHttpService {
     );
   } // end post
 
+  /**
+   * Clear the cache
+   */
+  public cacheClear() {
+    this.cache = {};
+  }
 
   /**
    * When an authentication check fails
    * @param error
    */
   private endSession(error: any) {
-    this.cache = {};
+    this.cacheClear();
     window.localStorage.removeItem('token');
     window.sessionStorage.clear();
     this.storeSvc.dispatch({ type: ApiStatusActions.RESET, payload: null }); // Clear out store on errors for security

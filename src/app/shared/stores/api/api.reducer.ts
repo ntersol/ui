@@ -7,6 +7,10 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
 
   let srcData: any;
 
+  if (payload && payload.apiMap && state[payload.apiMap.storeProperty]) {
+    srcData = state[payload.apiMap.storeProperty].data;
+  }
+
   // If an entry does not exist in the store, create it dynamically
   if (payload && payload.apiMap && !state[payload.apiMap.storeProperty]) {
     state[payload.apiMap.storeProperty] = {};
@@ -56,19 +60,9 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
 
     // UPSERT
     case ApiStatusActions.UPSERT_COMPLETE:
-      // If a map and mapSrc element are present, grab the unfiltered content from the mapSrc property.
-      //      Otherwise just get data straight out of the store
-      srcData =
-        payload.apiMap.map && payload.apiMap.mapSrc
-          ? state[payload.apiMap.storeProperty].data[payload.apiMap.mapSrc]
-          : state[payload.apiMap.storeProperty].data;
-
+     
       // Perform UPSERT
-      srcData = ApiUtils.updateRecords(srcData, payload.data, payload.apiMap.uniqueId, 'upsert');
-
-      // If map and mapSrc are present, remap the data before returning it to the store, otherwise just return the store data
-      state[payload.apiMap.storeProperty].data =
-        payload.apiMap.map && payload.apiMap.mapSrc ? payload.apiMap.map(srcData) : srcData;
+      state[payload.apiMap.storeProperty].data = ApiUtils.updateRecords(srcData, payload.data, payload.apiMap.uniqueId, 'upsert');
 
       // Update State
       state[payload.apiMap.storeProperty] = {
@@ -78,13 +72,7 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
 
     // POST
     case ApiStatusActions.POST_COMPLETE:
-      // If a map and mapSrc element are present, grab the unfiltered content from the mapSrc property.
-      //  Otherwise just get data straight out of the store
-      srcData =
-        payload.apiMap.map && payload.apiMap.mapSrc
-        ? state[payload.apiMap.storeProperty].data[payload.apiMap.mapSrc]
-          : state[payload.apiMap.storeProperty].data;
-
+      
       // If destination is an array and response is an array, concat with new data up front
       if (Array.isArray(srcData) && Array.isArray(payload.data)) {
         srcData = [...payload.data, ...srcData];
@@ -97,8 +85,7 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
       }
 
       // If map and mapSrc are present, remap the data before returning it to the store, otherwise just return the store data
-      state[payload.apiMap.storeProperty].data =
-        payload.apiMap.map && payload.apiMap.mapSrc ? payload.apiMap.map(srcData) : srcData;
+      state[payload.apiMap.storeProperty].data = srcData;
 
       // Update State
       state[payload.apiMap.storeProperty] = {
@@ -108,20 +95,9 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
 
     // PUT
     case ApiStatusActions.PUT_COMPLETE:
-      // console.warn('PUT_COMPLETE', payload)
-      // If a map and mapSrc element are present, grab the unfiltered content from the mapSrc property.
-      // Otherwise just get data straight out of the store
-      srcData =
-        payload.apiMap.map && payload.apiMap.mapSrc
-          ? state[payload.apiMap.storeProperty].data[payload.apiMap.mapSrc]
-          : state[payload.apiMap.storeProperty].data;
-
+      
       // Perform REPLACE
-      srcData = ApiUtils.updateRecords(srcData, payload.data, payload.apiMap.uniqueId, 'replace');
-
-      // If map and mapSrc are present, remap the data before returning it to the store, otherwise just return the store data
-      state[payload.apiMap.storeProperty].data =
-        payload.apiMap.map && payload.apiMap.mapSrc ? payload.apiMap.map(srcData) : srcData;
+      state[payload.apiMap.storeProperty].data = ApiUtils.updateRecords(srcData, payload.data, payload.apiMap.uniqueId, 'replace');
 
       // Update State
       state[payload.apiMap.storeProperty] = {
@@ -131,20 +107,9 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
 
     // DELETE
     case ApiStatusActions.DELETE_COMPLETE:
-      // console.warn('Delete Reducer ', payload)
-      // If a map and mapSrc element are present, grab the unfiltered content from the mapSrc property.
-      // Otherwise just get data straight out of the store
-      srcData =
-        payload.apiMap.map && payload.apiMap.mapSrc
-        ? state[payload.apiMap.storeProperty].data[payload.apiMap.mapSrc]
-          : state[payload.apiMap.storeProperty].data;
-
+     
       // Perform DELETE
-      srcData = ApiUtils.updateRecords(srcData, payload.data, payload.apiMap.uniqueId, 'delete');
-
-      // If map and mapSrc are present, remap the data before returning it to the store, otherwise just return the store data
-      state[payload.apiMap.storeProperty] =
-        payload.apiMap.map && payload.apiMap.mapSrc ? payload.apiMap.map(srcData) : srcData;
+      state[payload.apiMap.storeProperty].data = ApiUtils.updateRecords(srcData, payload.data, payload.apiMap.uniqueId, 'delete');
 
       // Update State
       state[payload.apiMap.storeProperty] = {
