@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ApiStatusActions } from '@mello-labs/api-tools';
 
 import { AppStore } from '$shared';
-import { ApiSelectorsService } from './api.selectors.service';
-import { ApiMap } from './api.map';
-
 import { Models } from '$models';
+
 import { ApiHttpService } from '../http.base.service';
+import { ApiSelectorsService } from './api.selectors.service';
+import { ApiStatusActions } from './api.actions';
+import { ApiMap } from './api.map';
 
 @Injectable({
   providedIn: 'root',

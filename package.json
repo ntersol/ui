@@ -38,7 +38,6 @@
     "@angular/platform-browser-dynamic": "6.0.3",
     "@angular/router": "6.0.3",
     "@angular/service-worker": "6.0.3",
-    "@mello-labs/api-tools": "4.0.0",
     "@mello-labs/datagrid": "2.0.0",
     "@mello-labs/form-tools": "2.0.0",
     "@mello-labs/ui": "1.2.0",

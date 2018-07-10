@@ -9,7 +9,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
 
 // Mello Labs Tools
-import { ApiStatusReducer } from '@mello-labs/api-tools';
 import { UIStoreReducer } from '$ui';
 import { ApiReducer } from '$api';
 
@@ -55,7 +54,7 @@ export const APP_COMPONENTS = [
       preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,
     }),
 
-    StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX
+    StoreModule.forRoot({ api: ApiReducer, ui: UIStoreReducer }), // NGRX
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
 
     SiteModule.forRoot(),
