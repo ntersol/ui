@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, map, share } from 'rxjs/operators';
 
-import { ApiStatusActions } from './api/api.actions';
+import { ApiStatusActions, ApiStoreActions } from './api/api.actions';
 
 import { AppStore } from './store';
 
@@ -40,15 +40,12 @@ export class ApiHttpService {
 
     // If this request is not in the cache or updateCache was requested (default behavior), load content into cache
     if (this.cache[url] == null || updateCache) {
-
-      // Update store with new state
-      this.storeSvc.dispatch({type: ApiStatusActions.STATE_LOADING, payload: { apiMap: apiMap }}); 
+      // Set loading
+      this.storeSvc.dispatch(ApiStoreActions.STATE_LOADING({ apiMap: apiMap }));
+      // Load into cache, make get request
       this.cache[url] = this.httpSvc.get(url).pipe(
         map(res => {
-          this.storeSvc.dispatch({
-            type: ApiStatusActions.GET_COMPLETE,
-            payload: { apiMap: apiMap, data: res },
-          }); // Load content into store
+          this.storeSvc.dispatch(ApiStoreActions.GET_COMPLETE({ apiMap: apiMap, data: res }));
           return res;
         }),
         catchError(error => {
@@ -56,10 +53,7 @@ export class ApiHttpService {
             error.errorMsg = 'Please log in ';
             return this.endSession(error);
           } else {
-            this.storeSvc.dispatch({
-              type: ApiStatusActions.STATE_ERROR,
-              payload: { apiMap: apiMap, payload: error },
-            }); // Update store with new state
+            this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR({ apiMap: apiMap, data: error }));
             return of(error);
           }
         }),
@@ -82,16 +76,18 @@ export class ApiHttpService {
   protected postStore<T>(url: string, apiMap: AppStore.ApiMap, data: T): Observable<T> {
 
     // Update store with new state
-    this.storeSvc.dispatch({ type: ApiStatusActions.STATE_MODIFYING, payload: { apiMap: apiMap }});
+    this.storeSvc.dispatch(ApiStoreActions.STATE_MODIFYING({ apiMap: apiMap }));
 
     return this.httpSvc.post(url, data).pipe(
       map((res: any) => {
         // Check if the response has a payload or not
         const dataNew = res ? res : data;
-        this.storeSvc.dispatch({
-          type: ApiStatusActions.POST_COMPLETE,
-          payload: { apiMap: apiMap, data: dataNew },
-        }); // Load content into store
+
+        this.storeSvc.dispatch(ApiStoreActions.POST_COMPLETE({ apiMap: apiMap, data: dataNew }));
+        //this.storeSvc.dispatch({
+        //  type: ApiStatusActions.POST_COMPLETE,
+        //  payload: { apiMap: apiMap, data: dataNew },
+        //}); // Load content into store
         return dataNew;
       }),
       catchError(error => {
@@ -99,9 +95,7 @@ export class ApiHttpService {
           error.errorMsg = 'Please log in ';
           return this.endSession(error);
         } else {
-          error.errorMsg = 'Unable to create ' + apiMap.storeProperty;
-          // Set status to error
-          this.storeSvc.dispatch({ type: ApiStatusActions.STATE_ERROR, payload: { apiMap: apiMap, data: error } });
+          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR({ apiMap: apiMap, data: error }));
           return of(error);
         }
       }),
@@ -116,16 +110,18 @@ export class ApiHttpService {
   protected upsertStore<T>(url: string, apiMap: AppStore.ApiMap, data: T | T[]): Observable<T> {
 
     // Update store with new state
-    this.storeSvc.dispatch({ type: ApiStatusActions.STATE_MODIFYING, payload: { apiMap: apiMap } });
+    this.storeSvc.dispatch(ApiStoreActions.STATE_MODIFYING({ apiMap: apiMap }));
 
     return this.httpSvc.put(url, data).pipe(
       map(res => {
         // Check if the response has a payload or not, if not then this is an upSert
         const dataNew = res ? res : data;
-        this.storeSvc.dispatch({
-          type: ApiStatusActions.UPSERT_COMPLETE,
-          payload: { apiMap: apiMap, data: dataNew },
-        }); // Load content into store
+        this.storeSvc.dispatch(ApiStoreActions.UPSERT_COMPLETE({ apiMap: apiMap, data: dataNew }));
+
+        //this.storeSvc.dispatch({
+        //  type: ApiStatusActions.UPSERT_COMPLETE,
+        //  payload: { apiMap: apiMap, data: dataNew },
+        //}); // Load content into store
         return dataNew;
       }),
       catchError(error => {
@@ -135,9 +131,7 @@ export class ApiHttpService {
           error.errorMsg = 'Please log in ';
           return this.endSession(error);
         } else {
-          error.errorMsg = 'Unable to update ' + apiMap.storeProperty;
-          // Set status to error
-          this.storeSvc.dispatch({ type: ApiStatusActions.STATE_ERROR, payload: { apiMap: apiMap, data: error } });
+          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR({ apiMap: apiMap, data: error }));
           return of(error);
         }
       }),
@@ -152,16 +146,17 @@ export class ApiHttpService {
   protected putStore<T>(url: string, apiMap: AppStore.ApiMap, data: T | T[]): Observable<T> {
 
     // Update store with new state
-    this.storeSvc.dispatch({ type: ApiStatusActions.STATE_MODIFYING, payload: { apiMap: apiMap } });
+    this.storeSvc.dispatch(ApiStoreActions.STATE_MODIFYING({ apiMap: apiMap }));
 
     return this.httpSvc.put(url, data).pipe(
       map(res => {
         // Check if the response has a payload or not,
         const dataNew = res ? res : data;
-        this.storeSvc.dispatch({
-          type: ApiStatusActions.PUT_COMPLETE,
-          payload: { apiMap: apiMap, data: dataNew },
-        }); // Load content into store
+        this.storeSvc.dispatch(ApiStoreActions.PUT_COMPLETE({ apiMap: apiMap, data: dataNew }));
+        //this.storeSvc.dispatch({
+        //  type: ApiStatusActions.PUT_COMPLETE,
+        //  payload: { apiMap: apiMap, data: dataNew },
+        //}); // Load content into store
         return dataNew;
       }),
       catchError(error => {
@@ -169,8 +164,7 @@ export class ApiHttpService {
           error.errorMsg = 'Please log in ';
           return this.endSession(error);
         } else {
-          error.errorMsg = 'Unable to update ' + apiMap.storeProperty;
-          this.storeSvc.dispatch({ type: ApiStatusActions.STATE_ERROR, payload: { apiMap: apiMap, data: error } });
+          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR({ apiMap: apiMap, data: error }));
           return of(error);
         }
       }),
@@ -185,26 +179,20 @@ export class ApiHttpService {
    */
   protected deleteStore<T>(url: string, apiMap: AppStore.ApiMap, element: T | T[]) {
     // Update store with new state
-    this.storeSvc.dispatch({ type: ApiStatusActions.STATE_MODIFYING, payload: { apiMap: apiMap } });
-
+    this.storeSvc.dispatch(ApiStoreActions.STATE_MODIFYING({ apiMap: apiMap }));
     // Delete doesn't natively support a body so this adds it in for deleting collections or other uncommon operations
     return this.httpSvc.request('delete', url, { body: element }).pipe(
       // return this.httpSvc.delete(url, , { body: element }) // Does not work with body, add back in when it does
       map(res => {
-        this.storeSvc.dispatch({
-          type: ApiStatusActions.DELETE_COMPLETE,
-          payload: { apiMap: apiMap, data: element },
-        }); // Load content into store
+        this.storeSvc.dispatch(ApiStoreActions.DELETE_COMPLETE({ apiMap: apiMap, data: element }));
         return res;
       }),
       catchError(error => {
-        console.warn('DELETE Error, handle 403 unauth errors here', error);
         if (error.status === 401 || error.status === 403) {
           error.errorMsg = 'Please log in ';
           return this.endSession(error);
         } else {
-          error.errorMsg = 'Unable to delete ' + apiMap.storeProperty;
-          this.storeSvc.dispatch({ type: ApiStatusActions.STATE_ERROR, payload: { apiMap: apiMap, data: error } });
+          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR({ apiMap: apiMap, data: error }));
           return of(error);
         }
       }),

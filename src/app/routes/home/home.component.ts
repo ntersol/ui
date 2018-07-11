@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Load user into editing pane
    * @param user
    */
-  public userEdit(user: any) {
+  public userEdit(user: Models.User) {
     this.formMain.patchValue(user);
     this.isEditing = true;
   }
@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Delete user
    * @param user
    */
-  public userDelete(user: any) {
+  public userDelete(user: Models.User) {
     this.api.users.delete(user).subscribe();
   }
 

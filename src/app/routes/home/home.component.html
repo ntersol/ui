@@ -59,7 +59,7 @@
 
   <!-- [toaster]="true" [showSuccess]="false" *ngIf="false"-->
 
-  <app-api-state [state]="routeData.users.data" *ngIf="routeData?.users">
+  <app-api-state [state]="routeData.users">
 
     <div class="alert alert-warning icon" *ngIf="!routeData?.users?.data?.length">No users found</div>
 
@@ -94,6 +94,13 @@
                   <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
                 </ng-template>
               </datagrid-column>
+
+              <datagrid-column prop="delete">
+                <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
+                  <a (click)="userDelete(row)"><i class="fa fa-remove"></i> Delete</a>
+                </ng-template>
+              </datagrid-column>
+
             </datagrid>
           </div>
         </ng-template>
@@ -126,6 +133,12 @@
                   <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
                 </ng-template>
               </datagrid-column>
+
+
+              
+
+
+              
             </datagrid>
           </div>
         </ng-template>

@@ -64,6 +64,11 @@ export declare namespace AppStore {
     success?: boolean;
   }
 
+  export interface ApiResponse {
+    apiMap: ApiMap;
+    data?: any;
+  }
+
   /** Maps the relationship between the store and the API. Automates all the interaction. */
   export interface ApiMap {
     /** The location of the rest API endpoint */

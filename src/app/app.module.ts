@@ -8,7 +8,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 // Global vendor modules
 import { StoreModule } from '@ngrx/store';
 
-// Mello Labs Tools
+// Store Reducer
 import { UIStoreReducer } from '$ui';
 import { ApiReducer } from '$api';
 

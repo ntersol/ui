@@ -1,28 +1,132 @@
-import { ApiStatusActions } from './api.actions';
+import { ApiStoreActions } from './api.actions';
 import { ApiUtils } from '$utils';
 import { AppStore } from '../store';
 
-export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}, { type, payload }: any) {
-  // console.log('ApiReducer', type, payload);
+import { Action } from '@ngrx/store';
+import { isType } from 'typescript-fsa';
 
-  let srcData: any;
+export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}, action: Action) {
+  console.log('ApiReducer', action, ApiStoreActions);
 
-  if (payload && payload.apiMap && state[payload.apiMap.storeProperty]) {
-    srcData = state[payload.apiMap.storeProperty].data;
+  //let srcData: any;
+   /**
+   * /
+  if (action.payload && action.payload.apiMap && state[action.payload.apiMap.storeProperty]) {
+    srcData = state[action.payload.apiMap.storeProperty].data;
   }
-
+ 
+ 
+   
   // If an entry does not exist in the store, create it dynamically
-  if (payload && payload.apiMap && !state[payload.apiMap.storeProperty]) {
-    state[payload.apiMap.storeProperty] = {};
+  if (action.payload && action.payload.apiMap && !state[action.payload.apiMap.storeProperty]) {
+    state[action.payload.apiMap.storeProperty] = {};
+  }
+  */
+
+
+  if (isType(action, ApiStoreActions.STATE_LOADING)) {
+    state[action.payload.apiMap.storeProperty] = {
+      ...state[action.payload.apiMap.storeProperty], loading: true, error: false
+    };
   }
 
+  if (isType(action, ApiStoreActions.STATE_MODIFYING)) {
+    state[action.payload.apiMap.storeProperty] = {
+      ...state[action.payload.apiMap.storeProperty], modifying: true, error: false, success: false
+    };
+  }
+
+  if (isType(action, ApiStoreActions.STATE_ERROR)) {
+    state[action.payload.apiMap.storeProperty] = {
+      ...state[action.payload.apiMap.storeProperty], modifying: false, loading: false, error: action.payload.data
+    };
+  }
+
+  // Get complete
+  if (isType(action, ApiStoreActions.GET_COMPLETE)) {
+    // If an entry does not exist in the store, create it dynamically
+    if (action.payload && action.payload.apiMap && !state[action.payload.apiMap.storeProperty]) {
+      state[action.payload.apiMap.storeProperty] = {};
+    }
+    // If response is an array
+    if (Array.isArray(action.payload.data)) {
+      state[action.payload.apiMap.storeProperty].data = [...action.payload.data];
+    } else if (typeof action.payload.data === 'object') {
+      // If response is an object
+      state[action.payload.apiMap.storeProperty].data = { ...action.payload.data };
+    } else {
+      // All other types are primitives and can be put straight into the store
+      state[action.payload.apiMap.storeProperty].data = action.payload.data;
+    }
+    // Update State
+    state[action.payload.apiMap.storeProperty] = { ...state[action.payload.apiMap.storeProperty], loading: false, error: false };
+  }
+
+  // Post complete
+  if (isType(action, ApiStoreActions.POST_COMPLETE)) {
+    let srcData = state[action.payload.apiMap.storeProperty].data;
+    // If destination is an array and response is an array, concat with new data up front
+    if (Array.isArray(srcData) && Array.isArray(action.payload.data)) {
+      srcData = [...action.payload.data, ...srcData];
+    } else if (srcData && typeof action.payload.data === 'object') {
+      // If destination is an array and response is an object, push with new data up front
+      srcData = [action.payload.data, ...srcData];
+    } else if (typeof srcData === 'object' && typeof action.payload.data === 'object') {
+      // If destination is an object and response is an object, replace current instance
+      srcData = { ...action.payload.data };
+    }
+
+    // If map and mapSrc are present, remap the data before returning it to the store, otherwise just return the store data
+    state[action.payload.apiMap.storeProperty].data = srcData;
+
+    // Update State
+    state[action.payload.apiMap.storeProperty] = {
+      ...state[action.payload.apiMap.storeProperty], loading: false, error: false, modifying: false, success: true
+    };
+  }
+
+  // Put complete operation
+  if (isType(action, ApiStoreActions.PUT_COMPLETE)) {
+    let srcData = state[action.payload.apiMap.storeProperty].data;
+    // Perform REPLACE
+    state[action.payload.apiMap.storeProperty].data = ApiUtils.updateRecords(srcData, action.payload.data, action.payload.apiMap.uniqueId, 'replace');
+    // Update State
+    state[action.payload.apiMap.storeProperty] = {
+      ...state[action.payload.apiMap.storeProperty], loading: false, error: false, modifying: false, success: true
+    };
+  }
+
+  // Upsert
+  if (isType(action, ApiStoreActions.UPSERT_COMPLETE)) {
+    let srcData = state[action.payload.apiMap.storeProperty].data;
+    // Perform UPSERT
+    state[action.payload.apiMap.storeProperty].data = ApiUtils.updateRecords(srcData, action.payload.data, action.payload.apiMap.uniqueId, 'upsert');
+    // Update State
+    state[action.payload.apiMap.storeProperty] = {
+      ...state[action.payload.apiMap.storeProperty], loading: false, error: false, modifying: false, success: true
+    };
+  }
+
+  // Upsert
+  if (isType(action, ApiStoreActions.DELETE_COMPLETE)) {
+    let srcData = state[action.payload.apiMap.storeProperty].data;
+    // Perform DELETE
+    state[action.payload.apiMap.storeProperty].data = ApiUtils.updateRecords(srcData, action.payload.data, action.payload.apiMap.uniqueId, 'delete');
+
+    // Update State
+    state[action.payload.apiMap.storeProperty] = {
+      ...state[action.payload.apiMap.storeProperty], loading: false, error: false, modifying: false, success: true
+    };
+  }
+
+  /*
   switch (type) {
     // Reset State
     case ApiStatusActions.RESET:
       return {};
 
     // State Change: Loading
-    case ApiStatusActions.STATE_LOADING:
+    case ApiStoreActions.STATE_LOADING:
       state[payload.apiMap.storeProperty] = {
         ...state[payload.apiMap.storeProperty], loading: true, error: false
       };
@@ -117,6 +221,7 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
       };
       break;
   }
+  */
 
   return state;
 }
