@@ -40,7 +40,7 @@ export class ApiService extends ApiHttpService {
    * Reset the store, clear out all held state and data
    */
   public resetStore() {
-    this.cacheClear; // Clear cache
+    this.cacheClear(); // Clear cache
     this.store.dispatch(ApiStoreActions.RESET(null));
   }
 
