@@ -6,17 +6,12 @@ import { ModuleWithProviders } from '@angular/core';
 import { ConfirmationModalComponent } from './confirmation/confirmation-modal.component';
 import { LogoutModalComponent } from './logout/logout-modal.component';
 
-const APP_MODALS = [
-  ConfirmationModalComponent,
-  LogoutModalComponent
-];
+const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   declarations: [APP_MODALS],
-  entryComponents: [APP_MODALS]
+  entryComponents: [APP_MODALS],
 })
 export class ModalsModule {
   static forRoot(): ModuleWithProviders {

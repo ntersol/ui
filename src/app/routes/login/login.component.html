@@ -9,7 +9,9 @@
 
         <form [formGroup]="formMain" novalidate (ngSubmit)="onLogin()">
           <div class="card-body">
-            <error *ngIf="errorApi" [error]="errorApi" [showDetails]="showErrorDetails"></error>
+            <!--
+    <error *ngIf="errorApi" [error]="errorApi" [showDetails]="showErrorDetails"></error>
+    -->
             <div class="alert alert-warning icon" *ngIf="loggedout">You have successfully logged out.</div>
             <div class="alert alert-danger icon" *ngIf="sessionExpired">Session expired, please log in again.</div>
             <p>Please enter your username and password.</p>
@@ -26,11 +28,11 @@
               </div>
             </div>
             <!--
-            <hr/>
-            <p><strong>QA Options</strong></p>
-            <app-field-component [frmGroup]="formMain" frmControl="channelId" label="Channel ID" type="text"></app-field-component>
-            <app-field-component [frmGroup]="formMain" frmControl="screenId" label="Screen ID" type="text"></app-field-component>
-            -->
+  <hr/>
+  <p><strong>QA Options</strong></p>
+  <app-field-component [frmGroup]="formMain" frmControl="channelId" label="Channel ID" type="text"></app-field-component>
+  <app-field-component [frmGroup]="formMain" frmControl="screenId" label="Screen ID" type="text"></app-field-component>
+  -->
           </div>
           <div class="card-footer text-right">
             <button class="btn btn-interact" type="submit" [disabled]="formMain.invalid || waiting" [ngClass]="{'btn-waiting': waiting}">

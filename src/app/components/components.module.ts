@@ -1,14 +1,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-// 3rd Party Tools
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { VendorModule } from '../vendor.module';
 
-// Mello Labs Tools
-import { ApiToolsModule } from '@mello-labs/api-tools';
-import { FormToolsModule } from '@mello-labs/form-tools';
 import { ModalsModule } from './modals/modals.module';
 
 // Components import
@@ -21,6 +15,7 @@ import {
   NavSearchComponent,
   LaunchModalComponent,
 } from '$components';
+import { ApiStateComponent } from './api-state/api-state.component';
 
 // Components to include
 export const APP_COMPONENTS = [
@@ -31,27 +26,24 @@ export const APP_COMPONENTS = [
   NavComponent,
   NavSearchComponent,
   LaunchModalComponent,
+
+  ApiStateComponent,
 ];
 
 @NgModule({
   imports: [
     // Angular
     CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
+
+    // Modals
     ModalsModule.forRoot(),
 
-    // Vendor
-    NgbModule.forRoot(),
-
-    // Mello Labs Tools
-    ApiToolsModule.forRoot(),
-    FormToolsModule.forRoot(),
+    // Vendors
+    VendorModule,
   ],
   providers: [],
   declarations: [APP_COMPONENTS],
-  exports: [APP_COMPONENTS, FormsModule, ReactiveFormsModule, NgbModule, ApiToolsModule, FormToolsModule],
+  exports: [APP_COMPONENTS],
 })
 export class ComponentsModule {
   static forRoot(): ModuleWithProviders {

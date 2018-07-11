@@ -3,9 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { DatePipe, CurrencyPipe } from '@angular/common';
 
-// Components Module
-import { ComponentsModule } from '$components';
-
 // Pipes + Directives
 import {
   // Pipes
@@ -40,12 +37,10 @@ export const APP_PIPES_DIRECTIVES = [
   imports: [
     // Angular
     CommonModule,
-
-    ComponentsModule,
   ],
   providers: [DatePipe, CurrencyPipe],
   declarations: [APP_PIPES_DIRECTIVES],
-  exports: [APP_PIPES_DIRECTIVES, ComponentsModule],
+  exports: [APP_PIPES_DIRECTIVES],
   entryComponents: [],
 })
 export class SharedModule {

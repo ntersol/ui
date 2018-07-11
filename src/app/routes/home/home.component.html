@@ -1,4 +1,4 @@
-<div id="app-home" class="container-fluid" *ngIf="{ state: usersState$ | async, users: users$ | async } as routeData">
+<div id="app-home" class="container-fluid" *ngIf="{ users: users$ | async } as routeData">
 
   <div class="card mb-3">
     <div class="card-header p-2">
@@ -28,7 +28,8 @@
               <app-field-component [frmGroup]="formMain" frmControl="website" label="Website" [labelColumns]="5"></app-field-component>
               <app-field-component [frmGroup]="formMain" frmControl="email" label="Email" [labelColumns]="5"></app-field-component>
               <app-field-component [frmGroup]="formMain" frmControl="phone" label="Phone" [labelColumns]="5"></app-field-component>
-              <button type="submit" class="btn btn-interact float-right" [disabled]="routeData.state.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : routeData.state.modifying }">
+
+              <button type="submit" class="btn btn-interact float-right" [disabled]="routeData?.users?.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : routeData?.users?.modifying }">
                 <ng-container *ngIf="!isEditing">
                   <i class="fa fa-user-plus" aria-hidden="true"></i> Add User
                 </ng-container>
@@ -36,12 +37,13 @@
                   <i class="fa fa-user" aria-hidden="true"></i> Update User
                 </ng-container>
               </button>
+
             </form>
           </div>
         </div>
       </div>
 
-      <button class="btn btn-icon btn-sm mr-2" (click)="usersRefresh()" [disabled]="routeData?.state?.loading">
+      <button class="btn btn-icon btn-sm mr-2" (click)="usersRefresh()" [disabled]="routeData?.users?.loading">
         <i class="fa fa-refresh"></i>
       </button>
 
@@ -55,23 +57,24 @@
     </div>
   </div>
 
+  <!-- [toaster]="true" [showSuccess]="false" *ngIf="false"-->
 
-  <api-state [state]="routeData?.state" [toaster]="true" [showSuccess]="false" *ngIf="routeData?.state">
+  <app-api-state [state]="routeData.users">
 
-    <div class="alert alert-warning icon" *ngIf="!routeData?.users?.length">No users found</div>
+    <div class="alert alert-warning icon" *ngIf="!routeData?.users?.data?.length">No users found</div>
 
     <ngb-tabset class="nav-tabs-sm"
-                *ngIf="routeData?.users?.length"
+                *ngIf="routeData?.users?.data?.length"
                 (tabChange)="ui.tabChange('HOME', $event)"
                 [activeId]="ui.select.tabActive$('HOME') | async">
       <ngb-tab id="tab-1">
         <ng-template ngbTabTitle>
-          <i class="fa fa-user-plus" aria-hidden="true"></i> New Users <small><em>({{ routeData.users | filter: true : 'new' | count }})</em></small>
+          <i class="fa fa-user-plus" aria-hidden="true"></i> New Users <small><em>({{ routeData.users.data | count }})</em></small>
         </ng-template>
         <ng-template ngbTabContent>
           <div style="position:relative;height:calc(100vh - 190px)">
             <datagrid #datagrid
-                      [rows]="routeData.users | filter: true : 'new'"
+                      [rows]="routeData.users.data"
                       [columns]="columns"
                       [state]="{}"
                       [options]="options"
@@ -91,19 +94,26 @@
                   <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
                 </ng-template>
               </datagrid-column>
+
+              <datagrid-column prop="delete">
+                <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
+                  <a (click)="userDelete(row)"><i class="fa fa-remove"></i> Delete</a>
+                </ng-template>
+              </datagrid-column>
+
             </datagrid>
           </div>
         </ng-template>
       </ngb-tab>
       <ngb-tab id="tab-2">
         <ng-template ngbTabTitle>
-          <i class="fa fa-users" aria-hidden="true"></i> Returning Users <small><em>({{ routeData.users | filter: false : 'new' | count }})</em></small>
+          <i class="fa fa-users" aria-hidden="true"></i> Returning Users <small><em>({{ routeData?.users?.data | count }})</em></small>
         </ng-template>
         <ng-template ngbTabContent>
           <div style="position:relative;height:calc(100vh - 190px)">
 
             <datagrid #datagrid
-                      [rows]="routeData.users | filter: false : 'new'"
+                      [rows]="routeData.users.data"
                       [columns]="columns"
                       [state]="{}"
                       [options]="options"
@@ -123,13 +133,14 @@
                   <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
                 </ng-template>
               </datagrid-column>
+
             </datagrid>
           </div>
         </ng-template>
       </ngb-tab>
     </ngb-tabset>
 
-  </api-state>
+  </app-api-state>
 
 
 </div>

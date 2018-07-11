@@ -72,4 +72,18 @@ export const columns: Datagrid.Column[] = [
     canEdit: true,
     canSearch: true,
   },
+  {
+    prop: 'delete',
+    label: 'Delete User',
+    columnType: 'string',
+    canSort: true,
+    canGroup: true,
+    canFilter: true,
+    canReorder: true,
+    canResize: true,
+    canDelete: true,
+    canPinLeft: true,
+    canEdit: true,
+    canSearch: true,
+  },
 ];

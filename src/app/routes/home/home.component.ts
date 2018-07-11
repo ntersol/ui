@@ -3,11 +3,12 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Datagrid } from '@mello-labs/datagrid';
 
-import { ApiService, ApiProps } from '$api';
+import { ApiService } from '$api';
 import { UIStoreService } from '$ui';
 import { Models } from '$models';
 import { DesktopUtils } from '$utils';
 import { columns } from './columns';
+import { HomeService } from './shared/home.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,6 @@ import { columns } from './columns';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public users$ = this.api.select.users$;
-  public usersState$ = this.api.select.getState$(ApiProps.users);
   public formMain: FormGroup;
   public isEditing: boolean;
 
@@ -36,13 +36,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     primaryKey: 'id',
   };
 
-  // public state: Datagrid.State = {};
   public columns: Datagrid.Column[] = columns;
 
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
 
-  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder) {}
+  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder, public home: HomeService) {}
 
   public ngOnInit() {
     // Get users and load into store
@@ -65,7 +64,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Refresh users
    */
   public usersRefresh() {
-    this.api.users.get(true).subscribe();
+    this.api.users.get(true).subscribe(res => console.warn('Test', res));
   }
 
   /**
@@ -88,7 +87,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Load user into editing pane
    * @param user
    */
-  public userEdit(user: any) {
+  public userEdit(user: Models.User) {
     this.formMain.patchValue(user);
     this.isEditing = true;
   }
@@ -97,7 +96,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Delete user
    * @param user
    */
-  public userDelete(user: any) {
+  public userDelete(user: Models.User) {
     this.api.users.delete(user).subscribe();
   }
 

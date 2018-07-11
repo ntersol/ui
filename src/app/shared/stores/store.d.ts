@@ -6,10 +6,10 @@ export declare namespace AppStore {
    *************************/
 
   /** API Store */
-  interface Api {
+  export interface Api {
     //users?: any[]; // Store response
     // Example of Store typing with mapped response
-    users: Models.User[] | null;
+    users: ApiState<Models.User[]> | null;
   }
 
   /** The API Map */
@@ -18,7 +18,7 @@ export declare namespace AppStore {
   }
 
   /** UI Store */
-  interface Ui {
+  export interface Ui {
     /** A static snapshot of the UI store, used mainly for multiscreen usage */
     saveState: Ui | null;
     tabsActive: { [key: string]: string };
@@ -39,12 +39,6 @@ export declare namespace AppStore {
   interface Root {
     api: Api;
     ui: Ui;
-    apiStatus: ApiStatuses;
-  }
-
-  /** API status store */
-  interface ApiStatuses {
-    [key: string]: ApiStatus;
   }
 
   /** Example pattern for data that is mapped before being passed into the store */
@@ -62,14 +56,17 @@ export declare namespace AppStore {
     users: ApiStatus | null;
   }
 
-  interface ApiStatus {
-    loading: boolean;
-    loaded: boolean;
-    loadError: any;
+  export interface ApiState<T> {
+    loading?: boolean;
+    data?: T;
+    error?: any;
+    modifying?: boolean;
+    success?: boolean;
+  }
 
-    modifying: boolean;
-    modified: boolean;
-    modifyError: any;
+  export interface ApiResponse {
+    apiMap: ApiMap;
+    data?: any;
   }
 
   /** Maps the relationship between the store and the API. Automates all the interaction. */
@@ -80,12 +77,6 @@ export declare namespace AppStore {
     storeProperty: string;
     /** A unique ID of each object in the collection. Also supports an array of strings if multiple unique ID's are needed in the event of a single key not being enough. */
     uniqueId: string | string[];
-    /** A callback function to modify the API response before it is inserted into the store */
-    map?: any;
-    /** If a map callback function is specified, this is the key for the location of the original unfiltered list of items. This is necessary to update the mapped list in the store without a GET all */
-    mapSrc?: string;
-    /** Occasionally a unique piece of information needs to be passed to the reducer from the method.  This property can have data assigned to pass to the reducer */
-    data?: any;
   }
 
   interface Rest {

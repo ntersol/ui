@@ -8,9 +8,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 // Global vendor modules
 import { StoreModule } from '@ngrx/store';
 
-// Mello Labs Tools
-import { ApiReducer, ApiStatusReducer } from '@mello-labs/api-tools';
+// Store Reducer
 import { UIStoreReducer } from '$ui';
+import { ApiReducer } from '$api';
 
 // Main entrypoint component
 import { AppComponent } from './app.component';
@@ -28,13 +28,11 @@ import {
   // Interceptors
   HttpInterceptorService,
   GlobalErrorHandler,
-
-  // Shared Module
-  SharedModule,
 } from '$shared';
 
 // Non-lazy loaded routes
 import { LoginComponent, NoContentComponent, QaComponent } from '$routes';
+import { SiteModule } from '$site';
 
 // Components
 export const APP_COMPONENTS = [
@@ -56,11 +54,10 @@ export const APP_COMPONENTS = [
       preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,
     }),
 
-    StoreModule.forRoot({ api: ApiReducer, apiStatus: ApiStatusReducer, ui: UIStoreReducer }), // NGRX
+    StoreModule.forRoot({ api: ApiReducer, ui: UIStoreReducer }), // NGRX
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
 
-    // Shared Module
-    SharedModule.forRoot(),
+    SiteModule.forRoot(),
   ],
   providers: [
     AppSettings, // App settings
