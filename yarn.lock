@@ -223,6 +223,10 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-2.0.0.tgz#65f78c7dd5a8ac424f44bb2050a9eab247cdeb0c"
 
+"@ngrx/entity@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@ngrx/entity/-/entity-6.0.1.tgz#a07fe95d39671f3be10143fe999f5a9ee00f4edc"
+
 "@ngrx/store@6.0.1":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-6.0.1.tgz#02c806ce20c698b997e81f5671e0edc07d32cf86"

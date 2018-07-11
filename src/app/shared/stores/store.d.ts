@@ -1,4 +1,5 @@
 import { Models } from '$models';
+import { EntityState, EntityAdapter } from '@ngrx/entity';
 
 export declare namespace AppStore {
   /*************************
@@ -7,14 +8,20 @@ export declare namespace AppStore {
 
   /** API Store */
   export interface Api {
+    [key: string]: ApiState<any>,
     //users?: any[]; // Store response
     // Example of Store typing with mapped response
-    users: ApiState<Models.User[]> | null;
+    users?: ApiState<EntityState<Models.User>>;
   }
 
   /** The API Map */
   export interface ApiMapping {
     users: ApiMap;
+  }
+
+  export interface EntityProp {
+    guid?: string;
+    email?: string;
   }
 
   /** UI Store */
@@ -41,21 +48,6 @@ export declare namespace AppStore {
     ui: Ui;
   }
 
-  /** Example pattern for data that is mapped before being passed into the store */
-  interface Mapped<T> {
-    /** Unaltered source of API response */
-    src: T[];
-    /** A dictionary organized by the primary key */
-    dict?: { [key: string]: T };
-    /** A deduped array arranged into a dictionary by primary key */
-    uniques?: { [key: string]: T };
-  }
-
-  interface StateStatuses {
-    // Example
-    users: ApiStatus | null;
-  }
-
   export interface ApiState<T> {
     loading?: boolean;
     data?: T;
@@ -77,10 +69,7 @@ export declare namespace AppStore {
     storeProperty: string;
     /** A unique ID of each object in the collection. Also supports an array of strings if multiple unique ID's are needed in the event of a single key not being enough. */
     uniqueId: string | string[];
+    adapter: EntityAdapter;
   }
 
-  interface Rest {
-    storeProp: string;
-    path: string;
-  }
 }

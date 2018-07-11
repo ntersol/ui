@@ -5,7 +5,20 @@ import { AppStore } from '../store';
 import { Action } from '@ngrx/store';
 import { isType } from 'typescript-fsa';
 
-export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}, action: Action) {
+
+import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+// import { Models } from 'src/app/shared/models';
+
+
+
+export const adapter: EntityAdapter<AppStore.Api> = createEntityAdapter<AppStore.Api>(<any>{
+  selectId: (entity: AppStore.EntityProp) => entity['email'],
+});
+
+//export const adapter: EntityAdapter<any> = createEntityAdapter<AppStore.Api>();
+
+
+export function ApiReducer(state: AppStore.Api = {}, action: Action) {
   // console.log('ApiReducer', action, ApiStoreActions);
 
   if (isType(action, ApiStoreActions.RESET)) {
@@ -43,26 +56,44 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
 
   // Get complete
   if (isType(action, ApiStoreActions.GET_COMPLETE)) {
-    // If an entry does not exist in the store, create it dynamically
+
     if (action.payload && action.payload.apiMap && !state[action.payload.apiMap.storeProperty]) {
       state[action.payload.apiMap.storeProperty] = {};
     }
-    // If response is an array
-    if (Array.isArray(action.payload.data)) {
-      state[action.payload.apiMap.storeProperty].data = [...action.payload.data];
-    } else if (typeof action.payload.data === 'object') {
-      // If response is an object
-      state[action.payload.apiMap.storeProperty].data = { ...action.payload.data };
-    } else {
-      // All other types are primitives and can be put straight into the store
-      state[action.payload.apiMap.storeProperty].data = action.payload.data;
+
+    if (!state[action.payload.apiMap.storeProperty].data) {
+      state[action.payload.apiMap.storeProperty].data = {
+        ids: [],
+        entities: {}
+      };
     }
-    // Update State
+    
     state[action.payload.apiMap.storeProperty] = {
       ...state[action.payload.apiMap.storeProperty],
+      data: action.payload.apiMap.adapter.addMany(action.payload.data, state[action.payload.apiMap.storeProperty].data),
       loading: false,
       error: false,
     };
+
+    // state[action.payload.apiMap.storeProperty].data = adapter.addMany(action.payload.data, state[action.payload.apiMap.storeProperty].data); // state[action.payload.apiMap.storeProperty].data
+
+    //console.log(test)
+    //// If an entry does not exist in the store, create it dynamically
+    //if (action.payload && action.payload.apiMap && !state[action.payload.apiMap.storeProperty]) {
+    //  state[action.payload.apiMap.storeProperty] = {};
+    //}
+    //// If response is an array
+    //if (Array.isArray(action.payload.data)) {
+    //  state[action.payload.apiMap.storeProperty].data = [...action.payload.data];
+    //} else if (typeof action.payload.data === 'object') {
+    //  // If response is an object
+    //  state[action.payload.apiMap.storeProperty].data = { ...action.payload.data };
+    //} else {
+    //  // All other types are primitives and can be put straight into the store
+    //  state[action.payload.apiMap.storeProperty].data = action.payload.data;
+    //}
+    // Update State
+   
   }
 
   // Post complete
@@ -78,7 +109,6 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
       // If destination is an object and response is an object, replace current instance
       srcData = { ...action.payload.data };
     }
-    // If map and mapSrc are present, remap the data before returning it to the store, otherwise just return the store data
     state[action.payload.apiMap.storeProperty].data = srcData;
     // Update State
     state[action.payload.apiMap.storeProperty] = {

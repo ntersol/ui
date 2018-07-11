@@ -8,6 +8,27 @@ Adding a new endpoints:
 // import IStore
 import { AppStore } from '$shared';
 import { ApiProps } from './api.props';
+import { createEntityAdapter } from '@ngrx/entity';
+
+// import { Models } from '$models';
+
+/**
+ * Returns an adapter for ngrx entity. This is necessary to define the unique ID/primary key for each model
+ * @param uniqueId - The unique identifier for this model
+ */
+function createAdapter(uniqueId: string) {
+  const adapter = createEntityAdapter({ selectId: (entity: any) => entity[uniqueId] });
+  adapter.getInitialState({
+    loading: false,
+    data: null,
+    error: false,
+    modifying: false,
+    success: false
+  });
+  return adapter;
+}
+
+
 
 export const ApiMap: AppStore.ApiMapping = {
   // Users Example
@@ -15,5 +36,8 @@ export const ApiMap: AppStore.ApiMapping = {
     endpoint: '//jsonplaceholder.typicode.com/users',
     storeProperty: ApiProps.users,
     uniqueId: 'id',
+    adapter: createAdapter('id')
   },
 };
+
+
