@@ -16,5 +16,4 @@ export const ApiMap: AppStore.ApiMapping = {
     storeProperty: ApiProps.users,
     uniqueId: 'id',
   },
-
 };

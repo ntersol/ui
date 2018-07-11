@@ -5,11 +5,14 @@ import { HomeService } from './home.service';
 describe('HomeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HomeService]
+      providers: [HomeService],
     });
   });
 
-  it('should be created', inject([HomeService], (service: HomeService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([HomeService], (service: HomeService) => {
+      expect(service).toBeTruthy();
+    }),
+  );
 });

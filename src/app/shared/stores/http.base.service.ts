@@ -6,17 +6,17 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, map, share } from 'rxjs/operators';
 
-import { ApiStatusActions, ApiStoreActions } from './api/api.actions';
+import { ApiStoreActions } from './api/api.actions';
 
 import { AppStore } from './store';
 
 @Injectable()
 export class ApiHttpService {
   /** Hold GET requests from an API using the URL as a primary key */
-  protected cache: { [key: string]: Observable<any> } = {};
+  private cache: { [key: string]: Observable<any> } = {};
 
-  constructor(private httpSvc: HttpClient, private storeSvc: Store<AppStore.Root>, private routerSvc: Router) { }
-  
+  constructor(private httpSvc: HttpClient, private storeSvc: Store<AppStore.Root>, private routerSvc: Router) {}
+
   /**
    * Make a GET request with simple caching
    * @param url - The URL location of the webapi
@@ -37,7 +37,6 @@ export class ApiHttpService {
    * @param updateCache - Refresh the version in the cache
    */
   protected getStore<T>(url: string, apiMap?: AppStore.ApiMap, updateCache = false): Observable<T> {
-
     // If this request is not in the cache or updateCache was requested (default behavior), load content into cache
     if (this.cache[url] == null || updateCache) {
       // Set loading
@@ -57,7 +56,7 @@ export class ApiHttpService {
             return of(error);
           }
         }),
-        share()
+        share(),
       );
       return this.cache[url];
     } else {
@@ -74,7 +73,6 @@ export class ApiHttpService {
    * @param data - The data to pass to the server
    */
   protected postStore<T>(url: string, apiMap: AppStore.ApiMap, data: T): Observable<T> {
-
     // Update store with new state
     this.storeSvc.dispatch(ApiStoreActions.STATE_MODIFYING({ apiMap: apiMap }));
 
@@ -82,12 +80,7 @@ export class ApiHttpService {
       map((res: any) => {
         // Check if the response has a payload or not
         const dataNew = res ? res : data;
-
         this.storeSvc.dispatch(ApiStoreActions.POST_COMPLETE({ apiMap: apiMap, data: dataNew }));
-        //this.storeSvc.dispatch({
-        //  type: ApiStatusActions.POST_COMPLETE,
-        //  payload: { apiMap: apiMap, data: dataNew },
-        //}); // Load content into store
         return dataNew;
       }),
       catchError(error => {
@@ -108,7 +101,6 @@ export class ApiHttpService {
    * @param data - The data to pass to the server
    */
   protected upsertStore<T>(url: string, apiMap: AppStore.ApiMap, data: T | T[]): Observable<T> {
-
     // Update store with new state
     this.storeSvc.dispatch(ApiStoreActions.STATE_MODIFYING({ apiMap: apiMap }));
 
@@ -117,11 +109,6 @@ export class ApiHttpService {
         // Check if the response has a payload or not, if not then this is an upSert
         const dataNew = res ? res : data;
         this.storeSvc.dispatch(ApiStoreActions.UPSERT_COMPLETE({ apiMap: apiMap, data: dataNew }));
-
-        //this.storeSvc.dispatch({
-        //  type: ApiStatusActions.UPSERT_COMPLETE,
-        //  payload: { apiMap: apiMap, data: dataNew },
-        //}); // Load content into store
         return dataNew;
       }),
       catchError(error => {
@@ -144,7 +131,6 @@ export class ApiHttpService {
    * @param data - The data to pass to the server
    */
   protected putStore<T>(url: string, apiMap: AppStore.ApiMap, data: T | T[]): Observable<T> {
-
     // Update store with new state
     this.storeSvc.dispatch(ApiStoreActions.STATE_MODIFYING({ apiMap: apiMap }));
 
@@ -153,10 +139,6 @@ export class ApiHttpService {
         // Check if the response has a payload or not,
         const dataNew = res ? res : data;
         this.storeSvc.dispatch(ApiStoreActions.PUT_COMPLETE({ apiMap: apiMap, data: dataNew }));
-        //this.storeSvc.dispatch({
-        //  type: ApiStatusActions.PUT_COMPLETE,
-        //  payload: { apiMap: apiMap, data: dataNew },
-        //}); // Load content into store
         return dataNew;
       }),
       catchError(error => {
@@ -214,7 +196,7 @@ export class ApiHttpService {
     this.cacheClear();
     window.localStorage.removeItem('token');
     window.sessionStorage.clear();
-    this.storeSvc.dispatch({ type: ApiStatusActions.RESET, payload: null }); // Clear out store on errors for security
+    this.storeSvc.dispatch(ApiStoreActions.RESET(null)); // Clear out store on errors for security
     this.routerSvc.navigate(['/login'], { queryParams: { session: 'expired' } });
     return of(error);
   }

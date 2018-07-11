@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Refresh users
    */
   public usersRefresh() {
-    this.api.users.get(true).subscribe();
+    this.api.users.get(true).subscribe(res => console.warn('Test', res));
   }
 
   /**

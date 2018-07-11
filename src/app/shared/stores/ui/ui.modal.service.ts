@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs';
 import { UIStoreActions } from './ui.actions';
 import { AppSettings } from 'src/app/shared/app.settings';
 import { AppStore } from 'src/app/shared/stores/store';
-import { ApiService } from 'src/app/shared/stores/api';
 
 import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
 
@@ -33,12 +32,7 @@ export class UIModalService {
     LogoutModalComponent: LogoutModalComponent,
   };
 
-  constructor(
-    private modalService: NgbModal,
-    private store: Store<AppStore.Root>,
-    private api: ApiService,
-    private settings: AppSettings,
-  ) {
+  constructor(private modalService: NgbModal, private store: Store<AppStore.Root>, private settings: AppSettings) {
     // Subscribe to the modal in the store and launch store modal if data is found. Also make sure token is present
     this.store.select(storeElem => storeElem.ui.modal).subscribe((modal: any) => {
       // Make sure modal exists AND that a token is present in app settings. This prevents a modal from persisting after logout
@@ -113,14 +107,10 @@ export class UIModalService {
       modal.result.then(
         () => {
           this.store.dispatch(UIStoreActions.MODAL_UNLOAD(null));
-          this.api.resetErrors();
-          this.api.resetSuccess();
         },
         () => {
           // On modal dismiss, which is closed without performing an action
           this.store.dispatch(UIStoreActions.MODAL_UNLOAD(null));
-          this.api.resetErrors();
-          this.api.resetSuccess();
         },
       );
     });

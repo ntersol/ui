@@ -17,11 +17,7 @@ import { ComponentsModule } from '$components';
     SharedModule,
   ],
   declarations: [],
-  exports: [
-    VendorModule,
-    SharedModule,
-    ComponentsModule,
-  ],
+  exports: [VendorModule, SharedModule, ComponentsModule],
 })
 export class SiteModule {
   static forRoot(): ModuleWithProviders {

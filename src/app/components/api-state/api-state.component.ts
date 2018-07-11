@@ -3,22 +3,18 @@ import { Input } from '@angular/core';
 
 import { AppStore } from '$shared';
 
-
 @Component({
   selector: 'app-api-state',
   templateUrl: './api-state.component.html',
   styleUrls: ['./api-state.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApiStateComponent implements OnInit {
-
   @Input() state: AppStore.ApiState<any>;
 
   public errorHide = true;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

@@ -17,13 +17,7 @@ import { FormToolsModule } from '@mello-labs/form-tools';
     NgbModule.forRoot(),
     FormToolsModule.forRoot(),
   ],
-  exports: [
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    FormToolsModule,
-  ],
-  declarations: []
+  exports: [RouterModule, FormsModule, ReactiveFormsModule, NgbModule, FormToolsModule],
+  declarations: [],
 })
-export class VendorModule { }
+export class VendorModule {}

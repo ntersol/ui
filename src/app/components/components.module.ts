@@ -27,19 +27,19 @@ export const APP_COMPONENTS = [
   NavSearchComponent,
   LaunchModalComponent,
 
-  ApiStateComponent
+  ApiStateComponent,
 ];
 
 @NgModule({
   imports: [
     // Angular
     CommonModule,
-    
+
     // Modals
     ModalsModule.forRoot(),
 
     // Vendors
-    VendorModule
+    VendorModule,
   ],
   providers: [],
   declarations: [APP_COMPONENTS],
