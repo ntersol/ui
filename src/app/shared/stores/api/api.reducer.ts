@@ -1,11 +1,17 @@
 import { ApiStoreActions } from './api.actions';
-import { ApiUtils } from '$utils';
+// import { ApiUtils } from '$utils';
 import { AppStore } from '../store';
 
 import { Action } from '@ngrx/store';
 import { isType } from 'typescript-fsa';
 
-export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}, action: Action) {
+import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+
+export const adapter: EntityAdapter<AppStore.Api> = createEntityAdapter<AppStore.Api>(<any>{
+  selectId: (entity: AppStore.EntityProp) => entity['email'],
+});
+
+export function ApiReducer(state: AppStore.Api = {}, action: Action) {
   // console.log('ApiReducer', action, ApiStoreActions);
 
   if (isType(action, ApiStoreActions.RESET)) {
@@ -31,7 +37,7 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
     };
   }
 
-  // Any api error
+  // On error, either from loading or modifying
   if (isType(action, ApiStoreActions.STATE_ERROR)) {
     state[action.payload.apiMap.storeProperty] = {
       ...state[action.payload.apiMap.storeProperty],
@@ -41,23 +47,32 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
     };
   }
 
-  // Get complete
+  /*
+  * Get complete
+  */
   if (isType(action, ApiStoreActions.GET_COMPLETE)) {
-    // If an entry does not exist in the store, create it dynamically
-    if (action.payload && action.payload.apiMap && !state[action.payload.apiMap.storeProperty]) {
-      state[action.payload.apiMap.storeProperty] = {};
-    }
-    // If response is an array
-    if (Array.isArray(action.payload.data)) {
-      state[action.payload.apiMap.storeProperty].data = [...action.payload.data];
-    } else if (typeof action.payload.data === 'object') {
-      // If response is an object
-      state[action.payload.apiMap.storeProperty].data = { ...action.payload.data };
+    // If response is an array/collection, convert to ngrx entities
+    if (Array.isArray(action.payload.data) && typeof action.payload.data === 'object') {
+      // Ensure initial state is set and current state is merged down on top of that
+      state[action.payload.apiMap.storeProperty] = {
+        ...action.payload.apiMap.entity.initialState,
+        ...state[action.payload.apiMap.storeProperty],
+      };
+      // Update record/s in collection
+      state[action.payload.apiMap.storeProperty] = action.payload.apiMap.entity.adapter.addMany(
+        action.payload.data,
+        state[action.payload.apiMap.storeProperty],
+      );
+      // After update, get new array and set to data property
+      state[action.payload.apiMap.storeProperty].data = action.payload.apiMap.entity.adapter
+        .getSelectors()
+        .selectAll(state[action.payload.apiMap.storeProperty]);
     } else {
-      // All other types are primitives and can be put straight into the store
+      // For all other types of data, load straight into data property
       state[action.payload.apiMap.storeProperty].data = action.payload.data;
     }
-    // Update State
+
+    // Set load complete state
     state[action.payload.apiMap.storeProperty] = {
       ...state[action.payload.apiMap.storeProperty],
       loading: false,
@@ -65,22 +80,39 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
     };
   }
 
-  // Post complete
-  if (isType(action, ApiStoreActions.POST_COMPLETE)) {
-    let srcData = state[action.payload.apiMap.storeProperty].data;
-    // If destination is an array and response is an array, concat with new data up front
-    if (Array.isArray(srcData) && Array.isArray(action.payload.data)) {
-      srcData = [...action.payload.data, ...srcData];
-    } else if (srcData && typeof action.payload.data === 'object') {
-      // If destination is an array and response is an object, push with new data up front
-      srcData = [action.payload.data, ...srcData];
-    } else if (typeof srcData === 'object' && typeof action.payload.data === 'object') {
-      // If destination is an object and response is an object, replace current instance
-      srcData = { ...action.payload.data };
+  /*
+  * Post, put and upsert complete
+  */
+  if (
+    isType(action, ApiStoreActions.POST_COMPLETE) ||
+    isType(action, ApiStoreActions.PUT_COMPLETE) ||
+    isType(action, ApiStoreActions.UPSERT_COMPLETE)
+  ) {
+    // If the destination is an ngrx entity type
+    if (state[action.payload.apiMap.storeProperty].entities) {
+      // If response is a collection, use addMany
+      if (Array.isArray(action.payload.data) && typeof action.payload.data === 'object') {
+        state[action.payload.apiMap.storeProperty] = action.payload.apiMap.entity.adapter.upsertMany(
+          action.payload.data,
+          state[action.payload.apiMap.storeProperty],
+        );
+      } else {
+        // If response is a single object, use addOne
+        state[action.payload.apiMap.storeProperty] = action.payload.apiMap.entity.adapter.upsertOne(
+          action.payload.data,
+          state[action.payload.apiMap.storeProperty],
+        );
+      }
+      // After update, get new array and set to data property
+      state[action.payload.apiMap.storeProperty].data = action.payload.apiMap.entity.adapter
+        .getSelectors()
+        .selectAll(state[action.payload.apiMap.storeProperty]);
+    } else {
+      // All other types, send repsonse straight to data property
+      state[action.payload.apiMap.storeProperty].data = action.payload.data;
     }
-    // If map and mapSrc are present, remap the data before returning it to the store, otherwise just return the store data
-    state[action.payload.apiMap.storeProperty].data = srcData;
-    // Update State
+
+    // Set state
     state[action.payload.apiMap.storeProperty] = {
       ...state[action.payload.apiMap.storeProperty],
       loading: false,
@@ -90,56 +122,37 @@ export function ApiReducer(state: { [key: string]: AppStore.ApiState<any> } = {}
     };
   }
 
-  // Put complete
-  if (isType(action, ApiStoreActions.PUT_COMPLETE)) {
-    const srcData = state[action.payload.apiMap.storeProperty].data;
-    // Perform REPLACE
-    state[action.payload.apiMap.storeProperty].data = ApiUtils.updateRecords(
-      srcData,
-      action.payload.data,
-      action.payload.apiMap.uniqueId,
-      'replace',
-    );
-    // Update State
-    state[action.payload.apiMap.storeProperty] = {
-      ...state[action.payload.apiMap.storeProperty],
-      loading: false,
-      error: false,
-      modifying: false,
-      success: true,
-    };
-  }
-
-  // Upsert complete
-  if (isType(action, ApiStoreActions.UPSERT_COMPLETE)) {
-    const srcData = state[action.payload.apiMap.storeProperty].data;
-    // Perform UPSERT
-    state[action.payload.apiMap.storeProperty].data = ApiUtils.updateRecords(
-      srcData,
-      action.payload.data,
-      action.payload.apiMap.uniqueId,
-      'upsert',
-    );
-    // Update State
-    state[action.payload.apiMap.storeProperty] = {
-      ...state[action.payload.apiMap.storeProperty],
-      loading: false,
-      error: false,
-      modifying: false,
-      success: true,
-    };
-  }
-
-  // Delete complete
+  /*
+  * Delete complete
+  */
   if (isType(action, ApiStoreActions.DELETE_COMPLETE)) {
-    const srcData = state[action.payload.apiMap.storeProperty].data;
-    // Perform DELETE
-    state[action.payload.apiMap.storeProperty].data = ApiUtils.updateRecords(
-      srcData,
-      action.payload.data,
-      action.payload.apiMap.uniqueId,
-      'delete',
-    );
+    // If the destination is an ngrx entity type
+    if (state[action.payload.apiMap.storeProperty].entities) {
+      // If response is a collection, use addMany
+      if (Array.isArray(action.payload.data) && typeof action.payload.data === 'object') {
+        // Get array of unique IDs for delete collection
+        const deleteIds = action.payload.data.reduce((a, b) => [...a, b[action.payload.apiMap.entity.uniqueId]], []);
+        // If response is a collection, use removeMany
+        state[action.payload.apiMap.storeProperty] = action.payload.apiMap.entity.adapter.removeMany(
+          deleteIds,
+          state[action.payload.apiMap.storeProperty],
+        );
+      } else {
+        // If response is a single object, use removeOne
+        state[action.payload.apiMap.storeProperty] = action.payload.apiMap.entity.adapter.removeOne(
+          action.payload.data[action.payload.apiMap.entity.uniqueId],
+          state[action.payload.apiMap.storeProperty],
+        );
+      }
+      // After update, get new array and set to data property
+      state[action.payload.apiMap.storeProperty].data = action.payload.apiMap.entity.adapter
+        .getSelectors()
+        .selectAll(state[action.payload.apiMap.storeProperty]);
+    } else {
+      // All other types, send repsonse straight to data property
+      state[action.payload.apiMap.storeProperty].data = action.payload.data;
+    }
+
     // Update State
     state[action.payload.apiMap.storeProperty] = {
       ...state[action.payload.apiMap.storeProperty],
