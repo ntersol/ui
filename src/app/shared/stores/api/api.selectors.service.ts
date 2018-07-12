@@ -3,13 +3,11 @@ import { Store, createSelector } from '@ngrx/store';
 
 // import { Models } from '$models';
 import { AppStore } from '$shared';
-import { ApiMap } from 'src/app/shared/stores/api';
+// import { ApiMap } from 'src/app/shared/stores/api';
 // import { Observable, combineLatest } from 'rxjs';
 // import { map } from 'rxjs/operators';
 
 const keyBy = require('lodash/keyBy');
-
-//ApiMap.users.adapter.getSelectors().selectAll
 
 // Mapped/source selectors for reuse or transforming data
 const selectors = {
@@ -25,7 +23,7 @@ const selectors = {
     (state: AppStore.Root) => state.api.users,
     users => {
       if (users && users.data) {
-        users.data = ApiMap.users.adapter.getSelectors().selectAll(users.data);
+        // users.data = ApiMap.users.entity.adapter.getSelectors().selectAll(users.data);
       }
       return users;
     },
@@ -36,12 +34,11 @@ const selectors = {
   providedIn: 'root',
 })
 export class ApiSelectorsService {
-  public users$ = this.store.select(selectors.users);
+  public users$ = this.store.select(store => store.api.users);
   // public users$ = this.store.select(store => store.api.users);
   public usersMapped$ = this.store.select(selectors.usersMapped);
 
-  constructor(private store: Store<AppStore.Root>) {
-  }
+  constructor(private store: Store<AppStore.Root>) {}
 
   /**
    * Returns a single unified API status for one or more API status calls.

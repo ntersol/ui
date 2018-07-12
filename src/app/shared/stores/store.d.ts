@@ -8,7 +8,7 @@ export declare namespace AppStore {
 
   /** API Store */
   export interface Api {
-    [key: string]: ApiState<any>,
+    [key: string]: ApiState<any>;
     //users?: any[]; // Store response
     // Example of Store typing with mapped response
     users?: ApiState<EntityState<Models.User>>;
@@ -54,6 +54,10 @@ export declare namespace AppStore {
     error?: any;
     modifying?: boolean;
     success?: boolean;
+    entities?: {
+      [key: string | number]: T;
+    };
+    ids?: string | number[];
   }
 
   export interface ApiResponse {
@@ -68,8 +72,7 @@ export declare namespace AppStore {
     /** The location/property of where to put the API response into the store */
     storeProperty: string;
     /** A unique ID of each object in the collection. Also supports an array of strings if multiple unique ID's are needed in the event of a single key not being enough. */
-    uniqueId: string | string[];
-    adapter: EntityAdapter;
+    uniqueId?: string | string[];
+    entity: EntityAdapter;
   }
-
 }
