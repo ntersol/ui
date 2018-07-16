@@ -1,5 +1,5 @@
 {
-  "name": "mello-labs-angular-starter",
+  "name": "angular-starter",
   "version": "2.2.0",
   "license": "MIT",
   "scripts": {
@@ -10,7 +10,7 @@
     "build": "ng build",
     "prod": "http-server ./dist -o -g",
     "build:prod": "ng build --target=production --environment=prod",
-    "deploy": "ng build --prod --base-href /mello-labs-angular-starter/ && angular-cli-ghpages --no-silent",
+    "deploy": "ng build --prod --base-href /angular-starter/ && angular-cli-ghpages --no-silent",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -40,7 +40,6 @@
     "@angular/service-worker": "6.0.9",
     "@mello-labs/datagrid": "2.0.0",
     "@mello-labs/form-tools": "2.0.0",
-    "@mello-labs/ui": "1.2.0",
     "@ng-bootstrap/ng-bootstrap": "2.0.0",
     "@ngrx/entity": "6.0.1",
     "@ngrx/store": "6.0.1",

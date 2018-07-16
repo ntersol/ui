@@ -1,16 +1,16 @@
-# Mello Labs Angular Starter
+# Angular Starter
 
 A rapid starter project for creating Angular single page apps. Contains Angular 6, lodash, Bootstrap 4, Ng-Bootstrap & Ngrx-Store (Redux). Built with Angular CLI.
 
-Available online @ https://jerrolkrause.github.io/mello-labs-angular-starter/#/. 
+Available online @ https://jerrolkrause.github.io/angular-starter/#/. 
 
 ## Quick Start
 
 ```bash
 # Clone the repo
-git clone https://github.com/JerrolKrause/mello-labs-angular-starter.git
+git clone https://github.com/JerrolKrause/angular-starter.git
 
-# Rename directory from `mello-labs-angular-starter` to `your-app`
+# Rename directory from `angular-starter` to `your-app`
 
 # Change directory to the repo
 cd your-app
@@ -54,7 +54,7 @@ npm run deploy
 ## Localizing Your App
 
 `package.json`
-- If using github pages, update the `npm run deploy` command in this file to include the correct slug. IE replace `/mello-labs-angular-starter/` with your url
+- If using github pages, update the `npm run deploy` command in this file to include the correct slug. IE replace `/angular-starter/` with your url
 
 `src > environments > environment.ts` +
 `src > environments > environment.prod.ts`
