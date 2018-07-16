@@ -1,5 +1,22 @@
-// Include global application specific styling here
-//body{font-weight:normal;}
+// Global UI Elements
+@import "ui/variables";
+@import "ui/mixins";
+@import "ui/layout";
+@import "ui/interactive";
+@import "ui/typography";
+@import "ui/forms";
+@import "ui/tables";
+@import "ui/animations";
 
-// Pink labs background
-header .bg-mello { background-image: -webkit-gradient(linear,left top,left bottom,from(#e4b0c6),to(#f7276e));background-image: linear-gradient(180deg,#e4b0c6 0,#f7276e);}
+// Components
+@import "components/accordions";
+@import "components/alerts";
+@import "components/buttons";
+@import "components/cards";
+@import "components/dropdowns";
+@import "components/navbar";
+@import "components/modals";
+@import "components/poptooltips";
+
+// Prototype pink background
+header .bg-pink { background-image: -webkit-gradient(linear,left top,left bottom,from(#e4b0c6),to(#f7276e));background-image: linear-gradient(180deg,#e4b0c6 0,#f7276e);}

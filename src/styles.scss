@@ -1,11 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 // Font Awesome loaded in angular-cli.json
 
-// Bootstrap. Needed by UI
-@import '~bootstrap/scss/bootstrap';
-
-// @mello-labs UI
-@import '~@mello-labs/ui/scss/styles';
+// Vendor styling
+@import './styles/vendor';
 
 // Application styling
 @import './styles/app';
