@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public users$ = this.api.select.users$;
   public formMain: FormGroup;
   public isEditing: boolean;
+  public sidebarOpen = false;
 
   public filterGlobal: Datagrid.FilterGlobal = {
     term: '',
@@ -64,7 +65,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Refresh users
    */
   public usersRefresh() {
-    this.api.users.get(true).subscribe(res => console.warn('Test', res));
+    this.api.users.get(true).subscribe();
   }
 
   /**

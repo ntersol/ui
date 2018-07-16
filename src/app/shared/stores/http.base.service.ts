@@ -62,8 +62,6 @@ export class ApiHttpService {
     } else {
       return of(<any>true);
     }
-
-    // return this.cache[url];
   }
 
   /**
@@ -96,36 +94,6 @@ export class ApiHttpService {
   } // end post
 
   /**
-   * Make an upsert via put. Upsert inserts if not found, updates if found
-   * @param url - The URL location of the webapi
-   * @param data - The data to pass to the server
-   */
-  protected upsertStore<T>(url: string, apiMap: AppStore.ApiMap, data: T | T[]): Observable<T> {
-    // Update store with new state
-    this.storeSvc.dispatch(ApiStoreActions.STATE_MODIFYING({ apiMap: apiMap }));
-
-    return this.httpSvc.put(url, data).pipe(
-      map(res => {
-        // Check if the response has a payload or not, if not then this is an upSert
-        const dataNew = res ? res : data;
-        this.storeSvc.dispatch(ApiStoreActions.UPSERT_COMPLETE({ apiMap: apiMap, data: dataNew }));
-        return dataNew;
-      }),
-      catchError(error => {
-        console.warn('PUT Error, handle 403 unauth errors here', error);
-
-        if (error.status === 401 || error.status === 403) {
-          error.errorMsg = 'Please log in ';
-          return this.endSession(error);
-        } else {
-          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR({ apiMap: apiMap, data: error }));
-          return of(error);
-        }
-      }),
-    );
-  } // end put
-
-  /**
    * Make a PUT request
    * @param url - The URL location of the webapi
    * @param data - The data to pass to the server
@@ -142,6 +110,36 @@ export class ApiHttpService {
         return dataNew;
       }),
       catchError(error => {
+        if (error.status === 401 || error.status === 403) {
+          error.errorMsg = 'Please log in ';
+          return this.endSession(error);
+        } else {
+          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR({ apiMap: apiMap, data: error }));
+          return of(error);
+        }
+      }),
+    );
+  } // end put
+
+  /**
+   * Make an upsert via put. Upsert inserts if not found, updates if found
+   * @param url - The URL location of the webapi
+   * @param data - The data to pass to the server
+   */
+  protected upsertStore<T>(url: string, apiMap: AppStore.ApiMap, data: T | T[]): Observable<T> {
+    // Update store with new state
+    this.storeSvc.dispatch(ApiStoreActions.STATE_MODIFYING({ apiMap: apiMap }));
+    // Upsert is patch
+    return this.httpSvc.patch(url, data).pipe(
+      map(res => {
+        // Check if the response has a payload or not, if not then this is an upSert
+        const dataNew = res ? res : data;
+        this.storeSvc.dispatch(ApiStoreActions.UPSERT_COMPLETE({ apiMap: apiMap, data: dataNew }));
+        return dataNew;
+      }),
+      catchError(error => {
+        console.warn('PUT Error, handle 403 unauth errors here', error);
+
         if (error.status === 401 || error.status === 403) {
           error.errorMsg = 'Please log in ';
           return this.endSession(error);
