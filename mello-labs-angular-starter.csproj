@@ -43,8 +43,8 @@
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.spec.ts" />
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.ts" />
     <TypeScriptCompile Include="src\app\components\components.module.ts" />
-    <TypeScriptCompile Include="src\app\components\lazy-libs\datagrid.module.ts" />
-    <TypeScriptCompile Include="src\app\components\lazy-libs\index.ts" />
+    <TypeScriptCompile Include="src\app\components\libs\datagrid.module.ts" />
+    <TypeScriptCompile Include="src\app\components\libs\index.ts" />
     <TypeScriptCompile Include="src\app\components\modals\modals.module.spec.ts" />
     <TypeScriptCompile Include="src\app\components\modals\modals.module.ts" />
     <TypeScriptCompile Include="src\app\routes\home\columns.ts" />

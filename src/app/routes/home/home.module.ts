@@ -1,8 +1,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DatagridLazyModule } from '$lazy'; // Lazy loaded library
 import { SiteModule } from '$site'; // Site modules
+import { DatagridLazyModule } from '$libs'; // Lazy loaded library
 // import { DatagridModule } from '@mello-labs/datagrid'; // Non-lazy load implementation
 
 // Home component and routing
