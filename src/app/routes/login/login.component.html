@@ -9,14 +9,23 @@
 
         <form [formGroup]="formMain" novalidate (ngSubmit)="onLogin()">
           <div class="card-body">
-            <!--
-    <error *ngIf="errorApi" [error]="errorApi" [showDetails]="showErrorDetails"></error>
-    -->
+
             <div class="alert alert-warning icon" *ngIf="loggedout">You have successfully logged out.</div>
             <div class="alert alert-danger icon" *ngIf="sessionExpired">Session expired, please log in again.</div>
             <p>Please enter your username and password.</p>
-            <app-field-component [frmGroup]="formMain" frmControl="userName" label="Username" type="text" classes="login"></app-field-component>
-            <app-field-component [frmGroup]="formMain" frmControl="password" label="Password" type="password" classes="password"></app-field-component>
+            <div class="form-group row">
+              <label for="login" class="col-12 col-md-3 col-form-label">Login</label>
+              <div class="col-12 col-md-9">
+                <input class="form-control" type="text" id="login" formControlName="userName">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="password" class="col-12 col-md-3 col-form-label">Password</label>
+              <div class="col-12 col-md-9">
+                <input class="form-control" type="password" id="password" formControlName="password">
+              </div>
+            </div>
+        
             <div class="row">
               <div class=" col-12 col-md-9 offset-md-3">
                 <div class="form-check">
@@ -27,15 +36,10 @@
                 </div>
               </div>
             </div>
-            <!--
-  <hr/>
-  <p><strong>QA Options</strong></p>
-  <app-field-component [frmGroup]="formMain" frmControl="channelId" label="Channel ID" type="text"></app-field-component>
-  <app-field-component [frmGroup]="formMain" frmControl="screenId" label="Screen ID" type="text"></app-field-component>
-  -->
+
           </div>
           <div class="card-footer text-right">
-            <button class="btn btn-interact" type="submit" [disabled]="formMain.invalid || waiting" [ngClass]="{'btn-waiting': waiting}">
+            <button class="btn btn-primary" type="submit" [disabled]="formMain.invalid || waiting" [ngClass]="{'btn-waiting': waiting}">
               <i class="fa fa-power-off" aria-hidden="true"></i>
               Sign In
             </button>
@@ -47,4 +51,5 @@
   </div>
 
 </div>
+
 <app-footer></app-footer>

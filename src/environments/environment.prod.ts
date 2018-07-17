@@ -8,7 +8,7 @@ export const environment = {
 
   properties: {
     /** Name of application */
-    appName: 'Mello Labs Processor Dashboard',
+    appName: 'Angular Starter',
   },
   settings: {
     /** Is an authentication endpoint available. If so make sure to update the endpoints in this file */

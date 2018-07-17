@@ -1,49 +1,23 @@
-<div id="app-home" class="container-fluid" *ngIf="{ users: users$ | async } as routeData">
+<div id="app-home" class="container-fluid" *ngIf="{ users: users$ | async } as route">
 
   <div class="card mb-3">
     <div class="card-header p-2">
 
       <div class="float-right">
-
-        <button class="btn btn-sm btn-secondary mr-1 d-inline-block"
+        <button class="btn btn-sm btn-outline-primary mr-1 d-inline-block"
                 title="Toggle multi-screen view"
                 [ngClass]="{ 'enabled' : ui.select.multiScreen$ | async }"
                 (click)="ui.multiScreenToggle()">
           <i aria-hidden="true" class="fa fa-external-link-square"></i>
         </button>
 
-        <div ngbDropdown placement="bottom-right" #myDrop="ngbDropdown" class="d-inline-block">
-          <button ngbDropdownToggle class="btn btn-sm btn-primary">
-            <i class="fa fa-user mr-1"></i>
-            Add/Edit User
-          </button>
-          <div ngbDropdownMenu id="dropdownUser" style="min-width:320px;" class="p-3" (click)="$event.stopPropagation();">
-            <a class="float-right" (click)="userStopEdit()" *ngIf="isEditing"><i class="fa fa-user-plus" aria-hidden="true"></i> Add New User</a>
-            <h2 *ngIf="!isEditing"> <i class="fa fa-user-plus" aria-hidden="true"></i> Add User</h2>
-            <h2 *ngIf="isEditing"><i class="fa fa-user" aria-hidden="true"></i> Updating User</h2>
-            <hr />
-            <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
-              <app-field-component [frmGroup]="formMain" frmControl="username" label="Username" [labelColumns]="5"></app-field-component>
-              <app-field-component [frmGroup]="formMain" frmControl="name" label="Name" [labelColumns]="5"></app-field-component>
-              <app-field-component [frmGroup]="formMain" frmControl="website" label="Website" [labelColumns]="5"></app-field-component>
-              <app-field-component [frmGroup]="formMain" frmControl="email" label="Email" [labelColumns]="5"></app-field-component>
-              <app-field-component [frmGroup]="formMain" frmControl="phone" label="Phone" [labelColumns]="5"></app-field-component>
-
-              <button type="submit" class="btn btn-interact float-right" [disabled]="routeData?.users?.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : routeData?.users?.modifying }">
-                <ng-container *ngIf="!isEditing">
-                  <i class="fa fa-user-plus" aria-hidden="true"></i> Add User
-                </ng-container>
-                <ng-container *ngIf="isEditing">
-                  <i class="fa fa-user" aria-hidden="true"></i> Update User
-                </ng-container>
-              </button>
-
-            </form>
-          </div>
-        </div>
+        <button class="btn btn-sm" (click)="sidebarOpen = !sidebarOpen" [ngClass]="sidebarOpen ? 'btn-danger' : 'btn-primary'">
+          <i class="fa fa-user mr-1"></i>
+          Toggle User Sidebar
+        </button>
       </div>
 
-      <button class="btn btn-icon btn-sm mr-2" (click)="usersRefresh()" [disabled]="routeData?.users?.loading">
+      <button class="btn btn-outline-primary btn-sm mr-2" (click)="usersRefresh()" [disabled]="route?.users?.loading">
         <i class="fa fa-refresh"></i>
       </button>
 
@@ -59,86 +33,68 @@
 
   <!-- [toaster]="true" [showSuccess]="false" *ngIf="false"-->
 
-  <app-api-state [state]="routeData.users">
+  <app-api-state [state]="route.users">
 
-    <div class="alert alert-warning icon" *ngIf="!routeData?.users?.data?.length">No users found</div>
+    <div class="alert alert-warning icon" *ngIf="!route?.users?.data?.length">No users found</div>
 
-    <ngb-tabset class="nav-tabs-sm"
-                *ngIf="routeData?.users?.data?.length"
-                (tabChange)="ui.tabChange('HOME', $event)"
-                [activeId]="ui.select.tabActive$('HOME') | async">
-      <ngb-tab id="tab-1">
-        <ng-template ngbTabTitle>
-          <i class="fa fa-user-plus" aria-hidden="true"></i> New Users <small><em>({{ routeData.users.data | count }})</em></small>
-        </ng-template>
-        <ng-template ngbTabContent>
-          <div style="position:relative;height:calc(100vh - 190px)">
-            <datagrid #datagrid
-                      [rows]="routeData.users.data"
-                      [columns]="columns"
-                      [state]="{}"
-                      [options]="options"
-                      [filterGlobal]="filterGlobal"
-                      (onStateChange)="onStateChange($event)"
-                      (onRowsSelected)="onRowsSelected($event)"
-                      (onRowUpdated)="onRowUpdated($event)">
+    <div class="row">
+      <div class="col-12" [ngClass]="sidebarOpen ? 'col-md-9' : 'col-md-12' ">
+        <div style="position:relative;height:calc(100vh - 150px)">
+          <datagrid #datagrid
+                    [rows]="route.users.data"
+                    [columns]="columns"
+                    [state]="{}"
+                    [options]="options"
+                    [filterGlobal]="filterGlobal"
+                    (onStateChange)="onStateChange($event)"
+                    (onRowsSelected)="onRowsSelected($event)"
+                    (onRowUpdated)="onRowUpdated($event)">
 
-              <!-- Custom templates, prop corresponds to column property -->
-              <datagrid-column prop="phone">
-                <!-- Header template -->
-                <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
-                  <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
-                </ng-template>
-                <!-- Cell template -->
-                <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-                  <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
-                </ng-template>
-              </datagrid-column>
+            <!-- Custom templates, prop corresponds to column property -->
+            <datagrid-column prop="phone">
+              <!-- Header template -->
+              <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
+                <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
+              </ng-template>
+              <!-- Cell template -->
+              <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
+                <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
+              </ng-template>
+            </datagrid-column>
 
-              <datagrid-column prop="delete">
-                <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-                  <a (click)="userDelete(row)"><i class="fa fa-remove"></i> Delete</a>
-                </ng-template>
-              </datagrid-column>
+            <datagrid-column prop="delete">
+              <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
+                <a (click)="userDelete(row)"><i class="fa fa-remove"></i> Delete</a>
+              </ng-template>
+            </datagrid-column>
 
-            </datagrid>
-          </div>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab id="tab-2">
-        <ng-template ngbTabTitle>
-          <i class="fa fa-users" aria-hidden="true"></i> Returning Users <small><em>({{ routeData?.users?.data | count }})</em></small>
-        </ng-template>
-        <ng-template ngbTabContent>
-          <div style="position:relative;height:calc(100vh - 190px)">
+          </datagrid>
+        </div>
+      </div>
+      <div class="col-12 col-md-3" *ngIf="sidebarOpen">
+        <a class="float-right" (click)="userStopEdit()" *ngIf="isEditing"><i class="fa fa-user-plus" aria-hidden="true"></i> Add New User</a>
+        <h2 *ngIf="!isEditing"> <i class="fa fa-user-plus" aria-hidden="true"></i> Add User</h2>
+        <h2 *ngIf="isEditing"><i class="fa fa-user" aria-hidden="true"></i> Updating User</h2>
+        <hr />
+        <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
+          <app-field-component [frmGroup]="formMain" frmControl="username" label="Username" [labelColumns]="5"></app-field-component>
+          <app-field-component [frmGroup]="formMain" frmControl="name" label="Name" [labelColumns]="5"></app-field-component>
+          <app-field-component [frmGroup]="formMain" frmControl="website" label="Website" [labelColumns]="5"></app-field-component>
+          <app-field-component [frmGroup]="formMain" frmControl="email" label="Email" [labelColumns]="5"></app-field-component>
+          <app-field-component [frmGroup]="formMain" frmControl="phone" label="Phone" [labelColumns]="5"></app-field-component>
 
-            <datagrid #datagrid
-                      [rows]="routeData.users.data"
-                      [columns]="columns"
-                      [state]="{}"
-                      [options]="options"
-                      [filterGlobal]="filterGlobal"
-                      (onStateChange)="onStateChange($event)"
-                      (onRowsSelected)="onRowsSelected($event)"
-                      (onRowUpdated)="onRowUpdated($event)">
+          <button type="submit" class="btn btn-primary float-right" [disabled]="route?.users?.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : route?.users?.modifying }">
+            <ng-container *ngIf="!isEditing">
+              <i class="fa fa-user-plus" aria-hidden="true"></i> Add User
+            </ng-container>
+            <ng-container *ngIf="isEditing">
+              <i class="fa fa-user" aria-hidden="true"></i> Update User
+            </ng-container>
+          </button>
 
-              <!-- Custom templates, prop corresponds to column property -->
-              <datagrid-column prop="phone">
-                <!-- Header template -->
-                <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
-                  <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
-                </ng-template>
-                <!-- Cell template -->
-                <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-                  <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
-                </ng-template>
-              </datagrid-column>
-
-            </datagrid>
-          </div>
-        </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
+        </form>
+      </div>
+    </div>
 
   </app-api-state>
 

@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       hasLogin = true;
     }
 
-    this.subs.push(
+    this.subs = [
       this.route.queryParams.subscribe(params => {
         if (params.session === 'expired') {
           this.sessionExpired = true;
@@ -48,13 +48,12 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.loggedout = true;
         }
       }),
-    );
+    ];
 
     window.clearTimeout(this.authService.sessionTimer); // When the page is loaded, clear any legacy timeouts
     this.authService.logOutModal = null; // Get rid of logout modal if it persists
 
     this.formMain = this.fb.group({
-      // <-- the parent FormGroup
       userName: [isLogin || 'juser', [Validators.required]],
       password: ['password', [Validators.required]],
       remember: [hasLogin],

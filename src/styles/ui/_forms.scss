@@ -1,0 +1,44 @@
+// Global branded styling. App specific styling should NOT go in this file
+label{
+    cursor:pointer;display:block;
+    &.icon{
+        position:relative;
+        &:before{font-family: 'FontAwesome';position: absolute;left: 8px;content: "\f0b0";cursor:default;top: 50%;transform: translateY(-50%); z-index: 4;}
+        .form-control{padding-left:25px;}
+        &.keyboard{
+            &:before {content: "\f11c";}
+            .form-control{padding-left:30px;}
+        }
+        &.filter:before {content: "\f0b0"}
+        .clear{position: absolute;right:10px;top: 50%;transform: translateY(-50%); z-index: 4;}
+    }
+
+    &.search{
+        &:before {font-family: 'FontAwesome';position: absolute;left: 8px;content: "\f002";cursor:default;}
+        .form-control{padding-left:30px;}
+    }
+    &.dragNDrop{    display: block;    height: 200px;    padding-top:30px;    background-color: #e8e8e8;    outline: 5px dashed #595959;    outline-offset: -5px;text-align:center;position:relative;
+        &:hover, &.hover{outline-color:$interact-primary ;color:$interact-primary ;}
+        input{display: block;opacity:0;position:absolute;top:0;bottom:0;left:0;right:0;cursor:pointer;}
+    }
+}
+
+.form-control{
+    &[type='checkbox']{cursor:pointer;}
+    &:hover, &:focus, &:active{border-color:$interact-primary ;}
+    &.form-control-over{position: relative;z-index: 3;border-top-right-radius:0;border-bottom-right-radius:0;border-color: transparent;}
+    &.form-control-under{position: absolute;top: 0;left: 0;z-index: 2;
+        &.form-control-sm{height: 1.69rem!important;}
+    }
+}
+
+.input-icon {float: right;margin-right: 8px;margin-top: -21px;position: relative;z-index: 2;}
+.datepicker .dropdown-menu {top: 2rem !important;}
+.form-check{margin:0;}
+.form-check-label{position:relative;top:7px;}
+.form-group{margin-bottom:0.5rem;
+    label{margin-bottom:0;}
+    &.required {
+        input:not([disabled]), select:not([disabled]), textarea:not([disabled]) {background-color: #ffffe8;}
+    }
+}
