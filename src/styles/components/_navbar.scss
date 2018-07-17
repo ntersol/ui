@@ -2,7 +2,8 @@
 header {
 
     .bg-pink { background-image: linear-gradient(to bottom, #4782b1 0%, #6faee1 100%);color: white; white-space: nowrap; }
-        .navbar-brand { color: white; padding-top: .5rem; padding-bottom: .5rem;
+        .navbar-brand { color: #fff; padding-top: .5rem; padding-bottom: .5rem;
+            strong{ color: #fff;}
             .fa { color: yellow; }
         }
         .logo{text-shadow: 1px 1px 5px rgba(255,255,255,.3);color:$interact-primary;}
