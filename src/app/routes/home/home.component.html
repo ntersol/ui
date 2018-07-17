@@ -83,7 +83,7 @@
           <app-field-component [frmGroup]="formMain" frmControl="email" label="Email" [labelColumns]="5"></app-field-component>
           <app-field-component [frmGroup]="formMain" frmControl="phone" label="Phone" [labelColumns]="5"></app-field-component>
 
-          <button type="submit" class="btn btn-interact float-right" [disabled]="route?.users?.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : route?.users?.modifying }">
+          <button type="submit" class="btn btn-primary float-right" [disabled]="route?.users?.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : route?.users?.modifying }">
             <ng-container *ngIf="!isEditing">
               <i class="fa fa-user-plus" aria-hidden="true"></i> Add User
             </ng-container>
