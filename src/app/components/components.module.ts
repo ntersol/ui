@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { VendorModule } from '../vendor.module';
 
-import { ModalsModule } from './modals/modals.module';
+// Modals import
+import { ConfirmationModalComponent } from './modals/confirmation/confirmation-modal.component';
+import { LogoutModalComponent } from './modals/logout/logout-modal.component';
 
 // Components import
 import {
@@ -17,8 +19,14 @@ import {
 } from '$components';
 import { ApiStateComponent } from './api-state/api-state.component';
 
+
+// Modals include
+const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];
+
+
 // Components to include
 export const APP_COMPONENTS = [
+  ...APP_MODALS,
   FooterComponent,
   HeaderComponent,
   LayoutMainComponent,
@@ -26,7 +34,6 @@ export const APP_COMPONENTS = [
   NavComponent,
   NavSearchComponent,
   LaunchModalComponent,
-
   ApiStateComponent,
 ];
 
@@ -35,15 +42,13 @@ export const APP_COMPONENTS = [
     // Angular
     CommonModule,
 
-    // Modals
-    ModalsModule.forRoot(),
-
     // Vendors
     VendorModule,
   ],
   providers: [],
   declarations: [APP_COMPONENTS],
   exports: [APP_COMPONENTS],
+  entryComponents: [APP_MODALS]
 })
 export class ComponentsModule {
   static forRoot(): ModuleWithProviders {

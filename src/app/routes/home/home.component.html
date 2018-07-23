@@ -64,7 +64,15 @@
 
             <datagrid-column prop="delete">
               <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-                <a (click)="userDelete(row)"><i class="fa fa-remove"></i> Delete</a>
+
+                <app-launch-modal
+                                  modal="ConfirmationModalComponent" size="lg" [data]="'Are you sure you want to delete ' + row.name + '?'" [isButton]="false"
+                                  (success)="userDelete(row)">
+                  <i class="fa fa-remove"></i> Delete
+                </app-launch-modal>
+                <!--
+  <a (click)="userDelete(row)"><i class="fa fa-remove"></i> Delete</a>
+  -->
               </ng-template>
             </datagrid-column>
 
