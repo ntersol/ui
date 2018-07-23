@@ -100,9 +100,6 @@ When working with Yarn/NPM Link and your local NPM package src folders (uncompil
 ```bash
 "include": [
 	"src/**/*",
-	"node_modules/@mello-labs/form-tools/**/*",
-	"node_modules/@mello-labs/api-tools/**/*",
-	"node_modules/@mello-labs/datagrid/**/*",
-	"node_modules/@mello-labs/utilities/**/*"
+	"node_modules/libName/**/*",
 ]
 ```
