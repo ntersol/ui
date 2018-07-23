@@ -15,7 +15,12 @@ export class ApiHttpService {
   /** Hold GET requests from an API using the URL as a primary key */
   private cache: { [key: string]: Observable<any> } = {};
 
-  constructor(private httpSvc: HttpClient, private storeSvc: Store<AppStore.Root>, private routerSvc: Router, private appProps: AppSettings) {}
+  constructor(
+    private httpSvc: HttpClient,
+    private storeSvc: Store<AppStore.Root>,
+    private routerSvc: Router,
+    private appProps: AppSettings,
+  ) {}
 
   /**
    * Make a GET request with simple caching

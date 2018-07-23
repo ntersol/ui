@@ -6,7 +6,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './confirmation-modal.component.html',
 })
 export class ConfirmationModalComponent {
-  
   public data: any; // Data is actually passed through the modal service not here
   public dataAlt: any; // Data is actually passed through the modal service not here
   public onSuccess: EventEmitter<any> = new EventEmitter();

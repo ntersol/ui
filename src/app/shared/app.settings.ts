@@ -7,7 +7,7 @@ import { environment } from '$env';
 export enum AppSettingsProps {
   token = 'token',
   apiUrl = 'apiUrl',
-  userName = 'userName'
+  userName = 'userName',
 }
 
 type Propkey = keyof typeof AppSettingsProps;
@@ -19,8 +19,8 @@ export class AppSettings {
   private localProp = 'settings-app-' + environment.properties.appName.length;
   /** If obfusicated, pad settings with this many characters */
   private pad = 100;
-  private localStorage: {[key in AppSettingsProps]?: string } = {};
-  private sessionStorage: {[key in AppSettingsProps]?: string } = {};
+  private localStorage: { [key in AppSettingsProps]?: string } = {};
+  private sessionStorage: { [key in AppSettingsProps]?: string } = {};
 
   /** API token for EPS */
   private _token: string | null = null;
@@ -103,7 +103,6 @@ export class AppSettings {
    * @param state
    */
   private settingsSave(state: Object) {
-
     try {
       if (state) {
         let str = JSON.stringify(state);
@@ -116,7 +115,6 @@ export class AppSettings {
     } catch (err) {
       return null;
     }
-
   }
 
   /**

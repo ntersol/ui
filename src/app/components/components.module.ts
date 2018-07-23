@@ -2,9 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { VendorModule } from '../vendor.module';
-
 import { SharedModule } from '$shared';
-
 
 // Modals import
 import { ConfirmationModalComponent } from './modals/confirmation/confirmation-modal.component';
@@ -22,10 +20,8 @@ import {
 } from '$components';
 import { ApiStateComponent } from './api-state/api-state.component';
 
-
 // Modals include
 const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];
-
 
 // Components to include
 export const APP_COMPONENTS = [
@@ -52,7 +48,7 @@ export const APP_COMPONENTS = [
   providers: [],
   declarations: [APP_COMPONENTS],
   exports: [APP_COMPONENTS],
-  entryComponents: [APP_MODALS]
+  entryComponents: [APP_MODALS],
 })
 export class ComponentsModule {
   static forRoot(): ModuleWithProviders {
