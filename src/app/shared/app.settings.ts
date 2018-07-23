@@ -7,8 +7,7 @@ import { environment } from '$env';
 export enum AppSettingsProps {
   token = 'token',
   apiUrl = 'apiUrl',
-  userName = 'userName',
-  lnkey = 'lnkey',
+  userName = 'userName'
 }
 
 type Propkey = keyof typeof AppSettingsProps;
@@ -44,17 +43,6 @@ export class AppSettings {
     // console.log('apiUrl', value);
     this._apiUrl = value;
     this.propSet(AppSettingsProps.apiUrl, value);
-  }
-
-  /** Loan number */
-  private _lnkey: string | null = null;
-  /** Username */
-  public get lnkey(): string | null {
-    return this._lnkey || this.propGet(AppSettingsProps.lnkey);
-  }
-  public set lnkey(value: string | null) {
-    this._lnkey = value;
-    this.propSet(AppSettingsProps.lnkey, value);
   }
 
   /** Username */
