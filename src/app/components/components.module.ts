@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { VendorModule } from '../vendor.module';
 
+import { SharedModule } from '$shared';
+
+
 // Modals import
 import { ConfirmationModalComponent } from './modals/confirmation/confirmation-modal.component';
 import { LogoutModalComponent } from './modals/logout/logout-modal.component';
@@ -41,7 +44,8 @@ export const APP_COMPONENTS = [
   imports: [
     // Angular
     CommonModule,
-
+    // Shared
+    SharedModule,
     // Vendors
     VendorModule,
   ],
