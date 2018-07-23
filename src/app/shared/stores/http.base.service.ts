@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, share } from 'rxjs/operators';
 
 import { ApiStoreActions } from './api/api.actions';
-
+import { AppSettings } from '../app.settings';
 import { AppStore } from './store';
 
 @Injectable()
@@ -15,7 +15,12 @@ export class ApiHttpService {
   /** Hold GET requests from an API using the URL as a primary key */
   private cache: { [key: string]: Observable<any> } = {};
 
-  constructor(private httpSvc: HttpClient, private storeSvc: Store<AppStore.Root>, private routerSvc: Router) {}
+  constructor(
+    private httpSvc: HttpClient,
+    private storeSvc: Store<AppStore.Root>,
+    private routerSvc: Router,
+    private appProps: AppSettings,
+  ) {}
 
   /**
    * Make a GET request with simple caching
@@ -192,7 +197,7 @@ export class ApiHttpService {
    */
   private endSession(error: any) {
     this.cacheClear();
-    window.localStorage.removeItem('token');
+    this.appProps.token = null;
     window.sessionStorage.clear();
     this.storeSvc.dispatch(ApiStoreActions.RESET(null)); // Clear out store on errors for security
     this.routerSvc.navigate(['/login'], { queryParams: { session: 'expired' } });

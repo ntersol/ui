@@ -5,9 +5,9 @@ import { UIModalService } from '$ui';
 
 /** Sample Usage:
 <app-launch-modal  classes="btn btn-icon"
-    modal="LoanDetailsModalComponent" size="lg" [data]="someData" [dataAlt]="someData" [isButton]="false"
-    (onSuccess)="doSomething($event)">
-        <div class="icons-app icons-app-loan_info"></div>
+    modal="ConfirmationModalComponent" size="lg" [data]="someData" [dataAlt]="someData" [isButton]="false"
+    (success)="doSomething($event)">
+        <i class="fa fa-remove"></i> Delete
 </app-launch-modal>
 */
 

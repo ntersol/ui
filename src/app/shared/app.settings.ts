@@ -8,7 +8,6 @@ export enum AppSettingsProps {
   token = 'token',
   apiUrl = 'apiUrl',
   userName = 'userName',
-  lnkey = 'lnkey',
 }
 
 type Propkey = keyof typeof AppSettingsProps;
@@ -17,7 +16,7 @@ type Propkey = keyof typeof AppSettingsProps;
 @Injectable()
 export class AppSettings {
   /** Property to store app settings in local or session storage */
-  private localProp = 'settings';
+  private localProp = 'settings-app-' + environment.properties.appName.length;
   /** If obfusicated, pad settings with this many characters */
   private pad = 100;
   private localStorage: { [key in AppSettingsProps]?: string } = {};
@@ -44,17 +43,6 @@ export class AppSettings {
     // console.log('apiUrl', value);
     this._apiUrl = value;
     this.propSet(AppSettingsProps.apiUrl, value);
-  }
-
-  /** Loan number */
-  private _lnkey: string | null = null;
-  /** Username */
-  public get lnkey(): string | null {
-    return this._lnkey || this.propGet(AppSettingsProps.lnkey);
-  }
-  public set lnkey(value: string | null) {
-    this._lnkey = value;
-    this.propSet(AppSettingsProps.lnkey, value);
   }
 
   /** Username */
@@ -111,33 +99,41 @@ export class AppSettings {
   }
 
   /**
-   * Return an object that has been obfusicated into a string
+   * Return an object that has been obfuscated into a string
    * @param state
    */
   private settingsSave(state: Object) {
-    if (state) {
-      let str = JSON.stringify(state);
-      if (environment.settings.obfuscate) {
-        str = StringUtils.pad(str, this.pad, this.pad);
-        str = StringUtils.obfuscateAdd(str);
+    try {
+      if (state) {
+        let str = JSON.stringify(state);
+        if (environment.settings.obfuscate) {
+          str = StringUtils.pad(str, this.pad, this.pad);
+          str = StringUtils.obfuscateAdd(str);
+        }
+        return str;
       }
-      return str;
+    } catch (err) {
+      return null;
     }
   }
 
   /**
-   * Return an object that has been de-obfusicated
+   * Return an object that has been de-obfuscated
    * @param state
    */
   private settingsRestore(state: string) {
-    if (state) {
-      let str = state;
-      if (environment.settings.obfuscate) {
-        str = StringUtils.obfuscateRemove(state);
-        str = StringUtils.trim(str, this.pad, this.pad);
+    try {
+      if (state) {
+        let str = state;
+        if (environment.settings.obfuscate) {
+          str = StringUtils.obfuscateRemove(state);
+          str = StringUtils.trim(str, this.pad, this.pad);
+        }
+        const obj = JSON.parse(str);
+        return obj;
       }
-      const obj = JSON.parse(str);
-      return obj;
+    } catch (err) {
+      return null;
     }
   }
 }

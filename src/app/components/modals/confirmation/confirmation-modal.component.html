@@ -12,8 +12,8 @@
   </div>
 
   <div class="modal-footer" style="justify-content: space-between;">
-    <button type="button" class="btn btn-interact-outline float-left pull-left dismiss" (click)="activeModal.dismiss('Close click')">Cancel</button>
-    <button type="button" class="btn btn-interact submit" (click)="submit()" aria-label="Close" [disabled]="waiting" [ngClass]="{'btn-waiting':waiting}">
+    <button type="button" class="btn btn-outline-primary float-left pull-left dismiss" (click)="activeModal.dismiss('Close click')">Cancel</button>
+    <button type="button" class="btn btn-primary submit" (click)="submit()" aria-label="Close">
       <i class="fa fa-check" aria-hidden="true"></i> Confirm
     </button>
   </div>

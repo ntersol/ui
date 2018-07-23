@@ -9,6 +9,7 @@ import { Models } from '$models';
 import { ApiHttpService } from '../http.base.service';
 import { ApiSelectorsService } from './api.selectors.service';
 import { ApiStoreActions } from './api.actions';
+import { AppSettings } from '../../app.settings';
 import { ApiMap } from './api.map';
 
 @Injectable({
@@ -27,10 +28,11 @@ export class ApiService extends ApiHttpService {
     private store: Store<AppStore.Root>,
     private http: HttpClient,
     private router: Router,
+    private props: AppSettings,
     /** API Store Selectors */
     public select: ApiSelectorsService,
   ) {
-    super(<any>http, <any>store, <any>router);
+    super(<any>http, <any>store, <any>router, <any>props);
 
     // Output store changes to console
     // this.store.subscribe(storeApi => console.log(JSON.parse(JSON.stringify(storeApi.api))));
@@ -48,6 +50,6 @@ export class ApiService extends ApiHttpService {
    * Fix a bug with TS where super calls don't count as usage
    */
   public fixTS() {
-    console.log(this.http, this.router);
+    console.log(this.http, this.router, this.props);
   }
 }
