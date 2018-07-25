@@ -73,6 +73,6 @@ export declare namespace AppStore {
     storeProperty: string;
     /** A unique ID of each object in the collection. Also supports an array of strings if multiple unique ID's are needed in the event of a single key not being enough. */
     uniqueId?: string | string[];
-    entity: EntityAdapter;
+    entity?: EntityAdapter;
   }
 }

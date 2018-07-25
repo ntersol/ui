@@ -51,13 +51,15 @@ export function ApiReducer(state: AppStore.Api = {}, action: Action) {
   * Get complete
   */
   if (isType(action, ApiStoreActions.GET_COMPLETE)) {
-    // If response is an array/collection, convert to ngrx entities
-    if (Array.isArray(action.payload.data) && typeof action.payload.data === 'object') {
+    // If response is an array/collection and has an entityAdapter, convert to ngrx entities
+    if (Array.isArray(action.payload.data) && typeof action.payload.data === 'object' && action.payload.apiMap.entity) {
       // Ensure initial state is set and current state is merged down on top of that
       state[action.payload.apiMap.storeProperty] = {
         ...action.payload.apiMap.entity.initialState,
         ...state[action.payload.apiMap.storeProperty],
       };
+      // After successful get, clear out all data currently in this store
+      state[action.payload.apiMap.storeProperty] = action.payload.apiMap.entity.adapter.removeAll();
       // Update record/s in collection
       state[action.payload.apiMap.storeProperty] = action.payload.apiMap.entity.adapter.addMany(
         action.payload.data,

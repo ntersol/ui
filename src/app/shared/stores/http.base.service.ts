@@ -7,20 +7,15 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, share } from 'rxjs/operators';
 
 import { ApiStoreActions } from './api/api.actions';
-import { AppSettings } from '../app.settings';
+
 import { AppStore } from './store';
 
 @Injectable()
 export class ApiHttpService {
   /** Hold GET requests from an API using the URL as a primary key */
-  private cache: { [key: string]: Observable<any> } = {};
+  private cache: { [key: string]: any } = {};
 
-  constructor(
-    private httpSvc: HttpClient,
-    private storeSvc: Store<AppStore.Root>,
-    private routerSvc: Router,
-    private appProps: AppSettings,
-  ) {}
+  constructor(private httpSvc: HttpClient, private storeSvc: Store<AppStore.Root>, private routerSvc: Router) { }
 
   /**
    * Make a GET request with simple caching
@@ -32,7 +27,7 @@ export class ApiHttpService {
     if (!this.cache[url] || updateCache) {
       this.cache[url] = this.httpSvc.get(url).pipe(share());
     }
-    return this.cache[url];
+    return of(this.cache[url]); // Return observable of api response
   } // end get
 
   /**
@@ -47,9 +42,10 @@ export class ApiHttpService {
       // Set loading
       this.storeSvc.dispatch(ApiStoreActions.STATE_LOADING({ apiMap: apiMap }));
       // Load into cache, make get request
-      this.cache[url] = this.httpSvc.get(url).pipe(
+      return this.httpSvc.get(url).pipe(
         map(res => {
           this.storeSvc.dispatch(ApiStoreActions.GET_COMPLETE({ apiMap: apiMap, data: res }));
+          this.cache[url] = res; // Cache api response
           return res;
         }),
         catchError(error => {
@@ -63,9 +59,11 @@ export class ApiHttpService {
         }),
         share(),
       );
-      return this.cache[url];
+
     } else {
-      return of(<any>true);
+      // Update store with cached data
+      this.storeSvc.dispatch(ApiStoreActions.GET_COMPLETE({ apiMap: apiMap, data: this.cache[url] }));
+      return of(this.cache[url]); // Return observable of api response
     }
   }
 
@@ -197,7 +195,7 @@ export class ApiHttpService {
    */
   private endSession(error: any) {
     this.cacheClear();
-    this.appProps.token = null;
+    window.localStorage.removeItem('token');
     window.sessionStorage.clear();
     this.storeSvc.dispatch(ApiStoreActions.RESET(null)); // Clear out store on errors for security
     this.routerSvc.navigate(['/login'], { queryParams: { session: 'expired' } });
