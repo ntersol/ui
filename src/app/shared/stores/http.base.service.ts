@@ -6,16 +6,18 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, map, share } from 'rxjs/operators';
 
+import { AppSettings } from '../app.settings';
 import { ApiStoreActions } from './api/api.actions';
-
 import { AppStore } from './store';
+
 
 @Injectable()
 export class ApiHttpService {
   /** Hold GET requests from an API using the URL as a primary key */
   private cache: { [key: string]: any } = {};
 
-  constructor(private httpSvc: HttpClient, private storeSvc: Store<AppStore.Root>, private routerSvc: Router) { }
+  constructor(private httpSvc: HttpClient, private storeSvc: Store<AppStore.Root>,
+    private routerSvc: Router, private appProps: AppSettings) { }
 
   /**
    * Make a GET request with simple caching
@@ -141,8 +143,6 @@ export class ApiHttpService {
         return dataNew;
       }),
       catchError(error => {
-        console.warn('PUT Error, handle 403 unauth errors here', error);
-
         if (error.status === 401 || error.status === 403) {
           error.errorMsg = 'Please log in ';
           return this.endSession(error);
@@ -195,7 +195,7 @@ export class ApiHttpService {
    */
   private endSession(error: any) {
     this.cacheClear();
-    window.localStorage.removeItem('token');
+    this.appProps.token = null;
     window.sessionStorage.clear();
     this.storeSvc.dispatch(ApiStoreActions.RESET(null)); // Clear out store on errors for security
     this.routerSvc.navigate(['/login'], { queryParams: { session: 'expired' } });
