@@ -2,8 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SiteModule } from '$site'; // Site modules
-import { DatagridLazyModule } from '$libs'; // Lazy loaded library
-// import { DatagridModule } from '@mello-labs/datagrid'; // Non-lazy load implementation
+import { DatagridModule } from '$components'; // Lazy loaded datagrid
 
 // Home component and routing
 import { routing } from './home.routes';
@@ -11,7 +10,7 @@ import { HomeComponent } from './home.component';
 import { HomeService } from './shared/home.service';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, DatagridLazyModule],
+  imports: [CommonModule, SiteModule, routing, DatagridModule],
   declarations: [HomeComponent],
   providers: [HomeService],
   exports: [],

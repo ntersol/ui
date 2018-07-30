@@ -1,0 +1,39 @@
+<div class="datagrid-header-container" [ngStyle]="{'width': gridProps.widthViewPort + 'px'}">
+    <div class="datagrid-header" [ngStyle]="{'width' : gridProps.widthTotal + 'px'}">
+
+        <!-- Header Row -->
+        <div class="datagrid-header-row">
+
+            <div class="datagrid-header-pinned sticky-left" *ngIf="columnsPinnedLeft?.length" [ngStyle]="{'width' : gridProps.widthPinned + 'px' }">
+                <datagrid-header-row [columns]="columnsPinnedLeft"
+                                     [columnType]="'pinnedLeft'"
+                                     [state]="state"
+                                     [status]="status"
+                                     [options]="options"
+                                     [scrollProps]="scrollProps"
+                                     [filterTerms]="filterTerms"
+                                     [templates]="templates"
+                                     (onColumnsUpdated)="columnsUpdated($event)"
+                                     (onStateUpdated)="stateUpdated($event)"
+                                     (onCustomLinkEvent)="customLinkEvent($event)">
+                </datagrid-header-row>
+            </div>
+            
+            <div class="datagrid-header-main" [ngStyle]="{ 'left' : (-scrollProps.scrollLeft + gridProps.widthPinned) + 'px' }">
+                <datagrid-header-row [columns]="columns"
+                                     [columnType]="'main'"
+                                     [state]="state"
+                                     [status]="status"
+                                     [options]="options"
+                                     [scrollProps]="scrollProps"
+                                     [filterTerms]="filterTerms"
+                                     [templates]="templates"
+                                     (onColumnsUpdated)="columnsUpdated($event)"
+                                     (onStateUpdated)="stateUpdated($event)"
+                                     (onCustomLinkEvent)="customLinkEvent($event)">
+                </datagrid-header-row>
+            </div>
+
+        </div>
+    </div>
+</div>

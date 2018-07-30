@@ -1,0 +1,14 @@
+<div class="datagrid-row">
+    <ng-container *ngFor="let column of columns; let columnIndex = index; trackBy:trackColumn">
+
+        <datagrid-cell class="datagrid-cell"
+                       [ngStyle]="{'left' : column.$$leftOffset + 'px' }"
+                       [column]="column"
+                       [row]="row"
+                       [options]="options"
+                       [templates]="templates"
+                       (onRowUpdated)="rowUpdated($event)">
+        </datagrid-cell>
+
+    </ng-container>
+</div>

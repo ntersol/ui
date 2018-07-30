@@ -1,4 +1,4 @@
-import { Datagrid } from '@mello-labs/datagrid';
+import { Datagrid } from '$components';
 
 export const columns: Datagrid.Column[] = [
   {
