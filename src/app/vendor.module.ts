@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormToolsModule } from '@mello-labs/form-tools';
 
 @NgModule({
   imports: [
@@ -15,9 +14,8 @@ import { FormToolsModule } from '@mello-labs/form-tools';
 
     // Vendors
     NgbModule.forRoot(),
-    FormToolsModule.forRoot(),
   ],
-  exports: [RouterModule, FormsModule, ReactiveFormsModule, NgbModule, FormToolsModule],
+  exports: [RouterModule, FormsModule, ReactiveFormsModule, NgbModule],
   declarations: [],
 })
 export class VendorModule {}

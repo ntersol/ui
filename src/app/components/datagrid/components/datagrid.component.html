@@ -1,0 +1,60 @@
+
+<div id="datagrid" class="datagrid" #dataGrid
+	 [ngClass]="{
+    'selectable' : options.selectionType,
+    'truncatable' : options.columnsTruncate,
+    'fullscreen' : options.fullScreen }">
+
+	<div *ngIf="!appReady || !domReady" class="container-fluid pt-3" style="font-size: 1rem;"><i class="fa fa-spinner fa-spin"></i> Loading View...</div>
+
+	<div class="datagrid-container" *ngIf="appReady && domReady">
+
+		<!--TODO: Add readonly div -->
+		<!-- Header -->
+		<datagrid-header [columns]="columnsExternal"
+						 [columnsPinnedLeft]="columnsPinnedLeft"
+						 [state]="state"
+						 [status]="status"
+						 [options]="options"
+						 [scrollProps]="scrollProps"
+						 [gridProps]="gridProps"
+						 [filterTerms]="filterTerms"
+             [templates]="columnTemplates"
+						 (onStateUpdated)="onStateUpdated($event)"
+						 (onColumnsUpdated)="columnsUpdated($event)"
+						 (onCustomLinkEvent)="customLinkEvent($event)">
+		</datagrid-header>
+
+		<!-- Info bar-->
+		<datagrid-info *ngIf="options.showInfo && (state?.sorts.length || state?.groups.length || state?.filters.length)"
+					   [state]="state"
+					   [options]="options"
+					   [columnsMapped]="columnsMapped"
+					   (onReset)="reset($event)">
+		</datagrid-info>
+
+		<!-- Body -->
+		<datagrid-body #dataGridBody
+					   [columns]="columnsExternal"
+					   [columnsPinnedLeft]="columnsPinnedLeft"
+					   [rows]="rowsExternal"
+					   [rowStyles]="rowStyles"
+					   [state]="state"
+					   [status]="status"
+					   [options]="options"
+					   [gridProps]="gridProps"
+             [templates]="columnTemplates"
+					   (onRowMouseEvent)="onRowMouseEvent($event)"
+					   (onRowUpdated)="rowUpdated($event)"
+					   (onGroupToggled)="groupToggled($event)"
+					   (onScrollEvent)="onScroll($event)">
+		</datagrid-body>
+	</div>
+
+	<!-- Drag select box -->
+	<div id="drag-select"
+		 *ngIf="options.showDragBox && dragging && options.selectionType && draggingPos.hasMinSize"
+		 [ngStyle]="{ 'top':draggingPos.top + 'px', 'left': draggingPos.left + 'px', width: draggingPos.width + 'px', height: draggingPos.height + 'px' }">
+	</div>
+
+</div>

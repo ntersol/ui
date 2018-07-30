@@ -9,3 +9,6 @@ export * from './launch-modal/launch-modal.component';
 
 // Components module
 export * from './components.module';
+
+// Libs
+export * from './datagrid/datagrid.module';

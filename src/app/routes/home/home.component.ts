@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Datagrid } from '@mello-labs/datagrid';
+import { Datagrid } from '$components';
 
 import { ApiService } from '$api';
 import { UIStoreService } from '$ui';
