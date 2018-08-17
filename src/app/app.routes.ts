@@ -46,6 +46,9 @@ export const ROUTES: Routes = [
       // { path: 'users', loadChildren: './routes/users/users.module#UsersModule', canActivate: [AuthGuard] },
 
       // Empty path string for homepage ('') needs to be LAST otherwise it catches all other routes
+      { path: 'monolith', pathMatch: 'full', loadChildren: './routes/monolith/monolith.module#MonolithModule', canActivate: [AuthGuard] },
+
+      // Empty path string for homepage ('') needs to be LAST otherwise it catches all other routes
       { path: '', pathMatch: 'full', loadChildren: './routes/home/home.module#HomeModule', canActivate: [AuthGuard] },
 
       {

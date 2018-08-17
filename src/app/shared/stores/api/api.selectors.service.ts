@@ -6,24 +6,15 @@ import { AppStore } from '$shared';
 // import { ApiMap } from 'src/app/shared/stores/api';
 // import { Observable, combineLatest } from 'rxjs';
 // import { map } from 'rxjs/operators';
-
-const keyBy = require('lodash/keyBy');
+// const keyBy = require('lodash/keyBy');
 
 // Mapped/source selectors for reuse or transforming data
 const selectors = {
-  usersMapped: createSelector(
-    (state: AppStore.Root) => state.api.users,
-    users => {
-      if (users.data) {
-        return keyBy(users.data, 'id');
-      }
-    },
-  ),
   users: createSelector(
     (state: AppStore.Root) => state.api.users,
     users => {
       if (users && users.data) {
-        // users.data = ApiMap.users.entity.adapter.getSelectors().selectAll(users.data);
+        // Modify data before returning to selector
       }
       return users;
     },
@@ -34,10 +25,9 @@ const selectors = {
   providedIn: 'root',
 })
 export class ApiSelectorsService {
-  public users$ = this.store.select(store => store.api.users);
+  public users$ = this.store.select(selectors.users); // Memoized selector
   // public users$ = this.store.select(store => store.api.users);
-  public usersMapped$ = this.store.select(selectors.usersMapped);
-
+  
   constructor(private store: Store<AppStore.Root>) {}
 
   /**

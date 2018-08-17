@@ -1,0 +1,137 @@
+<div id="app-monolith" class="container-fluid" *ngIf="{ users: users$ | async } as route">
+
+  <div class="card mb-3">
+    <div class="card-header p-2">
+
+      <div class="float-right">
+        <button class="btn btn-sm btn-outline-primary mr-1 d-inline-block"
+                title="Toggle multi-screen view"
+                [ngClass]="{ 'enabled' : ui.select.multiScreen$ | async }"
+                (click)="ui.multiScreenToggle()">
+          <i aria-hidden="true" class="fa fa-external-link-square"></i>
+        </button>
+
+        <button class="btn btn-sm" (click)="sidebarOpen = !sidebarOpen" [ngClass]="sidebarOpen ? 'btn-danger' : 'btn-primary'">
+          <i class="fa fa-user mr-1"></i>
+          Toggle User Sidebar
+        </button>
+      </div>
+
+      <button class="btn btn-outline-primary btn-sm mr-2" (click)="usersRefresh()" [disabled]="route?.users?.loading">
+        <i class="fa fa-refresh"></i>
+      </button>
+
+      <!-- Filter datatable -->
+      <form class="form-inline mr-3 d-inline-block">
+        <label class="icon filter" style="position:relative;">
+          <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter name or website" [ngModel]="filterGlobal.term" (ngModelChange)="onfilterGlobal($event)" data-qa="hp-filter-global" />
+          <a (click)="filterGlobal.term = null; onfilterGlobal()" *ngIf="filterGlobal.term" style="position:absolute;right: 10px;top: 4px;"><i class="fa fa-remove"></i></a>
+        </label>
+      </form>
+    </div>
+  </div>
+
+  <app-api-state [state]="route.users">
+
+    <div class="alert alert-warning icon" *ngIf="!route?.users?.data?.length">No users found</div>
+
+    <div class="row">
+      <div class="col-12" [ngClass]="sidebarOpen ? 'col-md-9' : 'col-md-12' ">
+        <div style="position:relative;height:calc(100vh - 150px)">
+          <datagrid #datagrid
+                    [rows]="route.users.data"
+                    [columns]="columns"
+                    [state]="{}"
+                    [options]="options"
+                    [filterGlobal]="filterGlobal"
+                    (onStateChange)="onStateChange($event)"
+                    (onRowsSelected)="onRowsSelected($event)"
+                    (onRowUpdated)="onRowUpdated($event)">
+
+            <!-- Custom templates, prop corresponds to column property -->
+            <datagrid-column prop="phone">
+              <!-- Header template -->
+              <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
+                <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
+              </ng-template>
+              <!-- Cell template -->
+              <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
+                <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
+              </ng-template>
+            </datagrid-column>
+
+            <datagrid-column prop="delete">
+              <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
+                <app-launch-modal
+                                  modal="ConfirmationModalComponent" size="lg" [data]="'Are you sure you want to delete ' + row.name + '?'" [isButton]="false"
+                                  (success)="userDelete(row)">
+                  <i class="fa fa-remove"></i> Delete
+                </app-launch-modal>
+              </ng-template>
+            </datagrid-column>
+
+          </datagrid>
+        </div>
+      </div>
+      <div class="col-12 col-md-3" *ngIf="sidebarOpen">
+        <a class="float-right" (click)="userStopEdit()" *ngIf="isEditing"><i class="fa fa-user-plus" aria-hidden="true"></i> Add New User</a>
+        <h2 *ngIf="!isEditing"> <i class="fa fa-user-plus" aria-hidden="true"></i> Add User</h2>
+        <h2 *ngIf="isEditing"><i class="fa fa-user" aria-hidden="true"></i> Updating User</h2>
+        <hr />
+
+        <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
+
+          <div class="form-group row">
+            <label for="username" class="col-3 col-form-label">Username<sup class="red">*</sup></label>
+            <div class="col-9">
+              <input class="form-control" type="text" id="username" formControlName="username">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="name" class="col-3 col-form-label">Name<sup class="red">*</sup></label>
+            <div class="col-9">
+              <input class="form-control" type="text" id="name" formControlName="name">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="website" class="col-3 col-form-label">Website</label>
+            <div class="col-9">
+              <input class="form-control" type="text" id="website" formControlName="website">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="email" class="col-3 col-form-label">Email</label>
+            <div class="col-9">
+              <input class="form-control" type="email" id="email" formControlName="email">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="phone" class="col-3 col-form-label">Phone</label>
+            <div class="col-9">
+              <input class="form-control" type="text" id="phone" formControlName="phone">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary float-right" [disabled]="route?.users?.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : route?.users?.modifying }">
+            <ng-container *ngIf="!isEditing">
+              <i class="fa fa-user-plus" aria-hidden="true"></i> Add User
+            </ng-container>
+            <ng-container *ngIf="isEditing">
+              <i class="fa fa-user" aria-hidden="true"></i> Update User
+            </ng-container>
+          </button>
+
+        </form>
+
+      </div>
+    </div>
+
+  </app-api-state>
+
+
+</div>
+
