@@ -6,14 +6,12 @@ import { Store } from '@ngrx/store';
 import { AppStore, AppSettings } from '$shared';
 import { Models } from '$models';
 
-import { ApiHttpService } from './api.http.base.service';
+import { ApiHttpService } from '$api';
 import { ApiSelectorsService } from './api.selectors.service';
-import { ApiStoreActions } from './api.actions';
+import { ApiStoreActions } from '$api';
 import { ApiMap } from './api.map';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ApiService extends ApiHttpService {
   /** Users endpoint */
   public users = {
@@ -34,7 +32,7 @@ export class ApiService extends ApiHttpService {
     super(<any>http, <any>store, <any>router, <any>props);
 
     // Output store changes to console
-     this.store.subscribe(storeApi => console.log(JSON.parse(JSON.stringify(storeApi))));
+     this.store.subscribe(storeApi => console.warn(JSON.parse(JSON.stringify(storeApi))));
   }
 
   /**

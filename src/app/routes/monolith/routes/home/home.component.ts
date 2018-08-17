@@ -10,12 +10,12 @@ import { DesktopUtils } from '$utils';
 import { columns } from './columns';
 
 @Component({
-  selector: 'app-monolith',
-  styleUrls: ['./monolith.component.scss'],
-  templateUrl: './monolith.component.html',
+  selector: 'app-home',
+  styleUrls: ['./home.component.scss'],
+  templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MonolithComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy {
   public users$ = this.api.select.users$;
   public formMain: FormGroup;
   public isEditing: boolean;

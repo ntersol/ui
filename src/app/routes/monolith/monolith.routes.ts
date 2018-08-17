@@ -1,12 +1,12 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MonolithComponent } from './monolith.component';
+import { HomeComponent } from './routes/home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MonolithComponent,
+    component: HomeComponent,
     data: { title: 'Dashboard' },
   },
 ];

@@ -6,10 +6,9 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, map, share } from 'rxjs/operators';
 
-import { AppSettings } from '../app.settings';
-import { ApiStoreActions } from './api/api.actions';
-import { AppStore } from './store';
-
+import { ApiStoreActions } from './api.actions';
+import { AppSettings } from '../../app.settings';
+import { AppStore } from '../store';
 
 @Injectable()
 export class ApiHttpService {

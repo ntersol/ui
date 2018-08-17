@@ -12,7 +12,7 @@ const initialState: AppStore.Ui = {
   tabsActive: {},
 };
 
-export function UIStoreReducer(state = initialState, action: Action) {
+export function UIReducer(state = initialState, action: Action) {
   // console.log('UI REDUCER:', action);
 
   if (isType(action, UIStoreActions.REHYDRATE)) {
