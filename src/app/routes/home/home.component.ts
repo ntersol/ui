@@ -8,7 +8,6 @@ import { UIStoreService } from '$ui';
 import { Models } from '$models';
 import { DesktopUtils } from '$utils';
 import { columns } from './columns';
-import { HomeService } from './shared/home.service';
 
 @Component({
   selector: 'app-home',
@@ -42,7 +41,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
 
-  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder, public home: HomeService) {}
+  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder) {}
 
   public ngOnInit() {
     // Get users and load into store

@@ -7,12 +7,11 @@ import { DatagridModule } from '$components'; // Lazy loaded datagrid
 // Home component and routing
 import { routing } from './home.routes';
 import { HomeComponent } from './home.component';
-import { HomeService } from './shared/home.service';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, DatagridModule],
   declarations: [HomeComponent],
-  providers: [HomeService],
+  providers: [],
   exports: [],
   entryComponents: [],
 })
