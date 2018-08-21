@@ -13,13 +13,13 @@ import { ApiReducer } from '$api';
 import { routing } from './monolith.routes';
 import { HomeComponent } from './routes/home/home.component';
 
-import { ApiService } from './shared/stores/api/api.store.service';
-import { ApiSelectorsService } from './shared/stores/api/api.selectors.service';
+import { MonolithApiService } from './shared/stores/api/api.store.service';
+import { MonolithApiSelectorsService } from './shared/stores/api/api.selectors.service';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, DatagridModule, StoreModule.forRoot({ monolithApi: ApiReducer, monolithUi: UIReducer })],
+  imports: [CommonModule, SiteModule, routing, DatagridModule, StoreModule.forRoot({ api: ApiReducer, ui: UIReducer })],
   declarations: [HomeComponent],
-  providers: [ApiService, ApiSelectorsService],
+  providers: [MonolithApiService, MonolithApiSelectorsService],
   exports: [],
   entryComponents: [],
 })

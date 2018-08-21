@@ -35,7 +35,7 @@
 
     <div class="alert alert-warning icon" *ngIf="!route?.users?.data?.length">No users found</div>
 
-    <div class="row">
+    <div class="row" *ngIf="route?.users?.data">
       <div class="col-12" [ngClass]="sidebarOpen ? 'col-md-9' : 'col-md-12' ">
         <div style="position:relative;height:calc(100vh - 150px)">
           <datagrid #datagrid

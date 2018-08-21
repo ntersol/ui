@@ -3,7 +3,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Datagrid } from '$components';
 
-import { ApiService } from '$api';
+import { MonolithApiService } from '../../shared/stores/api/api.store.service';
 import { UIStoreService } from '$ui';
 import { Models } from '$models';
 import { DesktopUtils } from '$utils';
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
 
-  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder) {}
+  constructor(private api: MonolithApiService, public ui: UIStoreService, private fb: FormBuilder) {}
 
   public ngOnInit() {
     // Get users and load into store

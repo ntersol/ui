@@ -34,7 +34,7 @@ export class ApiService extends ApiHttpService {
     super(<any>http, <any>store, <any>router, <any>props);
 
     // Output store changes to console
-     this.store.subscribe(storeApi => console.log(JSON.parse(JSON.stringify(storeApi))));
+    // this.store.subscribe(storeApi => console.log(JSON.parse(JSON.stringify(storeApi))));
   }
 
   /**

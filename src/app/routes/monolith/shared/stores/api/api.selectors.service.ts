@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store, createSelector } from '@ngrx/store';
 
 // import { Models } from '$models';
-import { AppStore } from '$shared';
+import { MonolithStore } from '../monolith.store';
 // import { ApiMap } from 'src/app/shared/stores/api';
 // import { Observable, combineLatest } from 'rxjs';
 // import { map } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { AppStore } from '$shared';
 // Mapped/source selectors for reuse or transforming data
 const selectors = {
   users: createSelector(
-    (state: AppStore.Root) => state.api.users,
+    (state: MonolithStore.Root) => state.api.users,
     users => {
       if (users && users.data) {
         // Modify data before returning to selector
@@ -22,11 +22,11 @@ const selectors = {
 };
 
 @Injectable()
-export class ApiSelectorsService {
+export class MonolithApiSelectorsService {
   public users$ = this.store.select(selectors.users); // Memoized selector
   // public users$ = this.store.select(store => store.api.users);
   
-  constructor(private store: Store<AppStore.Root>) {}
+  constructor(private store: Store<MonolithStore.Root>) {}
 
   /**
    * Returns a single unified API status for one or more API status calls.
