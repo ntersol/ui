@@ -3,18 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { AppStore, AppSettings } from '$shared';
+import { AppSettings } from '$shared';
 import { Models } from '$models';
 
-import { ApiHttpService } from './api.http.base.service';
-import { ApiSelectorsService } from './api.selectors.service';
-import { ApiStoreActions } from './api.actions';
+import { ApiHttpService } from '$api';
+import { MonolithApiSelectorsService } from './api.selectors.service';
+import { ApiStoreActions } from '$api';
 import { ApiMap } from './api.map';
+import { MonolithStore } from '../monolith.store';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ApiService extends ApiHttpService {
+@Injectable()
+export class MonolithApiService extends ApiHttpService {
   /** Users endpoint */
   public users = {
     get: (update?: boolean) => this.getStore<Models.User[]>(ApiMap.users.endpoint, ApiMap.users, update),
@@ -24,17 +23,17 @@ export class ApiService extends ApiHttpService {
   };
 
   constructor(
-    private store: Store<AppStore.Root>,
+    private store: Store<MonolithStore.Root>,
     private http: HttpClient,
     private router: Router,
     private props: AppSettings,
     /** API Store Selectors */
-    public select: ApiSelectorsService,
+    public select: MonolithApiSelectorsService,
   ) {
     super(<any>http, <any>store, <any>router, <any>props);
 
     // Output store changes to console
-    // this.store.subscribe(storeApi => console.log(JSON.parse(JSON.stringify(storeApi))));
+    // this.store.subscribe(storeApi => console.warn(JSON.parse(JSON.stringify(storeApi))));
   }
 
   /**

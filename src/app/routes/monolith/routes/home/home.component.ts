@@ -3,19 +3,19 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Datagrid } from '$components';
 
-import { ApiService } from '$api';
+import { MonolithApiService } from '../../shared/stores/api/api.store.service';
 import { UIStoreService } from '$ui';
 import { Models } from '$models';
 import { DesktopUtils } from '$utils';
 import { columns } from './columns';
 
 @Component({
-  selector: 'app-monolith',
-  styleUrls: ['./monolith.component.scss'],
-  templateUrl: './monolith.component.html',
+  selector: 'app-home',
+  styleUrls: ['./home.component.scss'],
+  templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MonolithComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy {
   public users$ = this.api.select.users$;
   public formMain: FormGroup;
   public isEditing: boolean;
@@ -41,7 +41,7 @@ export class MonolithComponent implements OnInit, OnDestroy {
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
 
-  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder) {}
+  constructor(private api: MonolithApiService, public ui: UIStoreService, private fb: FormBuilder) {}
 
   public ngOnInit() {
     // Get users and load into store

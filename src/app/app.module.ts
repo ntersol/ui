@@ -9,7 +9,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
 
 // Store Reducer
-import { UIStoreReducer } from '$ui';
+import { UIReducer } from '$ui';
 import { ApiReducer } from '$api';
 
 // Main entrypoint component
@@ -54,7 +54,7 @@ export const APP_COMPONENTS = [
       preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,
     }),
 
-    StoreModule.forRoot({ api: ApiReducer, ui: UIStoreReducer }), // NGRX
+    StoreModule.forRoot({ api: ApiReducer, ui: UIReducer }), // NGRX
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.settings.enableServiceWorker }),
 
     SiteModule.forRoot(),
