@@ -44,3 +44,4 @@ Thumbs.db
 obj/
 angular-starter.csproj
 App.config
+package-lock.json

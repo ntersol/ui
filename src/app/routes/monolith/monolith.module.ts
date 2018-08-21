@@ -16,10 +16,12 @@ import { HomeComponent } from './routes/home/home.component';
 import { MonolithApiService } from './shared/stores/api/api.store.service';
 import { MonolithApiSelectorsService } from './shared/stores/api/api.selectors.service';
 
+import { MonolithService } from './servies/monolith.service';
+
 @NgModule({
   imports: [CommonModule, SiteModule, routing, DatagridModule, StoreModule.forRoot({ api: ApiReducer, ui: UIReducer })],
   declarations: [HomeComponent],
-  providers: [MonolithApiService, MonolithApiSelectorsService],
+  providers: [MonolithApiService, MonolithApiSelectorsService, MonolithService],
   exports: [],
   entryComponents: [],
 })

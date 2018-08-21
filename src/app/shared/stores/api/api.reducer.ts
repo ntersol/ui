@@ -21,6 +21,7 @@ export function ApiReducer(state: AppStore.Api = {}, action: Action) {
   // Loading
   if (isType(action, ApiStoreActions.STATE_LOADING)) {
     state[action.payload.apiMap.storeProperty] = {
+      ...action.payload.apiMap.entity.initialState,
       ...state[action.payload.apiMap.storeProperty],
       loading: true,
       error: false,
@@ -30,6 +31,7 @@ export function ApiReducer(state: AppStore.Api = {}, action: Action) {
   // Modifying, IE put, post or delete
   if (isType(action, ApiStoreActions.STATE_MODIFYING)) {
     state[action.payload.apiMap.storeProperty] = {
+      ...action.payload.apiMap.entity.initialState,
       ...state[action.payload.apiMap.storeProperty],
       modifying: true,
       error: false,
@@ -40,6 +42,7 @@ export function ApiReducer(state: AppStore.Api = {}, action: Action) {
   // On error, either from loading or modifying
   if (isType(action, ApiStoreActions.STATE_ERROR)) {
     state[action.payload.apiMap.storeProperty] = {
+      ...action.payload.apiMap.entity.initialState,
       ...state[action.payload.apiMap.storeProperty],
       modifying: false,
       loading: false,
