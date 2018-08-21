@@ -1,4 +1,4 @@
-﻿/***** Global Mixins *****/
+/***** Global Mixins *****/
 
 @mixin transition($time : 0.3s){ transition: $time ease-out;}
 @mixin boxShadow($transparency:0.1){ box-shadow: 0px 2px 4px rgba(0,0,0,$transparency);}
@@ -11,7 +11,6 @@
 }
 @mixin gradient-radial($startColor, $endColor){
     background: $endColor;
-    //background-image: url('/Areas/LoanDepot/Images/noise.png'), radial-gradient(ellipse at center, $startColor 0%,$endColor 100%);
     background-image:radial-gradient(ellipse at center, $startColor 0%,$endColor 100%);
 }
 
