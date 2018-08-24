@@ -5,6 +5,7 @@ import { PostMessageService } from './post-message.service';
 import { UIStoreService } from '$ui';
 
 import { environment } from '$env';
+import { AppSettings } from '../app.settings';
 
 export enum MessageActions {
   RESYNC_UI = 'RESYNC_UI',
@@ -21,7 +22,7 @@ export class AppCommsService {
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
 
-  constructor(private messaging: PostMessageService, private ui: UIStoreService) {}
+  constructor(private messaging: PostMessageService, private ui: UIStoreService, private settings: AppSettings) { }
 
   /**
    * Start listening for app communication
@@ -40,7 +41,7 @@ export class AppCommsService {
               this.ui.storeStateRestore(message.payload);
             } else {
               // Otherwise update UI state from localstorage
-              this.ui.storeStateRestore(JSON.parse(window.localStorage.getItem('ui')));
+              this.ui.storeStateRestore(JSON.parse(this.settings.ui));
             }
             break;
           // Notify parent window that this window has closed
@@ -54,12 +55,14 @@ export class AppCommsService {
     // Manage the state of multiscreen functionality
     this.multiScreenState();
 
-    // When this window is closed, tell parent to end multiscreen
-    window.onbeforeunload = () => {
-      if (window.opener) {
-        this.messaging.postMessageToWindow(window.opener, { event: MessageActions.END_MULTISCREEN, payload: null });
-      }
-    };
+    if (this.settings.isBrowser) {
+      // When this window is closed, tell parent to end multiscreen
+      window.onbeforeunload = () => {
+        if (window.opener) {
+          this.messaging.postMessageToWindow(window.opener, { event: MessageActions.END_MULTISCREEN, payload: null });
+        }
+      };
+    }
   }
 
   /**
@@ -75,10 +78,12 @@ export class AppCommsService {
    * Resync the UI state between multiple instances of the web app
    */
   private resyncUI() {
-    if (this.ui.screen) {
-      this.messaging.postMessageToWindow(this.ui.screen, { event: MessageActions.RESYNC_UI, payload: null });
-    } else if (window.opener) {
-      this.messaging.postMessageToWindow(window.opener, { event: MessageActions.RESYNC_UI, payload: null });
+    if (this.settings.isBrowser) {
+      if (this.ui.screen) {
+        this.messaging.postMessageToWindow(this.ui.screen, { event: MessageActions.RESYNC_UI, payload: null });
+      } else if (window.opener) {
+        this.messaging.postMessageToWindow(window.opener, { event: MessageActions.RESYNC_UI, payload: null });
+      }
     }
   }
 
@@ -86,27 +91,31 @@ export class AppCommsService {
    * Manage the state of multiscreen functionality
    */
   private multiScreenState() {
-    // Get current path
-    const slug = window.location.origin + window.location.pathname;
-    this.subs.push(
-      this.ui.select.multiScreen$.subscribe(multiScreen => {
-        // If multiscreen is present and a window is not yet open and has not been closed
-        if (multiScreen && !this.ui.screen && !window.opener) {
-          setTimeout(() => {
+    if (this.settings.isBrowser) {
+      // Get current path
+      const slug = window.location.origin + window.location.pathname;
+      this.subs.push(
+        this.ui.select.multiScreen$.subscribe(multiScreen => {
+          // If multiscreen is present and a window is not yet open and has not been closed
+          if (multiScreen && !this.ui.screen && !window.opener) {
+            setTimeout(() => {
+              this.ui.screen = window.open(slug + '#/', 'App Instance');
+            });
+          } else if (this.ui.screen && this.ui.screen.closed) {
+            // If window has been closed
+            this.ui.screen = null;
+          } else if (multiScreen && this.ui.screen) {
+            // If multi screen has been set and a window is already opened, update url in current window
             this.ui.screen = window.open(slug + '#/', 'App Instance');
-          });
-        } else if (this.ui.screen && this.ui.screen.closed) {
-          // If window has been closed
-          this.ui.screen = null;
-        } else if (multiScreen && this.ui.screen) {
-          // If multi screen has been set and a window is already opened, update url in current window
-          this.ui.screen = window.open(slug + '#/', 'App Instance');
-        } else if (this.ui.screen && multiScreen === false) {
-          // If screen is open and multiscreen is false, close window
-          this.ui.screen.close();
-          this.ui.screen = null;
-        }
-      }),
-    );
+          } else if (this.ui.screen && multiScreen === false) {
+            // If screen is open and multiscreen is false, close window
+            this.ui.screen.close();
+            this.ui.screen = null;
+          }
+        }),
+      );
+    }
   }
+
+
 }

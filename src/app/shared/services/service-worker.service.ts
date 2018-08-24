@@ -4,6 +4,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { UIModalService } from '$ui';
 import { environment } from '$env';
+import { AppSettings } from '../app.settings';
 
 @Injectable({
   providedIn: 'root',
@@ -20,13 +21,13 @@ export class ServiceWorkerService {
   /** Hold SW sub */
   private sub: Subscription;
 
-  constructor(private sw: SwUpdate, private modals: UIModalService, private zone: NgZone) {}
+  constructor(private sw: SwUpdate, private modals: UIModalService, private zone: NgZone, private settings: AppSettings) { }
 
   /**
    * Enable service worker functionality which includes polling for updates
    */
   public enable() {
-    if (this.sw.isEnabled) {
+    if (this.sw.isEnabled && this.settings.isBrowser) {
       // On initial load, check if service worker is available first
       this.sub = this.sw.available.subscribe(() => {
         this.updateAvailable$.next(true);
@@ -46,8 +47,11 @@ export class ServiceWorkerService {
    * Disable service worker and stop polling
    */
   public disable() {
-    window.clearInterval(this.counter);
-    this.sub.unsubscribe();
+    if (this.settings.isBrowser) {
+      window.clearInterval(this.counter);
+      this.sub.unsubscribe();
+    }
+
   }
 
   /**
@@ -56,10 +60,13 @@ export class ServiceWorkerService {
   public pollForUpdates() {
     // Service worker/zone.js has issue with setInterval https://github.com/angular/angular/issues/20970
     this.zone.runOutsideAngular(() => {
-      this.counter = window.setInterval(() => {
-        this.zone.run(() => this.sw.checkForUpdate());
-      }, this.checkInterval * 1000 * 60);
+      if (this.settings.isBrowser) {
+        this.counter = window.setInterval(() => {
+          this.zone.run(() => this.sw.checkForUpdate());
+        }, this.checkInterval * 1000 * 60);
+      }
     });
+
   }
 
   /**
@@ -72,9 +79,9 @@ export class ServiceWorkerService {
         false,
         'lg',
         `A new version of ${
-          environment.properties.appName
+        environment.properties.appName
         } is available, would you like to update to the latest version?`,
-      )
+    )
       .result.then(
         () => {
           window.location.reload();
@@ -84,6 +91,6 @@ export class ServiceWorkerService {
           // this.modalPopped = false;
         },
         () => console.warn('User is on an outdated version of the application'),
-      );
+    );
   }
 }

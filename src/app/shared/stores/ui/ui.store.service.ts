@@ -5,6 +5,7 @@ import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '$env';
 import { AppStore } from '$shared';
 import { StringUtils } from '$utils';
+import { AppSettings } from '../../app.settings';
 import { UIStoreActions } from './ui.actions';
 import { UiSelectorsService } from './ui.selectors.service';
 
@@ -12,10 +13,8 @@ import { UiSelectorsService } from './ui.selectors.service';
   providedIn: 'root',
 })
 export class UIStoreService {
-  /** Location of UI store in localstorage */
-  public uiProp = 'ui';
   /** Holds the reference to a window opened programmatically. Used by appComms for multiscreen state */
-  public screen: Window;
+  public screen: any; // Window
 
   /** Obfuscate reference */
   private pad = 100;
@@ -24,11 +23,12 @@ export class UIStoreService {
     private store: Store<AppStore.Root>,
     /** UI Store Selectors */
     public select: UiSelectorsService,
+    private settings: AppSettings
   ) {
     // Rehydrate UI state from localstorage on instantiation
-    if (window.localStorage.getItem(this.uiProp)) {
+    if (this.settings.ui) {
       // Get UI state from localstorage
-      let str = window.localStorage.getItem(this.uiProp);
+      let str = this.settings.ui;
       // Remove obfusucation if is set
       if (environment.settings.obfuscate) {
         // If de-obfuscating errors out, remove ui store state and fail gracefully
@@ -38,7 +38,7 @@ export class UIStoreService {
           str = StringUtils.trim(str, this.pad, this.pad);
         } catch (err) {
           console.error(err);
-          window.localStorage.removeItem(this.uiProp);
+          this.settings.ui = null;
         }
       }
       // Convert to JSON
@@ -95,7 +95,7 @@ export class UIStoreService {
         str = StringUtils.charShift(str, 10);
       }
       // Set to localstorage
-      window.localStorage.setItem(this.uiProp, str);
+      this.settings.ui = str;
     }
   }
 }

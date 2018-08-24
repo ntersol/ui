@@ -38,13 +38,17 @@ export class PostMessageService {
     if (allowedDomains) {
       this.allowedDomains = allowedDomains;
     }
-    // If not IE
-    if (window.addEventListener) {
-      this.postMessageListener = window.addEventListener('message', this.messageReceived.bind(this), false);
-    } else {
-      // If IE
-      this.postMessageListener = (<any>window).attachEvent('onmessage', this.messageReceived.bind(this), false);
+
+    if (this.settings.isBrowser) {
+      // If not IE
+      if (window.addEventListener) {
+        this.postMessageListener = window.addEventListener('message', this.messageReceived.bind(this), false);
+      } else {
+        // If IE
+        this.postMessageListener = (<any>window).attachEvent('onmessage', this.messageReceived.bind(this), false);
+      }
     }
+    
     return this.postMessage$;
   }
 
@@ -52,7 +56,9 @@ export class PostMessageService {
    * Stop listening for postmessage events
    */
   public stopListening() {
-    window.removeEventListener('message', this.postMessageListener);
+    if (this.settings.isBrowser) {
+      window.removeEventListener('message', this.postMessageListener);
+    }
   }
 
   /**
@@ -61,8 +67,10 @@ export class PostMessageService {
    * @param urlTarget - If the target url is known, only post to that domain. Otherwise its *
    */
   public postMessageToParent(message: Message, urlTarget: string = '*') {
-    if (window.parent) {
-      window.parent.postMessage(this.addMetadata(message), urlTarget);
+    if (this.settings.isBrowser) {
+      if (window.parent) {
+        window.parent.postMessage(this.addMetadata(message), urlTarget);
+      }
     }
   }
 
@@ -73,9 +81,11 @@ export class PostMessageService {
    * @param urlTarget  - If the target url is known, only post to that domain. Otherwise its *
    */
   public postMessageToIframe(id: string, message: Message, urlTarget: string = '*') {
-    // Make sure the element is on the DOM
-    if ((<any>document).getElementById(id) && (<any>document).getElementById(id).contentWindow) {
-      (<any>document).getElementById(id).contentWindow.postMessage(this.addMetadata(message), urlTarget);
+    if (this.settings.isBrowser) {
+      // Make sure the element is on the DOM
+      if ((<any>document).getElementById(id) && (<any>document).getElementById(id).contentWindow) {
+        (<any>document).getElementById(id).contentWindow.postMessage(this.addMetadata(message), urlTarget);
+      }
     }
   }
 

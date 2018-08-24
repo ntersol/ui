@@ -32,7 +32,7 @@ export class StringUtils {
    * @param val A string to obfuscate
    */
   static obfuscateAdd(val: string) {
-    if (val) {
+    if (val && window) {
       return window.btoa(unescape(encodeURIComponent(val.toString())));
     }
     return null;
@@ -43,7 +43,7 @@ export class StringUtils {
    * @param val  A string to obfuscate
    */
   static obfuscateRemove(val: string) {
-    if (val) {
+    if (val && window) {
       return decodeURIComponent(escape(window.atob(val)));
     }
     return null;

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
 
 import { AuthService, AppSettings } from '$shared';
 import { Subscription } from 'rxjs';
@@ -31,11 +32,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public ngOnInit() {
     let isLogin, hasLogin;
-    if (window.localStorage.rememberLogin && this.settings.userName) {
+    if (isPlatformBrowser && window.localStorage.rememberLogin && this.settings.userName) {
       isLogin = this.settings.userName;
     }
 
-    if (window.localStorage.rememberLogin) {
+    if (isPlatformBrowser && window.localStorage.rememberLogin) {
       hasLogin = true;
     }
 
@@ -50,7 +51,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       }),
     ];
 
-    window.clearTimeout(this.authService.sessionTimer); // When the page is loaded, clear any legacy timeouts
+    if (isPlatformBrowser) {
+      window.clearTimeout(this.authService.sessionTimer); // When the page is loaded, clear any legacy timeouts
+    }
+    
     this.authService.logOutModal = null; // Get rid of logout modal if it persists
 
     this.formMain = this.fb.group({
@@ -74,9 +78,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     // If remember username is set
     if (this.formMain.value.remember) {
       this.settings.userName = this.formMain.value.userName;
-      window.localStorage.rememberLogin = true;
+      if (isPlatformBrowser) {
+        window.localStorage.rememberLogin = true;
+      }
+      
     } else {
-      window.localStorage.removeItem('rememberLogin');
+      if (isPlatformBrowser) {
+        window.localStorage.removeItem('rememberLogin');
+      }
     }
 
     // Authenticate

@@ -47,7 +47,7 @@ export const APP_COMPONENTS = [
 @NgModule({
   declarations: [APP_COMPONENTS],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'angular-starter' }),
     HttpClientModule,
     RouterModule.forRoot(ROUTES, {
       useHash: true,
