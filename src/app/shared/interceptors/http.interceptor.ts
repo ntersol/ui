@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-import { AppSettings } from '$shared';
+import { AppSettings } from '../app.settings';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {

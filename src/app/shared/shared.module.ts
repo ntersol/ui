@@ -1,22 +1,19 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Pipes
 import { DatePipe, CurrencyPipe } from '@angular/common';
+import { FilterPipe } from './pipes/filter.pipe';
+import { DebouncePipe } from './pipes/debounce.pipe';
+import { StringPipe } from './pipes/string.pipe';
+import { SortPipe } from './pipes/sort.pipe';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { PhoneNumberPipe } from './pipes/phone-number.pipe';
+import { CountPipe } from './pipes/count.pipe';
 
-// Pipes + Directives
-import {
-  // Pipes
-  FilterPipe,
-  DebouncePipe,
-  StringPipe,
-  SortPipe,
-  SafeHtmlPipe,
-  PhoneNumberPipe,
-  CountPipe,
+// Directives
+import { FullScreenDirective } from './directives/full-screen.directive';
 
-  // Directives
-  FullScreenDirective,
-} from '$shared';
 
 // Pipes + Directives
 export const APP_PIPES_DIRECTIVES = [

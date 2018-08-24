@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 
-import { AppSettings, AuthService } from '$shared';
 import { environment } from '$env';
+import { AppSettings } from '../app.settings';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root',

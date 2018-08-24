@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { AppSettings } from '$shared';
 import { ObjectUtils } from '$utils';
+import { AppSettings } from '../app.settings';
 
 interface Message {
   event?: string;

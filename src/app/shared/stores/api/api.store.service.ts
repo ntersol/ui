@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { AppStore, AppSettings } from '$shared';
 import { Models } from '$models';
 
 import { ApiHttpService } from './api.http.base.service';
 import { ApiSelectorsService } from './api.selectors.service';
 import { ApiStoreActions } from './api.actions';
 import { ApiMap } from './api.map';
+import { AppSettings } from '../../app.settings';
+import { AppStore } from '../store';
 
 @Injectable({
   providedIn: 'root',
