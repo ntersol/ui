@@ -22,20 +22,29 @@ import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CellComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
-  @Input() column: Datagrid.Column;
-  @Input() row: { [key: string]: any };
-  @Input() options: Datagrid.Options;
-  @Input() templates: Datagrid.Templates;
+  @Input()
+  column: Datagrid.Column;
+  @Input()
+  row: { [key: string]: any };
+  @Input()
+  options: Datagrid.Options;
+  @Input()
+  templates: Datagrid.Templates;
 
-  @Output() updateDatatable: EventEmitter<any> = new EventEmitter();
-  @Output() onRowUpdated: EventEmitter<any> = new EventEmitter();
+  @Output()
+  updateDatatable: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRowUpdated: EventEmitter<any> = new EventEmitter();
 
   /** The popover used for inline editing */
-  @ViewChild('p') p: NgbPopover;
+  @ViewChild('p')
+  p: NgbPopover;
   /** The popover textarea for inline editing */
-  @ViewChild('editBox') editBox: ElementRef;
+  @ViewChild('editBox')
+  editBox: ElementRef;
   /** Reference to content inside the cell */
-  @ViewChild('cellData') cellData: ElementRef;
+  @ViewChild('cellData')
+  cellData: ElementRef;
   /** Reference to content inside the cell */
   @ViewChild('cellTemplate', { read: ViewContainerRef })
   cellTemplate: ViewContainerRef;

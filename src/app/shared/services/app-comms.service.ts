@@ -22,7 +22,7 @@ export class AppCommsService {
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
 
-  constructor(private messaging: PostMessageService, private ui: UIStoreService, private settings: AppSettings) { }
+  constructor(private messaging: PostMessageService, private ui: UIStoreService, private settings: AppSettings) {}
 
   /**
    * Start listening for app communication
@@ -116,6 +116,4 @@ export class AppCommsService {
       );
     }
   }
-
-
 }

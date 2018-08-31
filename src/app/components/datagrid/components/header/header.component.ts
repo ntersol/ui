@@ -8,19 +8,31 @@ import { Datagrid } from '../../models/typings';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-  @Input() columns: Datagrid.Column[];
-  @Input() columnsPinnedLeft: Datagrid.Column[];
-  @Input() state: Datagrid.State;
-  @Input() status: Datagrid.Status;
-  @Input() options: Datagrid.Options;
-  @Input() gridProps: Datagrid.Props;
-  @Input() scrollProps: Datagrid.ScrollProps;
-  @Input() filterTerms: any;
-  @Input() templates: Datagrid.Templates;
+  @Input()
+  columns: Datagrid.Column[];
+  @Input()
+  columnsPinnedLeft: Datagrid.Column[];
+  @Input()
+  state: Datagrid.State;
+  @Input()
+  status: Datagrid.Status;
+  @Input()
+  options: Datagrid.Options;
+  @Input()
+  gridProps: Datagrid.Props;
+  @Input()
+  scrollProps: Datagrid.ScrollProps;
+  @Input()
+  filterTerms: any;
+  @Input()
+  templates: Datagrid.Templates;
 
-  @Output() onColumnsUpdated: EventEmitter<any> = new EventEmitter();
-  @Output() onStateUpdated: EventEmitter<any> = new EventEmitter();
-  @Output() onCustomLinkEvent: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onColumnsUpdated: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onStateUpdated: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onCustomLinkEvent: EventEmitter<any> = new EventEmitter();
 
   /** During a resize, disable some stuff */
   //public reSizing: boolean = false;

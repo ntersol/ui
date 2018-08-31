@@ -21,7 +21,12 @@ export class ServiceWorkerService {
   /** Hold SW sub */
   private sub: Subscription;
 
-  constructor(private sw: SwUpdate, private modals: UIModalService, private zone: NgZone, private settings: AppSettings) { }
+  constructor(
+    private sw: SwUpdate,
+    private modals: UIModalService,
+    private zone: NgZone,
+    private settings: AppSettings,
+  ) {}
 
   /**
    * Enable service worker functionality which includes polling for updates
@@ -51,7 +56,6 @@ export class ServiceWorkerService {
       window.clearInterval(this.counter);
       this.sub.unsubscribe();
     }
-
   }
 
   /**
@@ -66,7 +70,6 @@ export class ServiceWorkerService {
         }, this.checkInterval * 1000 * 60);
       }
     });
-
   }
 
   /**
@@ -79,9 +82,9 @@ export class ServiceWorkerService {
         false,
         'lg',
         `A new version of ${
-        environment.properties.appName
+          environment.properties.appName
         } is available, would you like to update to the latest version?`,
-    )
+      )
       .result.then(
         () => {
           window.location.reload();
@@ -91,6 +94,6 @@ export class ServiceWorkerService {
           // this.modalPopped = false;
         },
         () => console.warn('User is on an outdated version of the application'),
-    );
+      );
   }
 }

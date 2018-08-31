@@ -48,7 +48,7 @@ export class PostMessageService {
         this.postMessageListener = (<any>window).attachEvent('onmessage', this.messageReceived.bind(this), false);
       }
     }
-    
+
     return this.postMessage$;
   }
 

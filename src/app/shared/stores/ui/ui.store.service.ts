@@ -23,7 +23,7 @@ export class UIStoreService {
     private store: Store<AppStore.Root>,
     /** UI Store Selectors */
     public select: UiSelectorsService,
-    private settings: AppSettings
+    private settings: AppSettings,
   ) {
     // Rehydrate UI state from localstorage on instantiation
     if (this.settings.ui) {

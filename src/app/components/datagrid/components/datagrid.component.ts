@@ -62,16 +62,18 @@ TODOS:
 })
 export class DataGridComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   /** Self reference */
-  @ViewChild('dataGrid') dataGrid: ElementRef;
-  @ViewChild('dataGridBody') dataGridBody: BodyComponent;
+  @ViewChild('dataGrid')
+  dataGrid: ElementRef;
+  @ViewChild('dataGridBody')
+  dataGridBody: BodyComponent;
 
   /** Columns */
   private _columns: Datagrid.Column[];
   @Input()
   set columns(columns: Datagrid.Column[]) {
-      if (columns && columns.length) {
+    if (columns && columns.length) {
       // Create a random number slug so if different columns are passed a new instance is created every time
-      const slug = Math.floor(Math.random() * 1000000); 
+      const slug = Math.floor(Math.random() * 1000000);
       // Create custom track property and new reference for each column
       columns = columns.map((column, i) => {
         column.$$track = slug + '-' + i;
@@ -93,9 +95,9 @@ export class DataGridComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   private _rows: any[];
   @Input()
   set rows(rows: any[]) {
-      if (rows && rows.length) {
-        // Create a random number slug so if different rows are passed a new instance is created every time
-      const slug = Math.floor(Math.random() * 1000000); 
+    if (rows && rows.length) {
+      // Create a random number slug so if different rows are passed a new instance is created every time
+      const slug = Math.floor(Math.random() * 1000000);
       rows.forEach((row, i) => {
         row.$$track = slug + '-' + i;
         row.$$selected = false;
@@ -169,18 +171,28 @@ export class DataGridComponent implements OnInit, OnChanges, AfterViewInit, OnDe
     return this._columnTemplates;
   }
 
-  @Input() options: Datagrid.Options;
-  @Input() filterGlobal: Datagrid.FilterGlobal;
+  @Input()
+  options: Datagrid.Options;
+  @Input()
+  filterGlobal: Datagrid.FilterGlobal;
 
   /** Outputs */
-  @Output() onColumnsUpdated: EventEmitter<any> = new EventEmitter();
-  @Output() onRowsSelected: EventEmitter<any> = new EventEmitter();
-  @Output() onStateChange: EventEmitter<any> = new EventEmitter();
-  @Output() onRightClickMenu: EventEmitter<any> = new EventEmitter();
-  @Output() action: EventEmitter<any> = new EventEmitter();
-  @Output() onCustomLinkEvent: EventEmitter<any> = new EventEmitter();
-  @Output() onElementRef: EventEmitter<any> = new EventEmitter();
-  @Output() onRowUpdated: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onColumnsUpdated: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRowsSelected: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onStateChange: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRightClickMenu: EventEmitter<any> = new EventEmitter();
+  @Output()
+  action: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onCustomLinkEvent: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onElementRef: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRowUpdated: EventEmitter<any> = new EventEmitter();
 
   /** Columns that are sent to the DOM after any modification is done */
   public columnsInternal: Datagrid.Column[];
@@ -217,16 +229,16 @@ export class DataGridComponent implements OnInit, OnChanges, AfterViewInit, OnDe
   public rowSelectedLast: number | null;
   /** How many rows are selected */
   public rowsSelectedCount: number;
-  /** Keep track of which row was hovered over last during a drag operation. 
-  Used to select all rows when a drag operation does not end on a row */
+  /** Keep track of which row was hovered over last during a drag operation.
+   Used to select all rows when a drag operation does not end on a row */
   public rowHoveredLast: number | null;
   /** A list of default selectable terms to filter each column by */
   public filterTerms: any;
-  /** A dictionary that holds css CLASSES for a given row. 
-The lookup is the primary key specified in the options. Gets its data from options.rowClass */
+  /** A dictionary that holds css CLASSES for a given row.
+   The lookup is the primary key specified in the options. Gets its data from options.rowClass */
   public rowClasses = {};
-  /** A dictionary that holds css STYLES for a given row. 
-The lookup is the primary key specified in the options. Gets its data from options.rowStyle */
+  /** A dictionary that holds css STYLES for a given row.
+   The lookup is the primary key specified in the options. Gets its data from options.rowStyle */
   public rowStyles = {};
   /** Does the datatable have the data it needs to draw the dom? */
   public appReady = false;
@@ -262,11 +274,11 @@ The lookup is the primary key specified in the options. Gets its data from optio
   };
   /** The sum of the current column widths. Used to determine if column resize is necessary */
   private columnWidthsInternal = 0;
-  /** The height of the row. Necessary for virtual scroll calculation. 
-Needs to be an odd number to prevent partial pixel problems. Has 1px border added*/
+  /** The height of the row. Necessary for virtual scroll calculation.
+   Needs to be an odd number to prevent partial pixel problems. Has 1px border added*/
   private rowHeight = 23;
-  /** Keep track of which indexes are visible to prevent the component tree 
-from being updated unless actually changed */
+  /** Keep track of which indexes are visible to prevent the component tree
+   from being updated unless actually changed */
   private rowsIndexes = { start: 0, end: 0 };
   private columnIndexes = { start: 0, end: 0 };
   /** Throttle the window resize event */
@@ -798,7 +810,7 @@ from being updated unless actually changed */
    */
   public handleMouseUp(event: MouseEvent) {
     // console.warn('handleMouseUp', event.pageY);
-    // Sometimes the mouse scrolls too fast to register the last hovered row. 
+    // Sometimes the mouse scrolls too fast to register the last hovered row.
     // If the mouseup position is higher than the datatable top, set lasthovered to 0
     if (this.dragging && this.draggingPos && this.draggingPos.bounding && event.pageY < this.draggingPos.bounding.top) {
       this.rowHoveredLast = 0;
@@ -810,7 +822,7 @@ from being updated unless actually changed */
       // Unselect all text after drag to prevent weird selection issues
       if (document.getSelection) {
         document.getSelection().removeAllRanges();
-      } else if (window.getSelection) {
+      } else if (window && window.getSelection) {
         window.getSelection().removeAllRanges();
       }
     }
@@ -874,7 +886,7 @@ from being updated unless actually changed */
       }
 
       // Only allow height and top changes if the drag is within the horizontal bounding box
-      // This prevents the drag selection continuing to draw vertically even though 
+      // This prevents the drag selection continuing to draw vertically even though
       // the mouse is off the datagrid which would give the user the impression
       // they are selecting rows even though their mouse is not on the grid and won't record the row mouse up event
       if (pageX < draggingPos.bounding.right && pageX > draggingPos.bounding.left) {
@@ -1229,8 +1241,8 @@ Object.assign(rowStyles[row[this.options.primaryKey]] || {},
       this.rows.forEach(row => {
         // Loop through all styles without rules
         stylesNoModels.forEach(rule => {
-            // Merge the newly created styles with what is already existing. 
-            // This allows for multiple rulesets to assign styles without wiping out preexisting
+          // Merge the newly created styles with what is already existing.
+          // This allows for multiple rulesets to assign styles without wiping out preexisting
           rowStyles[row[primaryKey]] = Object.assign(rowStyles[row[primaryKey]], rule(row));
         });
       });
@@ -1262,8 +1274,8 @@ Object.assign(rowStyles[row[this.options.primaryKey]] || {},
           this.rows.forEach(row => {
             // Loop through all styles without rules
             stylesNoModels.forEach(rule => {
-                // Merge the newly created styles with what is already existing. 
-//                This allows for multiple rulesets to assign styles without wiping out preexisting
+              // Merge the newly created styles with what is already existing.
+              //                This allows for multiple rulesets to assign styles without wiping out preexisting
               rowStyles[row[primaryKey]] = Object.assign(rowStyles[row[primaryKey]] || {}, rule(row));
             });
           });
@@ -1279,8 +1291,8 @@ Object.assign(rowStyles[row[this.options.primaryKey]] || {},
               this.options.rowStyle[index] &&
               this.options.rowStyle[index].rules
             ) {
-                // Merge the newly created styles with what is already existing. 
-//                This allows for multiple rulesets to assign styles without wiping out preexisting
+              // Merge the newly created styles with what is already existing.
+              //                This allows for multiple rulesets to assign styles without wiping out preexisting
               if (this.options.rowStyle && this.options.rowStyle[index] && this.options.rowStyle[index].rules) {
                 rowStyles[row[primaryKey]] = {
                   ...(rowStyles[row[primaryKey]] || {}),

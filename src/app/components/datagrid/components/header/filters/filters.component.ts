@@ -10,12 +10,18 @@ import { Datagrid } from '../../../models/typings';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FiltersComponent implements OnInit, OnDestroy {
-  @Input() column: Datagrid.Column;
-  @Input() options: Datagrid.Options;
-  @Input() state: Datagrid.State;
-  @Input() status: Datagrid.Status;
-  @Input() filterTerms: any = {};
-  @Output() onFiltersUpdated: EventEmitter<any> = new EventEmitter();
+  @Input()
+  column: Datagrid.Column;
+  @Input()
+  options: Datagrid.Options;
+  @Input()
+  state: Datagrid.State;
+  @Input()
+  status: Datagrid.Status;
+  @Input()
+  filterTerms: any = {};
+  @Output()
+  onFiltersUpdated: EventEmitter<any> = new EventEmitter();
   public defaultList: any;
 
   public model: any;

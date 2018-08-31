@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser) {
       window.clearTimeout(this.authService.sessionTimer); // When the page is loaded, clear any legacy timeouts
     }
-    
+
     this.authService.logOutModal = null; // Get rid of logout modal if it persists
 
     this.formMain = this.fb.group({
@@ -81,7 +81,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       if (isPlatformBrowser) {
         window.localStorage.rememberLogin = true;
       }
-      
     } else {
       if (isPlatformBrowser) {
         window.localStorage.removeItem('rememberLogin');

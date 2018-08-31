@@ -118,7 +118,7 @@ export class DataGridService {
     // console.log('getVisibleRowsoffSetRowsFromTop', rows, this.scrollProps, this.rowHeight, this.gridProps);
     const rowsNew = [...rows];
     let buffer = 5;
-    if (window.navigator.userAgent.indexOf('Edge') > -1) {
+    if (window && window.navigator.userAgent.indexOf('Edge') > -1) {
       buffer = 15;
     }
 
@@ -622,7 +622,7 @@ export class DataGridService {
    */
   public columnsResize(columns: Datagrid.Column[], widthColumns: number, widthTable: number) {
     let leftOffset = 0;
-    const multiplier = Math.floor(widthTable / widthColumns * 100) / 100;
+    const multiplier = Math.floor((widthTable / widthColumns) * 100) / 100;
     return columns.map(column => {
       if (column.width) {
         column.$$width = Math.ceil(column.width * multiplier);

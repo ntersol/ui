@@ -15,8 +15,12 @@ export class ApiHttpService {
   /** Hold GET requests from an API using the URL as a primary key */
   private cache: { [key: string]: any } = {};
 
-  constructor(private httpSvc: HttpClient, private storeSvc: Store<AppStore.Root>,
-    private routerSvc: Router, private appProps: AppSettings) { }
+  constructor(
+    private httpSvc: HttpClient,
+    private storeSvc: Store<AppStore.Root>,
+    private routerSvc: Router,
+    private appProps: AppSettings,
+  ) {}
 
   /**
    * Make a GET request with simple caching
@@ -60,7 +64,6 @@ export class ApiHttpService {
         }),
         share(),
       );
-
     } else {
       // Update store with cached data
       this.storeSvc.dispatch(ApiStoreActions.GET_COMPLETE({ apiMap: apiMap, data: this.cache[url] }));

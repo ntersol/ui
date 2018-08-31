@@ -8,20 +8,31 @@ import { Datagrid } from '../../../models/typings';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderRowComponent implements OnInit, OnChanges {
-  @Input() columns: Datagrid.Column[];
-  @Input() state: Datagrid.State;
-  @Input() status: Datagrid.Status;
-  @Input() options: Datagrid.Options;
-  @Input() scrollProps: Datagrid.ScrollProps;
-  @Input() filterTerms: any;
-  @Input() columnType: 'pinnedLeft' | 'main';
-  @Input() templates: Datagrid.Templates;
+  @Input()
+  columns: Datagrid.Column[];
+  @Input()
+  state: Datagrid.State;
+  @Input()
+  status: Datagrid.Status;
+  @Input()
+  options: Datagrid.Options;
+  @Input()
+  scrollProps: Datagrid.ScrollProps;
+  @Input()
+  filterTerms: any;
+  @Input()
+  columnType: 'pinnedLeft' | 'main';
+  @Input()
+  templates: Datagrid.Templates;
 
   // private columnsOriginal;
 
-  @Output() onColumnsUpdated: EventEmitter<any> = new EventEmitter();
-  @Output() onStateUpdated: EventEmitter<any> = new EventEmitter();
-  @Output() onCustomLinkEvent: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onColumnsUpdated: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onStateUpdated: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onCustomLinkEvent: EventEmitter<any> = new EventEmitter();
 
   public cellContext: {
     column?: Datagrid.Column;

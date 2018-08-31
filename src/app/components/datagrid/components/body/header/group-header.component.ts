@@ -18,11 +18,15 @@ import { Datagrid } from '../../../models/typings';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GroupHeaderComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() width: number;
-  @Input() group: Datagrid.Group;
-  @Input() options: Datagrid.Options;
+  @Input()
+  width: number;
+  @Input()
+  group: Datagrid.Group;
+  @Input()
+  options: Datagrid.Options;
 
-  @Output() onGroupToggled: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onGroupToggled: EventEmitter<any> = new EventEmitter();
 
   public groupLabel = '';
   public active = true;

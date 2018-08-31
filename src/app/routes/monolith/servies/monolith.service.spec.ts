@@ -5,7 +5,7 @@ import { MonolithService } from './monolith.service';
 describe('MonolithService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MonolithService]
+      providers: [MonolithService],
     });
   });
 

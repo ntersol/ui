@@ -50,6 +50,8 @@
     <Content Include="src\app\app.component.html" />
     <Content Include="src\app\components\api-state\api-state.component.html" />
     <Content Include="src\app\components\api-state\api-state.component.scss" />
+    <Content Include="src\app\components\counter\counter.component.html" />
+    <Content Include="src\app\components\counter\counter.component.scss" />
     <Content Include="src\app\components\datagrid\components\body\body.component.html" />
     <Content Include="src\app\components\datagrid\components\body\cell\cell.component.html" />
     <Content Include="src\app\components\datagrid\components\body\header\group-header.component.html" />
@@ -142,6 +144,7 @@
     <Folder Include="src\app\" />
     <Folder Include="src\app\components\" />
     <Folder Include="src\app\components\api-state\" />
+    <Folder Include="src\app\components\counter\" />
     <Folder Include="src\app\components\datagrid\" />
     <Folder Include="src\app\components\datagrid\components\" />
     <Folder Include="src\app\components\datagrid\components\body\" />
@@ -230,6 +233,7 @@
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.spec.ts" />
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.ts" />
     <TypeScriptCompile Include="src\app\components\components.module.ts" />
+    <TypeScriptCompile Include="src\app\components\counter\counter.component.ts" />
     <TypeScriptCompile Include="src\app\components\datagrid\components\body\body.component.ts" />
     <TypeScriptCompile Include="src\app\components\datagrid\components\body\cell\cell.component.ts" />
     <TypeScriptCompile Include="src\app\components\datagrid\components\body\header\group-header.component.ts" />
@@ -283,6 +287,7 @@
     <TypeScriptCompile Include="src\app\routes\no-content\no-content.component.ts" />
     <TypeScriptCompile Include="src\app\routes\qa\qa.component.ts" />
     <TypeScriptCompile Include="src\app\shared\app.settings.ts" />
+    <TypeScriptCompile Include="src\app\shared\directives\focus.directive.ts" />
     <TypeScriptCompile Include="src\app\shared\directives\full-screen.directive.ts" />
     <TypeScriptCompile Include="src\app\shared\guards\auth.guard.ts" />
     <TypeScriptCompile Include="src\app\shared\index.ts" />
@@ -291,6 +296,7 @@
     <TypeScriptCompile Include="src\app\shared\models\index.d.ts" />
     <TypeScriptCompile Include="src\app\shared\pipes\count.pipe.ts" />
     <TypeScriptCompile Include="src\app\shared\pipes\debounce.pipe.ts" />
+    <TypeScriptCompile Include="src\app\shared\pipes\duration.pipe.ts" />
     <TypeScriptCompile Include="src\app\shared\pipes\filter.pipe.ts" />
     <TypeScriptCompile Include="src\app\shared\pipes\phone-number.pipe.ts" />
     <TypeScriptCompile Include="src\app\shared\pipes\safe-html.pipe.ts" />

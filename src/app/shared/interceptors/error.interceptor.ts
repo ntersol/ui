@@ -5,9 +5,7 @@ import { AppSettings } from '../app.settings';
 export class GlobalErrorHandler implements ErrorHandler {
   // private errorLogApi = '/api/logerror'; // API to post errors too
 
-  constructor(private settings: AppSettings) {
-   
-  }
+  constructor(private settings: AppSettings) {}
 
   // Custom error handler for application/angular errors
   // Uses plain JS to eliminate any dependencies that may not be available due to the error
@@ -15,7 +13,6 @@ export class GlobalErrorHandler implements ErrorHandler {
     console.error(error);
     // Only throw application errors to the dom. If the error has an errorMsg then it is an internal error
     if (this.settings.isBrowser && !error.errorMsg) {
-      
     }
     // Now throw the error to the console
     throw error;

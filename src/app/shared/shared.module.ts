@@ -10,10 +10,11 @@ import { SortPipe } from './pipes/sort.pipe';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 import { CountPipe } from './pipes/count.pipe';
+import { DurationPipe } from './pipes/duration.pipe';
 
 // Directives
 import { FullScreenDirective } from './directives/full-screen.directive';
-
+import { FocusDirective } from './directives/focus.directive';
 
 // Pipes + Directives
 export const APP_PIPES_DIRECTIVES = [
@@ -25,9 +26,11 @@ export const APP_PIPES_DIRECTIVES = [
   SafeHtmlPipe,
   PhoneNumberPipe,
   CountPipe,
+  DurationPipe,
 
   // Directives
   FullScreenDirective,
+  FocusDirective,
 ];
 
 @NgModule({

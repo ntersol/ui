@@ -8,6 +8,7 @@ import {
   EventEmitter,
   ElementRef,
   NgZone,
+  Renderer2,
 } from '@angular/core';
 import { Datagrid } from '../../models/typings';
 declare var require: any;
@@ -20,37 +21,59 @@ const throttle = require('lodash/throttle');
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyComponent implements OnInit, OnDestroy {
-  @Input() columns: Datagrid.Column[];
-  @Input() columnsPinnedLeft: Datagrid.Column[];
-  @Input() rows: any[];
-  @Input() rowStyles: any;
-  @Input() state: Datagrid.State;
-  @Input() status: Datagrid.Status;
-  @Input() options: Datagrid.Options;
-  @Input() gridProps: Datagrid.Props;
-  @Input() templates: Datagrid.Templates;
+  @Input()
+  columns: Datagrid.Column[];
+  @Input()
+  columnsPinnedLeft: Datagrid.Column[];
+  @Input()
+  rows: any[];
+  @Input()
+  rowStyles: any;
+  @Input()
+  state: Datagrid.State;
+  @Input()
+  status: Datagrid.Status;
+  @Input()
+  options: Datagrid.Options;
+  @Input()
+  gridProps: Datagrid.Props;
+  @Input()
+  templates: Datagrid.Templates;
 
-  @Output() onColumnsUpdated: EventEmitter<any> = new EventEmitter();
-  @Output() onStateUpdated: EventEmitter<any> = new EventEmitter();
-  @Output() onCustomLinkEvent: EventEmitter<any> = new EventEmitter();
-  @Output() onRowUpdated: EventEmitter<any> = new EventEmitter();
-  @Output() onRowMouseEvent: EventEmitter<any> = new EventEmitter();
-  @Output() onGroupToggled: EventEmitter<any> = new EventEmitter();
-  @Output() onRightClick: EventEmitter<any> = new EventEmitter();
-  @Output() onRowMouseDown: EventEmitter<any> = new EventEmitter();
-  @Output() onRowMouseUp: EventEmitter<any> = new EventEmitter();
-  @Output() onScrollEvent: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onColumnsUpdated: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onStateUpdated: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onCustomLinkEvent: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRowUpdated: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRowMouseEvent: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onGroupToggled: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRightClick: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRowMouseDown: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onRowMouseUp: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onScrollEvent: EventEmitter<any> = new EventEmitter();
 
   public body: any;
 
-  constructor(private zone: NgZone, element: ElementRef) {
-    this.body = element.nativeElement;
-  }
+  constructor(private zone: NgZone, private element: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {
     // Attach scroll event listener
     this.zone.runOutsideAngular(() => {
-      this.body.addEventListener('scroll', this.onScrollThrottled.bind(this), <any>{ capture: true, passive: true });
+      this.body = this.renderer.listen(this.element.nativeElement, 'scroll', () => {
+        this.onScrollThrottled.bind(this);
+      });
+      // console.log(this.body);
+      // console.log(this.renderer);
+      //this.body.addEventListener('scroll', this.onScrollThrottled.bind(this), <any>{ capture: true, passive: true });
     });
   }
 
@@ -117,6 +140,6 @@ export class BodyComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // Unsub from all subscriptions
-    this.body.removeEventListener('scroll', this.onScrollThrottled.bind(this), <any>{ capture: true, passive: true });
+    this.body();
   }
 }
