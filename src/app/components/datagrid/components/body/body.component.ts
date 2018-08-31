@@ -8,7 +8,7 @@ import {
   EventEmitter,
   ElementRef,
   NgZone,
-  Renderer2,
+  // Renderer2,
 } from '@angular/core';
 import { Datagrid } from '../../models/typings';
 declare var require: any;
@@ -63,17 +63,19 @@ export class BodyComponent implements OnInit, OnDestroy {
 
   public body: any;
 
-  constructor(private zone: NgZone, private element: ElementRef, private renderer: Renderer2) {}
+  constructor(private zone: NgZone, private element: ElementRef) { // , private renderer: Renderer2
+    this.body = this.element.nativeElement;
+  }
 
   ngOnInit() {
     // Attach scroll event listener
     this.zone.runOutsideAngular(() => {
-      this.body = this.renderer.listen(this.element.nativeElement, 'scroll', () => {
-        this.onScrollThrottled.bind(this);
-      });
+      //this.body = this.renderer.listen(this.element.nativeElement, 'scroll', () => {
+      //  this.onScrollThrottled.bind(this);
+      //});
       // console.log(this.body);
       // console.log(this.renderer);
-      //this.body.addEventListener('scroll', this.onScrollThrottled.bind(this), <any>{ capture: true, passive: true });
+      this.body.addEventListener('scroll', this.onScrollThrottled.bind(this), <any>{ capture: true, passive: true });
     });
   }
 
