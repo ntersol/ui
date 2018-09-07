@@ -13,7 +13,8 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "lazyModules": [
-              "src/app/components/datagrid/datagrid.module"
+              "src/app/libs/datagrid/datagrid.module",
+              "src/app/libs/charts/charts.module"
             ],
             "outputPath": "dist/browser",
             "index": "src/index.html",

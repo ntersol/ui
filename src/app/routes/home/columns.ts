@@ -1,4 +1,4 @@
-import { Datagrid } from '$components';
+import { Datagrid } from '$libs';
 
 export const columns: Datagrid.Column[] = [
   {

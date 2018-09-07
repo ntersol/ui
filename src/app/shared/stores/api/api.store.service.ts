@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { Models } from '$models';
+// import { environment } from '$env';
 
 import { ApiHttpService } from './api.http.base.service';
 import { ApiSelectorsService } from './api.selectors.service';
@@ -16,6 +17,9 @@ import { AppStore } from '../store';
   providedIn: 'root',
 })
 export class ApiService extends ApiHttpService {
+  // Base Url
+  // environment.endpoints.apiUrl
+
   /** Users endpoint */
   public users = {
     get: (update?: boolean) => this.getStore<Models.User[]>(ApiMap.users.endpoint, ApiMap.users, update),

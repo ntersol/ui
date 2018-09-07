@@ -1,6 +1,6 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, enableProdMode, APP_INITIALIZER, ErrorHandler } from '@angular/core';
+import { NgModule, enableProdMode, ErrorHandler } from '@angular/core'; // APP_INITIALIZER, 
 import { RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -76,12 +76,12 @@ export const APP_COMPONENTS = [
       multi: true,
     },
     // App initializer for startup
-    {
-      provide: APP_INITIALIZER,
-      useFactory: AppInit,
-      deps: [AppSettings, AppConfigService],
-      multi: true,
-    },
+    //{
+    //  provide: APP_INITIALIZER,
+    //  useFactory: AppInit,
+    //  deps: [AppSettings, AppConfigService],
+    //  multi: true,
+    //},
   ],
   bootstrap: [AppComponent],
   entryComponents: [],
@@ -93,10 +93,10 @@ export class AppModule {}
  * @param settings - App settings
  * @param config - Config service
  */
-export function AppInit(settings: AppSettings, config: AppConfigService): () => Promise<any> {
-  if (settings.apiUrl) {
-    return (): Promise<any> => new Promise(resolve => resolve());
-  } else {
-    return (): Promise<any> => config.loadEnvSettings();
-  }
-}
+//export function AppInit(settings: AppSettings, config: AppConfigService): () => Promise<any> {
+//  if (settings.apiUrl) {
+//    return (): Promise<any> => new Promise(resolve => resolve());
+//  } else {
+//    return (): Promise<any> => config.loadEnvSettings();
+//  }
+//}

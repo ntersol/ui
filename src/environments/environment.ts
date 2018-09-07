@@ -30,6 +30,8 @@ export const environment = {
   endpoints: {
     /** Location to get environment and config settings */
     envConfig: 'assets/mock-data/env-settings.json',
+    /** Location of API if not getting that from envConfig */
+    apiUrl: './',
     /** Login endpoint */
     authLogin: '/authentication/login',
     /** Refresh token endpoint */

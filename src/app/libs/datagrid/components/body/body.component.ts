@@ -142,6 +142,6 @@ export class BodyComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // Unsub from all subscriptions
-    this.body();
+    // this.body();
   }
 }
