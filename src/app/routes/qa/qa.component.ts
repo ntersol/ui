@@ -35,6 +35,22 @@ export class QaComponent implements OnInit {
     { name: 'Strawberries' },
   ];
 
+  public dataSets = [
+    {
+    label: '3',
+    data: [3]
+    },
+    {
+      label: '13',
+      data: [13]
+    },
+    {
+      label: '7',
+      data: [7]
+    },
+  ];
+
+
   constructor() {}
 
   ngOnInit() {}

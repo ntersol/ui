@@ -50,8 +50,8 @@
     <Content Include="src\app\app.component.html" />
     <Content Include="src\app\components\api-state\api-state.component.html" />
     <Content Include="src\app\components\api-state\api-state.component.scss" />
-    <Content Include="src\app\libs\charts\charts.component.html" />
-    <Content Include="src\app\libs\charts\charts.component.scss" />
+    <Content Include="src\app\libs\charts\chart.component.html" />
+    <Content Include="src\app\libs\charts\chart.component.scss" />
     <Content Include="src\app\components\counter\counter.component.html" />
     <Content Include="src\app\components\counter\counter.component.scss" />
     <Content Include="src\app\libs\datagrid\components\body\body.component.html" />
@@ -236,9 +236,10 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.spec.ts" />
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.ts" />
-    <TypeScriptCompile Include="src\app\libs\charts\charts.component.spec.ts" />
-    <TypeScriptCompile Include="src\app\libs\charts\charts.component.ts" />
-    <TypeScriptCompile Include="src\app\libs\charts\charts.module.spec.ts" />
+    <TypeScriptCompile Include="src\app\libs\charts\chart.component.ts" />
+    <TypeScriptCompile Include="src\app\libs\charts\charts.d.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\app\libs\charts\charts.module.ts" />
     <TypeScriptCompile Include="src\app\components\components.module.ts" />
     <TypeScriptCompile Include="src\app\components\counter\counter.component.ts" />
