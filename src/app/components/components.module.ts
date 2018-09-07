@@ -4,21 +4,22 @@ import { CommonModule } from '@angular/common';
 import { VendorModule } from '../vendor.module';
 import { SharedModule } from '$shared';
 
-// Modals import
+// Global modals
 import { ConfirmationModalComponent } from './modals/confirmation/confirmation-modal.component';
 import { LogoutModalComponent } from './modals/logout/logout-modal.component';
 
-// Components import
-import {
-  FooterComponent,
-  HeaderComponent,
-  LayoutMainComponent,
-  LayoutSingleComponent,
-  NavComponent,
-  NavSearchComponent,
-  LaunchModalComponent,
-} from '$components';
+// Layout
+import { FooterComponent } from './masterpage/footer/footer.component';
+import { HeaderComponent } from './masterpage/header/header.component';
+import { LayoutMainComponent } from './masterpage/main/layout-main.component';
+import { LayoutSingleComponent } from './masterpage/single/layout-single.component';
+import { NavComponent } from './masterpage/nav/nav.component';
+import { NavSearchComponent } from './masterpage/nav/search/nav-search.component';
+
+// Components
+import { LaunchModalComponent } from './launch-modal/launch-modal.component';
 import { ApiStateComponent } from './api-state/api-state.component';
+import { CounterComponent } from './counter/counter.component';
 
 // Modals include
 const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];
@@ -34,6 +35,7 @@ export const APP_COMPONENTS = [
   NavSearchComponent,
   LaunchModalComponent,
   ApiStateComponent,
+  CounterComponent,
 ];
 
 @NgModule({

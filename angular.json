@@ -13,14 +13,15 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "lazyModules": [
-              "src/app/components/datagrid/datagrid.module"
+              "src/app/libs/datagrid/datagrid.module",
+              "src/app/libs/charts/charts.module"
             ],
-            "outputPath": "dist",
+            "outputPath": "dist/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "preserveSymlinks": true,
-            "showCircularDependencies": false,
+            "showCircularDependencies": true,
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/assets",
@@ -114,6 +115,14 @@
               "**/node_modules/**"
             ]
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "src/tsconfig.server.json"
+          }
         }
       }
     },
@@ -122,6 +131,14 @@
       "sourceRoot": "",
       "projectType": "application",
       "architect": {
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "src/tsconfig.server.json"
+          }
+        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {

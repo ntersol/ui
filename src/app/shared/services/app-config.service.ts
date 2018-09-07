@@ -48,7 +48,7 @@ export class AppConfigService {
       .then((data: any) => this.appSettingsUpdate(data))
       .catch((err: any) => {
         console.error('Error getting environment settings', err);
-        sessionStorage.clear();
+        this.settings.sessionStorageClear();
         return Promise.resolve();
       });
   }

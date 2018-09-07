@@ -25,11 +25,13 @@ export const environment = {
   },
   domains: {
     /** If App Comms is enabled, whitelist domains to accept messages from here */
-    listenTo: <string[]>[window.location.origin],
+    listenTo: <string[]>[],
   },
   endpoints: {
     /** Location to get environment and config settings */
     envConfig: 'assets/mock-data/env-settings.json',
+    /** Location of API if not getting that from envConfig */
+    apiUrl: './',
     /** Login endpoint */
     authLogin: '/authentication/login',
     /** Refresh token endpoint */

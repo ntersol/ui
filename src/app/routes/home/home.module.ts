@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SiteModule } from '$site'; // Site modules
-import { DatagridModule } from '$components'; // Lazy loaded datagrid
+import { DatagridModule } from '$libs'; // Lazy loaded datagrid
 
 // Home component and routing
 import { routing } from './home.routes';

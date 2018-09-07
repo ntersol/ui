@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 
 import { SiteModule } from '$site'; // Site modules
-import { DatagridModule } from '$components'; // Lazy loaded datagrid
+import { DatagridModule } from '$libs'; // Lazy loaded datagrid
 
 // Store Reducer
 import { UIReducer } from '$ui';

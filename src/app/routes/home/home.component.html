@@ -4,6 +4,9 @@
     <div class="card-header p-2">
 
       <div class="float-right">
+        
+        <app-counter class="mr-2"></app-counter>
+
         <button class="btn btn-sm btn-outline-primary mr-1 d-inline-block"
                 title="Toggle multi-screen view"
                 [ngClass]="{ 'enabled' : ui.select.multiScreen$ | async }"

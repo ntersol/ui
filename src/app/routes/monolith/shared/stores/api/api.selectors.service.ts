@@ -25,7 +25,7 @@ const selectors = {
 export class MonolithApiSelectorsService {
   public users$ = this.store.select(selectors.users); // Memoized selector
   // public users$ = this.store.select(store => store.api.users);
-  
+
   constructor(private store: Store<MonolithStore.Root>) {}
 
   /**

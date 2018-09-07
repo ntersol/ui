@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { StringUtils } from '$utils';
 import { environment } from '$env';
@@ -21,10 +23,23 @@ export class AppSettings {
   private pad = 100;
   private localStorage: { [key in AppSettingsProps]?: string } = {};
   private sessionStorage: { [key in AppSettingsProps]?: string } = {};
+  /** Property to store app settings in local or session storage */
+  public isBrowser = isPlatformBrowser(this.platformId);
 
-  /** API token for EPS */
+  /** API token */
+  private _ui: string | null = null;
+  /** API token */
+  public get ui(): string | null {
+    return this._ui || this.propGet(AppSettingsProps.token);
+  }
+  public set ui(value: string | null) {
+    this._ui = value;
+    this.propSet(AppSettingsProps.token, value);
+  }
+
+  /** API token */
   private _token: string | null = null;
-  /** API token for EPS */
+  /** API token */
   public get token(): string | null {
     return this._token || this.propGet(AppSettingsProps.token);
   }
@@ -56,12 +71,21 @@ export class AppSettings {
     this.propSet(AppSettingsProps.userName, value);
   }
 
-  constructor() {
-    if (window.sessionStorage.getItem(this.localProp)) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (this.isBrowser && window.sessionStorage.getItem(this.localProp)) {
       this.sessionStorage = this.settingsRestore(window.sessionStorage.getItem(this.localProp));
     }
-    if (window.localStorage.getItem(this.localProp)) {
+    if (this.isBrowser && window.localStorage.getItem(this.localProp)) {
       this.localStorage = this.settingsRestore(window.localStorage.getItem(this.localProp));
+    }
+  }
+
+  /**
+   * Clear session storage
+   */
+  public sessionStorageClear() {
+    if (this.isBrowser) {
+      window.sessionStorage.clear();
     }
   }
 
@@ -71,10 +95,12 @@ export class AppSettings {
    * @param location - Location of locally stored prop, either sessionStorage or localStorage
    */
   private propGet(propKey: Propkey, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
-    if (location === 'sessionStorage' && this.sessionStorage[propKey]) {
-      return this.sessionStorage[propKey];
-    } else if (this.localStorage[propKey]) {
-      return this.localStorage[propKey];
+    if (this.isBrowser) {
+      if (location === 'sessionStorage' && this.sessionStorage[propKey]) {
+        return this.sessionStorage[propKey];
+      } else if (this.localStorage[propKey]) {
+        return this.localStorage[propKey];
+      }
     }
     return null;
   }
@@ -89,12 +115,14 @@ export class AppSettings {
     value: string | null,
     location: 'localStorage' | 'sessionStorage' = 'localStorage',
   ) {
-    if (location === 'sessionStorage') {
-      this.sessionStorage[propKey] = value;
-      window.sessionStorage.setItem(this.localProp, this.settingsSave(this.sessionStorage));
-    } else {
-      this.localStorage[propKey] = value;
-      window.localStorage.setItem(this.localProp, this.settingsSave(this.localStorage));
+    if (this.isBrowser) {
+      if (location === 'sessionStorage') {
+        this.sessionStorage[propKey] = value;
+        window.sessionStorage.setItem(this.localProp, this.settingsSave(this.sessionStorage));
+      } else {
+        this.localStorage[propKey] = value;
+        window.localStorage.setItem(this.localProp, this.settingsSave(this.localStorage));
+      }
     }
   }
 
