@@ -27,10 +27,10 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   @Input() tooltip: Chart.ChartTooltipOptions;
 
   // Format Elements
-  @Input() formatTooltip: Function;
-  @Input() formatDataLabel: Function;
-  @Input() formatXLabels: Function;
-  @Input() formatYLabels: Function;
+  @Input() formatTooltip: () => string | string[];
+  @Input() formatDatalabel: () => string | string[];
+  @Input() formatXLabels: () => string | string[];
+  @Input() formatYLabels: () => string | string[];
 
   // Show/Hide Elements
   /** Show or hide the tooltip which appears when you hover over a chart entry */
@@ -43,10 +43,14 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   @Input() showXAxisLabels = true;
   /** Show or hide the labels that appear on the Y axis */
   @Input() showYAxisLabels = true;
-  /** Show or hide the labels that appear on the X axis */
-  @Input() showXAxisTitle = false;
-  /** Show or hide the labels that appear on the Y axis */
-  @Input() showYAxisTitle = false;
+
+  // Titles
+  /** Title to show for the main chart */
+  @Input() titleChart: string;
+  /** Title to show for the X Axis, leave null for none */
+  @Input() titleXAxis:string;
+  /** Title to show for the Y Axis, leave null for none */
+  @Input() titleYAxis: string;
 
   //public chartJs = ChartJS;
   //public dataLabels = DataLabels;
@@ -58,30 +62,29 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   /** Default chart options, will be overriden by anything passed down through @Input options */
   private optionsDefault: Chart.ChartOptions = {
     maintainAspectRatio: false,
+    title: {
+      display: this.titleChart ? true : false,
+      text: this.titleChart
+    },
     legend: {
       display: this.showLegend,
     },
     tooltips: {
       enabled: this.showTooltip,
-      callbacks: {
-        label: function (tooltipItem, _data) {
-          return tooltipItem.yLabel + 100;
-        }
-      }
     },
     scales: {
       xAxes: [{
         display: this.showXAxisLabels,
         scaleLabel: {
-          display: this.showXAxisTitle,
-          labelString: 'This is the X Axis'
+          display: this.titleXAxis ? true : false,
+          labelString: this.titleXAxis
         }
       }],
       yAxes: [{
         display: this.showYAxisLabels,
         scaleLabel: {
-          display: this.showYAxisTitle,
-          labelString: 'This is the Y Axis'
+          display: this.titleYAxis ? true : false,
+          labelString: this.titleYAxis
         }
       }],
     },
@@ -154,6 +157,14 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     } else if (this.dataSets.length === 1) {
       // If only 1 dataset, generate the labels automatically from the values so they show on the x Axis
       chartConfiguration.data.labels = (<any>this).dataSets[0].data.map((val: number) => String(val));
+    }
+
+    // If tooltip formatter supplied
+    if (this.formatTooltip) {
+      chartConfiguration.options.tooltips.callbacks = {
+        ...chartConfiguration.options.tooltips.callbacks,
+        label: this.formatTooltip
+      };
     }
 
     return chartConfiguration;

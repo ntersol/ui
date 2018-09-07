@@ -61,7 +61,11 @@ export class QaComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  public formatTooltip(test: any) {
+    return test.y + 100;
+  }
 
   public launchModalSuccess(event: any) {
     if (event) {
