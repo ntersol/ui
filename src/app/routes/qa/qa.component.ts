@@ -38,33 +38,34 @@ export class QaComponent implements OnInit {
   public dataSets = [
     {
       label: 'Test',
-      data: [3,4,1,8,3,1,5,8,4,3]
+      data: [3, 4, 1, 8, 3, 1, 5, 8, 4, 3],
     },
-  
   ];
 
   public dataSets2 = [
     {
       label: 'Test',
-      data: [3,3,1]
+      data: [3, 3, 1],
     },
     {
       label: 'Hello',
-      data: [13,8,3]
+      data: [13, 8, 3],
     },
     {
       label: 'Once',
-      data: [7,1,2]
+      data: [7, 1, 2],
     },
   ];
 
+  
 
   constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   public formatTooltip(test: any) {
-    return test.y + 100;
+    console.log(test)
+    return test + 100;
   }
 
   public launchModalSuccess(event: any) {

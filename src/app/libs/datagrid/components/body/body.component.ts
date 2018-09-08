@@ -63,7 +63,8 @@ export class BodyComponent implements OnInit, OnDestroy {
 
   public body: any;
 
-  constructor(private zone: NgZone, private element: ElementRef) { // , private renderer: Renderer2
+  constructor(private zone: NgZone, private element: ElementRef) {
+    // , private renderer: Renderer2
     this.body = this.element.nativeElement;
   }
 

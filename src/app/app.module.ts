@@ -1,6 +1,6 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, enableProdMode, ErrorHandler } from '@angular/core'; // APP_INITIALIZER, 
+import { NgModule, enableProdMode, ErrorHandler } from '@angular/core'; // APP_INITIALIZER,
 import { RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
