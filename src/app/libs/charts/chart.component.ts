@@ -1,11 +1,15 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, OnChanges, AfterViewInit, OnDestroy } from '@angular/core';
 
 // Import version of chartJS without moment.js. Types are provided by the .d file in this folder
-import 'chart.js/dist/Chart.min.js';
-import 'chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js';
+// import 'chart.js/dist/Chart.min.js';
+// import 'chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js';
 // const ChartJS = require('chart.js/dist/Chart.min.js');
 // const DataLabels = require('chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js');
+declare global {
+  interface Window { Chart: any; }
+}
 
+const chartSrc = 'assets/scripts/chart.min.js';
 
 @Component({
   selector: 'app-chart',
@@ -106,7 +110,10 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   }
 
   ngAfterViewInit() {
-    this.chartInit();
+    this.scriptsLoad();
+    
+   
+
     this.isLoaded = true;
   }
   
@@ -118,15 +125,29 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   }
 
   /**
+   * Check if Chart.js is loaded, if not, load it then initialize the chart in this component
+   */
+  public scriptsLoad() {
+    if (window.Chart) {
+      this.chartInit();
+    } else {
+      const script = document.createElement('script');
+      script.src = chartSrc;
+      script.onload = () => this.chartInit();
+      document.head.appendChild(script); //or something of the likes
+    }
+  }
+
+  /**
    * Initialize the chart
    */
   private chartInit() {
-    if (this.element && this.element.nativeElement && (<any>window).Chart) {
+    if (this.element && this.element.nativeElement && window.Chart) {
       this.ctx = this.element.nativeElement.getContext('2d');
       const options = this.chartOptionsCreate();
       // Create chart from WINDOW reference not import
       // Due to bug with plugins registered with global object and not being available via imports
-      this.chart = new (<any>window).Chart(this.ctx, this.chartOptionsCreate());
+      this.chart = new window.Chart(this.ctx, this.chartOptionsCreate());
      
       console.log(options);
     }
