@@ -23,7 +23,7 @@ declare global {
 }
 
 interface FormatData {
-  pipe: 'Date' | 'Currency' | 'Number' | 'Percent',
+  pipe: 'date' | 'currency' | 'number' | 'percent',
   format: string;
 }
 
@@ -216,31 +216,44 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
         ticks: {
           callback: this.formatData(this.formatYLabels),
         }
-      }]
+      }];
+    }
+
+    // If tooltip formatter supplied
+    if (this.formatXLabels) {
+      chartConfiguration.options.scales.xAxes = [{
+        ticks: {
+          callback: this.formatData(this.formatXLabels),
+        }
+      }];
     }
 
     return chartConfiguration;
   }
 
+  /**
+   * Supply a formatter method OR an Angular pipe to the chart instance
+   * Used to format labels, values, datalabels, etc
+   * @param option
+   */
   private formatData(option: FormatData | Formatter) {
-    console.log('option',option)
     // Check if a custom formatter was supplied, if not use angular pipe
     if (typeof option !== 'function' && option.pipe) {
       switch (option.pipe) {
         // Use decimal pipe
-        case 'Number':
+        case 'number':
           return (tooltipItem: Chart.ChartTooltipItem, _data: Chart.ChartData) =>
             formatNumber(Number(tooltipItem.yLabel), 'en-US', option.format);
         // Datepipe
-        case 'Date':
+        case 'date':
           return (tooltipItem: Chart.ChartTooltipItem, _data: Chart.ChartData) =>
             formatDate(Number(tooltipItem.yLabel), option.format, 'en-US');
         // Currency pipe
-        case 'Currency':
+        case 'currency':
           return (tooltipItem: Chart.ChartTooltipItem, _data: Chart.ChartData) =>
             formatCurrency(Number(tooltipItem.yLabel), 'en-US', '', option.format);
         // Percent pipe
-        case 'Percent':
+        case 'percent':
           return (tooltipItem: Chart.ChartTooltipItem, _data: Chart.ChartData) =>
             formatPercent(Number(tooltipItem.yLabel), 'en-US', option.format);
         default:

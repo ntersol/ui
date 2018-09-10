@@ -31,7 +31,7 @@ import {
 } from '$shared';
 
 // Non-lazy loaded routes
-import { LoginComponent, NoContentComponent, QaComponent } from '$routes';
+import { LoginComponent, NoContentComponent } from '$routes';
 import { SiteModule } from '$site';
 
 // Components
@@ -41,7 +41,6 @@ export const APP_COMPONENTS = [
   // Routes
   LoginComponent,
   NoContentComponent,
-  QaComponent,
 ];
 
 @NgModule({

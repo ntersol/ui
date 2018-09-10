@@ -80,6 +80,8 @@
     <Content Include="src\app\routes\monolith\routes\home\home.component.scss" />
     <Content Include="src\app\routes\qa\qa.component.html" />
     <Content Include="src\app\routes\qa\qa.component.scss" />
+    <Content Include="src\app\routes\qa\routes\charts\charts.component.html" />
+    <Content Include="src\app\routes\qa\routes\charts\charts.component.scss" />
     <Content Include="src\assets\.gitkeep" />
     <Content Include="src\assets\icons\favicon-144x144.png" />
     <Content Include="src\assets\icons\favicon-192x192.png" />
@@ -193,6 +195,8 @@
     <Folder Include="src\app\routes\monolith\shared\utils\" />
     <Folder Include="src\app\routes\no-content\" />
     <Folder Include="src\app\routes\qa\" />
+    <Folder Include="src\app\routes\qa\routes\" />
+    <Folder Include="src\app\routes\qa\routes\charts\" />
     <Folder Include="src\app\shared\" />
     <Folder Include="src\app\shared\directives\" />
     <Folder Include="src\app\shared\guards\" />
@@ -296,6 +300,13 @@
     <TypeScriptCompile Include="src\app\routes\monolith\shared\stores\monolith.store.d.ts" />
     <TypeScriptCompile Include="src\app\routes\no-content\no-content.component.ts" />
     <TypeScriptCompile Include="src\app\routes\qa\qa.component.ts" />
+    <TypeScriptCompile Include="src\app\routes\qa\qa.module.spec.ts" />
+    <TypeScriptCompile Include="src\app\routes\qa\qa.module.ts" />
+    <TypeScriptCompile Include="src\app\routes\qa\qa.routes.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\app\routes\qa\routes\charts\charts.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\routes\qa\routes\charts\charts.component.ts" />
     <TypeScriptCompile Include="src\app\shared\app.settings.ts" />
     <TypeScriptCompile Include="src\app\shared\directives\focus.directive.ts" />
     <TypeScriptCompile Include="src\app\shared\directives\full-screen.directive.ts" />

@@ -41,6 +41,13 @@ export const ROUTES: Routes = [
         canActivate: [AuthGuard],
       },
 
+      {
+        path: 'qa',
+        loadChildren: './routes/qa/qa.module#QaModule',
+        data: { title: 'E2E Testing' },
+        canActivate: [AuthGuard],
+      },
+
       // Example for lazy loaded module with route params
       // { path: 'users/:empowerGuid', loadChildren: './routes/users/users.module#UsersModule', canActivate: [AuthGuard] },
       // { path: 'users', loadChildren: './routes/users/users.module#UsersModule', canActivate: [AuthGuard] },

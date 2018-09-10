@@ -1,0 +1,12 @@
+<div class="container-fluid">
+
+
+  <app-chart [dataSets]="dataSets"
+             [formatTooltip]="{
+                pipe: 'number',
+                format: '3.1-5'
+               }"
+             [formatYLabels]="formatTooltip">
+  </app-chart>
+
+</div>
