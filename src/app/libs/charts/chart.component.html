@@ -2,5 +2,10 @@
         'width': width ? width : null,
         'height': height ? height : null
         }">
+
+  <div class="alert alert-warning icon" *ngIf="!dataSets">No charting data found...</div>
   <canvas #element></canvas>
+
+  <div id="tooltip-custom" #tooltipCustom></div>
+
 </div>

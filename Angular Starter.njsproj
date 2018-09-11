@@ -103,6 +103,9 @@
     <Content Include="src\styles\components\_alerts.scss" />
     <Content Include="src\styles\components\_buttons.scss" />
     <Content Include="src\styles\components\_cards.scss" />
+    <Content Include="src\styles\components\_charts.scss">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\styles\components\_dropdowns.scss" />
     <Content Include="src\styles\components\_modals.scss" />
     <Content Include="src\styles\components\_navbar.scss" />
@@ -240,6 +243,7 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.spec.ts" />
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.ts" />
+    <TypeScriptCompile Include="src\app\libs\charts2\chart.d.ts" />
     <TypeScriptCompile Include="src\app\libs\charts\chart.component.ts" />
     <TypeScriptCompile Include="src\app\libs\charts\charts.d.ts">
       <SubType>Code</SubType>
@@ -307,6 +311,15 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\app\routes\qa\routes\charts\charts.component.spec.ts" />
     <TypeScriptCompile Include="src\app\routes\qa\routes\charts\charts.component.ts" />
+    <TypeScriptCompile Include="src\app\routes\qa\routes\charts\summary.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\app\routes\qa\routes\charts\transfers.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\app\routes\qa\routes\charts\user.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\app\shared\app.settings.ts" />
     <TypeScriptCompile Include="src\app\shared\directives\focus.directive.ts" />
     <TypeScriptCompile Include="src\app\shared\directives\full-screen.directive.ts" />

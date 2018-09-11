@@ -1,12 +1,47 @@
 <div class="container-fluid">
 
+  <div class="card card-sm mb-2">
+    <div class="card-header">
+      <a (click)="frame = 0">Talk Time</a> | 
+      <a (click)="frame = 1">Transfers</a>
+    </div>
+  </div>
 
+  <!--
+  <h3 class="text-center" *ngIf="dataSets3 && dataSets3[0]">{{dataSets3[0]?.label}} Talk Time</h3>
   <app-chart [dataSets]="dataSets"
-             [formatTooltip]="{
-                pipe: 'number',
-                format: '3.1-5'
-               }"
-             [formatYLabels]="formatTooltip">
+             [chartType]="'bar'"
+             [labels]="labels"
+             [titleYAxis]="'Minutes'"
+             [titleXAxis]="'Time Of Day'"
+             [showDataLabels]="false"
+             [showLegend]="false"
+             [stacked]="false"
+             [height]="'85vh'">
   </app-chart>
 
+  <hr />
+  -->
+
+  <app-charts2 *ngIf="frame === 0"
+               [data]="dataPoints"
+               [titleChart]="user[0]?.name + ' Talk Time'"
+               [colorsCustom]="['#2F4F4F']"
+               [showLegend]="false"
+               [formatXLabels]="formatTooltip"
+               [height]="'80vh'">
+  </app-charts2>
+
+  <app-charts2 *ngIf="frame === 1"
+               [data]="dataPoints2"
+               [titleChart]="'Transfers'"
+               [colorsCustom]="['#2F4F4F']"
+               [showLegend]="false"
+               [formatXLabels]="formatTooltip"
+               [height]="'80vh'">
+  </app-charts2>
+
+  <!--
+  [templateTooltip]="tooltipTemplate"
+   -->
 </div>
