@@ -35,15 +35,9 @@ export class QaComponent implements OnInit {
     { name: 'Strawberries' },
   ];
 
-  
-
-  
-
   constructor() {}
 
   ngOnInit() {}
-
- 
 
   public launchModalSuccess(event: any) {
     if (event) {

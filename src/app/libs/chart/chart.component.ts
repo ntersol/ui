@@ -11,11 +11,6 @@ import {
 } from '@angular/core';
 // import { formatDate, formatNumber, formatCurrency, formatPercent } from '@angular/common';
 
-// Import version of chartJS without moment.js. Types are provided by the .d file in this folder
-// import 'chart.js/dist/Chart.min.js';
-// import 'chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js';
-// const ChartJS = require('chart.js/dist/Chart.min.js');
-// const DataLabels = require('chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js');
 
 declare global {
   interface Window {
@@ -27,27 +22,46 @@ declare global {
 const chartSrc = 'assets/scripts/canvasjs.min.js';
 
 @Component({
-  selector: 'app-charts2',
-  templateUrl: './charts2.component.html',
-  styleUrls: ['./charts2.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-chart',
+  templateUrl: './chart.component.html',
+  styleUrls: ['./chart.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Charts2Component implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   /** TEMP */
-  @ViewChild('element') element: ElementRef;
-  @ViewChild('tooltipCustom') tooltipCustom: ElementRef;
+  @ViewChild('element')
+  element: ElementRef;
+  @ViewChild('tooltipCustom')
+  tooltipCustom: ElementRef;
 
-  @Input() type: 'line' | 'column' | 'bar' | 'area' | 'spline' | 'splineArea' | 'stepLine' | 'scatter' | 'bubble' | 'stackedColumn' | 'stackedBar' |
-    'stackedArea' | 'stackedColumn100' | 'stackedBar100' | 'stackedArea100' | 'pie' | 'doughnut' = 'column';
+  @Input()  type:
+    | 'line'
+    | 'column'
+    | 'bar'
+    | 'area'
+    | 'spline'
+    | 'splineArea'
+    | 'stepLine'
+    | 'scatter'
+    | 'bubble'
+    | 'stackedColumn'
+    | 'stackedBar'
+    | 'stackedArea'
+    | 'stackedColumn100'
+    | 'stackedBar100'
+    | 'stackedArea100'
+    | 'pie'
+    | 'doughnut' = 'column';
   @Input() width: string;
   @Input() height: string;
-  @Input() data: CanvasJS.ChartDataPoint[];
+  @Input() data: CanvasJS.ChartDataSeriesOptions[];
   @Input() options: CanvasJS.ChartOptions;
   @Input() stacked: boolean;
 
   /** Colors for data points in RGB */
   @Input() colorSet: string;
-  @Input() colorsCustom: string[];
+  @Input() colorGradient: [string, string];
+  @Input() colorsCustom: string[] = [];
 
   // Format Elements
   @Input() formatTooltip: any;
@@ -92,11 +106,15 @@ export class Charts2Component implements OnInit, OnChanges, AfterViewInit, OnDes
   /** After initial load */
   private isLoaded = false;
 
-  constructor() { }
+  private styling = {
+    fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+    fontSize: 10,
+    fontWeight: 'normal',
+  };
 
-  ngOnInit() {
-   
-  }
+  constructor() {}
+
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.scriptsLoad();
@@ -117,6 +135,7 @@ export class Charts2Component implements OnInit, OnChanges, AfterViewInit, OnDes
       this.chartInit(); // Chart.js already loaded, init chart
       this.isLoaded = true;
     } else {
+      // Dynamically load chart module
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.src = chartSrc;
@@ -132,14 +151,14 @@ export class Charts2Component implements OnInit, OnChanges, AfterViewInit, OnDes
    * Initialize the chart
    */
   private chartInit() {
-    console.log(this.element.nativeElement)
-    if (this.element && this.element.nativeElement && window.CanvasJS) { //  && this.dataSets
+    if (this.element && this.element.nativeElement && window.CanvasJS) {
+      //  && this.dataSets
       // Clean up any previous references before reinitializing the chart
       this.ngOnDestroy();
 
       if (this.colorsCustom) {
         this.colorScheme = 'customColors-' + this.colorsCustom.join;
-        window.CanvasJS.addColorSet(this.colorScheme, this.colorsCustom)
+        window.CanvasJS.addColorSet(this.colorScheme, this.colorsCustom);
       }
 
       // Create chart from WINDOW reference not import
@@ -147,7 +166,6 @@ export class Charts2Component implements OnInit, OnChanges, AfterViewInit, OnDes
       this.chart = new window.CanvasJS.Chart('chartContainer', this.chartOptionsCreate());
 
       this.chart.render();
-
     }
   }
 
@@ -155,62 +173,159 @@ export class Charts2Component implements OnInit, OnChanges, AfterViewInit, OnDes
    * Create the options needed by this chart
    */
   public chartOptionsCreate() {
-   
+    // If color gradient is specified, create it to match datapoint range
+    if (this.colorGradient && this.data && this.data[0] && this.data[0].dataPoints.length) {
+      this.colorsCustom = this.getColorScheme(
+        this.colorGradient[0],
+        this.colorGradient[1],
+        this.data[0].dataPoints.length,
+      );
+    }
+
+    // If custom colors supplied, register with chart plugin
+    if (this.colorsCustom) {
+      this.colorScheme = 'customColors-' + this.colorsCustom.join;
+      window.CanvasJS.addColorSet(this.colorScheme, this.colorsCustom);
+    }
+
+    // Create default options
     const options = <CanvasJS.ChartOptions>{
       animationEnabled: true,
       exportEnabled: true,
       title: {
         text: this.titleChart,
-        fontSize: 18
+        fontSize: 18,
+        fontFamily: this.styling.fontFamily,
+        fontWeight: this.styling.fontWeight,
       },
+      // theme: "light2",
       toolTip: {
         enabled: this.showTooltip,
-        fontColor: this.formatTooltip ? this.formatTooltip : null
+        fontColor: this.formatTooltip ? this.formatTooltip : null,
       },
-      colorSet: this.colorSet ? this.colorSet : this.colorScheme ? this.colorScheme : null, // Use build in color set if supplied, use custom colors if not
-      data: [{
-        type: this.type,
-        showInLegend: this.showLegend,
-        indexLabel: this.showIndexLabel ? '{x}' : null,
-        indexLabelFontSize: 10,
-        legendText: this.data[0].label,
-        dataPoints: this.data
-      }],
+      legend: {
+        fontSize: this.styling.fontSize,
+        fontFamily: this.styling.fontFamily,
+        cursor: 'pointer',
+        // Enable the legend to toggle dataseries on or off
+        itemclick: e => {
+          e.dataSeries.visible = typeof e.dataSeries.visible === 'undefined' || e.dataSeries.visible ? false : true;
+          this.chart.render();
+        },
+      },
+      colorSet: this.colorSet ? this.colorSet : this.colorScheme ? this.colorScheme : null, // Use built in color set if supplied, use custom colors if not
+      data: this.mapChartData(),
       axisX: {
         title: this.titleXAxis,
         titleFontSize: 16,
-        labelFontSize: 12,
-        labelFormatter: (val) => {
-          if (this.showXAxisLabels === false) { 
+        interval: 1,
+        labelFontSize: this.styling.fontSize,
+        labelFontFamily: this.styling.fontFamily,
+        labelFormatter: val => {
+          if (this.showXAxisLabels === false) {
             return ''; // If show labels is disabled, return empty string which hides the labels
           } else if (this.formatXLabels) {
             return this.formatXLabels(val); // If custom formatter supplied, format strings
           }
           return val.label; // Otherwise return default value
-        }
+        },
       },
       axisY: {
         title: this.titleYAxis,
         titleFontSize: 16,
-        labelFontSize: 12,
-        labelFormatter: (val) => {
+        labelFontSize: this.styling.fontSize,
+        labelFontFamily: this.styling.fontFamily,
+        labelFormatter: val => {
           if (this.showYAxisLabels === false) {
             return ''; // If show labels is disabled, return empty string which hides the labels
           } else if (this.formatYLabels) {
             return this.formatYLabels(val); // If custom formatter supplied, format strings
           }
           return val.value; // Otherwise return default value
-        }
+        },
       },
-    }
-
+    };
+    // console.log(options)
     // Return options object with overrides
     return {
       ...options,
-      ...this.options
+      ...this.options,
     };
   }
 
+  /**  */
+  private mapChartData(): CanvasJS.ChartDataSeriesOptions[] {
+    return this.data.map(data => {
+      return <CanvasJS.ChartDataSeriesOptions>{
+        type: this.type,
+        showInLegend: this.showLegend,
+        indexLabel: this.showIndexLabel ? '{x}' : null,
+        indexLabelFontSize: 10,
+        // legendText: this.data[0].label,
+        ...data,
+      };
+    });
+  }
+
+  /**
+   * Creates a gradient with a fixed number of steps in a string array
+   * @param startColor - Hex start color
+   * @param endColor - Hex end color
+   * @param steps - The number of hex colors to return
+   */
+  private getColorScheme(startColor: string, endColor: string, steps: number) {
+    const colorsCustom: string[] = [];
+    for (var i = 0; i <= steps; i++) {
+      colorsCustom.push(this.getGradientStep(startColor, endColor, i / steps));
+    }
+    return colorsCustom;
+  }
+
+  /**
+   * Get a color hex value between 2 input colors as part of a gradient
+   * @param startColor - Hex start color
+   * @param endColor - Hex end color
+   * @param percent
+   */
+  private getGradientStep(startColor: string, endColor: string, percent: number) {
+    // Strip the leading # if it's there
+    startColor = startColor.replace(/^\s*#|\s*$/g, '');
+    endColor = endColor.replace(/^\s*#|\s*$/g, '');
+
+    // convert 3 char codes --> 6, e.g. `E0F` --> `EE00FF`
+    if (startColor.length == 3) {
+      startColor = startColor.replace(/(.)/g, '$1$1');
+    }
+
+    if (endColor.length == 3) {
+      endColor = endColor.replace(/(.)/g, '$1$1');
+    }
+
+    // Get colors
+    let startRed = parseInt(startColor.substr(0, 2), 16),
+      startGreen = parseInt(startColor.substr(2, 2), 16),
+      startBlue = parseInt(startColor.substr(4, 2), 16);
+
+    let endRed = parseInt(endColor.substr(0, 2), 16),
+      endGreen = parseInt(endColor.substr(2, 2), 16),
+      endBlue = parseInt(endColor.substr(4, 2), 16);
+
+    // Calculate new color
+    let diffRed = endRed - startRed;
+    let diffGreen = endGreen - startGreen;
+    let diffBlue = endBlue - startBlue;
+
+    let diffRedStr = (diffRed * percent + startRed).toString(16).split('.')[0];
+    let diffGreenStr = (diffGreen * percent + startGreen).toString(16).split('.')[0];
+    let diffBlueStr = (diffBlue * percent + startBlue).toString(16).split('.')[0];
+
+    // ensure 2 digits by color
+    if (diffRedStr.length == 1) diffRedStr = '0' + diffRed;
+    if (diffGreenStr.length == 1) diffGreenStr = '0' + diffGreenStr;
+    if (diffBlueStr.length == 1) diffBlueStr = '0' + diffBlueStr;
+
+    return '#' + diffRedStr + diffGreenStr + diffBlueStr;
+  }
 
   /**
    * Supply a formatter method OR an Angular pipe to the chart instance

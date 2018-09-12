@@ -1,3 +1,3 @@
 // Libs
-export * from './charts/charts.module';
+export * from './chart/chart.module';
 export * from './datagrid/datagrid.module';

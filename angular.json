@@ -14,7 +14,7 @@
           "options": {
             "lazyModules": [
               "src/app/libs/datagrid/datagrid.module",
-              "src/app/libs/charts/charts.module"
+              "src/app/libs/chart/chart.module"
             ],
             "outputPath": "dist/browser",
             "index": "src/index.html",

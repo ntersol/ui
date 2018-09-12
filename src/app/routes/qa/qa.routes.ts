@@ -2,7 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { QaComponent } from './qa.component';
-import { ChartsComponent } from './routes/charts/charts.component'
+import { ChartsComponent } from './routes/charts/charts.component';
 
 const routes: Routes = [
   {

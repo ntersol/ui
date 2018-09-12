@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { NoContentComponent, LoginComponent, QaComponent } from '$routes'; // HomeComponent,
+import { NoContentComponent, LoginComponent } from '$routes'; // HomeComponent,
 
 import { LayoutMainComponent } from '$components';
 import { AuthGuard } from '$shared';
@@ -10,6 +10,13 @@ export const ROUTES: Routes = [
     path: 'login',
     component: LoginComponent,
     data: { title: 'Please Log In' },
+  },
+
+  {
+    path: 'qa',
+    loadChildren: './routes/qa/qa.module#QaModule',
+    data: { title: 'E2E Testing' },
+    canActivate: [AuthGuard],
   },
 
   // Example route param
@@ -33,20 +40,6 @@ export const ROUTES: Routes = [
       //  data: { title: 'Dashboard' },
       //  canActivate: [AuthGuard]
       // },
-
-      {
-        path: 'qa',
-        component: QaComponent,
-        data: { title: 'E2E Testing' },
-        canActivate: [AuthGuard],
-      },
-
-      {
-        path: 'qa',
-        loadChildren: './routes/qa/qa.module#QaModule',
-        data: { title: 'E2E Testing' },
-        canActivate: [AuthGuard],
-      },
 
       // Example for lazy loaded module with route params
       // { path: 'users/:empowerGuid', loadChildren: './routes/users/users.module#UsersModule', canActivate: [AuthGuard] },
