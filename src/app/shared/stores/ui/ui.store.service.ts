@@ -48,6 +48,9 @@ export class UIStoreService {
 
     // On UI store changes, persist to localstorage
     this.select.saveState$.subscribe((uiState: AppStore.Ui) => this.storeStateSave(uiState));
+
+    // Output store changes to console
+    // this.store.subscribe(storeApi => console.log(JSON.parse(JSON.stringify(storeApi.ui))));
   }
 
   /**
@@ -59,6 +62,10 @@ export class UIStoreService {
    */
   public tabChange(tabInstanceId: string, tabId: NgbTabChangeEvent) {
     this.store.dispatch(UIStoreActions.TAB_CHANGE({ tabInstanceId: tabInstanceId, tabId: tabId.nextId }));
+  }
+
+  public sidebarToggle(toggle: boolean) {
+    this.store.dispatch(UIStoreActions.SIDEBAR_TOGGLE(toggle));
   }
 
   /**

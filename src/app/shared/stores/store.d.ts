@@ -29,6 +29,7 @@ export declare namespace AppStore {
     /** A static snapshot of the UI store, used mainly for multiscreen usage */
     saveState: Ui | null;
     tabsActive: { [key: string]: string };
+    sidebarOpen: boolean;
     modal: {
       modalId: string;
       options: {};

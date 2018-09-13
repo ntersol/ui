@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('datagrid') datagrid: DataGridComponent;
 
   public users$ = this.api.select.users$;
+  public sidebarOpen$ = this.ui.select.sidebarOpen$;
   public formMain: FormGroup;
   public isEditing: boolean;
   public sidebarOpen = false;
@@ -72,9 +73,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   /** Toggle the sidebar */
-  public sidebarToggle() {
-    this.sidebarOpen = !this.sidebarOpen;
-    // This could be better
+  public sidebarToggle(toggle:boolean) {
+    this.ui.sidebarToggle(!toggle);
+    // There is a better way of doing this
     setTimeout(() => {
       this.datagrid.viewCreate();
       this.ref.detectChanges();

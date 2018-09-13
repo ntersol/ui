@@ -1,10 +1,10 @@
-<div id="app-home" class="container-fluid" *ngIf="{ users: users$ | async } as route">
+<div id="app-home" class="container-fluid" *ngIf="{ users: users$ | async, sidebarOpen : sidebarOpen$ | async } as route">
 
   <div class="card mb-3">
     <div class="card-header p-2">
 
       <div class="float-right">
-        
+
         <app-counter class="mr-2"></app-counter>
 
         <button class="btn btn-sm btn-outline-primary mr-1 d-inline-block"
@@ -14,7 +14,7 @@
           <i aria-hidden="true" class="fa fa-external-link-square"></i>
         </button>
 
-        <button class="btn btn-sm" (click)="sidebarToggle()" [ngClass]="sidebarOpen ? 'btn-danger' : 'btn-primary'">
+        <button class="btn btn-sm" (click)="sidebarToggle(route.sidebarOpen)" [ngClass]="route.sidebarOpen ? 'btn-danger' : 'btn-primary'">
           <i class="fa fa-user mr-1"></i>
           Toggle User Sidebar
         </button>
@@ -39,7 +39,7 @@
     <div class="alert alert-warning icon" *ngIf="!route?.users?.data?.length">No users found</div>
 
     <div class="row">
-      <div class="col-12" [ngClass]="sidebarOpen ? 'col-md-9' : 'col-md-12' ">
+      <div class="col-12" [ngClass]="route.sidebarOpen ? 'col-md-9' : 'col-md-12' ">
         <div style="position:relative;height:calc(100vh - 150px)">
           <datagrid #datagrid
                     [rows]="route.users.data"
@@ -65,8 +65,7 @@
 
             <datagrid-column prop="delete">
               <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-                <app-launch-modal
-                                  modal="ConfirmationModalComponent" size="lg" [data]="'Are you sure you want to delete ' + row.name + '?'" [isButton]="false"
+                <app-launch-modal modal="ConfirmationModalComponent" size="lg" [data]="'Are you sure you want to delete ' + row.name + '?'" [isButton]="false"
                                   (success)="userDelete(row)">
                   <i class="fa fa-remove"></i> Delete
                 </app-launch-modal>
@@ -76,7 +75,7 @@
           </datagrid>
         </div>
       </div>
-      <div class="col-12 col-md-3" *ngIf="sidebarOpen">
+      <div class="col-12 col-md-3" *ngIf="route.sidebarOpen">
         <a class="float-right" (click)="userStopEdit()" *ngIf="isEditing"><i class="fa fa-user-plus" aria-hidden="true"></i> Add New User</a>
         <h2 *ngIf="!isEditing"> <i class="fa fa-user-plus" aria-hidden="true"></i> Add User</h2>
         <h2 *ngIf="isEditing"><i class="fa fa-user" aria-hidden="true"></i> Updating User</h2>
