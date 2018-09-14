@@ -32,14 +32,7 @@ export class UIStoreService {
       // Remove obfusucation if is set
       if (environment.settings.obfuscate) {
         // If de-obfuscating errors out, remove ui store state and fail gracefully
-        try {
-          str = StringUtils.charShift(str, -10);
-          str = StringUtils.obfuscateRemove(str);
-          str = StringUtils.trim(str, this.pad, this.pad);
-        } catch (err) {
-          console.error(err);
-          this.settings.ui = null;
-        }
+        str = this.obfuscateRemove(str);
       }
       // Convert to JSON
       const uiState: AppStore.Ui = JSON.parse(str);
@@ -48,6 +41,9 @@ export class UIStoreService {
 
     // On UI store changes, persist to localstorage
     this.select.saveState$.subscribe((uiState: AppStore.Ui) => this.storeStateSave(uiState));
+
+    // Output store changes to console
+    // this.store.subscribe(storeApi => console.log(JSON.parse(JSON.stringify(storeApi.ui))));
   }
 
   /**
@@ -59,6 +55,14 @@ export class UIStoreService {
    */
   public tabChange(tabInstanceId: string, tabId: NgbTabChangeEvent) {
     this.store.dispatch(UIStoreActions.TAB_CHANGE({ tabInstanceId: tabInstanceId, tabId: tabId.nextId }));
+  }
+
+  /**
+   * Toggle sidebar
+   * @param toggle - New sidebar state
+   */
+  public sidebarToggle(toggle: boolean) {
+    this.store.dispatch(UIStoreActions.SIDEBAR_TOGGLE(toggle));
   }
 
   /**
@@ -90,12 +94,40 @@ export class UIStoreService {
       let str = JSON.stringify(state);
       // Add obfusciation if set
       if (environment.settings.obfuscate) {
-        str = StringUtils.pad(str, this.pad, this.pad);
-        str = StringUtils.obfuscateAdd(str);
-        str = StringUtils.charShift(str, 10);
+        str = this.obfuscateAdd(str);
       }
       // Set to localstorage
       this.settings.ui = str;
     }
   }
+
+
+  /**
+   * Add state obfuscation
+   * @param str
+   */
+  public obfuscateAdd(str:string) {
+    str = StringUtils.pad(str, this.pad, this.pad);
+    str = StringUtils.obfuscateAdd(str);
+    str = StringUtils.charShift(str, 10);
+    return str;
+  }
+
+  /**
+   * Remove state obfuscation
+   * @param str
+   */
+  public obfuscateRemove(str: string) {
+    try {
+      str = StringUtils.charShift(str, -10);
+      str = StringUtils.obfuscateRemove(str);
+      str = StringUtils.trim(str, this.pad, this.pad);
+    } catch (err) {
+      console.error(err);
+      this.settings.ui = null;
+    }
+    return str;
+  }
+
+
 }

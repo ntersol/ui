@@ -1,13 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Datagrid } from '$libs';
+import { DataGridComponent } from '../../libs/datagrid/components/datagrid.component';
 
 import { ApiService } from '$api';
 import { UIStoreService } from '$ui';
 import { Models } from '$models';
 import { DesktopUtils } from '$utils';
 import { columns } from './columns';
+import { Datagrid } from '$libs';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,11 @@ import { columns } from './columns';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, OnDestroy {
+
+  @ViewChild('datagrid') datagrid: DataGridComponent;
+
   public users$ = this.api.select.users$;
+  public sidebarOpen$ = this.ui.select.sidebarOpen$;
   public formMain: FormGroup;
   public isEditing: boolean;
   public sidebarOpen = false;
@@ -41,7 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
 
-  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder) {}
+  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder, private ref: ChangeDetectorRef) { }
 
   public ngOnInit() {
     // Get users and load into store
@@ -65,6 +70,16 @@ export class HomeComponent implements OnInit, OnDestroy {
    */
   public usersRefresh() {
     this.api.users.get(true).subscribe();
+  }
+
+  /** Toggle the sidebar */
+  public sidebarToggle(toggle:boolean) {
+    this.ui.sidebarToggle(!toggle);
+    // There is a better way of doing this
+    setTimeout(() => {
+      this.datagrid.viewCreate();
+      this.ref.detectChanges();
+    });
   }
 
   /**

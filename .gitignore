@@ -45,3 +45,4 @@ obj/
 angular-starter.csproj
 App.config
 package-lock.json
+yarn-error.log

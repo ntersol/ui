@@ -10,6 +10,7 @@ export enum AppSettingsProps {
   token = 'token',
   apiUrl = 'apiUrl',
   userName = 'userName',
+  ui = 'ui'
 }
 
 type Propkey = keyof typeof AppSettingsProps;
@@ -30,12 +31,19 @@ export class AppSettings {
   private _ui: string | null = null;
   /** API token */
   public get ui(): string | null {
-    return this._ui || this.propGet(AppSettingsProps.token);
+    return this._ui || this.propGet(AppSettingsProps.ui);
   }
   public set ui(value: string | null) {
     this._ui = value;
-    this.propSet(AppSettingsProps.token, value);
+    this.propSet(AppSettingsProps.ui, value);
   }
+  /** Get the UI state directly from localstorage and not from memory */
+  public uiState() {
+    // Reload session and localstorage
+    this.sessionStorage = this.settingsRestore(window.sessionStorage.getItem(this.localProp));
+    this.localStorage = this.settingsRestore(window.localStorage.getItem(this.localProp));
+    return this.propGet(AppSettingsProps.ui);
+  };
 
   /** API token */
   private _token: string | null = null;
@@ -96,10 +104,16 @@ export class AppSettings {
    */
   private propGet(propKey: Propkey, location: 'localStorage' | 'sessionStorage' = 'localStorage') {
     if (this.isBrowser) {
-      if (location === 'sessionStorage' && this.sessionStorage[propKey]) {
-        return this.sessionStorage[propKey];
-      } else if (this.localStorage[propKey]) {
-        return this.localStorage[propKey];
+      try {
+        if (location === 'sessionStorage' && this.sessionStorage[propKey]) {
+          return this.sessionStorage[propKey];
+        } else if (this.localStorage[propKey]) {
+          return this.localStorage[propKey];
+        }
+      } catch (err) {
+        console.log(err);
+        window.sessionStorage.clear();
+        window.localStorage.clear();
       }
     }
     return null;

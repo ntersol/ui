@@ -50,8 +50,6 @@
     <Content Include="src\app\app.component.html" />
     <Content Include="src\app\components\api-state\api-state.component.html" />
     <Content Include="src\app\components\api-state\api-state.component.scss" />
-    <Content Include="src\app\libs\charts\charts.component.html" />
-    <Content Include="src\app\libs\charts\charts.component.scss" />
     <Content Include="src\app\components\counter\counter.component.html" />
     <Content Include="src\app\components\counter\counter.component.scss" />
     <Content Include="src\app\libs\datagrid\components\body\body.component.html" />
@@ -80,6 +78,8 @@
     <Content Include="src\app\routes\monolith\routes\home\home.component.scss" />
     <Content Include="src\app\routes\qa\qa.component.html" />
     <Content Include="src\app\routes\qa\qa.component.scss" />
+    <Content Include="src\app\routes\qa\routes\charts\charts.component.html" />
+    <Content Include="src\app\routes\qa\routes\charts\charts.component.scss" />
     <Content Include="src\assets\.gitkeep" />
     <Content Include="src\assets\icons\favicon-144x144.png" />
     <Content Include="src\assets\icons\favicon-192x192.png" />
@@ -101,6 +101,9 @@
     <Content Include="src\styles\components\_alerts.scss" />
     <Content Include="src\styles\components\_buttons.scss" />
     <Content Include="src\styles\components\_cards.scss" />
+    <Content Include="src\styles\components\_charts.scss">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\styles\components\_dropdowns.scss" />
     <Content Include="src\styles\components\_modals.scss" />
     <Content Include="src\styles\components\_navbar.scss" />
@@ -146,8 +149,8 @@
     <Folder Include="src\app\" />
     <Folder Include="src\app\components\" />
     <Folder Include="src\app\components\api-state\" />
-    <Folder Include="src\app\libs\charts\" />
     <Folder Include="src\app\components\counter\" />
+    <Folder Include="src\app\libs\chart\" />
     <Folder Include="src\app\libs\datagrid\" />
     <Folder Include="src\app\libs\datagrid\components\" />
     <Folder Include="src\app\libs\datagrid\components\body\" />
@@ -193,6 +196,8 @@
     <Folder Include="src\app\routes\monolith\shared\utils\" />
     <Folder Include="src\app\routes\no-content\" />
     <Folder Include="src\app\routes\qa\" />
+    <Folder Include="src\app\routes\qa\routes\" />
+    <Folder Include="src\app\routes\qa\routes\charts\" />
     <Folder Include="src\app\shared\" />
     <Folder Include="src\app\shared\directives\" />
     <Folder Include="src\app\shared\guards\" />
@@ -236,10 +241,7 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.spec.ts" />
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.ts" />
-    <TypeScriptCompile Include="src\app\libs\charts\charts.component.spec.ts" />
-    <TypeScriptCompile Include="src\app\libs\charts\charts.component.ts" />
-    <TypeScriptCompile Include="src\app\libs\charts\charts.module.spec.ts" />
-    <TypeScriptCompile Include="src\app\libs\charts\charts.module.ts" />
+    <TypeScriptCompile Include="src\app\libs\chart\chart.d.ts" />
     <TypeScriptCompile Include="src\app\components\components.module.ts" />
     <TypeScriptCompile Include="src\app\components\counter\counter.component.ts" />
     <TypeScriptCompile Include="src\app\libs\datagrid\components\body\body.component.ts" />
@@ -295,6 +297,22 @@
     <TypeScriptCompile Include="src\app\routes\monolith\shared\stores\monolith.store.d.ts" />
     <TypeScriptCompile Include="src\app\routes\no-content\no-content.component.ts" />
     <TypeScriptCompile Include="src\app\routes\qa\qa.component.ts" />
+    <TypeScriptCompile Include="src\app\routes\qa\qa.module.spec.ts" />
+    <TypeScriptCompile Include="src\app\routes\qa\qa.module.ts" />
+    <TypeScriptCompile Include="src\app\routes\qa\qa.routes.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\app\routes\qa\routes\charts\charts.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\routes\qa\routes\charts\charts.component.ts" />
+    <TypeScriptCompile Include="src\app\routes\qa\routes\charts\summary.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\app\routes\qa\routes\charts\transfers.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\app\routes\qa\routes\charts\user.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\app\shared\app.settings.ts" />
     <TypeScriptCompile Include="src\app\shared\directives\focus.directive.ts" />
     <TypeScriptCompile Include="src\app\shared\directives\full-screen.directive.ts" />

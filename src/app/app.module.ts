@@ -1,6 +1,6 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, enableProdMode, ErrorHandler } from '@angular/core'; // APP_INITIALIZER, 
+import { NgModule, enableProdMode, ErrorHandler } from '@angular/core'; // APP_INITIALIZER,
 import { RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -31,7 +31,7 @@ import {
 } from '$shared';
 
 // Non-lazy loaded routes
-import { LoginComponent, NoContentComponent, QaComponent } from '$routes';
+import { LoginComponent, NoContentComponent } from '$routes';
 import { SiteModule } from '$site';
 
 // Components
@@ -41,7 +41,6 @@ export const APP_COMPONENTS = [
   // Routes
   LoginComponent,
   NoContentComponent,
-  QaComponent,
 ];
 
 @NgModule({

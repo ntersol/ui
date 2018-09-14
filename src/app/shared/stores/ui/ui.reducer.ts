@@ -9,6 +9,7 @@ const initialState: AppStore.Ui = {
   saveState: null,
   modal: null,
   multiScreen: false,
+  sidebarOpen: false,
   tabsActive: {},
 };
 
@@ -25,6 +26,10 @@ export function UIReducer(state = initialState, action: Action) {
 
   if (isType(action, UIStoreActions.MODAL_UNLOAD)) {
     state.modal = null;
+  }
+
+  if (isType(action, UIStoreActions.SIDEBAR_TOGGLE)) {
+    state.sidebarOpen = action.payload;
   }
 
   if (isType(action, UIStoreActions.TAB_CHANGE)) {

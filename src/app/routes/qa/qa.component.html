@@ -2,6 +2,11 @@
   <h1>QA Testing Page</h1>
   <p>Used for testing non-routable components.</p>
   <hr />
+
+ 
+
+
+  <hr />
   <p>Confirmation Modal</p>
   <app-launch-modal classes="btn btn-primary app-launch-modal"
                     modal="ConfirmationModalComponent" size="lg"
@@ -15,7 +20,7 @@
   <p>Filter Pipe</p>
   <div class="row">
     <div class="col-6">
-    <p>Array of strings</p>
+      <p>Array of strings</p>
       <input class="form-control" [(ngModel)]="filterFruit" id="filterPipeInput" />
       <button class="btn btn-primary" (click)="filterFruit = '' " id="filterPipeInputBtn">Clear</button>
       <ul id="filterPipeOutput">
@@ -31,7 +36,7 @@
       </ul>
     </div>
   </div>
-  
+
   <hr />
   <p>Debounce Pipe</p>
 </div>

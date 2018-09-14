@@ -41,7 +41,14 @@ export class AppCommsService {
               this.ui.storeStateRestore(message.payload);
             } else {
               // Otherwise update UI state from localstorage
-              this.ui.storeStateRestore(JSON.parse(this.settings.ui));
+              let str = this.settings.uiState();
+              if (environment.settings.obfuscate) {
+                // If de-obfuscating errors out, remove ui store state and fail gracefully
+                str = this.ui.obfuscateRemove(str);
+              }
+              // const state = JSON.parse(str);
+              const ui = JSON.parse(str);
+              this.ui.storeStateRestore(ui);
             }
             break;
           // Notify parent window that this window has closed

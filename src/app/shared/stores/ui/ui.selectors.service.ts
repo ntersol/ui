@@ -7,6 +7,7 @@ import { AppStore } from '$shared';
   providedIn: 'root',
 })
 export class UiSelectorsService {
+  public sidebarOpen$ = this.store.select(store => store.ui.sidebarOpen);
   public saveState$ = this.store.select(store => store.ui.saveState);
   public modal$ = this.store.select(store => store.ui.modal);
   public multiScreen$ = this.store.select(store => store.ui.multiScreen);
