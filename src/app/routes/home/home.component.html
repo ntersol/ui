@@ -26,7 +26,7 @@
 
       <!-- Filter datatable -->
       <form class="form-inline mr-3 d-inline-block">
-        <label class="icon filter" style="position:relative;">
+        <label class="icon icon-filter" style="position:relative;">
           <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter name or website" [ngModel]="filterGlobal.term" (ngModelChange)="onfilterGlobal($event)" data-qa="hp-filter-global" />
           <a (click)="filterGlobal.term = null; onfilterGlobal()" *ngIf="filterGlobal.term" style="position:absolute;right: 10px;top: 4px;"><i class="fa fa-remove"></i></a>
         </label>
@@ -39,7 +39,7 @@
     <div class="alert alert-warning icon" *ngIf="!route?.users?.data?.length">No users found</div>
 
     <div class="row">
-      <div class="col-12" [ngClass]="route.sidebarOpen ? 'col-md-9' : 'col-md-12' ">
+      <div class="col-12" [ngClass]="route.sidebarOpen ? 'col-md-8' : 'col-md-12' ">
         <div style="position:relative;height:calc(100vh - 150px)">
           <datagrid #datagrid
                     [rows]="route.users.data"
@@ -75,7 +75,7 @@
           </datagrid>
         </div>
       </div>
-      <div class="col-12 col-md-3" *ngIf="route.sidebarOpen">
+      <div class="col-12 col-md-4" *ngIf="route.sidebarOpen">
         <a class="float-right" (click)="userStopEdit()" *ngIf="isEditing"><i class="fa fa-user-plus" aria-hidden="true"></i> Add New User</a>
         <h2 *ngIf="!isEditing"> <i class="fa fa-user-plus" aria-hidden="true"></i> Add User</h2>
         <h2 *ngIf="isEditing"><i class="fa fa-user" aria-hidden="true"></i> Updating User</h2>
@@ -84,36 +84,36 @@
         <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
 
           <div class="form-group row">
-            <label for="username" class="col-3 col-form-label">Username<sup class="red">*</sup></label>
-            <div class="col-9">
+            <label for="username" class="col col-12 col-md-3 col-form-label">Username<sup class="red">*</sup></label>
+            <div class="col col-12 col-md-9">
               <input class="form-control" type="text" id="username" formControlName="username">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="name" class="col-3 col-form-label">Name<sup class="red">*</sup></label>
-            <div class="col-9">
+            <label for="name" class="col col-12 col-md-3 col-form-label">Name<sup class="red">*</sup></label>
+            <div class="col col-12 col-md-9">
               <input class="form-control" type="text" id="name" formControlName="name">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="website" class="col-3 col-form-label">Website</label>
-            <div class="col-9">
+            <label for="website" class="col col-12 col-md-3 col-form-label">Website</label>
+            <div class="col col-12 col-md-9">
               <input class="form-control" type="text" id="website" formControlName="website">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="email" class="col-3 col-form-label">Email</label>
-            <div class="col-9">
+            <label for="email" class="col col-12 col-md-3 col-form-label">Email</label>
+            <div class="col col-12 col-md-9">
               <input class="form-control" type="email" id="email" formControlName="email">
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="phone" class="col-3 col-form-label">Phone</label>
-            <div class="col-9">
+            <label for="phone" class="col col-12 col-md-3 col-form-label">Phone</label>
+            <div class="col col-12 col-md-9">
               <input class="form-control" type="text" id="phone" formControlName="phone">
             </div>
           </div>
