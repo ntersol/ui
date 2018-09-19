@@ -1,5 +1,4 @@
 import { Models } from '$models';
-import { EntityState, EntityAdapter } from '@ngrx/entity';
 
 export declare namespace AppStore {
   /*************************
@@ -11,7 +10,7 @@ export declare namespace AppStore {
     [key: string]: ApiState<any>;
     //users?: any[]; // Store response
     // Example of Store typing with mapped response
-    users?: ApiState<EntityState<Models.User>>;
+    users?: ApiState<Models.User[]>;
   }
 
   /** The API Map */
