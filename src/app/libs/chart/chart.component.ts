@@ -29,10 +29,8 @@ const chartSrc = 'assets/scripts/canvasjs.min.js';
 })
 export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   /** TEMP */
-  @ViewChild('element')
-  element: ElementRef;
-  @ViewChild('tooltipCustom')
-  tooltipCustom: ElementRef;
+  @ViewChild('element') element: ElementRef;
+  @ViewChild('tooltipCustom') tooltipCustom: ElementRef;
 
   @Input()  type:
     | 'line'
@@ -94,8 +92,8 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   /** Supply a custom html template for the tooltip */
   @Input() templateTooltip: any = null;
 
-  //public chartJs = ChartJS;
-  //public dataLabels = DataLabels;
+  /** Randomly generated uniqueID for the div that holds the chart. Allows for multiple charts per page */
+  public uniqueId = 'chart' + Math.floor(Math.random() * 1000000);
 
   /** Chart reference */
   private chart: CanvasJS.Chart;
@@ -114,7 +112,8 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   ngAfterViewInit() {
     this.scriptsLoad();
@@ -163,8 +162,7 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
 
       // Create chart from WINDOW reference not import
       // Due to bug with plugins registered with global instance and not being available via imports
-      this.chart = new window.CanvasJS.Chart('chartContainer', this.chartOptionsCreate());
-
+      this.chart = new window.CanvasJS.Chart(this.uniqueId, this.chartOptionsCreate());
       this.chart.render();
     }
   }
@@ -191,7 +189,8 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     // Create default options
     const options = <CanvasJS.ChartOptions>{
       animationEnabled: true,
-      exportEnabled: true,
+      exportEnabled: false,
+      animationDuration: 600,
       title: {
         text: this.titleChart,
         fontSize: 18,
