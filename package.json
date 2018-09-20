@@ -10,7 +10,7 @@
     "build": "ng build",
     "prod": "http-server ./dist -o -g",
     "build:prod": "ng build --target=production --environment=prod",
-    "deploy": "ng build --prod --base-href /angular-starter/ && angular-cli-ghpages --no-silent",
+    "deploy": "ng build --prod --base-href /slg-crm/ && angular-cli-ghpages --no-silent --dir=dist/browser",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
