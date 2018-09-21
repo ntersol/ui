@@ -258,8 +258,9 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
       return <CanvasJS.ChartDataSeriesOptions>{
         type: this.type,
         showInLegend: this.showLegend,
-        indexLabel: this.showIndexLabel ? '{x}' : null,
+        indexLabel: this.showIndexLabel ? '{y}' : null,
         indexLabelFontSize: 10,
+        // indexLabelFontColor: '#fff',
         // legendText: this.data[0].label,
         ...data,
       };
