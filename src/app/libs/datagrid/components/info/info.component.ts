@@ -7,14 +7,10 @@ import { Datagrid } from '../../models/typings';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfoComponent implements OnInit {
-  @Input()
-  state: Datagrid.State;
-  @Input()
-  options: Datagrid.Options;
-  @Input()
-  columnsMapped: Datagrid.Column;
-  @Output()
-  onReset: EventEmitter<any> = new EventEmitter();
+  @Input() state: Datagrid.State;
+  @Input() options: Datagrid.Options;
+  @Input() columnsMapped: Datagrid.Column;
+  @Output() onReset: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 

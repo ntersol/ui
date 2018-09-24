@@ -62,10 +62,8 @@ TODOS:
 })
 export class DataGridComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   /** Self reference */
-  @ViewChild('dataGrid')
-  dataGrid: ElementRef;
-  @ViewChild('dataGridBody')
-  dataGridBody: BodyComponent;
+  @ViewChild('dataGrid') dataGrid: ElementRef;
+  @ViewChild('dataGridBody') dataGridBody: BodyComponent;
 
   /** Columns */
   private _columns: Datagrid.Column[];
@@ -171,28 +169,18 @@ export class DataGridComponent implements OnInit, OnChanges, AfterViewInit, OnDe
     return this._columnTemplates;
   }
 
-  @Input()
-  options: Datagrid.Options;
-  @Input()
-  filterGlobal: Datagrid.FilterGlobal;
+  @Input() options: Datagrid.Options;
+  @Input() filterGlobal: Datagrid.FilterGlobal;
 
   /** Outputs */
-  @Output()
-  onColumnsUpdated: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onRowsSelected: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onStateChange: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onRightClickMenu: EventEmitter<any> = new EventEmitter();
-  @Output()
-  action: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onCustomLinkEvent: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onElementRef: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onRowUpdated: EventEmitter<any> = new EventEmitter();
+  @Output() onColumnsUpdated: EventEmitter<any> = new EventEmitter();
+  @Output() onRowsSelected: EventEmitter<any> = new EventEmitter();
+  @Output() onStateChange: EventEmitter<any> = new EventEmitter();
+  @Output() onRightClickMenu: EventEmitter<any> = new EventEmitter();
+  @Output() action: EventEmitter<any> = new EventEmitter();
+  @Output() onCustomLinkEvent: EventEmitter<any> = new EventEmitter();
+  @Output() onElementRef: EventEmitter<any> = new EventEmitter();
+  @Output() onRowUpdated: EventEmitter<any> = new EventEmitter();
 
   /** Columns that are sent to the DOM after any modification is done */
   public columnsInternal: Datagrid.Column[];

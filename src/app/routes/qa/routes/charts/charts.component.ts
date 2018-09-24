@@ -10,7 +10,7 @@ import { transfers } from './transfers';
 })
 export class ChartsComponent implements OnInit {
   public frame = 0;
-  
+
   public dataPoints: CanvasJS.ChartDataSeriesOptions[] = [];
   public dataPointsTransfersTotal: CanvasJS.ChartDataSeriesOptions[] = [];
   public dataPointsTopFive: CanvasJS.ChartDataSeriesOptions[] = [];
@@ -22,12 +22,10 @@ export class ChartsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-
     this.transfersTotal();
 
     this.dataPointsCounts = this.countsPerAgent();
     this.dataPointsTopFive = this.topFiveTransfers();
-
   }
 
   private countsPerAgent() {
@@ -136,5 +134,4 @@ export class ChartsComponent implements OnInit {
     //console.log(val)
     return val.label + '!!';
   }
-
 }

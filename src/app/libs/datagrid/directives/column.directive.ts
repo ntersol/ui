@@ -4,10 +4,8 @@ import { DataGridColumnCellDirective } from './cell-body.directive';
 
 @Directive({ selector: 'datagrid-column' })
 export class DataTableColumnDirective {
-  @Input()
-  name: string;
-  @Input()
-  prop: string;
+  @Input() name: string;
+  @Input() prop: string;
   // Add custom props here for overrides in the cell templates
 
   // Cell Templates

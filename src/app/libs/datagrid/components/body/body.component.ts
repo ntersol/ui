@@ -21,45 +21,26 @@ const throttle = require('lodash/throttle');
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyComponent implements OnInit, OnDestroy {
-  @Input()
-  columns: Datagrid.Column[];
-  @Input()
-  columnsPinnedLeft: Datagrid.Column[];
-  @Input()
-  rows: any[];
-  @Input()
-  rowStyles: any;
-  @Input()
-  state: Datagrid.State;
-  @Input()
-  status: Datagrid.Status;
-  @Input()
-  options: Datagrid.Options;
-  @Input()
-  gridProps: Datagrid.Props;
-  @Input()
-  templates: Datagrid.Templates;
+  @Input() columns: Datagrid.Column[];
+  @Input() columnsPinnedLeft: Datagrid.Column[];
+  @Input() rows: any[];
+  @Input() rowStyles: any;
+  @Input() state: Datagrid.State;
+  @Input() status: Datagrid.Status;
+  @Input() options: Datagrid.Options;
+  @Input() gridProps: Datagrid.Props;
+  @Input() templates: Datagrid.Templates;
 
-  @Output()
-  onColumnsUpdated: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onStateUpdated: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onCustomLinkEvent: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onRowUpdated: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onRowMouseEvent: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onGroupToggled: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onRightClick: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onRowMouseDown: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onRowMouseUp: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onScrollEvent: EventEmitter<any> = new EventEmitter();
+  @Output() onColumnsUpdated: EventEmitter<any> = new EventEmitter();
+  @Output() onStateUpdated: EventEmitter<any> = new EventEmitter();
+  @Output() onCustomLinkEvent: EventEmitter<any> = new EventEmitter();
+  @Output() onRowUpdated: EventEmitter<any> = new EventEmitter();
+  @Output() onRowMouseEvent: EventEmitter<any> = new EventEmitter();
+  @Output() onGroupToggled: EventEmitter<any> = new EventEmitter();
+  @Output() onRightClick: EventEmitter<any> = new EventEmitter();
+  @Output() onRowMouseDown: EventEmitter<any> = new EventEmitter();
+  @Output() onRowMouseUp: EventEmitter<any> = new EventEmitter();
+  @Output() onScrollEvent: EventEmitter<any> = new EventEmitter();
 
   public body: any;
 
