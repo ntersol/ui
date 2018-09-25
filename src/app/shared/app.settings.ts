@@ -10,7 +10,7 @@ export enum AppSettingsProps {
   token = 'token',
   apiUrl = 'apiUrl',
   userName = 'userName',
-  ui = 'ui'
+  ui = 'ui',
 }
 
 type Propkey = keyof typeof AppSettingsProps;
@@ -43,7 +43,7 @@ export class AppSettings {
     this.sessionStorage = this.settingsRestore(window.sessionStorage.getItem(this.localProp));
     this.localStorage = this.settingsRestore(window.localStorage.getItem(this.localProp));
     return this.propGet(AppSettingsProps.ui);
-  };
+  }
 
   /** API token */
   private _token: string | null = null;

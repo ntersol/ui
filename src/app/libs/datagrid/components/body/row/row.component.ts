@@ -16,19 +16,13 @@ import { Datagrid } from '../../../models/typings';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RowComponent implements OnInit, OnChanges {
-  @Input()
-  columns: Datagrid.Column[];
-  @Input()
-  options: Datagrid.Options;
-  @Input()
-  row: any[];
-  @Input()
-  templates: Datagrid.Templates;
+  @Input() columns: Datagrid.Column[];
+  @Input() options: Datagrid.Options;
+  @Input() row: any[];
+  @Input() templates: Datagrid.Templates;
 
-  @Output()
-  updateDatatable: EventEmitter<any> = new EventEmitter();
-  @Output()
-  onRowUpdated: EventEmitter<any> = new EventEmitter();
+  @Output() updateDatatable: EventEmitter<any> = new EventEmitter();
+  @Output() onRowUpdated: EventEmitter<any> = new EventEmitter();
 
   constructor(public elementRef: ElementRef) {}
 

@@ -15,20 +15,15 @@ export class FullScreenDirective implements AfterViewInit, OnChanges {
   public height: number;
 
   /** How much to offset the top of the grid. Will adjust automatically if null */
-  @Input()
-  offsetTop: number = null;
+  @Input() offsetTop: number = null;
   /** How much to offset the bottom of the grid */
-  @Input()
-  offsetBottom = 21;
+  @Input() offsetBottom = 21;
   /** What percent of the viewport height to display, default is 100% */
-  @Input()
-  percent = 100;
+  @Input() percent = 100;
   /** How to handle overflow Y */
-  @Input()
-  overflowY: overflow = 'auto';
+  @Input() overflowY: overflow = 'auto';
   /** How to handle overflow X */
-  @Input()
-  overflowX: overflow = 'hidden';
+  @Input() overflowX: overflow = 'hidden';
 
   @HostListener('window:resize')
   onResize() {

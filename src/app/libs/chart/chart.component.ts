@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 // import { formatDate, formatNumber, formatCurrency, formatPercent } from '@angular/common';
 
-
 declare global {
   interface Window {
     CanvasJS: any;
@@ -32,7 +31,8 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   @ViewChild('element') element: ElementRef;
   @ViewChild('tooltipCustom') tooltipCustom: ElementRef;
 
-  @Input()  type:
+  @Input()
+  type:
     | 'line'
     | 'column'
     | 'bar'
@@ -49,7 +49,8 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     | 'stackedBar100'
     | 'stackedArea100'
     | 'pie'
-    | 'doughnut' = 'column';
+    | 'doughnut' =
+    'column';
   @Input() width: string;
   @Input() height: string;
   @Input() data: CanvasJS.ChartDataSeriesOptions[];
@@ -112,8 +113,7 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.scriptsLoad();
@@ -258,8 +258,9 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
       return <CanvasJS.ChartDataSeriesOptions>{
         type: this.type,
         showInLegend: this.showLegend,
-        indexLabel: this.showIndexLabel ? '{x}' : null,
+        indexLabel: this.showIndexLabel ? '{y}' : null,
         indexLabelFontSize: 10,
+        // indexLabelFontColor: '#fff',
         // legendText: this.data[0].label,
         ...data,
       };

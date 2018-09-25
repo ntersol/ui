@@ -101,12 +101,11 @@ export class UIStoreService {
     }
   }
 
-
   /**
    * Add state obfuscation
    * @param str
    */
-  public obfuscateAdd(str:string) {
+  public obfuscateAdd(str: string) {
     str = StringUtils.pad(str, this.pad, this.pad);
     str = StringUtils.obfuscateAdd(str);
     str = StringUtils.charShift(str, 10);
@@ -128,6 +127,4 @@ export class UIStoreService {
     }
     return str;
   }
-
-
 }

@@ -10,8 +10,7 @@ import { AppStore } from '$shared';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApiStateComponent implements OnInit {
-  @Input()
-  state: AppStore.ApiState<any>;
+  @Input() state: AppStore.ApiState<any>;
 
   public errorHide = true;
 

@@ -8,7 +8,7 @@ import { UIStoreService } from '$ui';
 import { Models } from '$models';
 import { DesktopUtils } from '$utils';
 import { columns } from './columns';
-import { Datagrid } from '$libs';
+import { Datagrid, ContextService, ContextMenuList } from '$libs';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +17,6 @@ import { Datagrid } from '$libs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, OnDestroy {
-
   @ViewChild('datagrid') datagrid: DataGridComponent;
 
   public users$ = this.api.select.users$;
@@ -42,11 +41,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
   public columns: Datagrid.Column[] = columns;
-
+  /** selected rows */
+  private rowsSelected: Models.User[];
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
 
-  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder, private ref: ChangeDetectorRef) { }
+  constructor(
+    private api: ApiService,
+    public ui: UIStoreService,
+    private fb: FormBuilder,
+    private ref: ChangeDetectorRef,
+    private contextSvc: ContextService,
+  ) {}
 
   public ngOnInit() {
     // Get users and load into store
@@ -73,7 +79,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   /** Toggle the sidebar */
-  public sidebarToggle(toggle:boolean) {
+  public sidebarToggle(toggle: boolean) {
     this.ui.sidebarToggle(!toggle);
     // There is a better way of doing this
     setTimeout(() => {
@@ -127,11 +133,12 @@ export class HomeComponent implements OnInit, OnDestroy {
    * When rows have been selected
    * @param event
    */
-  public onRowsSelected(users: Models.User[]) {
-    if (users && users[0]) {
-      this.formMain.patchValue(users[0]);
+  public onRowsSelected(rows: Models.User[]) {
+    if (rows && rows[0]) {
+      this.rowsSelected = rows;
+      this.formMain.patchValue(rows[0]);
       this.isEditing = true;
-      DesktopUtils.copyToClipboard(users[0].phone); // Copy phone number to clipboard
+      DesktopUtils.copyToClipboard(rows[0].phone); // Copy phone number to clipboard
     }
   }
 
@@ -141,6 +148,14 @@ export class HomeComponent implements OnInit, OnDestroy {
    */
   public onRowUpdated(/** users: Models.User[] */) {
     // console.log('onRowUpdated', users);
+  }
+
+  /**
+   * Open a context menu on right click
+   * @param $event
+   */
+  public contextMenu($event: MouseEvent) {
+    this.contextSvc.open(ContextMenuList.home, $event, this.rowsSelected);
   }
 
   /**

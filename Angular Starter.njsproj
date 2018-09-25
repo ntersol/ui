@@ -52,6 +52,8 @@
     <Content Include="src\app\components\api-state\api-state.component.scss" />
     <Content Include="src\app\components\counter\counter.component.html" />
     <Content Include="src\app\components\counter\counter.component.scss" />
+    <Content Include="src\app\libs\chart\chart.component.html" />
+    <Content Include="src\app\libs\chart\chart.component.scss" />
     <Content Include="src\app\libs\datagrid\components\body\body.component.html" />
     <Content Include="src\app\libs\datagrid\components\body\cell\cell.component.html" />
     <Content Include="src\app\libs\datagrid\components\body\header\group-header.component.html" />
@@ -71,6 +73,8 @@
     <Content Include="src\app\components\masterpage\single\layout-single.component.html" />
     <Content Include="src\app\components\modals\confirmation\confirmation-modal.component.html" />
     <Content Include="src\app\components\modals\logout\logout-modal.component.html" />
+    <Content Include="src\app\routes\home\context-menu\context-menu.component.html" />
+    <Content Include="src\app\routes\home\context-menu\context-menu.component.scss" />
     <Content Include="src\app\routes\home\home.component.html" />
     <Content Include="src\app\routes\home\home.component.scss" />
     <Content Include="src\app\routes\login\login.component.html" />
@@ -102,6 +106,9 @@
     <Content Include="src\styles\components\_buttons.scss" />
     <Content Include="src\styles\components\_cards.scss" />
     <Content Include="src\styles\components\_charts.scss">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\styles\components\_contextmenu.scss">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\styles\components\_dropdowns.scss" />
@@ -151,6 +158,7 @@
     <Folder Include="src\app\components\api-state\" />
     <Folder Include="src\app\components\counter\" />
     <Folder Include="src\app\libs\chart\" />
+    <Folder Include="src\app\libs\context-menu\" />
     <Folder Include="src\app\libs\datagrid\" />
     <Folder Include="src\app\libs\datagrid\components\" />
     <Folder Include="src\app\libs\datagrid\components\body\" />
@@ -179,7 +187,7 @@
     <Folder Include="src\app\libs\" />
     <Folder Include="src\app\routes\" />
     <Folder Include="src\app\routes\home\" />
-    <Folder Include="src\app\routes\home\components\" />
+    <Folder Include="src\app\routes\home\context-menu\" />
     <Folder Include="src\app\routes\login\" />
     <Folder Include="src\app\routes\monolith\" />
     <Folder Include="src\app\routes\monolith\components\" />
@@ -241,9 +249,17 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.spec.ts" />
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.ts" />
+    <TypeScriptCompile Include="src\app\libs\chart\chart.component.ts" />
     <TypeScriptCompile Include="src\app\libs\chart\chart.d.ts" />
     <TypeScriptCompile Include="src\app\components\components.module.ts" />
     <TypeScriptCompile Include="src\app\components\counter\counter.component.ts" />
+    <TypeScriptCompile Include="src\app\libs\chart\chart.module.spec.ts" />
+    <TypeScriptCompile Include="src\app\libs\chart\chart.module.ts" />
+    <TypeScriptCompile Include="src\app\libs\context-menu\context-menu.list.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\app\libs\context-menu\context-menu.module.ts" />
+    <TypeScriptCompile Include="src\app\libs\context-menu\context-menu.service.ts" />
     <TypeScriptCompile Include="src\app\libs\datagrid\components\body\body.component.ts" />
     <TypeScriptCompile Include="src\app\libs\datagrid\components\body\cell\cell.component.ts" />
     <TypeScriptCompile Include="src\app\libs\datagrid\components\body\header\group-header.component.ts" />
@@ -276,6 +292,7 @@
     <TypeScriptCompile Include="src\app\components\modals\logout\logout-modal.component.ts" />
     <TypeScriptCompile Include="src\app\libs\index.ts" />
     <TypeScriptCompile Include="src\app\routes\home\columns.ts" />
+    <TypeScriptCompile Include="src\app\routes\home\context-menu\context-menu.component.ts" />
     <TypeScriptCompile Include="src\app\routes\home\home.component.spec.ts" />
     <TypeScriptCompile Include="src\app\routes\home\home.component.ts" />
     <TypeScriptCompile Include="src\app\routes\home\home.module.ts" />
