@@ -7,7 +7,7 @@ SET PATH=%PATH%;%AppData%\npm
 IF "%1"=="" (
     SET OUTPUT_PATH=bin
 ) ELSE (
-    SET OUTPUT_PATH=%1\LD.LoanDelegator.Web\_PublishedWebSites\LD.LoanDelegator.Web
+    SET OUTPUT_PATH=%1\
 )
 
 echo %OUTPUT_PATH%
