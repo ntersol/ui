@@ -23,7 +23,7 @@ enableProdMode();
 // Shared
 import {
   AppSettings, // App settings
-  AppConfigService, // App config/env settings
+  // AppConfigService, // App config/env settings
 
   // Interceptors
   HttpInterceptorService,
@@ -60,7 +60,7 @@ export const APP_COMPONENTS = [
   ],
   providers: [
     AppSettings, // App settings
-    AppConfigService, // App config/env settings
+    // AppConfigService, // App config/env settings
 
     // Global error handling
     {
