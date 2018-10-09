@@ -52,13 +52,16 @@ import 'core-js/es7/reflect';
  **/
 // import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 
-
+// IE 10 Zone.js fix
+// https://stackoverflow.com/questions/45675781/angular-4-app-using-ie-11-cant-execute-code-from-a-freed-script
+if ((<any>document)['documentMode'] || /Edge/.test(navigator.userAgent)) {
+  (window as any).__Zone_enable_cross_context_check = true;
+}
 
 /***************************************************************************************************
  * Zone JS is required by Angular itself.
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
-
 
 
 /***************************************************************************************************
