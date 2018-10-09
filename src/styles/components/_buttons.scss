@@ -38,4 +38,8 @@ button{cursor:pointer;}
 }
 
 // Button Groups
+.btn-group {
+  & > *:not(:last-child):not(.dropdown-toggle) > .btn { border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: 0; }
+  & > *:not(:first-child) > .btn { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+}
 .input-group .btn, .input-group .btn:hover{box-shadow:none;transform:none;}

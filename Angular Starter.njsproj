@@ -85,12 +85,10 @@
     <Content Include="src\app\routes\qa\routes\charts\charts.component.html" />
     <Content Include="src\app\routes\qa\routes\charts\charts.component.scss" />
     <Content Include="src\assets\.gitkeep" />
-    <Content Include="src\assets\icons\favicon-144x144.png" />
+    <Content Include="src\assets\icons\apple-icon-180x180.png" />
+    <Content Include="src\assets\icons\favicon-16x16.png" />
     <Content Include="src\assets\icons\favicon-192x192.png" />
-    <Content Include="src\assets\icons\favicon-36x36.png" />
-    <Content Include="src\assets\icons\favicon-48x48.png" />
-    <Content Include="src\assets\icons\favicon-512x512.png" />
-    <Content Include="src\assets\icons\favicon-72x72.png" />
+    <Content Include="src\assets\icons\favicon-32x32.png" />
     <Content Include="src\assets\icons\favicon-96x96.png" />
     <Content Include="src\assets\mock-data\env-settings.json" />
     <Content Include="src\assets\mock-data\login.json" />
