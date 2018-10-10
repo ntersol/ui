@@ -27,8 +27,8 @@
       <!-- Filter datatable-->
       <form class="form-inline mr-3 d-inline-block">
         <label class="icon icon-filter" style="position:relative;">
-          <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter" [(ngModel)]="filterGlobalTerm" (ngModelChange)="onFilterGlobal($event)" />
-          <a (click)="filterGlobalTerm = null; onFilterGlobal()" *ngIf="filterGlobalTerm" style="position:absolute;right: 10px;top: 4px;"><i class="fa fa-remove"></i></a>
+          <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter" [(ngModel)]="filterGlobalTerm" (ngModelChange)="gridFilterGlobal($event)" />
+          <a (click)="filterGlobalTerm = null; gridFilterGlobal()" *ngIf="filterGlobalTerm" style="position:absolute;right: 10px;top: 4px;"><i class="fa fa-remove"></i></a>
         </label>
       </form>
 
@@ -52,12 +52,23 @@
                            [enableFilter]="true"
                            [enableColResize]="true"
                            [enableRangeSelection]="true"
+                           [rememberGroupStateWhenNewData]="true"
                            rowGroupPanelShow="onlyWhenGrouping"
                            rowSelection="multiple"
-                           (selectionChanged)="onSelectionChanged($event)"
-                           (gridReady)="onGridReady($event)">
+                           (selectionChanged)="gridSelectionChanged($event)"
+                           (gridSizeChanged)="gridSizeChanged($event)"
+                           (rowDataChanged)="gridRowDataChanged($event)"
+                           (sortChanged)="gridStateChanged($event)"
+                           (filterChanged)="gridStateChanged($event)"
+                           (columnPinned)="gridStateChanged($event)"
+                           (columnResized)="gridStateChanged($event)"
+                           (columnMoved)="gridStateChanged($event)"
+                           (columnRowGroupChanged)="gridStateChanged($event)"
+                           (rowGroupOpened)="gridStateChanged($event)"
+                           (firstDataRendered)="gridFirstDataRendered()"
+                           (gridReady)="gridReady($event)">
           </ag-grid-angular>
-
+          
           <ng-template #phone let-row>
             {{ row?.phone }} Test12
           </ng-template>

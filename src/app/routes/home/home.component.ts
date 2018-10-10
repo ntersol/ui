@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ViewChild, Templ
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AgGridNg2 } from 'ag-grid-angular';
-import { GridOptions } from 'ag-grid-community';
+import { GridOptions, ColumnApi } from 'ag-grid-community';
 
 import { ApiService } from '$api';
 import { UIStoreService } from '$ui';
@@ -13,6 +13,13 @@ import { ContextService, ContextMenuList } from '$libs';
 
 import { TemplateRendererComponent } from '../../libs/grid/template-renderer/template-renderer.component';
 
+declare interface GridState {
+  columns?: any;
+  groups?: any;
+  sorts?: any;
+  filters?: any;
+}
+
 @Component({
   selector: 'app-home',
   styleUrls: ['./home.component.scss'],
@@ -21,7 +28,10 @@ import { TemplateRendererComponent } from '../../libs/grid/template-renderer/tem
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('grid') grid: AgGridNg2;
-  public gridColumnApi: any;
+  public gridColumnApi: ColumnApi;
+  public gridOptions: GridOptions = {}
+  public gridState: GridState = {};
+  public gridLoaded = false;
 
   public cellTemplates = {
    //phone:null
@@ -35,9 +45,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public isEditing: boolean;
   public sidebarOpen = false;
 
-  public gridOptions: GridOptions = {
-   
-  }
+  
 
   public filterGlobalTerm = '';
   
@@ -70,6 +78,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       username: ['', [Validators.required]],
       website: ['', []],
     });
+
   }
 
   ngAfterViewInit() {
@@ -83,69 +92,28 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       return column;
     })
     this.gridOptions.api.setColumnDefs(columns);
-   
-  }
-
-  /**
-   * Refresh users
-   */
-  public usersRefresh() {
-    this.api.users.get(true).subscribe();
-  }
-
-  /** Toggle the sidebar */
-  public sidebarToggle(toggle: boolean) {
-    this.ui.sidebarToggle(!toggle);
-    // There is a better way of doing this
-    setTimeout(() => {
-      //this.datagrid.viewCreate();
-      //this.ref.detectChanges();
-    });
-  }
-  
-
-  /**
-   * Stop editing to create a new user
-   */
-  public userStopEdit() {
-    this.formMain.reset();
-    this.isEditing = false;
-  }
-
-  /**
-   * Load user into editing pane
-   * @param user
-   */
-  public userEdit(user: Models.User) {
-    this.formMain.patchValue(user);
-    this.isEditing = true;
-  }
-
-  /**
-   * Delete user
-   * @param user
-   */
-  public userDelete(user: Models.User) {
-    this.api.users.delete(user).subscribe();
   }
 
   /**
    * When the grid is ready
    * @param params
    */
-  public onGridReady(params: any) {
-    console.log(params)
+  public gridReady(params: any) {
+    // console.log(params)
     // Resize columns to fit screen
-    this.gridOptions.api.sizeColumnsToFit();
+    // this.gridOptions.api.sizeColumnsToFit();
     this.gridColumnApi = params.columnApi;
 
-    // const allColumnIds:any[] = [];
-    // params.columnApi.getAllColumns().forEach((column: any) => allColumnIds.push(column.colId));
-    // params.columnApi.autoSizeColumns(allColumnIds);
+    this.gridStateRestore();
+  }
+
+  /** When the grid is resized, NEED DEBOUNCE */
+  public gridSizeChanged() {
+    // console.log('Grid Resized')
   }
 
   /** Filter global option */
-  public onFilterGlobal() {
+  public gridFilterGlobal() {
     this.grid.api.setQuickFilter(this.filterGlobalTerm);
   }
 
@@ -153,20 +121,60 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
    * Get selected rows out of the datagrid
    * @param event
    */
-  public onSelectionChanged() {
-    const selectedData = this.grid.api.getSelectedNodes().map(node => node.data);
-    
-    console.log(selectedData);
-    this.gridSaveState();
+  public gridSelectionChanged() {
+    const selectedRows = this.grid.api.getSelectedNodes().map(node => node.data);
+    console.log(selectedRows);
   }
 
+  /**
+   * On grid state changes such as sorting, filtering and grouping
+   * Need to debounce resizing
+   * @param $event
+   */
+  public gridStateChanged() {
+    // console.log('gridStateChanged', $event.type);
+    this.gridState = {
+      columns: this.gridColumnApi.getColumnState(),
+      groups: this.gridColumnApi.getColumnGroupState(),
+      sorts: this.grid.api.getSortModel(),
+      filters: this.grid.api.getFilterModel()
+    }
+    // Only save state after grid has been fully loaded
+    if (this.gridLoaded) {
+      this.gridStateSave();
+    }
+  }
 
-  public gridSaveState() {
-    console.log(this.gridColumnApi);
-    console.log(this.gridColumnApi.getColumnState());
-    console.log(this.gridColumnApi.getColumnGroupState());
-    console.log(this.gridColumnApi.getSortModel());
-    console.log(this.gridColumnApi.getFilterModel());
+  /** When data in the grid changes */
+  public gridRowDataChanged() {
+    // Whenever data is loaded into the grid the filters are wiped out. Check if filters are present and reload them
+    if (this.gridState.filters) {
+      this.grid.api.setFilterModel(this.gridState.filters);
+      this.grid.api.onFilterChanged();
+    }
+  }
+
+  /** After the grid has loaded data */
+  public gridFirstDataRendered() {
+    this.gridLoaded = true;
+  }
+
+  /** Save the grid state */
+  public gridStateSave() {
+    window.localStorage.gridState = JSON.stringify(this.gridState)
+  }
+
+  /** Restore the grid state */
+  public gridStateRestore() {
+    const state = window.localStorage.gridState;
+    if (state) {
+      this.gridState = JSON.parse(state);
+      this.gridColumnApi.setColumnState(this.gridState.columns);
+      this.gridColumnApi.setColumnGroupState(this.gridState.groups);
+      this.grid.api.setSortModel(this.gridState.sorts);
+      this.grid.api.setFilterModel(this.gridState.filters);
+      this.grid.api.onFilterChanged();
+    }
   }
 
   /**
@@ -200,6 +208,46 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.api.users.post(this.formMain.value).subscribe(() => this.formMain.reset());
     }
   }
+
+
+  /**
+   * Refresh users
+   */
+  public usersRefresh() {
+    this.api.users.get(true).subscribe();
+  }
+
+  /** Toggle the sidebar */
+  public sidebarToggle(toggle: boolean) {
+    this.ui.sidebarToggle(!toggle);
+  }
+
+
+  /**
+   * Stop editing to create a new user
+   */
+  public userStopEdit() {
+    this.formMain.reset();
+    this.isEditing = false;
+  }
+
+  /**
+   * Load user into editing pane
+   * @param user
+   */
+  public userEdit(user: Models.User) {
+    this.formMain.patchValue(user);
+    this.isEditing = true;
+  }
+
+  /**
+   * Delete user
+   * @param user
+   */
+  public userDelete(user: Models.User) {
+    this.api.users.delete(user).subscribe();
+  }
+
 
   ngOnDestroy() {
     if (this.subs.length) {
