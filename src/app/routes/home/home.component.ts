@@ -45,8 +45,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public isEditing: boolean;
   public sidebarOpen = false;
 
-  
-
   public filterGlobalTerm = '';
   
   public columns = columns;
@@ -86,7 +84,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       if (column.field === 'phone') {
         column.cellRendererFramework = TemplateRendererComponent;
         column.cellRendererParams = {
-           ngTemplate: this.cellTemplatePhone // This breaks grouping
+          ngTemplate: this.cellTemplatePhone,
+          grouping: () => { }
         }
       }
       return column;
@@ -101,7 +100,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public gridReady(params: any) {
     // console.log(params)
     // Resize columns to fit screen
-    // this.gridOptions.api.sizeColumnsToFit();
+    this.gridOptions.api.sizeColumnsToFit();
     this.gridColumnApi = params.columnApi;
 
     this.gridStateRestore();

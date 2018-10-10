@@ -16,15 +16,19 @@ export class TemplateRendererComponent implements ICellRendererAngularComp {
   templateContext: { $implicit: any, params: any };
 
   refresh(params: any): boolean {
-    this.templateContext = {
-      $implicit: params.data,
-      params: params
-    };
-    return true;
+    if (params.data) {
+      this.templateContext = {
+        $implicit: params.data,
+        params: params
+      };
+      return true;
+    }
+    return false;
   }
 
   agInit(params: ICellRendererParams): void {
     this.template = (<any>params)['ngTemplate'];
+    //this.template = () => 'test'
     this.refresh(params);
   }
 }

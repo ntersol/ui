@@ -53,6 +53,7 @@
                            [enableColResize]="true"
                            [enableRangeSelection]="true"
                            [rememberGroupStateWhenNewData]="true"
+                           [groupUseEntireRow]="true"
                            rowGroupPanelShow="onlyWhenGrouping"
                            rowSelection="multiple"
                            (selectionChanged)="gridSelectionChanged($event)"
@@ -69,8 +70,8 @@
                            (gridReady)="gridReady($event)">
           </ag-grid-angular>
           
-          <ng-template #phone let-row>
-            {{ row?.phone }} Test12
+          <ng-template #phone let-row >
+            <a href="tel:{{ row?.phone | phoneNumber : true }}">{{ row?.phone | phoneNumber }}</a> 
           </ng-template>
 
         </div>

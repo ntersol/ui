@@ -52,6 +52,8 @@
     <Content Include="src\app\components\api-state\api-state.component.scss" />
     <Content Include="src\app\components\counter\counter.component.html" />
     <Content Include="src\app\components\counter\counter.component.scss" />
+    <Content Include="src\app\components\modals\confirmation\confirmation-modal.component.html" />
+    <Content Include="src\app\components\modals\logout\logout-modal.component.html" />
     <Content Include="src\app\libs\chart\chart.component.html" />
     <Content Include="src\app\libs\chart\chart.component.scss" />
     <Content Include="src\app\libs\datagrid\components\body\body.component.html" />
@@ -153,6 +155,8 @@
     <Folder Include="src\app\components\" />
     <Folder Include="src\app\components\api-state\" />
     <Folder Include="src\app\components\counter\" />
+    <Folder Include="src\app\components\modals\confirmation\" />
+    <Folder Include="src\app\components\modals\logout\" />
     <Folder Include="src\app\libs\chart\" />
     <Folder Include="src\app\libs\context-menu\" />
     <Folder Include="src\app\libs\datagrid\" />
@@ -243,6 +247,8 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.spec.ts" />
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.ts" />
+    <TypeScriptCompile Include="src\app\components\modals\confirmation\confirmation-modal.component.ts" />
+    <TypeScriptCompile Include="src\app\components\modals\logout\logout-modal.component.ts" />
     <TypeScriptCompile Include="src\app\libs\chart\chart.component.ts" />
     <TypeScriptCompile Include="src\app\libs\chart\chart.d.ts" />
     <TypeScriptCompile Include="src\app\components\components.module.ts" />
