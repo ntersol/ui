@@ -71,8 +71,6 @@
     <Content Include="src\app\components\masterpage\nav\nav.component.html" />
     <Content Include="src\app\components\masterpage\nav\search\nav-search.component.html" />
     <Content Include="src\app\components\masterpage\single\layout-single.component.html" />
-    <Content Include="src\app\components\modals\confirmation\confirmation-modal.component.html" />
-    <Content Include="src\app\components\modals\logout\logout-modal.component.html" />
     <Content Include="src\app\routes\home\context-menu\context-menu.component.html" />
     <Content Include="src\app\routes\home\context-menu\context-menu.component.scss" />
     <Content Include="src\app\routes\home\home.component.html" />
@@ -180,8 +178,6 @@
     <Folder Include="src\app\components\masterpage\nav\search\" />
     <Folder Include="src\app\components\masterpage\single\" />
     <Folder Include="src\app\components\modals\" />
-    <Folder Include="src\app\components\modals\confirmation\" />
-    <Folder Include="src\app\components\modals\logout\" />
     <Folder Include="src\app\libs\" />
     <Folder Include="src\app\routes\" />
     <Folder Include="src\app\routes\home\" />
@@ -285,9 +281,7 @@
     <TypeScriptCompile Include="src\app\components\masterpage\nav\nav.component.ts" />
     <TypeScriptCompile Include="src\app\components\masterpage\nav\search\nav-search.component.ts" />
     <TypeScriptCompile Include="src\app\components\masterpage\single\layout-single.component.ts" />
-    <TypeScriptCompile Include="src\app\components\modals\confirmation\confirmation-modal.component.ts" />
     <TypeScriptCompile Include="src\app\components\modals\index.ts" />
-    <TypeScriptCompile Include="src\app\components\modals\logout\logout-modal.component.ts" />
     <TypeScriptCompile Include="src\app\libs\index.ts" />
     <TypeScriptCompile Include="src\app\routes\home\columns.ts" />
     <TypeScriptCompile Include="src\app\routes\home\context-menu\context-menu.component.ts" />

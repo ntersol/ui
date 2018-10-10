@@ -24,13 +24,14 @@
         <i class="fa fa-refresh"></i>
       </button>
 
-      <!-- Filter datatable -->
+      <!-- Filter datatable-->
       <form class="form-inline mr-3 d-inline-block">
         <label class="icon icon-filter" style="position:relative;">
-          <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter name or website" [ngModel]="filterGlobal.term" (ngModelChange)="onfilterGlobal($event)" data-qa="hp-filter-global" />
-          <a (click)="filterGlobal.term = null; onfilterGlobal()" *ngIf="filterGlobal.term" style="position:absolute;right: 10px;top: 4px;"><i class="fa fa-remove"></i></a>
+          <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter" [(ngModel)]="filterGlobalTerm" (ngModelChange)="onFilterGlobal($event)" />
+          <a (click)="filterGlobalTerm = null; onFilterGlobal()" *ngIf="filterGlobalTerm" style="position:absolute;right: 10px;top: 4px;"><i class="fa fa-remove"></i></a>
         </label>
       </form>
+
     </div>
   </div>
 
@@ -40,40 +41,27 @@
 
     <div class="row">
       <div class="col-12" [ngClass]="route.sidebarOpen ? 'col-md-8' : 'col-md-12' ">
-        <div style="position:relative;height:calc(100vh - 150px)">
-          <datagrid #datagrid
-                    [rows]="route.users.data"
-                    [columns]="columns"
-                    [state]="{}"
-                    [options]="options"
-                    [filterGlobal]="filterGlobal"
-                    (onStateChange)="onStateChange($event)"
-                    (onRowsSelected)="onRowsSelected($event)"
-                    (onRowUpdated)="onRowUpdated($event)"
-                    (onRightClickMenu)="contextMenu($event)">
+        <div style="position:relative;">
+          <ag-grid-angular #grid
+                           style="height:calc(100vh - 150px)"
+                           class="ag-theme-balham"
+                           [gridOptions]="gridOptions"
+                           [rowData]="route.users.data"
+                           [columnDefs]="columns"
+                           [enableSorting]="true"
+                           [enableFilter]="true"
+                           [enableColResize]="true"
+                           [enableRangeSelection]="true"
+                           rowGroupPanelShow="onlyWhenGrouping"
+                           rowSelection="multiple"
+                           (selectionChanged)="onSelectionChanged($event)"
+                           (gridReady)="onGridReady($event)">
+          </ag-grid-angular>
 
-            <!-- Custom templates, prop corresponds to column property -->
-            <datagrid-column prop="phone">
-              <!-- Header template -->
-              <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
-                <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
-              </ng-template>
-              <!-- Cell template -->
-              <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-                <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
-              </ng-template>
-            </datagrid-column>
+          <ng-template #phone let-row>
+            {{ row?.phone }} Test12
+          </ng-template>
 
-            <datagrid-column prop="delete">
-              <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-                <app-launch-modal modal="ConfirmationModalComponent" size="lg" [data]="'Are you sure you want to delete ' + row.name + '?'" [isButton]="false"
-                                  (success)="userDelete(row)">
-                  <i class="fa fa-remove"></i> Delete
-                </app-launch-modal>
-              </ng-template>
-            </datagrid-column>
-
-          </datagrid>
         </div>
       </div>
       <div class="col-12 col-md-4" *ngIf="route.sidebarOpen">
@@ -138,4 +126,6 @@
 
 </div>
 
+<!--    -->
 <app-context-menu></app-context-menu>
+

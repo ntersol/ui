@@ -1,14 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ViewChild, TemplateRef, AfterViewInit  } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { DataGridComponent } from '../../libs/datagrid/components/datagrid.component';
+import { AgGridNg2 } from 'ag-grid-angular';
+import { GridOptions } from 'ag-grid-community';
 
 import { ApiService } from '$api';
 import { UIStoreService } from '$ui';
 import { Models } from '$models';
-import { DesktopUtils } from '$utils';
+// import { DesktopUtils } from '$utils';
 import { columns } from './columns';
-import { Datagrid, ContextService, ContextMenuList } from '$libs';
+import { ContextService, ContextMenuList } from '$libs';
+
+import { TemplateRendererComponent } from '../../libs/grid/template-renderer/template-renderer.component';
 
 @Component({
   selector: 'app-home',
@@ -16,8 +19,15 @@ import { Datagrid, ContextService, ContextMenuList } from '$libs';
   templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit, OnDestroy {
-  @ViewChild('datagrid') datagrid: DataGridComponent;
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('grid') grid: AgGridNg2;
+  public gridColumnApi: any;
+
+  public cellTemplates = {
+   //phone:null
+  }
+
+  @ViewChild('phone') cellTemplatePhone: TemplateRef<any>;
 
   public users$ = this.api.select.users$;
   public sidebarOpen$ = this.ui.select.sidebarOpen$;
@@ -25,22 +35,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   public isEditing: boolean;
   public sidebarOpen = false;
 
-  public filterGlobal: Datagrid.FilterGlobal = {
-    term: '',
-    props: ['name', 'website'],
-  };
+  public gridOptions: GridOptions = {
+   
+  }
 
-  // Inputs
-  public options: Datagrid.Options = {
-    scrollbarH: true,
-    selectionType: 'single',
-    fullScreen: true,
-    controlsDropdown: true,
-    showInfo: true,
-    primaryKey: 'id',
-  };
-
-  public columns: Datagrid.Column[] = columns;
+  public filterGlobalTerm = '';
+  
+  public columns = columns;
   /** selected rows */
   private rowsSelected: Models.User[];
   /** Hold subs for unsub */
@@ -50,7 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private api: ApiService,
     public ui: UIStoreService,
     private fb: FormBuilder,
-    private ref: ChangeDetectorRef,
+    // private ref: ChangeDetectorRef,
     private contextSvc: ContextService,
   ) {}
 
@@ -71,6 +72,20 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngAfterViewInit() {
+    const columns = this.columns.map(column => {
+      if (column.field === 'phone') {
+        column.cellRendererFramework = TemplateRendererComponent;
+        column.cellRendererParams = {
+           ngTemplate: this.cellTemplatePhone // This breaks grouping
+        }
+      }
+      return column;
+    })
+    this.gridOptions.api.setColumnDefs(columns);
+   
+  }
+
   /**
    * Refresh users
    */
@@ -83,18 +98,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.ui.sidebarToggle(!toggle);
     // There is a better way of doing this
     setTimeout(() => {
-      this.datagrid.viewCreate();
-      this.ref.detectChanges();
+      //this.datagrid.viewCreate();
+      //this.ref.detectChanges();
     });
   }
-
-  /**
-   * Update the global filter term
-   * @param searchTerm
-   */
-  public onfilterGlobal(searchTerm: string = null) {
-    this.filterGlobal = { ...this.filterGlobal, term: searchTerm };
-  }
+  
 
   /**
    * Stop editing to create a new user
@@ -122,24 +130,43 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * When the state has been changed (grouping/filtering/sorting/etc)
-   * @param event
+   * When the grid is ready
+   * @param params
    */
-  public onStateChange(/** state: Datagrid.State */) {
-    // console.log('onStateChange', JSON.stringify(state));
+  public onGridReady(params: any) {
+    console.log(params)
+    // Resize columns to fit screen
+    this.gridOptions.api.sizeColumnsToFit();
+    this.gridColumnApi = params.columnApi;
+
+    // const allColumnIds:any[] = [];
+    // params.columnApi.getAllColumns().forEach((column: any) => allColumnIds.push(column.colId));
+    // params.columnApi.autoSizeColumns(allColumnIds);
+  }
+
+  /** Filter global option */
+  public onFilterGlobal() {
+    this.grid.api.setQuickFilter(this.filterGlobalTerm);
   }
 
   /**
-   * When rows have been selected
+   * Get selected rows out of the datagrid
    * @param event
    */
-  public onRowsSelected(rows: Models.User[]) {
-    if (rows && rows[0]) {
-      this.rowsSelected = rows;
-      this.formMain.patchValue(rows[0]);
-      this.isEditing = true;
-      DesktopUtils.copyToClipboard(rows[0].phone); // Copy phone number to clipboard
-    }
+  public onSelectionChanged() {
+    const selectedData = this.grid.api.getSelectedNodes().map(node => node.data);
+    
+    console.log(selectedData);
+    this.gridSaveState();
+  }
+
+
+  public gridSaveState() {
+    console.log(this.gridColumnApi);
+    console.log(this.gridColumnApi.getColumnState());
+    console.log(this.gridColumnApi.getColumnGroupState());
+    console.log(this.gridColumnApi.getSortModel());
+    console.log(this.gridColumnApi.getFilterModel());
   }
 
   /**
