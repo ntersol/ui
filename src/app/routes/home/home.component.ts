@@ -21,7 +21,6 @@ import { ContextService, ContextMenuList, GridStatusBarComponent, GridTemplateRe
 
 declare interface GridState {
   columns?: any;
-  groups?: any;
   sorts?: any;
   filters?: any;
 }
@@ -153,7 +152,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     // console.log('gridStateChanged', $event.type);
     this.gridState = {
       columns: this.gridColumnApi.getColumnState(),
-      groups: this.gridColumnApi.getColumnGroupState(),
       sorts: this.grid.api.getSortModel(),
       filters: this.grid.api.getFilterModel(),
     };
@@ -186,7 +184,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (state) {
       this.gridState = JSON.parse(state);
       this.gridColumnApi.setColumnState(this.gridState.columns);
-      this.gridColumnApi.setColumnGroupState(this.gridState.groups);
       this.grid.api.setSortModel(this.gridState.sorts);
       this.grid.api.setFilterModel(this.gridState.filters);
       this.grid.api.onFilterChanged();
