@@ -1,8 +1,11 @@
 // Libs
 export * from './chart/chart.module';
 export * from './datagrid/datagrid.module';
-export * from './grid/grid.module';
 
+// Grid
+export * from './grid/grid.module';
+export * from './grid/grid-status-bar/grid-status-bar.component';
+export * from './grid/grid-template-renderer/grid-template-renderer.component';
 
 // Context Menu
 export * from './context-menu/context-menu.module';

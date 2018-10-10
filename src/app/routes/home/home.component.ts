@@ -1,4 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ViewChild, TemplateRef, AfterViewInit  } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy,
+  ViewChild,
+  TemplateRef,
+  AfterViewInit,
+} from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AgGridNg2 } from 'ag-grid-angular';
@@ -9,9 +17,7 @@ import { UIStoreService } from '$ui';
 import { Models } from '$models';
 // import { DesktopUtils } from '$utils';
 import { columns } from './columns';
-import { ContextService, ContextMenuList } from '$libs';
-
-import { TemplateRendererComponent } from '../../libs/grid/template-renderer/template-renderer.component';
+import { ContextService, ContextMenuList, GridStatusBarComponent, GridTemplateRendererComponent } from '$libs';
 
 declare interface GridState {
   columns?: any;
@@ -28,16 +34,17 @@ declare interface GridState {
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('grid') grid: AgGridNg2;
-  public gridColumnApi: ColumnApi;
-  public gridOptions: GridOptions = {}
-  public gridState: GridState = {};
-  public gridLoaded = false;
-
-  public cellTemplates = {
-   //phone:null
-  }
-
   @ViewChild('phone') cellTemplatePhone: TemplateRef<any>;
+
+  public gridColumnApi: ColumnApi;
+  public gridOptions: GridOptions = {
+    statusBar: {
+      statusPanels: [{ statusPanel: 'statusBarComponent', align: 'left' }],
+    },
+  };
+  public gridState: GridState = {};
+  public frameworkComponents = { statusBarComponent: GridStatusBarComponent };
+  public gridLoaded = false;
 
   public users$ = this.api.select.users$;
   public sidebarOpen$ = this.ui.select.sidebarOpen$;
@@ -46,8 +53,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public sidebarOpen = false;
 
   public filterGlobalTerm = '';
-  
+
   public columns = columns;
+
+  private gridStatusComponent: GridStatusBarComponent;
   /** selected rows */
   private rowsSelected: Models.User[];
   /** Hold subs for unsub */
@@ -76,20 +85,20 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       username: ['', [Validators.required]],
       website: ['', []],
     });
-
   }
 
   ngAfterViewInit() {
+    // Attach custom tell templates to the appropriate column
     const columns = this.columns.map(column => {
       if (column.field === 'phone') {
-        column.cellRendererFramework = TemplateRendererComponent;
+        column.cellRendererFramework = GridTemplateRendererComponent;
         column.cellRendererParams = {
           ngTemplate: this.cellTemplatePhone,
-          grouping: () => { }
-        }
+          // grouping: () => { } // TODO: Custom renderer for group headers
+        };
       }
       return column;
-    })
+    });
     this.gridOptions.api.setColumnDefs(columns);
   }
 
@@ -99,11 +108,21 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   public gridReady(params: any) {
     // console.log(params)
-    // Resize columns to fit screen
-    this.gridOptions.api.sizeColumnsToFit();
     this.gridColumnApi = params.columnApi;
+    // Set reference to status component so state can be pushed
+    this.gridStatusComponent = (<any>this).gridOptions.api
+      .getStatusPanel('statusBarComponent')
+      .getFrameworkComponentInstance();
 
     this.gridStateRestore();
+  }
+
+  /** After the grid has loaded data */
+  public gridFirstDataRendered() {
+    this.gridLoaded = true;
+
+    // Resize columns to fit screen
+    this.gridOptions.api.sizeColumnsToFit();
   }
 
   /** When the grid is resized, NEED DEBOUNCE */
@@ -136,10 +155,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       columns: this.gridColumnApi.getColumnState(),
       groups: this.gridColumnApi.getColumnGroupState(),
       sorts: this.grid.api.getSortModel(),
-      filters: this.grid.api.getFilterModel()
-    }
+      filters: this.grid.api.getFilterModel(),
+    };
+
     // Only save state after grid has been fully loaded
     if (this.gridLoaded) {
+      // Pass gridstate to status component
+      this.gridStatusComponent.gridStateChange(this.gridState);
       this.gridStateSave();
     }
   }
@@ -153,14 +175,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  /** After the grid has loaded data */
-  public gridFirstDataRendered() {
-    this.gridLoaded = true;
-  }
-
   /** Save the grid state */
   public gridStateSave() {
-    window.localStorage.gridState = JSON.stringify(this.gridState)
+    window.localStorage.gridState = JSON.stringify(this.gridState);
   }
 
   /** Restore the grid state */
@@ -208,7 +225,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-
   /**
    * Refresh users
    */
@@ -220,7 +236,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public sidebarToggle(toggle: boolean) {
     this.ui.sidebarToggle(!toggle);
   }
-
 
   /**
    * Stop editing to create a new user
@@ -246,7 +261,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public userDelete(user: Models.User) {
     this.api.users.delete(user).subscribe();
   }
-
 
   ngOnDestroy() {
     if (this.subs.length) {

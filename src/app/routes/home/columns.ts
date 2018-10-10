@@ -2,7 +2,6 @@ import { ColDef } from 'ag-grid-community';
 
 // Filter options : agTextColumnFilter | agNumberColumnFilter | agDateColumnFilter
 
-
 export const columns: ColDef[] = [
   {
     field: 'name',

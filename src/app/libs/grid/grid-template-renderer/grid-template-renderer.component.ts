@@ -9,17 +9,17 @@ import { ICellRendererParams } from 'ag-grid-community';
     <ng-container
       *ngTemplateOutlet="template; context: templateContext"
     ></ng-container>
-  `
+  `,
 })
-export class TemplateRendererComponent implements ICellRendererAngularComp {
+export class GridTemplateRendererComponent implements ICellRendererAngularComp {
   template: TemplateRef<any>;
-  templateContext: { $implicit: any, params: any };
+  templateContext: { $implicit: any; params: any };
 
   refresh(params: any): boolean {
     if (params.data) {
       this.templateContext = {
         $implicit: params.data,
-        params: params
+        params: params,
       };
       return true;
     }

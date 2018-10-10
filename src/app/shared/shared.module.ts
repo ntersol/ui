@@ -11,6 +11,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 import { CountPipe } from './pipes/count.pipe';
 import { DurationPipe } from './pipes/duration.pipe';
+import { TextCasePipe } from './pipes/text-case.pipe';
 
 // Directives
 import { FullScreenDirective } from './directives/full-screen.directive';
@@ -27,6 +28,7 @@ export const APP_PIPES_DIRECTIVES = [
   PhoneNumberPipe,
   CountPipe,
   DurationPipe,
+  TextCasePipe,
 
   // Directives
   FullScreenDirective,
