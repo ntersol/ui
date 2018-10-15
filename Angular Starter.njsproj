@@ -110,6 +110,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\styles\components\_dropdowns.scss" />
+    <Content Include="src\styles\components\_grid.scss">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\styles\components\_modals.scss" />
     <Content Include="src\styles\components\_navbar.scss" />
     <Content Include="src\styles\components\_poptooltips.scss" />

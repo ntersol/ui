@@ -8,7 +8,8 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { AgGridNg2 } from 'ag-grid-angular';
 import { GridOptions, ColumnApi } from 'ag-grid-community';
 
@@ -32,9 +33,10 @@ declare interface GridState {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  // Grid props
   @ViewChild('grid') grid: AgGridNg2;
   @ViewChild('phone') cellTemplatePhone: TemplateRef<any>;
-
   public gridColumnApi: ColumnApi;
   public gridOptions: GridOptions = {
     statusBar: {
@@ -42,7 +44,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     },
   };
   public gridState: GridState = {};
-  public frameworkComponents = { statusBarComponent: GridStatusBarComponent };
+  public gridComponents = { statusBarComponent: GridStatusBarComponent };
   public gridLoaded = false;
 
   public users$ = this.api.select.users$;
@@ -73,6 +75,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     // Get users and load into store
     this.api.users.get().subscribe();
 
+    this.subs = [
+      // On window resize event, fit the columns to the screen
+      fromEvent(window, 'resize').pipe(debounceTime(200)).subscribe(() => {
+        if (this.gridLoaded) {
+          // Resize columns to fit screen
+          this.gridOptions.api.sizeColumnsToFit();
+        }
+      })
+    ];
+
     // Formgroup
     this.formMain = this.fb.group({
       address: ['', []],
@@ -87,7 +99,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    // Attach custom tell templates to the appropriate column
+    // Attach custom cell templates to the appropriate column
     const columns = this.columns.map(column => {
       if (column.field === 'phone') {
         column.cellRendererFramework = GridTemplateRendererComponent;

@@ -1,0 +1,16 @@
+/* Ag Grid */
+ag-grid-angular .ag-root-wrapper {
+  .ag-header-icon { opacity: .5 !important; color: $interact-primary;}
+  .ag-column-hover .ag-header-icon { opacity: 1 !important; }
+  .ag-icon { cursor: pointer; }
+  .ag-icon-menu { background-image: none;
+    &:before { font-family: 'FontAwesome'; content: "\f0c9"; }
+  }
+  .ag-status-bar { background-color: #f5f7f7; font-size: .7rem; color: rgba(0, 0, 0, 0.54);
+    .ag-status-bar-left { display: block; width: 100%; }
+    .btn { padding: 0.05rem 0.5rem 0.1rem 0.5rem; background: #fff;
+      span { color: #656565; }
+      &:hover span { color: #fff; }
+    }
+  }
+}
