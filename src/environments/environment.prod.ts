@@ -41,4 +41,7 @@ export const environment = {
     /** Which UI store properties to not write to localstorage. IE do not persist confidential/personal information */
     uiStoreBlacklist: <string[]>[],
   },
+  licenses: {
+    agGrid: 'qwerty',
+  }
 };

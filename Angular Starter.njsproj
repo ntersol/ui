@@ -77,6 +77,8 @@
     <Content Include="src\app\routes\home\home.component.html" />
     <Content Include="src\app\routes\home\home.component.scss" />
     <Content Include="src\app\routes\login\login.component.html" />
+    <Content Include="src\app\routes\monolith\routes\home\context-menu\context-menu.component.html" />
+    <Content Include="src\app\routes\monolith\routes\home\context-menu\context-menu.component.scss" />
     <Content Include="src\app\routes\monolith\routes\home\home.component.html" />
     <Content Include="src\app\routes\monolith\routes\home\home.component.scss" />
     <Content Include="src\app\routes\qa\qa.component.html" />
@@ -195,6 +197,7 @@
     <Folder Include="src\app\routes\monolith\components\" />
     <Folder Include="src\app\routes\monolith\routes\" />
     <Folder Include="src\app\routes\monolith\routes\home\" />
+    <Folder Include="src\app\routes\monolith\routes\home\context-menu\" />
     <Folder Include="src\app\routes\monolith\servies\" />
     <Folder Include="src\app\routes\monolith\shared\" />
     <Folder Include="src\app\routes\monolith\shared\directives\" />
@@ -309,6 +312,7 @@
     <TypeScriptCompile Include="src\app\routes\monolith\monolith.module.ts" />
     <TypeScriptCompile Include="src\app\routes\monolith\monolith.routes.ts" />
     <TypeScriptCompile Include="src\app\routes\monolith\routes\home\columns.ts" />
+    <TypeScriptCompile Include="src\app\routes\monolith\routes\home\context-menu\context-menu.component.ts" />
     <TypeScriptCompile Include="src\app\routes\monolith\routes\home\home.component.spec.ts" />
     <TypeScriptCompile Include="src\app\routes\monolith\routes\home\home.component.ts" />
     <TypeScriptCompile Include="src\app\routes\monolith\servies\monolith.service.spec.ts" />
