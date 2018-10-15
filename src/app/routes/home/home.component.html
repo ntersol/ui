@@ -27,8 +27,8 @@
       <!-- Filter datatable-->
       <form class="form-inline mr-3 d-inline-block">
         <label class="icon icon-filter" style="position:relative;">
-          <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter" [(ngModel)]="filterGlobalTerm" (ngModelChange)="gridFilterGlobal($event)" />
-          <a (click)="filterGlobalTerm = null; gridFilterGlobal()" *ngIf="filterGlobalTerm" style="position:absolute;right: 10px;top: 4px;"><i class="fa fa-remove"></i></a>
+          <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter" [(ngModel)]="gridFilterTerm" (ngModelChange)="gridFilterGlobal($event)" />
+          <a (click)="gridFilterTerm = null; gridFilterGlobal()" *ngIf="gridFilterTerm" style="position:absolute;right: 10px;top: 4px;"><i class="fa fa-remove"></i></a>
         </label>
       </form>
 
@@ -41,7 +41,7 @@
 
     <div class="row">
       <div class="col-12" [ngClass]="route.sidebarOpen ? 'col-md-8' : 'col-md-12' ">
-        <div style="position:relative;">
+        <div style="position:relative;" #gridContainer>
           <ag-grid-angular #grid
                            style="height:calc(100vh - 150px)"
                            class="ag-theme-balham"

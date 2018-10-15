@@ -63,7 +63,7 @@ export class GridStatusBarComponent implements OnInit {
    * Attach AG grid parameters
    * @param params
    */
-  agInit(params: any): void {
+  public agInit(params: any): void {
     this.params = params;
   }
 

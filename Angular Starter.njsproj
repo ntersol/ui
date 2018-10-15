@@ -43,7 +43,6 @@
     <Content Include="CHANGELOG.md" />
     <Content Include="e2e\tsconfig.e2e.json" />
     <Content Include="ngsw-config.json" />
-    <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="src\apple-touch-icon.png" />
@@ -73,6 +72,8 @@
     <Content Include="src\app\components\masterpage\nav\nav.component.html" />
     <Content Include="src\app\components\masterpage\nav\search\nav-search.component.html" />
     <Content Include="src\app\components\masterpage\single\layout-single.component.html" />
+    <Content Include="src\app\libs\grid\grid-status-bar\grid-status-bar.component.html" />
+    <Content Include="src\app\libs\grid\grid-status-bar\grid-status-bar.component.scss" />
     <Content Include="src\app\routes\home\context-menu\context-menu.component.html" />
     <Content Include="src\app\routes\home\context-menu\context-menu.component.scss" />
     <Content Include="src\app\routes\home\home.component.html" />
@@ -134,7 +135,6 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="tslint.json" />
-    <Content Include="yarn.lock" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="karma.conf.js" />
@@ -186,6 +186,10 @@
     <Folder Include="src\app\components\masterpage\single\" />
     <Folder Include="src\app\components\modals\" />
     <Folder Include="src\app\libs\" />
+    <Folder Include="src\app\libs\grid\" />
+    <Folder Include="src\app\libs\grid\grid-status-bar\" />
+    <Folder Include="src\app\libs\grid\grid-template-renderer\" />
+    <Folder Include="src\app\libs\grid\pipes\" />
     <Folder Include="src\app\routes\" />
     <Folder Include="src\app\routes\home\" />
     <Folder Include="src\app\routes\home\context-menu\" />
@@ -291,6 +295,11 @@
     <TypeScriptCompile Include="src\app\components\masterpage\nav\search\nav-search.component.ts" />
     <TypeScriptCompile Include="src\app\components\masterpage\single\layout-single.component.ts" />
     <TypeScriptCompile Include="src\app\components\modals\index.ts" />
+    <TypeScriptCompile Include="src\app\libs\grid\grid-status-bar\grid-status-bar.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\libs\grid\grid-status-bar\grid-status-bar.component.ts" />
+    <TypeScriptCompile Include="src\app\libs\grid\grid-template-renderer\grid-template-renderer.component.ts" />
+    <TypeScriptCompile Include="src\app\libs\grid\grid.module.ts" />
+    <TypeScriptCompile Include="src\app\libs\grid\pipes\text-case.pipe.ts" />
     <TypeScriptCompile Include="src\app\libs\index.ts" />
     <TypeScriptCompile Include="src\app\routes\home\columns.ts" />
     <TypeScriptCompile Include="src\app\routes\home\context-menu\context-menu.component.ts" />
@@ -347,6 +356,7 @@
     <TypeScriptCompile Include="src\app\shared\pipes\safe-html.pipe.ts" />
     <TypeScriptCompile Include="src\app\shared\pipes\sort.pipe.ts" />
     <TypeScriptCompile Include="src\app\shared\pipes\string.pipe.ts" />
+    <TypeScriptCompile Include="src\app\shared\pipes\text-case.pipe.ts" />
     <TypeScriptCompile Include="src\app\shared\services\app-comms.service.ts" />
     <TypeScriptCompile Include="src\app\shared\services\app-config.service.ts" />
     <TypeScriptCompile Include="src\app\shared\services\auth.service.ts" />

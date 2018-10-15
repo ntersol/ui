@@ -6,12 +6,15 @@ import {
   ViewChild,
   TemplateRef,
   AfterViewInit,
+  ElementRef,
 } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { Subscription, fromEvent } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { AgGridNg2 } from 'ag-grid-angular';
 import { GridOptions, ColumnApi } from 'ag-grid-community';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { debounce } from 'helpful-decorators';
 
 import { ApiService } from '$api';
 import { UIStoreService } from '$ui';
@@ -20,12 +23,14 @@ import { Models } from '$models';
 import { columns } from './columns';
 import { ContextService, ContextMenuList, GridStatusBarComponent, GridTemplateRendererComponent } from '$libs';
 
+
 declare interface GridState {
   columns?: any;
   sorts?: any;
   filters?: any;
 }
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-home',
   styleUrls: ['./home.component.scss'],
@@ -36,9 +41,17 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Grid props
   @ViewChild('grid') grid: AgGridNg2;
-  @ViewChild('phone') cellTemplatePhone: TemplateRef<any>;
+  @ViewChild('gridContainer') gridContainer: ElementRef;
+
   public gridColumnApi: ColumnApi;
   public gridOptions: GridOptions = {
+    // a default column definition with properties that get applied to every column
+    defaultColDef: {
+      width: 150, // set every column width
+      editable: true, // make every column editable
+      enableRowGroup: true, // make every column groupable
+      filter: 'agTextColumnFilter' // make every column use 'text' filter by default
+    },
     statusBar: {
       statusPanels: [{ statusPanel: 'statusBarComponent', align: 'left' }],
     },
@@ -46,6 +59,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public gridState: GridState = {};
   public gridComponents = { statusBarComponent: GridStatusBarComponent };
   public gridLoaded = false;
+  public gridFilterTerm = '';
+
+  @ViewChild('phone') cellTemplatePhone: TemplateRef<any>;
 
   public users$ = this.api.select.users$;
   public sidebarOpen$ = this.ui.select.sidebarOpen$;
@@ -53,16 +69,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public isEditing: boolean;
   public sidebarOpen = false;
 
-  public filterGlobalTerm = '';
-
   public columns = columns;
 
   private gridStatusComponent: GridStatusBarComponent;
   /** selected rows */
   private rowsSelected: Models.User[];
-  /** Hold subs for unsub */
-  private subs: Subscription[] = [];
-
+ 
   constructor(
     private api: ApiService,
     public ui: UIStoreService,
@@ -75,15 +87,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     // Get users and load into store
     this.api.users.get().subscribe();
 
-    this.subs = [
-      // On window resize event, fit the columns to the screen
-      fromEvent(window, 'resize').pipe(debounceTime(200)).subscribe(() => {
-        if (this.gridLoaded) {
-          // Resize columns to fit screen
-          this.gridOptions.api.sizeColumnsToFit();
-        }
-      })
-    ];
+    // On window resize event, fit the grid columns to the screen
+    fromEvent(window, 'resize').pipe(debounceTime(200)).subscribe(() => {
+      if (this.gridLoaded && this.gridOptions.api) {
+        this.gridFit();
+      }
+    });
 
     // Formgroup
     this.formMain = this.fb.group({
@@ -124,16 +133,24 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.gridStatusComponent = (<any>this).gridOptions.api
       .getStatusPanel('statusBarComponent')
       .getFrameworkComponentInstance();
-
     this.gridStateRestore();
   }
 
   /** After the grid has loaded data */
   public gridFirstDataRendered() {
     this.gridLoaded = true;
+    this.gridFit();
+  }
 
-    // Resize columns to fit screen
-    this.gridOptions.api.sizeColumnsToFit();
+  /** Have the columns fill the available space if less than grid width */
+  public gridFit() {
+    const widthCurrent = this.gridColumnApi.getColumnState().reduce((a, b) => a + b.width, 0);
+    const widthGrid = this.gridContainer.nativeElement.offsetWidth;
+    if (widthCurrent < widthGrid) {
+      console.log('Resizing Grid');
+      // Resize columns to fit screen
+      this.gridOptions.api.sizeColumnsToFit();
+    }
   }
 
   /** When the grid is resized, NEED DEBOUNCE */
@@ -143,7 +160,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** Filter global option */
   public gridFilterGlobal() {
-    this.grid.api.setQuickFilter(this.filterGlobalTerm);
+    this.grid.api.setQuickFilter(this.gridFilterTerm);
   }
 
   /**
@@ -157,16 +174,25 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /**
    * On grid state changes such as sorting, filtering and grouping
-   * Need to debounce resizing
+   * Added debounce since some events fire quickly like resizing
    * @param $event
    */
-  public gridStateChanged() {
-    // console.log('gridStateChanged', $event.type);
+  @debounce(500, {
+    'leading': false,
+    'trailing': true
+  })
+  public gridStateChanged($event: any) {
+    console.log('gridStateChanged',$event.type)
     this.gridState = {
       columns: this.gridColumnApi.getColumnState(),
       sorts: this.grid.api.getSortModel(),
       filters: this.grid.api.getFilterModel(),
     };
+
+    // If column resized, check if grid needs to be refit 
+    if ($event.type === 'columnResized') {
+      this.gridFit();
+    }
 
     // Only save state after grid has been fully loaded
     if (this.gridLoaded) {
@@ -187,7 +213,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** Save the grid state */
   public gridStateSave() {
-    window.localStorage.gridState = JSON.stringify(this.gridState);
+    // window.localStorage.gridState = JSON.stringify(this.gridState);
   }
 
   /** Restore the grid state */
@@ -271,9 +297,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.api.users.delete(user).subscribe();
   }
 
-  ngOnDestroy() {
-    if (this.subs.length) {
-      this.subs.forEach(sub => sub.unsubscribe());
-    } // Unsub
-  }
+  // Must be present even if not used for unsubs
+  ngOnDestroy() {  }
 }
