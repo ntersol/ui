@@ -1,8 +1,16 @@
 /* Ag Grid */
 ag-grid-angular .ag-root-wrapper {
-  .ag-header-icon { opacity: .5 !important; color: $interact-primary;}
+  .ag-header-cell-label { cursor: pointer; }
+  .ag-header-icon { opacity: .4 !important; color: $interact-primary; }
   .ag-column-hover .ag-header-icon { opacity: 1 !important; }
-  .ag-icon { cursor: pointer; }
+  .ag-icon { cursor: pointer; font-family: 'FontAwesome'; text-align: center;
+    &.ag-icon-asc { background-image: none;
+      &:before { content: "\f176"; }
+    }
+    &.ag-icon-desc { background-image: none;
+      &:before { content: "\f175"; }
+    }
+  }
   .ag-icon-menu { background-image: none;
     &:before { font-family: 'FontAwesome'; content: "\f0c9"; }
   }
