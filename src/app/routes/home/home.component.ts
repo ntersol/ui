@@ -12,7 +12,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { AgGridNg2 } from 'ag-grid-angular';
-import { GridOptions, ColumnApi } from 'ag-grid-community';
+import { GridOptions, ColumnApi, MenuItemDef } from 'ag-grid-community';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { debounce } from 'helpful-decorators';
 
@@ -43,6 +43,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public gridColumnApi: ColumnApi;
   public gridOptions: GridOptions = {
+    context: {
+      this: this
+    },
     // A default column definition with properties that get applied to every column
     defaultColDef: {
       width: 150, // Set every column width
@@ -216,6 +219,47 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.grid.api.setFilterModel(this.gridState.filters);
       this.grid.api.onFilterChanged();
     }
+  }
+
+  /**
+   * Create the context menu
+   * @param params
+   */
+  public gridContextMenu(params: any) {
+    // console.log(params.value, params.node.data) // Cell value and row object
+    return <MenuItemDef[]>[
+      'copy', 'copyWithHeaders', 'paste', 'separator',
+      {
+        name: 'Tags',
+        icon: '<i class="fa fa-tags"></i>',
+        subMenu: [
+          {
+            name: 'Red',
+            icon: '<i class="fa fa-tag red"></i>',
+            action: function () {
+              params.context.this.contextAction(params.value, params.node.data);
+            }
+          },
+          {
+            name: 'Green',
+            icon: '<i class="fa fa-tag green"></i>',
+            action: function () {
+              params.context.this.contextAction(params.value, params.node.data);
+            }
+          },
+        ],
+      },
+      'separator',
+      'export'
+    ];
+  }
+
+  /**
+    * An action to perform on a context menu click
+    * @param params
+    */
+  public contextAction(value: string, row: any) {
+    console.log(value, row);
   }
 
   /** Save the grid state */
