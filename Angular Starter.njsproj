@@ -74,8 +74,6 @@
     <Content Include="src\app\components\masterpage\single\layout-single.component.html" />
     <Content Include="src\app\libs\grid\grid-status-bar\grid-status-bar.component.html" />
     <Content Include="src\app\libs\grid\grid-status-bar\grid-status-bar.component.scss" />
-    <Content Include="src\app\routes\home\context-menu\context-menu.component.html" />
-    <Content Include="src\app\routes\home\context-menu\context-menu.component.scss" />
     <Content Include="src\app\routes\home\home.component.html" />
     <Content Include="src\app\routes\home\home.component.scss" />
     <Content Include="src\app\routes\login\login.component.html" />
@@ -192,7 +190,6 @@
     <Folder Include="src\app\libs\grid\pipes\" />
     <Folder Include="src\app\routes\" />
     <Folder Include="src\app\routes\home\" />
-    <Folder Include="src\app\routes\home\context-menu\" />
     <Folder Include="src\app\routes\login\" />
     <Folder Include="src\app\routes\monolith\" />
     <Folder Include="src\app\routes\monolith\components\" />
@@ -302,7 +299,6 @@
     <TypeScriptCompile Include="src\app\libs\grid\pipes\text-case.pipe.ts" />
     <TypeScriptCompile Include="src\app\libs\index.ts" />
     <TypeScriptCompile Include="src\app\routes\home\columns.ts" />
-    <TypeScriptCompile Include="src\app\routes\home\context-menu\context-menu.component.ts" />
     <TypeScriptCompile Include="src\app\routes\home\home.component.spec.ts" />
     <TypeScriptCompile Include="src\app\routes\home\home.component.ts" />
     <TypeScriptCompile Include="src\app\routes\home\home.module.ts" />

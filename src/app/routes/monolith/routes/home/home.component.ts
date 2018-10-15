@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Datagrid } from '$libs';
+import { Datagrid, ContextService, ContextMenuList} from '$libs';
 
 import { MonolithApiService } from '../../shared/stores/api/api.store.service';
 import { UIStoreService } from '$ui';
@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public formMain: FormGroup;
   public isEditing: boolean;
   public sidebarOpen = false;
+  public rowsSelected: any[] = [];
 
   public filterGlobal: Datagrid.FilterGlobal = {
     term: '',
@@ -41,7 +42,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
 
-  constructor(private api: MonolithApiService, public ui: UIStoreService, private fb: FormBuilder) {}
+  constructor(private api: MonolithApiService, public ui: UIStoreService, private fb: FormBuilder,
+    private contextSvc: ContextService,) {}
 
   public ngOnInit() {
     // Get users and load into store
@@ -114,6 +116,7 @@ export class HomeComponent implements OnInit, OnDestroy {
    */
   public onRowsSelected(users: Models.User[]) {
     if (users && users[0]) {
+      this.rowsSelected = users;
       this.formMain.patchValue(users[0]);
       this.isEditing = true;
       DesktopUtils.copyToClipboard(users[0].phone); // Copy phone number to clipboard
@@ -126,6 +129,14 @@ export class HomeComponent implements OnInit, OnDestroy {
    */
   public onRowUpdated(/** users: Models.User[] */) {
     // console.log('onRowUpdated', users);
+  }
+
+  /**
+   * Open a context menu on right click
+   * @param $event
+   */
+  public contextMenu($event: MouseEvent) {
+    this.contextSvc.open(ContextMenuList.home, $event, this.rowsSelected); // , this.rowsSelected
   }
 
   /**
