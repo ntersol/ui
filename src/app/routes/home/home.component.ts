@@ -18,10 +18,9 @@ import { debounce } from 'helpful-decorators';
 
 import { ApiService } from '$api';
 import { UIStoreService } from '$ui';
+import { GridStatusBarComponent, GridTemplateRendererComponent } from '$libs';
 import { Models } from '$models';
-// import { DesktopUtils } from '$utils';
 import { columns } from './columns';
-import { ContextService, ContextMenuList, GridStatusBarComponent, GridTemplateRendererComponent } from '$libs';
 
 
 declare interface GridState {
@@ -39,18 +38,17 @@ declare interface GridState {
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  // Grid props
   @ViewChild('grid') grid: AgGridNg2;
   @ViewChild('gridContainer') gridContainer: ElementRef;
 
   public gridColumnApi: ColumnApi;
   public gridOptions: GridOptions = {
-    // a default column definition with properties that get applied to every column
+    // A default column definition with properties that get applied to every column
     defaultColDef: {
-      width: 150, // set every column width
-      editable: true, // make every column editable
-      enableRowGroup: true, // make every column groupable
-      filter: 'agTextColumnFilter' // make every column use 'text' filter by default
+      width: 150, // Set every column width
+      editable: false, // Make every column editable
+      enableRowGroup: true, // Make every column groupable
+      filter: 'agTextColumnFilter', // Make every column use 'text' filter by default
     },
     statusBar: {
       statusPanels: [{ statusPanel: 'statusBarComponent', align: 'left' }],
@@ -60,6 +58,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public gridComponents = { statusBarComponent: GridStatusBarComponent };
   public gridLoaded = false;
   public gridFilterTerm = '';
+  public gridRowsSelected: Models.User[];
+  /** Allow the grid to update state. Disable to prevent infinite loops IE during column resizing */
+  public gridAllowUpdate = true;
 
   @ViewChild('phone') cellTemplatePhone: TemplateRef<any>;
 
@@ -72,15 +73,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public columns = columns;
 
   private gridStatusComponent: GridStatusBarComponent;
-  /** selected rows */
-  private rowsSelected: Models.User[];
- 
+  
+  
+
   constructor(
     private api: ApiService,
     public ui: UIStoreService,
     private fb: FormBuilder,
-    // private ref: ChangeDetectorRef,
-    private contextSvc: ContextService,
   ) {}
 
   public ngOnInit() {
@@ -88,11 +87,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.api.users.get().subscribe();
 
     // On window resize event, fit the grid columns to the screen
-    fromEvent(window, 'resize').pipe(debounceTime(200)).subscribe(() => {
-      if (this.gridLoaded && this.gridOptions.api) {
-        this.gridFit();
-      }
-    });
+    fromEvent(window, 'resize')
+      .pipe(debounceTime(300))
+      .subscribe(() => {
+        if (this.gridLoaded && this.gridOptions.api) {
+          this.gridFit();
+        }
+      });
 
     // Formgroup
     this.formMain = this.fb.group({
@@ -143,11 +144,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /** Have the columns fill the available space if less than grid width */
+  @debounce(300, {
+    leading: false,
+    trailing: true,
+  })
   public gridFit() {
     const widthCurrent = this.gridColumnApi.getColumnState().reduce((a, b) => a + b.width, 0);
     const widthGrid = this.gridContainer.nativeElement.offsetWidth;
-    if (widthCurrent < widthGrid) {
-      console.log('Resizing Grid');
+    if (widthCurrent < widthGrid && this.gridAllowUpdate && this.gridLoaded) {
+      // Disable allow update to prevent loop
+      this.gridAllowUpdate = false;
       // Resize columns to fit screen
       this.gridOptions.api.sizeColumnsToFit();
     }
@@ -168,8 +174,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param event
    */
   public gridSelectionChanged() {
-    const selectedRows = this.grid.api.getSelectedNodes().map(node => node.data);
-    console.log(selectedRows);
+    this.gridRowsSelected = this.grid.api.getSelectedNodes().map(node => node.data);
   }
 
   /**
@@ -177,29 +182,31 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
    * Added debounce since some events fire quickly like resizing
    * @param $event
    */
-  @debounce(500, {
-    'leading': false,
-    'trailing': true
+  @debounce(300, {
+    leading: false,
+    trailing: true,
   })
   public gridStateChanged($event: any) {
-    console.log('gridStateChanged',$event.type)
-    this.gridState = {
-      columns: this.gridColumnApi.getColumnState(),
-      sorts: this.grid.api.getSortModel(),
-      filters: this.grid.api.getFilterModel(),
-    };
+    // console.log('gridStateChanged', $event.type, this.gridAllowUpdate);
+    if (this.gridAllowUpdate) {
+      this.gridState = {
+        columns: this.gridColumnApi.getColumnState(),
+        sorts: this.grid.api.getSortModel(),
+        filters: this.grid.api.getFilterModel(),
+      };
 
-    // If column resized, check if grid needs to be refit 
-    if ($event.type === 'columnResized') {
-      this.gridFit();
-    }
+      if ($event.type === 'columnResized') {
+        this.gridFit();
+      }
 
-    // Only save state after grid has been fully loaded
-    if (this.gridLoaded) {
-      // Pass gridstate to status component
-      this.gridStatusComponent.gridStateChange(this.gridState);
-      this.gridStateSave();
+      // Only save state after grid has been fully loaded
+      if (this.gridLoaded) {
+        // Pass gridstate to status component
+        this.gridStatusComponent.gridStateChange(this.gridState);
+        this.gridStateSave();
+      }
     }
+    this.gridAllowUpdate = true;
   }
 
   /** When data in the grid changes */
@@ -213,7 +220,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** Save the grid state */
   public gridStateSave() {
-    // window.localStorage.gridState = JSON.stringify(this.gridState);
+    window.localStorage.gridState = JSON.stringify(this.gridState);
   }
 
   /** Restore the grid state */
@@ -226,22 +233,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.grid.api.setFilterModel(this.gridState.filters);
       this.grid.api.onFilterChanged();
     }
-  }
-
-  /**
-   * When a row has been edited
-   * @param event
-   */
-  public onRowUpdated(/** users: Models.User[] */) {
-    // console.log('onRowUpdated', users);
-  }
-
-  /**
-   * Open a context menu on right click
-   * @param $event
-   */
-  public contextMenu($event: MouseEvent) {
-    this.contextSvc.open(ContextMenuList.home, $event, this.rowsSelected);
   }
 
   /**
@@ -298,5 +289,5 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // Must be present even if not used for unsubs
-  ngOnDestroy() {  }
+  ngOnDestroy() {}
 }
