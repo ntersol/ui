@@ -1,14 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ColumnApi } from 'ag-grid-community';
 import { AgGridNg2 } from 'ag-grid-angular';
-import { ColumnState } from 'ag-grid-community/dist/lib/columnController/columnController';
-
-declare interface GridState {
-  columns?: ColumnState[];
-  groups?: any;
-  sorts?: any;
-  filters?: any;
-}
 
 @Component({
   selector: 'app-grid-status-bar',

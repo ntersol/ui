@@ -4,6 +4,7 @@ import { AppStore } from '$shared';
 const actionCreator = actionCreatorFactory('ui');
 
 export const UIStoreActions = {
+  GRID_STATE_CHANGE: actionCreator<GridState>('GRID_STATE_CHANGE'),
   RESET: actionCreator<null>('RESET'),
   REHYDRATE: actionCreator<AppStore.Ui>('REHYDRATE'),
   MODAL_OPEN: actionCreator<{

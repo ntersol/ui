@@ -18,16 +18,9 @@ import { debounce } from 'helpful-decorators';
 
 import { ApiService } from '$api';
 import { UIStoreService } from '$ui';
-import { GridStatusBarComponent, GridTemplateRendererComponent } from '$libs';
+import { GridStatusBarComponent, GridTemplateRendererComponent} from '$libs';
 import { Models } from '$models';
 import { columns } from './columns';
-
-
-declare interface GridState {
-  columns?: any;
-  sorts?: any;
-  filters?: any;
-}
 
 @AutoUnsubscribe()
 @Component({
@@ -76,8 +69,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public columns = columns;
 
   private gridStatusComponent: GridStatusBarComponent;
-  
-  
 
   constructor(
     private api: ApiService,
@@ -88,6 +79,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public ngOnInit() {
     // Get users and load into store
     this.api.users.get().subscribe();
+
+    // Rehydrate grid from UI state
+    this.ui.select.gridState$.subscribe(gridState => {
+      // Make sure this isn't the multiscreen originator and that the new state passed down doesn't match the current state
+      if (!this.ui.screen && gridState !== this.gridState) {
+        this.gridState = gridState;
+        this.gridStateRestore();
+        this.gridFit();
+        if (this.gridStatusComponent) {
+          this.gridStatusComponent.gridStateChange(this.gridState);
+        }
+      }
+    });
 
     // On window resize event, fit the grid columns to the screen
     fromEvent(window, 'resize')
@@ -147,7 +151,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /** Have the columns fill the available space if less than grid width */
-  @debounce(100, {
+  @debounce(0, {
     leading: false,
     trailing: true,
   })
@@ -264,18 +268,22 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** Save the grid state */
   public gridStateSave() {
-    window.localStorage.gridState = JSON.stringify(this.gridState);
+    this.ui.gridStateChange(this.gridState);
   }
 
   /** Restore the grid state */
   public gridStateRestore() {
-    const state = window.localStorage.gridState;
-    if (state) {
-      this.gridState = JSON.parse(state);
-      this.gridColumnApi.setColumnState(this.gridState.columns);
-      this.grid.api.setSortModel(this.gridState.sorts);
-      this.grid.api.setFilterModel(this.gridState.filters);
-      this.grid.api.onFilterChanged();
+    if (this.grid && this.gridColumnApi) {
+      if (this.gridState.columns) {
+        this.gridColumnApi.setColumnState(this.gridState.columns);
+      }
+      if (this.gridState.sorts) {
+        this.grid.api.setSortModel(this.gridState.sorts);
+      }
+      if (this.gridState.filters) {
+        this.grid.api.setFilterModel(this.gridState.filters);
+        this.grid.api.onFilterChanged();
+      }
     }
   }
 

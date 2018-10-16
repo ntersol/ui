@@ -2,7 +2,7 @@
 ag-grid-angular .ag-root-wrapper {
   .ag-header-cell-label { cursor: pointer; }
   .ag-column-drop-cell-button { cursor: pointer; }
-  .ag-header-icon { opacity: 1!important; color: $interact-primary; }
+  .ag-header-icon { opacity: 1 !important; color: $interact-primary; }
   .ag-column-hover .ag-header-icon { opacity: 1 !important; }
   .ag-icon { cursor: pointer; font-family: 'FontAwesome'; text-align: center; color: $interact-primary;
     &.ag-icon-asc { background-image: none;
@@ -23,7 +23,7 @@ ag-grid-angular .ag-root-wrapper {
     &.ag-icon-pin { background-image: none !important; line-height: initial;
       &:before { content: "\f08d"; }
     }
-    &.ag-icon-group { background-image: none !important; line-height: initial;
+    &.ag-icon-group { background-image: none !important; line-height: 2rem;
       &:before { content: "\f0c0"; }
     }
     &.ag-icon-copy { background-image: none !important; line-height: initial;
