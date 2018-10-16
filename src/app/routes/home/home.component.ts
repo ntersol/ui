@@ -1,23 +1,63 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy,
+  ViewChild,
+  TemplateRef,
+  AfterViewInit,
+  ElementRef,
+} from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { DataGridComponent } from '../../libs/datagrid/components/datagrid.component';
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { AgGridNg2 } from 'ag-grid-angular';
+import { GridOptions, ColumnApi, MenuItemDef } from 'ag-grid-community';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { debounce } from 'helpful-decorators';
 
 import { ApiService } from '$api';
 import { UIStoreService } from '$ui';
+import { GridStatusBarComponent, GridTemplateRendererComponent } from '$libs';
 import { Models } from '$models';
-import { DesktopUtils } from '$utils';
 import { columns } from './columns';
-import { Datagrid, ContextService, ContextMenuList } from '$libs';
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-home',
   styleUrls: ['./home.component.scss'],
   templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit, OnDestroy {
-  @ViewChild('datagrid') datagrid: DataGridComponent;
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('grid') grid: AgGridNg2;
+  @ViewChild('gridContainer') gridContainer: ElementRef;
+
+  public gridColumnApi: ColumnApi;
+  public gridOptions: GridOptions = {
+    context: {
+      this: this,
+    },
+    // A default column definition with properties that get applied to every column
+    defaultColDef: {
+      width: 150, // Set every column width
+      editable: false, // Make every column editable
+      enableRowGroup: true, // Make every column groupable
+      filter: 'agTextColumnFilter', // Make every column use 'text' filter by default
+    },
+    statusBar: {
+      statusPanels: [{ statusPanel: 'statusBarComponent', align: 'left' }],
+    },
+  };
+  public gridState: GridState = {};
+  public gridComponents = { statusBarComponent: GridStatusBarComponent };
+  public gridLoaded = false;
+  public gridFilterTerm = '';
+  public gridRowsSelected: Models.User[];
+  /** Allow the grid to update state. Disable to prevent infinite loops IE during column resizing */
+  public gridAllowUpdate = true;
+
+  @ViewChild('phone') cellTemplatePhone: TemplateRef<any>;
 
   public users$ = this.api.select.users$;
   public sidebarOpen$ = this.ui.select.sidebarOpen$;
@@ -25,38 +65,37 @@ export class HomeComponent implements OnInit, OnDestroy {
   public isEditing: boolean;
   public sidebarOpen = false;
 
-  public filterGlobal: Datagrid.FilterGlobal = {
-    term: '',
-    props: ['name', 'website'],
-  };
+  public columns = columns;
 
-  // Inputs
-  public options: Datagrid.Options = {
-    scrollbarH: true,
-    selectionType: 'single',
-    fullScreen: true,
-    controlsDropdown: true,
-    showInfo: true,
-    primaryKey: 'id',
-  };
+  private gridStatusComponent: GridStatusBarComponent;
 
-  public columns: Datagrid.Column[] = columns;
-  /** selected rows */
-  private rowsSelected: Models.User[];
-  /** Hold subs for unsub */
-  private subs: Subscription[] = [];
-
-  constructor(
-    private api: ApiService,
-    public ui: UIStoreService,
-    private fb: FormBuilder,
-    private ref: ChangeDetectorRef,
-    private contextSvc: ContextService,
-  ) {}
+  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder) {}
 
   public ngOnInit() {
     // Get users and load into store
     this.api.users.get().subscribe();
+
+    // Rehydrate grid from UI state
+    this.ui.select.gridState$.subscribe(gridState => {
+      // Make sure this isn't the multiscreen originator and that the new state passed down doesn't match the current state
+      if (!this.ui.screen && gridState !== this.gridState) {
+        this.gridState = gridState;
+        this.gridStateRestore();
+        this.gridFit();
+        if (this.gridStatusComponent) {
+          this.gridStatusComponent.gridStateChange(this.gridState);
+        }
+      }
+    });
+
+    // On window resize event, fit the grid columns to the screen
+    fromEvent(window, 'resize')
+      .pipe(debounceTime(100))
+      .subscribe(() => {
+        if (this.gridLoaded && this.gridOptions.api) {
+          this.gridFit();
+        }
+      });
 
     // Formgroup
     this.formMain = this.fb.group({
@@ -71,6 +110,195 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngAfterViewInit() {
+    // Attach custom cell templates to the appropriate column
+    const columns = this.columns.map(column => {
+      if (column.field === 'phone') {
+        column.cellRendererFramework = GridTemplateRendererComponent;
+        column.cellRendererParams = {
+          ngTemplate: this.cellTemplatePhone,
+          // grouping: () => { } // TODO: Custom renderer for group headers
+        };
+      }
+      return column;
+    });
+    this.gridOptions.api.setColumnDefs(columns);
+  }
+
+  /**
+   * When the grid is ready
+   * @param params
+   */
+  public gridReady(params: any) {
+    // console.log(params)
+    this.gridColumnApi = params.columnApi;
+    // Set reference to status component so state can be pushed
+    this.gridStatusComponent = (<any>this).gridOptions.api
+      .getStatusPanel('statusBarComponent')
+      .getFrameworkComponentInstance();
+    this.gridStateRestore();
+  }
+
+  /** After the grid has loaded data */
+  public gridFirstDataRendered() {
+    this.gridLoaded = true;
+    this.gridFit();
+  }
+
+  /** Have the columns fill the available space if less than grid width */
+  public gridFit() {
+    if (this.gridColumnApi && this.gridContainer && this.gridContainer.nativeElement) {
+      const widthCurrent = this.gridColumnApi.getColumnState().reduce((a, b) => a + b.width, 0);
+      const widthGrid = this.gridContainer.nativeElement.offsetWidth;
+      if (widthCurrent < widthGrid && this.gridAllowUpdate && this.gridLoaded) {
+        // Disable allow update to prevent loop
+        this.gridAllowUpdate = false;
+        // Resize columns to fit screen
+        this.gridOptions.api.sizeColumnsToFit();
+      }
+    }
+  }
+
+  /** When the grid is resized, NEED DEBOUNCE */
+  public gridSizeChanged() {
+    // console.log('Grid Resized')
+  }
+
+  /** Filter global option */
+  public gridFilterGlobal() {
+    this.grid.api.setQuickFilter(this.gridFilterTerm);
+  }
+
+  /**
+   * Get selected rows out of the datagrid
+   * @param event
+   */
+  public gridSelectionChanged() {
+    this.gridRowsSelected = this.grid.api.getSelectedNodes().map(node => node.data);
+  }
+
+  /**
+   * On grid state changes such as sorting, filtering and grouping
+   * Added debounce since some events fire quickly like resizing
+   * @param $event
+   */
+  @debounce(100, {
+    leading: false,
+    trailing: true,
+  })
+  public gridStateChanged($event: any) {
+    // console.log('gridStateChanged', $event.type, this.gridAllowUpdate);
+    if (this.gridAllowUpdate) {
+      this.gridState = {
+        columns: this.gridColumnApi.getColumnState(),
+        sorts: this.grid.api.getSortModel(),
+        filters: this.grid.api.getFilterModel(),
+      };
+
+      if ($event.type === 'columnResized') {
+        this.gridFit();
+      }
+
+      // Only save state after grid has been fully loaded
+      if (this.gridLoaded) {
+        // Pass gridstate to status component
+        this.gridStatusComponent.gridStateChange(this.gridState);
+        this.gridStateSave();
+      }
+    }
+    this.gridAllowUpdate = true;
+  }
+
+  /** When data in the grid changes */
+  public gridRowDataChanged() {
+    // Whenever data is loaded into the grid the filters are wiped out. Check if filters are present and reload them
+    if (this.gridState.filters) {
+      this.grid.api.setFilterModel(this.gridState.filters);
+      this.grid.api.onFilterChanged();
+    }
+  }
+
+  /**
+   * Create the context menu
+   * @param params
+   */
+  public gridContextMenu(params: any) {
+    // console.log(params.value, params.node.data) // Cell value and row object
+    return <MenuItemDef[]>[
+      'copy',
+      'copyWithHeaders',
+      'paste',
+      'separator',
+      {
+        name: 'Tags',
+        icon: '<i class="fa fa-tags"></i>',
+        subMenu: [
+          {
+            name: 'Red',
+            icon: '<i class="fa fa-tag red"></i>',
+            action: function() {
+              params.context.this.contextAction(params.value, params.node.data);
+            },
+          },
+          {
+            name: 'Green',
+            icon: '<i class="fa fa-tag green"></i>',
+            action: function() {
+              params.context.this.contextAction(params.value, params.node.data);
+            },
+          },
+        ],
+      },
+      'separator',
+      'export',
+    ];
+  }
+
+  /**
+   * An action to perform on a context menu click
+   * @param params
+   */
+  public contextAction(value: string, row: any) {
+    console.log(value, row);
+  }
+
+  /** Save the grid state */
+  public gridStateSave() {
+    this.ui.gridStateChange(this.gridState);
+  }
+
+  /** Restore the grid state */
+  public gridStateRestore() {
+    if (this.grid && this.gridColumnApi) {
+      if (this.gridState.columns) {
+        this.gridColumnApi.setColumnState(this.gridState.columns);
+      }
+      if (this.gridState.sorts) {
+        this.grid.api.setSortModel(this.gridState.sorts);
+      }
+      if (this.gridState.filters) {
+        this.grid.api.setFilterModel(this.gridState.filters);
+        this.grid.api.onFilterChanged();
+      }
+    }
+  }
+
+  /**
+   * Create/update user
+   */
+  public userSubmit() {
+    // If editing, use put
+    if (this.isEditing) {
+      this.api.users.put(this.formMain.value).subscribe(() => {
+        this.formMain.reset(); // Reset form after completion
+        this.isEditing = false;
+      });
+    } else {
+      // If creating, use post
+      this.api.users.post(this.formMain.value).subscribe(() => this.formMain.reset());
+    }
+  }
+
   /**
    * Refresh users
    */
@@ -81,19 +309,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   /** Toggle the sidebar */
   public sidebarToggle(toggle: boolean) {
     this.ui.sidebarToggle(!toggle);
-    // There is a better way of doing this
-    setTimeout(() => {
-      this.datagrid.viewCreate();
-      this.ref.detectChanges();
-    });
-  }
-
-  /**
-   * Update the global filter term
-   * @param searchTerm
-   */
-  public onfilterGlobal(searchTerm: string = null) {
-    this.filterGlobal = { ...this.filterGlobal, term: searchTerm };
   }
 
   /**
@@ -121,62 +336,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.api.users.delete(user).subscribe();
   }
 
-  /**
-   * When the state has been changed (grouping/filtering/sorting/etc)
-   * @param event
-   */
-  public onStateChange(/** state: Datagrid.State */) {
-    // console.log('onStateChange', JSON.stringify(state));
-  }
-
-  /**
-   * When rows have been selected
-   * @param event
-   */
-  public onRowsSelected(rows: Models.User[]) {
-    if (rows && rows[0]) {
-      this.rowsSelected = rows;
-      this.formMain.patchValue(rows[0]);
-      this.isEditing = true;
-      DesktopUtils.copyToClipboard(rows[0].phone); // Copy phone number to clipboard
-    }
-  }
-
-  /**
-   * When a row has been edited
-   * @param event
-   */
-  public onRowUpdated(/** users: Models.User[] */) {
-    // console.log('onRowUpdated', users);
-  }
-
-  /**
-   * Open a context menu on right click
-   * @param $event
-   */
-  public contextMenu($event: MouseEvent) {
-    this.contextSvc.open(ContextMenuList.home, $event, this.rowsSelected);
-  }
-
-  /**
-   * Create/update user
-   */
-  public userSubmit() {
-    // If editing, use put
-    if (this.isEditing) {
-      this.api.users.put(this.formMain.value).subscribe(() => {
-        this.formMain.reset(); // Reset form after completion
-        this.isEditing = false;
-      });
-    } else {
-      // If creating, use post
-      this.api.users.post(this.formMain.value).subscribe(() => this.formMain.reset());
-    }
-  }
-
-  ngOnDestroy() {
-    if (this.subs.length) {
-      this.subs.forEach(sub => sub.unsubscribe());
-    } // Unsub
-  }
+  // Must be present even if not used for unsubs
+  ngOnDestroy() {}
 }

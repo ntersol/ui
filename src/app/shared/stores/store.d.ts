@@ -29,6 +29,7 @@ export declare namespace AppStore {
     saveState: Ui | null;
     tabsActive: { [key: string]: string };
     sidebarOpen: boolean;
+    gridState: GridState;
     modal: {
       modalId: string;
       options: {};

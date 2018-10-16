@@ -66,6 +66,14 @@ export class UIStoreService {
   }
 
   /**
+   * Toggle sidebar
+   * @param toggle - New sidebar state
+   */
+  public gridStateChange(gridState: GridState) {
+    this.store.dispatch(UIStoreActions.GRID_STATE_CHANGE(gridState));
+  }
+
+  /**
    * Toggle multiscreen view
    */
   public multiScreenToggle(multiScreen: boolean | null = null) {

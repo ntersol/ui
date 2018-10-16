@@ -8,6 +8,7 @@ import { UIStoreActions } from './ui.actions';
 const initialState: AppStore.Ui = {
   saveState: null,
   modal: null,
+  gridState: {},
   multiScreen: false,
   sidebarOpen: false,
   tabsActive: {},
@@ -18,6 +19,10 @@ export function UIReducer(state = initialState, action: Action) {
 
   if (isType(action, UIStoreActions.REHYDRATE)) {
     state = { ...initialState, ...action.payload };
+  }
+
+  if (isType(action, UIStoreActions.GRID_STATE_CHANGE)) {
+    state.gridState = action.payload;
   }
 
   if (isType(action, UIStoreActions.MODAL_OPEN)) {

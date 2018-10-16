@@ -15,7 +15,8 @@
             "lazyModules": [
               "src/app/libs/datagrid/datagrid.module",
               "src/app/libs/chart/chart.module",
-              "src/app/libs/context-menu/context-menu.module"
+              "src/app/libs/context-menu/context-menu.module",
+              "src/app/libs/grid/grid.module"
             ],
             "outputPath": "dist/browser",
             "index": "src/index.html",

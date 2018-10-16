@@ -9,6 +9,7 @@ import { AppStore } from '$shared';
 export class UiSelectorsService {
   public sidebarOpen$ = this.store.select(store => store.ui.sidebarOpen);
   public saveState$ = this.store.select(store => store.ui.saveState);
+  public gridState$ = this.store.select(store => store.ui.gridState);
   public modal$ = this.store.select(store => store.ui.modal);
   public multiScreen$ = this.store.select(store => store.ui.multiScreen);
   public tabActive$ = (tabInstanceId: string) => this.store.select(store => store.ui.tabsActive[tabInstanceId]);
