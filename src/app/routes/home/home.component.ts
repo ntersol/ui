@@ -151,18 +151,17 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /** Have the columns fill the available space if less than grid width */
-  @debounce(0, {
-    leading: false,
-    trailing: true,
-  })
   public gridFit() {
-    const widthCurrent = this.gridColumnApi.getColumnState().reduce((a, b) => a + b.width, 0);
-    const widthGrid = this.gridContainer.nativeElement.offsetWidth;
-    if (widthCurrent < widthGrid && this.gridAllowUpdate && this.gridLoaded) {
-      // Disable allow update to prevent loop
-      this.gridAllowUpdate = false;
-      // Resize columns to fit screen
-      this.gridOptions.api.sizeColumnsToFit();
+    console.log('gridFit')
+    if (this.gridColumnApi && this.gridContainer && this.gridContainer.nativeElement) {
+      const widthCurrent = this.gridColumnApi.getColumnState().reduce((a, b) => a + b.width, 0);
+      const widthGrid = this.gridContainer.nativeElement.offsetWidth;
+      if (widthCurrent < widthGrid && this.gridAllowUpdate && this.gridLoaded) {
+        // Disable allow update to prevent loop
+        this.gridAllowUpdate = false;
+        // Resize columns to fit screen
+        this.gridOptions.api.sizeColumnsToFit();
+      }
     }
   }
 
