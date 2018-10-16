@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // On window resize event, fit the grid columns to the screen
     fromEvent(window, 'resize')
-      .pipe(debounceTime(300))
+      .pipe(debounceTime(100))
       .subscribe(() => {
         if (this.gridLoaded && this.gridOptions.api) {
           this.gridFit();
@@ -147,7 +147,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /** Have the columns fill the available space if less than grid width */
-  @debounce(300, {
+  @debounce(100, {
     leading: false,
     trailing: true,
   })
@@ -185,7 +185,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
    * Added debounce since some events fire quickly like resizing
    * @param $event
    */
-  @debounce(300, {
+  @debounce(100, {
     leading: false,
     trailing: true,
   })
