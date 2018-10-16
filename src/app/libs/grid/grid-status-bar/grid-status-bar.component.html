@@ -19,7 +19,7 @@
   <ng-container *ngIf="gridGroups?.length">
     <div class="d-inline-block mr-2">
       <span class="mr-1">Grouped By:</span>
-      <button class="btn btn-xs btn-outline-primary btn-grid-sort mr-2" title="Remove this filter" *ngFor="let group of gridGroups" (click)="removeGroup(group.colId)">
+      <button class="btn btn-xs btn-outline-primary btn-grid-sort mr-2" title="Remove this group" *ngFor="let group of gridGroups" (click)="removeGroup(group.colId)">
         <span class="mr-1">{{group.colId | textCase }}</span>
         <i class="fa fa-remove"></i>
       </button>
