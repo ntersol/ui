@@ -18,7 +18,7 @@ import { debounce } from 'helpful-decorators';
 
 import { ApiService } from '$api';
 import { UIStoreService } from '$ui';
-import { GridStatusBarComponent, GridTemplateRendererComponent} from '$libs';
+import { GridStatusBarComponent, GridTemplateRendererComponent } from '$libs';
 import { Models } from '$models';
 import { columns } from './columns';
 
@@ -30,14 +30,13 @@ import { columns } from './columns';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
-
   @ViewChild('grid') grid: AgGridNg2;
   @ViewChild('gridContainer') gridContainer: ElementRef;
 
   public gridColumnApi: ColumnApi;
   public gridOptions: GridOptions = {
     context: {
-      this: this
+      this: this,
     },
     // A default column definition with properties that get applied to every column
     defaultColDef: {
@@ -70,11 +69,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private gridStatusComponent: GridStatusBarComponent;
 
-  constructor(
-    private api: ApiService,
-    public ui: UIStoreService,
-    private fb: FormBuilder,
-  ) {}
+  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder) {}
 
   public ngOnInit() {
     // Get users and load into store
@@ -152,7 +147,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** Have the columns fill the available space if less than grid width */
   public gridFit() {
-    console.log('gridFit')
     if (this.gridColumnApi && this.gridContainer && this.gridContainer.nativeElement) {
       const widthCurrent = this.gridColumnApi.getColumnState().reduce((a, b) => a + b.width, 0);
       const widthGrid = this.gridContainer.nativeElement.offsetWidth;
@@ -231,7 +225,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public gridContextMenu(params: any) {
     // console.log(params.value, params.node.data) // Cell value and row object
     return <MenuItemDef[]>[
-      'copy', 'copyWithHeaders', 'paste', 'separator',
+      'copy',
+      'copyWithHeaders',
+      'paste',
+      'separator',
       {
         name: 'Tags',
         icon: '<i class="fa fa-tags"></i>',
@@ -239,28 +236,28 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           {
             name: 'Red',
             icon: '<i class="fa fa-tag red"></i>',
-            action: function () {
+            action: function() {
               params.context.this.contextAction(params.value, params.node.data);
-            }
+            },
           },
           {
             name: 'Green',
             icon: '<i class="fa fa-tag green"></i>',
-            action: function () {
+            action: function() {
               params.context.this.contextAction(params.value, params.node.data);
-            }
+            },
           },
         ],
       },
       'separator',
-      'export'
+      'export',
     ];
   }
 
   /**
-    * An action to perform on a context menu click
-    * @param params
-    */
+   * An action to perform on a context menu click
+   * @param params
+   */
   public contextAction(value: string, row: any) {
     console.log(value, row);
   }

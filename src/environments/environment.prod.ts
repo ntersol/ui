@@ -43,5 +43,5 @@ export const environment = {
   },
   licenses: {
     agGrid: 'qwerty',
-  }
+  },
 };

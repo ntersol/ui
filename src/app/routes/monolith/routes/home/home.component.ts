@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Datagrid, ContextService, ContextMenuList} from '$libs';
+import { Datagrid, ContextService, ContextMenuList } from '$libs';
 
 import { MonolithApiService } from '../../shared/stores/api/api.store.service';
 import { UIStoreService } from '$ui';
@@ -42,8 +42,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   /** Hold subs for unsub */
   private subs: Subscription[] = [];
 
-  constructor(private api: MonolithApiService, public ui: UIStoreService, private fb: FormBuilder,
-    private contextSvc: ContextService,) {}
+  constructor(
+    private api: MonolithApiService,
+    public ui: UIStoreService,
+    private fb: FormBuilder,
+    private contextSvc: ContextService,
+  ) {}
 
   public ngOnInit() {
     // Get users and load into store

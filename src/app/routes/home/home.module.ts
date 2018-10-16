@@ -8,9 +8,8 @@ import { GridModule } from '$libs'; // Lazy loaded datagrid DatagridModule,
 import { routing } from './home.routes';
 import { HomeComponent } from './home.component';
 
-
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, GridModule ],
+  imports: [CommonModule, SiteModule, routing, GridModule],
   declarations: [HomeComponent],
   providers: [],
   exports: [],

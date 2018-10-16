@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { environment } from '$env'
+import { environment } from '$env';
 
 import { AgGridModule } from 'ag-grid-angular';
 import 'ag-grid-enterprise';
@@ -10,7 +10,7 @@ import { GridStatusBarComponent } from './grid-status-bar/grid-status-bar.compon
 import { TextCasePipe } from './pipes/text-case.pipe';
 
 // Set license
-import { LicenseManager } from "ag-grid-enterprise";
+import { LicenseManager } from 'ag-grid-enterprise';
 LicenseManager.setLicenseKey(environment.licenses.agGrid);
 
 @NgModule({
