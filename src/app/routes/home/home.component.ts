@@ -18,7 +18,7 @@ import { debounce } from 'helpful-decorators';
 
 import { ApiService } from '$api';
 import { UIStoreService } from '$ui';
-import { GridStatusBarComponent, GridTemplateRendererComponent } from '$libs';
+import { GridService } from '$libs';
 import { Models } from '$models';
 import { columns } from './columns';
 
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     },
   };
   public gridState: GridState = {};
-  public gridComponents = { statusBarComponent: GridStatusBarComponent };
+  public gridComponents = { statusBarComponent: this.gridSvc.statusBar };
   public gridLoaded = false;
   public gridFilterTerm = '';
   public gridRowsSelected: Models.User[];
@@ -67,9 +67,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public columns = columns;
 
-  private gridStatusComponent: GridStatusBarComponent;
+  private gridStatusComponent:any;
 
-  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder) {}
+  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder, private gridSvc: GridService) { }
 
   public ngOnInit() {
     // Get users and load into store
@@ -114,7 +114,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     // Attach custom cell templates to the appropriate column
     const columns = this.columns.map(column => {
       if (column.field === 'phone') {
-        column.cellRendererFramework = GridTemplateRendererComponent;
+        column.cellRendererFramework = this.gridSvc.templateRenderer;
         column.cellRendererParams = {
           ngTemplate: this.cellTemplatePhone,
           // grouping: () => { } // TODO: Custom renderer for group headers

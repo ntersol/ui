@@ -302,6 +302,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\app\libs\grid\grid.module.ts" />
+    <TypeScriptCompile Include="src\app\libs\grid\grid.service.ts" />
     <TypeScriptCompile Include="src\app\libs\grid\pipes\text-case.pipe.ts" />
     <TypeScriptCompile Include="src\app\libs\index.ts" />
     <TypeScriptCompile Include="src\app\routes\home\columns.ts" />
