@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 
 import { SiteModule } from '$site'; // Site modules
-import { DatagridModule, ContextModule } from '$libs'; // Lazy loaded datagrid
+import { ContextModule } from '$libs'; // Lazy loaded datagrid
 
 // Store Reducer
 import { UIReducer } from '$ui';
@@ -24,7 +24,6 @@ import { MonolithService } from './servies/monolith.service';
     CommonModule,
     SiteModule,
     routing,
-    DatagridModule,
     ContextModule,
     StoreModule.forRoot({ api: ApiReducer, ui: UIReducer }),
   ],

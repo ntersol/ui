@@ -1,6 +1,5 @@
 // Libs
 export * from './chart/chart.module';
-export * from './datagrid/datagrid.module';
 
 // Grid
 export * from './grid/grid.module';
