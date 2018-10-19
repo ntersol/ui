@@ -1,6 +1,6 @@
 # Angular Starter
 
-A rapid starter project for creating Angular single page apps. Contains Angular 6, lodash, Bootstrap 4, Ng-Bootstrap & Ngrx-Store (Redux). Built with Angular CLI.
+A rapid starter project for creating Angular single page apps. Contains Angular, lodash, Bootstrap 4, Ng-Bootstrap & Ngrx-Store (Redux). Built with Angular CLI.
 
 Available online @ https://jerrolkrause.github.io/angular-starter/#/. 
 
