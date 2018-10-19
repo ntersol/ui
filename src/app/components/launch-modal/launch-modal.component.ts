@@ -59,7 +59,12 @@ export class LaunchModalComponent implements OnInit, OnDestroy {
     const modal = this.modals.open(<any>this.modal, this.persist, this.size, this.data);
     // If static modal
     if (modal) {
-      modal.afterClosed().subscribe(reason => this.success.emit(reason ? reason : null));
+      modal.afterClosed().subscribe(reason => {
+        // Only emit success event if data is passed
+        if (reason) {
+          this.success.emit(reason)
+        }
+      });
     } else {
       // If observable modal. KNOWN BUG: If the page is refreshed and the app is dependent on an onSuccess method
       // that method will not be persisted

@@ -2,7 +2,7 @@
 
   <div class="modal-header">
     <h3 class="modal-title"><i class="fa fa-question-circle-o" aria-hidden="true"></i> {{ dataAlt || 'Confirmation' }}</h3>
-    <button type="button" class="close" aria-label="Close" (click)="dialogRef.close()">
+    <button type="button" class="close" aria-label="Close" mat-dialog-close>
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -12,7 +12,7 @@
   </div>
 
   <div class="modal-footer" style="justify-content: space-between;">
-    <button type="button" class="btn btn-outline-primary float-left pull-left dismiss" (click)="dialogRef.close()">Cancel</button>
+    <button type="button" class="btn btn-outline-primary float-left pull-left dismiss" mat-dialog-close>Cancel</button>
     <button type="button" class="btn btn-primary submit" (click)="submit()" aria-label="Close">
       <i class="fa fa-check" aria-hidden="true"></i> Confirm
     </button>
