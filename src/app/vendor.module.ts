@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatIconModule, MatMenuModule, MatFormFieldModule, MatInputModule  } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -13,9 +14,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
 
     // Vendors
-    NgbModule.forRoot(),
+    NgbModule.forRoot(), // ngBootstrap
+    // Angular Materials
+    MatIconModule,
+    MatMenuModule, 
+    MatFormFieldModule,
+    MatInputModule ,
   ],
-  exports: [RouterModule, FormsModule, ReactiveFormsModule, NgbModule],
+  exports: [RouterModule, FormsModule, ReactiveFormsModule, NgbModule,
+    MatIconModule, MatMenuModule, MatFormFieldModule, MatInputModule,
+  ],
   declarations: [],
 })
 export class VendorModule {}

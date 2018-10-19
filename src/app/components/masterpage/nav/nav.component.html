@@ -2,7 +2,7 @@
   <i class="fa fa-bars" aria-hidden="true"></i>
 </button>
 
-<div class=" navbar-collapse" id="navbar-main" [ngClass]="{'collapse open': isOpen }">
+<div class="navbar-collapse" id="navbar-main" [ngClass]="{'collapse open': isOpen }">
   <div class="navbar-mobile">
 
     <ul class="navbar-nav mr-auto">
@@ -26,17 +26,15 @@
         </a>
       </ng-container>
 
-      <div ngbDropdown placement="bottom-right">
-        <a id="dropdown-toggler" ngbDropdownToggle class="d-none d-lg-block p-2 link">
-          <i class="fa fa-user mr-1"></i>
-         {{ userName }}
-        </a>
-        <div ngbDropdownMenu>
-          <a class="dropdown-item logout" (click)="logOut()" data-qa="mp-dropdown-logout">
-            <i class="fa fa-power-off" aria-hidden="true"></i> Sign Out
-          </a>
-        </div>
-      </div>
+      <a [matMenuTriggerFor]="appMenu">
+        <i class="fa fa-user mr-1"></i>
+        <span>{{ userName }}</span>
+      </a>
+      <mat-menu #appMenu="matMenu" xPosition="after">
+        <button mat-menu-item (click)="logOut()">
+          <i class="fa fa-power-off" aria-hidden="true"></i> Sign Out
+        </button>
+      </mat-menu>
 
     </div>
   </div>

@@ -108,6 +108,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       username: ['', [Validators.required]],
       website: ['', []],
     });
+    console.log(this.formMain);
   }
 
   ngAfterViewInit() {

@@ -88,40 +88,28 @@
 
         <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
 
-          <div class="form-group row">
-            <label for="username" class="col col-12 col-md-3 col-form-label">Username<sup class="red">*</sup></label>
-            <div class="col col-12 col-md-9">
-              <input class="form-control" type="text" id="username" formControlName="username">
-            </div>
-          </div>
+          <mat-form-field>
+            <input matInput placeholder="Username" formControlName="username" required>
+            <mat-error *ngIf="formMain?.controls?.username.hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
 
-          <div class="form-group row">
-            <label for="name" class="col col-12 col-md-3 col-form-label">Name<sup class="red">*</sup></label>
-            <div class="col col-12 col-md-9">
-              <input class="form-control" type="text" id="name" formControlName="name">
-            </div>
-          </div>
+          <mat-form-field>
+            <input matInput placeholder="Name" formControlName="name" required>
+          </mat-form-field>
 
-          <div class="form-group row">
-            <label for="website" class="col col-12 col-md-3 col-form-label">Website</label>
-            <div class="col col-12 col-md-9">
-              <input class="form-control" type="text" id="website" formControlName="website">
-            </div>
-          </div>
+          <mat-form-field>
+            <input matInput placeholder="Website" formControlName="website">
+          </mat-form-field>
 
-          <div class="form-group row">
-            <label for="email" class="col col-12 col-md-3 col-form-label">Email</label>
-            <div class="col col-12 col-md-9">
-              <input class="form-control" type="email" id="email" formControlName="email">
-            </div>
-          </div>
+          <mat-form-field>
+            <input matInput placeholder="Email" formControlName="email">
+          </mat-form-field>
 
-          <div class="form-group row">
-            <label for="phone" class="col col-12 col-md-3 col-form-label">Phone</label>
-            <div class="col col-12 col-md-9">
-              <input class="form-control" type="text" id="phone" formControlName="phone">
-            </div>
-          </div>
+          <mat-form-field>
+            <input matInput placeholder="Phone" formControlName="phone">
+          </mat-form-field>
 
           <button type="submit" class="btn btn-primary float-right" [disabled]="route?.users?.modifying || formMain.invalid" [ngClass]="{ 'btn-waiting' : route?.users?.modifying }">
             <ng-container *ngIf="!isEditing">
