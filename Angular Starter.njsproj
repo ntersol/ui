@@ -231,6 +231,7 @@
     <TypeScriptCompile Include="src\app\components\api-state\api-state.component.ts" />
     <TypeScriptCompile Include="src\app\components\modals\confirmation\confirmation-modal.component.ts" />
     <TypeScriptCompile Include="src\app\components\modals\logout\logout-modal.component.ts" />
+    <TypeScriptCompile Include="src\app\components\modals\modals.service.ts" />
     <TypeScriptCompile Include="src\app\libs\chart\chart.component.ts" />
     <TypeScriptCompile Include="src\app\libs\chart\chart.d.ts" />
     <TypeScriptCompile Include="src\app\components\components.module.ts" />

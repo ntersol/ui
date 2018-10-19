@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription, interval } from 'rxjs';
 
 @Component({
@@ -13,7 +13,7 @@ export class LogoutModalComponent implements OnInit, OnDestroy {
   public data = 120; // Data is actually passed through the modal service not here
   public dataAlt: any; // Data is actually passed through the modal service not here
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor() {}
 
   ngOnInit() {
     this.counter = this.data; // How long to display the modal window
@@ -26,7 +26,7 @@ export class LogoutModalComponent implements OnInit, OnDestroy {
       } else {
         // If timer hits zero or below, CLOSE this modal which toggles the logout action in AuthService
         this.logoutTimer$.unsubscribe();
-        this.activeModal.close();
+        //this.activeModal.close();
       }
     });
   }
