@@ -38,40 +38,44 @@
     <div class="row" *ngIf="route?.users?.data">
       <div class="col-12" [ngClass]="sidebarOpen ? 'col-md-9' : 'col-md-12' ">
         <div style="position:relative;height:calc(100vh - 150px)">
-          <datagrid #datagrid
-                    [rows]="route.users.data"
-                    [columns]="columns"
-                    [state]="{}"
-                    [options]="options"
-                    [filterGlobal]="filterGlobal"
-                    (onStateChange)="onStateChange($event)"
-                    (onRowsSelected)="onRowsSelected($event)"
-                    (onRowUpdated)="onRowUpdated($event)"
-                    (onRightClickMenu)="contextMenu($event)">
 
-            <!-- Custom templates, prop corresponds to column property -->
-            <datagrid-column prop="phone">
-              <!-- Header template -->
-              <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
-                <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
-              </ng-template>
-              <!-- Cell template -->
-              <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-                <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
-              </ng-template>
-            </datagrid-column>
+          Update to AG-Grid coming soon
 
-            <datagrid-column prop="delete">
-              <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-                <app-launch-modal
-                                  modal="ConfirmationModalComponent" size="lg" [data]="'Are you sure you want to delete ' + row.name + '?'" [isButton]="false"
-                                  (success)="userDelete(row)">
-                  <i class="fa fa-remove"></i> Delete
-                </app-launch-modal>
-              </ng-template>
-            </datagrid-column>
+          <!--
+  <datagrid #datagrid
+            [rows]="route.users.data"
+            [columns]="columns"
+            [state]="{}"
+            [options]="options"
+            [filterGlobal]="filterGlobal"
+            (onStateChange)="onStateChange($event)"
+            (onRowsSelected)="onRowsSelected($event)"
+            (onRowUpdated)="onRowUpdated($event)"
+            (onRightClickMenu)="contextMenu($event)">
+
+          <datagrid-column prop="phone">
+           
+            <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
+              <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
+            </ng-template>
+          
+            <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
+              <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
+            </ng-template>
+          </datagrid-column>
+
+          <datagrid-column prop="delete">
+            <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
+              <app-launch-modal modal="ConfirmationModalComponent" size="lg" [data]="'Are you sure you want to delete ' + row.name + '?'" [isButton]="false"
+                                (success)="userDelete(row)">
+                <i class="fa fa-remove"></i> Delete
+              </app-launch-modal>
+            </ng-template>
+          </datagrid-column>
 
           </datagrid>
+          -->
+
         </div>
       </div>
       <div class="col-12 col-md-3" *ngIf="sidebarOpen">

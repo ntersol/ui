@@ -1,6 +1,6 @@
-import { Datagrid } from '$libs';
+// import { Datagrid } from '$libs';
 
-export const columns: Datagrid.Column[] = [
+export const columns: any[] = [
   {
     prop: 'name',
     label: 'Name',

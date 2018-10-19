@@ -6,7 +6,7 @@ const capitalize = require('lodash/capitalize');
   name: 'textCase',
 })
 export class TextCasePipe implements PipeTransform {
-  transform(value: string, type: 'pascal' | 'upper' | 'lower'): any {
+  transform(value: string, type?: 'pascal' | 'upper' | 'lower'): any {
     if (value && typeof value === 'string') {
       switch (type) {
         case 'pascal':

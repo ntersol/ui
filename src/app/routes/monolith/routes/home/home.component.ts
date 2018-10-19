@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Datagrid, ContextService, ContextMenuList } from '$libs';
+import { ContextService, ContextMenuList } from '$libs';
 
 import { MonolithApiService } from '../../shared/stores/api/api.store.service';
 import { UIStoreService } from '$ui';
@@ -22,13 +22,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   public sidebarOpen = false;
   public rowsSelected: any[] = [];
 
-  public filterGlobal: Datagrid.FilterGlobal = {
+  public filterGlobal: any = {
     term: '',
     props: ['name', 'website'],
   };
 
   // Inputs
-  public options: Datagrid.Options = {
+  public options: any = {
     scrollbarH: true,
     selectionType: 'single',
     fullScreen: true,
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     primaryKey: 'id',
   };
 
-  public columns: Datagrid.Column[] = columns;
+  public columns: any[] = columns;
 
   /** Hold subs for unsub */
   private subs: Subscription[] = [];

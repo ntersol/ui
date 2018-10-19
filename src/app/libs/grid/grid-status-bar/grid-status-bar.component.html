@@ -9,7 +9,7 @@
   <!-- Sort Option -->
   <div class="d-inline-block mr-2" *ngIf="gridState?.sorts?.length">
     <span class="mr-1">Sorted By:</span>
-    <button class="btn btn-xs btn-outline-primary btn-grid-sort mr-2" title="Remove sorting" (click)="removeSort(gridState.sorts[0])">
+    <button class="btn btn-xs btn-outline-primary btn-grid-sort mr-2" title="Remove sorting" (click)="removeSort()">
       <span class="mr-1">{{gridState.sorts[0].colId  | textCase }}, {{gridState.sorts[0].sort | textCase }}</span>
       <i class="fa fa-remove"></i>
     </button>
