@@ -1,21 +1,19 @@
-import { Component, EventEmitter } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Inject } from '@angular/core';
+//import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-confirmation-modal',
   templateUrl: './confirmation-modal.component.html',
 })
 export class ConfirmationModalComponent {
-  public data: any; // Data is actually passed through the modal service not here
-  public dataAlt: any; // Data is actually passed through the modal service not here
-  public onSuccess: EventEmitter<any> = new EventEmitter();
-
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   /**
    * Submit the form
    */
-  submit() {
-    this.activeModal.close('Success');
-  } // end submit
+  public submit() {
+    this.dialogRef.close(this.data);
+  } 
 }

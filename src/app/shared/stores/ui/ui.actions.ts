@@ -9,9 +9,8 @@ export const UIStoreActions = {
   REHYDRATE: actionCreator<AppStore.Ui>('REHYDRATE'),
   MODAL_OPEN: actionCreator<{
     modalId: string;
-    options: { size: 'sm' | 'lg' | 'xl' | 'full'; windowClass: string };
+    options: { size: 'sm' | 'lg' | 'xl' | 'full'; };
     data: any;
-    dataAlt: any;
   }>('MODAL_OPEN'),
   MODAL_UNLOAD: actionCreator<null>('MODAL_UNLOAD'),
   TAB_CHANGE: actionCreator<{ tabInstanceId: string; tabId: string }>('TAB_CHANGE'),

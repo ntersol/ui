@@ -7,23 +7,22 @@
 
         <app-counter class="mr-2"></app-counter>
 
-        <button class="btn btn-sm btn-outline-primary mr-1 d-inline-block"
-                title="Toggle multi-screen view"
+        <button mat-stroked-button class="mr-2" title="Toggle multi-screen view"
                 [ngClass]="{ 'enabled' : ui.select.multiScreen$ | async }"
                 (click)="ui.multiScreenToggle()">
           <i aria-hidden="true" class="fa fa-external-link-square"></i>
         </button>
 
-        <button class="btn btn-sm" (click)="sidebarToggle(route.sidebarOpen)" [ngClass]="route.sidebarOpen ? 'btn-danger' : 'btn-primary'">
+        <button mat-raised-button class="mat-reverse" (click)="sidebarToggle(route.sidebarOpen)" [ngClass]="route.sidebarOpen ? 'active' : null">
           <i class="fa fa-user mr-1"></i>
           Toggle User Sidebar
         </button>
       </div>
 
-      <button class="btn btn-outline-primary btn-sm mr-2" (click)="usersRefresh()" [disabled]="route?.users?.loading">
+      <button mat-raised-button class="mat-reverse mr-2" (click)="usersRefresh()" [disabled]="route?.users?.loading">
         <i class="fa fa-refresh"></i>
       </button>
-
+    
       <!-- Filter datatable-->
       <form class="form-inline mr-3 d-inline-block">
         <label class="icon icon-filter" style="position:relative;">
@@ -73,9 +72,18 @@
                            (firstDataRendered)="gridFirstDataRendered()"
                            (gridReady)="gridReady($event)">
           </ag-grid-angular>
-          
-          <ng-template #phone let-row >
-            <a href="tel:{{ row?.phone | phoneNumber : true }}">{{ row?.phone | phoneNumber }}</a> 
+
+          <!-- Phone number template -->
+          <ng-template #phone let-row>
+            <a href="tel:{{ row?.phone | phoneNumber : true }}">{{ row?.phone | phoneNumber }}</a>
+          </ng-template>
+
+          <!-- Delete template -->
+          <ng-template #delete let-row>
+            <app-launch-modal modal="ConfirmationModalComponent" size="lg" data="Are you sure you want to delete this user?" [isButton]="false"
+                              (success)="userDelete()">
+              <i class="fa fa-remove"></i> Delete
+            </app-launch-modal>
           </ng-template>
 
         </div>

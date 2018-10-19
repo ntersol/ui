@@ -2,17 +2,17 @@
 
   <div class="modal-header">
     <h3 class="modal-title"><i class="fa fa-question-circle-o" aria-hidden="true"></i> {{ dataAlt || 'Confirmation' }}</h3>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="dialogRef.close()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
 
   <div class="modal-body" id="modal-body">
-    <p>{{ data }} </p>
+    <p class="mb-0">{{ data }} </p>
   </div>
 
   <div class="modal-footer" style="justify-content: space-between;">
-    <button type="button" class="btn btn-outline-primary float-left pull-left dismiss" (click)="activeModal.dismiss('Close click')">Cancel</button>
+    <button type="button" class="btn btn-outline-primary float-left pull-left dismiss" (click)="dialogRef.close()">Cancel</button>
     <button type="button" class="btn btn-primary submit" (click)="submit()" aria-label="Close">
       <i class="fa fa-check" aria-hidden="true"></i> Confirm
     </button>

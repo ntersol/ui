@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngrx/store';
-import { BehaviorSubject } from 'rxjs';
 
-import { UIStoreActions } from './ui.actions';
-import { AppSettings } from 'src/app/shared/app.settings';
-import { AppStore } from 'src/app/shared/stores/store';
 
 import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { AppSettings, AppStore } from '$shared';
+import { Store } from '@ngrx/store';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { UIStoreActions } from '$ui';
 
 /** Sample Usage:
 this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you want to delete this user?', 'Delete User').result.then(
@@ -18,12 +17,14 @@ this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you
 // List modals here by component name
 type modals = 'LogoutModalComponent' | 'ConfirmationModalComponent';
 
+
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class UIModalService {
+export class ModalsService {
+
   /** Reference to the STATIC currently open modal. This reference is used for static non persistant modals */
-  public modalRef: NgbModalRef;
+  public modalRef: MatDialogRef<any>;
   /** Reference to the STORE OBSERVABLE currently open modal. This reference is used for modals persisted in the UI store */
   public modalRef$: BehaviorSubject<any> = new BehaviorSubject(null);
   /** List of component references of available modals */
@@ -32,20 +33,31 @@ export class UIModalService {
     LogoutModalComponent: LogoutModalComponent,
   };
 
-  constructor(private modalService: NgbModal, private store: Store<AppStore.Root>, private settings: AppSettings) {
+  constructor(private store: Store<AppStore.Root>, private settings: AppSettings, public dialog: MatDialog) {
     // Subscribe to the modal in the store and launch store modal if data is found. Also make sure token is present
     this.store.select(storeElem => storeElem.ui.modal).subscribe((modal: any) => {
       // Make sure modal exists AND that a token is present in app settings. This prevents a modal from persisting after logout
       if (modal && Object.keys(modal).length && this.settings.token) {
         // Store reference to the modal instance
-        const modalRef = this.modalService.open(this.modalList[modal.modalId], modal.options);
-        // Add any passed in data to the modal instance after it has opened
-        if (modal.data) {
-          modalRef.componentInstance.data = modal.data;
+        let width = '720px';
+
+        switch (modal.size) {
+          case 'sm':
+            width = '480px';
+            break;
+          case 'xl':
+            width = '1024px';
+            break;
+          case 'full':
+            width = '90%';
+            break;
         }
-        if (modal.dataAlt) {
-          modalRef.componentInstance.dataAlt = modal.dataAlt;
-        }
+        //const modalRef = this.modalService.open(this.modalList[modal.modalId], modal.options);
+        const modalRef = this.dialog.open(this.modalList[modal.modalId], {
+          width: width,
+          data: modal.data || null
+        });
+        
         this.modalRef$.next(modalRef);
         this.onClose();
       }
@@ -65,14 +77,19 @@ export class UIModalService {
     persist: boolean = false,
     size: 'sm' | 'lg' | 'xl' | 'full' = 'lg',
     data?: any,
-    dataAlt?: any,
   ) {
-    let windowClass = '';
-    if (size === 'xl') {
-      windowClass += ' modal-xl';
-    }
-    if (size === 'full') {
-      windowClass += ' modal-full';
+    let width = '720px';
+
+    switch (size) {
+      case 'sm':
+        width = '480px';
+        break;
+      case 'xl':
+        width = '1024px';
+        break;
+      case 'full':
+        width = '90%';
+        break;
     }
 
     // If persist is set, load this modal into the store so state is managed by the UI store
@@ -86,13 +103,11 @@ export class UIModalService {
       );
     } else {
       // If persist is not set
-      this.modalRef = this.modalService.open(this.modalList[modalId], { size: <any>size, windowClass: windowClass });
-      if (data) {
-        this.modalRef.componentInstance.data = data;
-      }
-      if (dataAlt) {
-        this.modalRef.componentInstance.dataAlt = dataAlt;
-      }
+      // this.modalRef = this.modalService.open(this.modalList[modalId], { size: <any>size, windowClass: windowClass });
+      this.modalRef = this.dialog.open(this.modalList[modalId], {
+        width: width,
+        data: data
+      });
     }
     return this.modalRef;
   }

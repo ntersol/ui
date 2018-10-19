@@ -58,6 +58,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   public gridAllowUpdate = true;
 
   @ViewChild('phone') cellTemplatePhone: TemplateRef<any>;
+  @ViewChild('delete') cellTemplateDelete: TemplateRef<any>;
 
   public users$ = this.api.select.users$;
   public sidebarOpen$ = this.ui.select.sidebarOpen$;
@@ -108,7 +109,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       username: ['', [Validators.required]],
       website: ['', []],
     });
-    console.log(this.formMain);
   }
 
   ngAfterViewInit() {
@@ -119,6 +119,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         column.cellRendererParams = {
           ngTemplate: this.cellTemplatePhone,
           // grouping: () => { } // TODO: Custom renderer for group headers
+        };
+      }
+      if (column.field === 'delete') {
+        column.cellRendererFramework = this.gridSvc.templateRenderer;
+        column.cellRendererParams = {
+          ngTemplate: this.cellTemplateDelete,
         };
       }
       return column;
@@ -168,6 +174,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   /** Filter global option */
   public gridFilterGlobal() {
     this.grid.api.setQuickFilter(this.gridFilterTerm);
+  }
+
+  public doCoolStuff(test:any) {
+    console.log(test);
   }
 
   /**
@@ -333,7 +343,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
    * Delete user
    * @param user
    */
-  public userDelete(user: Models.User) {
+  public userDelete() {
+    const user = this.gridRowsSelected[0];
     this.api.users.delete(user).subscribe();
   }
 

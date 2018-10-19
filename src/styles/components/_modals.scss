@@ -7,3 +7,7 @@
     &.modal-xl .modal-dialog{max-width: 1100px; }
 }
 .modal-backdrop:first-of-type{z-index:1039;}
+
+body .mat-dialog-container { padding: 0;
+  .close:focus { outline: 0; }
+}
