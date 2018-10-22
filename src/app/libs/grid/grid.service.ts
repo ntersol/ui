@@ -4,12 +4,12 @@ import { GridTemplateRendererComponent } from './grid-template-renderer/grid-tem
 import { GridStatusBarComponent } from './grid-status-bar/grid-status-bar.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GridService {
   // Manage grid component references
   public statusBar = GridStatusBarComponent;
   public templateRenderer = GridTemplateRendererComponent;
 
-  constructor() { }
+  constructor() {}
 }

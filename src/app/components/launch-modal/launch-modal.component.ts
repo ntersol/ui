@@ -62,7 +62,7 @@ export class LaunchModalComponent implements OnInit, OnDestroy {
       modal.afterClosed().subscribe(reason => {
         // Only emit success event if data is passed
         if (reason) {
-          this.success.emit(reason)
+          this.success.emit(reason);
         }
       });
     } else {

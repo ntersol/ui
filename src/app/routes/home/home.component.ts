@@ -68,9 +68,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public columns = columns;
 
-  private gridStatusComponent:any;
+  private gridStatusComponent: any;
 
-  constructor(private api: ApiService, public ui: UIStoreService, private fb: FormBuilder, private gridSvc: GridService) { }
+  constructor(
+    private api: ApiService,
+    public ui: UIStoreService,
+    private fb: FormBuilder,
+    private gridSvc: GridService,
+  ) {}
 
   public ngOnInit() {
     // Get users and load into store
@@ -176,7 +181,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.grid.api.setQuickFilter(this.gridFilterTerm);
   }
 
-  public doCoolStuff(test:any) {
+  public doCoolStuff(test: any) {
     console.log(test);
   }
 

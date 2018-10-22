@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-
 import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { AppSettings, AppStore } from '$shared';
@@ -17,12 +16,10 @@ this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you
 // List modals here by component name
 type modals = 'LogoutModalComponent' | 'ConfirmationModalComponent';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ModalsService {
-
   /** Reference to the STATIC currently open modal. This reference is used for static non persistant modals */
   public modalRef: MatDialogRef<any>;
   /** Reference to the STORE OBSERVABLE currently open modal. This reference is used for modals persisted in the UI store */
@@ -55,9 +52,9 @@ export class ModalsService {
         //const modalRef = this.modalService.open(this.modalList[modal.modalId], modal.options);
         const modalRef = this.dialog.open(this.modalList[modal.modalId], {
           width: width,
-          data: modal.data || null
+          data: modal.data || null,
         });
-        
+
         this.modalRef$.next(modalRef);
         this.onClose();
       }
@@ -72,12 +69,7 @@ export class ModalsService {
    * @param data Primary set of data to pass to the modal
    * @param dataAlt Secondary set of data to pass to the modal
    */
-  public open(
-    modalId: modals,
-    persist: boolean = false,
-    size: 'sm' | 'lg' | 'xl' | 'full' = 'lg',
-    data?: any,
-  ) {
+  public open(modalId: modals, persist: boolean = false, size: 'sm' | 'lg' | 'xl' | 'full' = 'lg', data?: any) {
     let width = '720px';
 
     switch (size) {
@@ -106,7 +98,7 @@ export class ModalsService {
       // this.modalRef = this.modalService.open(this.modalList[modalId], { size: <any>size, windowClass: windowClass });
       this.modalRef = this.dialog.open(this.modalList[modalId], {
         width: width,
-        data: data
+        data: data,
       });
     }
     return this.modalRef;

@@ -7,13 +7,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   templateUrl: './confirmation-modal.component.html',
 })
 export class ConfirmationModalComponent {
-  constructor(public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
-  }
+  constructor(public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   /**
    * Submit the form
    */
   public submit() {
     this.dialogRef.close(this.data);
-  } 
+  }
 }

@@ -20,13 +20,7 @@ import { MonolithApiSelectorsService } from './shared/stores/api/api.selectors.s
 import { MonolithService } from './servies/monolith.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SiteModule,
-    routing,
-    ContextModule,
-    StoreModule.forRoot({ api: ApiReducer, ui: UIReducer }),
-  ],
+  imports: [CommonModule, SiteModule, routing, ContextModule, StoreModule.forRoot({ api: ApiReducer, ui: UIReducer })],
   declarations: [HomeComponent, HomeContextMenuComponent],
   providers: [MonolithApiService, MonolithApiSelectorsService, MonolithService],
   exports: [],
