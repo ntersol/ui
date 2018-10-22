@@ -1,5 +1,6 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, enableProdMode, ErrorHandler } from '@angular/core'; // APP_INITIALIZER,
 import { RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -48,6 +49,7 @@ export const APP_COMPONENTS = [
   imports: [
     BrowserModule.withServerTransition({ appId: 'angular-starter' }),
     HttpClientModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {
       useHash: true,
       preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,

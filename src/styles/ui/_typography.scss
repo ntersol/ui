@@ -30,3 +30,8 @@ small, .small { font-size: 80%; font-weight: 400; }
 .red { color: red; }
 .green { color: green; }
 .grey { color: #ccc; }
+
+.mat-icon.material-icons {
+  &.mat-icon-inline { position: relative; top: 2px; }
+  &:focus { outline: none; }
+}

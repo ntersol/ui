@@ -34,7 +34,6 @@ export declare namespace AppStore {
       modalId: string;
       options: {};
       data: any;
-      dataAlt: any;
     } | null;
     multiScreen: boolean;
   }

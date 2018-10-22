@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { UIModalService } from '$ui';
+import { ModalsService } from '../modals/modals.service';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
 /** Sample Usage:
 <app-launch-modal  classes="btn btn-icon"
@@ -10,7 +11,7 @@ import { UIModalService } from '$ui';
         <i class="fa fa-remove"></i> Delete
 </app-launch-modal>
 */
-
+@AutoUnsubscribe()
 @Component({
   selector: 'app-launch-modal',
   template: `<button class="{{classes}}" (click)="openModal()" *ngIf="isButton" [disabled]="disabled">
@@ -46,7 +47,7 @@ export class LaunchModalComponent implements OnInit, OnDestroy {
 
   private sub: Subscription;
 
-  constructor(private modals: UIModalService) {}
+  constructor(private modals: ModalsService) {}
 
   ngOnInit() {}
 
@@ -55,23 +56,21 @@ export class LaunchModalComponent implements OnInit, OnDestroy {
    * Attach a success function and pass any relevant data to the modal component
    */
   public openModal() {
-    if (this.size === 'xl') {
-      this.windowClass += ' modal-xl';
-    }
-    if (this.size === 'full') {
-      this.windowClass += ' modal-full';
-    }
-
-    const modal = this.modals.open(<any>this.modal, this.persist, this.size, this.data, this.dataAlt);
+    const modal = this.modals.open(<any>this.modal, this.persist, this.size, this.data);
     // If static modal
     if (modal) {
-      modal.result.then(reason => this.success.emit(reason), reason => this.dismiss.emit(reason));
+      modal.afterClosed().subscribe(reason => {
+        // Only emit success event if data is passed
+        if (reason) {
+          this.success.emit(reason);
+        }
+      });
     } else {
       // If observable modal. KNOWN BUG: If the page is refreshed and the app is dependent on an onSuccess method
       // that method will not be persisted
       this.sub = this.modals.modalRef$.subscribe(modalElem => {
         if (modalElem) {
-          modalElem.result.then((reason: any) => this.success.emit(reason), (reason: any) => this.dismiss.emit(reason));
+          modalElem.result.then((reason: any) => this.success.emit(reason), (reason: any) => this.success.emit(reason));
         }
       });
     }

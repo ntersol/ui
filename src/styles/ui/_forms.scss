@@ -61,3 +61,17 @@ label { cursor: pointer; display: block;
         input:not([disabled]), select:not([disabled]), textarea:not([disabled]) {background-color: #ffffe8;}
     }
 }
+
+.mat-form-field { width: 100%;
+
+  .mat-form-field-ripple, .mat-form-field-underline { background-color: $bg-primary !important; }
+
+  &.mat-form-field-can-float.mat-form-field-should-float {
+    .mat-form-field-label { color: $bg-primary; }
+  }
+
+  &.ng-valid.mat-form-field-can-float.mat-form-field-should-float {
+    .mat-form-field-label { color: green; }
+    .mat-form-field-underline { background-color: green; }
+  }
+}
