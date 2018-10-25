@@ -10,7 +10,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 // import { formatDate, formatNumber, formatCurrency, formatPercent } from '@angular/common';
-import { defaultsDeep } from 'lodash';
+const defaultsDeep = require('lodash/defaultsDeep');
 
 declare global {
   interface Window {
