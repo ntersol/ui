@@ -10,6 +10,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 // import { formatDate, formatNumber, formatCurrency, formatPercent } from '@angular/common';
+import { defaultsDeep } from 'lodash';
 
 declare global {
   interface Window {
@@ -54,7 +55,7 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   @Input() width: string;
   @Input() height: string;
   @Input() data: CanvasJS.ChartDataSeriesOptions[];
-  @Input() options: CanvasJS.ChartOptions;
+  @Input() options: Partial<CanvasJS.ChartOptions>;
   @Input() stacked: boolean;
 
   /** Colors for data points in RGB */
@@ -246,10 +247,7 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     };
     // console.log(options)
     // Return options object with overrides
-    return {
-      ...options,
-      ...this.options,
-    };
+    return defaultsDeep(this.options, options);
   }
 
   /**  */
