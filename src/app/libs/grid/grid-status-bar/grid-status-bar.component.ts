@@ -47,7 +47,7 @@ export class GridStatusBarComponent implements OnInit {
       // Get the active groups
       this.gridGroups = this.gridState.columns.filter((column: any) => column.rowGroupIndex !== null);
 
-      this.ref.markForCheck();
+      this.ref.detectChanges();
     }
   }
 
@@ -59,14 +59,8 @@ export class GridStatusBarComponent implements OnInit {
     this.params = params;
   }
 
-  /** Reset all sorts/filters/groups */
-  public reset() {
-    this.resetting = true;
-    this.grid.api.setSortModel(null);
-    this.grid.api.setFilterModel(null);
-    this.gridColumnApi.resetColumnState();
-    this.resetting = false;
-  }
+  /** Reset all sorts/filters/groups. Reference is passed by grid.component.ts */
+  public reset() {}
 
   /** Remove sorting */
   public removeSort() {

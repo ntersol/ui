@@ -26,8 +26,8 @@
       <!-- Filter datatable-->
       <form class="form-inline mr-3 d-inline-block">
         <label class="icon icon-filter" style="position:relative;">
-          <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter" [(ngModel)]="gridFilterTerm" (ngModelChange)="gridFilterGlobal()" />
-          <a (click)="gridFilterTerm = null; gridFilterGlobal()" *ngIf="gridFilterTerm" style="position:absolute;right: 10px;top: 4px;"><i class="fa fa-remove"></i></a>
+          <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter" [(ngModel)]="gridFilterTerm"/>
+          <a (click)="gridFilterTerm = null" *ngIf="gridFilterTerm" style="position:absolute;right: 10px;top: 4px;"><i class="fa fa-remove"></i></a>
         </label>
       </form>
 
@@ -41,11 +41,11 @@
     <div class="row">
       <div class="col-12" [ngClass]="route.sidebarOpen ? 'col-md-8' : 'col-md-12' ">
 
-        <div style="position:relative;" #gridContainer>
-          <ag-grid-angular #grid
-                           style="height:calc(100vh - 150px)"
+          <app-grid style="height:calc(100vh - 150px)"
                            class="ag-theme-balham"
                            [gridOptions]="gridOptions"
+                           [gridState]="gridState"
+                           [gridFilterTerm]="gridFilterTerm"
                            [rowData]="route.users.data"
                            [columnDefs]="columns"
                            [animateRows]="true"
@@ -55,23 +55,12 @@
                            [enableRangeSelection]="true"
                            [rememberGroupStateWhenNewData]="true"
                            [groupUseEntireRow]="true"
-                           [frameworkComponents]="gridComponents"
                            [getContextMenuItems]="gridContextMenu"
                            rowGroupPanelShow="onlyWhenGrouping"
                            rowSelection="multiple"
-                           (selectionChanged)="gridSelectionChanged()"
-                           (gridSizeChanged)="gridSizeChanged()"
-                           (rowDataChanged)="gridRowDataChanged()"
-                           (sortChanged)="gridStateChanged($event)"
-                           (filterChanged)="gridStateChanged($event)"
-                           (columnPinned)="gridStateChanged($event)"
-                           (columnResized)="gridStateChanged($event)"
-                           (columnMoved)="gridStateChanged($event)"
-                           (columnRowGroupChanged)="gridStateChanged($event)"
-                           (rowGroupOpened)="gridStateChanged($event)"
-                           (firstDataRendered)="gridFirstDataRendered()"
-                           (gridReady)="gridReady($event)">
-          </ag-grid-angular>
+                           (stateChange)="gridStateSave($event)"
+                           (rowsSelected)="rowsSelected($event)">
+          </app-grid>
 
           <!-- Phone number template -->
           <ng-template #phone let-row>
@@ -86,7 +75,6 @@
             </app-launch-modal>
           </ng-template>
 
-        </div>
       </div>
       <div class="col-12 col-md-4" *ngIf="route.sidebarOpen">
         <a class="float-right" (click)="userStopEdit()" *ngIf="isEditing"><i class="fa fa-user-plus" aria-hidden="true"></i> Add New User</a>
