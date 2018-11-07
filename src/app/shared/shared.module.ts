@@ -34,7 +34,7 @@ export const APP_PIPES_DIRECTIVES = [
   // Directives
   FullScreenDirective,
   FocusDirective,
-  ModalLaunchDirective
+  ModalLaunchDirective,
 ];
 
 @NgModule({

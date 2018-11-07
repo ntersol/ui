@@ -10,17 +10,14 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
   selector: 'app-base',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BaseComponent implements OnInit, OnDestroy {
-
-  constructor(
-    // private api: ApiService, public ui: UIStoreService
-  ) { }
+  constructor() // private api: ApiService, public ui: UIStoreService
+  {}
 
   ngOnInit() {}
 
   /** Must be present even if not used for autounsub */
   ngOnDestroy() {}
-
 }

@@ -7,12 +7,8 @@ import { SharedModule } from '$shared';
 import { MatFormFieldComponent } from './mat-form-field/mat-form-field.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    VendorModule,
-    SharedModule
-  ],
+  imports: [CommonModule, VendorModule, SharedModule],
   declarations: [MatFormFieldComponent],
-  exports: [MatFormFieldComponent]
+  exports: [MatFormFieldComponent],
 })
-export class MaterialsModule { }
+export class MaterialsModule {}

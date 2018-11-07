@@ -42,25 +42,49 @@
     <div class="row">
       <div class="col-12" [ngClass]="route.sidebarOpen ? 'col-md-8' : 'col-md-12' ">
 
-        <app-grid style="height:calc(100vh - 150px)" class="ag-theme-balham" [gridOptions]="gridOptions" [gridState]="gridState"
-          [gridFilterTerm]="gridFilterTerm" [rowData]="route.users.data" [columnDefs]="columns" [animateRows]="true"
-          [enableSorting]="true" [enableFilter]="true" [enableColResize]="true" [enableRangeSelection]="true"
-          [rememberGroupStateWhenNewData]="true" [groupUseEntireRow]="true" [getContextMenuItems]="gridContextMenu"
-          rowGroupPanelShow="onlyWhenGrouping" rowSelection="multiple" (stateChange)="gridStateSave($event)"
-          (rowsSelected)="rowsSelected($event)">
-        </app-grid>
+          <app-grid style="height:calc(100vh - 150px)" class="ag-theme-balham" 
+            [gridOptions]="gridOptions" 
+            [gridState]="gridState"
+            [gridFilterTerm]="gridFilterTerm" 
+            [rowData]="route.users.data" 
+            [columnDefs]="columns" 
+            [animateRows]="true"
+            [enableSorting]="true" 
+            [enableFilter]="true" 
+            [enableColResize]="true" 
+            [enableRangeSelection]="true"
+            [rememberGroupStateWhenNewData]="true" 
+            [groupUseEntireRow]="true" 
+            [getContextMenuItems]="gridContextMenu"
+            rowGroupPanelShow="onlyWhenGrouping" 
+            rowSelection="multiple" 
+            (stateChange)="gridStateSave($event)"
+            (rowsSelected)="rowsSelected($event)">
 
-        <!-- Phone number template -->
-        <ng-template #phone let-row>
-          <a href="tel:{{ row?.phone | phoneNumber : true }}">{{ row?.phone | phoneNumber }}</a>
-        </ng-template>
-
-        <!-- Delete template -->
-        <ng-template #delete let-row>
-          <button class="" appModalLaunch modal="ConfirmationModalComponent" size="lg" data="Are you sure you want to delete this user?" (success)="userDelete()">
-              <i class="fa fa-remove"></i> Delete
-          </button>
-        </ng-template>
+            <!-- Custom templates, prop corresponds to column property -->
+            <grid-column field="phone">
+              <!-- Header template (NOT CURRENTLY SUPPORTED YET)
+                            <ng-template let-value="value" let-column="column" let-row="row" grid-header-template>
+                              <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
+                            </ng-template>
+                             -->
+              <!-- Cell template -->
+              <ng-template let-value="value" let-column="column" let-row="row" grid-cell-template>
+                <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
+              </ng-template>
+            </grid-column>
+            
+            <!-- Custom templates, prop corresponds to column property -->
+            <grid-column field="delete">
+              <!-- Cell template -->
+              <ng-template let-value="value" let-column="column" let-row="row" grid-cell-template>
+                <button mat-raised-button class="mat-reverse btn-sm" appModalLaunch modal="ConfirmationModalComponent" size="lg"
+                  data="Are you sure you want to delete this user?" (success)="userDelete()">
+                  <i class="fa fa-remove"></i> Delete
+                </button>
+              </ng-template>
+            </grid-column>
+          </app-grid>
 
       </div>
       <div class="col-12 col-md-4 anim-fade-in" *ngIf="route.sidebarOpen">

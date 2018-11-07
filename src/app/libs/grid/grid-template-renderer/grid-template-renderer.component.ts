@@ -13,13 +13,16 @@ import { ICellRendererParams } from 'ag-grid-community';
 })
 export class GridTemplateRendererComponent implements ICellRendererAngularComp {
   template: TemplateRef<any>;
-  templateContext: { $implicit: any; params: any };
+  templateContext: { $implicit: any; params: any; column: any; row: any; value: any };
 
   refresh(params: any): boolean {
     if (params.data) {
       this.templateContext = {
-        $implicit: params.data,
+        value: params.data[params.colDef.field],
+        column: params.colDef,
+        row: params.data,
         params: params,
+        $implicit: params.data[params.colDef.field],
       };
       return true;
     }
@@ -28,7 +31,7 @@ export class GridTemplateRendererComponent implements ICellRendererAngularComp {
 
   agInit(params: ICellRendererParams): void {
     this.template = (<any>params)['ngTemplate'];
-    //this.template = () => 'test'
+    // this.template = () => 'test'
     this.refresh(params);
   }
 }

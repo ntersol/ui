@@ -8,6 +8,8 @@ import {
   Output,
   EventEmitter,
   ViewEncapsulation,
+  ContentChildren,
+  QueryList,
 } from '@angular/core';
 import { AgGridNg2 } from 'ag-grid-angular';
 import { GridOptions, ColumnApi } from 'ag-grid-community';
@@ -15,8 +17,9 @@ import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 import { debounce } from 'helpful-decorators';
 
+import { GridTemplateRendererComponent } from '../grid-template-renderer/grid-template-renderer.component';
 import { GridStatusBarComponent } from '../grid-status-bar/grid-status-bar.component';
-//import { GridTemplateRendererComponent } from '../grid-template-renderer/grid-template-renderer.component';
+import { GridColumnDirective } from '../directives/column.directive';
 
 const defaultsDeep = require('lodash/defaultsDeep');
 
@@ -68,7 +71,6 @@ export class GridComponent implements OnInit {
 
   @Input() gridState: GridState;
   @Input() rowData: any[];
-  @Input() columns: any[];
   @Input() columnDefs: any[];
   @Input() animateRows: boolean;
   @Input() enableSorting: boolean;
@@ -91,6 +93,19 @@ export class GridComponent implements OnInit {
   public gridComponents = { statusBarComponent: GridStatusBarComponent };
   public gridStatusComponent: GridStatusBarComponent;
 
+  /** Holds custom DOM templates passed from parent */
+  private _columnTemplates: any;
+  @ContentChildren(GridColumnDirective)
+  set columnTemplates(val: QueryList<GridColumnDirective>) {
+    const arr = val.toArray();
+    if (arr.length) {
+      this._columnTemplates = arr;
+    }
+  }
+  get columnTemplates(): QueryList<GridColumnDirective> {
+    return this._columnTemplates;
+  }
+
   constructor() {}
 
   ngOnInit() {
@@ -102,27 +117,6 @@ export class GridComponent implements OnInit {
           this.gridFit();
         }
       });
-  }
-
-  ngAfterViewInit() {
-    //// Attach custom cell templates to the appropriate column
-    //const columns = this.columns.map(column => {
-    //  if (column.field === 'phone') {
-    //    column.cellRendererFramework = this.gridSvc.templateRenderer;
-    //    column.cellRendererParams = {
-    //      ngTemplate: this.cellTemplatePhone,
-    //      // grouping: () => { } // TODO: Custom renderer for group headers
-    //    };
-    //  }
-    //  if (column.field === 'delete') {
-    //    column.cellRendererFramework = this.gridSvc.templateRenderer;
-    //    column.cellRendererParams = {
-    //      ngTemplate: this.cellTemplateDelete,
-    //    };
-    //  }
-    //  return column;
-    //});
-    //this.grid.api.setColumnDefs(columns);
   }
 
   /**
@@ -139,6 +133,8 @@ export class GridComponent implements OnInit {
     this.gridStatusComponent.reset = this.gridReset.bind(this);
     // Grid is ready, restore default state if any
     this.gridStateRestore();
+    // Attach templates
+    this.templatesAttach();
   }
 
   /** After the grid has loaded data */
@@ -252,6 +248,33 @@ export class GridComponent implements OnInit {
     if (this.gridState.filters) {
       this.grid.api.setFilterModel(this.gridState.filters);
       this.grid.api.onFilterChanged();
+    }
+  }
+
+  /**
+   * Extracts custom cell/header templates from projected content and attaches it to the ag-grid renderer
+   */
+  public templatesAttach() {
+    // Make sure columns and column templates are present
+    if (this.columnDefs && this.columnTemplates && this.columnTemplates.length) {
+      console.log('templatesAttach');
+      // Loop through all custom templates
+      this.columnTemplates.forEach(template => {
+        // Loop through all columns
+        for (let i = 0; i <= this.columnDefs.length - 1; i++) {
+          const column = this.columnDefs[i];
+          // If column field matches custom template, attach custom tempalte
+          if (column.field === template.field) {
+            column.cellRendererFramework = GridTemplateRendererComponent;
+            column.cellRendererParams = {
+              ngTemplate: template.templateCell,
+            };
+            break; // Stop loop
+          }
+        }
+      });
+      // Update column definitions after done
+      this.grid.api.setColumnDefs(this.columnDefs);
     }
   }
 }

@@ -70,7 +70,13 @@ export class ModalsService {
    * @param data Primary set of data to pass to the modal
    * @param dataAlt Secondary set of data to pass to the modal
    */
-  public open(modalId: modals, persist: boolean = false, size: 'sm' | 'lg' | 'xl' | 'full' = 'lg', data?: any, dataAlt?: any) {
+  public open(
+    modalId: modals,
+    persist: boolean = false,
+    size: 'sm' | 'lg' | 'xl' | 'full' = 'lg',
+    data?: any,
+    dataAlt?: any,
+  ) {
     let width = '720px';
 
     switch (size) {
