@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { AppSettings } from '../../shared/app.settings';
 import { AppStore } from '../../shared/stores/store';
 import { Store } from '@ngrx/store';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { UIStoreActions } from '$ui';
+import { ConfirmationModalComponent } from './confirmation/confirmation-modal.component';
+import { LogoutModalComponent } from './logout/logout-modal.component';
 
 /** Sample Usage:
 this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you want to delete this user?', 'Delete User').result.then(

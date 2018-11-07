@@ -165,7 +165,8 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Delete user
    * @param user
    */
-  public userDelete() {
+  public userDelete(id: string) {
+    console.log(id);
     const user = this.gridRowsSelected[0];
     this.api.users.delete(user).subscribe();
   }

@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
-import { UIModalService } from '$ui';
+import { ModalsService } from '$modals';
 import { environment } from '$env';
 import { AppSettings } from '../app.settings';
 
@@ -23,7 +23,7 @@ export class ServiceWorkerService {
 
   constructor(
     private sw: SwUpdate,
-    private modals: UIModalService,
+    private modals: ModalsService,
     private zone: NgZone,
     private settings: AppSettings,
   ) {}
@@ -85,13 +85,16 @@ export class ServiceWorkerService {
           environment.properties.appName
         } is available, would you like to update to the latest version?`,
       )
-      .result.then(
-        () => {
-          window.location.reload();
-          // this.sw.activateUpdate();
-          // this.updateAvailable$.next(false);
-          // this.pollForUpdates();
-          // this.modalPopped = false;
+      .afterClosed()
+      .subscribe(
+        reason => {
+          if (reason) {
+            window.location.reload();
+            // this.sw.activateUpdate();
+            // this.updateAvailable$.next(false);
+            // this.pollForUpdates();
+            // this.modalPopped = false;
+          }
         },
         () => console.warn('User is on an outdated version of the application'),
       );

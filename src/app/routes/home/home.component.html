@@ -78,8 +78,8 @@
             <grid-column field="delete">
               <!-- Cell template -->
               <ng-template let-value="value" let-column="column" let-row="row" grid-cell-template>
-                <button mat-raised-button class="mat-reverse btn-sm" appModalLaunch modal="ConfirmationModalComponent" size="lg"
-                  data="Are you sure you want to delete this user?" (success)="userDelete()">
+                <button mat-raised-button class="mat-reverse sm" 
+                appModalLaunch modal="ConfirmationModalComponent" size="lg" data="Are you sure you want to delete this user?" [dataAlt]="row.id" (success)="userDelete($event)">
                   <i class="fa fa-remove"></i> Delete
                 </button>
               </ng-template>

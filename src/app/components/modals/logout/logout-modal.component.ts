@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-//import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-logout-modal',
@@ -9,11 +9,13 @@ import { Subscription, interval } from 'rxjs';
 export class LogoutModalComponent implements OnInit, OnDestroy {
   public logoutTimer$: Subscription; // Holds the countdown obserable
   public counter: number; // Log out after this many seconds
-  // public modalDuration: number = 120; // This number is passed in through the modal reference, will default to 120 if not specified
-  public data = 120; // Data is actually passed through the modal service not here
-  public dataAlt: any; // Data is actually passed through the modal service not here
+  public modalDuration = 120; // This number is passed in through the modal reference, will default to 120 if not specified
 
-  constructor() {}
+  constructor(
+    public dialogRef: MatDialogRef<any>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public dataAlt: any
+    ) {}
 
   ngOnInit() {
     this.counter = this.data; // How long to display the modal window
@@ -25,10 +27,14 @@ export class LogoutModalComponent implements OnInit, OnDestroy {
         this.counter--;
       } else {
         // If timer hits zero or below, CLOSE this modal which toggles the logout action in AuthService
-        this.logoutTimer$.unsubscribe();
-        //this.activeModal.close();
+        this.logout();
       }
     });
+  }
+
+  /** Log the user out manually */
+  public logout() {
+    this.dialogRef.close(true);
   }
 
   public ngOnDestroy() {

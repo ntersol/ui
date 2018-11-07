@@ -257,7 +257,6 @@ export class GridComponent implements OnInit {
   public templatesAttach() {
     // Make sure columns and column templates are present
     if (this.columnDefs && this.columnTemplates && this.columnTemplates.length) {
-      console.log('templatesAttach');
       // Loop through all custom templates
       this.columnTemplates.forEach(template => {
         // Loop through all columns
