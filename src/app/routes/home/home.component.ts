@@ -22,9 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public gridFilterTerm = '';
   public gridRowsSelected: Models.User[];
 
-  //@ViewChild('phone') cellTemplatePhone: TemplateRef<any>;
-  //@ViewChild('delete') cellTemplateDelete: TemplateRef<any>;
-
+  public users: Models.User[];
   public users$ = this.api.select.users$;
   public sidebarOpen$ = this.ui.select.sidebarOpen$;
   public formMain: FormGroup;
@@ -35,7 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public ngOnInit() {
     // Get users and load into store
-    this.api.users.get().subscribe();
+    this.api.users.get().subscribe(users => this.users = users);
 
     // Rehydrate grid from UI state
     this.ui.select.gridState$.subscribe(gridState => {
@@ -112,6 +110,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.ui.gridStateChange(gridState);
   }
 
+  /** When rows are selected in the grid */
   public rowsSelected(rows: Models.User[]) {
     this.userEdit(rows[0]);
   }
@@ -165,9 +164,8 @@ export class HomeComponent implements OnInit, OnDestroy {
    * Delete user
    * @param user
    */
-  public userDelete(id: string) {
-    console.log(id);
-    const user = this.gridRowsSelected[0];
+  public userDelete(id: number) {
+    const user = this.users.filter(user2 => user2.id === id)[0];
     this.api.users.delete(user).subscribe();
   }
 
