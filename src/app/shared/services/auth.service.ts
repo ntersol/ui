@@ -133,13 +133,16 @@ export class AuthService {
   private launchLogoutModal(): void {
     clearTimeout(this.sessionTimer);
     // Open log out modal window
-    this.modals.open('LogoutModalComponent', false, 'lg', this.modalDuration).afterClosed().subscribe(reason => {
-      if (reason !== true) {
-        this.setTimer(this.setTimerDefaultSeconds);
-      } else {
-        this.logOut();
-      }
-    });
+    this.modals
+      .open('LogoutModalComponent', false, 'lg', this.modalDuration)
+      .afterClosed()
+      .subscribe(reason => {
+        if (reason !== true) {
+          this.setTimer(this.setTimerDefaultSeconds);
+        } else {
+          this.logOut();
+        }
+      });
   }
 
   /**

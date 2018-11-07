@@ -14,8 +14,8 @@ export class LogoutModalComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    @Inject(MAT_DIALOG_DATA) public dataAlt: any
-    ) {}
+    @Inject(MAT_DIALOG_DATA) public dataAlt: any,
+  ) {}
 
   ngOnInit() {
     this.counter = this.data; // How long to display the modal window
