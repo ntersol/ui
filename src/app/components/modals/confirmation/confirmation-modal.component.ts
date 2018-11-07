@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-//import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({

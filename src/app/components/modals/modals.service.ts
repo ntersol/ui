@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { ConfirmationModalComponent, LogoutModalComponent } from '$modals';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { AppSettings, AppStore } from '$shared';
+import { AppSettings } from '../../shared/app.settings';
+import { AppStore } from '../../shared/stores/store';
 import { Store } from '@ngrx/store';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { UIStoreActions } from '$ui';
@@ -49,7 +50,7 @@ export class ModalsService {
             width = '90%';
             break;
         }
-        //const modalRef = this.modalService.open(this.modalList[modal.modalId], modal.options);
+
         const modalRef = this.dialog.open(this.modalList[modal.modalId], {
           width: width,
           data: modal.data || null,
@@ -69,7 +70,7 @@ export class ModalsService {
    * @param data Primary set of data to pass to the modal
    * @param dataAlt Secondary set of data to pass to the modal
    */
-  public open(modalId: modals, persist: boolean = false, size: 'sm' | 'lg' | 'xl' | 'full' = 'lg', data?: any) {
+  public open(modalId: modals, persist: boolean = false, size: 'sm' | 'lg' | 'xl' | 'full' = 'lg', data?: any, dataAlt?: any) {
     let width = '720px';
 
     switch (size) {
@@ -101,6 +102,7 @@ export class ModalsService {
         data: data,
       });
     }
+    this.modalRef.componentInstance.dataAlt = dataAlt;
     return this.modalRef;
   }
 

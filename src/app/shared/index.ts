@@ -29,8 +29,5 @@ export * from './pipes/count.pipe';
 // Store Typings
 export * from './stores/store.d';
 
-// Directives
-export * from './directives/full-screen.directive';
-
 // Shared Module - Needs to be last
 export * from './shared.module';

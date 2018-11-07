@@ -57,10 +57,9 @@
 
         <!-- Delete template -->
         <ng-template #delete let-row>
-          <app-launch-modal modal="ConfirmationModalComponent" size="lg" data="Are you sure you want to delete this user?"
-            [isButton]="false" (success)="userDelete()">
-            <i class="fa fa-remove"></i> Delete
-          </app-launch-modal>
+          <button class="" appModalLaunch modal="ConfirmationModalComponent" size="lg" data="Are you sure you want to delete this user?" (success)="userDelete()">
+              <i class="fa fa-remove"></i> Delete
+          </button>
         </ng-template>
 
       </div>
@@ -76,29 +75,12 @@
 
           <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
 
-            <mat-form-field>
-              <input matInput placeholder="Username" formControlName="username" required>
-              <mat-error *ngIf="formMain?.controls?.username.hasError('required')">
-                This field is <strong>required</strong>
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Name" formControlName="name" required>
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Website" formControlName="website">
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Email" formControlName="email">
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Phone" formControlName="phone">
-            </mat-form-field>
-
+              <app-mat-form-field [formGroup]="formMain" controlName="username" placeholder="Username"></app-mat-form-field>
+              <app-mat-form-field [formGroup]="formMain" controlName="name" placeholder="Name"></app-mat-form-field>
+              <app-mat-form-field [formGroup]="formMain" controlName="website" placeholder="Website"></app-mat-form-field>
+              <app-mat-form-field [formGroup]="formMain" controlName="email" placeholder="Email"></app-mat-form-field>
+              <app-mat-form-field [formGroup]="formMain" controlName="phone" placeholder="Phone"></app-mat-form-field>
+        
             <div class="text-right">
                 <button type="submit" mat-raised-button class="mat-reverse" [disabled]="route?.users?.modifying || formMain.invalid"
                 [ngClass]="{ 'mat-waiting' : route?.users?.modifying }">
@@ -110,6 +92,7 @@
                 </ng-container>
               </button>
             </div>
+            
           </form>
         </mat-card>
       </div>
