@@ -17,7 +17,6 @@ import { NavComponent } from './masterpage/nav/nav.component';
 import { NavSearchComponent } from './masterpage/nav/search/nav-search.component';
 
 // Components
-import { LaunchModalComponent } from './launch-modal/launch-modal.component';
 import { ApiStateComponent } from './api-state/api-state.component';
 import { CounterComponent } from './counter/counter.component';
 
@@ -36,7 +35,6 @@ export const APP_COMPONENTS = [
   LayoutSingleComponent,
   NavComponent,
   NavSearchComponent,
-  LaunchModalComponent,
   ApiStateComponent,
   CounterComponent,
 ];

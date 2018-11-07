@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public rowsSelected(rows: Models.User[]) {
-    console.log(rows);
+    this.userEdit(rows[0]);
   }
 
   /**

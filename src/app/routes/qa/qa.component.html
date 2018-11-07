@@ -8,13 +8,9 @@
 
   <hr />
   <p>Confirmation Modal</p>
-  <app-launch-modal classes="btn btn-primary app-launch-modal"
-                    modal="ConfirmationModalComponent" size="lg"
-                    [data]="'Does the confirmation modal work?'"
-                    [dataAlt]="'Testing Confirmation Modal'"
-                    (onSuccess)="launchModalSuccess($event)">
-    Launch Modal Component
-  </app-launch-modal>
+  <button appModalLaunch modal="ConfirmationModalComponent" size="lg" data="'Does the confirmation modal work?'" (success)="launchModalSuccess($event)">
+      Launch Modal Component
+  </button>
   <div *ngIf="launchModalWorks" id="launchModalWorks">Success method works</div>
   <hr />
   <p>Filter Pipe</p>
