@@ -8,10 +8,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DurationPipe implements PipeTransform {
   transform(value: any): any {
-    let days: number = Math.floor(value / 60 / 60 / 24); // Days are dropped for now
-    let hours: number = days - Math.floor(value / 60 / 60);
-    let minutes: number = Math.floor(value / 60);
-    let seconds: number = value - minutes * 60;
+    const days: number = Math.floor(value / 60 / 60 / 24); // Days are dropped for now
+    const hours: number = days - Math.floor(value / 60 / 60);
+    const minutes: number = Math.floor(value / 60);
+    const seconds: number = value - minutes * 60;
 
     // Convert to string
     let hoursStr = String(hours);

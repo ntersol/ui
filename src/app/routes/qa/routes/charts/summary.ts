@@ -57,8 +57,8 @@ export const data = [
   },
 ];
 
-//const labels: string[] = [];
-//this.dataSets3 = this.data.map((elem, i) => {
+// const labels: string[] = [];
+// this.dataSets3 = this.data.map((elem, i) => {
 
 //  const data: number[] = [];
 //  for (let key in elem) {
@@ -74,5 +74,5 @@ export const data = [
 //    label: elem['Department Wide Stats'],
 //    data: data
 //  }
-//});
-//this.labels = labels;
+// });
+// this.labels = labels;

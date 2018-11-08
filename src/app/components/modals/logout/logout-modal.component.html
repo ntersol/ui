@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h3 class="modal-title"><i class="fa fa-thumbs-up"></i> Warning</h3>
-  <button type="button" class="close" aria-label="Close">
+  <button type="button" class="close" aria-label="Close" mat-dialog-close>
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -10,11 +10,11 @@
 </div>
 
 <div class="modal-footer" style="justify-content: space-between;">
-  <button type="button" class="btn btn-danger float-left pull-left" aria-label="Close">
+  <button type="button" mat-stroked-button class="float-left pull-left" aria-label="Close" (click)="logout()">
     <i class="fa fa-power-off" aria-hidden="true"></i>
     Log Out
   </button>
-  <button type="button" class="btn btn-primary" qa="continue">
+  <button type="button" mat-raised-button class="mat-reverse" mat-dialog-close>
     Continue Working
     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
   </button>

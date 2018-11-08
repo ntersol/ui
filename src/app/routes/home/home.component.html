@@ -42,29 +42,52 @@
     <div class="row">
       <div class="col-12" [ngClass]="route.sidebarOpen ? 'col-md-8' : 'col-md-12' ">
 
-        <app-grid style="height:calc(100vh - 150px)" class="ag-theme-balham" [gridOptions]="gridOptions" [gridState]="gridState"
-          [gridFilterTerm]="gridFilterTerm" [rowData]="route.users.data" [columnDefs]="columns" [animateRows]="true"
-          [enableSorting]="true" [enableFilter]="true" [enableColResize]="true" [enableRangeSelection]="true"
-          [rememberGroupStateWhenNewData]="true" [groupUseEntireRow]="true" [getContextMenuItems]="gridContextMenu"
-          rowGroupPanelShow="onlyWhenGrouping" rowSelection="multiple" (stateChange)="gridStateSave($event)"
-          (rowsSelected)="rowsSelected($event)">
-        </app-grid>
+          <app-grid style="height:calc(100vh - 150px)" class="ag-theme-balham" 
+            [gridOptions]="gridOptions" 
+            [gridState]="gridState"
+            [gridFilterTerm]="gridFilterTerm" 
+            [rowData]="route.users.data" 
+            [columnDefs]="columns" 
+            [animateRows]="true"
+            [enableSorting]="true" 
+            [enableFilter]="true" 
+            [enableColResize]="true" 
+            [enableRangeSelection]="true"
+            [rememberGroupStateWhenNewData]="true" 
+            [groupUseEntireRow]="true" 
+            [getContextMenuItems]="gridContextMenu"
+            rowGroupPanelShow="onlyWhenGrouping" 
+            rowSelection="multiple" 
+            (stateChange)="gridStateSave($event)"
+            (rowsSelected)="rowsSelected($event)">
 
-        <!-- Phone number template -->
-        <ng-template #phone let-row>
-          <a href="tel:{{ row?.phone | phoneNumber : true }}">{{ row?.phone | phoneNumber }}</a>
-        </ng-template>
-
-        <!-- Delete template -->
-        <ng-template #delete let-row>
-          <app-launch-modal modal="ConfirmationModalComponent" size="lg" data="Are you sure you want to delete this user?"
-            [isButton]="false" (success)="userDelete()">
-            <i class="fa fa-remove"></i> Delete
-          </app-launch-modal>
-        </ng-template>
+            <!-- Custom templates, prop corresponds to column property -->
+            <grid-column field="phone">
+              <!-- Header template (NOT CURRENTLY SUPPORTED YET)
+                            <ng-template let-value="value" let-column="column" let-row="row" grid-header-template>
+                              <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
+                            </ng-template>
+                             -->
+              <!-- Cell template -->
+              <ng-template let-value="value" let-column="column" let-row="row" grid-cell-template>
+                <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
+              </ng-template>
+            </grid-column>
+            
+            <!-- Custom templates, prop corresponds to column property -->
+            <grid-column field="delete">
+              <!-- Cell template -->
+              <ng-template let-value="value" let-column="column" let-row="row" grid-cell-template>
+                <button mat-raised-button class="mat-reverse sm" 
+                appModalLaunch modal="ConfirmationModalComponent" size="lg" data="Are you sure you want to delete this user?" [dataAlt]="row.id" (success)="userDelete($event)">
+                  <i class="fa fa-remove"></i> Delete
+                </button>
+              </ng-template>
+            </grid-column>
+          </app-grid>
 
       </div>
-      <div class="col-12 col-md-4" *ngIf="route.sidebarOpen">
+      <div class="col-12 col-md-4 anim-fade-in" *ngIf="route.sidebarOpen">
 
         <mat-card>
 
@@ -76,29 +99,12 @@
 
           <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
 
-            <mat-form-field>
-              <input matInput placeholder="Username" formControlName="username" required>
-              <mat-error *ngIf="formMain?.controls?.username.hasError('required')">
-                This field is <strong>required</strong>
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Name" formControlName="name" required>
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Website" formControlName="website">
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Email" formControlName="email">
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Phone" formControlName="phone">
-            </mat-form-field>
-
+              <app-mat-form-field [formGroup]="formMain" controlName="username" placeholder="Username"></app-mat-form-field>
+              <app-mat-form-field [formGroup]="formMain" controlName="name" placeholder="Name"></app-mat-form-field>
+              <app-mat-form-field [formGroup]="formMain" controlName="website" placeholder="Website"></app-mat-form-field>
+              <app-mat-form-field [formGroup]="formMain" controlName="email" placeholder="Email"></app-mat-form-field>
+              <app-mat-form-field [formGroup]="formMain" controlName="phone" placeholder="Phone"></app-mat-form-field>
+        
             <div class="text-right">
                 <button type="submit" mat-raised-button class="mat-reverse" [disabled]="route?.users?.modifying || formMain.invalid"
                 [ngClass]="{ 'mat-waiting' : route?.users?.modifying }">
@@ -110,6 +116,7 @@
                 </ng-container>
               </button>
             </div>
+
           </form>
         </mat-card>
       </div>

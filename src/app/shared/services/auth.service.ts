@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router, RoutesRecognized, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-
+import { MatDialogRef } from '@angular/material';
 import { map } from 'rxjs/operators';
 
 import { environment } from '$env';
 
-import { UIModalService } from '$ui';
 import { ApiService } from '$api';
 import { AppSettings } from '../app.settings';
+import { ModalsService } from 'src/app/components/modals/modals.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,23 +16,23 @@ import { AppSettings } from '../app.settings';
 export class AuthService {
   /** Is session expired */
   public sessionExpired = false;
-  /** How long to show the modal window */
-  public modalDuration = 12; // 120
+  /** How long to show the modal window in seconds */
+  public modalDuration = 60; // 60
   /** Holds the logout session timer */
   public sessionTimer: any = null; //
   /** Holds reference to logout modal */
-  public logOutModal: NgbModalRef;
+  public logOutModal: MatDialogRef<any>;
   /** The http call so a token can be refreshed with a callback and success method */
   public refreshToken = this.http.put(this.settings.apiUrl + environment.endpoints.authTokenRefresh, null);
   /** If a token is passed in without logging in no timer duration is present. Default to this */
-  private setTimerDefaultSeconds = 5; // 5 minutes
+  private setTimerDefaultSeconds = 300; // 300 = 5 minutes
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
     private settings: AppSettings,
-    private modals: UIModalService,
+    private modals: ModalsService,
     private api: ApiService,
   ) {
     // If token is passed in via query param, update settings. Standard query param: /#/?token=123456
@@ -52,6 +51,13 @@ export class AuthService {
         this.setTimer(this.setTimerDefaultSeconds); // Start the session timer with the default time
       }
     });
+
+    // On service load, if auth is enabled and a token is present start timer
+    // This accomodates reloading the app
+    if (environment.settings.enableAuth && this.settings.token) {
+      // If reloading and not logging in
+      this.setTimer(this.setTimerDefaultSeconds);
+    }
   }
 
   /**
@@ -65,6 +71,7 @@ export class AuthService {
         map((response: any) => {
           this.settings.token = response.data.token;
           this.sessionExpired = false;
+          this.setTimerDefaultSeconds = response.data.expirationSeconds;
           this.setTimer(response.data.expirationSeconds);
           return response;
         }),
@@ -76,6 +83,7 @@ export class AuthService {
       map((response: any) => {
         this.settings.token = response.data.token;
         this.sessionExpired = false;
+        this.setTimerDefaultSeconds = response.data.expirationSeconds;
         this.setTimer(response.data.expirationSeconds);
         return response;
       }),
@@ -109,11 +117,10 @@ export class AuthService {
    * @param ExpirationSeconds
    */
   private setTimer(expirationSeconds: number): void {
-    // console.log('Setting session timer to ', ExpirationSeconds, ' seconds');
+    // console.log('Setting session timer to ', expirationSeconds, ' seconds');
     clearTimeout(this.sessionTimer);
     // ExpirationSeconds = 20;
     this.sessionTimer = setTimeout(() => {
-      // console.log('Timer Expired');
       this.sessionExpired = true;
       this.launchLogoutModal();
       // Double the modal duration to add a buffer between server countdown and browser countdown
@@ -126,18 +133,17 @@ export class AuthService {
   private launchLogoutModal(): void {
     clearTimeout(this.sessionTimer);
     // Open log out modal window
-    this.modals.open('LogoutModalComponent', false, 'lg', this.modalDuration).result.then(
-      () => {
-        this.logOut();
-      },
-      dismissReason => {
-        // When modal is dismissed
-        if (dismissReason !== 'norefresh') {
-          this.refreshTokenUpdate();
+    this.modals
+      .open('LogoutModalComponent', false, 'lg', this.modalDuration)
+      .afterClosed()
+      .subscribe(reason => {
+        if (reason !== true) {
+          this.setTimer(this.setTimerDefaultSeconds);
+        } else {
+          this.logOut();
         }
-      },
-    );
-  } // end launchLogoutModal
+      });
+  }
 
   /**
    * Log the user out. Clear stored data and redirect to login page

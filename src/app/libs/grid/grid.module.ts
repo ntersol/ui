@@ -8,6 +8,11 @@ import 'ag-grid-enterprise';
 import { GridComponent } from './grid/grid.component';
 import { GridTemplateRendererComponent } from './grid-template-renderer/grid-template-renderer.component';
 import { GridStatusBarComponent } from './grid-status-bar/grid-status-bar.component';
+
+import { GridColumnDirective } from './directives/column.directive';
+import { GridColumnHeaderDirective } from './directives/cell-header.directive';
+import { GridColumnCellDirective } from './directives/cell-body.directive';
+
 import { TextCasePipe } from './pipes/text-case.pipe';
 
 // Set license
@@ -17,8 +22,24 @@ LicenseManager.setLicenseKey(environment.licenses.agGrid);
 @NgModule({
   imports: [CommonModule, AgGridModule.withComponents([GridTemplateRendererComponent])],
   providers: [],
-  declarations: [GridTemplateRendererComponent, GridStatusBarComponent, TextCasePipe, GridComponent],
-  exports: [AgGridModule, GridTemplateRendererComponent, GridStatusBarComponent, GridComponent],
+  declarations: [
+    GridTemplateRendererComponent,
+    GridStatusBarComponent,
+    TextCasePipe,
+    GridComponent,
+    GridColumnDirective,
+    GridColumnHeaderDirective,
+    GridColumnCellDirective,
+  ],
+  exports: [
+    AgGridModule,
+    GridTemplateRendererComponent,
+    GridStatusBarComponent,
+    GridComponent,
+    GridColumnDirective,
+    GridColumnHeaderDirective,
+    GridColumnCellDirective,
+  ],
   entryComponents: [GridStatusBarComponent],
 })
 export class GridModule {}

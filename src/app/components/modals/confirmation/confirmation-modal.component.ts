@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-//import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -7,12 +6,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   templateUrl: './confirmation-modal.component.html',
 })
 export class ConfirmationModalComponent {
-  constructor(public dialogRef: MatDialogRef<any>, @Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(
+    public dialogRef: MatDialogRef<any>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public dataAlt: any,
+  ) {}
 
   /**
    * Submit the form
    */
   public submit() {
-    this.dialogRef.close(this.data);
+    this.dialogRef.close(this.dataAlt || this.data);
   }
 }

@@ -107,7 +107,7 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   private isLoaded = false;
 
   private styling = {
-    fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+    fontFamily: `'Helvetica Neue', 'Helvetica', 'Arial', sans-serif`,
     fontSize: 10,
     fontWeight: 'normal',
   };
@@ -213,7 +213,8 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
           this.chart.render();
         },
       },
-      colorSet: this.colorSet ? this.colorSet : this.colorScheme ? this.colorScheme : null, // Use built in color set if supplied, use custom colors if not
+      // Use built in color set if supplied, use custom colors if not
+      colorSet: this.colorSet ? this.colorSet : this.colorScheme ? this.colorScheme : null, 
       data: this.mapChartData(),
       axisX: {
         title: this.titleXAxis,
@@ -269,7 +270,7 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
    */
   private getColorScheme(startColor: string, endColor: string, steps: number) {
     const colorsCustom: string[] = [];
-    for (var i = 0; i <= steps; i++) {
+    for (let i = 0; i <= steps; i++) {
       colorsCustom.push(this.getGradientStep(startColor, endColor, i / steps));
     }
     return colorsCustom;
@@ -287,36 +288,42 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     endColor = endColor.replace(/^\s*#|\s*$/g, '');
 
     // convert 3 char codes --> 6, e.g. `E0F` --> `EE00FF`
-    if (startColor.length == 3) {
+    if (startColor.length === 3) {
       startColor = startColor.replace(/(.)/g, '$1$1');
     }
 
-    if (endColor.length == 3) {
+    if (endColor.length === 3) {
       endColor = endColor.replace(/(.)/g, '$1$1');
     }
 
     // Get colors
-    let startRed = parseInt(startColor.substr(0, 2), 16),
+    const startRed = parseInt(startColor.substr(0, 2), 16),
       startGreen = parseInt(startColor.substr(2, 2), 16),
       startBlue = parseInt(startColor.substr(4, 2), 16);
 
-    let endRed = parseInt(endColor.substr(0, 2), 16),
+    const endRed = parseInt(endColor.substr(0, 2), 16),
       endGreen = parseInt(endColor.substr(2, 2), 16),
       endBlue = parseInt(endColor.substr(4, 2), 16);
 
     // Calculate new color
-    let diffRed = endRed - startRed;
-    let diffGreen = endGreen - startGreen;
-    let diffBlue = endBlue - startBlue;
+    const diffRed = endRed - startRed;
+    const diffGreen = endGreen - startGreen;
+    const diffBlue = endBlue - startBlue;
 
     let diffRedStr = (diffRed * percent + startRed).toString(16).split('.')[0];
     let diffGreenStr = (diffGreen * percent + startGreen).toString(16).split('.')[0];
     let diffBlueStr = (diffBlue * percent + startBlue).toString(16).split('.')[0];
 
     // ensure 2 digits by color
-    if (diffRedStr.length == 1) diffRedStr = '0' + diffRed;
-    if (diffGreenStr.length == 1) diffGreenStr = '0' + diffGreenStr;
-    if (diffBlueStr.length == 1) diffBlueStr = '0' + diffBlueStr;
+    if (diffRedStr.length === 1) {
+      diffRedStr = '0' + diffRed;
+    }
+    if (diffGreenStr.length === 1) {
+      diffGreenStr = '0' + diffGreenStr;
+    }
+    if (diffBlueStr.length === 1) {
+      diffBlueStr = '0' + diffBlueStr;
+    }
 
     return '#' + diffRedStr + diffGreenStr + diffBlueStr;
   }

@@ -1,30 +1,15 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Directive, Input, Output, EventEmitter, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ModalsService } from '../../components/modals/modals.service';
 
-import { ModalsService } from '../modals/modals.service';
-import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-
-/** Sample Usage:
-<app-launch-modal  classes="btn btn-icon"
-    modal="ConfirmationModalComponent" size="lg" [data]="someData" [dataAlt]="someData" [isButton]="false"
-    (success)="doSomething($event)">
-        <i class="fa fa-remove"></i> Delete
-</app-launch-modal>
-*/
-@AutoUnsubscribe()
-@Component({
-  selector: 'app-launch-modal',
-  template: `<button class="{{classes}}" (click)="openModal()" *ngIf="isButton" [disabled]="disabled">
-                <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
-            </button>
-            <a class="{{classes}}" (click)="openModal()" *ngIf="!isButton" [ngClass]="{'disabled': disabled }">
-                <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
-            </a>
-            <ng-template #contentTpl><ng-content></ng-content></ng-template>`,
+/**
+ * Launch a modal
+ * USAGE: appModalLaunch modal="ConfirmationModalComponent" size="lg" data="'Test'"
+ */
+@Directive({
+  selector: '[appModalLaunch]',
 })
-export class LaunchModalComponent implements OnInit, OnDestroy {
-  /** Is this a button tag or an a link */
-  @Input() isButton = true; //
+export class ModalLaunchDirective implements OnInit, OnDestroy {
   /** The modal component name to launch */
   @Input() modal: string;
   /** Should the modal persist on reload */
@@ -55,8 +40,9 @@ export class LaunchModalComponent implements OnInit, OnDestroy {
    * Open a modal window
    * Attach a success function and pass any relevant data to the modal component
    */
-  public openModal() {
-    const modal = this.modals.open(<any>this.modal, this.persist, this.size, this.data);
+  @HostListener('click', ['$event'])
+  public openModal($event: MouseEvent) {
+    const modal = this.modals.open(<any>this.modal, this.persist, this.size, this.data, this.dataAlt);
     // If static modal
     if (modal) {
       modal.afterClosed().subscribe(reason => {
@@ -74,6 +60,7 @@ export class LaunchModalComponent implements OnInit, OnDestroy {
         }
       });
     }
+    $event.preventDefault();
   } // end openModal
 
   ngOnDestroy() {

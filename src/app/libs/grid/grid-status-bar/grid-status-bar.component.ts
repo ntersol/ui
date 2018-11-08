@@ -37,11 +37,13 @@ export class GridStatusBarComponent implements OnInit {
 
       // Get the dictionary of filters and turn into array
       this.gridFilters = [];
-      for (let key in this.gridState.filters) {
-        this.gridFilters.push({
-          ...this.gridState.filters[key],
-          field: key,
-        });
+      for (const key in this.gridState.filters) {
+        if (this.gridFilters.hasOwnProperty(key)) {
+          this.gridFilters.push({
+            ...this.gridState.filters[key],
+            field: key,
+          });
+        }
       }
 
       // Get the active groups

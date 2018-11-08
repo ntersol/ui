@@ -17,9 +17,11 @@ import { NavComponent } from './masterpage/nav/nav.component';
 import { NavSearchComponent } from './masterpage/nav/search/nav-search.component';
 
 // Components
-import { LaunchModalComponent } from './launch-modal/launch-modal.component';
 import { ApiStateComponent } from './api-state/api-state.component';
 import { CounterComponent } from './counter/counter.component';
+
+// Form Tools
+import { MaterialsModule } from './materials/materials.module';
 
 // Modals include
 const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];
@@ -33,7 +35,6 @@ export const APP_COMPONENTS = [
   LayoutSingleComponent,
   NavComponent,
   NavSearchComponent,
-  LaunchModalComponent,
   ApiStateComponent,
   CounterComponent,
 ];
@@ -46,10 +47,11 @@ export const APP_COMPONENTS = [
     SharedModule,
     // Vendors
     VendorModule,
+    MaterialsModule,
   ],
   providers: [],
   declarations: [APP_COMPONENTS],
-  exports: [APP_COMPONENTS],
+  exports: [APP_COMPONENTS, MaterialsModule],
   entryComponents: [APP_MODALS],
 })
 export class ComponentsModule {

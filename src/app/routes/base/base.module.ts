@@ -15,4 +15,4 @@ import { BaseComponent } from './base.component';
   exports: [],
   entryComponents: [],
 })
-export class BaseModule { }
+export class BaseModule {}
