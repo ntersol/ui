@@ -26,6 +26,12 @@ export class AppSettings {
   private sessionStorage: { [key in AppSettingsProps]?: string } = {};
   /** Property to store app settings in local or session storage */
   public isBrowser = isPlatformBrowser(this.platformId);
+  /** API token */
+  private _token: string | null = null;
+  /** Web Api Url */
+  private _apiUrl: string | null = null;
+  /** Username */
+  private _userName: string | null = null;
 
   /** API token */
   private _ui: string | null = null;
@@ -46,8 +52,6 @@ export class AppSettings {
   }
 
   /** API token */
-  private _token: string | null = null;
-  /** API token */
   public get token(): string | null {
     return this._token || this.propGet(AppSettingsProps.token);
   }
@@ -56,8 +60,6 @@ export class AppSettings {
     this.propSet(AppSettingsProps.token, value);
   }
 
-  /** Web Api Url */
-  private _apiUrl: string | null = null;
   /** Web Api Url */
   public get apiUrl(): string | null {
     return this._apiUrl || this.propGet(AppSettingsProps.apiUrl);
@@ -68,8 +70,6 @@ export class AppSettings {
     this.propSet(AppSettingsProps.apiUrl, value);
   }
 
-  /** Username */
-  private _userName: string | null = null;
   /** Username */
   public get userName(): string | null {
     return this._userName || this.propGet(AppSettingsProps.userName);

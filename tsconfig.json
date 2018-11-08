@@ -32,6 +32,7 @@
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": false,
+    "noImplicitAny": true,
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"
@@ -42,5 +43,5 @@
     "preserveWhitespaces": false
   },
   "include": [ "src/**/*" ],
-  "exclude": [ "e2e", "**/*.spec.ts", "node_modules", "node_modules/**/*" ]
+  "exclude": [ "e2e", "**/*.spec.ts", "node_modules", "node_modules/**/*" ],
 }

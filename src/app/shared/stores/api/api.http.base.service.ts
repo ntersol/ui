@@ -198,9 +198,9 @@ export class ApiHttpService {
   private endSession(error: any) {
     this.cacheClear();
     this.appProps.token = null;
-    //if (this.settings.isBrowser) {
+    // if (this.settings.isBrowser) {
     //  this.settings.sessionStorage.clear();
-    //}
+    // }
     this.storeSvc.dispatch(ApiStoreActions.RESET(null)); // Clear out store on errors for security
     this.routerSvc.navigate(['/login'], { queryParams: { session: 'expired' } });
     return of(error);

@@ -77,12 +77,12 @@ export const APP_COMPONENTS = [
       multi: true,
     },
     // App initializer for startup
-    //{
+    // {
     //  provide: APP_INITIALIZER,
     //  useFactory: AppInit,
     //  deps: [AppSettings, AppConfigService],
     //  multi: true,
-    //},
+    // },
   ],
   bootstrap: [AppComponent],
   entryComponents: [],
@@ -94,10 +94,10 @@ export class AppModule {}
  * @param settings - App settings
  * @param config - Config service
  */
-//export function AppInit(settings: AppSettings, config: AppConfigService): () => Promise<any> {
+// export function AppInit(settings: AppSettings, config: AppConfigService): () => Promise<any> {
 //  if (settings.apiUrl) {
 //    return (): Promise<any> => new Promise(resolve => resolve());
 //  } else {
 //    return (): Promise<any> => config.loadEnvSettings();
 //  }
-//}
+// }

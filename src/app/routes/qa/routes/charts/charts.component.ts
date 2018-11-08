@@ -48,15 +48,17 @@ export class ChartsComponent implements OnInit {
 
     const dataPoints = [];
 
-    for (let key in transfersTotal) {
-      dataPoints.push(transfersTotal[key]);
+    for (const key in transfersTotal) {
+      if (transfersTotal.hasOwnProperty(key)) {
+        dataPoints.push(transfersTotal[key]);
+      }
     }
 
     return <CanvasJS.ChartDataSeriesOptions[]>[
       {
         dataPoints: dataPoints.sort((a, b) => {
-          if (a.y < b.y) return -1;
-          if (a.y > b.y) return 1;
+          if (a.y < b.y) { return -1; }
+          if (a.y > b.y) { return 1; }
           return 0;
         }),
       },
@@ -82,16 +84,18 @@ export class ChartsComponent implements OnInit {
     });
     const dataPoints = [];
 
-    for (let key in transfersTotal) {
-      dataPoints.push(transfersTotal[key]);
+    for (const key in transfersTotal) {
+      if (transfersTotal.hasOwnProperty(key)) {
+        dataPoints.push(transfersTotal[key]);
+      }
     }
 
     const mapped = <CanvasJS.ChartDataSeriesOptions[]>[
       {
         dataPoints: dataPoints
           .sort((a, b) => {
-            if (a.y < b.y) return -1;
-            if (a.y > b.y) return 1;
+            if (a.y < b.y) { return -1; }
+            if (a.y > b.y) { return 1; }
             return 0;
           })
           .reverse(),
@@ -106,18 +110,19 @@ export class ChartsComponent implements OnInit {
   private transfersTotal() {
     const date = transfers[0].date;
     const transfersByAgent: { [key: string]: any[] } = {};
-    transfers.forEach(user => {
-      if (user.date === date) {
-        const key = user.date + 'T' + user.Time;
+    transfers.forEach(user2 => {
+      if (user2.date === date) {
+        const key = user2.date + 'T' + user2.Time;
         if (!transfersByAgent[key]) {
           transfersByAgent[key] = [];
         }
-        transfersByAgent[key].push(user);
+        transfersByAgent[key].push(user2);
       }
     });
 
     this.dataPointsTransfersTotal = [];
-    for (let key in transfersByAgent) {
+    for (const key in transfersByAgent) {
+      if (transfersByAgent.hasOwnProperty(key)) {
       this.dataPointsTransfersTotal.push({
         name: transfersByAgent[key][0].Time,
         dataPoints: transfersByAgent[key].map(transfer => {
@@ -128,10 +133,10 @@ export class ChartsComponent implements OnInit {
         }),
       });
     }
+    }
   }
 
   public formatTooltip(val: CanvasJS.ChartLabelFormatter): string {
-    //console.log(val)
     return val.label + '!!';
   }
 }

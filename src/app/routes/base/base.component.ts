@@ -13,8 +13,10 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BaseComponent implements OnInit, OnDestroy {
-  constructor() // private api: ApiService, public ui: UIStoreService
-  {}
+
+  // private api: ApiService, public ui: UIStoreService
+  constructor(
+  ) {}
 
   ngOnInit() {}
 
