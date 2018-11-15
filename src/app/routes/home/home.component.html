@@ -100,11 +100,11 @@
 
           <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
 
-              <app-mat-form-field [formGroup]="formMain" controlName="username" placeholder="Username"></app-mat-form-field>
-              <app-mat-form-field [formGroup]="formMain" controlName="name" placeholder="Name"></app-mat-form-field>
-              <app-mat-form-field [formGroup]="formMain" controlName="website" placeholder="Website"></app-mat-form-field>
-              <app-mat-form-field [formGroup]="formMain" controlName="email" placeholder="Email"></app-mat-form-field>
-              <app-mat-form-field [formGroup]="formMain" controlName="phone" placeholder="Phone"></app-mat-form-field>
+              <app-form-field [formGroup]="formMain" controlName="username" placeholder="Username"></app-form-field>
+              <app-form-field [formGroup]="formMain" controlName="name" placeholder="Name"></app-form-field>
+              <app-form-field [formGroup]="formMain" controlName="website" placeholder="Website"></app-form-field>
+              <app-form-field [formGroup]="formMain" controlName="email" placeholder="Email"></app-form-field>
+              <app-form-field [formGroup]="formMain" controlName="phone" placeholder="Phone"></app-form-field>
         
             <div class="text-right">
                 <button type="submit" mat-raised-button class="mat-reverse" [disabled]="route?.users?.modifying || formMain.invalid"

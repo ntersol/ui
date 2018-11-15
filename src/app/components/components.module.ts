@@ -21,7 +21,7 @@ import { ApiStateComponent } from './api-state/api-state.component';
 import { CounterComponent } from './counter/counter.component';
 
 // Form Tools
-import { MaterialsModule } from './materials/materials.module';
+import { UILibModule } from './ui-lib/ui-lib.module';
 
 // Modals include
 const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];
@@ -47,11 +47,11 @@ export const APP_COMPONENTS = [
     SharedModule,
     // Vendors
     VendorModule,
-    MaterialsModule,
+    UILibModule,
   ],
   providers: [],
   declarations: [APP_COMPONENTS],
-  exports: [APP_COMPONENTS, MaterialsModule],
+  exports: [APP_COMPONENTS, UILibModule],
   entryComponents: [APP_MODALS],
 })
 export class ComponentsModule {

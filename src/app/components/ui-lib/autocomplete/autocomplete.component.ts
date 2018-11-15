@@ -7,24 +7,24 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 /**
  * Autocomplete extension for angular materials. Automatically handles the filtering and emits selected values
  * EXAMPLE: For a string array, returns string value
-    <app-mat-autocomplete [terms]="terms" placeholder="Select a user..." (optionSelected)="optionSelected($event)"></app-mat-autocomplete>
+    <app-autocomplete [terms]="terms" placeholder="Select a user..." (optionSelected)="optionSelected($event)"></app-autocomplete>
  * EXAMPLE: For an object array, autocomplete returns the entire selected object
-    <app-mat-autocomplete [terms]="terms" placeholder="Select a user..." termLabel="name" 
-    (optionSelected)="optionSelected($event)"></app-mat-autocomplete>
+    <app-autocomplete [terms]="terms" placeholder="Select a user..." termLabel="name" 
+    (optionSelected)="optionSelected($event)"></app-autocomplete>
 * EXAMPLE: For an object array, autocomplete returns the selected property value instead of the entire object
-    <app-mat-autocomplete [terms]="terms" placeholder="Select a user..." termLabel="name" termValue="name" 
-    (optionSelected)="optionSelected($event)"></app-mat-autocomplete>
+    <app-autocomplete [terms]="terms" placeholder="Select a user..." termLabel="name" termValue="name" 
+    (optionSelected)="optionSelected($event)"></app-autocomplete>
 * EXAMPLE: For use with a reactive form. Returns the selected value name as the property name in the form
-    <app-mat-autocomplete [terms]="terms" placeholder="Select a user..." termLabel="name" termValue="name" 
-    [formControlRef]="form.controls.name"></app-mat-autocomplete>
+    <app-autocomplete [terms]="terms" placeholder="Select a user..." termLabel="name" termValue="name" 
+    [formControlRef]="form.controls.name"></app-autocomplete>
  */
 @Component({
-  selector: 'app-mat-autocomplete',
-  templateUrl: './mat-autocomplete.component.html',
-  styleUrls: ['./mat-autocomplete.component.scss'],
+  selector: 'app-autocomplete',
+  templateUrl: './autocomplete.component.html',
+  styleUrls: ['./autocomplete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatAutocompleteComponent implements OnInit {
+export class AutocompleteComponent implements OnInit {
   /** Available autocomplete terms */
   @Input() terms: any[] = [];
   /** Default placeholder text */
