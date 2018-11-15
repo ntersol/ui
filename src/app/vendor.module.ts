@@ -14,7 +14,25 @@ import {
   MatTabsModule,
   MatCardModule,
   MatStepperModule,
+  MatAutocompleteModule, 
+  
 } from '@angular/material';
+
+const modules = [
+ // Angular Materials
+ MatIconModule,
+ MatMenuModule,
+ MatFormFieldModule,
+ MatInputModule,
+ MatSelectModule,
+ MatButtonModule,
+ MatDialogModule,
+ MatExpansionModule,
+ MatTabsModule,
+ MatCardModule,
+ MatStepperModule,
+ MatAutocompleteModule
+];
 
 @NgModule({
   imports: [
@@ -23,36 +41,13 @@ import {
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-
-    // Vendors
-    // Angular Materials
-    MatIconModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatTabsModule,
-    MatCardModule,
-    MatStepperModule,
+   ...modules
   ],
   exports: [
     RouterModule,
     FormsModule,
     ReactiveFormsModule, // NgbModule,
-    MatIconModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatTabsModule,
-    MatCardModule,
-    MatStepperModule,
+    ...modules
   ],
   declarations: [],
 })
