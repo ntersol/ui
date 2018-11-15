@@ -38,10 +38,11 @@ export class GridComponent implements OnInit {
   @ViewChild('grid') grid: AgGridNg2;
   @ViewChild('gridContainer') gridContainer: ElementRef;
 
+  @Input() parentRef: any;
   /** Hold and set default options for grid*/
   private _gridOptions: GridOptions = {
     context: {
-      this: this,
+      // this: this.parentRef,
     },
     // A default column definition with properties that get applied to every column
     defaultColDef: {
@@ -71,6 +72,7 @@ export class GridComponent implements OnInit {
 
   @Input() gridState: GridState;
   @Input() rowData: any[];
+  @Input() getMainMenuItems: any;
   @Input() columnDefs: any[];
   @Input() animateRows: boolean;
   @Input() enableSorting: boolean;
@@ -109,6 +111,7 @@ export class GridComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    this.gridOptions.context = this.parentRef;
     // On window resize event, fit the grid columns to the screen
     fromEvent(window, 'resize')
       .pipe(debounceTime(100))
