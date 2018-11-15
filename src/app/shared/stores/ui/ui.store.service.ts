@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 import { environment } from '$env';
 import { AppStore } from '$shared';
@@ -8,6 +7,7 @@ import { StringUtils } from '$utils';
 import { AppSettings } from '../../app.settings';
 import { UIStoreActions } from './ui.actions';
 import { UiSelectorsService } from './ui.selectors.service';
+import { MatTabChangeEvent } from '@angular/material';
 
 @Injectable({
   providedIn: 'root',
@@ -47,14 +47,15 @@ export class UIStoreService {
   }
 
   /**
-   * Change the visible tab of a tabset
-   * USAGE: <ngb-tabset (tabChange)="ui.tabChange('HOME',$event)" [activeId]="ui.select.tabActive$('HOME') | async">
-   * Make sure all tabs have an id: <ngb-tab id="tab-1">
+   * Change and persist the visible tab of a tabset
+   * Make sure this service is public: constructor(public ui: UIStoreService) and that the first argument matches
+   * USAGE
+   <mat-tab-group [selectedIndex]="ui.select.tabActive$('home') | async" (selectedTabChange)="ui.tabChange('home', $event)">
    * @param tabInstanceId - A name or unique identifier for this tab instance
-   * @param tabId - The tabChange event supplied by ng-boostrap
+   * @param tabEvent - The tabChange event supplied by ng-boostrap
    */
-  public tabChange(tabInstanceId: string, tabId: NgbTabChangeEvent) {
-    this.store.dispatch(UIStoreActions.TAB_CHANGE({ tabInstanceId: tabInstanceId, tabId: tabId.nextId }));
+  public tabChange(tabInstanceId: string, tabEvent: MatTabChangeEvent) {
+    this.store.dispatch(UIStoreActions.TAB_CHANGE({ tabInstanceId: tabInstanceId, tabId: tabEvent.index }));
   }
 
   /**

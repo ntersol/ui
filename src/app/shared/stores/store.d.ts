@@ -27,7 +27,7 @@ export declare namespace AppStore {
   export interface Ui {
     /** A static snapshot of the UI store, used mainly for multiscreen usage */
     saveState: Ui | null;
-    tabsActive: { [key: string]: string };
+    tabsActive: { [key: string]: number };
     sidebarOpen: boolean;
     gridState: GridState;
     modal: {

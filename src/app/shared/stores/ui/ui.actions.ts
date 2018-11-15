@@ -13,7 +13,7 @@ export const UIStoreActions = {
     data: any;
   }>('MODAL_OPEN'),
   MODAL_UNLOAD: actionCreator<null>('MODAL_UNLOAD'),
-  TAB_CHANGE: actionCreator<{ tabInstanceId: string; tabId: string }>('TAB_CHANGE'),
+  TAB_CHANGE: actionCreator<{ tabInstanceId: string; tabId: number }>('TAB_CHANGE'),
   SIDEBAR_TOGGLE: actionCreator<boolean>('SIDEBAR_TOGGLE'),
   MULTISCREEN_TOGGLE: actionCreator<boolean | null>('MULTISCREEN_TOGGLE'),
 };
