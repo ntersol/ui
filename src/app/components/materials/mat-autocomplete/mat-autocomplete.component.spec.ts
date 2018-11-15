@@ -8,9 +8,8 @@ describe('MatAutocompleteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MatAutocompleteComponent ]
-    })
-    .compileComponents();
+      declarations: [MatAutocompleteComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

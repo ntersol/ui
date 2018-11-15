@@ -22,7 +22,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
   selector: 'app-mat-autocomplete',
   templateUrl: './mat-autocomplete.component.html',
   styleUrls: ['./mat-autocomplete.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MatAutocompleteComponent implements OnInit {
   /** Available autocomplete terms */
@@ -35,7 +35,8 @@ export class MatAutocompleteComponent implements OnInit {
   @Input() termValue: string;
   /** If autocomplete is part of a form group, pass the form control reference */
   @Input() formControlRef: FormControl;
-  /** The term that was selected from the autocomplete */ 
+  /** The term that was selected from the autocomplete */
+
   @Output() optionSelected = new EventEmitter<any>();
 
   /** Internal form control used for input */
@@ -45,21 +46,20 @@ export class MatAutocompleteComponent implements OnInit {
   /** Term that was selected from the autocomplete */
   public selectedTerm: string;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     // Set up filtering as a user types
-    this.filteredOptions = this.autoCompleteControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value[this.termLabel]),
-        map(value => this._filter(value))
-      );
+    this.filteredOptions = this.autoCompleteControl.valueChanges.pipe(
+      startWith(''),
+      map(value => (typeof value === 'string' ? value : value[this.termLabel])),
+      map(value => this._filter(value)),
+    );
   }
 
   /**
    * Determine which display label to use
-   * @param option 
+   * @param option
    */
   public labelDisplay(option: any) {
     return this.termLabel && option ? option[this.termLabel] : option;
@@ -79,7 +79,7 @@ export class MatAutocompleteComponent implements OnInit {
 
   /**
    * When an option was selected from the autocomplete
-   * @param event 
+   * @param event
    */
   public selectedOption(event: MatAutocompleteSelectedEvent) {
     const value = this.termValue ? event.option.value[this.termValue] : event.option.value;
@@ -104,5 +104,4 @@ export class MatAutocompleteComponent implements OnInit {
       this.selectedTerm = null;
     }
   }
-
 }

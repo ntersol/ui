@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public ngOnInit() {
     // Get users and load into store
-    this.api.users.get().subscribe(users => this.users = users);
+    this.api.users.get().subscribe(users => (this.users = users));
 
     // Rehydrate grid from UI state
     this.ui.select.gridState$.subscribe(gridState => {
@@ -98,14 +98,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Generate custom navigation links for the grid column dropdown menu
-   * @param params 
+   * @param params
    */
   public gridCustomLinks = (params: any) => {
     const self = this;
     // Get current menu items
     const currentMenu: (string | MenuItemDef)[] = params.defaultItems.slice(0);
     // Get current column ID. Useful for individual custom column menus. IE if (columnId === 'someProp') ...
-    const columnId = params.column.getId(); 
+    const columnId = params.column.getId();
     // Insert before the reset columns element which is last
     currentMenu.splice(currentMenu.length - 2, 0, 'separator');
     currentMenu.splice(currentMenu.length - 2, 0, {
@@ -116,24 +116,24 @@ export class HomeComponent implements OnInit, OnDestroy {
           icon: '<i class="fa fa-pie-chart"></i>',
           action: function() {
             self.gridMenuAction((<any>this).name, columnId);
-          }
+          },
         },
         {
           name: 'Bar Chart',
           icon: '<i class="fa fa-bar-chart"></i>',
           action: function() {
             self.gridMenuAction((<any>this).name, columnId);
-          }
+          },
         },
-      ]
+      ],
     });
     return currentMenu;
-  }
+  };
 
   /**
    * An action to perform from a custom link on the grid column menu
-   * @param actionType 
-   * @param columnId 
+   * @param actionType
+   * @param columnId
    */
   public gridMenuAction(actionType: string, columnId: string) {
     console.log(actionType, columnId);

@@ -57,8 +57,12 @@ export class ChartsComponent implements OnInit {
     return <CanvasJS.ChartDataSeriesOptions[]>[
       {
         dataPoints: dataPoints.sort((a, b) => {
-          if (a.y < b.y) { return -1; }
-          if (a.y > b.y) { return 1; }
+          if (a.y < b.y) {
+            return -1;
+          }
+          if (a.y > b.y) {
+            return 1;
+          }
           return 0;
         }),
       },
@@ -94,8 +98,12 @@ export class ChartsComponent implements OnInit {
       {
         dataPoints: dataPoints
           .sort((a, b) => {
-            if (a.y < b.y) { return -1; }
-            if (a.y > b.y) { return 1; }
+            if (a.y < b.y) {
+              return -1;
+            }
+            if (a.y > b.y) {
+              return 1;
+            }
             return 0;
           })
           .reverse(),
@@ -123,16 +131,16 @@ export class ChartsComponent implements OnInit {
     this.dataPointsTransfersTotal = [];
     for (const key in transfersByAgent) {
       if (transfersByAgent.hasOwnProperty(key)) {
-      this.dataPointsTransfersTotal.push({
-        name: transfersByAgent[key][0].Time,
-        dataPoints: transfersByAgent[key].map(transfer => {
-          return <CanvasJS.ChartDataPoint>{
-            label: transfer.name,
-            y: transfer.Transfers,
-          };
-        }),
-      });
-    }
+        this.dataPointsTransfersTotal.push({
+          name: transfersByAgent[key][0].Time,
+          dataPoints: transfersByAgent[key].map(transfer => {
+            return <CanvasJS.ChartDataPoint>{
+              label: transfer.name,
+              y: transfer.Transfers,
+            };
+          }),
+        });
+      }
     }
   }
 
