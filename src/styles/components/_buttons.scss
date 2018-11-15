@@ -60,24 +60,26 @@ button { cursor: pointer; }
 // Material buttons
 body {
   button.mat-menu-item:focus {outline:initial;}
+  .mat-menu-item{line-height: 35px;height: 35px;}
   .mat-button, .mat-raised-button, .mat-flat-button, .mat-stroked-button, .mat-icon-button { transition: .3s ease-out; font-weight: normal ; position: relative; overflow: hidden; background-image: linear-gradient(to top, #fff 0%, #fff 100%); color: $interact-primary; min-width: initial; line-height: 1.85rem; padding: 0 .55rem;
     &:hover { color: #fff; }
+    //&.cdk-focused:hover{ color: $interact-primary!important; }
     &:focus { outline: initial; }
     &:after { transition: .3s ease-out; content: ' '; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 1; opacity: 0; background: $interact-primary-lt; background-image: linear-gradient(to bottom, $interact-primary-lt 0%, $interact-primary 100%); }
     &:hover:after { opacity: 1; }
     &.sm{line-height: 1.25rem;font-size: .7rem;}
-    &.cdk-focused .mat-button-wrapper { color: #fff !important; }
+    //&.cdk-focused .mat-button-wrapper { color: #fff !important; }
     &.cdk-focused:after { display: none; }
     .mat-button-wrapper { z-index: 2; position: relative; }
     &.mat-reverse { background: $interact-primary-lt; background-image: linear-gradient(to bottom, $interact-primary-lt 0%, $interact-primary 100%);
       .mat-button-wrapper { color: #fff; }
-      &:hover {
+      &:hover { background-image: linear-gradient(to bottom, #fff 20%, #e9ecef 100%);
         .mat-button-wrapper { color: $interact-primary; }
       }
       &:after { transition: .3s ease-out; content: ' '; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 1; opacity: 0; background: #fff; }
-      &:hover:after { opacity: 1; }
+      &.mat-stroked-button .mat-button-wrapper{color:$interact-primary;}
     }
-    &.active, &.enabled { transition: .3s ease-out; background-image: linear-gradient(to top, #ad0000 0%, #ff4343 100%); color: #fff; border: 1px solid red; opacity: 1; }
+    &.active, &.enabled { transition: .3s ease-out; background-image: linear-gradient(to top, #ad0000 0%, #ff4343 100%)!important; color: #fff; border: 1px solid red; opacity: 1; }
     &[disabled] { border: 1px solid #a7a7a7 !important; background: #ededed !important;
       .mat-button-wrapper { color: dimgray !important; }
       &:after { display: none; }
@@ -90,5 +92,6 @@ body {
       .fa { display: none; }
       &:after { font-family: FontAwesome; content: "\f110"; animation: fa-spin 2s infinite linear; display: inline-block; position: relative; left: -3px; }
     }
+    &.mat-stroked-button{background-image: linear-gradient(to bottom, #fff 20%, #e9ecef 100%);}
   }
 }
