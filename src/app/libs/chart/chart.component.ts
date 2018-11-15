@@ -151,7 +151,8 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
    * Initialize the chart
    */
   private chartInit() {
-    if (this.element && this.element.nativeElement && window.CanvasJS) {
+    // Make sure DOM element exists
+    if (this.element && this.element.nativeElement && window.CanvasJS && document.getElementById(this.uniqueId)) {
       //  && this.dataSets
       // Clean up any previous references before reinitializing the chart
       this.ngOnDestroy();
@@ -165,6 +166,8 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
       // Due to bug with plugins registered with global instance and not being available via imports
       this.chart = new window.CanvasJS.Chart(this.uniqueId, this.chartOptionsCreate());
       this.chart.render();
+    } else {
+      setTimeout(() => this.chartInit(), 100);
     }
   }
 
@@ -214,7 +217,7 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
         },
       },
       // Use built in color set if supplied, use custom colors if not
-      colorSet: this.colorSet ? this.colorSet : this.colorScheme ? this.colorScheme : null, 
+      colorSet: this.colorSet ? this.colorSet : this.colorScheme ? this.colorScheme : null,
       data: this.mapChartData(),
       axisX: {
         title: this.titleXAxis,
@@ -222,24 +225,30 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
         interval: 1,
         labelFontSize: this.styling.fontSize,
         labelFontFamily: this.styling.fontFamily,
-        labelFormatter: (this.formatXLabels || this.showXAxisLabels === false) ? val => {
-          if (this.showXAxisLabels === false) {
-            return ''; // If show labels is disabled, return empty string which hides the labels
-          }
-          return this.formatXLabels(val); // If custom formatter supplied, format strings
-        } : null, // Otherwise return default value
+        labelFormatter:
+          this.formatXLabels || this.showXAxisLabels === false
+            ? val => {
+                if (this.showXAxisLabels === false) {
+                  return ''; // If show labels is disabled, return empty string which hides the labels
+                }
+                return this.formatXLabels(val); // If custom formatter supplied, format strings
+              }
+            : null, // Otherwise return default value
       },
       axisY: {
         title: this.titleYAxis,
         titleFontSize: 16,
         labelFontSize: this.styling.fontSize,
         labelFontFamily: this.styling.fontFamily,
-        labelFormatter: (this.formatYLabels || this.showYAxisLabels === false) ? val => {
-          if (this.showYAxisLabels === false) {
-            return ''; // If show labels is disabled, return empty string which hides the labels
-          }
-          return this.formatYLabels(val); // If custom formatter supplied, format strings
-        } : null, // Otherwise return default value
+        labelFormatter:
+          this.formatYLabels || this.showYAxisLabels === false
+            ? val => {
+                if (this.showYAxisLabels === false) {
+                  return ''; // If show labels is disabled, return empty string which hides the labels
+                }
+                return this.formatYLabels(val); // If custom formatter supplied, format strings
+              }
+            : null, // Otherwise return default value
       },
     };
     // console.log(options)
@@ -328,6 +337,13 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     return '#' + diffRedStr + diffGreenStr + diffBlueStr;
   }
 
+  /** Rerender chart. Used by dom observer directive */
+  public rerender() {
+    if (this.chart) {
+      this.chart.render();
+    }
+  }
+
   /**
    * Supply a formatter method OR an Angular pipe to the chart instance
    * Used to format labels, values, datalabels, etc
@@ -373,6 +389,7 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   ngOnDestroy() {
     if (this.chart) {
       this.chart.destroy();
+      this.chart = null;
     }
   }
 }
