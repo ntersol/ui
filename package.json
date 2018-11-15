@@ -23,7 +23,8 @@
     "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
     "serve:ssr": "node dist/server",
     "build:client-and-server-bundles": "ng build --prod && ng run angular-starter:server",
-    "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
+    "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
+    "build-ie-polyfills": "webpack-cli src/polyfills-ie.ts -o src/assets/scripts/polyfills-ie.min.js -c webpack-polyfill.config.js"
   },
   "prettier": {
     "printWidth": 120,
