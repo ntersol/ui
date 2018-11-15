@@ -17,6 +17,7 @@ import { TextCasePipe } from './pipes/text-case.pipe';
 import { FullScreenDirective } from './directives/full-screen.directive';
 import { FocusDirective } from './directives/focus.directive';
 import { ModalLaunchDirective } from './directives/modal-launch.directive';
+import { DomObserverDirective } from './directives/dom-observer.directive';
 
 // Pipes + Directives
 export const APP_PIPES_DIRECTIVES = [
@@ -35,6 +36,7 @@ export const APP_PIPES_DIRECTIVES = [
   FullScreenDirective,
   FocusDirective,
   ModalLaunchDirective,
+  DomObserverDirective
 ];
 
 @NgModule({
