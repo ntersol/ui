@@ -39,42 +39,40 @@
       <div class="col-12" [ngClass]="sidebarOpen ? 'col-md-9' : 'col-md-12' ">
         <div style="position:relative;height:calc(100vh - 150px)">
 
-          Update to AG-Grid coming soon
+          <app-stepper>
+            <step>
+              <ng-template step-label-template>
+                Step 1
+              </ng-template>
+              <ng-template step-body-template>
+                <mat-card>
+                  Step 1 Body
+                </mat-card>
+              </ng-template>
+            </step>
 
-          <!--
-  <datagrid #datagrid
-            [rows]="route.users.data"
-            [columns]="columns"
-            [state]="{}"
-            [options]="options"
-            [filterGlobal]="filterGlobal"
-            (onStateChange)="onStateChange($event)"
-            (onRowsSelected)="onRowsSelected($event)"
-            (onRowUpdated)="onRowUpdated($event)"
-            (onRightClickMenu)="contextMenu($event)">
+            <step>
+              <ng-template step-label-template>
+                Step 2
+              </ng-template>
+              <ng-template step-body-template>
+                <mat-card>
+                  Step 2 Body
+                </mat-card>
+              </ng-template>
+            </step>
 
-          <datagrid-column prop="phone">
-           
-            <ng-template let-value="value" let-column="column" let-row="row" datagrid-header-template>
-              <i class="fa fa-phone" aria-hidden="true"></i> Phone Number
-            </ng-template>
-          
-            <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-              <a href="tel:{{ value | phoneNumber : true }}">{{ value | phoneNumber }}</a>
-            </ng-template>
-          </datagrid-column>
-
-          <datagrid-column prop="delete">
-            <ng-template let-value="value" let-column="column" let-row="row" datagrid-cell-template>
-              <app-launch-modal modal="ConfirmationModalComponent" size="lg" [data]="'Are you sure you want to delete ' + row.name + '?'" [isButton]="false"
-                                (success)="userDelete(row)">
-                <i class="fa fa-remove"></i> Delete
-              </app-launch-modal>
-            </ng-template>
-          </datagrid-column>
-
-          </datagrid>
-          -->
+            <step>
+              <ng-template step-label-template>
+                Step 3
+              </ng-template>
+              <ng-template step-body-template>
+                <mat-card>
+                  Step 3 Body
+                </mat-card>
+              </ng-template>
+            </step>
+          </app-stepper>
 
         </div>
       </div>
