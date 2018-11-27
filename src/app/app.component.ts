@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     this.routeChange();
     // Always refresh env settings after app load even if already present in localstorage
     // This protects against env setting getting stale when bypassing the app initializer
-
+    // Ordinarily this logic would go in the service but a service won't be instantiated if it isn't injected somewhere
     if (environment.settings.enableServiceWorker) {
       this.sw.enable();
     }

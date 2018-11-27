@@ -23,7 +23,7 @@ export class AuthService {
   /** Holds reference to logout modal */
   public logOutModal: MatDialogRef<any>;
   /** The http call so a token can be refreshed with a callback and success method */
-  public refreshToken = this.http.put(this.settings.apiUrl + environment.endpoints.authTokenRefresh, null);
+  public refreshToken = this.http.put(environment.endpoints.apiUrl + environment.endpoints.authTokenRefresh, null);
   /** If a token is passed in without logging in no timer duration is present. Default to this */
   private setTimerDefaultSeconds = 300; // 300 = 5 minutes
 
@@ -77,7 +77,7 @@ export class AuthService {
         }),
       );
     }
-    const url = this.settings.apiUrl + environment.endpoints.authLogin;
+    const url = environment.endpoints.apiUrl + environment.endpoints.authLogin;
     // Auth point is configured
     return this.http.post(url, data).pipe(
       map((response: any) => {

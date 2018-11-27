@@ -59,11 +59,12 @@ export class UIStoreService {
   }
 
   /**
-   * Toggle sidebar
-   * @param toggle - New sidebar state
+   * Change a toggle which is just a boolean in a dictionary
+   * @param prop - Property to set, corresponds to toggle$ in the ui.select service
+   * @param value - T/F
    */
-  public sidebarToggle(toggle: boolean) {
-    this.store.dispatch(UIStoreActions.SIDEBAR_TOGGLE(toggle));
+  public toggle(prop: string, value: boolean) {
+    this.store.dispatch(UIStoreActions.TOGGLES({ prop: prop, value: value }));
   }
 
   /**
@@ -72,13 +73,6 @@ export class UIStoreService {
    */
   public gridStateChange(gridState: GridState) {
     this.store.dispatch(UIStoreActions.GRID_STATE_CHANGE(gridState));
-  }
-
-  /**
-   * Toggle multiscreen view
-   */
-  public multiScreenToggle(multiScreen: boolean | null = null) {
-    this.store.dispatch(UIStoreActions.MULTISCREEN_TOGGLE(multiScreen));
   }
 
   /**

@@ -9,9 +9,8 @@ const initialState: AppStore.Ui = {
   saveState: null,
   modal: null,
   gridState: {},
-  multiScreen: false,
-  sidebarOpen: false,
   tabsActive: {},
+  toggles: {},
 };
 
 export function UIReducer(state = initialState, action: Action) {
@@ -33,16 +32,12 @@ export function UIReducer(state = initialState, action: Action) {
     state.modal = null;
   }
 
-  if (isType(action, UIStoreActions.SIDEBAR_TOGGLE)) {
-    state.sidebarOpen = action.payload;
+  if (isType(action, UIStoreActions.TOGGLES)) {
+    state.toggles[action.payload.prop] = action.payload.value;
   }
 
   if (isType(action, UIStoreActions.TAB_CHANGE)) {
     state.tabsActive[action.payload.tabInstanceId] = action.payload.tabId;
-  }
-
-  if (isType(action, UIStoreActions.MULTISCREEN_TOGGLE)) {
-    state.multiScreen = action.payload !== null ? action.payload : !state.multiScreen;
   }
 
   // If the action namespace is the UI store and NOT the rehydrate action

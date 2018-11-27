@@ -8,16 +8,16 @@ interface Statuses {
 
 /**
  * A component abstraction for mat-form-field. Adds better design and validation states
- * USAGE: <app-mat-form-field [formGroup]="formAgent" controlName="address" placeholder="Address"></app-mat-form-field>
+ * USAGE: <app-form-field [formGroup]="formAgent" controlName="address" placeholder="Address"></app-form-field>
  */
 @AutoUnsubscribe()
 @Component({
-  selector: 'app-mat-form-field',
-  templateUrl: './mat-form-field.component.html',
-  styleUrls: ['./mat-form-field.component.scss'],
+  selector: 'app-form-field',
+  templateUrl: './form-field.component.html',
+  styleUrls: ['./form-field.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatFormFieldComponent implements OnInit, OnDestroy {
+export class FormFieldComponent implements OnInit, OnDestroy {
   /** Formgroup reference */
   @Input() formGroup: FormGroup;
   /** The formControlName of this field */

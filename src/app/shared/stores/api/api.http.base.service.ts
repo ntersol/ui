@@ -58,8 +58,8 @@ export class ApiHttpService {
             error.errorMsg = 'Please log in ';
             return this.endSession(error);
           } else {
-            this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR({ apiMap: apiMap, data: error }));
-            return of(error);
+            this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_GET({ apiMap: apiMap, data: error }));
+            throw error;
           }
         }),
         share(),
@@ -93,8 +93,8 @@ export class ApiHttpService {
           error.errorMsg = 'Please log in ';
           return this.endSession(error);
         } else {
-          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR({ apiMap: apiMap, data: error }));
-          return of(error);
+          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
+          throw error;
         }
       }),
     );
@@ -121,8 +121,8 @@ export class ApiHttpService {
           error.errorMsg = 'Please log in ';
           return this.endSession(error);
         } else {
-          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR({ apiMap: apiMap, data: error }));
-          return of(error);
+          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
+          throw error;
         }
       }),
     );
@@ -149,8 +149,8 @@ export class ApiHttpService {
           error.errorMsg = 'Please log in ';
           return this.endSession(error);
         } else {
-          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR({ apiMap: apiMap, data: error }));
-          return of(error);
+          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
+          throw error;
         }
       }),
     );
@@ -177,8 +177,8 @@ export class ApiHttpService {
           error.errorMsg = 'Please log in ';
           return this.endSession(error);
         } else {
-          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR({ apiMap: apiMap, data: error }));
-          return of(error);
+          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
+          throw error;
         }
       }),
     );

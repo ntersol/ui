@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import { Input } from '@angular/core';
 
 import { AppStore } from '$shared';
@@ -9,12 +9,17 @@ import { AppStore } from '$shared';
   styleUrls: ['./api-state.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ApiStateComponent implements OnInit {
+export class ApiStateComponent implements OnInit, OnChanges {
   @Input() state: AppStore.ApiState<any>;
 
-  public errorHide = true;
+  public errorShow = true;
 
   constructor() {}
 
   ngOnInit() {}
+
+  ngOnChanges() {
+    // Everytime input data changes, reset error to show
+    this.errorShow = true;
+  }
 }

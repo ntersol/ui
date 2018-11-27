@@ -5,12 +5,6 @@ import { AppStore } from '../store';
 import { Action } from '@ngrx/store';
 import { isType } from 'typescript-fsa';
 
-import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-
-export const adapter: EntityAdapter<AppStore.Api> = createEntityAdapter<AppStore.Api>(<any>{
-  selectId: (entity: AppStore.EntityProp) => entity['email'],
-});
-
 export function ApiReducer(state: AppStore.Api = {}, action: Action) {
   // console.log('ApiReducer', action, ApiStoreActions);
 
@@ -34,19 +28,29 @@ export function ApiReducer(state: AppStore.Api = {}, action: Action) {
       ...action.payload.apiMap.entity.initialState,
       ...state[action.payload.apiMap.storeProperty],
       modifying: true,
-      error: false,
+      errorModifying: false,
       success: false,
     };
   }
 
   // On error, either from loading or modifying
-  if (isType(action, ApiStoreActions.STATE_ERROR)) {
+  if (isType(action, ApiStoreActions.STATE_ERROR_GET)) {
+    state[action.payload.apiMap.storeProperty] = {
+      ...action.payload.apiMap.entity.initialState,
+      ...state[action.payload.apiMap.storeProperty],
+      loading: false,
+      error: action.payload.data,
+    };
+  }
+
+  // On error, either from loading or modifying
+  if (isType(action, ApiStoreActions.STATE_ERROR_MODIYFING)) {
     state[action.payload.apiMap.storeProperty] = {
       ...action.payload.apiMap.entity.initialState,
       ...state[action.payload.apiMap.storeProperty],
       modifying: false,
-      loading: false,
-      error: action.payload.data,
+      errorModifying: action.payload.data,
+      success: false,
     };
   }
 

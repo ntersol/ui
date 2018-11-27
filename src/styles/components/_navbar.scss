@@ -1,8 +1,8 @@
 // Global branded styling. App specific styling should NOT go in this file
 header {
-  @include gradient($bg-primary-dk,$bg-primary-lt);
-  .navbar-brand { color: #fff; padding-top: .5rem; padding-bottom: .5rem;
-    strong { color: #fff; }
+  background:#fff;border-bottom:1px solid #e2e5e8;margin-bottom: 1rem; 
+  .navbar-brand {margin-right: 3rem;color:#000;
+    strong { }
     .fa { color: yellow; }
   }
   .logo { text-shadow: 1px 1px 5px rgba(255,255,255,.3); color: $interact-primary; }
@@ -16,12 +16,14 @@ header {
 
   .nav-mobile-only{margin-top:1rem;padding-top:1rem;border-top:1px solid #ccc;}
 
-  .navbar { margin-bottom: 1rem; padding: 0; padding-bottom: .20rem;
-    .navbar-nav > .nav-item .nav-link, .form-inline > a:not([href]):not([tabindex]) { color: white;
-      &.active { border-bottom: 2px solid white; padding-bottom: .25rem; }
+  .navbar { padding: 0;
+    .navbar-nav > .nav-item .nav-link, .form-inline > a:not([href]):not([tabindex]) { color:#8f9daf;font-size:.75rem;font-weight: bold;padding-bottom: .75rem;padding-top: .9rem;
+      &.active { border-bottom: 2px solid $interact-primary;
+      .fa{color:$interact-primary; }
+     }
     }
-    #navbar-main .link { color: white; }
-    .navbar-toggler { color: #fff; font-size: 1.1rem; top: .75rem; }
+    #navbar-main .link { color: #8f9daf; }
+    .navbar-toggler { color: #8f9daf; font-size: 1.1rem; top: .75rem; }
   }
 
   @include media-breakpoint-up(lg) {

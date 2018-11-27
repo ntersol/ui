@@ -10,12 +10,15 @@ import {
   ViewEncapsulation,
   ContentChildren,
   QueryList,
+  OnChanges,
+  OnDestroy,
 } from '@angular/core';
 import { AgGridNg2 } from 'ag-grid-angular';
-import { GridOptions, ColumnApi } from 'ag-grid-community';
+import { GridOptions, ColumnApi, ColDef } from 'ag-grid-community';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 import { debounce } from 'helpful-decorators';
+import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
 import { GridTemplateRendererComponent } from '../grid-template-renderer/grid-template-renderer.component';
 import { GridStatusBarComponent } from '../grid-status-bar/grid-status-bar.component';
@@ -23,6 +26,7 @@ import { GridColumnDirective } from '../directives/column.directive';
 
 const defaultsDeep = require('lodash/defaultsDeep');
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
@@ -34,7 +38,7 @@ const defaultsDeep = require('lodash/defaultsDeep');
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('grid') grid: AgGridNg2;
   @ViewChild('gridContainer') gridContainer: ElementRef;
 
@@ -70,10 +74,25 @@ export class GridComponent implements OnInit {
     }
   }
 
-  @Input() gridState: GridState;
+  private _gridState: GridState = {
+    columns: [],
+    sorts: [],
+    filters: {},
+  };
+  @Input()
+  set gridState(gridState: GridState) {
+    this._gridState = {
+      ...this._gridState,
+      ...gridState,
+    };
+  }
+  get gridState() {
+    return this._gridState;
+  }
+
   @Input() rowData: any[];
   @Input() getMainMenuItems: any;
-  @Input() columnDefs: any[];
+  @Input() columnDefs: ColDef[];
   @Input() animateRows: boolean;
   @Input() enableSorting: boolean;
   @Input() enableFilter: boolean;
@@ -94,6 +113,8 @@ export class GridComponent implements OnInit {
   public gridAllowUpdate = true;
   public gridComponents = { statusBarComponent: GridStatusBarComponent };
   public gridStatusComponent: GridStatusBarComponent;
+
+  private columnsDefault: ColDef[];
 
   /** Holds custom DOM templates passed from parent */
   private _columnTemplates: any;
@@ -120,6 +141,12 @@ export class GridComponent implements OnInit {
           this.gridFit();
         }
       });
+  }
+
+  ngOnChanges(model: any) {
+    if (model.columnDefs && model.columnDefs.currentValue) {
+      this.columnsDefault = this.columnsSaveDefaults(model.columnDefs.currentValue);
+    }
   }
 
   /**
@@ -220,7 +247,7 @@ export class GridComponent implements OnInit {
   /** Get grid state and emit to parent */
   public getGridState() {
     this.gridState = {
-      columns: this.gridColumnApi.getColumnState(),
+      columns: this.columnStateRestore(this.columnsDefault, this.gridColumnApi.getColumnState()),
       sorts: this.grid.api.getSortModel(),
       filters: this.grid.api.getFilterModel(),
     };
@@ -279,4 +306,51 @@ export class GridComponent implements OnInit {
       this.grid.api.setColumnDefs(this.columnDefs);
     }
   }
+
+  /**
+   * Returns the full complete column definitions which contain properties AG grid removed.
+   * AG grid mutates the column definitions and removes key properies like field and headerName.
+   * This method returns a mashup of both the original and modified column definitions.
+   * @param colsDefault - Original column defs with properties of "field" and "headerName"
+   * @param colsModified - Modified column def with properties of "colId" etc
+   */
+  private columnStateRestore(colsDefault: ColDef[], colsModified: ColDef[]): ColDef[] {
+    if (colsDefault && colsModified) {
+      const colsOriginal = [...colsDefault];
+      // Loop through the modified columns
+      return colsModified.map(column => {
+        // Now loop through the default/original input columns
+        for (let i = 0; i <= colsDefault.length; i++) {
+          // Check if the field name in the original matches the colID in the modified
+          if (colsOriginal[i].field === column.colId) {
+            // Remove the matched item out of the original array to cut future loops down
+            // colsOriginal = [...colsOriginal.slice(0, i), ...colsOriginal.slice(i + 1)];
+            // Return the column def which is a mashup of both objects
+            return {
+              ...colsOriginal[i],
+              ...column,
+            };
+          }
+        }
+      });
+    }
+    return colsModified;
+  }
+
+  /**
+   * Save the original column definitions
+   * AG grid mutates the original input columns and destroys a lot of data
+   * @param columns
+   */
+  private columnsSaveDefaults(columns: ColDef[]): ColDef[] {
+    // Make sure data exists
+    if (columns && columns.length) {
+      return this.columnDefs.map(column => {
+        return { ...column };
+      });
+    }
+    return null;
+  }
+
+  ngOnDestroy() {}
 }

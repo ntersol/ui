@@ -28,8 +28,6 @@ export class AppSettings {
   public isBrowser = isPlatformBrowser(this.platformId);
   /** API token */
   private _token: string | null = null;
-  /** Web Api Url */
-  private _apiUrl: string | null = null;
   /** Username */
   private _userName: string | null = null;
 
@@ -58,16 +56,6 @@ export class AppSettings {
   public set token(value: string | null) {
     this._token = value;
     this.propSet(AppSettingsProps.token, value);
-  }
-
-  /** Web Api Url */
-  public get apiUrl(): string | null {
-    return this._apiUrl || this.propGet(AppSettingsProps.apiUrl);
-  }
-  public set apiUrl(value: string | null) {
-    // console.log('apiUrl', value);
-    this._apiUrl = value;
-    this.propSet(AppSettingsProps.apiUrl, value);
   }
 
   /** Username */

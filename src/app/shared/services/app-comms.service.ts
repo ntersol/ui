@@ -53,7 +53,7 @@ export class AppCommsService {
             break;
           // Notify parent window that this window has closed
           case MessageActions.END_MULTISCREEN:
-            this.ui.multiScreenToggle(false);
+            this.ui.toggle('multiScreen', false);
             break;
         }
       }),
@@ -102,7 +102,7 @@ export class AppCommsService {
       // Get current path
       const slug = window.location.origin + window.location.pathname;
       this.subs.push(
-        this.ui.select.multiScreen$.subscribe(multiScreen => {
+        this.ui.select.toggle$('multiScreen').subscribe(multiScreen => {
           // If multiscreen is present and a window is not yet open and has not been closed
           if (multiScreen && !this.ui.screen && !window.opener) {
             setTimeout(() => {
