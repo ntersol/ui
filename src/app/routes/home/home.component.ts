@@ -40,6 +40,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       // Make sure this isn't the multiscreen originator and that the new state passed down doesn't match the current state
       if (!this.ui.screen && gridState !== this.gridState) {
         this.gridState = gridState;
+        if (this.gridState.columns) {
+          this.columns = this.gridState.columns;
+        }
       }
     });
 
@@ -128,7 +131,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       ],
     });
     return currentMenu;
-  };
+  }
 
   /**
    * An action to perform from a custom link on the grid column menu
