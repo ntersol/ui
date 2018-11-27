@@ -1,5 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, ContentChildren, QueryList, AfterViewInit, Input, 
-  HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ElementRef,
+  ContentChildren,
+  QueryList,
+  AfterViewInit,
+  Input,
+  HostListener,
+} from '@angular/core';
 
 import { StepDirective } from './directives/step.directive';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
@@ -26,7 +35,7 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'app-stepper',
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StepperComponent implements OnInit, AfterViewInit {
   /** At what hozizontal resolution does the horizontal stepper change to the vertical stepper in pixels */
@@ -52,9 +61,9 @@ export class StepperComponent implements OnInit, AfterViewInit {
   public selectedIndexWidths: number[] = [];
   public ready = false;
 
-  constructor(private elRef: ElementRef) { }
+  constructor(private elRef: ElementRef) {}
 
-  ngOnInit() {  
+  ngOnInit() {
     this.widthUpdate();
   }
 
@@ -75,7 +84,7 @@ export class StepperComponent implements OnInit, AfterViewInit {
    * @param section - New section
    */
   public selectionChange(stepper: StepperSelectionEvent) {
-   console.log(stepper);
+    console.log(stepper);
   }
 
   /**
@@ -113,5 +122,4 @@ export class StepperComponent implements OnInit, AfterViewInit {
       }
     }, 500);
   }
-
 }

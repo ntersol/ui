@@ -17,5 +17,4 @@ export class StepDirective {
   @Input()
   @ContentChild(StepLabelDirective, { read: TemplateRef })
   label: TemplateRef<any>;
-  
 }

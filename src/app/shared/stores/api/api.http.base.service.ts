@@ -59,7 +59,7 @@ export class ApiHttpService {
             return this.endSession(error);
           } else {
             this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_GET({ apiMap: apiMap, data: error }));
-            throw(error);
+            throw error;
           }
         }),
         share(),
@@ -94,7 +94,7 @@ export class ApiHttpService {
           return this.endSession(error);
         } else {
           this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
-          throw(error);
+          throw error;
         }
       }),
     );
@@ -122,7 +122,7 @@ export class ApiHttpService {
           return this.endSession(error);
         } else {
           this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
-          throw(error);
+          throw error;
         }
       }),
     );
@@ -150,7 +150,7 @@ export class ApiHttpService {
           return this.endSession(error);
         } else {
           this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
-          throw(error);
+          throw error;
         }
       }),
     );
@@ -178,7 +178,7 @@ export class ApiHttpService {
           return this.endSession(error);
         } else {
           this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
-          throw(error);
+          throw error;
         }
       }),
     );

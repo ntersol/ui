@@ -131,7 +131,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       ],
     });
     return currentMenu;
-  }
+  };
 
   /**
    * An action to perform from a custom link on the grid column menu

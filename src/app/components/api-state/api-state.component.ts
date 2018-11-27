@@ -9,7 +9,7 @@ import { AppStore } from '$shared';
   styleUrls: ['./api-state.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ApiStateComponent implements OnInit , OnChanges {
+export class ApiStateComponent implements OnInit, OnChanges {
   @Input() state: AppStore.ApiState<any>;
 
   public errorShow = true;
@@ -22,5 +22,4 @@ export class ApiStateComponent implements OnInit , OnChanges {
     // Everytime input data changes, reset error to show
     this.errorShow = true;
   }
-
 }

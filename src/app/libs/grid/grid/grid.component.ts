@@ -11,7 +11,7 @@ import {
   ContentChildren,
   QueryList,
   OnChanges,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { AgGridNg2 } from 'ag-grid-angular';
 import { GridOptions, ColumnApi, ColDef } from 'ag-grid-community';
@@ -23,7 +23,6 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { GridTemplateRendererComponent } from '../grid-template-renderer/grid-template-renderer.component';
 import { GridStatusBarComponent } from '../grid-status-bar/grid-status-bar.component';
 import { GridColumnDirective } from '../directives/column.directive';
-
 
 const defaultsDeep = require('lodash/defaultsDeep');
 
@@ -75,15 +74,16 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  private _gridState: GridState =  {
+  private _gridState: GridState = {
     columns: [],
     sorts: [],
-    filters: {}
+    filters: {},
   };
-  @Input() set gridState(gridState: GridState) {
+  @Input()
+  set gridState(gridState: GridState) {
     this._gridState = {
       ...this._gridState,
-      ...gridState
+      ...gridState,
     };
   }
   get gridState() {
@@ -148,7 +148,6 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
       this.columnsDefault = this.columnsSaveDefaults(model.columnDefs.currentValue);
     }
   }
-
 
   /**
    * When the grid is ready and has finished loading
@@ -248,7 +247,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   /** Get grid state and emit to parent */
   public getGridState() {
     this.gridState = {
-      columns: this.columnStateRestore(this.columnsDefault, this.gridColumnApi.getColumnState() ),
+      columns: this.columnStateRestore(this.columnsDefault, this.gridColumnApi.getColumnState()),
       sorts: this.grid.api.getSortModel(),
       filters: this.grid.api.getFilterModel(),
     };
@@ -329,7 +328,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
             // Return the column def which is a mashup of both objects
             return {
               ...colsOriginal[i],
-              ...column
+              ...column,
             };
           }
         }
@@ -341,18 +340,17 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   /**
    * Save the original column definitions
    * AG grid mutates the original input columns and destroys a lot of data
-   * @param columns 
+   * @param columns
    */
   private columnsSaveDefaults(columns: ColDef[]): ColDef[] {
     // Make sure data exists
     if (columns && columns.length) {
       return this.columnDefs.map(column => {
-        return {...column};
+        return { ...column };
       });
     }
     return null;
   }
 
   ngOnDestroy() {}
-
 }

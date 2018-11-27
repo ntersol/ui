@@ -4,7 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 import * as dev from './environment';
 
-export const environment = {
-  ...dev, 
+export const environment: any = {
+  ...dev,
   production: true,
 };
+// Overrides for deeper properties since spread operator only works at top level
+// environment.settings.enableAuth = true;
