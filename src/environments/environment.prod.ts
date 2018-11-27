@@ -2,11 +2,12 @@
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-import * as dev from './environment';
+import { common } from './environment.common';
 
-export const environment: any = {
-  ...dev,
+export const environment = {
+  ...common,
   production: true,
 };
+
 // Overrides for deeper properties since spread operator only works at top level
 // environment.settings.enableAuth = true;
