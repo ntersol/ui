@@ -13,11 +13,6 @@ export declare namespace AppStore {
     users?: ApiState<Models.User[]>;
   }
 
-  /** The API Map */
-  export interface ApiMapping {
-    users: ApiMap;
-  }
-
   export interface EntityProp {
     guid?: string;
     email?: string;
@@ -52,6 +47,7 @@ export declare namespace AppStore {
     loading?: boolean;
     data?: T;
     error?: any;
+    errorModifying?: any;
     modifying?: boolean;
     success?: boolean;
     entities?: {
