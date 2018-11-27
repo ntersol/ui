@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public users: Models.User[];
   public users$ = this.api.select.users$;
-  public sidebarOpen$ = this.ui.select.sidebarOpen$;
   public formMain: FormGroup;
   public isEditing: boolean;
   public sidebarOpen = false;
@@ -131,7 +130,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       ],
     });
     return currentMenu;
-  };
+  }
 
   /**
    * An action to perform from a custom link on the grid column menu
@@ -182,11 +181,6 @@ export class HomeComponent implements OnInit, OnDestroy {
    */
   public usersRefresh() {
     this.api.users.get(true).subscribe();
-  }
-
-  /** Toggle the sidebar */
-  public sidebarToggle(toggle: boolean) {
-    this.ui.sidebarToggle(!toggle);
   }
 
   /**

@@ -5,12 +5,6 @@ import { AppStore } from '../store';
 import { Action } from '@ngrx/store';
 import { isType } from 'typescript-fsa';
 
-import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-
-export const adapter: EntityAdapter<AppStore.Api> = createEntityAdapter<AppStore.Api>(<any>{
-  selectId: (entity: AppStore.EntityProp) => entity['email'],
-});
-
 export function ApiReducer(state: AppStore.Api = {}, action: Action) {
   // console.log('ApiReducer', action, ApiStoreActions);
 

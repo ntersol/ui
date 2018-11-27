@@ -13,24 +13,18 @@ export declare namespace AppStore {
     users?: ApiState<Models.User[]>;
   }
 
-  export interface EntityProp {
-    guid?: string;
-    email?: string;
-  }
-
   /** UI Store */
   export interface Ui {
     /** A static snapshot of the UI store, used mainly for multiscreen usage */
     saveState: Ui | null;
-    tabsActive: { [key: string]: number };
-    sidebarOpen: boolean;
-    gridState: GridState;
+    gridState: GridState | null;
     modal: {
       modalId: string;
       options: {};
       data: any;
     } | null;
-    multiScreen: boolean;
+    tabsActive: { [key: string]: number | null };
+    toggles: { [key: string]: boolean | null };
   }
 
   /*************************
@@ -54,6 +48,11 @@ export declare namespace AppStore {
       [key: string | number]: T;
     };
     ids?: string | number[];
+  }
+
+  interface Toggles {
+    prop: string;
+    value: boolean;
   }
 
   export interface ApiResponse {

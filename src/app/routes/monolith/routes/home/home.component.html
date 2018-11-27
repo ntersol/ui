@@ -1,36 +1,5 @@
 <div id="app-home" class="container-fluid" *ngIf="{ users: users$ | async } as route">
 
-  <div class="card mb-3">
-    <div class="card-header p-2">
-
-      <div class="float-right">
-        <button class="btn btn-sm btn-outline-primary mr-1 d-inline-block"
-                title="Toggle multi-screen view"
-                [ngClass]="{ 'enabled' : ui.select.multiScreen$ | async }"
-                (click)="ui.multiScreenToggle()">
-          <i aria-hidden="true" class="fa fa-external-link-square"></i>
-        </button>
-
-        <button class="btn btn-sm" (click)="sidebarOpen = !sidebarOpen" [ngClass]="sidebarOpen ? 'btn-danger' : 'btn-primary'">
-          <i class="fa fa-user mr-1"></i>
-          Toggle User Sidebar
-        </button>
-      </div>
-
-      <button class="btn btn-outline-primary btn-sm mr-2" (click)="usersRefresh()" [disabled]="route?.users?.loading">
-        <i class="fa fa-refresh"></i>
-      </button>
-
-      <!-- Filter datatable -->
-      <form class="form-inline mr-3 d-inline-block">
-        <label class="icon filter" style="position:relative;">
-          <input class="form-control form-control-sm filterSearch" type="text" name="filterGlobal" placeholder="Filter name or website" [ngModel]="filterGlobal.term" (ngModelChange)="onfilterGlobal($event)" data-qa="hp-filter-global" />
-          <a (click)="filterGlobal.term = null; onfilterGlobal()" *ngIf="filterGlobal.term" style="position:absolute;right: 10px;top: 4px;"><i class="fa fa-remove"></i></a>
-        </label>
-      </form>
-    </div>
-  </div>
-
   <app-api-state [state]="route.users">
 
     <div class="alert alert-warning icon" *ngIf="!route?.users?.data?.length">No users found</div>

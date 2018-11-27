@@ -1,18 +1,18 @@
 <div
   id="app-home"
   class="container-fluid"
-  *ngIf="{ users: users$ | async, sidebarOpen: sidebarOpen$ | async } as route"
+  *ngIf="{ users: users$ | async, sidebarOpen: ui.select.toggle$('sidebar') | async, multiScreen: ui.select.toggle$('multiScreen') | async } as route"
 >
   <mat-card class="mb-3 p-2">
     <div class="float-right">
       <app-counter class="mr-2"></app-counter>
-
+    
       <button
         mat-stroked-button
         class="mr-2"
         title="Toggle multi-screen view"
-        [ngClass]="{ enabled: ui.select.multiScreen$ | async }"
-        (click)="ui.multiScreenToggle()"
+        [ngClass]="route.multiScreen ? 'active' : null"
+        (click)="ui.toggle('multiScreen', !route.multiScreen)"
       >
         <i aria-hidden="true" class="fa fa-external-link-square"></i>
       </button>
@@ -20,7 +20,7 @@
       <button
         mat-button
         class="mat-reverse"
-        (click)="sidebarToggle(route.sidebarOpen)"
+        (click)="ui.toggle('sidebar', !route.sidebarOpen)"
         [ngClass]="route.sidebarOpen ? 'active' : null"
       >
         <i class="fa fa-user mr-1"></i> Toggle User Sidebar
