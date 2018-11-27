@@ -77,7 +77,7 @@ export class AuthService {
         }),
       );
     }
-    const url = this.settings.apiUrl + environment.endpoints.authLogin;
+    const url = environment.endpoints.apiUrl + environment.endpoints.authLogin;
     // Auth point is configured
     return this.http.post(url, data).pipe(
       map((response: any) => {
