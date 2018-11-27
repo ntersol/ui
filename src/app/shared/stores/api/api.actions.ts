@@ -14,7 +14,10 @@ export const ApiStoreActions = {
 
   STATE_LOADING: actionCreator<AppStore.ApiResponse>('STATE_LOADING'),
   STATE_MODIFYING: actionCreator<AppStore.ApiResponse>('STATE_MODIFYING'),
-  STATE_ERROR: actionCreator<AppStore.ApiResponse>('STATE_ERROR'),
+  // STATE_ERROR: actionCreator<AppStore.ApiResponse>('STATE_ERROR'),
+
+  STATE_ERROR_GET: actionCreator<AppStore.ApiResponse>('STATE_ERROR_GET'),
+  STATE_ERROR_MODIYFING: actionCreator<AppStore.ApiResponse>('STATE_ERROR_MODIYFING'),
 
   GET_COMPLETE: actionCreator<AppStore.ApiResponse>('GET_COMPLETE'),
   POST_COMPLETE: actionCreator<AppStore.ApiResponse>('POST_COMPLETE'),

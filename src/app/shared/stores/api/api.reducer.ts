@@ -34,19 +34,29 @@ export function ApiReducer(state: AppStore.Api = {}, action: Action) {
       ...action.payload.apiMap.entity.initialState,
       ...state[action.payload.apiMap.storeProperty],
       modifying: true,
-      error: false,
+      errorModifying: false,
       success: false,
     };
   }
 
   // On error, either from loading or modifying
-  if (isType(action, ApiStoreActions.STATE_ERROR)) {
+  if (isType(action, ApiStoreActions.STATE_ERROR_GET)) {
+    state[action.payload.apiMap.storeProperty] = {
+      ...action.payload.apiMap.entity.initialState,
+      ...state[action.payload.apiMap.storeProperty],
+      loading: false,
+      error: action.payload.data,
+    };
+  }
+
+  // On error, either from loading or modifying
+  if (isType(action, ApiStoreActions.STATE_ERROR_MODIYFING)) {
     state[action.payload.apiMap.storeProperty] = {
       ...action.payload.apiMap.entity.initialState,
       ...state[action.payload.apiMap.storeProperty],
       modifying: false,
-      loading: false,
-      error: action.payload.data,
+      errorModifying: action.payload.data,
+      success: false,
     };
   }
 

@@ -5,12 +5,11 @@ Adding a new endpoints:
 3. Add the end data location in the main store state in api.store.service.ts
 */
 
-import { AppStore } from '$shared';
 import { ApiProps } from './api.props';
 import { createEntity } from './api.actions';
 import { Models } from '$models';
 
-export const ApiMap: AppStore.ApiMapping = {
+export const ApiMap = {
   // Users Example
   users: {
     endpoint: '//jsonplaceholder.typicode.com/users',
