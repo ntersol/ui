@@ -1,8 +1,5 @@
-
-
+// Common env settings that don't change between dev and prod
 export const common: any = {
-    production: false,
-
     properties: {
       /** Name of application */
       appName: 'Angular Starter',
@@ -42,4 +39,3 @@ export const common: any = {
       agGrid: 'qwerty',
     },
   };
-  
