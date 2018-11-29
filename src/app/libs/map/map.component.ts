@@ -121,15 +121,7 @@ export class MapComponent implements OnInit, AfterViewChecked, OnChanges, OnDest
         this.infoBox.setMap(this.map);
 
         // On view change
-        Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', () => {
-          // If heatmap specified and the zoom level changed
-          if (this.heatMap && this.heatMapLayer && this.zoomLevel !== this.map.getZoom()) {
-            this.heatMapLayer.dispose();
-            this.heatMapLayer = this.heatMap(this.map, this.entities);
-          }
-          // Update zoom property
-          this.zoomLevel = this.map.getZoom();
-        });
+        Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', this.viewChanged.bind(this));
 
         /** */
        if (this.heatmap) {
@@ -182,13 +174,30 @@ export class MapComponent implements OnInit, AfterViewChecked, OnChanges, OnDest
     }
   }
 
+  /**
+   * When the view of the map changes such as scrolling or zooming
+   */
+  public viewChanged() {
+    // If the view change event was a zoom
+    if (this.zoomLevel !== this.map.getZoom()) {
+      // If heatmap is present, throw away old layer and regenerate a new one
+      if (this.heatMap && this.heatMapLayer) {
+        this.heatMapLayer.dispose();
+        this.heatMapLayer = this.heatMap(this.map, this.entities);
+      }
+    }
+
+     // Update zoom property
+     this.zoomLevel = this.map.getZoom();
+  }
+
   /** Add entities such as pushpins and circles to the map */
   public entitiesAdd(map: Microsoft.Maps.Map, locations: Location[]) {
     if (locations && locations.length) {
       // Create new pushpin instances and add to map
       const pins = locations.map(loc => {
         const pin: Microsoft.Maps.Pushpin = new Microsoft.Maps.Pushpin((<any>loc));
-        Microsoft.Maps.Events.addHandler(pin, 'click', this.pushpinClicked.bind(this));
+        Microsoft.Maps.Events.addHandler(pin, 'click', this.pushpinClicked.bind(this) );
         // Add metadata if available
         if (loc.metadata) {
           pin.metadata = { ...loc.metadata };
@@ -262,7 +271,10 @@ export class MapComponent implements OnInit, AfterViewChecked, OnChanges, OnDest
     this.map.entities.clear();
   }
 
-
+  /**
+   * When a pushpin is clicked, show the infobox
+   * @param e 
+   */
   public pushpinClicked(e: any) {
     // Make sure the infobox has metadata to display.
     if (e.targetType === 'pushpin') {
