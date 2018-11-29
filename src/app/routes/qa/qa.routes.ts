@@ -3,8 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { QaComponent } from './qa.component';
 import { ChartsComponent } from './routes/charts/charts.component';
+import { MapComponent } from './routes/map/map.component';
 
 const routes: Routes = [
+  {
+    path: 'map',
+    component: MapComponent,
+    data: { title: 'Map' },
+  },
   {
     path: 'charts',
     component: ChartsComponent,

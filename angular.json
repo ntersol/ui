@@ -15,7 +15,8 @@
             "lazyModules": [
               "src/app/libs/chart/chart.module",
               "src/app/libs/context-menu/context-menu.module",
-              "src/app/libs/grid/grid.module"
+              "src/app/libs/grid/grid.module",
+              "src/app/libs/map/map.module"
             ],
             "outputPath": "dist/browser",
             "index": "src/index.html",

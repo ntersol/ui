@@ -5,7 +5,7 @@
  * NOT http://localhost:57462/swagger/ui/index#/
 
  Config Options:
-  - Set namespace to "Models"
+  - Set namespace to Models
   - TS version 2.7
   - Generate DTO types: Checked
   - Type Style: Interface
@@ -20,6 +20,32 @@ export declare namespace Models {
     ApiUrl: string;
     ApiNamespace: string;
     SignalRUrl: string;
+  }
+
+  export interface Location {
+    property_id: number;
+    display_lat: number;
+    display_lng: number;
+    display_address: string;
+    city: string;
+    county: string;
+    zip_code: number;
+    listing_price:string;
+    total_bedrooms: number;
+    total_bathrooms: string;
+    is_single_family: string;
+    is_multi_family: string;
+    is_condo: string;
+    is_condo_townhouse: string;
+    is_townhouse: string;
+    is_lot: string;
+    square_feet: number;
+    days_on_market: number;
+    lot_dimension: string;
+    hoa_fee: string;
+    year_built: number;
+    listing_status: string;
+    listing_status_standardized: string;
   }
 
   export interface User {
