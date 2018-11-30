@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  AfterViewChecked,
+  AfterViewInit,
   OnChanges,
   OnDestroy,
   Output,
@@ -19,10 +19,9 @@ const apiKey = 'AnTlR8QC4A9PDl4d0sLe5pfonbXmuPneJDVGS4jMi_CVxFcz4Q8RbxYJ25qlnY_p
   styleUrls: ['./map.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MapComponent implements OnInit, AfterViewChecked, OnChanges, OnDestroy {
-
+export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   /** Any entities such as pushpins or circles */
-  @Input() entities: Location[];
+  @Input() locations: Location[];
   /** Configure the map  */
   @Input() options: Microsoft.Maps.IMapOptions = {};
   /** Bing API key which can be generated @ https://www.bingmapsportal.com/Application. Defaults to low usage dev key */
@@ -53,8 +52,7 @@ export class MapComponent implements OnInit, AfterViewChecked, OnChanges, OnDest
 
   constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ngOnChanges() {
     // If changed
@@ -62,23 +60,23 @@ export class MapComponent implements OnInit, AfterViewChecked, OnChanges, OnDest
       this.scriptsLoad();
     }
 
-    // If new entities are passed down, clear out existing and add to map
-    if (this.isLoaded && this.map && this.entities && !this.isEmitting) {
-      this.entitiesClear();
-      this.entitiesAdd(this.map, this.entities);
+    // If new locations are passed down, clear out existing and add to map
+    if (this.isLoaded && this.map && this.locations && !this.isEmitting) {
+      this.locationsClear(this.map);
+      this.locationsAdd(this.map, this.locations);
       const element = <Microsoft.Maps.Pushpin>this.map.entities.get(0);
       this.map.setView({ center: element.getLocation() });
     }
 
     // Clear out any preexisting entities
-    if (this.isLoaded && this.map && !this.isEmitting && (!this.entities || this.entities.length === 0)) {
-      this.entitiesClear();
+    if (this.isLoaded && this.map && !this.isEmitting && (!this.locations || this.locations.length === 0)) {
+      this.locationsClear(this.map);
     }
 
     this.isEmitting = false;
   }
 
-  ngAfterViewChecked() {
+  ngAfterViewInit() {
     this.scriptsLoad();
   }
 
@@ -90,7 +88,7 @@ export class MapComponent implements OnInit, AfterViewChecked, OnChanges, OnDest
       this.mapInit(); // Chart.js already loaded, init chart
       this.isLoaded = true;
     } else {
-      // Dynamically load map module
+      // Dynamically load bing js
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.src = scriptSrc + this.apiKey + '&callback=mapInit';
@@ -106,34 +104,37 @@ export class MapComponent implements OnInit, AfterViewChecked, OnChanges, OnDest
    * Create the map and set intial view and properties
    */
   public mapInit() {
-    // Get reference to map
+    // Get reference to map direct from DOM
     const map = document.getElementById(this.uniqueId);
+
     if (map && !this.map) {
       // Bing can't see the DOM sometimes on initial load even when in the right lifecycle hook
       try {
         // Store map reference
         this.map = new Microsoft.Maps.Map(map, { credentials: this.apiKey, ...this.options, zoom: this.zoom });
+
         // Update zoom property
         this.zoomLevel = this.map.getZoom();
 
         // Attach infobox to map instance, on default is hidden
-        this.infoBox = new Microsoft.Maps.Infobox(this.map.getCenter(), {visible: false });
+        this.infoBox = new Microsoft.Maps.Infobox(this.map.getCenter(), { visible: false });
         this.infoBox.setMap(this.map);
 
-        // On view change
+        // When the view is changed such as scrolling or zooming
         Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', this.viewChanged.bind(this));
 
-        /** */
-       if (this.heatmap) {
-        Microsoft.Maps.loadModule('Microsoft.Maps.HeatMap', () => {
-          this.heatMapLayer = this.heatMap(this.map, this.entities);
-        });
-       } else {
+        // Check if heatmap or pushpins
+        if (this.heatmap) {
+          // Load heatmap module
+          Microsoft.Maps.loadModule('Microsoft.Maps.HeatMap', () => {
+            this.heatMapLayer = this.heatMap(this.map, this.locations);
+          });
+        } else {
           // If entities were passed down, add them after map creation
-          this.entitiesAdd(this.map, this.entities);
+          this.locationsAdd(this.map, this.locations);
           // Resize viewport to fit all pins
-          this.viewPortUpdate(this.map, this.entities);
-       }
+          this.viewPortUpdate(this.map, this.locations);
+        }
 
         /**
         // Add click event handler
@@ -167,10 +168,10 @@ export class MapComponent implements OnInit, AfterViewChecked, OnChanges, OnDest
         });
       */
       } catch (err) {
-        window.setTimeout(() => this.mapInit(), 50);
+        window.setTimeout(() => this.mapInit(), 500);
       }
     } else {
-      window.setTimeout(() => this.mapInit(), 50);
+      window.setTimeout(() => this.mapInit(), 500);
     }
   }
 
@@ -183,56 +184,77 @@ export class MapComponent implements OnInit, AfterViewChecked, OnChanges, OnDest
       // If heatmap is present, throw away old layer and regenerate a new one
       if (this.heatMap && this.heatMapLayer) {
         this.heatMapLayer.dispose();
-        this.heatMapLayer = this.heatMap(this.map, this.entities);
+        this.heatMapLayer = this.heatMap(this.map, this.locations);
       }
     }
 
-     // Update zoom property
-     this.zoomLevel = this.map.getZoom();
+    // Update zoom property
+    this.zoomLevel = this.map.getZoom();
   }
 
   /** Add entities such as pushpins and circles to the map */
-  public entitiesAdd(map: Microsoft.Maps.Map, locations: Location[]) {
+  public locationsAdd(map: Microsoft.Maps.Map, locations: Location[]) {
     if (locations && locations.length) {
       // Create new pushpin instances and add to map
       const pins = locations.map(loc => {
-        const pin: Microsoft.Maps.Pushpin = new Microsoft.Maps.Pushpin((<any>loc));
-        Microsoft.Maps.Events.addHandler(pin, 'click', this.pushpinClicked.bind(this) );
+        const pin: Microsoft.Maps.Pushpin = new Microsoft.Maps.Pushpin(<any>loc);
+        Microsoft.Maps.Events.addHandler(pin, 'click', this.pushpinClicked.bind(this));
         // Add metadata if available
         if (loc.metadata) {
           pin.metadata = { ...loc.metadata };
         }
         return pin;
       });
-      map.entities.push(pins); 
+      map.entities.push(pins);
     }
   }
 
   /**
    * Creates a heatmap layer based on location entities
-   * @param map 
-   * @param locations 
+   * @param map
+   * @param locations
    */
   public heatMap(map: Microsoft.Maps.Map, locations: Location[]) {
     // Turn lat/long into location entities
     const locationsPoints = locations.map(loc => new Microsoft.Maps.Location(loc.latitude, loc.longitude));
     const zoom = map.getZoom();
-   
+
     // Get a radius based on zoom level
     // TODO: Generate this programatically
-    const radiuses = [0, 0, 0, 0, 0, 0, 0, 0, 300, 900, 2000, 3500, 7000, 
-      10500, 15500, 30500, 60000, 90000, 120000, 120000, 120000];
+    const radiuses = [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      300,
+      900,
+      2000,
+      3500,
+      7000,
+      10500,
+      15500,
+      30500,
+      60000,
+      90000,
+      120000,
+      120000,
+      120000,
+    ];
     const radius = radiuses[21 - zoom];
-    
+
     // Get intensity based on zoom level
     // TODO: Generate this programatically
-    let intensity = .75;
-    if ((21 - zoom) > 14) {
-      intensity = .05;
-    } else if ((21 - zoom) > 13) {
-      intensity = .2;
-    } else if ((21 - zoom) > 11) {
-      intensity = .5;
+    let intensity = 0.75;
+    if (21 - zoom > 14) {
+      intensity = 0.05;
+    } else if (21 - zoom > 13) {
+      intensity = 0.2;
+    } else if (21 - zoom > 11) {
+      intensity = 0.5;
     }
 
     // Create heatmap layer
@@ -257,23 +279,23 @@ export class MapComponent implements OnInit, AfterViewChecked, OnChanges, OnDest
 
   /**
    * Resize the viewport to contain all the supplied locations
-   * @param locations 
+   * @param locations
    */
   public viewPortUpdate(map: Microsoft.Maps.Map, locations: Location[]) {
     // Get the viewport dimensions
     const bestView = Microsoft.Maps.LocationRect.fromLocations(<any>locations);
     // Now resize
-    map.setView({bounds: bestView });
+    map.setView({ bounds: bestView });
   }
 
   /** Clear entities such as pushpins and circles off the map */
-  public entitiesClear() {
-    this.map.entities.clear();
+  public locationsClear(map: Microsoft.Maps.Map) {
+    map.entities.clear();
   }
 
   /**
    * When a pushpin is clicked, show the infobox
-   * @param e 
+   * @param e
    */
   public pushpinClicked(e: any) {
     // Make sure the infobox has metadata to display.
@@ -290,7 +312,7 @@ export class MapComponent implements OnInit, AfterViewChecked, OnChanges, OnDest
          */
         title: pin.metadata.title,
         description: pin.metadata.description,
-        visible: true
+        visible: true,
       });
       // this.infoBox.setLocation(pin.getLocation());
     }

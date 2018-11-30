@@ -10,14 +10,14 @@ import { Models } from '$models';
 })
 export class MapComponent implements OnInit {
 
-  public entities: any[];
+  public locations: Location[];
 
   constructor(private http: HttpClient, private ref: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.http.get('assets/mock-data/map-data.json').subscribe((data: any) => {
       const locations: Models.Location[] = data;
-      this.entities = locations.map(location => {
+      this.locations = locations.map(location => {
         return <Location>{
           metadata: {
             title: location.display_address,
