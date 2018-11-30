@@ -31,11 +31,12 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   @Input() zoom = 9;
   /** Display a heatmap instead of pushpins  */
   @Input() heatmap = false;
+  /** Display a heatmap instead of pushpins  */
+  @Input() addPushPins: false | 'single' | 'multiple' = false;
 
-  /** When entities are updated, they are emitted from here */
-  // @Output() entitiesUpdated = new EventEmitter<Microsoft.Maps.IPrimitive[]>();
-
+  /** When any property of the viewport changes */
   @Output() viewChanged = new EventEmitter<Map.ViewProps>();
+  /** When a location is added by clicking on the map */
   @Output() locationAdded = new EventEmitter<Microsoft.Maps.IPrimitive[]>();
 
   /** Reference to created bing map  */
@@ -56,7 +57,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
  
   constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() { 
+    // Add a callback method on the global scope that bing maps can use to initialize the map after loading
+    (<any>window).mapInitialize = () => this.mapInit();
+  }
 
   ngOnChanges() {
     // If changed
@@ -66,6 +70,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
     // If new locations are passed down, clear out existing and update map
     if (this.isLoaded && this.map && this.locations && !this.isEmitting) {
+      console.log('test');
       this.mapSetType();
     }
 
@@ -86,15 +91,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
    */
   public scriptsLoad() {
     if ((<any>window).Microsoft && (<any>window).Microsoft.Maps) {
-      this.mapInit(); // Chart.js already loaded, init chart
+      this.mapInit(); // Bing already loaded, init map
       this.isLoaded = true;
     } else {
       // Dynamically load bing js
       const script = document.createElement('script');
       script.type = 'text/javascript';
-      script.src = scriptSrc + this.apiKey + '&callback=mapInit';
+      // Callback query param will fire after bing maps successfully loads
+      script.src = scriptSrc + this.apiKey + '&callback=mapInitialize';
       script.onload = () => {
-        this.mapInit();
+        // this.mapInit();
         this.isLoaded = true;
       }; // After load, init chart
       document.head.appendChild(script);
@@ -105,65 +111,59 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
    * Create the map and set intial view and properties
    */
   private mapInit() {
-    // Get reference to map direct from DOM
-    const map = document.getElementById(this.uniqueId);
-
-    // Map instance does not exist yet
-    if (map && !this.map) {
-      // Bing can't see the DOM sometimes on initial load even when in the right lifecycle hook
-      try {
-        // Store map reference
-        this.map = new Microsoft.Maps.Map(map, { credentials: this.apiKey, ...this.options, zoom: this.zoom });
-
+     // Bing can't see the DOM sometimes on initial load even when in the right lifecycle hook
+     // try {
+        // Create map reference
+        this.map = new Microsoft.Maps.Map(
+          document.getElementById(this.uniqueId), 
+          { credentials: this.apiKey, ...this.options, zoom: this.zoom }
+          );
+    // } catch (err) {}
+    
+    // Map instance was successfully created
+    if (this.map) {
         // Set viewport properties
         this.viewProps = this.viewPropsUpdate(this.map);
 
         // Attach infobox to map instance, on default is hidden
         this.infoBox = new Microsoft.Maps.Infobox(this.map.getCenter(), { visible: false });
         this.infoBox.setMap(this.map);
-
         // When the view is changed such as scrolling or zooming
         Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', () => this.viewChange());
 
+        // If pushpins enabled, add event handler
+        if (this.addPushPins) {
+          Microsoft.Maps.Events.addHandler(this.map,
+            'click',
+            (e: Microsoft.Maps.IMouseEventArgs) => this.mapClickEvent(e, this.map, this.addPushPins)
+          );
+        }
+        // Now set map type, either heatmap or pushpins
         this.mapSetType();
 
-        /**
-        // Add click event handler
-        Microsoft.Maps.Events.addHandler(this.map, 'click', (e: any) => {
-          // console.log(e);
-          // Add info box
-          // var center = this.map.getCenter();
-          // var infobox = new Microsoft.Maps.Infobox(e.location, {
-          //  title: 'New Pin',
-          //  // description: 'Seattle'
-          // });
-          // infobox.setMap(this.map);
-
-          // Remove pushpins
-          this.entitiesClear();
-
-          // Add pushpin
-          const pushpin = new Microsoft.Maps.Pushpin(e.location);
-          console.log(e.location);
-          console.log(pushpin);
-          //  { icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png' }
-          this.map.entities.push(pushpin);
-
-          // Add circle
-          const circle = this.drawCircle(e.location, '1', 'mile');
-          this.map.entities.push(circle);
-
-          // Pass entities list for parent
-          this.isEmitting = true;
-          this.entitiesUpdated.emit(this.map.entities.getPrimitives());
-        });
-      */
-      } catch (err) {
-        window.setTimeout(() => this.mapInit(), 500);
-      }
     } else {
       window.setTimeout(() => this.mapInit(), 500);
     }
+  }
+
+  /**
+   * On a map click event, add a pushpin on the clicked location
+   * @param e 
+   * @param map 
+   * @param type 
+   */
+  private mapClickEvent(e: Microsoft.Maps.IMouseEventArgs, map: Microsoft.Maps.Map, type: false | 'single' | 'multiple') {
+    console.log(e);
+    // If pushpin type is set to single, clear out all other pins
+    if (type === 'single') {
+      this.locationsClear(this.map);
+    }
+    const pushpin = new Microsoft.Maps.Pushpin(e.location);
+    //  { icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png' }
+    // Add circle
+    // const circle = this.drawCircle(e.location, '1', 'mile');
+    // this.map.entities.push(circle);
+    map.entities.push(pushpin);
   }
 
   /**
@@ -182,16 +182,18 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       // If locations were passed down, add them after map creation
       this.locationsAdd(this.map, this.locations);
       // If multiple locations passed, adjust viewport to contain all. Else just center on single point
-      if (this.locations.length > 1) {
+      if (this.locations && this.locations.length > 1) {
         // Resize viewport to fit all pins
         this.viewPortUpdate(this.map, this.locations);
-      } else {
+      } else if (this.locations) {
         // Get only location and center viewport
         const element = <Microsoft.Maps.Pushpin>this.map.entities.get(0);
         this.map.setView({ center: element.getLocation() });
       }
     }
   }
+
+  
 
   /**
    * When the view of the map changes such as scrolling or zooming
@@ -232,7 +234,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   }
 
   /**
-   * Update the viewport properties such as zoom level and screen center
+   * Update the viewport properties such as zoom level, center position, etc
    * @param map 
    */
   private viewPropsUpdate(map: Microsoft.Maps.Map) {
@@ -244,15 +246,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     };
   }
 
-  /** Add entities such as pushpins and circles to the map */
+  /** Add locations such as pushpins and circles to the map */
   private locationsAdd(map: Microsoft.Maps.Map, locations: Map.Location[]) {
     if (locations && locations.length) {
       // Create new pushpin instances and add to map
       const pins = locations.map(loc => {
         const pin: Microsoft.Maps.Pushpin = new Microsoft.Maps.Pushpin(<any>loc);
-        Microsoft.Maps.Events.addHandler(pin, 'click', this.pushpinClicked.bind(this));
-        // Add metadata if available
+        // If metadata available, add to pin and add infobox click event
         if (loc.metadata) {
+          Microsoft.Maps.Events.addHandler(pin, 'click', this.pushpinClicked.bind(this));
           pin.metadata = { ...loc.metadata };
         }
         return pin;

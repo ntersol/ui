@@ -1,9 +1,13 @@
-<div style="height:800px;">
-
+<div style="height:100vh;">
+<!--
+  
+    [locations]="locations" 
+-->
   <app-map 
   [locations]="locations" 
-  [heatmap]="true"
-  (viewChanged)="viewChanged($event)">
+    [heatmap]="false"
+    [addPushPins]="'single'"
+    (viewChanged)="viewChanged($event)">
   </app-map>
   
 </div>
