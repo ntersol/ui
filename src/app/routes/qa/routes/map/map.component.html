@@ -2,7 +2,8 @@
 
   <app-map 
   [locations]="locations" 
-  [heatmap]="true">
+  [heatmap]="true"
+  (viewChanged)="viewChanged($event)">
   </app-map>
   
 </div>

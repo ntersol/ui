@@ -10,7 +10,7 @@ import { Models } from '$models';
 })
 export class MapComponent implements OnInit {
 
-  public locations: Location[];
+  public locations: Map.Location[];
 
   constructor(private http: HttpClient, private ref: ChangeDetectorRef) {}
 
@@ -18,7 +18,7 @@ export class MapComponent implements OnInit {
     this.http.get('assets/mock-data/map-data.json').subscribe((data: any) => {
       const locations: Models.Location[] = data;
       this.locations = locations.map(location => {
-        return <Location>{
+        return <Map.Location>{
           metadata: {
             title: location.display_address,
             description: location.city + ' ' + location.zip_code
@@ -30,5 +30,9 @@ export class MapComponent implements OnInit {
       this.ref.markForCheck();
     });
 
+  }
+
+  public viewChanged(viewProps: Map.ViewProps) {
+    console.log(viewProps);
   }
 }

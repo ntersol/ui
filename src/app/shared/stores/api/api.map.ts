@@ -8,11 +8,13 @@ Adding a new endpoints:
 import { ApiProps } from './api.props';
 import { createEntity } from './api.actions';
 import { Models } from '$models';
+// import { environment } from '$env';
 
 export const ApiMap = {
   // Users Example
   users: {
     endpoint: '//jsonplaceholder.typicode.com/users',
+    // endpoint: environment.endpoints.apiUrl + '/users'
     storeProperty: ApiProps.users,
     entity: createEntity<Models.User>('id'),
   },
