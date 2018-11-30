@@ -23,17 +23,30 @@ const apiKey = 'AnTlR8QC4A9PDl4d0sLe5pfonbXmuPneJDVGS4jMi_CVxFcz4Q8RbxYJ25qlnY_p
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   /** Any entities such as pushpins or circles */
   @Input() locations: Map.Location[];
-  /** Configure the map  */
-  @Input() options: Microsoft.Maps.IMapOptions = {};
+ 
+  /** Configure the map options  */
+  private _options: Map.Options;
+  @Input() set options(options: Map.Options) {
+    this._options = options;
+  }
+  get options() {
+    return {
+      ...this._options,
+      pushPinsAddable: this.pushPinsAddable,
+      pushPinIcon: this.pushPinIcon
+    };
+  }
+
   /** Bing API key which can be generated @ https://www.bingmapsportal.com/Application. Defaults to low usage dev key */
   @Input() apiKey = apiKey;
   /** Default zoom level  */
   @Input() zoom = 9;
   /** Display a heatmap instead of pushpins  */
   @Input() heatmap = false;
-  /** Display a heatmap instead of pushpins  */
-  @Input() addPushPins: false | 'single' | 'multiple' = false;
-
+  /** Can pushpins be added to the map. If so, one or many  */
+  @Input() pushPinsAddable: false | 'single' | 'multiple' = false;
+  /** URL of image to use for custom pin  */
+  @Input() pushPinIcon: string;
   /** When any property of the viewport changes */
   @Output() viewChanged = new EventEmitter<Map.ViewProps>();
   /** When a location is added by clicking on the map */
@@ -68,9 +81,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       this.scriptsLoad();
     }
 
-    // If new locations are passed down, clear out existing and update map
+    // If new locations are passed down, update map
     if (this.isLoaded && this.map && this.locations && !this.isEmitting) {
-      console.log('test');
       this.mapSetType();
     }
 
@@ -132,10 +144,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', () => this.viewChange());
 
         // If pushpins enabled, add event handler
-        if (this.addPushPins) {
+        if (this.options.pushPinsAddable) {
           Microsoft.Maps.Events.addHandler(this.map,
             'click',
-            (e: Microsoft.Maps.IMouseEventArgs) => this.mapClickEvent(e, this.map, this.addPushPins)
+            (e: Microsoft.Maps.IMouseEventArgs) => this.mapClickEvent(e, this.map, this.options)
           );
         }
         // Now set map type, either heatmap or pushpins
@@ -152,14 +164,20 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
    * @param map 
    * @param type 
    */
-  private mapClickEvent(e: Microsoft.Maps.IMouseEventArgs, map: Microsoft.Maps.Map, type: false | 'single' | 'multiple') {
+  private mapClickEvent(e: Microsoft.Maps.IMouseEventArgs, map: Microsoft.Maps.Map, options: Map.Options) {
     console.log(e);
     // If pushpin type is set to single, clear out all other pins
-    if (type === 'single') {
+    if (options.pushPinsAddable === 'single') {
       this.locationsClear(this.map);
     }
-    const pushpin = new Microsoft.Maps.Pushpin(e.location);
-    //  { icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png' }
+    // Options for pushpins
+    const pinOptions: Microsoft.Maps.IPushpinOptions = {};
+    // If custom icon specified
+    if (options.pushPinIcon) {
+      pinOptions.icon = options.pushPinIcon;
+    }
+    // Create new pushpin
+    const pushpin = new Microsoft.Maps.Pushpin(e.location, pinOptions);
     // Add circle
     // const circle = this.drawCircle(e.location, '1', 'mile');
     // this.map.entities.push(circle);
@@ -180,7 +198,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       // Clear out any old locations
       this.locationsClear(this.map);
       // If locations were passed down, add them after map creation
-      this.locationsAdd(this.map, this.locations);
+      this.locationsAdd(this.map, this.locations, this.options);
       // If multiple locations passed, adjust viewport to contain all. Else just center on single point
       if (this.locations && this.locations.length > 1) {
         // Resize viewport to fit all pins
@@ -197,6 +215,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
   /**
    * When the view of the map changes such as scrolling or zooming
+   * map: Microsoft.Maps.Map, viewPropsCurrent: Map.ViewProps, heatMapLayer: Microsoft.Maps.HeatMapLayer
    */
   private viewChange() {
     // Get the latest view properties
@@ -246,12 +265,23 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     };
   }
 
-  /** Add locations such as pushpins and circles to the map */
-  private locationsAdd(map: Microsoft.Maps.Map, locations: Map.Location[]) {
+  /**
+   * Add locations such as pushpins and circles to the map
+   * @param map 
+   * @param locations 
+   * @param options 
+   */
+  private locationsAdd(map: Microsoft.Maps.Map, locations: Map.Location[], options?: Map.Options) {
     if (locations && locations.length) {
       // Create new pushpin instances and add to map
       const pins = locations.map(loc => {
-        const pin: Microsoft.Maps.Pushpin = new Microsoft.Maps.Pushpin(<any>loc);
+        // Options for pushpins
+        const pinOptions: Microsoft.Maps.IPushpinOptions = {};
+        // If custom icon specified, default to pin specific icon otherwise fallback to global icon
+        if (loc.icon || options.pushPinIcon) {
+          pinOptions.icon = loc.icon || options.pushPinIcon;
+        }
+        const pin: Microsoft.Maps.Pushpin = new Microsoft.Maps.Pushpin(<any>loc, pinOptions);
         // If metadata available, add to pin and add infobox click event
         if (loc.metadata) {
           Microsoft.Maps.Events.addHandler(pin, 'click', this.pushpinClicked.bind(this));

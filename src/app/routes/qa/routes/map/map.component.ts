@@ -24,7 +24,8 @@ export class MapComponent implements OnInit {
             description: location.city + ' ' + location.zip_code
           },
           latitude: location.display_lat, 
-          longitude: location.display_lng
+          longitude: location.display_lng,
+          // icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png'
         };
       });
       this.ref.markForCheck();

@@ -2,12 +2,15 @@
 <!--
   
     [locations]="locations" 
+    pushPinIcon="https://www.bingmapsportal.com/Content/images/poi_custom.png"
 -->
   <app-map 
-  [locations]="locations" 
+    [locations]="locations" 
     [heatmap]="false"
-    [addPushPins]="'single'"
+    pushPinsAddable="single"
+    pushPinIcon="https://www.bingmapsportal.com/Content/images/poi_custom.png"
     (viewChanged)="viewChanged($event)">
   </app-map>
   
 </div>
+
