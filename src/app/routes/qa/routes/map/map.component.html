@@ -7,9 +7,10 @@
   <app-map 
     [locations]="locations" 
     [heatmap]="false"
-    [pushPinsAddable]="'single'"
+    [pushPinsAddable]="'multiple'"
     [pushPinIcon]="'https://www.bingmapsportal.com/Content/images/poi_custom.png'"
     [pushPinRadius]="radius"
+    (addedPushPin)="addedPushPin($event)"
     (viewChanged)="viewChanged($event)">
   </app-map>
   

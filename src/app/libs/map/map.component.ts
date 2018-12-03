@@ -62,7 +62,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   /** When any property of the viewport changes */
   @Output() viewChanged = new EventEmitter<Map.ViewProps>();
   /** When a location is added by clicking on the map */
-  @Output() locationAdded = new EventEmitter<Microsoft.Maps.IPrimitive[]>();
+  @Output() addedPushPin = new EventEmitter<Microsoft.Maps.Location[]>();
 
   /** Reference to created bing map  */
   public map: Microsoft.Maps.Map;
@@ -89,7 +89,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   }
 
   ngOnChanges(model: any) {
-    console.log(model);
     // If map not loaded
     if (this.isLoaded && !this.map) {
       this.scriptsLoad();
@@ -171,7 +170,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
           this.map,
           'click',
           (e: Microsoft.Maps.IMouseEventArgs) => {
-            MapEvents.mapClickEvent(e, this.map, this.options);
+            // Emit newly added location
+            const pins = MapEvents.mapClickEvent(e, this.map, this.options);
+            // Emit the locations of the newly created pins
+            this.addedPushPin.emit(pins.map(pin => pin.getLocation()));
           },
         );
       }
@@ -191,7 +193,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         // If metadata available, add to pin and add infobox click event
         pins.forEach(pin => {
           if (pin.metadata) {
-            Microsoft.Maps.Events.addHandler(pin, 'click', e => MapEvents.pushpinClicked(e, this.infoBox));
+            Microsoft.Maps.Events.addHandler(pin, 'click', (e: Microsoft.Maps.IMouseEventArgs) => {
+              this.infoBox.setOptions(MapEvents.pushpinClicked(e));
+            });
           }
         });
         // If multiple locations passed, adjust viewport to contain all. Else just center on single point

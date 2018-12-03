@@ -115,13 +115,12 @@ export const MapObjects = {
     // Get location of pushpin and add circle to map
     MapObjects.entitiesGet<Microsoft.Maps.Pushpin>(map, 'Pushpin').forEach(entity => {
       const location = entity.getLocation();
-      console.log(location);
       MapObjects.circleDraw(map, location, options.pushPinRadius);
     });
   },
 
   /**
-   * Extract a collection of entities from the map based on type. WIll be properly typed
+   * Extract a collection of entities from the map based on type. Will be properly typed
    * @param map
    * @param type
    */

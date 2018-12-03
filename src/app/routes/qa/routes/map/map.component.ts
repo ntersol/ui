@@ -35,4 +35,9 @@ export class MapComponent implements OnInit {
   public viewChanged(viewProps: Map.ViewProps) {
     console.log(viewProps);
   }
+
+  public addedPushPin(location: Microsoft.Maps.Location[]) {
+    console.log(location);
+  }
+
 }
