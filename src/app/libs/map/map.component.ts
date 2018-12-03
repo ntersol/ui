@@ -19,7 +19,6 @@ import { MapEvents } from './factories/map.events';
 const scriptSrc = 'https://www.bing.com/api/maps/mapcontrol?key=';
 const apiKey = 'AnTlR8QC4A9PDl4d0sLe5pfonbXmuPneJDVGS4jMi_CVxFcz4Q8RbxYJ25qlnY_p';
 
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -103,7 +102,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
       // If an empty locations array or null locations is passed, clear out any preexisting entities
       // Or if new locations are passed down
-      // !model.locations || model.locations.length === 0 || 
+      // !model.locations || model.locations.length === 0 ||
       if (model.locations && model.locations.length) {
         MapObjects.removeAll(this.map);
       }
@@ -213,8 +212,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     }
   }
 
-  
-
   /**
    * When the view of the map changes such as scrolling or zooming
    * map: Microsoft.Maps.Map, viewPropsCurrent: Map.ViewProps, heatMapLayer: Microsoft.Maps.HeatMapLayer
@@ -256,7 +253,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     this.viewChanged.emit(this.viewProps);
   }
 
-  
   /**
    * Creates a heatmap layer based on location entities
    * @param map

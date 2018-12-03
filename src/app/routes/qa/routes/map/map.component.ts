@@ -39,5 +39,4 @@ export class MapComponent implements OnInit {
   public addedPushPin(location: Microsoft.Maps.Location[]) {
     console.log(location);
   }
-
 }

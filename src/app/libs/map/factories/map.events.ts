@@ -5,7 +5,8 @@ export const MapEvents = {
    * When a pushpin is clicked, show the infobox
    * @param e
    */
-  pushpinClicked: (e: any) => { // : Microsoft.Maps.IMouseEventArgs
+  pushpinClicked: (e: any) => {
+    // : Microsoft.Maps.IMouseEventArgs
     // Make sure the infobox has metadata to display.
     if (e.targetType === 'pushpin') {
       const pin: Microsoft.Maps.Pushpin = e.target;

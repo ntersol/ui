@@ -23,11 +23,7 @@ export const MapObjects = {
    * @param locations
    * @param options
    */
-  pushPinAdd: (
-    map: Microsoft.Maps.Map,
-    locations: Map.Location[],
-    options: Map.Options,
-  ) => {
+  pushPinAdd: (map: Microsoft.Maps.Map, locations: Map.Location[], options: Map.Options) => {
     if (locations && locations.length) {
       // Create new pushpin instances and add to map
       const pins = locations.map(loc => {

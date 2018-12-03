@@ -822,11 +822,10 @@ declare namespace Microsoft.Maps {
    * of returning any of these shapes.
    */
   export interface IPrimitive {
-
     entity: {
       id: string;
       title: string;
-    }
+    };
 
     /** Optional property to store any additional metadata for this primitive. */
     metadata?: any;
@@ -2443,12 +2442,11 @@ declare namespace Microsoft.Maps {
    * The Polygon class derives from the IPrimitive interface.
    */
   export class Polygon implements IPrimitive {
-
     public entity: {
       id: string;
       title: string;
     };
-    
+
     /**
      * Information that is linked to the polygon.
      * Some modules such as the GeoJSON, and Spatial Data Service modules will also often add information to this property.
@@ -2614,7 +2612,6 @@ declare namespace Microsoft.Maps {
    * The Pushpin class derives from the IPrimitive interface.
    */
   export class Pushpin implements IPrimitive {
-
     public entity: {
       id: string;
       title: string;
