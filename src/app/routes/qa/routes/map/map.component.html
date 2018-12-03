@@ -1,14 +1,13 @@
 <div style="height:100vh;">
 <!--
   
-    [locations]="locations" 
-    pushPinIcon="https://www.bingmapsportal.com/Content/images/poi_custom.png"
 -->
   <app-map 
     [locations]="locations" 
-    [heatmap]="false"
+    [heatmap]="true"
     pushPinsAddable="single"
     pushPinIcon="https://www.bingmapsportal.com/Content/images/poi_custom.png"
+    pushPinRadius="1"
     (viewChanged)="viewChanged($event)">
   </app-map>
   

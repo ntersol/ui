@@ -13,6 +13,8 @@ declare module Map {
     }
     /** URL to an image to use as the pushpin icon. Will overwrite the global pushpin icon */
     icon?: string;
+    /** Draw a circle/radius around a push pin. Value is in miles */
+    radius?: string;
     latitude: number;
     longitude: number;
   }
@@ -39,6 +41,8 @@ declare module Map {
     pushPinsAddable?: false | 'single' | 'multiple' = false;
     /** URL to an image to use as the pushpin icon */
     pushPinIcon?: string;
+    /** Draw a circle/radius around a push pin. Value is in miles */
+    pushPinRadius?: string;
   }
 
 }

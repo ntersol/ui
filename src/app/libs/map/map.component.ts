@@ -12,6 +12,16 @@ import {
 
 const scriptSrc = 'https://www.bing.com/api/maps/mapcontrol?key=';
 const apiKey = 'AnTlR8QC4A9PDl4d0sLe5pfonbXmuPneJDVGS4jMi_CVxFcz4Q8RbxYJ25qlnY_p';
+// Create factories for bing map entities to reduce reliance on new keyword
+const mapEntities = {
+  map: (divId: string, options?: Microsoft.Maps.IMapLoadOptions) => new Microsoft.Maps.Map(document.getElementById(divId), options),
+  infoBox: (location: Microsoft.Maps.Location, options?: Microsoft.Maps.IInfoboxOptions) => new Microsoft.Maps.Infobox(location, options),
+  pushpin: (location: Microsoft.Maps.Location, options?: Microsoft.Maps.IPushpinOptions) =>  new Microsoft.Maps.Pushpin(location, options),
+  location: (latitude: number, longitude: number ) => new Microsoft.Maps.Location(latitude, longitude),
+  heatMapLayer: (locations: ( Microsoft.Maps.Location | Microsoft.Maps.Pushpin)[] , options: Microsoft.Maps.IHeatMapLayerOptions) =>  new Microsoft.Maps.HeatMapLayer(locations, options),
+  polygon: (rings: Microsoft.Maps.Location[] | Microsoft.Maps.Location[][], options: Microsoft.Maps.IPolygonOptions) => new Microsoft.Maps.Polygon(rings, options),
+  color: (a: number, b: number, c: number, d: number, ) => new Microsoft.Maps.Color(a, b, c, d),
+};
 
 
 @Component({
@@ -33,7 +43,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     return {
       ...this._options,
       pushPinsAddable: this.pushPinsAddable,
-      pushPinIcon: this.pushPinIcon
+      pushPinIcon: this.pushPinIcon,
+      pushPinRadius: this.pushPinRadius
     };
   }
 
@@ -43,10 +54,14 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   @Input() zoom = 9;
   /** Display a heatmap instead of pushpins  */
   @Input() heatmap = false;
+
   /** Can pushpins be added to the map. If so, one or many  */
   @Input() pushPinsAddable: false | 'single' | 'multiple' = false;
   /** URL of image to use for custom pin  */
   @Input() pushPinIcon: string;
+  /** Draw a circle/radius around a push pin. Value is in miles */
+  @Input() pushPinRadius: string;
+
   /** When any property of the viewport changes */
   @Output() viewChanged = new EventEmitter<Map.ViewProps>();
   /** When a location is added by clicking on the map */
@@ -124,22 +139,22 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
    */
   private mapInit() {
      // Bing can't see the DOM sometimes on initial load even when in the right lifecycle hook
-     // try {
-        // Create map reference
-        this.map = new Microsoft.Maps.Map(
-          document.getElementById(this.uniqueId), 
-          { credentials: this.apiKey, ...this.options, zoom: this.zoom }
-          );
-    // } catch (err) {}
-    
+
+    // Create map reference
+    this.map = mapEntities.map(
+      this.uniqueId,
+      { credentials: this.apiKey, ...this.options, zoom: this.zoom }
+    );
+        
     // Map instance was successfully created
     if (this.map) {
         // Set viewport properties
         this.viewProps = this.viewPropsUpdate(this.map);
 
         // Attach infobox to map instance, on default is hidden
-        this.infoBox = new Microsoft.Maps.Infobox(this.map.getCenter(), { visible: false });
+        this.infoBox = mapEntities.infoBox(this.map.getCenter(), { visible: false });
         this.infoBox.setMap(this.map);
+
         // When the view is changed such as scrolling or zooming
         Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', () => this.viewChange());
 
@@ -165,7 +180,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
    * @param type 
    */
   private mapClickEvent(e: Microsoft.Maps.IMouseEventArgs, map: Microsoft.Maps.Map, options: Map.Options) {
-    console.log(e);
     // If pushpin type is set to single, clear out all other pins
     if (options.pushPinsAddable === 'single') {
       this.locationsClear(this.map);
@@ -176,12 +190,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     if (options.pushPinIcon) {
       pinOptions.icon = options.pushPinIcon;
     }
+
     // Create new pushpin
-    const pushpin = new Microsoft.Maps.Pushpin(e.location, pinOptions);
-    // Add circle
-    // const circle = this.drawCircle(e.location, '1', 'mile');
-    // this.map.entities.push(circle);
+    const pushpin = mapEntities.pushpin(e.location, pinOptions);
     map.entities.push(pushpin);
+
+    if (options.pushPinRadius) {
+      const circle = this.drawCircle(e.location, options.pushPinRadius, 'mile');
+      map.entities.push(circle);
+    }
+
   }
 
   /**
@@ -281,7 +299,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         if (loc.icon || options.pushPinIcon) {
           pinOptions.icon = loc.icon || options.pushPinIcon;
         }
-        const pin: Microsoft.Maps.Pushpin = new Microsoft.Maps.Pushpin(<any>loc, pinOptions);
+        const pin: Microsoft.Maps.Pushpin = mapEntities.pushpin(<any>loc, pinOptions);
+        
         // If metadata available, add to pin and add infobox click event
         if (loc.metadata) {
           Microsoft.Maps.Events.addHandler(pin, 'click', this.pushpinClicked.bind(this));
@@ -300,7 +319,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
    */
   private heatMap(map: Microsoft.Maps.Map, locations: Map.Location[]) {
     // Turn lat/long into location entities
-    const locationsPoints = locations.map(loc => new Microsoft.Maps.Location(loc.latitude, loc.longitude));
+    const locationsPoints = locations.map(loc =>  mapEntities.location(loc.latitude, loc.longitude));
     const zoom = map.getZoom();
 
     // Get a radius based on zoom level
@@ -342,7 +361,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     }
 
     // Create heatmap layer
-    const heatMap = new Microsoft.Maps.HeatMapLayer(locationsPoints, {
+    const heatMap = mapEntities.heatMapLayer(locationsPoints, {
       intensity: intensity, // 0.5,
       radius: radius, // 10000
       unit: 'meters',
@@ -419,7 +438,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
     const lat = origin.latitude * RadPerDeg;
     const lon = origin.longitude * RadPerDeg;
-    const locs = new Array();
+    const locs = [];
     const AngDist = parseFloat(radius) / earthRadius;
     for (let x = 0; x <= 360; x++) {
       // making a 360-sided polygon
@@ -434,15 +453,15 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         );
       pLatitude = pLatitude / RadPerDeg;
       pLongitude = pLongitude / RadPerDeg;
-      locs.push(new Microsoft.Maps.Location(pLatitude, pLongitude));
+      locs.push(mapEntities.location(pLatitude, pLongitude));
     }
 
     // create the cirlce object
-    return new Microsoft.Maps.Polygon(locs, {
+    return mapEntities.polygon(locs, {
       visible: true,
       strokeThickness: 4,
-      strokeColor: new Microsoft.Maps.Color(75, 0, 0, 255),
-      fillColor: new Microsoft.Maps.Color(50, 0, 255, 0),
+      strokeColor: mapEntities.color(75, 0, 0, 255),
+      fillColor: mapEntities.color(50, 0, 255, 0),
     });
   }
 
