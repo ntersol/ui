@@ -5,10 +5,10 @@
   
 -->
   <app-map 
-  [locations]="locations" 
+    [locations]="locations" 
     [heatmap]="false"
-    pushPinsAddable="multiple"
-    pushPinIcon="https://www.bingmapsportal.com/Content/images/poi_custom.png"
+    [pushPinsAddable]="'single'"
+    [pushPinIcon]="'https://www.bingmapsportal.com/Content/images/poi_custom.png'"
     [pushPinRadius]="radius"
     (viewChanged)="viewChanged($event)">
   </app-map>
