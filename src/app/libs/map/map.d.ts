@@ -3,20 +3,25 @@
 // Definitions by: Ricky Brundritt <https://github.com/rbrundritt>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-declare module Map {
-
+declare namespace Map {
   export interface Location {
     metadata?: {
       infoBoxHtml?: () => string;
       title?: string;
       description?: string;
-    }
+    };
     /** URL to an image to use as the pushpin icon. Will overwrite the global pushpin icon */
     icon?: string;
     /** Draw a circle/radius around a push pin. Value is in miles */
     radius?: string;
     latitude: number;
     longitude: number;
+  }
+
+  export interface Entity {
+    id: string;
+    ref: Microsoft.Maps.Pushpin | Microsoft.Maps.Polygon;
+    type: 'pushpin' | 'circle';
   }
 
   export interface ViewProps {
@@ -31,7 +36,7 @@ declare module Map {
       altitudeReference: number;
       latitude: number;
       longitude: number;
-    },
+    };
     /** The lat/long of the bounding box/viewport dimensions */
     bounds?: [number, number, number, number];
   }
@@ -44,6 +49,4 @@ declare module Map {
     /** Draw a circle/radius around a push pin. Value is in miles */
     pushPinRadius?: string;
   }
-
 }
-

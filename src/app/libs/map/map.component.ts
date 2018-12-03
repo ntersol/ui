@@ -12,17 +12,23 @@ import {
 
 const scriptSrc = 'https://www.bing.com/api/maps/mapcontrol?key=';
 const apiKey = 'AnTlR8QC4A9PDl4d0sLe5pfonbXmuPneJDVGS4jMi_CVxFcz4Q8RbxYJ25qlnY_p';
-// Create factories for bing map entities to reduce reliance on new keyword
+// Create factories for bing map entities to remove reliance on new keyword
 const mapEntities = {
-  map: (divId: string, options?: Microsoft.Maps.IMapLoadOptions) => new Microsoft.Maps.Map(document.getElementById(divId), options),
-  infoBox: (location: Microsoft.Maps.Location, options?: Microsoft.Maps.IInfoboxOptions) => new Microsoft.Maps.Infobox(location, options),
-  pushpin: (location: Microsoft.Maps.Location, options?: Microsoft.Maps.IPushpinOptions) =>  new Microsoft.Maps.Pushpin(location, options),
-  location: (latitude: number, longitude: number ) => new Microsoft.Maps.Location(latitude, longitude),
-  heatMapLayer: (locations: ( Microsoft.Maps.Location | Microsoft.Maps.Pushpin)[] , options: Microsoft.Maps.IHeatMapLayerOptions) =>  new Microsoft.Maps.HeatMapLayer(locations, options),
-  polygon: (rings: Microsoft.Maps.Location[] | Microsoft.Maps.Location[][], options: Microsoft.Maps.IPolygonOptions) => new Microsoft.Maps.Polygon(rings, options),
-  color: (a: number, b: number, c: number, d: number, ) => new Microsoft.Maps.Color(a, b, c, d),
+  map: (divId: string, options?: Microsoft.Maps.IMapLoadOptions) =>
+    new Microsoft.Maps.Map(document.getElementById(divId), options),
+  infoBox: (location: Microsoft.Maps.Location, options?: Microsoft.Maps.IInfoboxOptions) =>
+    new Microsoft.Maps.Infobox(location, options),
+  pushpin: (location: Microsoft.Maps.Location, options?: Microsoft.Maps.IPushpinOptions) =>
+    new Microsoft.Maps.Pushpin(location, options),
+  location: (latitude: number, longitude: number) => new Microsoft.Maps.Location(latitude, longitude),
+  heatMapLayer: (
+    locations: (Microsoft.Maps.Location | Microsoft.Maps.Pushpin)[],
+    options: Microsoft.Maps.IHeatMapLayerOptions,
+  ) => new Microsoft.Maps.HeatMapLayer(locations, options),
+  polygon: (rings: Microsoft.Maps.Location[] | Microsoft.Maps.Location[][], options: Microsoft.Maps.IPolygonOptions) =>
+    new Microsoft.Maps.Polygon(rings, options),
+  color: (a: number, b: number, c: number, d: number) => new Microsoft.Maps.Color(a, b, c, d),
 };
-
 
 @Component({
   selector: 'app-map',
@@ -31,12 +37,13 @@ const mapEntities = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
-  /** Any entities such as pushpins or circles */
+  /** Any locations such as pushpins or circles */
   @Input() locations: Map.Location[];
- 
+
   /** Configure the map options  */
   private _options: Map.Options;
-  @Input() set options(options: Map.Options) {
+  @Input()
+  set options(options: Map.Options) {
     this._options = options;
   }
   get options() {
@@ -44,7 +51,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       ...this._options,
       pushPinsAddable: this.pushPinsAddable,
       pushPinIcon: this.pushPinIcon,
-      pushPinRadius: this.pushPinRadius
+      pushPinRadius: this.pushPinRadius,
     };
   }
 
@@ -78,35 +85,46 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   public isLoaded = false;
   /** Randomly generated uniqueID for the div that holds the map. Allows for multiple map per page  */
   public uniqueId = 'map' + Math.floor(Math.random() * 1000000);
-  /** Disable updating immediately after entities has been emitted. This prevents update loop */
-  private isEmitting = false;
   /** Viewport properties  */
   private viewProps: Map.ViewProps = {};
- 
+  /** Hold references to map event handlers for future disposal  */
+
+  private eventHandlers: { mapClicks?: Microsoft.Maps.IHandlerId } = {};
+  /** Array of any created entities such as pushpins and circles   */
+  private entities: Map.Entity[] = [];
+
   constructor() {}
 
-  ngOnInit() { 
+  ngOnInit() {
     // Add a callback method on the global scope that bing maps can use to initialize the map after loading
     (<any>window).mapInitialize = () => this.mapInit();
   }
 
-  ngOnChanges() {
-    // If changed
+  ngOnChanges(model: any) {
+    // console.log(model);
+    // If map not loaded
     if (this.isLoaded && !this.map) {
       this.scriptsLoad();
     }
 
-    // If new locations are passed down, update map
-    if (this.isLoaded && this.map && this.locations && !this.isEmitting) {
-      this.mapSetType();
-    }
+    // If map is loaded and present
+    if (this.isLoaded && this.map) {
+      // If new locations are passed down, update map
+      if (model.locations) {
+        this.mapInit();
+      }
 
-    // If an empty locations array or null locations is passed, clear out any preexisting entities
-    if (this.isLoaded && this.map && !this.isEmitting && (!this.locations || this.locations.length === 0)) {
-      this.locationsClear(this.map);
-    }
+      // If an empty locations array or null locations is passed, clear out any preexisting entities
+      // Or if new locations are passed down
+      if (!model.locations || model.locations.length === 0 || (model.locations && model.locations.length)) {
+        // this.locationsClear(this.map);
+      }
 
-    this.isEmitting = false;
+      // If new push pin radius passed down
+      if (model.pushPinRadius) {
+        this.circlesRefresh(this.map, this.options);
+      }
+    } // End is loaded
   }
 
   ngAfterViewInit() {
@@ -138,36 +156,60 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
    * Create the map and set intial view and properties
    */
   private mapInit() {
-     // Bing can't see the DOM sometimes on initial load even when in the right lifecycle hook
+    // If map is not present yet, create it
+    if (!this.map) {
+      // Create map reference
+      this.map = mapEntities.map(this.uniqueId, { credentials: this.apiKey, ...this.options, zoom: this.zoom });
+      // Attach infobox to map instance, on default is hidden
+      this.infoBox = mapEntities.infoBox(this.map.getCenter(), { visible: false });
+      this.infoBox.setMap(this.map);
+      // When the view is changed such as scrolling or zooming
+      Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', () => this.viewChange());
+    }
 
-    // Create map reference
-    this.map = mapEntities.map(
-      this.uniqueId,
-      { credentials: this.apiKey, ...this.options, zoom: this.zoom }
-    );
-        
     // Map instance was successfully created
     if (this.map) {
-        // Set viewport properties
-        this.viewProps = this.viewPropsUpdate(this.map);
-
-        // Attach infobox to map instance, on default is hidden
-        this.infoBox = mapEntities.infoBox(this.map.getCenter(), { visible: false });
-        this.infoBox.setMap(this.map);
-
-        // When the view is changed such as scrolling or zooming
-        Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', () => this.viewChange());
-
-        // If pushpins enabled, add event handler
-        if (this.options.pushPinsAddable) {
-          Microsoft.Maps.Events.addHandler(this.map,
-            'click',
-            (e: Microsoft.Maps.IMouseEventArgs) => this.mapClickEvent(e, this.map, this.options)
-          );
+      // Set viewport properties
+      this.viewProps = this.viewPropsUpdate(this.map);
+      // If pushpins enabled
+      if (this.options.pushPinsAddable) {
+        // Remove previous click event handler
+        if (this.eventHandlers.mapClicks) {
+          // Microsoft.Maps.Events.removeHandler(this.eventHandlers.mapClicks);
         }
-        // Now set map type, either heatmap or pushpins
-        this.mapSetType();
-
+        // Add event handler to create pushpins
+        this.eventHandlers.mapClicks = Microsoft.Maps.Events.addHandler(
+          this.map,
+          'click',
+          (e: Microsoft.Maps.IMouseEventArgs) => {
+            const entitiesNew = this.mapClickEvent(e, this.map, this.options);
+            this.entities = [...this.entities, ...entitiesNew];
+          },
+        );
+      }
+      // Check if heatmap or pushpins
+      if (this.heatmap) {
+        // Load heatmap module
+        Microsoft.Maps.loadModule('Microsoft.Maps.HeatMap', () => {
+          // Clean up any previous instance of heatmap layer
+          if (this.heatMapLayer) {
+            this.heatMapLayer.dispose();
+          }
+          this.heatMapLayer = this.heatMap(this.map, this.locations);
+        });
+      } else {
+        // If locations were passed down, add them after map creation
+        this.locationsAdd(this.map, this.locations, this.options);
+        // If multiple locations passed, adjust viewport to contain all. Else just center on single point
+        if (this.locations && this.locations.length > 1) {
+          // Resize viewport to fit all pins
+          this.viewPortUpdate(this.map, this.locations);
+        } else if (this.locations) {
+          // Get only location and center viewport
+          const element = <Microsoft.Maps.Pushpin>this.map.entities.get(0);
+          this.map.setView({ center: element.getLocation() });
+        }
+      }
     } else {
       window.setTimeout(() => this.mapInit(), 500);
     }
@@ -175,11 +217,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
   /**
    * On a map click event, add a pushpin on the clicked location
-   * @param e 
-   * @param map 
-   * @param type 
+   * @param e
+   * @param map
+   * @param type
    */
   private mapClickEvent(e: Microsoft.Maps.IMouseEventArgs, map: Microsoft.Maps.Map, options: Map.Options) {
+    const entities: Map.Entity[] = [];
+
     // If pushpin type is set to single, clear out all other pins
     if (options.pushPinsAddable === 'single') {
       this.locationsClear(this.map);
@@ -193,43 +237,23 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
     // Create new pushpin
     const pushpin = mapEntities.pushpin(e.location, pinOptions);
-    map.entities.push(pushpin);
+    map.entities.add(pushpin);
+    entities.push({
+      id: pushpin.entity.id,
+      type: 'pushpin',
+      ref: pushpin,
+    });
 
     if (options.pushPinRadius) {
-      const circle = this.drawCircle(e.location, options.pushPinRadius, 'mile');
-      map.entities.push(circle);
-    }
-
-  }
-
-  /**
-   * Determine which type of map to create, heatmap or pushpin based
-   */
-  private mapSetType() {
-    // Check if heatmap or pushpins
-    if (this.heatmap) {
-      // Load heatmap module
-      Microsoft.Maps.loadModule('Microsoft.Maps.HeatMap', () => {
-        this.heatMapLayer = this.heatMap(this.map, this.locations);
+      const circle = this.circleDraw(map, e.location, options.pushPinRadius);
+      entities.push({
+        id: circle.entity.id,
+        type: 'circle',
+        ref: circle,
       });
-    } else {
-      // Clear out any old locations
-      this.locationsClear(this.map);
-      // If locations were passed down, add them after map creation
-      this.locationsAdd(this.map, this.locations, this.options);
-      // If multiple locations passed, adjust viewport to contain all. Else just center on single point
-      if (this.locations && this.locations.length > 1) {
-        // Resize viewport to fit all pins
-        this.viewPortUpdate(this.map, this.locations);
-      } else if (this.locations) {
-        // Get only location and center viewport
-        const element = <Microsoft.Maps.Pushpin>this.map.entities.get(0);
-        this.map.setView({ center: element.getLocation() });
-      }
     }
+    return entities;
   }
-
-  
 
   /**
    * When the view of the map changes such as scrolling or zooming
@@ -249,17 +273,19 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       // Update viewprops to indicate a zoom was performed
       viewProps = {
         ...viewProps,
-        didZoom: true
+        didZoom: true,
       };
     }
 
     // If the view change event was a scroll
-    if (this.viewProps.center.latitude !== viewProps.center.latitude || 
-      this.viewProps.center.longitude !== viewProps.center.longitude) {
+    if (
+      this.viewProps.center.latitude !== viewProps.center.latitude ||
+      this.viewProps.center.longitude !== viewProps.center.longitude
+    ) {
       // Update viewprops to indicate a scroll was performed
       viewProps = {
         ...viewProps,
-        didScroll: true
+        didScroll: true,
       };
     }
 
@@ -272,22 +298,22 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
   /**
    * Update the viewport properties such as zoom level, center position, etc
-   * @param map 
+   * @param map
    */
   private viewPropsUpdate(map: Microsoft.Maps.Map) {
     const props: any = map.getBounds(); // getBounds not properly typed
     return <Map.ViewProps>{
       zoom: map.getZoom(),
       center: props.center,
-      bounds: props.bounds
+      bounds: props.bounds,
     };
   }
 
   /**
    * Add locations such as pushpins and circles to the map
-   * @param map 
-   * @param locations 
-   * @param options 
+   * @param map
+   * @param locations
+   * @param options
    */
   private locationsAdd(map: Microsoft.Maps.Map, locations: Map.Location[], options?: Map.Options) {
     if (locations && locations.length) {
@@ -300,7 +326,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
           pinOptions.icon = loc.icon || options.pushPinIcon;
         }
         const pin: Microsoft.Maps.Pushpin = mapEntities.pushpin(<any>loc, pinOptions);
-        
+
         // If metadata available, add to pin and add infobox click event
         if (loc.metadata) {
           Microsoft.Maps.Events.addHandler(pin, 'click', this.pushpinClicked.bind(this));
@@ -308,7 +334,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         }
         return pin;
       });
-      map.entities.push(pins);
+      map.entities.add(pins);
+      return pins;
     }
   }
 
@@ -319,7 +346,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
    */
   private heatMap(map: Microsoft.Maps.Map, locations: Map.Location[]) {
     // Turn lat/long into location entities
-    const locationsPoints = locations.map(loc =>  mapEntities.location(loc.latitude, loc.longitude));
+    const locationsPoints = locations.map(loc => mapEntities.location(loc.latitude, loc.longitude));
     const zoom = map.getZoom();
 
     // Get a radius based on zoom level
@@ -427,7 +454,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
    * @param radius
    * @param disUnit
    */
-  public drawCircle(origin: any, radius: string, disUnit: string) {
+  public circleDraw(map: Microsoft.Maps.Map, origin: any, radius: string, disUnit: string = 'mile') {
     let RadPerDeg = 0;
     let earthRadius = 0;
 
@@ -457,12 +484,43 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     }
 
     // create the cirlce object
-    return mapEntities.polygon(locs, {
+    const circle = mapEntities.polygon(locs, {
       visible: true,
       strokeThickness: 4,
       strokeColor: mapEntities.color(75, 0, 0, 255),
       fillColor: mapEntities.color(50, 0, 255, 0),
     });
+
+    // Add to map
+    map.entities.add(circle);
+    // Return for collection
+    return circle;
+  }
+
+  /**
+   * Refresh the circles currently on the map
+   * @param map
+   * @param options
+   * @param entities
+   */
+  private circlesRefresh(map: Microsoft.Maps.Map, options: Map.Options) {
+    // Remove all circles from map
+    this.entitiesGet<Microsoft.Maps.Polygon>(map, 'Polygon').forEach(entry => map.entities.remove(entry));
+
+    // Get location of pushpin and add circle to map
+    this.entitiesGet<Microsoft.Maps.Pushpin>(map, 'Pushpin').forEach(entity => {
+      const location = entity.getLocation();
+      this.circleDraw(map, location, options.pushPinRadius);
+    });
+  }
+
+  /**
+   * Extract a collection of entities from the map based on type. WIll be properly typed
+   * @param map
+   * @param type
+   */
+  private entitiesGet<t>(map: Microsoft.Maps.Map, type: 'Polygon' | 'Pushpin'): t[] {
+    return <any>map.entities.getPrimitives().filter(entry => entry.entity.id.split('_')[0] === type);
   }
 
   ngOnDestroy() {

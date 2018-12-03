@@ -9,8 +9,8 @@ import { Models } from '$models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent implements OnInit {
-
   public locations: Map.Location[];
+  public radius = 1;
 
   constructor(private http: HttpClient, private ref: ChangeDetectorRef) {}
 
@@ -21,16 +21,15 @@ export class MapComponent implements OnInit {
         return <Map.Location>{
           metadata: {
             title: location.display_address,
-            description: location.city + ' ' + location.zip_code
+            description: location.city + ' ' + location.zip_code,
           },
-          latitude: location.display_lat, 
+          latitude: location.display_lat,
           longitude: location.display_lng,
           // icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png'
         };
       });
       this.ref.markForCheck();
     });
-
   }
 
   public viewChanged(viewProps: Map.ViewProps) {

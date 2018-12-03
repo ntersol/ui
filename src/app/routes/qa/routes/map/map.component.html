@@ -1,13 +1,15 @@
 <div style="height:100vh;">
+  <button class="btn btn-primary" (click)="radius = 1">Set Radius to 1</button>
+  <button class="btn btn-primary" (click)="radius = 5">Set Radius to 5</button>
 <!--
   
 -->
   <app-map 
-    [locations]="locations" 
-    [heatmap]="true"
-    pushPinsAddable="single"
+  [locations]="locations" 
+    [heatmap]="false"
+    pushPinsAddable="multiple"
     pushPinIcon="https://www.bingmapsportal.com/Content/images/poi_custom.png"
-    pushPinRadius="1"
+    [pushPinRadius]="radius"
     (viewChanged)="viewChanged($event)">
   </app-map>
   
