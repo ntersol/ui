@@ -30,7 +30,7 @@ export declare namespace Models {
     city: string;
     county: string;
     zip_code: number;
-    listing_price:string;
+    listing_price: string;
     total_bedrooms: number;
     total_bathrooms: string;
     is_single_family: string;
