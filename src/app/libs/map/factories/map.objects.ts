@@ -118,6 +118,75 @@ export const MapObjects = {
   },
 
   /**
+   * Creates a heatmap layer based on location entities
+   * @param map
+   * @param locations
+   */
+  heatMapCreate: (map: Microsoft.Maps.Map, locations: Map.Location[]) => {
+    // Turn lat/long into location entities
+    const locationsPoints = locations.map(loc => MapObjectTypes.location(loc.latitude, loc.longitude));
+    const zoom = map.getZoom();
+
+    // Get a radius based on zoom level
+    // TODO: Generate this programatically
+    const radiuses = [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      300,
+      900,
+      2000,
+      3500,
+      7000,
+      10500,
+      15500,
+      30500,
+      60000,
+      90000,
+      120000,
+      120000,
+      120000,
+    ];
+    const radius = radiuses[21 - zoom];
+
+    // Get intensity based on zoom level
+    // TODO: Generate this programatically
+    let intensity = 0.75;
+    if (21 - zoom > 14) {
+      intensity = 0.05;
+    } else if (21 - zoom > 13) {
+      intensity = 0.2;
+    } else if (21 - zoom > 11) {
+      intensity = 0.5;
+    }
+
+    // Create heatmap layer
+    const heatMap = MapObjectTypes.heatMapLayer(locationsPoints, {
+      intensity: intensity, // 0.5,
+      radius: radius, // 10000
+      unit: 'meters',
+      /**
+       * TODO: Allow heatmap to be customizable
+      colorGradient: {
+          '0': 'Black',
+          '0.4': 'Purple',
+          '0.6': 'Red',
+          '0.8': 'Yellow',
+          '1': 'White'
+      },
+      aggregateLocationWeights: true
+     */
+    });
+    map.layers.insert(heatMap);
+    return heatMap;
+  },
+
+  /**
    * Extract a collection of entities from the map based on type. Will be properly typed
    * @param map
    * @param type

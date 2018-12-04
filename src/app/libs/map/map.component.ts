@@ -202,7 +202,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
           if (this.heatMapLayer) {
             this.heatMapLayer.dispose();
           }
-          this.heatMapLayer = this.heatMap(this.map, this.locations);
+          this.heatMapLayer = MapObjects.heatMapCreate(this.map, this.locations);
         });
       } else {
         // If locations were passed down, add them after map creation
@@ -243,7 +243,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       // If heatmap is present, throw away old layer and regenerate a new one
       if (this.heatMapLayer) {
         this.heatMapLayer.dispose();
-        this.heatMapLayer = this.heatMap(this.map, this.locations);
+        this.heatMapLayer = MapObjects.heatMapCreate(this.map, this.locations);
       }
       // Update viewprops to indicate a zoom was performed
       viewProps = {
@@ -269,74 +269,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
     // Emit
     this.viewChanged.emit(this.viewProps);
-  }
-
-  /**
-   * Creates a heatmap layer based on location entities
-   * @param map
-   * @param locations
-   */
-  private heatMap(map: Microsoft.Maps.Map, locations: Map.Location[]) {
-    // Turn lat/long into location entities
-    const locationsPoints = locations.map(loc => MapObjectTypes.location(loc.latitude, loc.longitude));
-    const zoom = map.getZoom();
-
-    // Get a radius based on zoom level
-    // TODO: Generate this programatically
-    const radiuses = [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      300,
-      900,
-      2000,
-      3500,
-      7000,
-      10500,
-      15500,
-      30500,
-      60000,
-      90000,
-      120000,
-      120000,
-      120000,
-    ];
-    const radius = radiuses[21 - zoom];
-
-    // Get intensity based on zoom level
-    // TODO: Generate this programatically
-    let intensity = 0.75;
-    if (21 - zoom > 14) {
-      intensity = 0.05;
-    } else if (21 - zoom > 13) {
-      intensity = 0.2;
-    } else if (21 - zoom > 11) {
-      intensity = 0.5;
-    }
-
-    // Create heatmap layer
-    const heatMap = MapObjectTypes.heatMapLayer(locationsPoints, {
-      intensity: intensity, // 0.5,
-      radius: radius, // 10000
-      unit: 'meters',
-      /**
-      colorGradient: {
-          '0': 'Black',
-          '0.4': 'Purple',
-          '0.6': 'Red',
-          '0.8': 'Yellow',
-          '1': 'White'
-      },
-      aggregateLocationWeights: true
-     */
-    });
-    map.layers.insert(heatMap);
-    return heatMap;
   }
 
   ngOnDestroy() {
