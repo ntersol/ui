@@ -1,12 +1,8 @@
 <div style="height:100vh;">
-  <button class="btn btn-primary" (click)="radius = 1">Set Radius to 1</button>
-  <button class="btn btn-primary" (click)="radius = 5">Set Radius to 5</button>
-<!--
-  
--->
+
   <app-map 
     [locations]="locations" 
-    [heatmap]="true"
+    [heatmap]="false"
     [disablePanning]="false"
     [disableZoom]="false"
     [disableDashboard]="false"

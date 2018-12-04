@@ -10,8 +10,6 @@ import {
   Input,
 } from '@angular/core';
 
-// import { MapObjectsService } from './services/map-objects.service';
-
 import { MapObjects, MapObjectTypes } from './factories/map.objects';
 import { MapView } from './factories/map.view';
 import { MapEvents } from './factories/map.events';
@@ -19,6 +17,22 @@ import { MapEvents } from './factories/map.events';
 const scriptSrc = 'https://www.bing.com/api/maps/mapcontrol?key=';
 const apiKey = 'AnTlR8QC4A9PDl4d0sLe5pfonbXmuPneJDVGS4jMi_CVxFcz4Q8RbxYJ25qlnY_p';
 
+/** USAGE: 
+   <app-map 
+    [locations]="locations" 
+    [heatmap]="false"
+    [disablePanning]="false"
+    [disableZoom]="false"
+    [disableDashboard]="false"
+    [disableLocateMeButton]="true"
+    [disableMapTypeSelector]="true"
+    [pushPinsAddable]="'multiple'"
+    [pushPinIcon]="'https://www.bingmapsportal.com/Content/images/poi_custom.png'"
+    [pushPinRadius]="radius"
+    (addedPushPin)="addedPushPin($event)"
+    (viewChanged)="viewChanged($event)">
+  </app-map>
+ */
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
