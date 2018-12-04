@@ -169,7 +169,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       this.infoBox = MapObjectTypes.infoBox(this.map.getCenter(), { visible: false });
       this.infoBox.setMap(this.map);
       // When the view is changed such as scrolling or zooming
-      Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', () => this.viewChange());
+      Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', () => {
+        this.viewProps = MapView.viewChange(this.map, this.viewProps);
+
+        if (this.viewProps.didZoom && this.heatMapLayer) {
+          this.heatMapLayer.dispose();
+          this.heatMapLayer = MapObjects.heatMapCreate(this.map, this.locations);
+        }
+
+        this.viewChanged.emit(this.viewProps);
+      });
     }
 
     // Map instance was successfully created
@@ -233,7 +242,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   /**
    * When the view of the map changes such as scrolling or zooming
    * map: Microsoft.Maps.Map, viewPropsCurrent: Map.ViewProps, heatMapLayer: Microsoft.Maps.HeatMapLayer
-   */
+ 
   private viewChange() {
     // Get the latest view properties
     let viewProps = MapView.viewPropsUpdate(this.map);
@@ -270,6 +279,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     // Emit
     this.viewChanged.emit(this.viewProps);
   }
+  */
 
   ngOnDestroy() {
     if (this.map) {
