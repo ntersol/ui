@@ -25,7 +25,7 @@ export class MapComponent implements OnInit {
           },
           latitude: location.display_lat,
           longitude: location.display_lng,
-          // icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png'
+          // icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png' // Custom pin level icon
         };
       });
       this.ref.markForCheck();

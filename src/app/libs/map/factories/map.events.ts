@@ -12,7 +12,7 @@ export const MapEvents = {
       const pin: Microsoft.Maps.Pushpin = e.target;
       return <Microsoft.Maps.IInfoboxOptions>{
         location: pin.getLocation(),
-        title: pin.metadata.title,
+        title: pin.metadata.title + 'Test',
         description: pin.metadata.description,
         visible: true,
       };

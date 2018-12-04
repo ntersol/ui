@@ -34,9 +34,11 @@ export const MapObjects = {
           pinOptions.icon = loc.icon || options.pushPinIcon;
         }
         const pin: Microsoft.Maps.Pushpin = MapObjectTypes.pushpin(<any>loc, pinOptions);
+        
         if (loc.metadata) {
-          pin.metadata = { ...pin.metadata };
+          pin.metadata = { ...loc.metadata };
         }
+        
         return pin;
       });
       map.entities.add(pins);
