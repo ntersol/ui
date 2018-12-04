@@ -38,6 +38,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   get options() {
     return {
       ...this._options,
+      disablePanning: this.disablePanning,
+      disableScrollWheelZoom: this.disableZoom,
+      showZoomButtons: !this.disableZoom,
+      showDashboard: !this.disableDashboard,
+      showLocateMeButton: !this.disableLocateMeButton,
+      showLogo: false,
+      showMapTypeSelector: !this.disableMapTypeSelector,
+      // disableStreetside: true,
+      // disableStreetsideAutoCoverage: true,
+      // showMapTypeSelector: false,
       pushPinsAddable: this.pushPinsAddable,
       pushPinIcon: this.pushPinIcon,
       pushPinRadius: this.pushPinRadius,
@@ -50,13 +60,23 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   @Input() zoom = 9;
   /** Display a heatmap instead of pushpins  */
   @Input() heatmap = false;
-
   /** Can pushpins be added to the map. If so, one or many  */
   @Input() pushPinsAddable: false | 'single' | 'multiple' = false;
   /** URL of image to use for custom pin  */
   @Input() pushPinIcon: string;
   /** Draw a circle/radius around a push pin. Value is in miles */
   @Input() pushPinRadius: string;
+
+  /** Should panning/scrolling be disabled */
+  @Input() disablePanning = false;
+  /** Should zooming be disabled? Will disable mouse wheel and zoom controls */
+  @Input() disableZoom = false;
+  /** Disable located me button */
+  @Input() disableLocateMeButton = true;
+  /** Disable map type selectoed, IE road, topo, etc */
+  @Input() disableMapTypeSelector = true;
+  /** Disable all dashboard controls */
+  @Input() disableDashboard = true;
 
   /** When any property of the viewport changes */
   @Output() viewChanged = new EventEmitter<Map.ViewProps>();
@@ -69,7 +89,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   public infoBox: Microsoft.Maps.Infobox;
   /** Reference to heatmap layer  */
   public heatMapLayer: Microsoft.Maps.HeatMapLayer;
-
   /** Map has been loaded  */
   public isLoaded = false;
   /** Randomly generated uniqueID for the div that holds the map. Allows for multiple map per page  */
@@ -77,7 +96,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   /** Viewport properties  */
   private viewProps: Map.ViewProps = {};
   /** Hold references to map event handlers for future disposal  */
-
   private eventHandlers: { mapClicks?: Microsoft.Maps.IHandlerId } = {};
 
   constructor() {}
@@ -119,7 +137,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   }
 
   /**
-   * Check if Chart.js is loaded, if not, load it then initialize the chart in this component
+   * Check if map js is loaded, if not, load it then initialize the map in this component
    */
   public scriptsLoad() {
     if ((<any>window).Microsoft && (<any>window).Microsoft.Maps) {
