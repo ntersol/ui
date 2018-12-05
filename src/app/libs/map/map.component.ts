@@ -52,6 +52,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   get options() {
     return {
       ...this._options,
+      credentials: this.apiKey,
       disablePanning: this.disablePanning,
       disableScrollWheelZoom: this.disableZoom,
       showZoomButtons: !this.disableZoom,
@@ -116,7 +117,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
   ngOnInit() {
     // Add a callback method on the global scope that bing maps can use to initialize the map after loading
-    (<any>window).mapInitialize = () => this.mapInit();
+    // Add unique ID to avoid collisions with multiple maps
+    (<any>window)['mapInitialize' + this.uniqueId] = () => this.mapInit();
   }
 
   ngOnChanges(model: any) {
@@ -132,16 +134,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         this.mapInit();
       }
 
-      // If an empty locations array or null locations is passed, clear out any preexisting entities
-      // Or if new locations are passed down
-      // !model.locations || model.locations.length === 0 ||
-      if (model.locations && model.locations.length) {
-        MapObjects.removeAll(this.map);
-      }
-
       // If new push pin radius passed down
       if (model.pushPinRadius) {
         MapObjects.circlesRefresh(this.map, this.options);
+      }
+
+      // If an empty locations array or null locations is passed, clear out any preexisting entities
+      // Or if new locations are passed down
+      // !model.locations || model.locations.length === 0 ||
+      if ((this.locations && this.locations.length) || (Array.isArray(this.locations) && this.locations.length === 0)) {
+        MapObjects.removeAll(this.map);
       }
     } // End is loaded
   }
@@ -162,7 +164,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       const script = document.createElement('script');
       script.type = 'text/javascript';
       // Callback query param will fire after bing maps successfully loads
-      script.src = scriptSrc + this.apiKey + '&callback=mapInitialize';
+      script.src = scriptSrc + this.apiKey + '&callback=mapInitialize' + this.uniqueId;
       script.onload = () => {
         // this.mapInit();
         this.isLoaded = true;
@@ -178,19 +180,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     // If map is not present yet, create it
     if (!this.map) {
       // Create map reference
-      this.map = MapObjectTypes.map(this.uniqueId, { credentials: this.apiKey, ...this.options, zoom: this.zoom });
+      this.map = MapObjectTypes.map(this.uniqueId, { ...this.options });
       // Attach infobox to map instance, on default is hidden
-      this.infoBox = MapObjectTypes.infoBox(this.map.getCenter(), { visible: false });
+      this.infoBox = MapObjectTypes.infoBox(null, { visible: false });
       this.infoBox.setMap(this.map);
       // When the view is changed such as scrolling or zooming
       Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', () => {
         this.viewProps = MapView.viewChange(this.map, this.viewProps);
-
         if (this.viewProps.didZoom && this.heatMapLayer) {
           this.heatMapLayer.dispose();
           this.heatMapLayer = MapObjects.heatMapCreate(this.map, this.locations);
         }
-
         this.viewChanged.emit(this.viewProps);
       });
     }
@@ -212,8 +212,10 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
           (e: Microsoft.Maps.IMouseEventArgs) => {
             // Emit newly added location
             const pins = MapEvents.mapClickEvent(e, this.map, this.options);
-            // Emit the locations of the newly created pins
-            this.addedPushPin.emit(pins.map(pin => pin.getLocation()));
+            if (pins && pins.length) {
+              // Emit the locations of the newly created pins
+              this.addedPushPin.emit(pins.map(pin => pin.getLocation()));
+            }
           },
         );
       }
@@ -230,14 +232,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       } else {
         // If locations were passed down, add them after map creation
         const pins = MapObjects.pushPinAdd(this.map, this.locations, this.options);
-        // If metadata available, add to pin and add infobox click event
-        pins.forEach(pin => {
-          if (pin.metadata) {
-            Microsoft.Maps.Events.addHandler(pin, 'click', (e: Microsoft.Maps.IMouseEventArgs) => {
-              this.infoBox.setOptions(MapEvents.pushpinClicked(e));
-            });
-          }
-        });
+        MapEvents.infoBoxEvent(pins, this.infoBox);
         // If multiple locations passed, adjust viewport to contain all. Else just center on single point
         if (this.locations && this.locations.length > 1) {
           // Resize viewport to fit all pins

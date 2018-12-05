@@ -19,6 +19,19 @@ export const MapEvents = {
     }
   },
 
+  infoBoxEvent: (pins: Microsoft.Maps.Pushpin[], infoBox: Microsoft.Maps.Infobox) => {
+    if (pins && pins.length) {
+      // If metadata available, add to pin and add infobox click event
+      pins.forEach(pin => {
+        if (pin.metadata) {
+          Microsoft.Maps.Events.addHandler(pin, 'click', (e: Microsoft.Maps.IMouseEventArgs) => {
+            infoBox.setOptions(MapEvents.pushpinClicked(e));
+          });
+        }
+      });
+    }
+  },
+
   /**
    * On a map click event, add a pushpin on the clicked location
    * @param e

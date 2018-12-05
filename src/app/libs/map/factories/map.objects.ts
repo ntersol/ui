@@ -1,7 +1,6 @@
 // Create factories for bing map entities to remove tight coupling to 'new' keyword
 export const MapObjectTypes = {
-  map: (divId: string, options?: Microsoft.Maps.IMapLoadOptions) =>
-    new Microsoft.Maps.Map(document.getElementById(divId), options),
+  map: (divId: string, options?: Map.Options) => new Microsoft.Maps.Map(document.getElementById(divId), <any>options),
   infoBox: (location: Microsoft.Maps.Location, options?: Microsoft.Maps.IInfoboxOptions) =>
     new Microsoft.Maps.Infobox(location, options),
   pushpin: (location: Microsoft.Maps.Location, options?: Microsoft.Maps.IPushpinOptions) =>
@@ -18,7 +17,7 @@ export const MapObjectTypes = {
 
 export const MapObjects = {
   /**
-   * Add locations such as pushpins and circles to the map
+   * Add pushpins to the map
    * @param map
    * @param locations
    * @param options
