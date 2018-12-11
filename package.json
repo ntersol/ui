@@ -3,6 +3,7 @@
   "version": "2.2.0",
   "license": "MIT",
   "scripts": {
+    "install": "git update-index --skip-worktree src/environments/environment.local.ts",
     "start": "npm run format && ng serve",
     "format": "npm run format-glob -- \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\"",
     "format-glob": "prettier --write",
