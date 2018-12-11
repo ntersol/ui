@@ -6,7 +6,7 @@ import { GridModule } from '$features'; // Lazy loaded datagrid DatagridModule,
 
 // Home component and routing
 import { routing } from './home.routes';
-import { HomeComponent } from './home.component';
+import { HomeComponent } from './routes/home/home.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, GridModule],

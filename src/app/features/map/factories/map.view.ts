@@ -41,10 +41,11 @@ export const MapView = {
     }
 
     // If the view change event was a scroll
-    if (viewPropsCurrent.center && (
-      viewPropsCurrent.center.latitude !== viewPropsNew.center.latitude ||
-      viewPropsCurrent.center.longitude !== viewPropsNew.center.longitude
-    )) {
+    if (
+      viewPropsCurrent.center &&
+      (viewPropsCurrent.center.latitude !== viewPropsNew.center.latitude ||
+        viewPropsCurrent.center.longitude !== viewPropsNew.center.longitude)
+    ) {
       // Update viewprops to indicate a scroll was performed
       viewPropsNew = {
         ...viewPropsNew,
