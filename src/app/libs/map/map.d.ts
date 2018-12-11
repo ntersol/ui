@@ -43,6 +43,8 @@ declare namespace Map {
 
   export interface Options extends Microsoft.Maps.IMapOptions {
     credentials: string;
+    /** Zoom level, from 2 (most zoomed out) to 20 (most zoomed in) */
+    zoom?: number;
     /** Can pushpins be added to the map by clicking. Single for only one pin, multiple for any number */
     pushPinsAddable?: false | 'single' | 'multiple' = false;
     /** URL to an image to use as the pushpin icon */

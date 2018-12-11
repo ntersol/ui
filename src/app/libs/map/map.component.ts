@@ -53,6 +53,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     return {
       ...this._options,
       credentials: this.apiKey,
+      zoom: this.zoom,
       disablePanning: this.disablePanning,
       disableScrollWheelZoom: this.disableZoom,
       showZoomButtons: !this.disableZoom,
@@ -178,7 +179,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
    * Create the map and set intial view and properties
    */
   private mapInit() {
-    console.log(this, this.map, this.uniqueId);
+    // console.log(this, this.map, this.uniqueId);
     // If map is not present yet, create it
     if (!this.map && document.getElementById(this.uniqueId)) {
       // Create map reference
@@ -195,8 +196,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         }
         this.viewChanged.emit(this.viewProps);
       });
-      // Bing has a hard time seeing the DOM sometimes, add a check to avoid a map error
-    } else if (this.map && document.getElementById(this.uniqueId)) {
+      
+    } 
+    
+    // Bing has a hard time seeing the DOM sometimes, add a check to avoid a map error
+    if (this.map && document.getElementById(this.uniqueId)) {
       // Set viewport properties
       this.viewProps = MapView.viewPropsUpdate(this.map);
       // If pushpins enabled
