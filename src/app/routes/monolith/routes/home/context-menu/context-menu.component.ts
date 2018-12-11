@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { ContextMenuComponent } from 'ngx-contextmenu';
-import { ContextService, ContextMenuList } from '$libs';
+import { ContextService, ContextMenuList } from '$features';
 
 @Component({
   selector: 'app-context-menu',

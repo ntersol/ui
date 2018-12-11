@@ -5,7 +5,7 @@ import { QaComponent } from './qa.component';
 import { routing } from './qa.routes';
 
 import { ChartsComponent } from './routes/charts/charts.component';
-import { ChartModule, MapModule } from '$libs';
+import { ChartModule, MapModule } from '$features';
 import { MapComponent } from './routes/map/map.component';
 
 @NgModule({

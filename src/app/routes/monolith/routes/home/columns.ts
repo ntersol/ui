@@ -1,4 +1,4 @@
-// import { Datagrid } from '$libs';
+// import { Datagrid } from '$features';
 
 export const columns: any[] = [
   {

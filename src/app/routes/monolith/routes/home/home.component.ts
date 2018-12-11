@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ContextService, ContextMenuList } from '$libs';
+import { ContextService, ContextMenuList } from '$features';
 
 import { MonolithApiService } from '../../shared/stores/api/api.store.service';
 import { UIStoreService } from '$ui';

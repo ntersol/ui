@@ -102,7 +102,7 @@ Lazy load libraries. Normally libraries that are shared between lazy loaded rout
 - Add a module in `app > components > libs > *` that imports the library and then exports it
 - Export the module in the barrel file in `app > components > libs > index.ts`
 - In angular.json, add the path to the module in `projects > architect > build > options > lazyModules`
-- In the module where the library is needed, import the lazy loaded module from the barrel like `import { DatagridModule } from '$libs';` and then add to the ngModule imports array
+- In the module where the library is needed, import the lazy loaded module from the barrel like `import { DatagridModule } from '$features';` and then add to the ngModule imports array
 
 When working with Yarn/NPM Link and your local NPM package src folders (uncompiled .ts), use the following boilerplate in your root tsconfig so that Angular CLI will compile and build on save and not throw an Angular package error
 ```bash
