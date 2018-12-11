@@ -1,3 +1,5 @@
+import { local } from './environment.local';
+
 // Common env settings that don't change between dev and prod
 export const common: any = {
     properties: {
@@ -30,6 +32,8 @@ export const common: any = {
       authLogin: '/authentication/login',
       /** Refresh token endpoint */
       authTokenRefresh: '/authentication/token',
+      // Localized
+      ...local.endpoints
     },
     state: {
       /** Which UI store properties to not write to localstorage. IE do not persist confidential/personal information */
