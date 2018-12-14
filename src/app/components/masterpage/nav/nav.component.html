@@ -1,3 +1,6 @@
+
+
+<div class="nav-component">
 <button class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbar-main" aria-expanded="false"
   aria-label="Toggle navigation" (click)="isOpen = !isOpen">
   <i class="fa fa-bars" aria-hidden="true"></i>
@@ -22,13 +25,11 @@
     <!-- Mobile only utility nav from dropdown in appMenu -->
     <ul class="navbar-nav mr-auto d-block d-lg-none nav-mobile-only">
       <li class="nav-item">
-        <a class="nav-link" (click)="logOut()">
-          <i class="fa fa-power-off" aria-hidden="true"></i> Sign Out
-        </a>
+        <ng-container *ngTemplateOutlet="utilityNav"></ng-container>
       </li>
     </ul>
 
-    <div class="form-inline my-2 my-lg-0">
+    <div class="form-inline my-2 my-lg-0 d-none d-lg-flex">
       <!-- App update notification via service worker -->
       <ng-container *ngIf="hasSW && hasUpdate$ | async as hasUpdate">
         <a class="badge badge-warning mr-3" (click)="updateApp()" style="color:#fff;">
@@ -42,12 +43,18 @@
         <i class="fa fa-caret-down mr-1"></i>
       </a>
       <mat-menu #appMenu="matMenu" xPosition="after">
-        <button mat-menu-item (click)="logOut()">
-          <i class="fa fa-power-off" aria-hidden="true"></i> Sign Out
-        </button>
+        <ng-container *ngTemplateOutlet="utilityNav"></ng-container>
       </mat-menu>
-
     </div>
+
   </div>
   <div class="nav-mobile-bg" (click)="isOpen = !isOpen"></div>
 </div>
+</div>
+
+<!-- Utility nav. Used in user dropdown and below main nav in mobile-->
+<ng-template #utilityNav>
+  <a mat-menu-item class="nav-link" (click)="logOut()">
+    <i class="fa fa-power-off mr-1" aria-hidden="true"></i> Sign Out
+  </a>
+</ng-template>
