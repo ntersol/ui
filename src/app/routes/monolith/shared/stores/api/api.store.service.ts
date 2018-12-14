@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { AppSettings } from '$shared';
-import { Models } from '$models';
 
 import { ApiHttpService } from '$api';
 import { MonolithApiSelectorsService } from './api.selectors.service';

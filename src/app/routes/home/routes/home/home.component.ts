@@ -5,7 +5,6 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 
 import { ApiService } from '$api';
 import { UIStoreService } from '$ui';
-import { Models } from '$models';
 import { columns } from './columns';
 
 @AutoUnsubscribe()

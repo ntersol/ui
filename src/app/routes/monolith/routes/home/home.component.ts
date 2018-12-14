@@ -5,7 +5,6 @@ import { ContextService, ContextMenuList } from '$features';
 
 import { MonolithApiService } from '../../shared/stores/api/api.store.service';
 import { UIStoreService } from '$ui';
-import { Models } from '$models';
 import { DesktopUtils } from '$utils';
 import { columns } from './columns';
 

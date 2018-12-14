@@ -7,7 +7,6 @@ Adding a new endpoints:
 
 import { ApiProps } from './api.props';
 import { createEntity } from './api.actions';
-import { Models } from '$models';
 import { AppStore } from '../store';
 // import { environment } from '$env';
 

@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Models } from '$models';
 
 @Component({
   selector: 'app-map-route',
@@ -16,7 +15,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.http.get('assets/mock-data/map-data.json').subscribe((data: any) => {
-      const locations: Models.Location[] = data;
+      const locations: any[] = data;
       this.locations = locations.map(location => {
         return <Map.Location>{
           metadata: {

@@ -11,43 +11,12 @@
   - Type Style: Interface
   - Null Value: Null
   - Leave everything else blank or unchecked here
-
  */
 
-export declare namespace Models {
-  /** Initial environment settings received from web api*/
-  interface EnvSettings {
-    ApiUrl: string;
-    ApiNamespace: string;
-    SignalRUrl: string;
-  }
-
-  export interface Location {
-    property_id: number;
-    display_lat: number;
-    display_lng: number;
-    display_address: string;
-    city: string;
-    county: string;
-    zip_code: number;
-    listing_price: string;
-    total_bedrooms: number;
-    total_bathrooms: string;
-    is_single_family: string;
-    is_multi_family: string;
-    is_condo: string;
-    is_condo_townhouse: string;
-    is_townhouse: string;
-    is_lot: string;
-    square_feet: number;
-    days_on_market: number;
-    lot_dimension: string;
-    hoa_fee: string;
-    year_built: number;
-    listing_status: string;
-    listing_status_standardized: string;
-  }
-
+declare namespace Models {
+  /********************************
+   *  BEGIN NSWAG STUDIO COPY/PASTE
+   ********************************/
   export interface User {
     id: number;
     name?: string;
@@ -71,4 +40,7 @@ export declare namespace Models {
       bs?: string;
     };
   }
+  /********************************
+   *  END NSWAG STUDIO COPY/PASTE
+   ********************************/
 }
