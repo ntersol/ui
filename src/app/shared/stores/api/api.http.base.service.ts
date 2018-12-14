@@ -49,7 +49,9 @@ export class ApiHttpService {
       // Load into cache, make get request
       return this.httpSvc.get(url).pipe(
         map(res => {
-          this.storeSvc.dispatch(ApiStoreActions.GET_COMPLETE({ apiMap: apiMap, data: res }));
+          // If map callback specified, run request through that
+          const data = apiMap.map ? apiMap.map(res) : res;
+          this.storeSvc.dispatch(ApiStoreActions.GET_COMPLETE({ apiMap: apiMap, data: data }));
           this.cache[url] = res; // Cache api response
           return res;
         }),

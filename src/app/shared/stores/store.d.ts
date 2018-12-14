@@ -68,6 +68,9 @@ export declare namespace AppStore {
     storeProperty: string;
     /** A unique ID of each object in the collection. Also supports an array of strings if multiple unique ID's are needed in the event of a single key not being enough. */
     uniqueId?: string | string[];
+    /** The location of the rest API endpoint */
     entity?: EntityAdapter;
+    /** Map the data before returning to store. This is usually used to extra data from a nested property. IE response => {data: [] } */
+    map?: (data: any) => any;
   }
 }
