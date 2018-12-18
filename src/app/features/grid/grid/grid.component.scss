@@ -1,13 +1,11 @@
 @import '../../../../styles/globals';
 /* Grid Container */
-:host,
+:host{display: flex;flex-direction: column;height: 100%;}
 app-grid,
 ag-grid-angular,
-.gridContainer {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+.ag-theme-balham,
+.gridContainer {display: flex;flex-direction: column;height: 100%;}
+
 /* Ag Grid */
 ag-grid-angular .ag-root-wrapper {
   .ag-header-cell-label {
