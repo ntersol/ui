@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService, ServiceWorkerService, AppSettings, VersionManagementService } from '$shared';
-import { environment } from '$env';
+import { AuthService, AppSettings, VersionManagementService } from '$shared';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { ModalsService } from '$modals';
