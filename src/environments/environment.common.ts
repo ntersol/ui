@@ -35,8 +35,8 @@ export const common: any = {
      /** Api version endpoint. If not null then the app will request an update when the version changes */
      version: '/version',
      /** Log front-end errors to here. Used by error.intercepter */
-     errors: 'apiwebapp/log',
-    // Localized
+     // errors: 'apiwebapp/log',
+     // Localized
     ...local.endpoints,
   },
   state: {
