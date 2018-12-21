@@ -7,6 +7,7 @@ import { SharedModule } from '$shared';
 // Global modals
 import { ConfirmationModalComponent } from './modals/confirmation/confirmation-modal.component';
 import { LogoutModalComponent } from './modals/logout/logout-modal.component';
+import { FeedbackComponent } from './modals/feedback/feedback.component';
 
 // Layout
 import { FooterComponent } from './masterpage/footer/footer.component';
@@ -18,13 +19,14 @@ import { NavSearchComponent } from './masterpage/nav/search/nav-search.component
 
 // Components
 import { ApiStateComponent } from './api-state/api-state.component';
+import { ErrorComponent } from './error/error.component';
 import { CounterComponent } from './counter/counter.component';
 
 // Form Tools
 import { UILibModule } from './ui-lib/ui-lib.module';
 
 // Modals include
-const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];
+const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent, FeedbackComponent];
 
 // Components to include
 export const APP_COMPONENTS = [
@@ -36,6 +38,7 @@ export const APP_COMPONENTS = [
   NavComponent,
   NavSearchComponent,
   ApiStateComponent,
+  ErrorComponent,
   CounterComponent,
 ];
 

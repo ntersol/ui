@@ -35,8 +35,9 @@ export class AutocompleteComponent implements OnInit {
   @Input() termValue: string;
   /** If autocomplete is part of a form group, pass the form control reference */
   @Input() formControlRef: FormControl;
+  /** Available autocomplete terms */
+  @Input() termSelected: any[] = [];
   /** The term that was selected from the autocomplete */
-
   @Output() optionSelected = new EventEmitter<any>();
 
   /** Internal form control used for input */
@@ -49,6 +50,11 @@ export class AutocompleteComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    // If a term is preselected, patch it in
+    if (this.termSelected) {
+      this.autoCompleteControl.patchValue(this.termSelected);
+    }
+
     // Set up filtering as a user types
     this.filteredOptions = this.autoCompleteControl.valueChanges.pipe(
       startWith(''),
@@ -95,13 +101,10 @@ export class AutocompleteComponent implements OnInit {
    */
   public clearSelected() {
     this.autoCompleteControl.patchValue('');
-    // Only update/emit values if a term was selected
-    if (this.selectedTerm !== null && this.selectedTerm !== undefined) {
-      this.optionSelected.emit(null);
-      if (this.formControlRef) {
-        this.formControlRef.patchValue(null);
-      }
-      this.selectedTerm = null;
+    this.optionSelected.emit(null);
+    if (this.formControlRef) {
+      this.formControlRef.patchValue(null);
     }
+    this.selectedTerm = null;
   }
 }

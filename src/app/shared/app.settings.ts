@@ -4,6 +4,7 @@ import { isPlatformBrowser } from '@angular/common';
 
 import { StringUtils } from '$utils';
 import { environment } from '$env';
+import { BehaviorSubject } from 'rxjs';
 
 // Enum of app setting properties. Only needed if using the propGet and propSet methods in this file
 export enum AppSettingsProps {
@@ -11,6 +12,7 @@ export enum AppSettingsProps {
   apiUrl = 'apiUrl',
   userName = 'userName',
   ui = 'ui',
+  version = 'version',
 }
 
 type Propkey = keyof typeof AppSettingsProps;
@@ -30,9 +32,14 @@ export class AppSettings {
   private _token: string | null = null;
   /** Username */
   private _userName: string | null = null;
-
   /** API token */
   private _ui: string | null = null;
+   /** User */
+   private _version: string | null = null;
+
+  /** Used by the error interceptor to pass global error messages to app.component.html */
+  public error$ = new BehaviorSubject<string>(null);
+
   /** API token */
   public get ui(): string | null {
     return this._ui || this.propGet(AppSettingsProps.ui);
@@ -65,6 +72,15 @@ export class AppSettings {
   public set userName(value: string | null) {
     this._userName = value;
     this.propSet(AppSettingsProps.userName, value);
+  }
+
+  /** App version */
+  public get version(): string | null {
+    return this._version || this.propGet(AppSettingsProps.version);
+  }
+  public set version(value: string | null) {
+    this._version = value;
+    this.propSet(AppSettingsProps.version, value);
   }
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {

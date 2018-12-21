@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Models } from '$models';
 // import { environment } from '$env';
 
 import { ApiHttpService } from './api.http.base.service';
 import { ApiSelectorsService } from './api.selectors.service';
 import { ApiStoreActions } from './api.actions';
 import { ApiMap } from './api.map';
-import { AppSettings } from '../../app.settings';
 import { AppStore } from '../store';
 
 @Injectable({
@@ -31,12 +28,10 @@ export class ApiService extends ApiHttpService {
   constructor(
     private store: Store<AppStore.Root>,
     private http: HttpClient,
-    private router: Router,
-    private props: AppSettings,
     /** API Store Selectors */
     public select: ApiSelectorsService,
   ) {
-    super(<any>http, <any>store, <any>router, <any>props);
+    super(<any>http, <any>store);
 
     // Output store changes to console
     // this.store.subscribe(storeApi => console.log(JSON.parse(JSON.stringify(storeApi.api))));
@@ -54,6 +49,6 @@ export class ApiService extends ApiHttpService {
    * Fix a bug with TS where super calls don't count as usage
    */
   public fixTS() {
-    console.log(this.http, this.router, this.props);
+    console.log(this.http);
   }
 }

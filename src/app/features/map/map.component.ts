@@ -129,7 +129,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
     // If map is loaded and present
     if (this.isLoaded && this.map) {
-      
       // If new push pin radius passed down
       if (model.pushPinRadius) {
         MapObjects.circlesRefresh(this.map, this.options);
@@ -146,7 +145,6 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       if (model.locations || model.heatmap) {
         this.mapInit();
       }
-
     } // End is loaded
   }
 
@@ -196,9 +194,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         }
         this.viewChanged.emit(this.viewProps);
       });
-      
-    } 
-    
+    }
+
     // Bing has a hard time seeing the DOM sometimes, add a check to avoid a map error
     if (this.map && document.getElementById(this.uniqueId)) {
       // Set viewport properties
@@ -228,7 +225,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       if (this.heatMapLayer) {
         this.heatMapLayer.dispose();
       }
-      
+
       // Check if heatmap or pushpins
       if (this.heatmap) {
         // Load heatmap module

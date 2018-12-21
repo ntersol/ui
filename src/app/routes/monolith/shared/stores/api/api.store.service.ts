@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { AppSettings } from '$shared';
-import { Models } from '$models';
 
 import { ApiHttpService } from '$api';
 import { MonolithApiSelectorsService } from './api.selectors.service';
@@ -30,7 +29,7 @@ export class MonolithApiService extends ApiHttpService {
     /** API Store Selectors */
     public select: MonolithApiSelectorsService,
   ) {
-    super(<any>http, <any>store, <any>router, <any>props);
+    super(<any>http, <any>store);
 
     // Output store changes to console
     // this.store.subscribe(storeApi => console.warn(JSON.parse(JSON.stringify(storeApi))));

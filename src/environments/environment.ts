@@ -4,8 +4,13 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 import { common } from './environment.common';
+import { local } from './environment.local';
 
 export const environment = {
   ...common,
+  endpoints: {
+    ...common.endpoints,
+    ...local.endpoints,
+  },
   production: false,
 };

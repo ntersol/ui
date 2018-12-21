@@ -3,9 +3,14 @@ import { HttpClient } from '@angular/common/http';
 
 import { AppSettings } from '../app.settings';
 import { environment } from '$env';
-import { Models } from '$models';
 
 const camelCase = require('lodash/camelCase');
+
+interface EnvSettings {
+  ApiUrl: string;
+  ApiNamespace: string;
+  SignalRUrl: string;
+}
 
 interface Settings {
   [key: string]: any;
@@ -22,7 +27,7 @@ export class AppConfigService {
    * Set all env settings in app settings
    * @param settings
    */
-  public appSettingsUpdate(settings: Models.EnvSettings) {
+  public appSettingsUpdate(settings: EnvSettings) {
     // Loop through all env properties passed by web api
     Object.keys(settings).forEach(key => {
       // Check to make sure this prop has been declared in app.settings and is not undefined

@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { AuthService, ServiceWorkerService, AppSettings } from '$shared';
-import { environment } from '$env';
+import { AuthService, AppSettings, VersionManagementService } from '$shared';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { ModalsService } from '$modals';
 
 const startCase = require('lodash/startCase');
 const toLower = require('lodash/toLower');
 
 @Component({
   selector: 'app-nav',
+  styleUrls: ['./nav.component.scss'],
   templateUrl: './nav.component.html',
 })
 export class NavComponent {
@@ -14,15 +17,28 @@ export class NavComponent {
   public isOpen = false;
   /** Turn the username into title case */
   public userName = startCase(toLower(this.settings.userName));
-  /**  Is the service worker enabled */
-  public hasSW = environment.settings.enableServiceWorker;
   /**   Does the app have an update */
-  public hasUpdate$ = this.sw.updateAvailable$;
+  public hasUpdate$ = this.vm.hasUpdate$;
+  /** App version */
+  public version = this.settings.version;
 
-  constructor(private auth: AuthService, private sw: ServiceWorkerService, private settings: AppSettings) {}
+  constructor(
+    private auth: AuthService,
+    private settings: AppSettings,
+    public modals: ModalsService,
+    private vm: VersionManagementService,
+    private router: Router,
+  ) {
+    // On route change, if mobile nav is open close it
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      if (this.isOpen) {
+        this.isOpen = false;
+      }
+    });
+  }
 
   public updateApp() {
-    this.sw.openModal();
+    this.vm.modalOpen();
   }
 
   public logOut() {

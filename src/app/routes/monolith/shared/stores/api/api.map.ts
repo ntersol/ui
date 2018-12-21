@@ -7,7 +7,6 @@ Adding a new endpoints:
 
 import { ApiProps } from './api.props';
 import { createEntity } from '$api';
-import { Models } from '$models';
 
 export const ApiMap = {
   // Users Example

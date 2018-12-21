@@ -7,10 +7,10 @@ Adding a new endpoints:
 
 import { ApiProps } from './api.props';
 import { createEntity } from './api.actions';
-import { Models } from '$models';
+import { AppStore } from '../store';
 // import { environment } from '$env';
 
-export const ApiMap = {
+export const ApiMap: { [key: string]: AppStore.ApiMap } = {
   // Users Example
   users: {
     endpoint: '//jsonplaceholder.typicode.com/users',

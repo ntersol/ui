@@ -4,13 +4,16 @@ import { Title } from '@angular/platform-browser';
 import { map, filter, mergeMap } from 'rxjs/operators';
 
 import { environment } from '$env';
-import { AuthService, ServiceWorkerService, AppCommsService } from '$shared';
+import { AuthService, ServiceWorkerService, AppCommsService, AppSettings } from '$shared';
+import { VersionManagementService } from './shared/services/version-management.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+  /** Global/app errors */
+  public error$ = this.settings.error$;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -18,19 +21,28 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private sw: ServiceWorkerService,
     private comms: AppCommsService,
+    private version: VersionManagementService,
+    private settings: AppSettings
   ) {}
 
   ngOnInit() {
     this.routeChange();
-    // Always refresh env settings after app load even if already present in localstorage
-    // This protects against env setting getting stale when bypassing the app initializer
-    // Ordinarily this logic would go in the service but a service won't be instantiated if it isn't injected somewhere
+    
+    // If service worker
     if (environment.settings.enableServiceWorker) {
       this.sw.enable();
     }
+
+    // If app comms
     if (environment.settings.enableAppComms) {
       this.comms.commsEnable();
     }
+
+    // If version endpoint specified, poll for version changes
+    if (environment.endpoints.version) {
+      this.version.versionCheckStart();
+    }
+    
   }
 
   /**

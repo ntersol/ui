@@ -7,12 +7,11 @@ section { padding: 1rem; background: white; padding-bottom: 0.2rem; margin-botto
     & > .table { margin: -1rem; margin-bottom: 0; }
 }
 .embedded header{display:none;}
-footer{ margin-top:1rem;}
+
 
 .api-hover{position:fixed;bottom:20px;right:20px;z-index:200;
     .alert{box-shadow: 3px 3px 8px rgba(0,0,0,0.5);}
 }
-.sidebar{background-color: #2f6491;color:white;}
 
 .sticky {position: sticky;top: 0;z-index: 150;}
 .sticky-error{

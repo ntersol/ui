@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { UIStoreActions } from '$ui';
 import { ConfirmationModalComponent } from './confirmation/confirmation-modal.component';
 import { LogoutModalComponent } from './logout/logout-modal.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 /** Sample Usage:
 this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you want to delete this user?', 'Delete User').result.then(
@@ -16,7 +17,7 @@ this.ui.modals.open('ConfirmationModalComponent', false, 'lg', 'Are you sure you
 */
 
 // List modals here by component name
-type modals = 'LogoutModalComponent' | 'ConfirmationModalComponent';
+type modals = 'LogoutModalComponent' | 'ConfirmationModalComponent' | 'FeedbackComponent';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,7 @@ export class ModalsService {
   public modalList: { [key: string]: any } = {
     ConfirmationModalComponent: ConfirmationModalComponent,
     LogoutModalComponent: LogoutModalComponent,
+    FeedbackComponent: FeedbackComponent
   };
 
   constructor(private store: Store<AppStore.Root>, private settings: AppSettings, public dialog: MatDialog) {

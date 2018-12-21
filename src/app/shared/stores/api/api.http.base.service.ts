@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, share } from 'rxjs/operators';
 
 import { ApiStoreActions } from './api.actions';
-import { AppSettings } from '../../app.settings';
 import { AppStore } from '../store';
 
 @Injectable()
@@ -15,12 +13,7 @@ export class ApiHttpService {
   /** Hold GET requests from an API using the URL as a primary key */
   private cache: { [key: string]: any } = {};
 
-  constructor(
-    private httpSvc: HttpClient,
-    private storeSvc: Store<AppStore.Root>,
-    private routerSvc: Router,
-    private appProps: AppSettings,
-  ) {}
+  constructor(private httpSvc: HttpClient, private storeSvc: Store<AppStore.Root>) {}
 
   /**
    * Make a GET request with simple caching
@@ -49,18 +42,15 @@ export class ApiHttpService {
       // Load into cache, make get request
       return this.httpSvc.get(url).pipe(
         map(res => {
-          this.storeSvc.dispatch(ApiStoreActions.GET_COMPLETE({ apiMap: apiMap, data: res }));
+          const data = apiMap.map ? apiMap.map(res) : res;
+          this.storeSvc.dispatch(ApiStoreActions.GET_COMPLETE({ apiMap: apiMap, data: data }));
           this.cache[url] = res; // Cache api response
           return res;
         }),
         catchError(error => {
-          if (error.status === 401 || error.status === 403) {
-            error.errorMsg = 'Please log in ';
-            return this.endSession(error);
-          } else {
-            this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_GET({ apiMap: apiMap, data: error }));
-            throw error;
-          }
+          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_GET({ apiMap: apiMap, data: error }));
+          // Observable type is being set in the http interceptor so cast to any here
+          return <Observable<any>>throwError(error);
         }),
         share(),
       );
@@ -89,13 +79,9 @@ export class ApiHttpService {
         return dataNew;
       }),
       catchError(error => {
-        if (error.status === 401 || error.status === 403) {
-          error.errorMsg = 'Please log in ';
-          return this.endSession(error);
-        } else {
-          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
-          throw error;
-        }
+        this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
+        // Observable type is being set in the http interceptor so cast to any here
+        return <Observable<any>>throwError(error);
       }),
     );
   } // end post
@@ -117,13 +103,9 @@ export class ApiHttpService {
         return dataNew;
       }),
       catchError(error => {
-        if (error.status === 401 || error.status === 403) {
-          error.errorMsg = 'Please log in ';
-          return this.endSession(error);
-        } else {
-          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
-          throw error;
-        }
+        this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
+        // Observable type is being set in the http interceptor so cast to any here
+        return <Observable<any>>throwError(error);
       }),
     );
   } // end put
@@ -145,13 +127,9 @@ export class ApiHttpService {
         return dataNew;
       }),
       catchError(error => {
-        if (error.status === 401 || error.status === 403) {
-          error.errorMsg = 'Please log in ';
-          return this.endSession(error);
-        } else {
-          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
-          throw error;
-        }
+        this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
+        // Observable type is being set in the http interceptor so cast to any here
+        return <Observable<any>>throwError(error);
       }),
     );
   } // end put
@@ -173,13 +151,9 @@ export class ApiHttpService {
         return res;
       }),
       catchError(error => {
-        if (error.status === 401 || error.status === 403) {
-          error.errorMsg = 'Please log in ';
-          return this.endSession(error);
-        } else {
-          this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
-          throw error;
-        }
+        this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_MODIYFING({ apiMap: apiMap, data: error }));
+        // Observable type is being set in the http interceptor so cast to any here
+        return <Observable<any>>throwError(error);
       }),
     );
   } // end post
@@ -189,20 +163,5 @@ export class ApiHttpService {
    */
   public cacheClear() {
     this.cache = {};
-  }
-
-  /**
-   * When an authentication check fails
-   * @param error
-   */
-  private endSession(error: any) {
-    this.cacheClear();
-    this.appProps.token = null;
-    // if (this.settings.isBrowser) {
-    //  this.settings.sessionStorage.clear();
-    // }
-    this.storeSvc.dispatch(ApiStoreActions.RESET(null)); // Clear out store on errors for security
-    this.routerSvc.navigate(['/login'], { queryParams: { session: 'expired' } });
-    return of(error);
   }
 }

@@ -44,7 +44,10 @@ export function UIReducer(state = initialState, action: Action) {
   if (action.type && action.type.split('/')[0] === 'ui' && !isType(action, UIStoreActions.REHYDRATE)) {
     const saveState = { ...state };
     delete saveState.saveState;
-    state.saveState = JSON.parse(JSON.stringify(saveState));
+    // Fail silently if a circular structure error exists
+    try {
+      state.saveState = JSON.parse(JSON.stringify(saveState));
+    } catch (err) {}
   }
 
   // console.log('UI STATE: ', JSON.parse(JSON.stringify(state)));
