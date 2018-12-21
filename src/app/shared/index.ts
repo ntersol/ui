@@ -9,6 +9,7 @@ export * from './services/service-worker.service';
 export * from './services/post-message.service';
 export * from './services/app-config.service';
 export * from './services/app-comms.service';
+export * from './services/version-management.service';
 
 // Base services and interceptors
 export * from './interceptors/error.interceptor';
