@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { map, filter, mergeMap } from 'rxjs/operators';
 
 import { environment } from '$env';
-import { AuthService, ServiceWorkerService, AppCommsService } from '$shared';
+import { AuthService, ServiceWorkerService, AppCommsService, AppSettings } from '$shared';
 import { VersionManagementService } from './shared/services/version-management.service';
 
 @Component({
@@ -12,6 +12,8 @@ import { VersionManagementService } from './shared/services/version-management.s
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+  /** Global/app errors */
+  public error$ = this.settings.error$;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -19,7 +21,8 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private sw: ServiceWorkerService,
     private comms: AppCommsService,
-    private version: VersionManagementService
+    private version: VersionManagementService,
+    private settings: AppSettings
   ) {}
 
   ngOnInit() {
