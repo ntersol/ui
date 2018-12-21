@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { AuthService, ServiceWorkerService, AppSettings } from '$shared';
+import { AuthService, ServiceWorkerService, AppSettings, VersionManagementService } from '$shared';
 import { environment } from '$env';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { ModalsService } from '$modals';
 
 const startCase = require('lodash/startCase');
 const toLower = require('lodash/toLower');
@@ -17,15 +18,16 @@ export class NavComponent {
   public isOpen = false;
   /** Turn the username into title case */
   public userName = startCase(toLower(this.settings.userName));
-  /**  Is the service worker enabled */
-  public hasSW = environment.settings.enableServiceWorker;
   /**   Does the app have an update */
-  public hasUpdate$ = this.sw.updateAvailable$;
+  public hasUpdate$ = this.vm.hasUpdate$;
+  /** App version */
+  public version = this.settings.version;
 
   constructor(
     private auth: AuthService,
-    private sw: ServiceWorkerService,
     private settings: AppSettings,
+    public modals: ModalsService,
+    private vm: VersionManagementService,
     private router: Router,
   ) {
     // On route change, if mobile nav is open close it
@@ -37,7 +39,7 @@ export class NavComponent {
   }
 
   public updateApp() {
-    this.sw.openModal();
+    this.vm.modalOpen();
   }
 
   public logOut() {

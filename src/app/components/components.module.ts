@@ -7,6 +7,7 @@ import { SharedModule } from '$shared';
 // Global modals
 import { ConfirmationModalComponent } from './modals/confirmation/confirmation-modal.component';
 import { LogoutModalComponent } from './modals/logout/logout-modal.component';
+import { FeedbackComponent } from './modals/feedback/feedback.component';
 
 // Layout
 import { FooterComponent } from './masterpage/footer/footer.component';
@@ -25,7 +26,7 @@ import { CounterComponent } from './counter/counter.component';
 import { UILibModule } from './ui-lib/ui-lib.module';
 
 // Modals include
-const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent];
+const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent, FeedbackComponent];
 
 // Components to include
 export const APP_COMPONENTS = [
