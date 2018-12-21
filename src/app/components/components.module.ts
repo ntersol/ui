@@ -18,6 +18,7 @@ import { NavSearchComponent } from './masterpage/nav/search/nav-search.component
 
 // Components
 import { ApiStateComponent } from './api-state/api-state.component';
+import { ErrorComponent } from './error/error.component';
 import { CounterComponent } from './counter/counter.component';
 
 // Form Tools
@@ -36,6 +37,7 @@ export const APP_COMPONENTS = [
   NavComponent,
   NavSearchComponent,
   ApiStateComponent,
+  ErrorComponent,
   CounterComponent,
 ];
 
