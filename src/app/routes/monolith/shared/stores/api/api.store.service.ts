@@ -29,7 +29,7 @@ export class MonolithApiService extends ApiHttpService {
     /** API Store Selectors */
     public select: MonolithApiSelectorsService,
   ) {
-    super(<any>http, <any>store, <any>router, <any>props);
+    super(<any>http, <any>store);
 
     // Output store changes to console
     // this.store.subscribe(storeApi => console.warn(JSON.parse(JSON.stringify(storeApi))));
