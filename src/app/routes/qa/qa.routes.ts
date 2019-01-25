@@ -6,6 +6,7 @@ import { ChartsComponent } from './routes/charts/charts.component';
 import { MapComponent } from './routes/map/map.component';
 
 const routes: Routes = [
+ 
   {
     path: 'map',
     component: MapComponent,
