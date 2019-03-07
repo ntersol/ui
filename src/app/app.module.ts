@@ -53,6 +53,7 @@ export const APP_COMPONENTS = [
     RouterModule.forRoot(ROUTES, {
       useHash: true,
       preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,
+      scrollPositionRestoration: 'enabled',
     }),
 
     StoreModule.forRoot({ api: ApiReducer, ui: UIReducer }), // NGRX
