@@ -119,11 +119,11 @@
           <hr />
 
           <form [formGroup]="formMain" novalidate (ngSubmit)="userSubmit()">
-            <app-form-field [formGroup]="formMain" controlName="username" placeholder="Username"></app-form-field>
-            <app-form-field [formGroup]="formMain" controlName="name" placeholder="Name"></app-form-field>
-            <app-form-field [formGroup]="formMain" controlName="website" placeholder="Website"></app-form-field>
-            <app-form-field [formGroup]="formMain" controlName="email" placeholder="Email"></app-form-field>
-            <app-form-field [formGroup]="formMain" controlName="phone" placeholder="Phone"></app-form-field>
+            <app-form-field formControlName="username" placeholder="Username"></app-form-field>
+            <app-form-field formControlName="name" placeholder="Name"></app-form-field>
+            <app-form-field formControlName="website" placeholder="Website"></app-form-field>
+            <app-form-field formControlName="email" placeholder="Email"></app-form-field>
+            <app-form-field formControlName="phone" placeholder="Phone"></app-form-field>
 
             <div class="text-right">
               <button
