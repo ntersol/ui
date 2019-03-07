@@ -44,8 +44,8 @@ export class ApiHttpService {
         map(res => {
           const data = apiMap.map ? apiMap.map(res) : res;
           this.storeSvc.dispatch(ApiStoreActions.GET_COMPLETE({ apiMap: apiMap, data: data }));
-          this.cache[url] = res; // Cache api response
-          return res;
+          this.cache[url] = data; // Cache api response
+          return data;
         }),
         catchError(error => {
           this.storeSvc.dispatch(ApiStoreActions.STATE_ERROR_GET({ apiMap: apiMap, data: error }));
