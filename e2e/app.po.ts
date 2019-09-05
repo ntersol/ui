@@ -1,7 +1,6 @@
 import { browser, by, element } from 'protractor';
 
 export class App {
-
   /**
    * Navigate to a url
    * @param url
@@ -9,7 +8,6 @@ export class App {
   navigateTo(url = '/#/') {
     return browser.get(url);
   }
-
 
   /**
    * Checks if the supplied URL matches the current url.
@@ -19,7 +17,7 @@ export class App {
    */
   checkUrl(urlNew: string, isMatch: boolean = true) {
     return browser.driver.wait(() => {
-      return browser.driver.getCurrentUrl().then((url)=> {
+      return browser.driver.getCurrentUrl().then(url => {
         if (isMatch) {
           return url.indexOf(urlNew) != -1 ? true : false;
         } else {
@@ -28,5 +26,4 @@ export class App {
       });
     }, 10000);
   }
-
 }

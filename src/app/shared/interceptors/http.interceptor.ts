@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { AppSettings } from '../app.settings';
 import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { ApiService } from '$api';
+import { SettingsService } from '$settings';
+import { AuthService, AuthState } from '../services';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -12,7 +11,7 @@ export class HttpInterceptorService implements HttpInterceptor {
    * Append bearer token to auth settings
    * @param settings
    */
-  constructor(private settings: AppSettings, private router: Router, private api: ApiService) {}
+  constructor(private settings: SettingsService, private auth: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Add any custom headers
@@ -40,8 +39,6 @@ export class HttpInterceptorService implements HttpInterceptor {
    * End the user's session based on auth failure
    */
   private sessionEnd() {
-    this.settings.token = null; // Clear token
-    this.api.resetStore(); // Reset api store and api cache
-    this.router.navigate(['/login'], { queryParams: { session: 'expired' } }); // Bounce to login page
+    this.auth.logOut(AuthState.sessionExpired);
   }
 }

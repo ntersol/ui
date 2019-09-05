@@ -30,4 +30,3 @@ interface IRest {
   Put?: any;
   Delete?: any;
 }
-

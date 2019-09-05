@@ -5,9 +5,8 @@ import { VendorModule } from '../vendor.module';
 import { SharedModule } from '$shared';
 
 // Global modals
-import { ConfirmationModalComponent } from './modals/confirmation/confirmation-modal.component';
 import { LogoutModalComponent } from './modals/logout/logout-modal.component';
-import { FeedbackComponent } from './modals/feedback/feedback.component';
+import { FeedbackModalComponent } from './modals/feedback/feedback.component';
 
 // Layout
 import { FooterComponent } from './masterpage/footer/footer.component';
@@ -17,16 +16,8 @@ import { LayoutSingleComponent } from './masterpage/single/layout-single.compone
 import { NavComponent } from './masterpage/nav/nav.component';
 import { NavSearchComponent } from './masterpage/nav/search/nav-search.component';
 
-// Components
-import { ApiStateComponent } from './api-state/api-state.component';
-import { ErrorComponent } from './error/error.component';
-import { CounterComponent } from './counter/counter.component';
-
-// Form Tools
-import { UILibModule } from './ui-lib/ui-lib.module';
-
 // Modals include
-const APP_MODALS = [ConfirmationModalComponent, LogoutModalComponent, FeedbackComponent];
+const APP_MODALS = [LogoutModalComponent, FeedbackModalComponent];
 
 // Components to include
 export const APP_COMPONENTS = [
@@ -37,9 +28,6 @@ export const APP_COMPONENTS = [
   LayoutSingleComponent,
   NavComponent,
   NavSearchComponent,
-  ApiStateComponent,
-  ErrorComponent,
-  CounterComponent,
 ];
 
 @NgModule({
@@ -50,11 +38,10 @@ export const APP_COMPONENTS = [
     SharedModule,
     // Vendors
     VendorModule,
-    UILibModule,
   ],
   providers: [],
   declarations: [APP_COMPONENTS],
-  exports: [APP_COMPONENTS, UILibModule],
+  exports: [APP_COMPONENTS],
   entryComponents: [APP_MODALS],
 })
 export class ComponentsModule {

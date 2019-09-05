@@ -1,5 +1,5 @@
 {
-  "extends": [ "tslint-angular" ],
+  "extends": ["tslint-angular"],
   "defaultSeverity": "warning",
   "rules": {
     "no-trailing-whitespace": false,

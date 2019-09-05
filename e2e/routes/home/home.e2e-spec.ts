@@ -3,9 +3,7 @@ import { browser, by, element } from 'protractor';
 import { App } from '../../app.po';
 import { HomePage } from './home.po';
 
-
 describe('Home Page', () => {
-
   let app: App = new App();
   let page: HomePage = new HomePage();
 
@@ -18,5 +16,4 @@ describe('Home Page', () => {
     let result = true;
     expect<any>(subject).toEqual(result);
   });
-  
 });

@@ -1,7 +1,6 @@
 <div style="height:100vh;">
-
-  <app-map 
-    [locations]="locations" 
+  <app-map
+    [locations]="locations"
     [heatmap]="true"
     [disablePanning]="false"
     [disableZoom]="false"
@@ -12,8 +11,7 @@
     [pushPinIcon]="'https://www.bingmapsportal.com/Content/images/poi_custom.png'"
     [pushPinRadius]="radius"
     (addedPushPin)="addedPushPin($event)"
-    (viewChanged)="viewChanged($event)">
+    (viewChanged)="viewChanged($event)"
+  >
   </app-map>
-  
 </div>
-

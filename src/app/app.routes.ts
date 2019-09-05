@@ -12,13 +12,6 @@ export const ROUTES: Routes = [
     data: { title: 'Please Log In' },
   },
 
-  {
-    path: 'qa',
-    loadChildren: './routes/qa/qa.module#QaModule',
-    data: { title: 'E2E Testing' },
-    canActivate: [AuthGuard],
-  },
-
   // Example route param
   // {
   //  path: 'loan/:LNKey',
@@ -47,20 +40,26 @@ export const ROUTES: Routes = [
 
       // Empty path string for homepage ('') needs to be LAST otherwise it catches all other routes
       {
-        path: 'monolith',
+        path: 'route',
         pathMatch: 'full',
-        loadChildren: './routes/monolith/monolith.module#MonolithModule',
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'base',
-        pathMatch: 'full',
-        loadChildren: './routes/base/base.module#BaseModule',
+        loadChildren: () => import('./routes/_route/route.module').then(m => m.RouteModule),
         canActivate: [AuthGuard],
       },
 
       // Empty path string for homepage ('') needs to be LAST otherwise it catches all other routes
-      { path: '', pathMatch: 'full', loadChildren: './routes/home/home.module#HomeModule', canActivate: [AuthGuard] },
+      {
+        path: '',
+        pathMatch: 'full',
+        loadChildren: () => import('./routes/home/home.module').then(m => m.HomeModule),
+        canActivate: [AuthGuard],
+      },
+
+      {
+        path: 'qa',
+        loadChildren: () => import('./routes/qa/qa.module').then(m => m.QaModule),
+        data: { title: 'E2E Testing' },
+        canActivate: [AuthGuard],
+      },
 
       {
         path: '**',

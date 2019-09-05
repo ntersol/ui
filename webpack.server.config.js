@@ -10,10 +10,10 @@ module.exports = {
   externals: [/node_modules/],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].js',
   },
   module: {
-    rules: [{ test: /\.ts$/, loader: 'ts-loader' }]
+    rules: [{ test: /\.ts$/, loader: 'ts-loader' }],
   },
   plugins: [
     // Temporary Fix for issue: https://github.com/angular/angular/issues/11580
@@ -21,12 +21,8 @@ module.exports = {
     new webpack.ContextReplacementPlugin(
       /(.+)?angular(\\|\/)core(.+)?/,
       path.join(__dirname, 'src'), // location of your src
-      {} // a map of your routes
+      {}, // a map of your routes
     ),
-    new webpack.ContextReplacementPlugin(
-      /(.+)?express(\\|\/)(.+)?/,
-      path.join(__dirname, 'src'),
-      {}
-    )
-  ]
+    new webpack.ContextReplacementPlugin(/(.+)?express(\\|\/)(.+)?/, path.join(__dirname, 'src'), {}),
+  ],
 };

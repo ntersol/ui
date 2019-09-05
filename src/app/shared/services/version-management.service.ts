@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { AppSettings } from '../app.settings';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '$env';
-import { ModalsService } from '$modals';
+import { UiStateService } from '$ui';
 
 interface VersionApi {
   assembly: string;
@@ -17,88 +14,78 @@ interface VersionApi {
   version: string;
 }
 
+/**
+ * Polls the server for version changes
+ */
 @Injectable({
   providedIn: 'root',
 })
-export class VersionManagementService {
-  /** Notify subscribers of update available */
-  public hasUpdate$ = new BehaviorSubject<boolean>(false);
+export class NtsVersionManagementService {
   /** Update at this frequency */
-  private pollInterval = 5 * 60 * 1000; // 5 minutes
+  private pollInterval!: number;
+  /** Current version, grabbed from localstorage */
+  private versionCurrent!: string | null;
+  /** URL to poll for versionchanges */
+  private versionApiUrl!: string;
+  /** Can this service continue polling */
+  private canPoll = true;
+  /** Property to extract version from localstorage */
+  private versionProp!: string;
 
-  constructor(private settings: AppSettings, private http: HttpClient, private modals: ModalsService) {}
+  constructor(private http: HttpClient, private ui: UiStateService) {}
 
   /**
-   * Start version checking
+   * Poll for version changes
+   * @param versionApiUrl Location of version api url
+   * @param pollInterval How often to check for version changes in milliseconds. Default is 1 hour
+   * @param versionProp Which property to get/set the version in localstorage. Default is 'version'
    */
-  public versionCheckStart() {
-    this.versionCheck(
-      this.http.get<VersionApi>(environment.endpoints.apiUrl + environment.endpoints.version),
-      this.settings,
-    );
+  public start(versionApiUrl: string, pollInterval = 1 * 60 * 60 * 1000, versionProp = 'version') {
+    // Get current version from local storage
+    this.versionCurrent = localStorage.getItem(versionProp);
+    this.pollInterval = pollInterval;
+    this.versionApiUrl = versionApiUrl;
+    this.versionProp = versionProp;
+    this.pollVersionChanges();
+    this.ui.updateAvailable$.next(true);
+    return this.ui.updateAvailable$;
   }
 
   /**
-   * Recusive method to poll for version changes
-   * If found, updates settings and notifies subscribers of update available which promps to refresh app
-   * @param appVersionLocations
+   * Stop checking for version changes
    */
-  private versionCheck(versionHttp: Observable<VersionApi>, settings: AppSettings, pollInterval = this.pollInterval) {
-    const sub = versionHttp.subscribe(
+  public stop() {
+    this.canPoll = false;
+  }
+
+  /**
+   * Poll for version changes
+   */
+  private pollVersionChanges() {
+    this.http.get<VersionApi>(this.versionApiUrl).subscribe(
       res => {
         const version = res.version;
-
-        let hasUpdate = false;
-        // If app version has not been set
-        if (!settings.version) {
-          settings.version = version;
-        } else if (settings.version !== version) {
-          // New version found, update version in settings and set hasupdate flag
-          settings.version = version;
-          hasUpdate = true;
+        // If version isn't set, set it here and in localstorage
+        if (!this.versionCurrent) {
+          this.versionCurrent = version;
+          localStorage.setItem(this.versionProp, String(version));
         }
-
-        // If no update is found, poll
-        if (!hasUpdate) {
-          setTimeout(() => {
-            this.versionCheck(versionHttp, settings);
-          }, pollInterval);
-        } else {
-          // If update found, stop polling and update behavior subject
-          this.hasUpdate$.next(true);
-          // Pop modal to ask user to refresh app
-          this.modalOpen();
+        // If new version is different than old version, notify observable
+        if (version !== this.versionCurrent) {
+          this.versionCurrent = version;
+          localStorage.setItem(this.versionProp, String(version));
+          this.ui.updateAvailable$.next(true);
         }
-        sub.unsubscribe();
+        if (this.canPoll) {
+          setTimeout(() => this.pollVersionChanges(), this.pollInterval);
+        }
       },
-      // On error, resume polling anyway
+      // On error, reset
       () => {
-        setTimeout(() => {
-          this.versionCheck(versionHttp, settings);
-        }, pollInterval);
+        if (this.canPoll) {
+          setTimeout(() => this.pollVersionChanges(), this.pollInterval);
+        }
       },
     );
-  }
-
-  /**
-   * Open a confirmation modal asking the user to reload the app
-   */
-  public modalOpen() {
-    this.modals
-      .open(
-        'ConfirmationModalComponent',
-        false,
-        'sm',
-        'A new version of this application has just been released, would you like to refresh?',
-      )
-      .afterClosed()
-      .subscribe(closed => {
-        if (closed) {
-          // Reset ui state to clear out any breaking changes
-          this.settings.ui = null;
-          // Reload page
-          location.reload();
-        }
-      });
   }
 }

@@ -3,9 +3,7 @@ import { browser, by, element } from 'protractor';
 import { App } from '../../app.po';
 import { QaPage } from '../qa.po';
 
-
 describe('Filter Pipe', () => {
-
   let app: App = new App();
   let page: QaPage = new QaPage();
 
@@ -88,6 +86,4 @@ describe('Filter Pipe', () => {
     let result = 10;
     expect<any>(subject).toEqual(result);
   });
-
-  
 });

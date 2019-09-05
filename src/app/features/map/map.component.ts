@@ -41,10 +41,10 @@ const apiKey = 'AnTlR8QC4A9PDl4d0sLe5pfonbXmuPneJDVGS4jMi_CVxFcz4Q8RbxYJ25qlnY_p
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   /** Any locations such as pushpins or circles */
-  @Input() locations: Map.Location[];
+  @Input() locations: Map.Location[] | undefined;
 
   /** Configure the map options  */
-  private _options: Map.Options;
+  private _options: Map.Options | undefined;
   @Input()
   set options(options: Map.Options) {
     this._options = options;
@@ -78,9 +78,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   /** Can pushpins be added to the map. If so, one or many  */
   @Input() pushPinsAddable: false | 'single' | 'multiple' = false;
   /** URL of image to use for custom pin  */
-  @Input() pushPinIcon: string;
+  @Input() pushPinIcon: string | undefined;
   /** Draw a circle/radius around a push pin. Value is in miles */
-  @Input() pushPinRadius: string;
+  @Input() pushPinRadius: string | undefined;
 
   /** Should panning/scrolling be disabled */
   @Input() disablePanning = false;
@@ -99,11 +99,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
   @Output() addedPushPin = new EventEmitter<Microsoft.Maps.Location[]>();
 
   /** Reference to created bing map  */
-  public map: Microsoft.Maps.Map;
+  public map: Microsoft.Maps.Map | undefined;
   /** Reference to infobox instance  */
-  public infoBox: Microsoft.Maps.Infobox;
+  public infoBox: Microsoft.Maps.Infobox | undefined;
   /** Reference to heatmap layer  */
-  public heatMapLayer: Microsoft.Maps.HeatMapLayer;
+  public heatMapLayer: Microsoft.Maps.HeatMapLayer | undefined;
   /** Map has been loaded  */
   public isLoaded = false;
   /** Randomly generated uniqueID for the div that holds the map. Allows for multiple map per page  */
@@ -182,18 +182,23 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     if (!this.map && document.getElementById(this.uniqueId)) {
       // Create map reference
       this.map = MapObjectTypes.map(this.uniqueId, { ...this.options });
+
       // Attach infobox to map instance, on default is hidden
-      this.infoBox = MapObjectTypes.infoBox(null, { visible: false });
-      this.infoBox.setMap(this.map);
-      // When the view is changed such as scrolling or zooming
-      Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', () => {
-        this.viewProps = MapView.viewChange(this.map, this.viewProps);
-        if (this.viewProps.didZoom && this.heatMapLayer && this.heatmap) {
-          this.heatMapLayer.dispose();
-          this.heatMapLayer = MapObjects.heatMapCreate(this.map, this.locations);
-        }
-        this.viewChanged.emit(this.viewProps);
-      });
+      this.infoBox = MapObjectTypes.infoBox(<any>null, { visible: false });
+      if (this.map) {
+        this.infoBox.setMap(this.map);
+        // When the view is changed such as scrolling or zooming
+        Microsoft.Maps.Events.addHandler(this.map, 'viewchangeend', () => {
+          if (this.map && this.locations) {
+            this.viewProps = MapView.viewChange(this.map, this.viewProps);
+            if (this.viewProps.didZoom && this.heatMapLayer && this.heatmap) {
+              this.heatMapLayer.dispose();
+              this.heatMapLayer = MapObjects.heatMapCreate(this.map, this.locations);
+            }
+            this.viewChanged.emit(this.viewProps);
+          }
+        });
+      }
     }
 
     // Bing has a hard time seeing the DOM sometimes, add a check to avoid a map error
@@ -207,18 +212,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
           Microsoft.Maps.Events.removeHandler(this.eventHandlers.mapClicks);
         }
         // Add event handler to create pushpins
-        this.eventHandlers.mapClicks = Microsoft.Maps.Events.addHandler(
-          this.map,
-          'click',
-          (e: Microsoft.Maps.IMouseEventArgs) => {
+        this.eventHandlers.mapClicks = Microsoft.Maps.Events.addHandler(this.map, 'click', (e: Microsoft.Maps.IMouseEventArgs) => {
+          if (this.map) {
             // Emit newly added location
             const pins = MapEvents.mapClickEvent(e, this.map, this.options);
             if (pins && pins.length) {
               // Emit the locations of the newly created pins
               this.addedPushPin.emit(pins.map(pin => pin.getLocation()));
             }
-          },
-        );
+          }
+        });
       }
 
       // Clean up any previous instance of heatmap layer
@@ -230,12 +233,18 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
       if (this.heatmap) {
         // Load heatmap module
         Microsoft.Maps.loadModule('Microsoft.Maps.HeatMap', () => {
-          this.heatMapLayer = MapObjects.heatMapCreate(this.map, this.locations);
+          if (this.map && this.locations) {
+            this.heatMapLayer = MapObjects.heatMapCreate(this.map, this.locations);
+          }
         });
       } else {
         // If locations were passed down, add them after map creation
-        const pins = MapObjects.pushPinAdd(this.map, this.locations, this.options);
-        MapEvents.infoBoxEvent(pins, this.infoBox);
+        if (this.map && this.locations) {
+          const pins = MapObjects.pushPinAdd(this.map, this.locations, this.options);
+          if (pins && this.infoBox) {
+            MapEvents.infoBoxEvent(pins, this.infoBox);
+          }
+        }
         // If multiple locations passed, adjust viewport to contain all. Else just center on single point
         if (this.locations && this.locations.length > 1) {
           // Resize viewport to fit all pins

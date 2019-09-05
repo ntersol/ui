@@ -25,7 +25,9 @@ export const MapEvents = {
       pins.forEach(pin => {
         if (pin.metadata) {
           Microsoft.Maps.Events.addHandler(pin, 'click', (e: Microsoft.Maps.IMouseEventArgs) => {
-            infoBox.setOptions(MapEvents.pushpinClicked(e));
+            if (MapEvents && e) {
+              infoBox.setOptions(<any>MapEvents.pushpinClicked(e));
+            }
           });
         }
       });

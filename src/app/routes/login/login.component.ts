@@ -3,31 +3,31 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 
-import { AuthService, AppSettings } from '$shared';
-import { Subscription } from 'rxjs';
+import { AuthService, AuthState } from '$shared';
+import { SettingsService } from '$settings';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  public formMain: FormGroup;
-  public waiting: boolean;
-  public errorApi: IErrorApi;
+  public formMain!: FormGroup;
+  public waiting: boolean | undefined;
+  public errorApi: IErrorApi | null | undefined;
   public showErrorDetails = false;
-  public sessionExpired: boolean;
-  public loggedout: boolean;
-  public showPassword = false;
-  public returnUrl: string;
 
-  public subs: Subscription[] = [];
+  public authState$ = this.authService.authState$;
+  public authState = AuthState;
+
+  public loggedout: boolean | undefined;
+  public showPassword = false;
 
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private settings: AppSettings,
+    private settings: SettingsService,
   ) {}
 
   public ngOnInit() {
@@ -40,21 +40,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       hasLogin = true;
     }
 
-    this.subs = [
-      this.route.queryParams.subscribe(params => {
-        if (params.session === 'expired') {
-          this.sessionExpired = true;
-        }
-        if (params.session === 'loggedout') {
-          this.loggedout = true;
-        }
-      }),
-    ];
-
-    if (isPlatformBrowser) {
-      window.clearTimeout(this.authService.sessionTimer); // When the page is loaded, clear any legacy timeouts
-    }
-
     this.authService.logOutModal = null; // Get rid of logout modal if it persists
 
     this.formMain = this.fb.group({
@@ -62,9 +47,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: ['password', [Validators.required]],
       remember: [hasLogin],
     });
-
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   /**
@@ -76,7 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.showErrorDetails = false;
 
     // If remember username is set
-    if (this.formMain.value.remember) {
+    if (this.formMain && this.formMain.value.remember) {
       this.settings.userName = this.formMain.value.userName;
       if (isPlatformBrowser) {
         window.localStorage.rememberLogin = true;
@@ -91,7 +73,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.logIn(this.formMain.value).subscribe(
       () => {
         this.settings.userName = this.formMain.value.userName;
-        this.router.navigate([this.returnUrl]);
+        // get return url from route parameters or default to '/'
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.router.navigate([returnUrl]);
         this.waiting = false;
       },
       error => {
@@ -107,9 +91,5 @@ export class LoginComponent implements OnInit, OnDestroy {
     );
   } // end onSubmit
 
-  ngOnDestroy() {
-    if (this.subs.length) {
-      this.subs.forEach(sub => sub.unsubscribe());
-    }
-  }
+  ngOnDestroy() {}
 }

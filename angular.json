@@ -4,7 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular-starter": {
-      
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,10 +12,12 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "lazyModules": [
+              "src/app/features/calendar/calendar.module",
               "src/app/features/chart/chart.module",
-              "src/app/features/context-menu/context-menu.module",
+              "src/app/features/forms/forms.module",
+              "src/app/features/generic/generic.module",
               "src/app/features/grid/grid.module",
-              "src/app/features/map/map.module",
+              "src/app/features/map/map.module"
             ],
             "outputPath": "dist/browser",
             "index": "src/index.html",
@@ -25,16 +26,8 @@
             "preserveSymlinks": true,
             "showCircularDependencies": true,
             "polyfills": "src/polyfills.ts",
-            "assets": [
-              "src/assets",
-              "src/manifest.json",
-              "src/favicon.ico",
-              "src/apple-touch-icon.png",
-              "src/safari-pinned-tab.svg"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/assets", "src/favicon.ico", "src/apple-touch-icon.png", "src/safari-pinned-tab.svg", "src/manifest.webmanifest"],
+            "styles": ["src/styles.scss"],
             "scripts": [
               {
                 "input": "node_modules/document-register-element/build/document-register-element.js"
@@ -45,6 +38,44 @@
             ]
           },
           "configurations": {
+            "qa": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ]
+            },
+            "uat": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uat.ts"
+                }
+              ]
+            },
             "production": {
               "optimization": true,
               "outputHashing": "all",
@@ -93,29 +124,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
-            "styles": [
-              "node_modules/font-awesome/css/font-awesome.css",
-              "src/styles.scss"
-            ],
-            "assets": [
-              "src/assets",
-              "src/manifest.json",
-              "src/favicon.ico",
-              "src/apple-touch-icon.png",
-              "src/safari-pinned-tab.svg"
-            ]
+            "styles": ["node_modules/font-awesome/css/font-awesome.css", "src/styles.scss"],
+            "assets": ["src/assets", "src/favicon.ico", "src/apple-touch-icon.png", "src/safari-pinned-tab.svg", "src/manifest.webmanifest"]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "server": {
@@ -151,12 +168,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

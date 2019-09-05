@@ -12,10 +12,10 @@ export class FullScreenDirective implements AfterViewInit, OnChanges {
   /** DOM reference */
   public elem: ElementRef;
   /** Current height of element */
-  public height: number;
+  public height!: number;
 
   /** How much to offset the top of the grid. Will adjust automatically if null */
-  @Input() offsetTop: number = null;
+  @Input() offsetTop: number | null = null;
   /** How much to offset the bottom of the grid */
   @Input() offsetBottom = 21;
   /** What percent of the viewport height to display, default is 100% */

@@ -1,44 +1,47 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import {
-  MatIconModule,
-  MatMenuModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatSelectModule,
-  MatButtonModule,
-  MatDialogModule,
-  MatExpansionModule,
-  MatTabsModule,
-  MatCardModule,
-  MatStepperModule,
-  MatAutocompleteModule,
-  MatCheckboxModule,
-  MatButtonToggleModule,
-  MatPaginatorModule,
-  MatTooltipModule,
-} from '@angular/material';
+
+import { MenuModule } from 'primeng/menu';
+import { MenubarModule } from 'primeng/menubar';
+import { SlideMenuModule } from 'primeng/slidemenu';
+import { ButtonModule } from 'primeng/button';
+import { SidebarModule } from 'primeng/sidebar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ConfirmationService, DialogService } from 'primeng/api';
+import { CardModule } from 'primeng/card';
+
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { AccordionModule } from 'primeng/accordion';
+import { TabViewModule } from 'primeng/tabview';
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
+import { TooltipModule } from 'primeng/tooltip';
+
+
 
 const modules = [
-  // Angular Materials
-  MatIconModule,
-  MatMenuModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatSelectModule,
-  MatButtonModule,
-  MatDialogModule,
-  MatExpansionModule,
-  MatTabsModule,
-  MatCardModule,
-  MatStepperModule,
-  MatAutocompleteModule,
-  MatCheckboxModule,
-  MatButtonToggleModule,
-  MatPaginatorModule,
-  MatTooltipModule,
+  // Prime NG UI Lib
+  MenubarModule,
+  MenuModule,
+  SlideMenuModule,
+  ButtonModule,
+  SidebarModule,
+  ConfirmDialogModule,
+  DynamicDialogModule,
+  CardModule,
+ 
+  MessagesModule,
+  MessageModule,
+  AccordionModule,
+  TabViewModule,
+  TableModule,
+  DropdownModule,
+  TooltipModule,
+  
 ];
 
 @NgModule({
@@ -50,6 +53,7 @@ const modules = [
     ReactiveFormsModule,
     ...modules,
   ],
+  providers: [],
   exports: [
     RouterModule,
     FormsModule,
@@ -58,4 +62,11 @@ const modules = [
   ],
   declarations: [],
 })
-export class VendorModule {}
+export class VendorModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: VendorModule,
+      providers: [ConfirmationService, DialogService],
+    };
+  }
+}

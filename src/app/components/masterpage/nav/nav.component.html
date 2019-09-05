@@ -1,3 +1,30 @@
+<p-menubar [model]="navMenu" *ngIf="(isDesktop$ | async); else mobileTemplate">
+  <div>
+    <ng-container *ngIf="(hasUpdate$ | async) as hasUpdate">
+      <button pButton type="button" icon="fa fa-warning" label="Update Available" (click)="updateApp()"></button>
+    </ng-container>
+    <p-slideMenu #menu [model]="utilityMenu" [popup]="true" [viewportHeight]="utilityMenu.length * 65"></p-slideMenu>
+    <a label="Show" (click)="menu.toggle($event)">
+      <i class="fa fa-user mr-2"></i> <span class="mr-2">{{ userName }}</span> <i class="fa fa-caret-down mr-1"></i>
+    </a>
+  </div>
+</p-menubar>
+
+<ng-template #mobileTemplate>
+  <div class="pt-2 float-right">
+    <a (click)="sidebarVisible = true" class="p-2">
+      <i class="fa fa-bars fa-lg mr-2"></i>
+    </a>
+  </div>
+</ng-template>
+
+<p-sidebar [(visible)]="sidebarVisible">
+  <p-menu [model]="navMenu"></p-menu>
+  <hr />
+  <p-menu [model]="utilityMenu"></p-menu>
+</p-sidebar>
+
+<!--
 <div class="nav-component">
   <button
     class="navbar-toggler navbar-toggler-right"
@@ -15,28 +42,21 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            <i class="fa fa-tachometer mr-1" aria-hidden="true"></i> Dashboard
+            <i class="fa fa-tachometer mr-1" aria-hidden="true"></i> Home
           </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/monolith"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <i class="fa fa-cubes mr-1" aria-hidden="true"></i> Monolith
+          <a class="nav-link" routerLink="/route" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <i class="fa fa-cubes mr-1" aria-hidden="true"></i> Demo Route
           </a>
         </li>
       </ul>
 
-      <!-- Mobile only utility nav from dropdown in appMenu -->
       <ul class="navbar-nav mr-auto d-block d-lg-none nav-mobile-only">
         <li class="nav-item"><ng-container *ngTemplateOutlet="utilityNav"></ng-container></li>
       </ul>
 
       <div class="form-inline my-2 my-lg-0 d-none d-lg-flex">
-        <!-- App update notification -->
         <ng-container *ngIf="(hasUpdate$ | async) as hasUpdate">
           <a class="badge badge-warning mr-3 py-2" (click)="updateApp()" style="color:#fff;">
             <i class="fa fa-warning"></i> Update Available
@@ -46,24 +66,16 @@
         <a [matMenuTriggerFor]="appMenu">
           <i class="fa fa-user mr-1"></i> <span class="mr-1">{{ userName }}</span> <i class="fa fa-caret-down mr-1"></i>
         </a>
-        <mat-menu #appMenu="matMenu" xPosition="after">
-          <ng-container *ngTemplateOutlet="utilityNav"></ng-container>
-        </mat-menu>
+        <mat-menu #appMenu="matMenu" xPosition="after"> <ng-container *ngTemplateOutlet="utilityNav"></ng-container> </mat-menu>
       </div>
     </div>
     <div class="nav-mobile-bg" (click)="isOpen = !isOpen"></div>
   </div>
 </div>
 
-<!-- Utility nav. Used in user dropdown and below main nav in mobile-->
 <ng-template #utilityNav>
-  <button mat-menu-item disabled>Version {{ version }}</button>
-  <!--
-  <button mat-menu-item class="nav-link" (click)="modals.open('FeedbackComponent')">
-    <i class="fa fa-comments-o" aria-hidden="true"></i> Send Feedback
-  </button>
-  -->
-  <a mat-menu-item class="nav-link" (click)="logOut()">
-    <i class="fa fa-power-off mr-1" aria-hidden="true"></i> Sign Out
-  </a>
+  <button mat-menu-item disabled *ngIf="(version$ | async) as version">Version: {{ version }}</button>
+ 
+  <a mat-menu-item class="nav-link" (click)="logOut()"> <i class="fa fa-power-off mr-1" aria-hidden="true"></i> Sign Out </a>
 </ng-template>
+-->

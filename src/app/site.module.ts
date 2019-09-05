@@ -5,19 +5,22 @@ import { VendorModule } from './vendor.module';
 
 import { SharedModule } from '$shared';
 import { ComponentsModule } from '$components';
+import { NtsStateManagementModule } from '$features';
 
 @NgModule({
   imports: [
     // Angular
     CommonModule,
-    VendorModule,
+    // Vendor components
+    VendorModule.forRoot(),
     // Global components
     ComponentsModule,
     // Global shared
     SharedModule,
+    NtsStateManagementModule,
   ],
   declarations: [],
-  exports: [VendorModule, SharedModule, ComponentsModule],
+  exports: [VendorModule, SharedModule, ComponentsModule, NtsStateManagementModule],
 })
 export class SiteModule {
   static forRoot(): ModuleWithProviders {

@@ -1,11 +1,14 @@
 declare interface GridState {
-  columns?: ColumnState[];
-  sorts?: { colId: string; sort: string }[];
-  filters?: {
+  columnDefs: ColDef[];
+  columnsState: ColumnState[];
+  sorts: { colId: string; sort: string }[];
+  groupsColumns: any[];
+  groupsRows: Record<string, boolean>;
+  filters: {
     [key: string]: {
-      filter: string;
-      filterType: string;
-      type: string;
+      filter?: string;
+      filterType?: string;
+      type?: string;
     };
   };
 }

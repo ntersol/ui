@@ -1,13 +1,14 @@
-// Libs
+// Charts
 export * from './chart/chart.module';
-
 // Grid
 export * from './grid/grid.module';
-
 // Map
 export * from './map/map.module';
-
-// Context Menu
-export * from './context-menu/context-menu.module';
-export * from './context-menu/context-menu.service';
-export * from './context-menu/context-menu.list';
+// Generic components
+export * from './generic/generic.module';
+// App state components
+export * from './state-management/state-management.module';
+// Forms
+export * from './forms/forms.module';
+// Calendar
+export * from './calendar/calendar.module';

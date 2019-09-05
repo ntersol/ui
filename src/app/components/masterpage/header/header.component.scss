@@ -4,35 +4,16 @@ header {
   background: #fff;
   border-bottom: 1px solid #e2e5e8;
   margin-bottom: 1rem;
-  .navbar-brand {
-    margin-right: 3rem;
-    color: #000;
-    .fa {
-      color: yellow;
-    }
-  }
   .logo {
     text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.3);
     color: $interact-primary;
   }
-  .search-group {
-    padding: 0.5em 1em;
-    .form-control,
-    .btn {
-      border: 0;
-    }
-    .btn {
-      border-left-width: 1px;
-    }
-    .search-option {
-      width: 7rem;
-    }
-    .search-field {
-      width: 8rem;
-    }
+  .brand {
+    display: inline-block;
+    line-height: 43px;
+    font-size: 1.25rem;
   }
-
-  .navbar {
-    padding: 0;
+  .nav {
+    flex-grow: 1;
   }
 }

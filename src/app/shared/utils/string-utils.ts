@@ -5,6 +5,27 @@ const escape = require('lodash/escape');
  * Helper utilities for string manipulation
  */
 export class StringUtils {
+  static serialize(entity: JSON) {
+    console.log(entity);
+    let str = JSON.stringify(entity);
+    str = this.pad(str, 75, 75);
+    str = this.obfuscateAdd(str);
+    str = this.charShift(str, 10);
+    return str;
+  }
+  static deserialize(str: string) {
+    console.log(str, typeof str);
+    try {
+      str = StringUtils.charShift(str, -10);
+      str = StringUtils.obfuscateRemove(str);
+      str = StringUtils.trim(str, 75, 75);
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+    return JSON.parse(str);
+  }
+
   /**
    * Generate a random string of letters and numbers
    * @param length - The length of the string
@@ -35,7 +56,7 @@ export class StringUtils {
     if (val && window) {
       return window.btoa(unescape(encodeURIComponent(val.toString())));
     }
-    return null;
+    return val;
   }
 
   /**
@@ -46,7 +67,7 @@ export class StringUtils {
     if (val && window) {
       return decodeURIComponent(escape(window.atob(val)));
     }
-    return null;
+    return val;
   }
 
   /**

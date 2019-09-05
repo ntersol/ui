@@ -40,6 +40,8 @@ export class PhoneNumberPipe implements PipeTransform {
         number = number;
       }
       return ('(' + area + ') ' + number).trim().slice(0, 14);
+    } else if (area && area.length === 3) {
+      return '(' + area + ') ';
     } else {
       return '(' + area;
     }

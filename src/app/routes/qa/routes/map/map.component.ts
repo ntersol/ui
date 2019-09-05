@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent implements OnInit {
-  public locations: Map.Location[];
+  public locations: Map.Location[] | undefined;
   public radius = 1;
 
   constructor(private http: HttpClient, private ref: ChangeDetectorRef) {}

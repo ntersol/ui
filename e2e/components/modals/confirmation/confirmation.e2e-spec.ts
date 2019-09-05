@@ -3,9 +3,7 @@ import { browser, by, element } from 'protractor';
 import { App } from '../../../app.po';
 import { QaPage } from '../../qa.po';
 
-
 describe('Confirmation Modal', () => {
-
   let app: App = new App();
   let page: QaPage = new QaPage();
 
@@ -16,13 +14,13 @@ describe('Confirmation Modal', () => {
   it('should be on the correct url, /#/qa', () => {
     return app.checkUrl('qa');
   });
-  
+
   it('should open && have correct data supplied by launch modal component ', () => {
     element(by.css('.app-launch-modal')).click();
     Promise.all([
       expect(element(by.css('#modalConfirm')).isPresent()).toEqual(true),
       expect(element(by.css('#modalConfirm .modal-title')).getText()).toEqual('Testing Confirmation Modal'),
-      expect(element(by.css('#modalConfirm .modal-body')).getText()).toEqual('Does the confirmation modal work?')
+      expect(element(by.css('#modalConfirm .modal-body')).getText()).toEqual('Does the confirmation modal work?'),
     ]).then();
   });
 
@@ -41,5 +39,4 @@ describe('Confirmation Modal', () => {
     let result = true;
     expect<any>(subject).toEqual(result);
   });
-  
 });

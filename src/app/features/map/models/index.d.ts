@@ -1409,11 +1409,7 @@ declare namespace Microsoft.Maps {
      * @param handler The callback function to handle the event when triggered.
      * @returns The handler id.
      */
-    export function addHandler(
-      target: Infobox,
-      eventName: string,
-      handler: (eventArg?: IInfoboxEventArgs) => void,
-    ): IHandlerId;
+    export function addHandler(target: Infobox, eventName: string, handler: (eventArg?: IInfoboxEventArgs) => void): IHandlerId;
 
     /**
      * Attaches the handler for the event that is thrown by the target. Use the return object to remove the handler using the removeHandler method.
@@ -1423,11 +1419,7 @@ declare namespace Microsoft.Maps {
      * @param handler The callback function to handle the event when triggered.
      * @returns The handler id.
      */
-    export function addHandler(
-      target: Layer,
-      eventName: string,
-      handler: (eventArg?: IMouseEventArgs) => void,
-    ): IHandlerId;
+    export function addHandler(target: Layer, eventName: string, handler: (eventArg?: IMouseEventArgs) => void): IHandlerId;
 
     /**
      * Attaches the handler for the event that is thrown by the target. Use the return object to remove the handler using the removeHandler method.
@@ -1464,11 +1456,7 @@ declare namespace Microsoft.Maps {
      * click, dblclick, maptypechanged, mousedown, mousemove, mouseout, mouseover, mouseup, mousewheel, rightclick, viewchange, viewchangeend, viewchangestart
      * @param handler The callback function to handle the event when triggered.
      */
-    export function addOne(
-      target: Map,
-      eventName: string,
-      handler: (eventArg?: IMouseEventArgs | IMapTypeChangeEventArgs) => void,
-    ): void;
+    export function addOne(target: Map, eventName: string, handler: (eventArg?: IMouseEventArgs | IMapTypeChangeEventArgs) => void): void;
 
     /**
      * Attaches the handler for the event that is thrown by the target, but only triggers the handler the first once after being attached.
@@ -1596,11 +1584,7 @@ declare namespace Microsoft.Maps {
      * @param handler The callback function to handle the event when triggered.
      * @returns The handler id.
      */
-    export function addThrottledHandler(
-      target: Infobox,
-      eventName: string,
-      handler: (eventArg?: IInfoboxEventArgs) => void,
-    ): IHandlerId;
+    export function addThrottledHandler(target: Infobox, eventName: string, handler: (eventArg?: IInfoboxEventArgs) => void): IHandlerId;
 
     /**
      * Attaches the handler for the event that is thrown by the target, where the minimum interval between events (in milliseconds) is specified as a parameter.

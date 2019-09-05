@@ -12,7 +12,7 @@ exports.config = {
     //'./e2e/components/pipes/**/*.e2e-spec.ts' // Components only
   ],
   capabilities: {
-    'browserName': 'chrome'
+    browserName: 'chrome',
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',
@@ -20,13 +20,13 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
-    print: function () { }
+    print: function() {},
   },
   onPrepare() {
     require('ts-node').register({
-      project: 'e2e/tsconfig.e2e.json'
+      project: 'e2e/tsconfig.e2e.json',
     });
-    require("zone.js/dist/zone-node");
+    require('zone.js/dist/zone-node');
 
     jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
     console.log('onPrepare');
@@ -38,11 +38,10 @@ exports.config = {
     element(by.css('form .password')).sendKeys('123456');
     element(by.css('form button[type="submit"]')).click();
 
-    return browser.driver.wait(function () {
-      return browser.driver.getCurrentUrl().then(function (url) {
+    return browser.driver.wait(function() {
+      return browser.driver.getCurrentUrl().then(function(url) {
         return url.indexOf('login') === -1 ? true : false;
       });
     }, 10000);
-
-  }
+  },
 };

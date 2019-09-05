@@ -1,6 +1,8 @@
 import { ErrorHandler, Injectable } from '@angular/core';
-import { AppSettings } from '../app.settings';
+
 import { environment } from '$env';
+import { SettingsService } from '$settings';
+import { ServiceWorkerService } from '../services/service-worker.service';
 
 interface AngularError {
   promise: any;
@@ -23,7 +25,7 @@ interface LogError {
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
-  constructor(private settings: AppSettings) {}
+  constructor(private settings: SettingsService, private sw: ServiceWorkerService) {}
 
   // Custom error handler for application/angular errors
   // Uses plain JS to eliminate any dependencies that may not be available due to the error
@@ -33,10 +35,10 @@ export class GlobalErrorHandler implements ErrorHandler {
     // Does not have http status field (to ignore http errors)
     if (this.settings.isBrowser && !error.errorMsg && !error.hasOwnProperty('status') && environment.production) {
       // If error endpoint specified, log errors
-      if (environment.endpoints.errors) {
+      if (environment.endpoints.errorPath) {
         this.logError(error);
       }
-      this.settings.error$.next(error.message);
+      // this.settings.error$.next(error.message);
       this.resetState(error);
     }
     // Now throw the error to the console
@@ -49,9 +51,13 @@ export class GlobalErrorHandler implements ErrorHandler {
    */
   private resetState(error: AngularError) {
     console.error({ error: error });
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.href = '/#/login';
+    const resetAction = () => {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = '/#/login';
+    };
+    // If serviceworker is enabled, remove it first befire executing reset action, otherwise just reset
+    this.sw.isEnabled ? this.sw.remove(resetAction) : resetAction();
   }
 
   /**
@@ -59,8 +65,11 @@ export class GlobalErrorHandler implements ErrorHandler {
    * Use XMLHttpRequest since httpClient may not be available
    */
   private logError(error: AngularError) {
+    if (!environment.endpoints.apiUrl || !environment.endpoints.errorPath) {
+      return;
+    }
     const http = new XMLHttpRequest();
-    const url = environment.endpoints.apiUrl + environment.endpoints.errors;
+    const url = environment.endpoints.apiUrl + environment.endpoints.errorPath;
     const data: LogError = {
       level: 'Error',
       class: '',

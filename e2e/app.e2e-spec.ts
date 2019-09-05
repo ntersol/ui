@@ -1,9 +1,7 @@
 import { browser, by, element } from 'protractor';
 import { App } from './app.po';
 
-
 describe('Application', () => {
-
   let app: App = new App();
 
   beforeEach(() => {
@@ -32,5 +30,4 @@ describe('Application', () => {
 
     return app.checkUrl('login', false);
   });
-
 });

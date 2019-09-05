@@ -29,8 +29,8 @@ const chartSrc = 'assets/scripts/canvasjs.min.js';
 })
 export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   /** TEMP */
-  @ViewChild('element') element: ElementRef;
-  @ViewChild('tooltipCustom') tooltipCustom: ElementRef;
+  @ViewChild('element', { static: false }) element!: ElementRef;
+  @ViewChild('tooltipCustom', { static: false }) tooltipCustom!: ElementRef;
 
   @Input()
   type:
@@ -51,15 +51,15 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     | 'stackedArea100'
     | 'pie'
     | 'doughnut' = 'column';
-  @Input() width: string;
-  @Input() height: string;
-  @Input() data: CanvasJS.ChartDataSeriesOptions[];
-  @Input() options: Partial<CanvasJS.ChartOptions>;
-  @Input() stacked: boolean;
+  @Input() width!: string;
+  @Input() height!: string;
+  @Input() data!: CanvasJS.ChartDataSeriesOptions[];
+  @Input() options!: Partial<CanvasJS.ChartOptions>;
+  @Input() stacked!: boolean;
 
   /** Colors for data points in RGB */
-  @Input() colorSet: string;
-  @Input() colorGradient: [string, string];
+  @Input() colorSet!: string;
+  @Input() colorGradient!: [string, string];
   @Input() colorsCustom: string[] = [];
 
   // Format Elements
@@ -83,11 +83,11 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
 
   // Titles
   /** Title to show for the main chart */
-  @Input() titleChart: string;
+  @Input() titleChart: string | undefined;
   /** Title to show for the X Axis, leave null for none */
-  @Input() titleXAxis: string;
+  @Input() titleXAxis: string | undefined;
   /** Title to show for the Y Axis, leave null for none */
-  @Input() titleYAxis: string;
+  @Input() titleYAxis: string | undefined;
 
   // Template
   /** Supply a custom html template for the tooltip */
@@ -97,10 +97,10 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   public uniqueId = 'chart' + Math.floor(Math.random() * 1000000);
 
   /** Chart reference */
-  private chart: CanvasJS.Chart;
+  private chart: CanvasJS.Chart | null = null;
 
   /** If custom colors supplied, this is the auto-generated name of the color scheme */
-  private colorScheme: string;
+  private colorScheme: string | undefined;
 
   /** After initial load */
   private isLoaded = false;
@@ -164,7 +164,9 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
       // Create chart from WINDOW reference not import
       // Due to bug with plugins registered with global instance and not being available via imports
       this.chart = new window.CanvasJS.Chart(this.uniqueId, this.chartOptionsCreate());
-      this.chart.render();
+      if (this.chart) {
+        this.chart.render();
+      }
     } else {
       setTimeout(() => this.chartInit(), 100);
     }
@@ -176,11 +178,7 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   public chartOptionsCreate() {
     // If color gradient is specified, create it to match datapoint range
     if (this.colorGradient && this.data && this.data[0] && this.data[0].dataPoints.length) {
-      this.colorsCustom = this.getColorScheme(
-        this.colorGradient[0],
-        this.colorGradient[1],
-        this.data[0].dataPoints.length,
-      );
+      this.colorsCustom = this.getColorScheme(this.colorGradient[0], this.colorGradient[1], this.data[0].dataPoints.length);
     }
 
     // If custom colors supplied, register with chart plugin
@@ -212,7 +210,9 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
         // Enable the legend to toggle dataseries on or off
         itemclick: e => {
           e.dataSeries.visible = typeof e.dataSeries.visible === 'undefined' || e.dataSeries.visible ? false : true;
-          this.chart.render();
+          if (this.chart) {
+            this.chart.render();
+          }
         },
       },
       // Use built in color set if supplied, use custom colors if not
@@ -388,7 +388,9 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   ngOnDestroy() {
     if (this.chart) {
       this.chart.destroy();
-      this.chart = null;
+      if (this.chart) {
+        this.chart = null;
+      }
     }
   }
 }

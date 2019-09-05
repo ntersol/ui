@@ -3,9 +3,7 @@ import { App } from '../app.po';
 
 import { QaPage } from './qa.po';
 
-
 describe('QA page', () => {
-
   let app: App = new App();
   let page: QaPage = new QaPage();
 
@@ -22,5 +20,4 @@ describe('QA page', () => {
     let result = true;
     expect<any>(subject).toEqual(result);
   });
-
 });

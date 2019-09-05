@@ -42,6 +42,8 @@ export const MapView = {
 
     // If the view change event was a scroll
     if (
+      viewPropsNew &&
+      viewPropsNew.center &&
       viewPropsCurrent.center &&
       (viewPropsCurrent.center.latitude !== viewPropsNew.center.latitude ||
         viewPropsCurrent.center.longitude !== viewPropsNew.center.longitude)

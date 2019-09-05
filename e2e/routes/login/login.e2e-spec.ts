@@ -3,9 +3,7 @@ import { browser, by, element } from 'protractor';
 import { App } from '../../app.po';
 import { LoginPage } from './login.po';
 
-
 describe('Login Page', () => {
-
   let app: App = new App();
   let page: LoginPage = new LoginPage();
 
@@ -33,7 +31,7 @@ describe('Login Page', () => {
 
   it('should show password in plain text after clicking Show Password', () => {
     element(by.css('form .toggle-pwd')).click();
-    let subject = element(by.css('form .password')).getAttribute('type')
+    let subject = element(by.css('form .password')).getAttribute('type');
     // let result = 'eat@joes.com';
     expect<any>(subject).toEqual('text');
   });
@@ -56,5 +54,4 @@ describe('Login Page', () => {
 
     return app.checkUrl('login', false);
   });
-
 });

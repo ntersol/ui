@@ -1,12 +1,22 @@
-.popover{
-    white-space:nowrap;z-index:500!important;
-    animation: fadein .75s;padding:.25rem;
-    .popover-header{display:none;}
+.popover {
+  white-space: nowrap;
+  z-index: 500 !important;
+  animation: fadein 0.75s;
+  padding: 0.25rem;
+  .popover-header {
+    display: none;
+  }
 }
-.tooltip{background:#fff!important;color:#000!important;}
-
+.tooltip {
+  background: #fff !important;
+  color: #000 !important;
+}
 
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

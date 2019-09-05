@@ -8,8 +8,8 @@ interface DomOptions {
 }
 
 interface Dimensions {
-  width: string;
-  height: string;
+  width: string | null;
+  height: string | null;
 }
 
 /**
@@ -37,7 +37,7 @@ export class DomObserverDirective implements OnInit, OnDestroy, AfterViewInit {
   /** Watch changes to data */
   @Input() changesToWindowResize = true;
   /** Callback method to execute when this DOM element changes */
-  @Input() callback: Function;
+  @Input() callback: Function | undefined;
 
   /** Watch changes to data*/
   // @Output() domChange = new EventEmitter<any>();
@@ -50,7 +50,7 @@ export class DomObserverDirective implements OnInit, OnDestroy, AfterViewInit {
   };
 
   /** Holds active observer */
-  private observer: MutationObserver;
+  private observer: MutationObserver | undefined;
 
   /** Last dimensions of element */
   private dimensionsLast: Dimensions = {
@@ -141,6 +141,8 @@ export class DomObserverDirective implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
-    this.observer.disconnect();
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 }

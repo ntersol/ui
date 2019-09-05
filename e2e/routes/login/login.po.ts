@@ -1,6 +1,3 @@
-import {  } from 'protractor';
+import {} from 'protractor';
 
-export class LoginPage {
-
-
-}
+export class LoginPage {}

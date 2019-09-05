@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { AppSettings } from '../app.settings';
-import { environment } from '$env';
+import { SettingsService } from '$settings';
 
 const camelCase = require('lodash/camelCase');
 
@@ -21,7 +20,7 @@ interface Settings {
  */
 @Injectable()
 export class AppConfigService {
-  constructor(private settings: AppSettings, private http: HttpClient) {}
+  constructor(private settings: SettingsService, private http: HttpClient) {}
 
   /**
    * Set all env settings in app settings
@@ -46,14 +45,14 @@ export class AppConfigService {
   /**
    * Load environment settings
    */
-  public loadEnvSettings(): Promise<any> {
+  public loadEnvSettings(envEndpoint: string) {
     return this.http
-      .get(environment.endpoints.envConfig)
+      .get(envEndpoint)
       .toPromise()
       .then((data: any) => this.appSettingsUpdate(data))
       .catch((err: any) => {
         console.error('Error getting environment settings', err);
-        this.settings.sessionStorageClear();
+        this.settings.reset();
         return Promise.resolve();
       });
   }

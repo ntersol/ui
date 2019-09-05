@@ -17,7 +17,7 @@ export class ChartsComponent implements OnInit {
   public dataPointsCounts: CanvasJS.ChartDataSeriesOptions[] = [];
 
   public user = user;
-  public labels: string[];
+  public labels: string[] | undefined;
 
   constructor() {}
 
