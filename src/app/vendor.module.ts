@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { ConfirmationService, DialogService } from 'primeng/api';
+import { ConfirmationService, DialogService, MessageService } from 'primeng/api';
 import { CardModule } from 'primeng/card';
 
 import { MessagesModule } from 'primeng/messages';
@@ -20,8 +20,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
-
-
+import { ToastModule } from 'primeng/toast';
 
 const modules = [
   // Prime NG UI Lib
@@ -33,7 +32,7 @@ const modules = [
   ConfirmDialogModule,
   DynamicDialogModule,
   CardModule,
- 
+
   MessagesModule,
   MessageModule,
   AccordionModule,
@@ -41,7 +40,7 @@ const modules = [
   TableModule,
   DropdownModule,
   TooltipModule,
-  
+  ToastModule,
 ];
 
 @NgModule({
@@ -66,7 +65,7 @@ export class VendorModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: VendorModule,
-      providers: [ConfirmationService, DialogService],
+      providers: [ConfirmationService, DialogService, MessageService],
     };
   }
 }

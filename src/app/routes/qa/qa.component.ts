@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, DialogService } from 'primeng/api';
+import { ConfirmationService, DialogService, MessageService } from 'primeng/api';
 import { DemoModalComponent } from './components/modal/demo-modal/demo-modal.component';
 import { LogoutModalComponent, FeedbackModalComponent } from '$modals';
 import { ServiceWorkerService } from '$shared';
@@ -40,7 +40,12 @@ export class QaComponent implements OnInit {
     { name: 'Strawberries' },
   ];
 
-  constructor(private confirmationService: ConfirmationService, public dialogService: DialogService, private sw: ServiceWorkerService) {}
+  constructor(
+    private confirmationService: ConfirmationService,
+    public dialogService: DialogService,
+    private sw: ServiceWorkerService,
+    private message: MessageService,
+  ) {}
 
   ngOnInit() {}
 
@@ -115,6 +120,11 @@ export class QaComponent implements OnInit {
         console.log('Log out');
       }
     });
+  }
+
+  public toasterPop() {
+    console.log(1, this.message);
+    this.message.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
   }
 
   /**
