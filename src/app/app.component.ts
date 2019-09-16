@@ -4,8 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { map, filter, mergeMap } from 'rxjs/operators';
 
 import { environment } from '$env';
-import { NtsVersionManagementService } from './shared/services';
-import { ServiceWorkerService } from '$shared';
+import { NtsVersionManagementService, NtsServiceWorkerService } from '$features';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +18,7 @@ export class AppComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private title: Title,
     private version: NtsVersionManagementService,
-    private sw: ServiceWorkerService,
+    private sw: NtsServiceWorkerService,
   ) {}
 
   ngOnInit() {

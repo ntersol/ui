@@ -12,3 +12,5 @@ export * from './state-management/state-management.module';
 export * from './forms/forms.module';
 // Calendar
 export * from './calendar/calendar.module';
+// Generic components & services
+export * from './generic';

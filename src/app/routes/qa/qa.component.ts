@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, DialogService, MessageService } from 'primeng/api';
 import { DemoModalComponent } from './components/modal/demo-modal/demo-modal.component';
 import { LogoutModalComponent, FeedbackModalComponent } from '$modals';
-import { ServiceWorkerService } from '$shared';
 import { filter } from 'rxjs/operators';
+import { NtsServiceWorkerService } from '$features';
 
 @Component({
   selector: 'app-qa',
@@ -43,7 +43,7 @@ export class QaComponent implements OnInit {
   constructor(
     private confirmationService: ConfirmationService,
     public dialogService: DialogService,
-    private sw: ServiceWorkerService,
+    private sw: NtsServiceWorkerService,
     private message: MessageService,
   ) {}
 

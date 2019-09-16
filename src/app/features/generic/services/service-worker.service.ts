@@ -32,7 +32,7 @@ export interface PushResponse {
 @Injectable({
   providedIn: 'root',
 })
-export class ServiceWorkerService {
+export class NtsServiceWorkerService {
   /** Is the service worker enabled */
   public isEnabled = this.sw.isEnabled;
   /** Does this app have permission to send push notifications */

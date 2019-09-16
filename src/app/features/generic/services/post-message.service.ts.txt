@@ -17,7 +17,7 @@ interface MessageComplete extends Message {
 @Injectable({
   providedIn: 'root',
 })
-export class PostMessageService {
+export class NtsPostMessageService {
   /** Postmessage response */
   public postMessage$: Subject<Message> = new Subject();
   /** Holds postmessage event listener */

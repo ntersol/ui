@@ -14,7 +14,7 @@ interface Keys {
 @Injectable({
   providedIn: 'root',
 })
-export class NtDomEventsService {
+export class NtsDomEventsService {
   private keysPressed = new Subject<Keys>();
   /** Keys that have just been pressed */
   public get keysPressed$() {

@@ -2,7 +2,7 @@ import { ErrorHandler, Injectable } from '@angular/core';
 
 import { environment } from '$env';
 import { SettingsService } from '$settings';
-import { ServiceWorkerService } from '../services/service-worker.service';
+import { NtsServiceWorkerService } from '$features';
 
 interface AngularError {
   promise: any;
@@ -25,7 +25,7 @@ interface LogError {
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
-  constructor(private settings: SettingsService, private sw: ServiceWorkerService) {}
+  constructor(private settings: SettingsService, private sw: NtsServiceWorkerService) {}
 
   // Custom error handler for application/angular errors
   // Uses plain JS to eliminate any dependencies that may not be available due to the error
