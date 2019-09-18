@@ -1,9 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 /**
- * USAGE: {{ val | sort: 'asc' : 'name' }}
+ * Sorts an array input
+ * First param is direction, second param is optional object property to sort against
+ *  USAGE: {{ val | sort: 'asc' : 'name' }}
  */
-
 @Pipe({
   name: 'sort',
 })
@@ -16,7 +17,8 @@ export class SortPipe implements PipeTransform {
       const sortDesc = (a: any, b: any) => b[objProp] - a[objProp];
 
       if (objProp) {
-        arrayNew = sortDir === 'asc' ? arrayNew.sort(sortAsc) : arrayNew.sort(sortDesc);
+        arrayNew =
+          sortDir === 'asc' ? arrayNew.sort(sortAsc) : arrayNew.sort(sortDesc);
       } else {
         arrayNew = sortDir === 'asc' ? arrayNew.sort() : arrayNew.reverse();
       }

@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpHeaders } from '@angular/common/http';
+import {
+  HttpEvent,
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { SettingsService } from '$settings';
-import { AuthService, AuthState } from '../services';
+import { AuthService, AuthState } from '../services/project';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -13,7 +19,10 @@ export class HttpInterceptorService implements HttpInterceptor {
    */
   constructor(private settings: SettingsService, private auth: AuthService) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler,
+  ): Observable<HttpEvent<any>> {
     // Add any custom headers
     const headersObj: { [keys: string]: string } = {};
     // If token present, add bearer token
