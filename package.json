@@ -47,6 +47,23 @@
         "./"
       ]
     },
+    "overrides": {
+      "nts.angular/components/general/calendar": {},
+      "nts.angular/components/general/chart": {},
+      "nts.angular/components/general/forms": {},
+      "nts.angular/components/general/generic": {},
+      "nts.angular/components/general/grid": {},
+      "nts.angular/components/general/index": {},
+      "nts.angular/components/general/map": {},
+      "nts.angular/components/general/state-management": {},
+      "nts.angular/pipes/pipes": {},
+      "nts.angular/services/general/dom-eventsservice": {},
+      "nts.angular/services/general/index": {},
+      "nts.angular/services/general/post-messageservice": {},
+      "nts.angular/services/general/service-workerservice": {},
+      "nts.angular/services/general/signal-rservice": {},
+      "nts.angular/services/general/version-managementservice": {}
+    },
     "dist": {
       "entry": "dist/bit/entry",
       "target": "dist/bit/target"
@@ -98,7 +115,8 @@
     "rxjs": "6.5.2",
     "ts-loader": "6.0.4",
     "typescript-fsa": "3.0.0-beta-2",
-    "zone.js": "0.10.1"
+    "zone.js": "0.10.1",
+    "@bit/nts.angular.components.general.table": "file:./src/app/components/general/table"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.802.1",
