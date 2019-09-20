@@ -16,6 +16,9 @@ nts-form-field {
     margin-top: 3px;
   }
 
+  // Boolean checkbox
+  .nts-checkbox-boolean{display:flex;} 
+
   // Manage the floating label styling and animation
   .ui-float-label {
     & > .ui-inputwrapper-focus ~ label,

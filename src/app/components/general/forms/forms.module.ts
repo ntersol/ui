@@ -13,11 +13,13 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { SpinnerModule } from 'primeng/spinner';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { FormFieldComponent } from './components/form-field/form-field.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 
-const components = [FormFieldComponent];
+import { NtsFormFieldComponent } from './components/form-field/form-field.component';
+import { NtsFilterFieldComponent } from './components/filter-field/filter-field.component';
+
+const components = [NtsFormFieldComponent, NtsFilterFieldComponent];
 
 @NgModule({
   declarations: [components],

@@ -10,15 +10,21 @@
         <!-- Autocomplete -->
         <ng-container *ngSwitchCase="'autoComplete'">
           <div class="autocomplete">
-          <p-autoComplete
-            [field]="optionIsObjectsArray ? optionLabel : null"
-            [(ngModel)]="model"
-            [suggestions]="autoCompleteSuggestions"
-            (completeMethod)="autoCompleteFilterTerms($event)"
-            (ngModelChange)="autoCompleteSelection($event);"
-          ></p-autoComplete>
-          <a class="cancel" (click)="model = null;formControl.patchValue(null)" *ngIf="formControl.value !== null" title="Remove selection"><i class="fa fa-remove"></i></a>
-        </div>
+            <p-autoComplete
+              [field]="optionIsObjectsArray ? optionLabel : null"
+              [(ngModel)]="model"
+              [suggestions]="autoCompleteSuggestions"
+              (completeMethod)="autoCompleteFilterTerms($event)"
+              (ngModelChange)="autoCompleteSelection($event)"
+            ></p-autoComplete>
+            <a
+              class="cancel"
+              (click)="model = null; formControl.patchValue(null)"
+              *ngIf="formControl.value !== null"
+              title="Remove selection"
+              ><i class="fa fa-remove"></i
+            ></a>
+          </div>
         </ng-container>
 
         <!-- Button group -->
@@ -91,6 +97,18 @@
               [value]="option[optionValue] !== undefined ? option[optionValue] : option"
             ></p-checkbox>
           </div>
+        </ng-container>
+
+        <!-- Single checkbox that returns a boolean value -->
+        <ng-container *ngSwitchCase="'checkboxBoolean'">
+            <p-checkbox
+              class="nts-checkbox-boolean"
+              [binary]="true"
+              [name]="name"
+              [id]="id"
+              [formControl]="formControl"
+              [label]="placeholder"
+            ></p-checkbox>
         </ng-container>
 
         <!-- Radio -->
