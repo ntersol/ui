@@ -53,7 +53,7 @@ export class NtsSignalRService {
   public connectionStart(
     signalRUrl: string,
     token?: string | tokenFn,
-    retryTime = 10000,
+    retryTime = 5000,
   ) {
     // Make sure user is logged in and signalR endpoint specified
     if (!signalRUrl) {
@@ -70,6 +70,8 @@ export class NtsSignalRService {
     }
     // Start signalR
     const hubConnection = (<any>this.hubConnection).start();
+    // If this connection disconnects, keep restarting it until it reconnects
+    this.hubConnection.onclose(() => setTimeout(() => this.connectionStart(), retryTime));
     // Watch status
     hubConnection
       // If any queued ID's, attach ON event to the observable
