@@ -1,6 +1,6 @@
 # Angular Starter
 
-A rapid starter project for creating Angular single page apps. Contains Angular, Angular Materials, Bootstrap 4 & Ngrx-Store (Redux). Built with Angular CLI.
+A rapid starter project for creating Angular single page apps. Contains Angular, ngPrime, Akita and more. Built with Angular CLI.
 
 Available online @ https://jerrolkrause.github.io/angular-starter/#/
 
@@ -105,13 +105,14 @@ npm run deploy
 - TS Lint (Note that this requires the project to be in a solution to work): https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebAnalyzer
 
 ## Bit Usage
+Review bit documentation here: https://docs.bit.dev/docs/quick-start. Ntersol bit library is here: https://bit.dev/nts/angular
 
 - Install/update bit cli `npm install bit-bin -g`
+- Checkout the latest version of all components with `bit checkout latest --all`
 - See list of outdated components `bit list --outdated`
 - Check status of local component environment, IE which components have been updated `bit status`
-- Checkout the latest version of all components with `bit checkout latest --all`
-- When components are ready to have their changes export, first run `bit tag --all` to set a new semver version and then export with `bit export nts.angular`
-- Add a new component to a namespaced project with `bit add src/app/pipes/my-new-pipe --namespace pipes`
+- When components are ready to have their changes exported, first run `bit tag --all` or `bit tag --all 1.0.0` to set a new semver version and then export with `bit export nts.angular`
+- Add a new component to a namespaced project with `bit add src/app/component/general/new-component --namespace components/general`. See https://bit.dev/nts/angular for the locations and namespaces of components.
 
 ## Useful Info
 
