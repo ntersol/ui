@@ -104,6 +104,10 @@ npm run deploy
 - Prettier: https://marketplace.visualstudio.com/items?itemName=MadsKristensen.JavaScriptPrettier
 - TS Lint (Note that this requires the project to be in a solution to work): https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebAnalyzer
 
+## Bit Usage
+
+- Install/update bit cli `npm install bit-bin -g`
+
 ## Useful Info
 
 Lazy load libraries. Normally libraries that are shared between lazy loaded routes are all bundled into a single master bundle. This approach will bundle them separately.

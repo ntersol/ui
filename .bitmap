@@ -85,6 +85,31 @@
     "nts.angular/components/general/forms@1.0.1": {
         "files": [
             {
+                "relativePath": "src/app/components/general/forms/README.md",
+                "test": false,
+                "name": "README.md"
+            },
+            {
+                "relativePath": "src/app/components/general/forms/components/filter-field/filter-field.component.html",
+                "test": false,
+                "name": "filter-field.component.html"
+            },
+            {
+                "relativePath": "src/app/components/general/forms/components/filter-field/filter-field.component.scss",
+                "test": false,
+                "name": "filter-field.component.scss"
+            },
+            {
+                "relativePath": "src/app/components/general/forms/components/filter-field/filter-field.component.spec.ts",
+                "test": false,
+                "name": "filter-field.component.spec.ts"
+            },
+            {
+                "relativePath": "src/app/components/general/forms/components/filter-field/filter-field.component.ts",
+                "test": false,
+                "name": "filter-field.component.ts"
+            },
+            {
                 "name": "form-field.component.html",
                 "relativePath": "src/app/components/general/forms/components/form-field/form-field.component.html",
                 "test": false
@@ -726,7 +751,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "nts.angular/services/general/signal-rservice@1.0.0": {
+    "nts.angular/services/general/signal-rservice@1.0.1": {
         "files": [
             {
                 "name": "signal-r.service.ts",
@@ -750,5 +775,5 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.3.0"
+    "version": "14.4.1"
 }

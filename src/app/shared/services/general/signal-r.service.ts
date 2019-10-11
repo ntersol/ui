@@ -38,9 +38,7 @@ export class NtsSignalRService {
 
   constructor() {
     if (!signalR) {
-      console.error(
-        'SignalR not installed. Install with: npm install @aspnet/signalr –-save',
-      );
+      console.error('SignalR not installed. Install with: npm install @aspnet/signalr –-save');
     }
   }
 
@@ -50,11 +48,7 @@ export class NtsSignalRService {
    * @param token - The bearer token to pass for requests. This argument accepts either a string or a closure that returns a string. If using a string, be sure to use the tokenUpdate method in this file when the token changes. The closure should return the token, IE () => this.settings.token
    * @param retryTime - If signalR is unavailable, retry in this many milliseconds
    */
-  public connectionStart(
-    signalRUrl: string,
-    token?: string | tokenFn,
-    retryTime = 5000,
-  ) {
+  public connectionStart(signalRUrl: string, token?: string | tokenFn, retryTime = 10000) {
     // Make sure user is logged in and signalR endpoint specified
     if (!signalRUrl) {
       return;
@@ -64,14 +58,12 @@ export class NtsSignalRService {
 
     // If hubConnection not available yet, create it only on first instance
     if (!this.hubConnection) {
-      this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(signalRUrl, { accessTokenFactory: () => this.token })
-        .build();
+      this.hubConnection = new signalR.HubConnectionBuilder().withUrl(signalRUrl, { accessTokenFactory: () => this.token }).build();
     }
     // Start signalR
-    const hubConnection = (<any>this.hubConnection).start();
+    const hubConnection = this.hubConnection.start();
     // If this connection disconnects, keep restarting it until it reconnects
-    this.hubConnection.onclose(() => setTimeout(() => this.connectionStart(), retryTime));
+    this.hubConnection.onclose(() => setTimeout(() => this.connectionStart(signalRUrl, this.token, retryTime), retryTime));
     // Watch status
     hubConnection
       // If any queued ID's, attach ON event to the observable
@@ -82,14 +74,11 @@ export class NtsSignalRService {
           this.queuedIDs = {}; // Reset queue
         }
       })
-      // If error on start, retry every 10 seconds
+      // If error on start, retry
       .catch(() => {
         // If retry specified
         if (retryTime) {
-          setTimeout(
-            () => this.connectionStart(signalRUrl, this.token, retryTime),
-            retryTime,
-          );
+          setTimeout(() => this.connectionStart(signalRUrl, this.token, retryTime), retryTime);
         }
       });
     // Return promise of signalR startup status
