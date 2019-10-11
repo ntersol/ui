@@ -108,8 +108,10 @@ npm run deploy
 
 - Install/update bit cli `npm install bit-bin -g`
 - See list of outdated components `bit list --outdated`
+- Check status of local component environment, IE which components have been updated `bit status`
 - Checkout the latest version of all components with `bit checkout latest --all`
-- When components are ready to have their changes export, first run `bit tag --all` to set a new semver version and then run `bit export --all`
+- When components are ready to have their changes export, first run `bit tag --all` to set a new semver version and then export with `bit export nts.angular`
+- Add a new component to a namespaced project with `bit add src/app/pipes/my-new-pipe --namespace pipes`
 
 ## Useful Info
 

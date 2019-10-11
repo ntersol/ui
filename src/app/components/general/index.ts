@@ -12,7 +12,7 @@ export * from './state-management/state-management.module';
 export * from './forms/forms.module';
 // Calendar
 export * from './calendar/calendar.module';
-// Table
-export * from './table/table.module';
 // Generic components & services
 export * from './generic';
+// Table
+export * from './table/table.module';
