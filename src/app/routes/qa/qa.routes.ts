@@ -11,7 +11,7 @@ import { CalendarComponent } from './routes/calendar/calendar.component';
 
 const routes: Routes = [
   {
-    path: 'map',
+    path: 'maps',
     component: MapComponent,
     data: { title: 'Map' },
   },
