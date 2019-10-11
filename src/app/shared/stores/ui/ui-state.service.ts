@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UiStateStore } from './ui-state.store';
 import { UiStateQuery } from './ui-state.query';
-import { map, distinctUntilChanged, filter} from 'rxjs/operators';
+import { map, distinctUntilChanged, filter } from 'rxjs/operators';
 import { merge } from 'rxjs';
 import { ConfirmationService } from 'primeng/api';
 import { SwUpdate } from '@angular/service-worker';
@@ -46,7 +46,9 @@ export class UiStateService {
     private ntsVersion: NtsVersionManagementService,
   ) {
     // this.query.uiState$.subscribe(state => console.log('UI STATE', state));
-    this.updateAvailable$.pipe(filter(val => val)).subscribe(() => this.updateAppModal());
+    this.updateAvailable$
+      .pipe(filter(val => val))
+      .subscribe(() => this.updateAppModal());
   }
 
   /**

@@ -5,7 +5,7 @@ import { QaComponent } from './qa.component';
 import { routing } from './qa.routes';
 import { ChartsComponent } from './routes/charts/charts.component';
 import {
-  ChartModule,
+  NtsChartModule,
   MapModule,
   NtsGenericModule,
   NtsGridModule,
@@ -24,7 +24,7 @@ import { CalendarComponent } from './routes/calendar/calendar.component';
     CommonModule,
     SiteModule,
     routing,
-    ChartModule,
+    NtsChartModule,
     MapModule,
     NtsGenericModule,
     NtsGridModule,

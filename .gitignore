@@ -2,6 +2,7 @@
 
 # bitsource
 .bit
+.dependencies
 
 # compiled output
 /dist

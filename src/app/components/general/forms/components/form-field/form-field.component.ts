@@ -1,4 +1,13 @@
-import { Component, OnInit, Input, ViewEncapsulation, Self, Optional, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewEncapsulation,
+  Self,
+  Optional,
+  OnDestroy,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { NgControl, FormControl } from '@angular/forms';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { isRequired } from '../../utils/isRequired.util';
@@ -144,13 +153,17 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
 
     // If field type is a dropdown, add a null option
     if (this.type === 'dropdown' && this.options && this.optionIsObjectsArray) {
-      this.optionsOutput = this.dropdownAddNullOption(<SelectItem[]>this.options);
+      this.optionsOutput = this.dropdownAddNullOption(<SelectItem[]>(
+        this.options
+      ));
     }
 
     // Set model for default
     this.model = this.formControl.value;
     // Update model if form control changes
-    this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe(val => (this.model = val));
+    this.formControl.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe(val => (this.model = val));
 
     // Determine if this is a generic field type
     this.fieldType = [
@@ -170,7 +183,9 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
 
     // Determine if the control needs to generate a unique id and or name property from the placeholder or the field name
     if ((this.placeholder && (!this.name || !this.id)) || !this.placeholder) {
-      const name = this.placeholder ? this.placeholder : formControlGetFieldName(this.formControl);
+      const name = this.placeholder
+        ? this.placeholder
+        : formControlGetFieldName(this.formControl);
       // Create slug, ensure slug is unique
       const slug = slugCreateUniqueId(name, NtsFormFieldComponent);
       // If name not supplied, autogenerate one from the placeholder
@@ -232,23 +247,30 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
    * Filter the available autocomplete terms based on the query typed by the user
    * @param result
    */
-  public autoCompleteFilterTerms(result: { originalEvent: Event; query: string }) {
+  public autoCompleteFilterTerms(result: {
+    originalEvent: Event;
+    query: string;
+  }) {
     const term = result.query.toLowerCase().trim();
     if (this.options && this.options.length) {
       if (typeof this.options[0] === 'object') {
-        this.autoCompleteSuggestions = (<SelectItem[]>this.options).filter(option => {
-          const optionTerm = String((<any>option)[this.optionLabel])
-            .toLowerCase()
-            .trim();
-          return optionTerm.indexOf(term) !== -1 ? true : false;
-        });
+        this.autoCompleteSuggestions = (<SelectItem[]>this.options).filter(
+          option => {
+            const optionTerm = String((<any>option)[this.optionLabel])
+              .toLowerCase()
+              .trim();
+            return optionTerm.indexOf(term) !== -1 ? true : false;
+          },
+        );
       } else if (typeof this.options[0] === 'string') {
-        this.autoCompleteSuggestions = (<string[]>this.options).filter(option => {
-          const optionTerm = String(option)
-            .toLowerCase()
-            .trim();
-          return optionTerm.indexOf(term) !== -1 ? true : false;
-        });
+        this.autoCompleteSuggestions = (<string[]>this.options).filter(
+          option => {
+            const optionTerm = String(option)
+              .toLowerCase()
+              .trim();
+            return optionTerm.indexOf(term) !== -1 ? true : false;
+          },
+        );
       } else {
         console.error('Unknown types in options array');
       }
@@ -269,7 +291,10 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
    */
   private dropdownAddNullOption(options: SelectItem[]): SelectItem[] {
     // Make sure a default null value was not passed
-    const hasNull = options.reduce((a, b) => (a || b.value === null ? true : false), false);
+    const hasNull = options.reduce(
+      (a, b) => (a || b.value === null ? true : false),
+      false,
+    );
     if (!hasNull) {
       const option: any = { disabled: true, styleClass: 'disabled' }; // SelectItem
       option[this.optionLabel] = '-- Please Select --';

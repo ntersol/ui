@@ -107,6 +107,9 @@ npm run deploy
 ## Bit Usage
 
 - Install/update bit cli `npm install bit-bin -g`
+- See list of outdated components `bit list --outdated`
+- Checkout the latest version of all components with `bit checkout latest --all`
+- When components are ready to have their changes export, first run `bit tag --all` to set a new semver version and then run `bit export --all`
 
 ## Useful Info
 
