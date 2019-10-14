@@ -27,8 +27,10 @@ See Angular CLI github page for full usage: https://github.com/angular/angular-c
 # Serve dev on http://localhost:4200/
 ng serve --aot
 
-# Build for prod. Files will appear in the dist folder
-ng build --prod
+# Prod Build for targeted environment. Files will appear in the dist folder
+npm run build:qa # Uses settings from environment.qa.ts
+npm run build:uat # Uses settings from environment.uat.ts
+npm run build:prod # Uses settings from environment.prod.ts
 
 # Serve prod build from dist folder at http://127.0.0.1:8080/#/.
 # Requires http server which can be installed with `npm install http-server -g`
@@ -63,7 +65,7 @@ npm run deploy
 
 - If using github pages, update the `npm run deploy` command in this file to include the correct slug. IE replace `/angular-starter/` with your url
 
-`src > environments > environment.ts` +
+`src > environments > defaults.ts` +
 `src > environments > environment.prod.ts`
 
 - Localize environment settings and properties in these files. Enable/disable app functionality as needed
