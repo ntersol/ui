@@ -8,7 +8,9 @@
     [disableLocateMeButton]="true"
     [disableMapTypeSelector]="true"
     [pushPinsAddable]="'multiple'"
-    [pushPinIcon]="'https://www.bingmapsportal.com/Content/images/poi_custom.png'"
+    [pushPinIcon]="
+      'https://www.bingmapsportal.com/Content/images/poi_custom.png'
+    "
     [pushPinRadius]="radius"
     (addedPushPin)="addedPushPin($event)"
     (viewChanged)="viewChanged($event)"

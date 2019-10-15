@@ -29,6 +29,8 @@ import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent implements OnInit {
+  @Input() defaultView = 'dayGridMonth';
+
   @Input() events = [
     { title: 'Call Suzi', date: '2019-08-01' },
     { title: 'Send Docs Out', date: '2019-08-02' },

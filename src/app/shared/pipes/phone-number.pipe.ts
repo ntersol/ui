@@ -12,6 +12,7 @@ export class PhoneNumberPipe implements PipeTransform {
     }
     // Whitelist numbers only
     let viewVal = val.replace(/[^0-9]/g, '');
+    // Keep track of leading ones
     let hasLeadingOne = false;
     // Check for leading one
     if (viewVal.charAt(0) === '1' && viewVal.length === 11) {

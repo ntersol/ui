@@ -25,7 +25,7 @@ const chartSrc = 'assets/scripts/canvasjs.min.js';
  * A charting and data visualization library based on CanvasJS
  */
 @Component({
-  selector: 'app-chart',
+  selector: 'nts-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

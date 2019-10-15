@@ -16,7 +16,7 @@ import {
   SortPipe,
   StringPipe,
   TextCasePipe,
-  LimitPipe
+  LimitPipe,
 } from './pipes';
 // Directives
 import {

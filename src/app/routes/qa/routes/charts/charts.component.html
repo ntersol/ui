@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <app-chart
+  <nts-chart
     *ngIf="frame === 0"
     [type]="'bar'"
     [data]="dataPointsCounts"
@@ -16,12 +16,18 @@
     [showLegend]="false"
     [height]="'90vh'"
   >
-  </app-chart>
+  </nts-chart>
 
-  <app-chart *ngIf="frame === 1" [data]="dataPointsTransfersTotal" [titleChart]="'Transfers'" [showLegend]="false" [height]="'90vh'">
-  </app-chart>
+  <nts-chart
+    *ngIf="frame === 1"
+    [data]="dataPointsTransfersTotal"
+    [titleChart]="'Transfers'"
+    [showLegend]="false"
+    [height]="'90vh'"
+  >
+  </nts-chart>
 
-  <app-chart
+  <nts-chart
     *ngIf="frame === 2"
     [data]="dataPointsTopFive"
     [type]="'bar'"
@@ -30,7 +36,7 @@
     [showLegend]="false"
     [height]="'90vh'"
   >
-  </app-chart>
+  </nts-chart>
 
   <!--
 

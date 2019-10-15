@@ -1,7 +1,11 @@
 <div class="search-group">
   <form (submit)="submit()" name="nav-search">
     <div class="input-group input-group-sm">
-      <select class="form-control search-option" [(ngModel)]="search.type" name="type">
+      <select
+        class="form-control search-option"
+        [(ngModel)]="search.type"
+        name="type"
+      >
         <option selected disabled value="">Search By:</option>
         <option value="TEMP">Loan Number</option>
         <option value="TEMP">First Name</option>
@@ -17,7 +21,13 @@
         name="field"
       />
       <div class="input-group-btn">
-        <button type="submit" class="btn btn-interact" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button
+          type="submit"
+          class="btn btn-interact"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
           <i class="fa fa-search white"></i> Search
         </button>
       </div>

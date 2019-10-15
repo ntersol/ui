@@ -1,11 +1,23 @@
-<p-menubar [model]="navMenu" *ngIf="(isDesktop$ | async); else mobileTemplate">
+<p-menubar [model]="navMenu" *ngIf="isDesktop$ | async; else mobileTemplate">
   <div>
-    <ng-container *ngIf="(hasUpdate$ | async) as hasUpdate">
-      <button pButton type="button" icon="fa fa-warning" label="Update Available" (click)="updateApp()"></button>
+    <ng-container *ngIf="hasUpdate$ | async as hasUpdate">
+      <button
+        pButton
+        type="button"
+        icon="fa fa-warning"
+        label="Update Available"
+        (click)="updateApp()"
+      ></button>
     </ng-container>
-    <p-slideMenu #menu [model]="utilityMenu" [popup]="true" [viewportHeight]="utilityMenu.length * 65"></p-slideMenu>
+    <p-slideMenu
+      #menu
+      [model]="utilityMenu"
+      [popup]="true"
+      [viewportHeight]="utilityMenu.length * 65"
+    ></p-slideMenu>
     <a label="Show" (click)="menu.toggle($event)">
-      <i class="fa fa-user mr-2"></i> <span class="mr-2">{{ userName }}</span> <i class="fa fa-caret-down mr-1"></i>
+      <i class="fa fa-user mr-2"></i> <span class="mr-2">{{ userName }}</span>
+      <i class="fa fa-caret-down mr-1"></i>
     </a>
   </div>
 </p-menubar>

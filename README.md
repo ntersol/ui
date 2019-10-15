@@ -109,10 +109,15 @@ npm run deploy
 ## Bit Usage
 Review bit documentation here: https://docs.bit.dev/docs/quick-start. Ntersol bit library is here: https://bit.dev/nts/angular
 
+One line wonders:
+	-- Get and update to latest everything: `npm run bit:pull`
+	-- Tag and push everything: `npm run bit:push`
+
+Additional Info:
 - Install/update bit cli `npm install bit-bin -g`
-- Checkout the latest version of all components with `bit checkout latest --all`
 - See list of outdated components `bit list --outdated`
-- Check status of local component environment, IE which components have been updated `bit status`
+- To get the latest version of everything, run `bit import && bit checkout latest --all`. Import downloads the latest version from the remote server and checkout switches to that version
+- Check status of local component environment, IE which components have been updated and are ready for tagging/uploading `bit status`
 - When components are ready to have their changes exported, first run `bit tag --all` or `bit tag --all 1.0.0` to set a new semver version and then export with `bit export nts.angular`
 - Add a new component to a namespaced project with `bit add src/app/component/general/new-component --namespace components/general`. See https://bit.dev/nts/angular for the locations and namespaces of components.
 
