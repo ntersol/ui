@@ -110,8 +110,8 @@ npm run deploy
 Review bit documentation here: https://docs.bit.dev/docs/quick-start. Ntersol bit library is here: https://bit.dev/nts/angular
 
 One line wonders:
-	-- Get and update to latest everything: `npm run bit:pull`
-	-- Tag and push everything: `npm run bit:push`
+- Get and update to latest everything: `npm run bit:pull`
+- Tag and push everything: `npm run bit:push`
 
 Additional Info:
 - Install/update bit cli `npm install bit-bin -g`
