@@ -34,6 +34,7 @@ export class UiStateService {
       .select(state => state.toggles)
       .pipe(
         map(val => (val && val[toggleProp] !== null ? val[toggleProp] : null)),
+        filter(val => typeof val !== 'undefined'),
         distinctUntilChanged(),
       );
 
