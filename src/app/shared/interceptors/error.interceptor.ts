@@ -2,7 +2,7 @@ import { ErrorHandler, Injectable } from '@angular/core';
 
 import { environment } from '$env';
 import { SettingsService } from '$settings';
-import { NtsServiceWorkerService } from '$services';
+import { NtsServiceWorkerService } from '../services/general';
 
 interface AngularError {
   promise: any;
@@ -65,7 +65,7 @@ export class GlobalErrorHandler implements ErrorHandler {
       window.location.href = '/#/login';
     };
     // If serviceworker is enabled, remove it first befire executing reset action, otherwise just reset
-    this.sw.isEnabled ? this.sw.remove(resetAction) : resetAction();
+    this.sw.isEnabled ? this.sw.remove() : resetAction();
   }
 
   /**

@@ -1,13 +1,17 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, enableProdMode, ErrorHandler } from '@angular/core'; // APP_INITIALIZER,
+import { NgModule, enableProdMode, ErrorHandler, Injector } from '@angular/core'; // APP_INITIALIZER,
 import { RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { enableAkitaProdMode, persistState } from '@datorama/akita';
 
-// Global vendor modules
+import { SiteModule } from '$site';
+import { LoginComponent } from './routes/login/login.component';
+import { NoContentComponent } from './routes/no-content/no-content.component';
+import { GlobalErrorHandler } from './shared/interceptors/error.interceptor';
+import { HttpInterceptorService } from './shared/interceptors/http.interceptor';
 
 // Main entrypoint component
 import { AppComponent } from './app.component';
@@ -57,18 +61,6 @@ persistState({
 // Enables faster prod mode, does disable some dirty error checking though
 enableProdMode();
 
-// Shared
-import {
-  // AppConfigService, // App config/env settings
-
-  // Interceptors
-  HttpInterceptorService,
-  GlobalErrorHandler,
-} from '$shared';
-
-// Non-lazy loaded routes
-import { LoginComponent, NoContentComponent } from '$routes';
-import { SiteModule } from '$site';
 
 // Components
 export const APP_COMPONENTS = [
@@ -79,6 +71,8 @@ export const APP_COMPONENTS = [
   NoContentComponent,
 ];
 
+export let InjectorInstance: Injector;
+
 @NgModule({
   declarations: [APP_COMPONENTS],
   imports: [
@@ -87,15 +81,12 @@ export const APP_COMPONENTS = [
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {
       useHash: true,
-      preloadingStrategy: environment.settings.preloadRoutes
-        ? PreloadAllModules
-        : NoPreloading,
+      preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,
       scrollPositionRestoration: 'enabled',
     }),
 
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled:
-        environment.production && environment.settings.enableServiceWorker,
+      enabled: environment.production && environment.settings.enableServiceWorker,
       registrationStrategy: 'registerImmediately',
     }),
 
@@ -127,7 +118,11 @@ export const APP_COMPONENTS = [
   bootstrap: [AppComponent],
   entryComponents: [],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private injector: Injector) {
+    InjectorInstance = this.injector;
+  }
+}
 
 /**
  * Check if environment settings are already present, if not load first before the rest of the app
