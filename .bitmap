@@ -311,7 +311,7 @@
         "origin": "NESTED",
         "originallySharedDir": "src/app/components/general/grid"
     },
-    "nts.angular/components/general/grid@1.0.6": {
+    "nts.angular/components/general/grid@1.0.9": {
         "files": [
             {
                 "name": "grid-status-bar.component.html",
@@ -409,7 +409,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "nts.angular/components/general/index@1.0.19": {
+    "nts.angular/components/general/index@1.0.20": {
         "files": [
             {
                 "name": "index.ts",
@@ -775,7 +775,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "nts.angular/services/general/index@1.0.5": {
+    "nts.angular/services/general/index@1.0.6": {
         "files": [
             {
                 "name": "index.ts",
@@ -811,7 +811,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "nts.angular/services/general/signal-rservice@1.0.2": {
+    "nts.angular/services/general/signal-rservice@1.0.4": {
         "files": [
             {
                 "name": "signal-r.service.ts",

@@ -54,6 +54,8 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('grid', { static: false }) grid!: AgGridAngular;
   @ViewChild('gridContainer', { static: false }) gridContainer!: ElementRef;
 
+  /** The property containing the unique ID of the row data */
+  @Input() rowUniqueId!: string;
   @Input() parentRef: any;
   @Input() license: string | undefined;
   @Input() enableSorting = true;
@@ -79,6 +81,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
       // set the cell renderer to 'group'
       // cellRenderer: 'agGroupCellRenderer',
     },
+    getRowNodeId: data => data[this.rowUniqueId],
     statusBar: {
       statusPanels: [
         {
@@ -112,8 +115,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   };
 
   @Input() rowData: any[] | undefined;
-  /** The property containing the unique ID of the row data */
-  @Input() rowUniqueId!: string;
+
   @Input() getMainMenuItems: any;
   @Input() columnDefs: ColDef[] | undefined;
   @Input() animateRows: boolean | undefined;
@@ -124,9 +126,48 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   @Input() getContextMenuItems: any;
   @Input() frameworkComponents: any;
   @Input() rowGroupPanelShow: any;
-  @Input() rowSelection: any;
+  /** Allow the user to select more than one row */
+  @Input() rowSelection: 'single' | 'multiple' = 'multiple';
   /** When new entries are passed in, should rows that are currently selected stay selected */
   @Input() rowsStaySelected = true;
+
+  /**
+   * Highlight and scroll to existing row or rows. This requires the uniqueId to match
+   */
+  @Input() set selectRows(rowsSrc: any | any[]) {
+    if (!this.gridApi || !rowsSrc || !this.rowUniqueId) {
+      return;
+    }
+    // Create an array of uniqueIds, this will be used to match against the existing rows
+    const uniqueIds: string[] = [];
+    if (Array.isArray(rowsSrc) && rowsSrc.length) {
+      rowsSrc.forEach(row => uniqueIds.push(row[this.rowUniqueId]));
+    } else {
+      uniqueIds.push(rowsSrc[this.rowUniqueId]);
+    }
+    // Deselect all rows first
+    this.gridApi.deselectAll();
+    this.gridApi.forEachNode((node, i) => {
+      if (uniqueIds.includes(node.data[this.rowUniqueId])) {
+        node.setSelected(true, false);
+      }
+      // Scroll to the first node supplied by the input
+      if (i === 0 && this.gridApi) {
+        this.gridApi.ensureNodeVisible(node);
+      }
+    });
+  }
+
+  /**
+   * Update individual rows without refreshing the entire grid
+   */
+  @Input() set updateRows(rowsSrc: any | any[]) {
+    if (!this.gridApi || !rowsSrc || !this.rowUniqueId) {
+      return;
+    }
+    this.gridApi.updateRowData({ update: [...rowsSrc] });
+    this.gridApi.redrawRows();
+  }
 
   @Output() stateChange = new EventEmitter<NtsGridState>();
   @Output() rowsSelected = new EventEmitter<any[]>();
@@ -150,6 +191,27 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   /** Hold latest gridstate */
   public gridState$ = new BehaviorSubject<any>(this.gridState);
   public columns$ = new BehaviorSubject<ColDef[] | null>(null);
+
+  /** Get the currently visible rows accounting for grouping, filtering & sorting */
+  public get rowsVisible() {
+    return this.gridApi
+      ? this.gridApi
+          .getRenderedNodes()
+          .map(x => x.data)
+          .filter(x => x)
+      : [];
+  }
+
+  /** Get the currently selected rows that are visible  */
+  public get rowsVisibleSelected() {
+    return this.gridApi
+      ? this.gridApi
+          .getRenderedNodes()
+          .filter(x => x.isSelected())
+          .map(x => x.data)
+          .filter(x => x)
+      : [];
+  }
 
   /** Dictionary of keys being pressed */
   private keysPressed: { [key: string]: boolean } = {};
@@ -319,12 +381,14 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
    */
   @debounce(200)
   public gridSelectionChanged() {
-    const rows = this.grid.api.getSelectedRows();
-    // HACK: When a grid filter term is present, rows are selected at random in diff quantities and reverse
-    // Reversing gives at least the first in order correct lead
-    if (this.gridFilterTerm && this.gridFilterTerm !== '') {
-      rows.reverse();
+    if (!this.gridApi) {
+      return;
     }
+    // Get selected nodes by only looking at visible rows
+    const rows = this.gridApi
+      .getRenderedNodes()
+      .filter(x => x && x.isSelected())
+      .map(x => x.data);
     this.rowsSelectedList = rows;
     this.rowsSelected.emit(rows);
   }

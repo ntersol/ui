@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 // Closure containing token
 type tokenFn = () => string;
@@ -15,90 +15,87 @@ type tokenFn = () => string;
   providedIn: 'root',
 })
 export class NtsSignalRService {
+  public isActive$ = new BehaviorSubject(false);
   /** Is SignalR currently running */
   public isActive = false;
   /** Hold ref to signalR hub */
-  private hubConnection: signalR.HubConnection | undefined;
+  private hubConnection: signalR.HubConnection | null = null;
   /** A dictionary of observables tied to a specific ID that will listen to an ID */
   private connections: { [key: string]: Subject<any> } = {};
   /**
-   * A dictionary of message events where the observable has been created BEFORE signalR is ready.
+   * An array of message events where the observable has been created BEFORE signalR is ready.
    * After signalR is ready these IDs will have their signalR ON event attached to the observable
    */
-  private queuedIDs: { [key: string]: boolean } = {};
+  private queuedIDs: string[] = [];
 
-  private _token!: string | tokenFn;
+  private _token!: string | tokenFn | null;
   /** Return the token if it is a string or a closure that returns a string */
-  private get token(): string {
-    if (typeof this._token === 'function') {
-      return this._token();
-    }
-    return this._token;
+  private get token(): string | null {
+    return typeof this._token === 'function' ? this._token() : this._token;
   }
 
   constructor() {
     if (!signalR) {
-      console.error(
-        'SignalR not installed. Install with: npm install @aspnet/signalr –-save',
-      );
+      console.error(`SignalR not installed. Install with: npm install '@aspnet/signalr –-save'`);
     }
   }
 
   /**
    * Start a connection to signalR
    * @param signalRUrl - Location of the api url for signalr
-   * @param token - The bearer token to pass for requests. This argument accepts either a string or a closure that returns a string. If using a string, be sure to use the tokenUpdate method in this file when the token changes. The closure should return the token, IE () => this.settings.token
+   * @param token - The bearer token to pass for requests. This argument accepts either a string or a closure that returns a string.
+   * If using a string, be sure to use the tokenUpdate method in this file when the token changes.
+   * The closure should return the token, IE () => this.settings.token
    * @param retryTime - If signalR is unavailable, retry in this many milliseconds
    */
-  public connectionStart(
-    signalRUrl: string,
-    token?: string | tokenFn,
-    retryTime = 10000,
-  ) {
-    // Make sure user is logged in and signalR endpoint specified
-    if (!signalRUrl) {
+  public connectionStart(signalRUrl: string, token: string | tokenFn, retryTime = 10000) {
+    // Set/update token
+    this._token = token;
+
+    // Require a signalR url and a token
+    if (!signalRUrl || !this.token || typeof this.token !== 'string') {
       return;
     }
-    // Keep token
-    this._token = <any>token; // TODO: Improve for strict null checks
 
-    // If hubConnection not available yet, create it only on first instance
-    if (!this.hubConnection) {
-      this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl(signalRUrl, { accessTokenFactory: () => this.token })
-        .build();
+    // If connection already exists, return that. No need to reinitialize
+    if (this.hubConnection) {
+      return this.hubConnection;
     }
+
+    this.hubConnection = new signalR.HubConnectionBuilder()
+      .withUrl(signalRUrl, <signalR.IHttpConnectionOptions>{ accessTokenFactory: () => this.token })
+      .build();
+
     // Start signalR
     const hubConnection = this.hubConnection.start();
-    // If this connection disconnects, keep restarting it until it reconnects
-    this.hubConnection.onclose(() =>
-      setTimeout(
-        () => this.connectionStart(signalRUrl, this.token, retryTime),
-        retryTime,
-      ),
-    );
+
     // Watch status
     hubConnection
       // If any queued ID's, attach ON event to the observable
       .then(() => {
         this.isActive = true;
-        if (Object.keys(this.queuedIDs).length) {
-          Object.keys(this.queuedIDs).forEach(key => this.listenStart(key));
-          this.queuedIDs = {}; // Reset queue
+        this.isActive$.next(true);
+        // If any ID's are queued, start the listener for them
+        if (this.queuedIDs.length) {
+          this.queuedIDs.forEach(key => this.listenStart(key));
+          this.queuedIDs = []; // Reset queue
         }
       })
       // If error on start, retry
-      .catch(() => {
-        // If retry specified
-        if (retryTime) {
-          setTimeout(
-            () => this.connectionStart(signalRUrl, this.token, retryTime),
-            retryTime,
-          );
+      .catch(err => {
+        // If error is "unauthorized", end connection and do not retry. Otherwise keep trying
+        if (
+          String(err)
+            .toLowerCase()
+            .includes('unauthorized')
+        ) {
+          this.connectionEnd();
+        } else {
+          setTimeout(() => this.connectionStart(signalRUrl, <string | tokenFn>this.token, retryTime), retryTime);
         }
       });
     // Return promise of signalR startup status
-    return hubConnection;
+    return this.hubConnection;
   }
 
   /**
@@ -109,23 +106,32 @@ export class NtsSignalRService {
     if (!this.hubConnection) {
       return;
     }
+
+    // Null out token reference
+    this._token = null;
+
     // Complete and end all open subscriptions
     Object.keys(this.connections).forEach(key => {
       this.connections[key].complete();
       delete this.connections[key];
     });
+
     // Stop connection
     const hubConnection = this.hubConnection.stop();
     // End connection
     hubConnection
       .then(() => {
         this.isActive = false;
+        this.isActive$.next(false);
+        // Null out existing connection after stopping
+        this.hubConnection = null;
       })
       .catch(err => {
         console.log('Error while stopping connection: ' + err);
         // On error, attempt to end connection every 10 seconds
         setTimeout(() => this.connectionEnd(), 10000);
       });
+
     // Return promise of stop status
     return hubConnection;
   }
@@ -134,7 +140,6 @@ export class NtsSignalRService {
    * Listen to data being returned from signalR
    * Returns an observable that will only update on the event specified by 'id'
    * @param id The unique ID of the message event
-   * @param autoStart Should this event attempt to start signalR if not started already?
    */
   public listenStart<t>(id: string) {
     // If observable for this message ID does not exist
@@ -145,20 +150,12 @@ export class NtsSignalRService {
     // Make sure hub connection has been started
     if (this.hubConnection) {
       // Add event listener to hub connection
-      this.hubConnection.on(id, data => {
-        // Double check that user is logged in
-        if (this.token) {
-          // When data is passed via signalR, update subs
-          this.connections[id].next(JSON.parse(data));
-        } else {
-          // If no token, end connection, do not broadcast
-          this.connectionEnd();
-        }
-      });
+      this.hubConnection.on(id, data => this.connections[id].next(JSON.parse(data)));
     } else {
-      console.warn('SignalR has not been started yet');
+      // Hub connection has not been created yet, add ID to queue. listenStart will be rerun after hub connects
+      this.queuedIDs = [...this.queuedIDs, id];
     }
-
+    // Return subject
     return <Subject<t>>this.connections[id];
   }
 
@@ -198,7 +195,7 @@ export class NtsSignalRService {
    * Update the token signalR will use to communicate with the webapi
    * @param token
    */
-  public updateToken(token: string) {
+  public tokenUpdate(token: string) {
     this._token = token;
   }
 }
