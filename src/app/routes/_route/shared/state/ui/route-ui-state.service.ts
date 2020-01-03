@@ -1,5 +1,5 @@
 import { StoreConfig, Store, Query } from '@datorama/akita';
-import { storeName } from 'src/app/routes/home';
+import { storeName } from '../../../route.module';
 
 interface RouteUIState {
   someProp: string | null;
