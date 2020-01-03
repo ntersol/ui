@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 // import { DomainService } from '$domain';
-import { UiStateService } from '$ui';
+// import { UiStateService } from '$ui';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class RootComponent implements OnInit, OnDestroy {
   
   constructor(
     // private domainState: DomainService, // Global domain state
-    public uiState: UiStateService, // Global UI state
+    // public uiState: UiStateService, // Global UI state
   ) {}
 
   ngOnInit() {}

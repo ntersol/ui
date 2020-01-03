@@ -1,12 +1,19 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { SettingsStore, createInitialState } from './settings.store';
-import { SettingsQuery } from './settings.query';
 import { isPlatformBrowser } from '@angular/common';
+import { StoreConfig, Store, Query } from '@datorama/akita';
 
 enum Props {
   token = 'token',
   userName = 'userName',
   version = 'version',
+}
+
+export function createInitialState(): Settings {
+  return {
+    token: null,
+    userName: null,
+    version: null,
+  };
 }
 
 @Injectable({ providedIn: 'root' })
@@ -72,5 +79,22 @@ export class SettingsService {
    */
   public reset() {
     this.store.reset();
+  }
+}
+
+// tslint:disable-next-line:max-classes-per-file
+@Injectable({ providedIn: 'root' })
+@StoreConfig({ name: 'settings', resettable: true })
+export class SettingsStore extends Store<Settings> {
+  constructor() {
+    super(createInitialState());
+  }
+}
+
+// tslint:disable-next-line:max-classes-per-file
+@Injectable({ providedIn: 'root' })
+export class SettingsQuery extends Query<Settings> {
+  constructor(protected store: SettingsStore) {
+    super(store);
   }
 }

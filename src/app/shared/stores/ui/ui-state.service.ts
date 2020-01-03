@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
-import { UiStateStore } from './ui-state.store';
-import { UiStateQuery } from './ui-state.query';
 import { map, distinctUntilChanged, filter } from 'rxjs/operators';
 import { merge } from 'rxjs';
 import { ConfirmationService } from 'primeng/api';
 import { SwUpdate } from '@angular/service-worker';
 import { NtsServiceWorkerService, NtsVersionManagementService } from '../../services/general';
+import { StoreConfig, Store, Query } from '@datorama/akita';
 
+export function createInitialState(): UIState {
+  return {
+    tabsActive: {},
+    toggles: {},
+  };
+}
+
+// tslint:disable-next-line:max-classes-per-file
 @Injectable({ providedIn: 'root' })
 export class UiStateService {
   /** Is an app update available, either from the service worker or the version checker */
-  public updateAvailable$ = merge(
-    this.ntsSw.updateAvailable$,
-    this.ntsVersion.updateAvailable$,
-  );
+  public updateAvailable$ = merge(this.ntsSw.updateAvailable$, this.ntsVersion.updateAvailable$);
 
   /** State of current UI store */
   public uiState$ = this.query.select();
@@ -44,9 +48,7 @@ export class UiStateService {
     private ntsVersion: NtsVersionManagementService,
   ) {
     // this.query.uiState$.subscribe(state => console.log('UI STATE', state));
-    this.updateAvailable$
-      .pipe(filter(val => val))
-      .subscribe(() => this.updateAppModal());
+    this.updateAvailable$.pipe(filter(val => val)).subscribe(() => this.updateAppModal());
   }
 
   /**
@@ -89,13 +91,9 @@ export class UiStateService {
 
   public updateAppModal() {
     this.confirmationService.confirm({
-      message:
-        'An update for this application is available, would you like to update?',
+      message: 'An update for this application is available, would you like to update?',
       header: 'Confirmation',
-      accept: () =>
-        this.sw.isEnabled
-          ? this.sw.activateUpdate().then(() => document.location.reload())
-          : document.location.reload(),
+      accept: () => (this.sw.isEnabled ? this.sw.activateUpdate().then(() => document.location.reload()) : document.location.reload()),
       // reject: () => console.log('Nope!!!'),
     });
   }
@@ -105,5 +103,22 @@ export class UiStateService {
    */
   public reset() {
     this.store.reset();
+  }
+}
+
+// tslint:disable-next-line:max-classes-per-file
+@Injectable({ providedIn: 'root' })
+@StoreConfig({ name: 'uiState', resettable: true })
+export class UiStateStore extends Store<UIState> {
+  constructor() {
+    super(createInitialState());
+  }
+}
+
+// tslint:disable-next-line:max-classes-per-file
+@Injectable({ providedIn: 'root' })
+export class UiStateQuery extends Query<UIState> {
+  constructor(protected store: UiStateStore) {
+    super(store);
   }
 }
