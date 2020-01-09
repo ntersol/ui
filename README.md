@@ -120,6 +120,7 @@ Additional Info:
 - Check status of local component environment, IE which components have been updated and are ready for tagging/uploading `bit status`
 - When components are ready to have their changes exported, first run `bit tag --all` or `bit tag --all 1.0.0` to set a new semver version and then export with `bit export nts.angular`
 - Add a new component to a namespaced project with `bit add src/app/component/general/new-component --namespace components/general`. See https://bit.dev/nts/angular for the locations and namespaces of components.
+- Sometimes when getting the latest component, bit adds lots of extra carriage returns. To fix this run checkout with the reset command `npm run bit:reset`
 
 Add bit to a new project
 1. In the root directory, run `bit init`

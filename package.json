@@ -10,6 +10,7 @@
     "ng": "ng",
     "bit:pull": "bit import && bit checkout latest --all",
     "bit:push": "bit tag --all && bit export nts.angular",
+    "bit:reset": "bit checkout --all --reset",
     "build": "ng build",
     "build:stats": "ng build --prod --stats-json && npm run bundle-report",
     "bundle-report": "webpack-bundle-analyzer dist/browser/stats.json -p 8887",
