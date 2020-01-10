@@ -1,13 +1,7 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ColumnApi } from 'ag-grid-community';
 import { AgGridAngular } from 'ag-grid-angular';
 const cloneDeep = require('lodash/cloneDeep');
-
 @Component({
   selector: 'app-grid-status-bar',
   templateUrl: './grid-status-bar.component.html',
@@ -25,20 +19,16 @@ export class GridStatusBarComponent implements OnInit {
   };
   public gridFilters: any[] = [];
   public gridGroups: any[] = [];
-
   private grid!: AgGridAngular;
   private gridColumnApi!: ColumnApi;
   private params: any;
   /** Disable updates while resetting */
   private resetting = false;
-
   constructor(private ref: ChangeDetectorRef) {}
-
   ngOnInit() {
     this.grid = this.params;
     this.gridColumnApi = this.params.columnApi;
   }
-
   /**
    * When the grid state is changed. This is passed from the parent component
    * @param gridState
@@ -48,7 +38,6 @@ export class GridStatusBarComponent implements OnInit {
     if (!this.resetting) {
       // Local reference to grid state
       this.gridState = cloneDeep(gridState);
-
       // Get grid filters
       if (this.gridState && this.gridState.filters) {
         const filterTermsMax = 3;
@@ -66,18 +55,13 @@ export class GridStatusBarComponent implements OnInit {
           };
         });
       }
-
       // Get the active groups
       if (this.gridState && this.gridState.columnsState) {
-        this.gridGroups = this.gridState.columnsState.filter(
-          (column: any) => column.rowGroupIndex !== null,
-        );
+        this.gridGroups = this.gridState.columnsState.filter((column: any) => column.rowGroupIndex !== null);
       }
-
       this.ref.detectChanges();
     }
   }
-
   /**
    * Attach AG grid parameters
    * @param params
@@ -85,15 +69,12 @@ export class GridStatusBarComponent implements OnInit {
   public agInit(params: any): void {
     this.params = params;
   }
-
   /** Reset all sorts/filters/groups. Reference is passed by grid.component.ts */
   public reset() {}
-
   /** Remove sorting */
   public removeSort() {
     this.grid.api.setSortModel(null);
   }
-
   /**
    * Remove specified group
    * @param colId - colID of group to remove
@@ -110,7 +91,6 @@ export class GridStatusBarComponent implements OnInit {
       this.gridColumnApi.setColumnState(this.gridState.columnsState);
     }
   }
-
   /**
    * Remove specified filter
    * @param field - field of filter to remove

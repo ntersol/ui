@@ -1,7 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
 const capitalize = require('lodash/capitalize');
-
 @Pipe({
   name: 'textCase',
 })
@@ -19,7 +17,6 @@ export class TextCasePipe implements PipeTransform {
           return capitalize(value);
       }
     }
-
     return null;
   }
 }

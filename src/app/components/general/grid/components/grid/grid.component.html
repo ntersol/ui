@@ -17,8 +17,8 @@
     [rowSelection]="rowSelection"
     [groupRemoveSingleChildren]="true"
     [allowContextMenuWithControlKey]="true"
-    (rowClicked)="onRowSelected($event)"
     (selectionChanged)="gridSelectionChanged()"
+    (cellKeyPress)="gridSelectionChanged()"
     (cellContextMenu)="cellContextMenu($event)"
     (rangeSelectionChanged)="gridRangeSelectionChanged($event)"
     (rowDataChanged)="gridRowDataChanged()"
@@ -34,6 +34,8 @@
   >
   </ag-grid-angular>
   <!--
+    
+    (rowClicked)="onRowSelected($event)"
     (rowGroupOpened)="gridStateChanged($event)"
   -->
 </div>

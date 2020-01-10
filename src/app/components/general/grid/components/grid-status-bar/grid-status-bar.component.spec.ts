@@ -4,6 +4,7 @@ import { GridStatusBarComponent } from './grid-status-bar.component';
 
 describe('GridStatusBarComponent', () => {
   let component: GridStatusBarComponent;
+
   let fixture: ComponentFixture<GridStatusBarComponent>;
 
   beforeEach(async(() => {
@@ -14,7 +15,9 @@ describe('GridStatusBarComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GridStatusBarComponent);
+
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
 

@@ -622,7 +622,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "nts.angular/components/general/table@0.0.15": {
+    "nts.angular/components/general/table@0.0.16": {
         "files": [
             {
                 "name": "table.component.html",
@@ -662,6 +662,21 @@
             {
                 "name": "index.ts",
                 "relativePath": "index.ts",
+                "test": false
+            },
+            {
+                "name": "phone-number.pipe.ts",
+                "relativePath": "pipes/phone-number.pipe.ts",
+                "test": false
+            },
+            {
+                "name": "slug.pipe.ts",
+                "relativePath": "pipes/slug.pipe.ts",
+                "test": false
+            },
+            {
+                "name": "table.d.ts",
+                "relativePath": "table.d.ts",
                 "test": false
             },
             {

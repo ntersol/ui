@@ -17,15 +17,6 @@ import {
 import { Table } from 'primeng/table';
 import { TableColumnDirective } from '../../directives/column.directive';
 
-type NtsColumnType = 'email' | 'date' | 'dateTime' | 'currency';
-
-export interface NtsColumn {
-  field: string;
-  header: string | null;
-  type?: NtsColumnType;
-  /** Arguments to pass to the formatting pipes */
-  typeArgs?: string;
-}
 @Component({
   selector: 'nts-table',
   templateUrl: './table.component.html',
@@ -38,7 +29,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   /** Rows */
   @Input() rows: any[] | undefined;
   /** Columns */
-  @Input() columns: NtsColumn[] | undefined;
+  @Input() columns: NtsTable.Column[] | undefined;
   /** Custom header text */
   @Input() headerText: string | undefined;
   /** Is the table sortable */
@@ -51,6 +42,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() filterTerm: string | null = null;
   /** Enable paginate and only display this many entries */
   @Input() paginateRows: number | undefined;
+  /** Shows a dropdown with how many results per page */
+  @Input() rowsPerPageOptions: number[] | undefined;
 
   @Input() compact = false;
 
@@ -92,10 +85,13 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
       this.rowsSrc = [...this.rows];
     }
 
-    setTimeout(() => {
-      this.columnWidthsPercent = this.columnWidthFix(this.tableHeaders.toArray());
-      this.ref.markForCheck();
-    });
+    if (this.tableHeaders) {
+      setTimeout(() => {
+        this.columnWidthsPercent = this.columnWidthFix(this.tableHeaders.toArray());
+        this.ref.markForCheck();
+      });
+    }
+   
   }
 
   /**

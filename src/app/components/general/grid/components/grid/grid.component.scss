@@ -13,7 +13,6 @@ ag-grid-angular,
   height: 100%;
   width: 100%;
 }
-
 /* Ag Grid */
 ag-grid-angular .ag-root-wrapper {
   .ag-header-icon.ag-filter-icon .ag-icon-filter,
@@ -24,7 +23,6 @@ ag-grid-angular .ag-root-wrapper {
   .ag-column-drop {
     display: none;
   }
-
   .ag-header-cell-label {
     cursor: pointer;
   }
@@ -59,7 +57,6 @@ ag-grid-angular .ag-root-wrapper {
         content: '\f0d7';
       }
     }
-
     &.ag-icon-checkbox-indeterminate {
       background-image: none !important;
       &:before {
@@ -135,8 +132,8 @@ ag-grid-angular .ag-root-wrapper {
     .ag-icon:after {
       display: inline-block;
       padding-left: 6px;
-      font: 400 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-        Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      font: 400 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+        'Helvetica Neue', sans-serif;
     }
     .ag-icon-filter:after {
       content: 'Filters';
