@@ -214,10 +214,8 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   }
   private subsActive = true;
   // Manage keyboard events
-  @HostListener('document:keydown', ['$event'])
-  keyPressed = (event: KeyboardEvent) => this.keyboardEvent(event);
-  @HostListener('document:keyup', ['$event'])
-  keyUp = (event: KeyboardEvent) => this.keyboardEvent(event);
+  @HostListener('document:keydown', ['$event']) keyPressed = (event: KeyboardEvent) => this.keyboardEvent(event);
+  @HostListener('document:keyup', ['$event']) keyUp = (event: KeyboardEvent) => this.keyboardEvent(event);
 
   constructor() {}
 
@@ -352,7 +350,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
     this.rowsSelectedList = this.rowsVisibleSelected;
     this.rowsSelected.emit(this.rowsVisibleSelected);
   }
- 
+
   /**
    * On right click
    */

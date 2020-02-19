@@ -6,8 +6,10 @@ import { MessageModule } from 'primeng/message';
 import { NtsDomainStateComponent } from './components/api-state/api-state.component';
 import { NtsErrorComponent } from './components/error/error.component';
 import { EntityToArray } from './pipes/entity-to-array.pipe';
+import { EntityData } from './pipes/entity-data.pipe';
+import { EntityIsLoaded } from './pipes/is-loaded.pipe';
 
-const Components = [NtsDomainStateComponent, NtsErrorComponent, EntityToArray];
+const Components = [NtsDomainStateComponent, NtsErrorComponent, EntityToArray, EntityData, EntityIsLoaded];
 
 /**
  * State management tools intended to work with Akita

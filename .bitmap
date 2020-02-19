@@ -97,8 +97,13 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "nts.angular/components/general/forms@1.1.5": {
+    "nts.angular/components/general/forms@1.1.6": {
         "files": [
+            {
+                "name": "LICENSE.md",
+                "relativePath": "src/app/components/general/forms/LICENSE.md",
+                "test": false
+            },
             {
                 "name": "README.md",
                 "relativePath": "src/app/components/general/forms/README.md",
@@ -152,6 +157,11 @@
             {
                 "name": "index.ts",
                 "relativePath": "src/app/components/general/forms/index.ts",
+                "test": false
+            },
+            {
+                "name": "tsconfig.json",
+                "relativePath": "src/app/components/general/forms/tsconfig.json",
                 "test": false
             },
             {
@@ -213,8 +223,13 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "nts.angular/components/general/grid@1.0.14": {
+    "nts.angular/components/general/grid@1.0.15": {
         "files": [
+            {
+                "name": "LICENSE.md",
+                "relativePath": "src/app/components/general/grid/LICENSE.md",
+                "test": false
+            },
             {
                 "name": "grid-status-bar.component.html",
                 "relativePath": "src/app/components/general/grid/components/grid-status-bar/grid-status-bar.component.html",
@@ -293,6 +308,11 @@
             {
                 "name": "text-case.pipe.ts",
                 "relativePath": "src/app/components/general/grid/pipes/text-case.pipe.ts",
+                "test": false
+            },
+            {
+                "name": "tsconfig.json",
+                "relativePath": "src/app/components/general/grid/tsconfig.json",
                 "test": false
             },
             {
@@ -554,8 +574,13 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "nts.angular/components/general/state-management@1.0.11": {
+    "nts.angular/components/general/state-management@1.0.12": {
         "files": [
+            {
+                "name": "LICENSE.md",
+                "relativePath": "src/app/components/general/state-management/LICENSE.md",
+                "test": false
+            },
             {
                 "name": "api-state.component.html",
                 "relativePath": "src/app/components/general/state-management/components/api-state/api-state.component.html",
@@ -592,6 +617,11 @@
                 "test": false
             },
             {
+                "name": "entity-data.pipe.ts",
+                "relativePath": "src/app/components/general/state-management/pipes/entity-data.pipe.ts",
+                "test": false
+            },
+            {
                 "name": "entity-to-array.pipe.spec.ts",
                 "relativePath": "src/app/components/general/state-management/pipes/entity-to-array.pipe.spec.ts",
                 "test": false
@@ -602,8 +632,18 @@
                 "test": false
             },
             {
+                "name": "is-loaded.pipe.ts",
+                "relativePath": "src/app/components/general/state-management/pipes/is-loaded.pipe.ts",
+                "test": false
+            },
+            {
                 "name": "state-management.module.ts",
                 "relativePath": "src/app/components/general/state-management/state-management.module.ts",
+                "test": false
+            },
+            {
+                "name": "state.d.ts",
+                "relativePath": "src/app/components/general/state-management/state.d.ts",
                 "test": false
             },
             {
@@ -622,8 +662,28 @@
                 "test": false
             },
             {
+                "name": "tsconfig.json",
+                "relativePath": "src/app/components/general/state-management/tsconfig.json",
+                "test": false
+            },
+            {
+                "name": "combineEntityState.util.ts",
+                "relativePath": "src/app/components/general/state-management/utils/combineEntityState.util.ts",
+                "test": false
+            },
+            {
                 "name": "entityAddData.util.ts",
                 "relativePath": "src/app/components/general/state-management/utils/entityAddData.util.ts",
+                "test": false
+            },
+            {
+                "name": "guards.util.ts",
+                "relativePath": "src/app/components/general/state-management/utils/guards.util.ts",
+                "test": false
+            },
+            {
+                "name": "initialState.ts",
+                "relativePath": "src/app/components/general/state-management/utils/initialState.ts",
                 "test": false
             }
         ],

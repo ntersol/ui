@@ -1,58 +1,28 @@
-<!--
-  TODO:
-  Update for scenarios:
-  1. No data in store, waiting for data
-  2. Data in store, data refreshing
-  -- When to show loading logic as hover spinner
--->
-
-<div class="nts-state" [ngClass]="{ 'nts-state-spacer': !(state?.loading && state?.data?.length) }">
-
-  <!--
-    Loading: get
-  -->
-  <ng-container *ngIf="!modify">
-    <!-- Error, Loading-->
-    <ng-container *ngIf="state?.error">
-      <nts-error [error]="state?.error" [canClose]="false"></nts-error>
-    </ng-container>
-
-    <!-- Loading, no data -->
-    <ng-container *ngIf="!state || (state?.loading && !state?.data?.length)">
-      <p-progressBar mode="indeterminate" [style]="{ height: '12px' }"></p-progressBar>
-    </ng-container>
-
-    <!-- Loading, data already in store-->
-    <ng-container *ngIf="state?.loading && state?.data?.length">
-      <p-progressBar mode="indeterminate" [style]="{ height: '2px' }"></p-progressBar>
-    </ng-container>
+<div class="nts-state" [ngClass]="{ 'nts-state-spacer': !(stateSrc?.loading && stateSrc?.data) }">
+  <!-- Loading, no data -->
+  <ng-container *ngIf="!stateSrc || (showLoading && stateSrc?.loading && !stateSrc?.data)">
+    <p-progressBar mode="indeterminate" [style]="{ height: '12px' }"></p-progressBar>
   </ng-container>
 
-  <!--
-    Modifying: post, put, patch delete
-  -->
-  <ng-container *ngIf="modify">
-    <!-- Error, Loading-->
-    <ng-container *ngIf="state?.modifyError">
-      <nts-error [error]="state?.error" [canClose]="false"></nts-error>
-    </ng-container>
+  <!-- Loading with data OR modifying -->
+  <ng-container *ngIf="(showLoading && stateSrc?.loading && stateSrc?.data) || (showModifying && stateSrc?.modifying)">
+    <p-progressBar mode="indeterminate" [style]="{ height: '2px' }"></p-progressBar>
+  </ng-container>
 
-    <!-- Loading, no data -->
-    <ng-container *ngIf="state?.modifying && !state?.data?.length">
-      <p-progressBar mode="indeterminate" [style]="{ height: '12px' }"></p-progressBar>
-    </ng-container>
+  <!-- Loading error -->
+  <ng-container *ngIf="showLoading && stateSrc?.error">
+    <nts-error [error]="stateSrc?.error" [canClose]="false"></nts-error>
+  </ng-container>
 
-    <!-- Loading, data already in store-->
-    <ng-container *ngIf="state?.modifying && state?.data?.length">
-      <p-progressBar mode="indeterminate" [style]="{ height: '2px' }"></p-progressBar>
-    </ng-container>
+  <!-- Modifying error -->
+  <ng-container *ngIf="showModifying && stateSrc?.errorModify && !stateSrc?.error">
+    <nts-error [error]="stateSrc?.errorModify" [canClose]="false"></nts-error>
   </ng-container>
 
   <!-- 
-    Content
+    Always show content if data prop is not null
   -->
-  <ng-container *ngIf="state?.data?.length">
+  <ng-container *ngIf="stateSrc?.data">
     <ng-content></ng-content>
   </ng-container>
-
 </div>

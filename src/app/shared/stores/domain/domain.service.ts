@@ -3,14 +3,14 @@ import { StaticService } from './services/static.service';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { EntityState } from '@datorama/akita';
-import { generateEntityStore } from 'src/app/components/general/state-management';
+import { NtsCreateEntityStore } from 'src/app/components/general/state-management';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DomainService {
 
-  public users = generateEntityStore(this.http)({ idKey: 'id', apiUrl: '//jsonplaceholder.typicode.com/users' });
+  public users = NtsCreateEntityStore(this.http)({ idKey: 'id', apiUrl: '//jsonplaceholder.typicode.com/users' });
 
   // List all store services here
   constructor(
