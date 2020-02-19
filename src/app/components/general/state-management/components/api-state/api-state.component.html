@@ -6,26 +6,53 @@
   -- When to show loading logic as hover spinner
 -->
 
-<ng-container *ngIf="state">
-  <!-- Loading -->
-  <div
-    *ngIf="
-      (state.loading && !loaderDisabled && !state.error) ||
-      (loaderDisabled && !state?.ids && !state.error)
-    "
-  >
-    <i class="fa fa-spinner fa-spin"></i> Loading...
-  </div>
+<div class="nts-state" [ngClass]="{ 'nts-state-spacer': !(state?.loading && state?.data?.length) }">
 
-  <!-- Error -->
-  <ng-container *ngIf="errorVisible && state.error">
-    <nts-error [error]="state.error" [canClose]="false"></nts-error>
+  <!--
+    Loading: get
+  -->
+  <ng-container *ngIf="!modify">
+    <!-- Error, Loading-->
+    <ng-container *ngIf="state?.error">
+      <nts-error [error]="state?.error" [canClose]="false"></nts-error>
+    </ng-container>
+
+    <!-- Loading, no data -->
+    <ng-container *ngIf="!state || (state?.loading && !state?.data?.length)">
+      <p-progressBar mode="indeterminate" [style]="{ height: '12px' }"></p-progressBar>
+    </ng-container>
+
+    <!-- Loading, data already in store-->
+    <ng-container *ngIf="state?.loading && state?.data?.length">
+      <p-progressBar mode="indeterminate" [style]="{ height: '2px' }"></p-progressBar>
+    </ng-container>
   </ng-container>
 
-  <!-- Content -->
-  <ng-container
-    *ngIf="(!state?.loading && !state?.error) || (loaderDisabled && state?.ids)"
-  >
+  <!--
+    Modifying: post, put, patch delete
+  -->
+  <ng-container *ngIf="modify">
+    <!-- Error, Loading-->
+    <ng-container *ngIf="state?.modifyError">
+      <nts-error [error]="state?.error" [canClose]="false"></nts-error>
+    </ng-container>
+
+    <!-- Loading, no data -->
+    <ng-container *ngIf="state?.modifying && !state?.data?.length">
+      <p-progressBar mode="indeterminate" [style]="{ height: '12px' }"></p-progressBar>
+    </ng-container>
+
+    <!-- Loading, data already in store-->
+    <ng-container *ngIf="state?.modifying && state?.data?.length">
+      <p-progressBar mode="indeterminate" [style]="{ height: '2px' }"></p-progressBar>
+    </ng-container>
+  </ng-container>
+
+  <!-- 
+    Content
+  -->
+  <ng-container *ngIf="state?.data?.length">
     <ng-content></ng-content>
   </ng-container>
-</ng-container>
+
+</div>

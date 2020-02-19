@@ -12,7 +12,7 @@ import { environment } from '$env';
 })
 export class GridComponent implements OnInit {
   public license = environment.licenses.agGrid;
-  public users$ = this.domain.users.data$;
+  public users$ = this.domain.users.select$;
   public rows: any[] = cars;
   public columns: ColDef[] = [
     { field: 'name', headerName: 'Name' },
@@ -69,7 +69,7 @@ export class GridComponent implements OnInit {
       this.domain.users.delete(5).subscribe();
     }, 1000);
 
-      this.domain.users.data$.subscribe(x => console.log(x));
+      this.domain.users.select$.subscribe(x => console.log(x));
   }
 
   public gridStateChange(gridState: NtsGridState) {

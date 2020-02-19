@@ -213,7 +213,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "nts.angular/components/general/grid@1.0.12": {
+    "nts.angular/components/general/grid@1.0.14": {
         "files": [
             {
                 "name": "grid-status-bar.component.html",
@@ -554,16 +554,16 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "nts.angular/components/general/state-management@1.0.9": {
+    "nts.angular/components/general/state-management@1.0.11": {
         "files": [
-            {
-                "name": "api-state.component.css",
-                "relativePath": "src/app/components/general/state-management/components/api-state/api-state.component.css",
-                "test": false
-            },
             {
                 "name": "api-state.component.html",
                 "relativePath": "src/app/components/general/state-management/components/api-state/api-state.component.html",
+                "test": false
+            },
+            {
+                "name": "api-state.component.scss",
+                "relativePath": "src/app/components/general/state-management/components/api-state/api-state.component.scss",
                 "test": false
             },
             {
@@ -607,19 +607,19 @@
                 "test": false
             },
             {
+                "name": "base-store.ts",
                 "relativePath": "src/app/components/general/state-management/stores/base-store.ts",
-                "test": false,
-                "name": "base-store.ts"
+                "test": false
             },
             {
+                "name": "entity-store.ts",
                 "relativePath": "src/app/components/general/state-management/stores/entity-store.ts",
-                "test": false,
-                "name": "entity-store.ts"
+                "test": false
             },
             {
+                "name": "store.ts",
                 "relativePath": "src/app/components/general/state-management/stores/store.ts",
-                "test": false,
-                "name": "store.ts"
+                "test": false
             },
             {
                 "name": "entityAddData.util.ts",
@@ -836,7 +836,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "nts.angular/services/general/signal-rservice@1.0.7": {
+    "nts.angular/services/general/signal-rservice@1.0.8": {
         "files": [
             {
                 "name": "signal-r.service.ts",
@@ -860,5 +860,5 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.7.1"
+    "version": "14.7.4"
 }

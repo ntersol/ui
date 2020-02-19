@@ -112,6 +112,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   @Input() enableRangeSelection: boolean | undefined;
   @Input() rememberGroupStateWhenNewData: any;
   @Input() groupUseEntireRow: boolean | undefined;
+  @Input() groupRemoveSingleChildren = false;
   @Input() getContextMenuItems: any;
   @Input() frameworkComponents: any;
   @Input() rowGroupPanelShow: any;
@@ -140,7 +141,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
         node.setSelected(true, false);
       }
       // Scroll to the first node supplied by the input
-      if (i === 0) {
+      if (i === 0 && this.gridApi) {
         this.gridApi.ensureNodeVisible(node);
       }
     });

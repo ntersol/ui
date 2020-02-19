@@ -1,7 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { tap, catchError, take } from 'rxjs/operators';
+import { tap, catchError, take, map, switchMap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
-import { applyTransaction, EntityState, EntityStore, QueryEntity, StoreConfigOptions } from '@datorama/akita';
+import {
+  applyTransaction,
+  EntityState,
+  EntityStore,
+  QueryEntity,
+  StoreConfigOptions,
+  SelectAllOptionsB,
+} from '@datorama/akita';
 
 export interface EntityStoreConfig extends Partial<StoreConfigOptions> {
   /** The uniqueID or guid or the entity format */
@@ -36,6 +43,7 @@ type UrlResolver = <t>(x?: t) => string;
 export interface EntityStateExtended<t = any, IDType = any> extends EntityState<t, IDType> {
   modifying: boolean;
   modifyError: any;
+  data: t[];
 }
 
 /**
@@ -44,20 +52,49 @@ export interface EntityStateExtended<t = any, IDType = any> extends EntityState<
 export class EntityStoreClass<t> {
   public store: EntityStore<EntityStateExtended<t>, t>;
   public query: QueryEntity<EntityStateExtended<t>, t>;
-  public data$: Observable<EntityStateExtended<t, any>>;
+  /** Select the store state and all entities */
+  public select$: Observable<EntityStateExtended<t, any>>;
+  /** Select the store state and a subset of entities using Akita's standard query parameters for selectAll */
+  public selectAll$: (select: SelectAllOptionsB<t>) => Observable<EntityStateExtended<t, any>>;
 
   constructor(private http: HttpClient, private config: EntityStoreConfig) {
     // Generate initial state
-    const initialState: EntityStateExtended = Object.assign({ modifying: false, loading: false, modifyError: false }, this.config.initialState);
+    const initialState: EntityStateExtended = Object.assign(
+      { modifying: false, loading: false, modifyError: false },
+      this.config.initialState,
+    );
     // Create store
     this.store = new EntityStore<EntityStateExtended<t>, t>(initialState, {
       name: this.config.name || String(Math.floor(Math.random() * 10000000)),
       resettable: this.config.resettable,
+      idKey: this.config.idKey,
       cache: this.config.cache ? this.config.cache : undefined,
     });
     // Create query
     this.query = new QueryEntity<EntityStateExtended<t>, t>(this.store);
-    this.data$ = this.query.select();
+    // Create data source. Add in data property
+    this.select$ = this.query
+      .select()
+      .pipe(map(state => Object.assign({}, state, { data: (<any>state).ids.map((id: any) => (<any>state).entities[id]) })));
+
+    // Create select all query that accepts default akita parameters
+    // Note that selectAll is improperly typed and returns a hashmap not an array
+    this.selectAll$ = (select: SelectAllOptionsB<t>) =>
+      this.query.selectAll(select).pipe(
+        switchMap(entities =>
+          this.query.select().pipe(
+            map(stateSrc => {
+              const state: Partial<EntityStateExtended<t, t>> = {
+                entities: {},
+                ids: entities.map(entity => (<any>entity)[this.config.idKey]),
+                data: entities,
+              };
+              entities.forEach(entity => state[(<any>entity)[this.config.idKey]]);
+              return Object.assign({}, stateSrc, state);
+            }),
+          ),
+        ),
+      );
   }
 
   /**
@@ -69,6 +106,7 @@ export class EntityStoreClass<t> {
     // If not cached or refresh cache is specified, make http call and load store
     if (refreshCache || !this.query.getHasCache()) {
       this.store.setLoading(true);
+      this.store.setError(null);
       // Check if this is the default apiUrl or a custom get url
       const apiUrl = this.config.apiUrls && this.config.apiUrls.get ? this.config.apiUrls.get : this.config.apiUrl;
       // Check if this is a function or a string, if function resolve the method to return a string
@@ -81,8 +119,8 @@ export class EntityStoreClass<t> {
         }), // On success, add response to store
         catchError(err => {
           applyTransaction(() => {
-            this.store.setError(err);
             this.store.setLoading(false);
+            this.store.setError(err);
           });
           return throwError(err);
         }),
@@ -102,8 +140,8 @@ export class EntityStoreClass<t> {
     // Check if this is a function or a string, if function resolve the method to return a string
     const apiUrlResolved = typeof apiUrl === 'function' ? apiUrl() : apiUrl;
     // If a map from the api response is needed
-    const map = this.config.map && this.config.map.post ? this.config.map.post : null;
-    return this.upsert(this.http.post<t>(apiUrlResolved, entity), entity, map);
+    const mapped = this.config.map && this.config.map.post ? this.config.map.post : null;
+    return this.upsert(this.http.post<t>(apiUrlResolved, entity), entity, mapped);
   }
 
   /**
@@ -121,8 +159,8 @@ export class EntityStoreClass<t> {
     // Check if this is a function or a string, if function resolve the method to return a string
     const apiUrlResolved = typeof apiUrl === 'function' ? apiUrl() : apiUrl;
     // If a map from the api response is needed
-    const map = this.config.map && this.config.map.put ? this.config.map.put : null;
-    return this.upsert(this.http.put<t>(apiUrlResolved, entity), entity, map);
+    const mapped = this.config.map && this.config.map.put ? this.config.map.put : null;
+    return this.upsert(this.http.put<t>(apiUrlResolved, entity), entity, mapped);
   }
 
   /**
@@ -140,8 +178,8 @@ export class EntityStoreClass<t> {
     // Check if this is a function or a string, if function resolve the method to return a string
     const apiUrlResolved = typeof apiUrl === 'function' ? apiUrl() : apiUrl;
     // If a map from the api response is needed
-    const map = this.config.map && this.config.map.post ? this.config.map.post : null;
-    return this.upsert(this.http.patch<t>(apiUrlResolved, entity), entity, map);
+    const mapped = this.config.map && this.config.map.post ? this.config.map.post : null;
+    return this.upsert(this.http.patch<t>(apiUrlResolved, entity), entity, mapped);
   }
 
   /**
@@ -149,14 +187,14 @@ export class EntityStoreClass<t> {
    * @param request
    * @param entity
    */
-  public upsert(request: Observable<t>, entity: Partial<t> | Partial<t>[], map: ((x: any) => any) | null) {
+  public upsert(request: Observable<t>, entity: Partial<t> | Partial<t>[], mapped: ((x: any) => any) | null) {
     this.store.update({ modifying: true, modifyError: false });
     return request.pipe(
       tap(res => {
         // If web api response is nill, default to supplied entity
         let result = res === null || res === undefined ? <t | t[]>entity : res;
         // If map function pass result through that
-        result = map ? map(result) : result;
+        result = mapped ? mapped(result) : result;
 
         // If string returned, it is the unique ID and replace the entity property for that
         if (typeof res === 'string') {
@@ -221,8 +259,9 @@ export class EntityStoreClass<t> {
 }
 
 /**
- * Generate a new entity store
+ * Generate a new entity store. File is curried so use generateEntityStore(this.http)({ idKey: 'guid', apiUrl: 'documents' })
  * @param http
  * @param config
  */
-export const generateEntityStore = <t>(http: HttpClient, config: EntityStoreConfig) => new EntityStoreClass<t>(http, config);
+export const generateEntityStore = (http: HttpClient) => <t>(config: EntityStoreConfig) =>
+  new EntityStoreClass<t>(http, config);

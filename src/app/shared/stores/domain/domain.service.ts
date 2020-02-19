@@ -10,7 +10,7 @@ import { generateEntityStore } from 'src/app/components/general/state-management
 })
 export class DomainService {
 
-  public users = generateEntityStore<Models.User>(this.http, { idKey: 'id', apiUrl: '//jsonplaceholder.typicode.com/users' });
+  public users = generateEntityStore(this.http)({ idKey: 'id', apiUrl: '//jsonplaceholder.typicode.com/users' });
 
   // List all store services here
   constructor(
