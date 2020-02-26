@@ -119,7 +119,12 @@ Additional Info:
 - To get the latest version of everything, run `bit import && bit checkout latest --all`. Import downloads the latest version from the remote server and checkout switches to that version
 - Check status of local component environment, IE which components have been updated and are ready for tagging/uploading `bit status`
 - When components are ready to have their changes exported, first run `bit tag --all` or `bit tag --all 1.0.0` to set a new semver version and then export with `bit export nts.angular`
-- Add a new component to a namespaced project with `bit add src/app/component/general/new-component --namespace components/general`. See https://bit.dev/nts/angular for the locations and namespaces of components.
+- Add a new component to a namespaced project with `bit add src/app/components/general/new-component --namespace components/general`. See https://bit.dev/nts/angular for the locations and namespaces of components.
+
+
+When bit goes wrong:
+- Bit likes to add extra namespaced lines to the root package.json even if you aren't using the npm package. It can cause issues so remove that extra line
+- When adding a bit lib to a new project, but likes to add a node_modules directory into the lib directory. This should be deleted
 - Sometimes when getting the latest component, bit adds lots of extra carriage returns. To fix this run checkout with the reset command `npm run bit:reset`
 
 Add bit to a new project
