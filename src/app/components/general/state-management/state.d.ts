@@ -1,6 +1,8 @@
+// import { Observable } from 'rxjs';
+
 declare namespace NtsState {
   /** Structure of entity state supplied by the store */
-  export interface EntityState<t = any, IDType = any> extends State {
+  export interface EntityState<t = any, IDType = any> extends ApiState {
     [key: string]: any;
     entities: HashMap<t>;
     ids: IDType[];
@@ -8,13 +10,15 @@ declare namespace NtsState {
   }
 
   /** Api state only interface */
-  export interface State {
+  export interface ApiState<t = boolean> {
     loading: boolean;
     modifying: boolean;
     error: any;
     errorModify: any;
-    data: null | boolean;
+    data: null | t;
   }
+
+  export type ApiUrl = string | UrlResolver | Observable<string>;
 
   export interface EntityStoreConfig {
     /** Full path to webapi. Assumes restful conventions for verbs */
@@ -23,12 +27,12 @@ declare namespace NtsState {
     idKey?: string | number;
     /** Overwrite the default webapi url for a specific verb. Optionally supports a url resolver */
     apiUrls?: {
-      get?: string | UrlResolver;
-      search?: string | UrlResolver;
-      post?: string | UrlResolver;
-      put?: string | UrlResolver;
-      patch?: string | UrlResolver;
-      delete?: string | UrlResolver;
+      get?: ApiUrl;
+      search?: ApiUrl;
+      post?: ApiUrl;
+      put?: ApiUrl;
+      patch?: ApiUrl;
+      delete?: ApiUrl;
     };
     /** Map the webapi response before it is passed to the store on a per verb basis */
     map?: {
@@ -36,7 +40,7 @@ declare namespace NtsState {
       post?: (x: any) => any;
       put?: (x: any) => any;
       patch?: (x: any) => any;
-      delete?: (x: any) => any;
+      // delete?: (x: any) => any;
     };
     /** Can the store be reset? Default is true */
     resettable?: boolean;

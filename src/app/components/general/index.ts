@@ -1,26 +1,20 @@
+// Calendar
+export * from './calendar';
 // Charts
 export * from './chart/chart.module';
-
-// Grid
-export * from './grid/grid.module';
-
-// Map
-export * from './map/map.module';
-
+// Doc Editor
+export * from './document-editor';
+// Forms
+export * from './forms';
 // Generic components
 export * from './generic/generic.module';
-
+// Grid
+export * from './grid';
+// Map
+export * from './map/map.module';
 // App state components
-export * from './state-management/state-management.module';
-
-// Forms
-export * from './forms/forms.module';
-
-// Calendar
-export * from './calendar/calendar.module';
-
+export * from './state-management';
 // Table
-export * from 'src/app/components/general/table';
-
-// Generic components & services
-export * from './generic/generic.module';
+export * from './table';
+// Tags
+export * from './tags';

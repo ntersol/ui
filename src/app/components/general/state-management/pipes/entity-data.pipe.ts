@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { isEntityState } from '../utils/guards.util';
+import { isApiState } from '../utils/guards.util';
 
 /**
  * Extracts the data property out of an entity state. Most useful for working with multi typed arrays with combinations
@@ -23,10 +23,10 @@ export class EntityData implements PipeTransform {
 
     // If not an array, return either the source data or the entity state data property
     if (!Array.isArray(value)) {
-      return isEntityState(value) ? value.data : value;
+      return isApiState(value) ? value.data : value;
     }
 
     // If array, extract data from entitystate, otherwise just grab source data
-    return value.map(d => (isEntityState(d) ? d.data : d));
+    return value.map(d => (isApiState(d) ? d.data : d));
   }
 }

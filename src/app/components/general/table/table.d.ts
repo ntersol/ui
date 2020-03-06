@@ -6,5 +6,6 @@ declare namespace NtsTable {
     type?: ColumnType;
     /** Arguments to pass to the formatting pipes */
     typeArgs?: string;
+    sortable?: boolean;
   }
 }

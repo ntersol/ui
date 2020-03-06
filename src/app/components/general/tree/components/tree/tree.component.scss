@@ -1,0 +1,68 @@
+nts-tree {
+  .ui-tree {
+    border: 0;
+    border-radius: initial;
+    width: 100%;
+    padding: 0;
+    .ui-tree-container {
+      overflow: initial;
+    }
+    
+    .ui-treenode {
+      .ui-treenode-children {
+        padding: 0 0 0 3em;
+      }
+      .ui-treenode-content {
+        display: flex;
+        align-items: center;
+        padding: 1px 0px!important;
+        &:hover {
+          background-color: #add3f8;
+        }
+        .ui-treenode-content,
+        .ui-state-highlight,
+        .ui-treenode-label {
+          width: 100%;
+          &:hover, &.ui-state-highlight{background-color:initial!important;color:initial!important;}
+        }
+        .ui-treenode-icon {
+          min-width: 10px;
+        }
+      }
+    }
+  }
+  
+  /* Compact View */ 
+  .nts-tree-compact .ui-tree {
+    .ui-tree-container > p-treenode > .ui-treenode > .ui-treenode-content {
+      padding: 5px;
+    }
+    .ui-treenode-content {
+      line-height: 16px;
+      font-size: 13px;
+      &.ui-treenode-content-selected {
+        background-color: #d1edf7 ;
+        color: #000000;
+      }
+    }
+    .ui-treenode,
+    .ui-treenode-label {
+      padding: 0 !important;
+      padding-right: 5px !important;
+    }
+    .ui-chkbox {
+      width: initial;
+      height: initial;
+    }
+
+    .ui-chkbox .ui-chkbox-box {
+      width: 15px;
+      height: 15px;
+    }
+    .ui-chkbox-icon.ui-clickable {
+      font-size: 15px;
+      top: -2px;
+      left: -1px;
+    }
+  }
+}

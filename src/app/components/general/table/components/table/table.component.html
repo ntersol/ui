@@ -37,7 +37,7 @@
         <th
           *ngFor="let col of columns; let i = index"
           [pSortableColumn]="col.field"
-          [pSortableColumnDisabled]="!sortable"
+          [pSortableColumnDisabled]="col.sortable === false"
           #th
           [ngStyle]="{ width: columnWidthsPercent && columnWidthsPercent[i] ? columnWidthsPercent[i] + '%' : null }"
           class="nts-table-th-{{ col.field | slug }} nts-table-th-type-{{ col.type | slug }}"
@@ -57,7 +57,7 @@
           <ng-template #headerDefault>
             <span [innerHtml]="col.header"></span>
           </ng-template>
-          <p-sortIcon [field]="col.field" *ngIf="sortable"></p-sortIcon>
+          <p-sortIcon [field]="col.field" *ngIf="col.sortable !== false"></p-sortIcon>
         </th>
       </tr>
     </ng-template>

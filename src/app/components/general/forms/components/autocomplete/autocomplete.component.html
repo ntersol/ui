@@ -1,0 +1,18 @@
+<p-autoComplete
+  [field]="label"
+  [dataKey]="dataKey"
+  [placeholder]="placeholder"
+  [(ngModel)]="value"
+  [suggestions]="termsFiltered"
+  [forceSelection]="forceSelection"
+  [size]="30"
+  [dropdown]="dropdown"
+  [minLength]="minLength"
+  (onBlur)="onBlur()"
+  (onSelect)="onSelect($event)"
+  (completeMethod)="filterTerms($event)"
+>
+  <ng-template let-term pTemplate="item">
+    {{ term && label && term[label] ? term[label] : term }}
+  </ng-template>
+</p-autoComplete>

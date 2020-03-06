@@ -32,8 +32,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() columns: NtsTable.Column[] | undefined;
   /** Custom header text */
   @Input() headerText: string | undefined;
-  /** Is the table sortable */
-  @Input() sortable = true;
   /** Show the custom filter box */
   @Input() showFilter = false;
   /** Show table headers */
@@ -91,11 +89,11 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
         this.ref.markForCheck();
       });
     }
-   
+
   }
 
   /**
-   * Reset/remove the sort order after user toggles through each state 
+   * Reset/remove the sort order after user toggles through each state
    * @param sort
    */
   public onSort(sort: { field: string; order: number }) {

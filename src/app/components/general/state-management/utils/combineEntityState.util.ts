@@ -1,4 +1,4 @@
-import { isEntityState } from './guards.util';
+import { isApiState } from './guards.util';
 
 /**
  * Combines the domain state from multiple entity stores into a single state object.
@@ -9,8 +9,8 @@ import { isEntityState } from './guards.util';
  */
 export const NtsCombineEntityState = (
   states: NtsState.EntityState | (NtsState.EntityState | unknown)[] | null | undefined,
-): NtsState.State => {
-  const state: NtsState.State = {
+): NtsState.ApiState => {
+  const state: NtsState.ApiState = {
     loading: false,
     modifying: false,
     error: null,
@@ -25,7 +25,7 @@ export const NtsCombineEntityState = (
   // Ensure states is always an array for reduce
   const statesArray = !Array.isArray(states) ? [states] : states;
   // Filter out any non-entity states in array
-  const statesEntity = statesArray.filter(isEntityState);
+  const statesEntity = statesArray.filter(isApiState);
 
   // Roll up the separate entity states into a single state object
   if (statesEntity && statesEntity.length) {
@@ -33,8 +33,7 @@ export const NtsCombineEntityState = (
     state.modifying = statesEntity.reduce((a, b) => a || b.modifying, <boolean>false);
     state.error = statesEntity.reduce((a, b) => a || b.error, <any>null);
     state.errorModify = statesEntity.reduce((a, b) => a || b.errorModify, <any>null);
-    state.data = statesEntity.reduce((a, b) => b.data === undefined || a === false ? false : a, <boolean>true);
+    state.data = statesEntity.reduce((a, b) => b.data === undefined || b.data === null || a === false ? false : a, <boolean>true);
   }
-  // console.log(state.data, statesEntity);
   return state;
 };

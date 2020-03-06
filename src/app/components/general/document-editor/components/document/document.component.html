@@ -1,0 +1,15 @@
+<div class="nts-docs-tns" *ngIf="document && viewModels">
+  <ng-container *ngFor="let page of document.pages; let i = index">
+    <div>
+      <app-page
+        [page]="page"
+        [view]="viewModels[page.pdfSrcIndex][page.pageSrcIndex]"
+        [settings]="settings"
+        [tnSettings]="tnSettings"
+        [isSelected]="selection?.includes(i)"
+        [isActive]="pageActive?.pdfIndex === page?.pdfSrcIndex && pageActive?.pageIndex === page?.pageSrcIndex"
+        [pageIndex]="i"
+      ></app-page>
+    </div>
+  </ng-container>
+</div>

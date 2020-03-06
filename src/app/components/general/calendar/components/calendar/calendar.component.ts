@@ -38,8 +38,8 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent implements OnInit, OnChanges {
+  
   @Input() defaultView: NtsCalendar.DefaultView = 'dayGridMonth';
-
   @Input() events: NtsCalendar.Event[] = [];
   @Input() selectable = false;
   @Input() height: number | undefined;
@@ -56,7 +56,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   public calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin, resourceTimelinePlugin, listPlugin];
   public visible$ = new BehaviorSubject(true);
 
-  @ViewChild('fc', { static: true }) fc!: FullCalendar;
+  @ViewChild('fc', { static: true }) fc?: FullCalendar;
 
   constructor() {}
 
@@ -64,10 +64,10 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   ngOnChanges(model: SimpleChanges) {
     if (model.defaultView) {
-      this.changeViewType();
+      this.changeViewType(this.defaultView);
     }
     if (model.events) {
-      this.changeViewType();
+      this.changeViewType(this.defaultView);
     }
   }
 
@@ -83,8 +83,10 @@ export class CalendarComponent implements OnInit, OnChanges {
    * Change the type of view full calendar is displaying
    * Full calendar does not support this natively so reinstantiating the component is necessary
    */
-  public changeViewType() {
-    this.visible$.next(false);
-    setTimeout(() => this.visible$.next(true));
+  public changeViewType(defaultView: NtsCalendar.DefaultView) {
+    if (!this.fc || !this.fc.calendar) {
+      return;
+    }
+    this.fc.calendar.changeView(defaultView);
   }
 }

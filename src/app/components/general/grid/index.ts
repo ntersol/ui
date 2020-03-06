@@ -1,1 +1,1 @@
-import './grid.module';
+export * from './grid.module';

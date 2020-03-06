@@ -1,0 +1,21 @@
+{
+  "name": "@bit/nts.angular.components.general.document-editor",
+  "version": "0.0.1",
+  "homepage": "https://bit.dev/nts/angular/components/general/document-editor",
+  "main": "index.ts",
+  "dependencies": {
+    "@angular/core": "8.2.14",
+    "rxjs": "6.5.3",
+    "@angular/common": "8.2.14",
+    "primeng": "8.1.1",
+    "lodash": "4.17.15"
+  },
+  "devDependencies": {
+    "@types/lodash": "4.14.149"
+  },
+  "peerDependencies": {},
+  "license": "SEE LICENSE IN LICENSE",
+  "bit": {
+    "env": {}
+  }
+}

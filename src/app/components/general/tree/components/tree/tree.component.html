@@ -1,0 +1,34 @@
+<div class="nts-tree" [ngClass]="{ 'nts-tree-compact': compactView }">
+  <p-tree
+    #tree
+    [value]="nodes$ | async"
+    [selectionMode]="selectionMode"
+    [draggableNodes]="draggable"
+    [droppableNodes]="droppable"
+    [contextMenu]="contextMenu"
+    [propagateSelectionUp]="propagateSelectionUp" 
+    [propagateSelectionDown]="propagateSelectionDown"
+    [filter]="false"
+    [(selection)]="selection"
+    (onNodeSelect)="onNodeSelect.emit($event)"
+    (onNodeUnselect)="onNodeUnselect.emit($event)"
+    (onNodeExpand)="onNodeExpand.emit($event)"
+    (onNodeCollapse)="onNodeCollapse.emit($event)"
+    (onNodeContextMenuSelect)="onNodeContextMenuSelect.emit($event)"
+    (onNodeDrop)="onNodeDrop.emit($event)"
+  >
+    <ng-container *ngFor="let template of templates">
+      <ng-template let-node [pTemplate]="template.field">
+        <ng-container
+          *ngTemplateOutlet="
+            template.templateEntry;
+            context: {
+              $$implicit: node,
+              node: node
+            }
+          "
+        ></ng-container>
+      </ng-template>
+    </ng-container>
+  </p-tree>
+</div>

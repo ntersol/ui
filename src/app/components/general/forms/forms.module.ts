@@ -18,8 +18,10 @@ import { TooltipModule } from 'primeng/tooltip';
 
 import { NtsFormFieldComponent } from './components/form-field/form-field.component';
 import { NtsFilterFieldComponent } from './components/filter-field/filter-field.component';
+import { NtsAutocompleteComponent } from './components/autocomplete/autocomplete.component';
+import { NtsCheckboxComponent } from './components/checkbox/checkbox.component';
 
-const components = [NtsFormFieldComponent, NtsFilterFieldComponent];
+const components = [NtsFormFieldComponent, NtsFilterFieldComponent, NtsAutocompleteComponent, NtsCheckboxComponent];
 
 @NgModule({
   declarations: [components],

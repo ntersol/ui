@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { NtsCombineEntityState } from '../../utils/combineEntityState.util';
 
 @Component({
@@ -6,10 +6,10 @@ import { NtsCombineEntityState } from '../../utils/combineEntityState.util';
   templateUrl: './api-state.component.html',
   styleUrls: ['./api-state.component.scss'],
 })
-export class NtsDomainStateComponent implements OnInit {
+export class NtsDomainStateComponent implements OnInit, OnChanges {
   /** Default domain state */
   @Input() set state(state: NtsState.EntityState | (NtsState.EntityState | unknown)[] | null) {
-    this.stateSrc =  NtsCombineEntityState(state);
+    this.stateSrc = NtsCombineEntityState(state);
   }
 
   /** Should the state component look the modify state instead of load state */
@@ -20,9 +20,13 @@ export class NtsDomainStateComponent implements OnInit {
   @Input() showModifying = true;
 
   /** Holds combined state of any number entity state objects */
-  public stateSrc: NtsState.State | undefined;
+  public stateSrc: NtsState.ApiState | undefined;
 
   constructor() {}
 
   ngOnInit() {}
+
+  ngOnChanges() {
+    // console.log({...this.stateSrc});
+  }
 }

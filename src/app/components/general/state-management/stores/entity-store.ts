@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError, map, switchMap, share, take } from 'rxjs/operators';
-import { throwError, Observable } from 'rxjs';
+import { throwError, Observable, isObservable } from 'rxjs';
 import { applyTransaction, EntityStore, QueryEntity, SelectAllOptionsB } from '@datorama/akita';
-import { initialState } from '../utils/initialState';
+import { initialEntityState } from '../utils/initialState';
 /**
  * Dynamically created an Akita store for entities
  */
@@ -15,7 +15,7 @@ export class NtsEntityStore<t> {
   public selectAll$: (select: SelectAllOptionsB<t>) => Observable<NtsState.EntityState<t, any>>;
 
   /** Unique ID of the entity */
-  private idKey: string | number;
+  private idKey: string | number = 'guid';
   /** This prop is used to track if the store has received at least one successful get request, even if response was empty  */
   private hasData = false;
   /** Store the compiled result for the data property here.
@@ -27,15 +27,15 @@ export class NtsEntityStore<t> {
 
   constructor(private http: HttpClient, private config: NtsState.EntityStoreConfig) {
     // Generate initial state. Note that this state does not have undefined props like the source entity state does
-    const state: NtsState.EntityState<t> = Object.assign(initialState, this.config.initialState);
+    const state: NtsState.EntityState<t> = Object.assign(initialEntityState, config.initialState);
     // Set default idkey to guid
-    this.idKey = this.config.idKey || 'guid';
+    this.idKey = config.idKey || 'guid';
     // Create store, set defaults
     this.store = new EntityStore(state, {
-      name: this.config.name || String(Math.floor(Math.random() * 10000000)),
-      resettable: this.config.resettable || true,
+      name: config.name || String(Math.floor(Math.random() * 10000000)),
+      resettable: config.resettable || true,
       idKey: String(this.idKey),
-      cache: this.config.cache ? this.config.cache : undefined,
+      cache: config.cache ? config.cache : undefined,
     } as any);
 
     // Create query
@@ -57,23 +57,16 @@ export class NtsEntityStore<t> {
     );
 
     // Create select all query that accepts default akita parameters
-    this.selectAll$ = (select: SelectAllOptionsB<t>) =>
-      this.query.selectAll(select).pipe(
+    this.selectAll$ = (select: SelectAllOptionsB<t>) => {
+      return this.query.selectAll(select).pipe(
         switchMap(entities =>
           this.query.select().pipe(
             map(stateSrc => {
-              let data: t[] | null | undefined;
-              if (this.hasData && !this.data) {
-                data = stateSrc.ids.map(id => stateSrc.entities[id]);
-                this.data = data;
-              } else if (this.hasData && this.data) {
-                data = this.data;
-              }
               const stateNew: Partial<NtsState.EntityState<t, t>> = {
                 entities: {},
                 ids: entities.map(entity => (<any>entity)[this.idKey]),
                 // Data will always be null or undefined until initial get success
-                data: data,
+                data: entities,
               };
               entities.forEach(entity => stateNew[(<any>entity)[this.idKey]]);
               return Object.assign({}, stateSrc, stateNew);
@@ -81,6 +74,7 @@ export class NtsEntityStore<t> {
           ),
         ),
       );
+    };
   }
 
   /**
@@ -95,34 +89,39 @@ export class NtsEntityStore<t> {
       applyTransaction(() => {
         this.store.setLoading(true);
         this.store.setError(null);
+        this.store.update({ errorModify: false });
       });
       // Check if this is the default apiUrl or a custom get url
       const apiUrl = this.config.apiUrls && this.config.apiUrls.get ? this.config.apiUrls.get : this.config.apiUrl;
       // Check if this is a function or a string, if function resolve the method to return a string
       const apiUrlResolved = typeof apiUrl === 'function' ? apiUrl() : apiUrl;
+
       if (!apiUrlResolved) {
         console.error('Please supply an api url for this action');
         return throwError(null);
       }
+
+      const httpRequest = !isObservable<string>(apiUrlResolved)
+        ? this.http.get<t[]>(apiUrlResolved)
+        : apiUrlResolved.pipe(switchMap(url => this.http.get<t[]>(url)));
+
       // If instance of get hasn't been created yet, add as a single instance with resolved api url
-      if (!this.httpGet$) {
-        this.httpGet$ = this.http.get<t[]>(apiUrlResolved).pipe(
-          tap(entities => {
-            this.hasData = true;
-            this.data = null;
-            const result: t[] = this.config.map && this.config.map.get ? this.config.map.get(entities) : entities;
-            this.store.set(result);
-          }),
-          catchError(err => {
-            applyTransaction(() => {
-              this.store.setLoading(false);
-              this.store.setError(err);
-            });
-            return throwError(err);
-          }),
-          share(),
-        );
-      }
+      this.httpGet$ = httpRequest.pipe(
+        tap(entities => {
+          this.hasData = true;
+          this.data = null;
+          const result: t[] = this.config.map && this.config.map.get ? this.config.map.get(entities) : entities;
+          this.store.set(result);
+        }),
+        catchError(err => {
+          applyTransaction(() => {
+            this.store.setLoading(false);
+            this.store.setError(err);
+          });
+          return throwError(err);
+        }),
+        share(),
+      );
 
       // Make get request
       return this.httpGet$;
@@ -144,9 +143,14 @@ export class NtsEntityStore<t> {
       console.error('Please supply an api url for this action');
       return throwError(null);
     }
+    // Check if api url is observable
+    const httpRequest = !isObservable<string>(apiUrlResolved)
+      ? this.http.post<Partial<t>>(apiUrlResolved, entity)
+      : apiUrlResolved.pipe(switchMap(url => this.http.post<Partial<t>>(url, entity)));
+
     // If a map from the api response is needed
     const mapped = this.config.map && this.config.map.post ? this.config.map.post : null;
-    return this.upsert(this.http.post<t>(apiUrlResolved, entity), entity, mapped);
+    return this.upsert(httpRequest, entity, mapped);
   }
 
   /**
@@ -167,9 +171,15 @@ export class NtsEntityStore<t> {
       console.error('Please supply an api url for this action');
       return throwError(null);
     }
+
+    // Check if api url is observable
+    const httpRequest = !isObservable<string>(apiUrlResolved)
+      ? this.http.put<Partial<t>>(apiUrlResolved, entity)
+      : apiUrlResolved.pipe(switchMap(url => this.http.put<Partial<t>>(url, entity)));
+
     // If a map from the api response is needed
     const mapped = this.config.map && this.config.map.put ? this.config.map.put : null;
-    return this.upsert(this.http.put<t>(apiUrlResolved, entity), entity, mapped);
+    return this.upsert(httpRequest, entity, mapped);
   }
 
   /**
@@ -190,9 +200,15 @@ export class NtsEntityStore<t> {
       console.error('Please supply an api url for this action');
       return throwError(null);
     }
+
+    // Check if api url is observable
+    const httpRequest = !isObservable<string>(apiUrlResolved)
+      ? this.http.patch<Partial<t>>(apiUrlResolved, entity)
+      : apiUrlResolved.pipe(switchMap(url => this.http.patch<Partial<t>>(url, entity)));
+
     // If a map from the api response is needed
-    const mapped = this.config.map && this.config.map.post ? this.config.map.post : null;
-    return this.upsert(this.http.patch<t>(apiUrlResolved, entity), entity, mapped);
+    const mapped = this.config.map && this.config.map.patch ? this.config.map.patch : null;
+    return this.upsert(httpRequest, entity, mapped);
   }
 
   /**
@@ -200,8 +216,7 @@ export class NtsEntityStore<t> {
    * @param request
    * @param entity
    */
-  public upsert(request: Observable<t>, entity: Partial<t> | Partial<t>[], mapped: ((x: any) => any) | null) {
-    // debugger;
+  public upsert(request: Observable<Partial<t>>, entity: Partial<t> | Partial<t>[], mapped: ((x: any) => any) | null) {
     this.store.update({ modifying: true, errorModify: false });
     return request.pipe(
       tap(res => {
@@ -246,7 +261,13 @@ export class NtsEntityStore<t> {
     const apiUrl = this.config.apiUrls && this.config.apiUrls.delete ? this.config.apiUrls.delete : this.config.apiUrl;
     // Check if this is a function or a string, if function resolve the method to return a string
     const apiUrlResolved = typeof apiUrl === 'function' ? apiUrl() : apiUrl + '/' + key;
-    return this.http.delete<t>(apiUrlResolved).pipe(
+
+    // Check if api url is observable
+    const httpRequest = !isObservable<string>(apiUrlResolved)
+      ? this.http.delete<Partial<t>>(apiUrlResolved)
+      : apiUrlResolved.pipe(switchMap(url => this.http.delete<Partial<t>>(url)));
+
+    return httpRequest.pipe(
       tap(() => {
         applyTransaction(() => {
           this.data = null;
@@ -268,6 +289,9 @@ export class NtsEntityStore<t> {
    * Reset store
    */
   public reset() {
+    if (!this.store || !this.query) {
+      return throwError(null);
+    }
     this.store.reset();
   }
 }

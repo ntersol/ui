@@ -1,7 +1,6 @@
 <div [ngStyle]="{ 'min-height': height + 'px' }">
   <full-calendar
     #fc
-    *ngIf="visible$ | async"
     [defaultView]="defaultView"
     [events]="events"
     [height]="height"
