@@ -13,7 +13,7 @@
   - Leave everything else blank or unchecked here
  */
 
-declare namespace Models {
+export namespace Models {
   export interface Auth {
     data: {
       userGuid: string;

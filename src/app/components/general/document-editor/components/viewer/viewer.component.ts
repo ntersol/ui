@@ -9,6 +9,8 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
+import { NtsDocumentEditor } from '../..';
+import { pdfjsDist } from '../../shared/models/pdf';
 
 @Component({
   selector: 'app-viewer',

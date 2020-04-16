@@ -86,7 +86,7 @@ export let InjectorInstance: Injector;
     }),
 
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production && environment.settings.enableServiceWorker,
+      enabled: environment.settings.enableServiceWorker,
       registrationStrategy: 'registerImmediately',
     }),
 

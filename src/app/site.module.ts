@@ -28,7 +28,7 @@ import { NtsStateManagementModule } from './components/general';
   ],
 })
 export class SiteModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SiteModule> {
     return {
       ngModule: SiteModule,
       providers: [],

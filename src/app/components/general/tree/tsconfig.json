@@ -23,5 +23,6 @@
       "fullTemplateTypeCheck": true,
       "preserveWhitespaces": false
     },
+    "include": ["*"],
   }
   

@@ -1,3 +1,5 @@
+import { NtsTree } from '..';
+
 export const nodeCompareLabel = (filterTerm: string | null) => (node: NtsTree.TreeNode | null) => {
   if (!node) {
     return false;

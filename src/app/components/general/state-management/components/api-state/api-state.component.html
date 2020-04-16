@@ -10,12 +10,12 @@
   </ng-container>
 
   <!-- Loading error -->
-  <ng-container *ngIf="showLoading && stateSrc?.error">
+  <ng-container *ngIf="showLoading && showErrorLoading && stateSrc?.error">
     <nts-error [error]="stateSrc?.error" [canClose]="false"></nts-error>
   </ng-container>
 
   <!-- Modifying error -->
-  <ng-container *ngIf="showModifying && stateSrc?.errorModify && !stateSrc?.error">
+  <ng-container *ngIf="showModifying && showErrorModifying && stateSrc?.errorModify && !stateSrc?.error">
     <nts-error [error]="stateSrc?.errorModify" [canClose]="false"></nts-error>
   </ng-container>
 

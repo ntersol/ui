@@ -1,4 +1,4 @@
-declare namespace NtsDocumentEditor {
+export module NtsDocumentEditor {
   interface Document {
     label: string | null;
     pages: Page[];

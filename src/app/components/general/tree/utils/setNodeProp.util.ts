@@ -1,3 +1,5 @@
+import { NtsTree } from '..';
+
 /**
  *  Set/change a property for all nodes, configurable by depth
  * @param nodes

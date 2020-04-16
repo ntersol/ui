@@ -1,15 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ViewChild,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  OnChanges,
-  SimpleChanges,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewEncapsulation, ChangeDetectionStrategy, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FullCalendar } from 'primeng/fullcalendar';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -17,6 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import listPlugin from '@fullcalendar/list';
 import { BehaviorSubject } from 'rxjs';
+import { NtsCalendar } from '../..';
 
 // const ics = require('../../utils/ics.util.js');
 /**
@@ -38,7 +28,6 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent implements OnInit, OnChanges {
-  
   @Input() defaultView: NtsCalendar.DefaultView = 'dayGridMonth';
   @Input() events: NtsCalendar.Event[] = [];
   @Input() selectable = false;

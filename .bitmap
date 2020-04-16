@@ -985,7 +985,7 @@
         "origin": "IMPORTED",
         "originallySharedDir": "src/app/components/general/scripter"
     },
-    "nts.angular/components/general/state-management@1.0.17": {
+    "nts.angular/components/general/state-management@1.0.19": {
         "files": [
             {
                 "name": "LICENSE.md",
@@ -1035,6 +1035,11 @@
             {
                 "name": "httpRequestWithState.util.ts",
                 "relativePath": "src/app/components/general/state-management/operators/httpRequestWithState.util.ts",
+                "test": false
+            },
+            {
+                "name": "mapData.util.ts",
+                "relativePath": "src/app/components/general/state-management/operators/mapData.util.ts",
                 "test": false
             },
             {
@@ -1090,6 +1095,11 @@
             {
                 "name": "combineEntityState.util.ts",
                 "relativePath": "src/app/components/general/state-management/utils/combineEntityState.util.ts",
+                "test": false
+            },
+            {
+                "name": "entityAddData.util.ts",
+                "relativePath": "src/app/components/general/state-management/utils/entityAddData.util.ts",
                 "test": false
             },
             {

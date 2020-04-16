@@ -1,4 +1,4 @@
-declare namespace NtsTags {
+export namespace NtsTags {
   export interface TagDef {
     guid: string;
     tagText: string;

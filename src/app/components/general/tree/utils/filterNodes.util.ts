@@ -1,3 +1,5 @@
+import { NtsTree } from '..';
+
 /**
  * Filter the tree recursively by doing a string match against the label
  * @param nodes - Tree nodes to filter

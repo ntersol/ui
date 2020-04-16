@@ -28,3 +28,7 @@ $easeInQuart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
 $easeOutQuart: cubic-bezier(0.165, 0.84, 0.44, 1);
 $easeInOutQuart: cubic-bezier(0.77, 0, 0.175, 1);
 $easeInOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+/* If loading scss files from the assets dir, this is the path */
+// $asset-slug: ''; // For root
+$asset-slug: '/angular-starter'; // For subdirs

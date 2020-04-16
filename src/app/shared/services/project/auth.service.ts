@@ -12,13 +12,12 @@ import {
   startWith,
   take,
 } from 'rxjs/operators';
-
-import { DialogService } from 'primeng/api';
-
+import { DialogService } from 'primeng/dynamicdialog';
 import { environment } from '$env';
 import { DomainService } from '$domain';
 import { SettingsService } from '$settings';
 import { LogoutModalComponent } from '$modals';
+import { Models } from '../../models/models';
 
 export enum AuthState {
   initial,

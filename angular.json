@@ -11,6 +11,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "lazyModules": [
               "src/app/components/general/calendar/calendar.module",
               "src/app/components/general/chart/chart.module",
@@ -18,10 +19,8 @@
               "src/app/components/general/forms/forms.module",
               "src/app/components/general/generic/generic.module",
               "src/app/components/general/grid/grid.module",
-              "src/app/components/general/map/map.module",
               "src/app/components/general/table/table.module",
-              "src/app/components/general/tags/tags.module",
-              "src/app/components/general/tree/tree.module"
+              "src/app/components/general/tags/tags.module"
             ],
             "outputPath": "dist/browser",
             "index": "src/index.html",
@@ -43,6 +42,12 @@
           },
           "configurations": {
             "qa": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -50,7 +55,7 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
@@ -62,6 +67,12 @@
               ]
             },
             "uat": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -69,7 +80,7 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
@@ -81,6 +92,12 @@
               ]
             },
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -88,7 +105,7 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
@@ -184,10 +201,13 @@
     "@schematics/angular:component": {
       "changeDetection": "OnPush",
       "prefix": "app",
-      "styleext": "scss"
+      "style": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "app"
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

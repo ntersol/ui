@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-map-route',
@@ -13,12 +7,14 @@ import { HttpClient } from '@angular/common/http';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent implements OnInit {
+  /**
   public locations: Map.Location[] | undefined;
   public radius = 1;
-
-  constructor(private http: HttpClient, private ref: ChangeDetectorRef) {}
+ */
+  constructor() {}
 
   ngOnInit() {
+    /**
     this.http.get('assets/mock-data/map-data.json').subscribe((data: any) => {
       const locations: any[] = data;
       this.locations = locations.map(location => {
@@ -34,13 +30,16 @@ export class MapComponent implements OnInit {
       });
       this.ref.markForCheck();
     });
+     */
   }
 
+  /**
   public viewChanged(viewProps: Map.ViewProps) {
     console.log(viewProps);
   }
+   */
 
-  public addedPushPin(location: Microsoft.Maps.Location[]) {
+  public addedPushPin(location: any) {
     console.log(location);
   }
 }

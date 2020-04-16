@@ -3,6 +3,9 @@ import { distinctUntilChanged, map, filter } from 'rxjs/operators';
 import { documentModelCreate, documentMerge } from './utils/models-create.util';
 import { viewModelCreate } from './utils/view-model-create.util';
 import { insertAt } from './utils/arrays.util';
+import { Injectable } from '@angular/core';
+import { NtsDocumentEditor } from '..';
+import { pdfjsDist } from './models/pdf';
 const cloneDeep = require('lodash/cloneDeep');
 
 declare global {
@@ -11,6 +14,7 @@ declare global {
   }
 }
 
+@Injectable()
 export class DocumentEditorService {
   private _state: NtsDocumentEditor.State = {
     loadingScript: true,

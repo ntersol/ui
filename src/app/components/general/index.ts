@@ -11,10 +11,13 @@ export * from './generic/generic.module';
 // Grid
 export * from './grid';
 // Map
-export * from './map/map.module';
+// export * from './map/map.module';
 // App state components
 export * from './state-management';
 // Table
 export * from './table';
 // Tags
 export * from './tags';
+
+// Tags
+export * from './tree';

@@ -2,7 +2,13 @@
  * Definitions for fullCalendar. Their repo isn't strongly typed...
  * Pulled from node_modules\@fullcalendar\core\main.d.ts
  */
-declare namespace NtsCalendar {
+export namespace NtsCalendar {
+  export interface Header {
+    /** Space delimited with the following options: title, today, prev, next, prevYear, nextYear, today */
+    left: string;
+    center: string;
+    right: string;
+  }
   export type DefaultView =
     | 'dayGridMonth'
     | 'dayGridWeek'

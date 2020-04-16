@@ -5,6 +5,7 @@ import { isPlatformBrowser } from '@angular/common';
 
 import { SettingsService } from '$settings';
 import { AuthState, AuthService } from 'src/app/shared/services/project/auth.service';
+import { IErrorApi } from 'src/typings';
 
 @Component({
   selector: 'app-login',

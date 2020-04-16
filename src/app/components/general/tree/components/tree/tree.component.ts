@@ -20,6 +20,7 @@ import { NtsFilterTreeNodes } from '../../utils/filterNodes.util';
 import { map } from 'rxjs/operators';
 import { setNodeDefaults } from '../../utils/setNodeDefaults.util';
 import { nodeCompareLabel } from '../../utils/nodeLabelCompare.util';
+import { NtsTree } from '../..';
 const cloneDeep = require('lodash/cloneDeep');
 
 @Component({

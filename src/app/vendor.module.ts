@@ -3,11 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import {
-  ConfirmationService,
-  DialogService,
-  MessageService,
-} from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+import { DialogModule } from 'primeng/dialog';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
 import { SlideMenuModule } from 'primeng/slidemenu';
@@ -32,6 +30,7 @@ const modules = [
   SlideMenuModule,
   ButtonModule,
   SidebarModule,
+  DialogModule,
   ConfirmDialogModule,
   DynamicDialogModule,
   CardModule,
@@ -65,7 +64,7 @@ const modules = [
   declarations: [],
 })
 export class VendorModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<VendorModule> {
     return {
       ngModule: VendorModule,
       providers: [ConfirmationService, DialogService, MessageService],

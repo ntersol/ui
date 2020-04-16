@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
+import { NtsDocumentEditor } from '../..';
 
 @Component({
   selector: 'app-page',

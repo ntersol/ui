@@ -4,6 +4,7 @@ import { ColDef, GridOptions } from 'ag-grid-community';
 import { DomainService } from '$domain';
 import { gridState1, gridState2, gridState3 } from './gridStates';
 import { environment } from '$env';
+import { NtsGridState } from 'src/app/components/general/grid/grid';
 
 @Component({
   selector: 'app-grid',
@@ -72,7 +73,7 @@ export class GridComponent implements OnInit {
       this.domain.users.select$.subscribe(x => console.log(x));
   }
 
-  public gridStateChange(gridState: NtsGridState) {
+  public gridStateChange(gridState: NtsGridState ) {
     // console.warn('gridStateChange', JSON.stringify(gridState));
     window.localStorage.setItem('qaGrid', JSON.stringify(gridState));
   }

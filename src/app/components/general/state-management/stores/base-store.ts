@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { tap, catchError, take } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { applyTransaction, StoreConfigOptions, Store, Query } from '@datorama/akita';
-
 export interface StoreConfig extends Partial<StoreConfigOptions> {
   /** The uniqueID or guid or the entity format */
   idKey: string;
@@ -28,11 +27,8 @@ export interface StoreConfig extends Partial<StoreConfigOptions> {
   initialState?: any;
   /** A name of the store, will be auto generated if not supplied */
   name?: string;
-}
-
-/** Received the entity passed to the store and should return a string of the web api url */
+} /** Received the entity passed to the store and should return a string of the web api url */
 type UrlResolver = <t>(x?: t) => string;
-
 export interface StoreState<t> {
   loading: boolean;
   error: any;
@@ -40,7 +36,6 @@ export interface StoreState<t> {
   modifying: boolean;
   modifyError: any;
 }
-
 /**
  * Dynamically created an Akita store for entities
  */
@@ -48,7 +43,6 @@ export class BaseStoreClass<t> {
   public store: Store;
   public query: Query<StoreState<t>>;
   public data$: Observable<StoreState<t>>;
-
   constructor(private http: HttpClient, private config: StoreConfig) {
     // Generate initial state
     const initialState: StoreState<t> = Object.assign(
@@ -65,7 +59,6 @@ export class BaseStoreClass<t> {
     this.query = new Query<StoreState<t>>(this.store);
     this.data$ = this.query.select();
   }
-
   /**
    * Get entities and load into store
    * By default requests are cached
@@ -97,7 +90,6 @@ export class BaseStoreClass<t> {
     // Always return original api response but only once
     return this.query.select().pipe(take(1));
   }
-
   /**
    * Create new entity via post
    * @param entity
@@ -111,7 +103,6 @@ export class BaseStoreClass<t> {
     const map = this.config.map && this.config.map.post ? this.config.map.post : null;
     return this.upsert(this.http.post<t>(apiUrlResolved, entity), entity, map);
   }
-
   /**
    * Create new entity via post
    * @param entity
@@ -130,7 +121,6 @@ export class BaseStoreClass<t> {
     const map = this.config.map && this.config.map.put ? this.config.map.put : null;
     return this.upsert(this.http.put<t>(apiUrlResolved, entity), entity, map);
   }
-
   /**
    * Create new entity via post
    * @param entity
@@ -149,7 +139,6 @@ export class BaseStoreClass<t> {
     const map = this.config.map && this.config.map.post ? this.config.map.post : null;
     return this.upsert(this.http.patch<t>(apiUrlResolved, entity), entity, map);
   }
-
   /**
    * Perform an upsert. Takes an http post/put/patch type and performs an upsert on the result
    * @param request
@@ -162,9 +151,7 @@ export class BaseStoreClass<t> {
         // If web api response is nill, default to supplied entity
         let result = res === null || res === undefined ? <t | t[]>entity : res;
         // If map function pass result through that
-        result = map ? map(result) : result;
-
-        // If string returned, it is the unique ID and replace the entity property for that
+        result = map ? map(result) : result; // If string returned, it is the unique ID and replace the entity property for that
         if (typeof res === 'string') {
           (<any>result)[this.config.idKey] = res; // TODO: Fix any
           // Object is returned, merge response with entity supplied. Response takes priority
@@ -186,7 +173,6 @@ export class BaseStoreClass<t> {
       }),
     );
   }
-
   /**
    * Delete entity
    * @param entity
@@ -194,7 +180,6 @@ export class BaseStoreClass<t> {
   public delete(entity: string | number | Partial<t>) {
     const id: keyof Partial<t> = <any>this.config.idKey; // @Todo: Type without any
     const key = typeof entity === 'string' || typeof entity === 'number' ? entity : entity[id];
-
     this.store.update({ modifying: true, modifyError: false });
     // Check if this is the default apiUrl or a custom get url
     const apiUrl = this.config.apiUrls && this.config.apiUrls.delete ? this.config.apiUrls.delete : this.config.apiUrl;
@@ -217,16 +202,13 @@ export class BaseStoreClass<t> {
       }),
     );
   }
-
   /**
    * Reset store
    */
   public reset() {
     this.store.reset();
   }
-}
-
-/**
+} /**
  * Generate a new entity store
  * @param http
  * @param config

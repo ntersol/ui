@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { SwUpdate, SwPush } from '@angular/service-worker';
-import { interval, Observable, BehaviorSubject } from 'rxjs';
+import { interval, Observable, BehaviorSubject, from, of } from 'rxjs';
 import { delay } from 'helpful-decorators';
 import { HttpClient } from '@angular/common/http';
-import { take, filter, map } from 'rxjs/operators';
+import { map, take, switchMap, filter } from 'rxjs/operators';
 
 /** Model that needs to be sent from the server to the service worker */
 export interface NotificationServerResponse {
@@ -55,20 +55,22 @@ export interface PushResponse {
  */
 @Injectable({ providedIn: 'root' })
 export class NtsServiceWorkerService {
+  /** Is an update available */
   public updateAvailable$ = new BehaviorSubject<boolean>(false);
   /** Is the service worker enabled */
   public isEnabled = this.sw.isEnabled;
-  /** Does the user have an active push subscription */
-  public isPushActive$ = this.swPush.subscription.pipe(map(x => !!x));
   /** Handle click events on notifications */
   public notificationClicks$ = this.swPush.notificationClicks;
   /** Does this app have permission to send push notifications? */
   private permission: NotificationPermission = 'Notification' in window ? Notification.permission : 'denied';
+  /** Service worker instance */
+  public worker$ = from(navigator.serviceWorker.getRegistration());
+  /** Get the current active push notification. Null if it does not exist */
+  public pushSubscription$ = this.worker$.pipe(switchMap(registration => (registration ? from(registration.pushManager.getSubscription()) : of(null))));
+  /** Does the user have an active push subscription */
+  public isPushActive$ = this.pushSubscription$.pipe(map(x => !!x));
 
-  constructor(private sw: SwUpdate, private swPush: SwPush, private http: HttpClient) {
-    // Convenience method to unsub from push for debugging purposes
-    (<any>window).PushSubscriptionRemove = () => this.pushSubscriptionRemove();
-  }
+  constructor(private sw: SwUpdate, private swPush: SwPush, private http: HttpClient) {}
 
   /**
    * Ask the user for permission to send push notifications
@@ -115,57 +117,70 @@ export class NtsServiceWorkerService {
    */
   @delay(100) // Ensures app is loaded
   public pollforUpdates(intervalTime = 5 * 60 * 1000) {
-    if (this.sw.isEnabled) {
-      // If an update is available, notify the app. Called before checkForUpdate so it will fire if update available on load
-      this.sw.available.subscribe(() => this.updateAvailable$.next(true));
-      // Immediately check for an update when service loads
-      // Otherwise SW will always serve old version of app
-      this.sw.checkForUpdate();
-      // Poll for updates
-      interval(intervalTime).subscribe(() => this.sw.checkForUpdate());
+    if (!this.sw.isEnabled) {
+      console.error('Service Worker not enabled');
+      return;
     }
+    // If an update is available, notify the app. Called before checkForUpdate so it will fire if update available on load
+    this.sw.available.subscribe(() => this.updateAvailable$.next(true));
+    // Immediately check for an update when service loads
+    // Otherwise SW will always serve old version of app
+    this.sw.checkForUpdate();
+    // Poll for updates
+    interval(intervalTime).subscribe(() => this.sw.checkForUpdate());
   }
 
   /**
    * Get a push subscription, pass to the backend for use with web push
    * @param pathToApi URL to location to pass the subscription to
    * @param publicKey A VAPID public key
-   * @param callback
+   * @param forceSend Always send the sub to the backend even if it already exists
    */
-  public pushSubscriptionCreate(pathToApi: string, publicKey: string) {
-    this.swPush.subscription
+  public pushSubscriptionCreate(pathToApi: string, publicKey: string, forceSend = false) {
+    if (!this.sw.isEnabled) {
+      console.error('Service Worker not enabled');
+      return;
+    }
+
+    // Get current push subscription, null if not exists
+    this.pushSubscription$
       .pipe(
-        take(1),
-        filter(sub => !sub),
+        take(1), // Only get once
+        filter(subCurrent => !subCurrent || forceSend), // If no existing sub or force send is set
+        switchMap(() => this.worker$), // Get service worker
+        filter(w => !!w), // Null check for service worker
+        map(s => (s ? s.pushManager : undefined)), // Map to push manager
       )
-      .subscribe(() => {
-        this.swPush
-          .requestSubscription({ serverPublicKey: publicKey })
-          .then(sub => this.http.post(pathToApi, sub).subscribe()) // Pass subscription to backend
-          .catch(err => console.error('Could not subscribe to notifications: ', err));
+      .subscribe(pm => {
+        if (pm) {
+          pm.subscribe({ applicationServerKey: publicKey, userVisibleOnly: true })
+            .then(sub => this.http.post(pathToApi, sub).subscribe())
+            .catch(err => console.error('Error getting push subscription: ', err));
+        } else {
+          console.error('Push manager not defined');
+        }
       });
+    return this.pushSubscription$;
   }
 
   /**
-   * Unsubscribe to the current push subscription if present
+   * Unsubscribe the current push subscription if present
    * @param pathToApi If supplied will send a delete request to the supplied path
    */
   public pushSubscriptionRemove(pathToApi?: string) {
-    this.swPush.subscription
-      .pipe(
-        take(1),
-        filter(sub => !!sub),
-      )
-      .subscribe(() => {
-        this.swPush
-          .unsubscribe()
-          .then(() => {
-            if (pathToApi) {
-              this.http.delete(pathToApi).subscribe();
-            }
-          })
-          .catch(error => console.error('Error unsubbing from push subscription: ', error));
-      });
+    if (!this.sw.isEnabled) {
+      console.error('Service Worker not enabled');
+      return;
+    }
+    this.pushSubscription$.pipe(take(1)).subscribe(s => {
+      if (s) {
+        s.unsubscribe().then(() => {
+          if (pathToApi) {
+            this.http.delete(pathToApi).subscribe();
+          }
+        });
+      }
+    });
   }
 
   /**

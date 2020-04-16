@@ -1,3 +1,5 @@
+import { NtsTree } from '..';
+
 /**
  * Recursively merge the defaults with the supplied nodes
  * @param nodes

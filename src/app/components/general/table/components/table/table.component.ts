@@ -16,6 +16,7 @@ import {
 } from '@angular/core';
 import { Table } from 'primeng/table';
 import { TableColumnDirective } from '../../directives/column.directive';
+import { NtsTable } from '../..';
 
 @Component({
   selector: 'nts-table',

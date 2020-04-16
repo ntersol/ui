@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { SiteModule } from '$site'; // Site modules
 
 // Routing
-import { routing } from './routes';
+import { routing } from './home.routes';
 
 // Components
-import { RootComponent } from './routes/root/root.component';
+import { HomeComponent } from './home.component';
 
 // Route State Management
 import {
@@ -16,11 +16,9 @@ import {
 } from './shared/state/ui';
 import { RouteDomainStateService } from './shared/state/domain';
 
-export const storeName = 'home-UIState'; // Change this property to be unique & route specific, IE 'route-UIState' => 'dashboard-UIState'
-
 @NgModule({
   imports: [CommonModule, SiteModule, routing],
-  declarations: [RootComponent],
+  declarations: [HomeComponent],
   providers: [
     RouteUiStateService,
     RouteUiStateStore,

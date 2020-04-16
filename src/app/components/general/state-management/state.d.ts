@@ -1,14 +1,14 @@
 // import { Observable } from 'rxjs';
-
-declare namespace NtsState {
+export namespace NtsState {
+  
   /** Structure of entity state supplied by the store */
   export interface EntityState<t = any, IDType = any> extends ApiState {
     [key: string]: any;
     entities: HashMap<t>;
     ids: IDType[];
     data: null | t[];
-  }
-
+  } 
+  
   /** Api state only interface */
   export interface ApiState<t = boolean> {
     loading: boolean;
@@ -17,9 +17,9 @@ declare namespace NtsState {
     errorModify: any;
     data: null | t;
   }
-
+  
   export type ApiUrl = string | UrlResolver | Observable<string>;
-
+  
   export interface EntityStoreConfig {
     /** Full path to webapi. Assumes restful conventions for verbs */
     apiUrl?: string;
@@ -53,7 +53,6 @@ declare namespace NtsState {
     /** A name of the store, will be auto generated if not supplied */
     name?: string;
   }
-
   /** Receives the entity passed to the store and should return a string of the web api url.
    * Used to generate non standard or complex api urls with dynamic properties */
   type UrlResolver = <t>(x?: t) => string;

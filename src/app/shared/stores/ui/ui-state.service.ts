@@ -5,6 +5,7 @@ import { ConfirmationService } from 'primeng/api';
 import { SwUpdate } from '@angular/service-worker';
 import { NtsServiceWorkerService, NtsVersionManagementService } from '../../services/general';
 import { StoreConfig, Store, Query } from '@datorama/akita';
+import { UIState } from './ui-state';
 
 export function createInitialState(): UIState {
   return {

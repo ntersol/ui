@@ -1,3 +1,6 @@
+import { NtsDocumentEditor } from '../..';
+import { pdfjsDist } from '../models/pdf';
+
 export class DocumentPreview implements NtsDocumentEditor.Preview {
   public canvas: HTMLCanvasElement;
   private _offscreenCanvas?: any; // OffscreenCanvas;
@@ -42,16 +45,12 @@ export class DocumentPreview implements NtsDocumentEditor.Preview {
     // Get offscreencanvas if available, regular canvas otherwise
     const canvas = this._offscreenCanvas ? this._offscreenCanvas : this.canvas;
     if (this._page) {
-      this.viewCreate(this._page, canvas, this._width).promise.then(
-        
-      );
+      this.viewCreate(this._page, canvas, this._width).promise.then();
       this._isRendered = true;
     } else {
       this.page.then(page => {
         this._page = page;
-        this.viewCreate(this._page, canvas, this._width).promise.then(
-
-          );
+        this.viewCreate(this._page, canvas, this._width).promise.then();
         this._isRendered = true;
       });
     }

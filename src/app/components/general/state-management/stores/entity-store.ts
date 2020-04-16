@@ -3,6 +3,8 @@ import { tap, catchError, map, switchMap, share, take } from 'rxjs/operators';
 import { throwError, Observable, isObservable } from 'rxjs';
 import { applyTransaction, EntityStore, QueryEntity, SelectAllOptionsB } from '@datorama/akita';
 import { initialEntityState } from '../utils/initialState';
+import { NtsState } from '..';
+
 /**
  * Dynamically created an Akita store for entities
  */
@@ -159,23 +161,37 @@ export class NtsEntityStore<t> {
    */
   public put(entity: Partial<t> | Partial<t>[]) {
     const key: keyof Partial<t> = <any>this.idKey; // @Todo: Type without any
-    // Check if this is the default apiUrl or a custom get url
-    let apiUrl = this.config.apiUrls && this.config.apiUrls.put ? this.config.apiUrls.put : this.config.apiUrl;
-    // If not an array, attach the id to the url, otherwise bulk uploads require a standalone endpoint
-    if (!Array.isArray(entity)) {
-      apiUrl += '/' + entity[key];
-    }
-    // Check if this is a function or a string, if function resolve the method to return a string
-    const apiUrlResolved = typeof apiUrl === 'function' ? apiUrl() : apiUrl;
-    if (!apiUrlResolved) {
-      console.error('Please supply an api url for this action');
+    // Get the api url, either the default global one or a custom one for this verb
+    const apiUrl = this.config.apiUrls && this.config.apiUrls.put ? this.config.apiUrls.put : this.config.apiUrl;
+    // Determine if an additional slug (usually the guid or id) needs to be appended to this request
+    // An additional slug is never appended to a custom url and must be added by the input source
+    const entitySlug =
+      this.config.apiUrls && this.config.apiUrls.patch
+        ? null
+        : '/' + (!Array.isArray(entity) ? entity[key] : entity[0][key]);
+
+    // Hold final http request, may be null if no conditions match
+    let httpRequest: Observable<Partial<t>> | null = null;
+    // If type is string
+    if (typeof apiUrl === 'string') {
+      const slug = entitySlug ? apiUrl + entitySlug : apiUrl; // Only append slug if NOT custom
+      httpRequest = this.http.put<Partial<t>>(slug, entity);
+      // If type is function
+    } else if (typeof apiUrl === 'function') {
+      const slug = entitySlug ? apiUrl() + entitySlug : apiUrl; // Only append slug if NOT custom
+      httpRequest = this.http.put<Partial<t>>(slug, entity);
+      // If type is observable
+    } else if (isObservable<string>(apiUrl)) {
+      httpRequest = apiUrl.pipe(
+        switchMap(url => {
+          const slug = entitySlug ? url + entitySlug : url; // Only append slug if NOT custom
+          return this.http.put<Partial<t>>(slug, entity);
+        }),
+      );
+    } else {
+      console.error('Please supply an api url for PUT');
       return throwError(null);
     }
-
-    // Check if api url is observable
-    const httpRequest = !isObservable<string>(apiUrlResolved)
-      ? this.http.put<Partial<t>>(apiUrlResolved, entity)
-      : apiUrlResolved.pipe(switchMap(url => this.http.put<Partial<t>>(url, entity)));
 
     // If a map from the api response is needed
     const mapped = this.config.map && this.config.map.put ? this.config.map.put : null;
@@ -188,23 +204,37 @@ export class NtsEntityStore<t> {
    */
   public patch(entity: Partial<t> | Partial<t>[]) {
     const key: keyof Partial<t> = <any>this.idKey; // @Todo: Type without any
-    // Check if this is the default apiUrl or a custom get url
-    let apiUrl = this.config.apiUrls && this.config.apiUrls.patch ? this.config.apiUrls.patch : this.config.apiUrl;
-    // If not an array, attach the id to the url, otherwise bulk uploads require a standalone endpoint
-    if (!Array.isArray(entity)) {
-      apiUrl += '/' + entity[key];
-    }
-    // Check if this is a function or a string, if function resolve the method to return a string
-    const apiUrlResolved = typeof apiUrl === 'function' ? apiUrl() : apiUrl;
-    if (!apiUrlResolved) {
-      console.error('Please supply an api url for this action');
+    // Get the api url, either the default global one or a custom one for this verb
+    const apiUrl = this.config.apiUrls && this.config.apiUrls.patch ? this.config.apiUrls.patch : this.config.apiUrl;
+    // Determine if an additional slug (usually the guid or id) needs to be appended to this request
+    // An additional slug is never appended to a custom url and must be added by the input source
+    const entitySlug =
+      this.config.apiUrls && this.config.apiUrls.patch
+        ? null
+        : '/' + (!Array.isArray(entity) ? entity[key] : entity[0][key]);
+
+    // Hold final http request, may be null if no conditions match
+    let httpRequest: Observable<Partial<t>> | null = null;
+    // If type is string
+    if (typeof apiUrl === 'string') {
+      const slug = entitySlug ? apiUrl + entitySlug : apiUrl; // Only append slug if NOT custom
+      httpRequest = this.http.patch<Partial<t>>(slug, entity);
+      // If type is function
+    } else if (typeof apiUrl === 'function') {
+      const slug = entitySlug ? apiUrl() + entitySlug : apiUrl; // Only append slug if NOT custom
+      httpRequest = this.http.patch<Partial<t>>(slug, entity);
+      // If type is observable
+    } else if (isObservable<string>(apiUrl)) {
+      httpRequest = apiUrl.pipe(
+        switchMap(url => {
+          const slug = entitySlug ? url + entitySlug : url; // Only append slug if NOT custom
+          return this.http.patch<Partial<t>>(slug, entity);
+        }),
+      );
+    } else {
+      console.error('Please supply an api url for PATCH');
       return throwError(null);
     }
-
-    // Check if api url is observable
-    const httpRequest = !isObservable<string>(apiUrlResolved)
-      ? this.http.patch<Partial<t>>(apiUrlResolved, entity)
-      : apiUrlResolved.pipe(switchMap(url => this.http.patch<Partial<t>>(url, entity)));
 
     // If a map from the api response is needed
     const mapped = this.config.map && this.config.map.patch ? this.config.map.patch : null;
@@ -222,8 +252,6 @@ export class NtsEntityStore<t> {
       tap(res => {
         // If web api response is nill, default to supplied entity
         let result = res === null || res === undefined ? <t | t[]>entity : res;
-        // If map function pass result through that
-        result = mapped ? mapped(result) : result;
 
         // If string returned, it is the unique ID and replace the entity property for that
         if (typeof res === 'string') {
@@ -232,8 +260,12 @@ export class NtsEntityStore<t> {
         } else if (typeof res === 'object' && !Array.isArray(res)) {
           result = Object.assign(entity, res);
         }
+
+        // If map function pass result through that
+        result = mapped ? mapped(result) : result;
         // Convert to array
         const resultArray = !Array.isArray(result) ? [result] : result;
+
         // Extract unique Ids
         // const ids: string[] = result.map(x => (<any>x)[this.config.idKey]); // TODO: Fix any
         applyTransaction(() => {

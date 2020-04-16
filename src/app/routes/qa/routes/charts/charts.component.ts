@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { user } from './user';
 import { transfers } from './transfers';
+import { CanvasJS } from 'src/app/components/general/chart';
 
 @Component({
   selector: 'app-charts',

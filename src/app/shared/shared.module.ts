@@ -58,7 +58,7 @@ export const APP_PIPES_DIRECTIVES = [
   entryComponents: [],
 })
 export class SharedModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<SharedModule> {
     return {
       ngModule: SharedModule,
       providers: [],

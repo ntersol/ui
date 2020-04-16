@@ -1,6 +1,7 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { StoreConfig, Store, Query } from '@datorama/akita';
+import { Settings } from './settings';
 
 enum Props {
   token = 'token',

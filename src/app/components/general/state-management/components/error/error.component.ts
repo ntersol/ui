@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  ViewEncapsulation,
-} from '@angular/core';
-
+import { Component, OnInit, ChangeDetectionStrategy, Input, ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'nts-error',
   templateUrl: './error.component.html',
@@ -23,8 +16,6 @@ export class NtsErrorComponent implements OnInit {
   @Input() errorExpanded = false;
   /** Show error details in accordian */
   @Input() errorShowDetails = true;
-
   constructor() {}
-
   ngOnInit() {}
 }

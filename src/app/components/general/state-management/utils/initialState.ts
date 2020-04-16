@@ -1,3 +1,4 @@
+import { NtsState } from '..';
 export const initialState: NtsState.ApiState = {
   loading: false,
   modifying: false,
@@ -5,10 +6,9 @@ export const initialState: NtsState.ApiState = {
   errorModify: null,
   data: null,
 };
-
 export const initialEntityState: NtsState.EntityState = {
   ...initialState,
   entities: {},
   ids: [],
-  data: null
+  data: null,
 };

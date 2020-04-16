@@ -1,3 +1,6 @@
+import { NtsDocumentEditor } from '../..';
+import { pdfjsDist } from '../models/pdf';
+
 /**
  *
  * @param pdf

@@ -47,7 +47,7 @@ export const APP_COMPONENTS = [
   entryComponents: [APP_MODALS],
 })
 export class ComponentsModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<ComponentsModule> {
     return {
       ngModule: ComponentsModule,
       providers: [],

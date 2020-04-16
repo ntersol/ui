@@ -1,4 +1,4 @@
-declare namespace NtsTable {
+export namespace NtsTable {
   type ColumnType = 'email' | 'phoneNumber' | 'date' | 'dateTime' | 'currency' | 'limited';
   interface Column {
     field: string;

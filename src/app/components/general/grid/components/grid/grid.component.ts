@@ -27,6 +27,7 @@ import { GridStatusBarComponent } from '../grid-status-bar/grid-status-bar.compo
 import { GridColumnDirective } from '../../directives/column.directive';
 import { columnsTemplateAttach } from '../../utils/attachColumnTemplates.util';
 import { rowsReselect } from '../../utils/reselectRows.util';
+import { NtsGridState } from '../../grid';
 const defaultsDeep = require('lodash/defaultsDeep');
 const cloneDeep = require('lodash/cloneDeep');
 /**
@@ -46,8 +47,8 @@ const cloneDeep = require('lodash/cloneDeep');
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridComponent implements OnInit, OnChanges, OnDestroy {
-  @ViewChild('grid', { static: false }) grid!: AgGridAngular;
-  @ViewChild('gridContainer', { static: false }) gridContainer!: ElementRef;
+  @ViewChild('grid') grid!: AgGridAngular;
+  @ViewChild('gridContainer') gridContainer!: ElementRef;
   /** The property containing the unique ID of the row data */
   @Input() rowUniqueId!: string;
   @Input() parentRef: any;

@@ -1,25 +1,17 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  ElementRef,
-  Input,
-  OnChanges,
-  AfterViewInit,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, OnChanges, AfterViewInit, OnDestroy } from '@angular/core';
+import { CanvasJS } from './chart.models';
+// import { CanvasJS } from './chart';
 // import { formatDate, formatNumber, formatCurrency, formatPercent } from '@angular/common';
 const defaultsDeep = require('lodash/defaultsDeep');
+
+// JS file source
+const chartSrc = 'assets/scripts/canvasjs.min.js';
 
 declare global {
   interface Window {
     CanvasJS: any;
   }
 }
-
-// JS file source
-const chartSrc = 'assets/scripts/canvasjs.min.js';
 
 /**
  * A charting and data visualization library based on CanvasJS
@@ -32,8 +24,8 @@ const chartSrc = 'assets/scripts/canvasjs.min.js';
 })
 export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   /** TEMP */
-  @ViewChild('element', { static: false }) element!: ElementRef;
-  @ViewChild('tooltipCustom', { static: false }) tooltipCustom!: ElementRef;
+  @ViewChild('element') element!: ElementRef;
+  @ViewChild('tooltipCustom') tooltipCustom!: ElementRef;
 
   @Input()
   type:
@@ -187,7 +179,7 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
   public chartOptionsCreate() {
     // If color gradient is specified, create it to match datapoint range
     if (this.colorGradient && this.data && this.data[0] && this.data[0].dataPoints.length) {
-      this.colorsCustom = this.getColorScheme(this.colorGradient[0], this.colorGradient[1], this.limit ||  this.data[0].dataPoints.length);
+      this.colorsCustom = this.getColorScheme(this.colorGradient[0], this.colorGradient[1], this.limit || this.data[0].dataPoints.length);
     }
 
     // If custom colors supplied, register with chart plugin
@@ -278,7 +270,10 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
         indexLabelFontSize: 10,
         ...data,
         dataPoints: this.limit
-          ? [...data.dataPoints].sort((a, b) => (a.y && b.y && a.y > b.y) ? -1 : 1).slice(0, this.limit).reverse()
+          ? [...data.dataPoints]
+              .sort((a, b) => (a.y && b.y && a.y > b.y ? -1 : 1))
+              .slice(0, this.limit)
+              .reverse()
           : data.dataPoints,
         // indexLabelFontColor: '#fff',
         // legendText: this.data[0].label,

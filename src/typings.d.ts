@@ -7,7 +7,7 @@ interface NodeModule {
 
 /* Starter Typings */
 
-interface IErrorApi {
+export interface IErrorApi {
   errorMsg?: string;
   headers?: object;
   message?: string;

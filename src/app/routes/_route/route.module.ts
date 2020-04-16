@@ -6,10 +6,9 @@ import { SiteModule } from '$site'; // Site modules
 import { routing } from './routes';
 
 // Components
-import { RootComponent } from './routes/root/root.component';
+import { RootComponent } from './root.component';
 import { RouteUiStateService, RouteUiStateStore, RouteUiStateQuery } from './shared/state/ui/route-ui-state.service';
 
-export const storeName = 'route-UIState'; // Change this property to be unique & route specific, IE 'route-UIState' => 'dashboard-UIState'
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing],

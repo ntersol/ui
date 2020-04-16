@@ -1,0 +1,43 @@
+<div id="nts-scripter">
+  <section class="fld-col flg-4 flg-sm-5">
+    <nts-campaign-status [call]="call"></nts-campaign-status>
+
+    <section class="fld-col fld-sm-row">
+      <section class="fld-col flg-4 flg-sm-5 mwb-4 mwr-sm-5 fls-1-1 vw-p100">
+        <nts-panel
+          *ngFor="let panelGuid of state.panelFlow"
+          [panel]="state.panels[panelGuid]"
+          [formGroup]="formGroup"
+          [dataFields]="dataFields"
+          [dispositions]="dispositions"
+          (panelEdit)="panelEdit($event)"
+          (formChanged)="formChanged.emit(formGroup.getRawValue())"
+          (disposition)="
+            disposition.emit({
+              disposition: $event,
+              panel: panel,
+              call: call,
+              items: formGroup.value
+            })
+          "
+          (buttonClick)="buttonClicked($event, call, state.panels[panelGuid], formGroup)"
+          (edit)="
+            edit.emit({
+              data: $event,
+              call: call,
+              panel: panel,
+              items: formGroup.value
+            })
+          "
+        ></nts-panel>
+      </section>
+      <nts-notes
+        *ngIf="false"
+        class="fls-1-1 vwmx-sm-ch1 vw-p100"
+        [notes]="call.notes"
+        (savePrimaryNote)="savePrimaryNote.emit($event)"
+        (addNewNote)="addNewNote.emit($event)"
+      ></nts-notes>
+    </section>
+  </section>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/api';
+import {DialogService} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-demo-modal',
@@ -8,12 +8,11 @@ import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/api';
 })
 export class DemoModalComponent implements OnInit {
   constructor(
-    public ref: DynamicDialogRef,
-    public config: DynamicDialogConfig,
+    public dialogService: DialogService
   ) {}
 
   ngOnInit() {
-    console.log(this.ref); // Modal controls
-    console.log(this.config); // Modal data passed from service
+    console.log(this.dialogService); // Modal controls
+    // console.log(this.config); // Modal data passed from service
   }
 }

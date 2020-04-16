@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  ConfirmationService,
-  DialogService,
-  MessageService,
-} from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { DemoModalComponent } from './components/modal/demo-modal/demo-modal.component';
 import { LogoutModalComponent, FeedbackModalComponent } from '$modals';
 import { filter } from 'rxjs/operators';
@@ -19,18 +16,7 @@ export class QaComponent implements OnInit {
 
   public filterFruit: any;
   public filterFruitMore: any;
-  public fruits = [
-    'Apple',
-    'Orange',
-    'Kiwi',
-    'Marionberries',
-    'Loganberries',
-    'Mangostein',
-    'Peach',
-    'Pear',
-    'Blackberries',
-    'Strawberries',
-  ];
+  public fruits = ['Apple', 'Orange', 'Kiwi', 'Marionberries', 'Loganberries', 'Mangostein', 'Peach', 'Pear', 'Blackberries', 'Strawberries'];
   public fruitsMore = [
     { name: 'Apple' },
     { name: 'Orange' },

@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
 import { filter, debounceTime, tap, skip } from 'rxjs/operators';
+import { NtsDocumentEditor } from '../..';
 
 @Component({
   selector: 'nts-document-editor',

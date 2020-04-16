@@ -1,4 +1,5 @@
 import { pageViewCreate } from './canvas-create.util';
+import { pdfjsDist } from '../models/pdf';
 
 /**
  * Create the default pages model from the source pdf
