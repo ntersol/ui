@@ -10,17 +10,19 @@ import {
   QueryList,
   ViewChild,
   ChangeDetectorRef,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { TreeNode } from 'primeng/api';
-import { TreeTemplateDirective } from '../../directives/template.directive';
 import { Tree } from 'primeng/tree';
-import { setNodeProp } from '../../utils/setNodeProp.util';
+import { TreeTemplateDirective } from '../../directives/template.directive';
 import { BehaviorSubject } from 'rxjs';
-import { NtsFilterTreeNodes } from '../../utils/filterNodes.util';
 import { map } from 'rxjs/operators';
+import { setNodeProp } from '../../utils/setNodeProp.util';
+import { filterTreeNodes } from '../../utils/filterNodes.util';
 import { setNodeDefaults } from '../../utils/setNodeDefaults.util';
 import { nodeCompareLabel } from '../../utils/nodeLabelCompare.util';
-import { NtsTree } from '../..';
+import { NtsTree } from '../../tree';
 const cloneDeep = require('lodash/cloneDeep');
 
 @Component({
@@ -31,35 +33,17 @@ const cloneDeep = require('lodash/cloneDeep');
   // tslint:disable-next-line:use-component-view-encapsulation
   encapsulation: ViewEncapsulation.None,
 })
-export class NtsTreeComponent implements OnInit {
+export class NtsTreeComponent implements OnInit, OnChanges {
   @ViewChild('tree', { static: true }) tree!: Tree;
 
-  private _value: TreeNode[] | null = null;
-  @Input() set value(nodes: TreeNode[] | null) {
-    this._value = nodes;
-    
-    this.nodesSrc$.next(this.value);
-    this.selection = []; // When new nodes are supplied, reset selection array
-    this.selectionChange.emit(this.selection);
-  }
-  get value(): TreeNode[] | null {
-    const nodes = <TreeNode[]>cloneDeep(this._value) || [];
-    // Set node defaults if supplied
-    return this.nodeDefaults ? setNodeDefaults(nodes, this.nodeDefaults) : nodes;
-  }
+  /** Tree nodes */
+  @Input() value: TreeNode[] | null = null;
 
-  private _filterTerm: string | null = null;
   /** Filter the tree by matching the label property to the supplied filter term */
-  @Input() set filterTerm(term: string) {
-    this._filterTerm = term;
-    this.nodesSrc$.next(this.value);
-  }
-  private _filterFn: ((node: NtsTree.TreeNode) => boolean) | null = null;
+  @Input() filterTerm: string | null = null;
+
   /** Filters the tree by evaluating a callback function that should return a boolean */
-  @Input() set filterFn(fn: ((node: NtsTree.TreeNode) => boolean) | null) {
-    this._filterFn = fn;
-    this.nodesSrc$.next(this.value);
-  }
+  @Input() filterFn: ((node: NtsTree.TreeNode) => boolean) | null = null;
 
   /** Node source for tree */
   public nodesSrc$ = new BehaviorSubject<TreeNode[] | null>(this.value);
@@ -71,13 +55,13 @@ export class NtsTreeComponent implements OnInit {
       }
       let nodesFiltered = nodes;
       // If filter term supplied, filter nodes
-      if (this._filterTerm) {
-        nodesFiltered = NtsFilterTreeNodes(nodes, nodeCompareLabel(this._filterTerm));
+      if (this.filterTerm) {
+        nodesFiltered = filterTreeNodes(nodes, nodeCompareLabel(this.filterTerm));
       }
 
       // If filter FN supplied, apply filter
-      if (this._filterFn) {
-        nodesFiltered = NtsFilterTreeNodes(nodes, this._filterFn);
+      if (this.filterFn) {
+        nodesFiltered = filterTreeNodes(nodesFiltered, this.filterFn);
       }
 
       return nodesFiltered;
@@ -92,7 +76,7 @@ export class NtsTreeComponent implements OnInit {
   @Input() propagateSelectionUp = false;
   @Input() propagateSelectionDown = false;
   /** Set default attributes for each node where array index corresponds to depth */
-  @Input() nodeDefaults: Partial<TreeNode>[] | undefined;
+  @Input() nodeDefaults?: Partial<TreeNode>[];
 
   @Input() selection: NtsTree.TreeNode[] = [];
   @Output() selectionChange: EventEmitter<NtsTree.TreeNode[]> = new EventEmitter<any>();
@@ -125,6 +109,16 @@ export class NtsTreeComponent implements OnInit {
   constructor(private ref: ChangeDetectorRef) {}
 
   ngOnInit() {}
+
+  ngOnChanges(model: SimpleChanges) {
+    if (model.value || model.filterTerm || model.filterFn) {
+      const nodes = <TreeNode[]>cloneDeep(this.value) || [];
+      const nodesWithDefaults = this.nodeDefaults ? setNodeDefaults(nodes, this.nodeDefaults) : nodes;
+      this.nodesSrc$.next(nodesWithDefaults);
+      this.selection = []; // When new nodes are supplied, reset selection array
+      this.selectionChange.emit(this.selection);
+    }
+  }
 
   public selectAll() {}
 

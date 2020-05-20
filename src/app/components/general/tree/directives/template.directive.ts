@@ -8,7 +8,6 @@ export class TreeTemplateDirective {
   // Add custom props here for overrides in the cell templates
 
   // Cell Templates
-  // @Input()
   @ContentChild(TreeTemplateNodeDirective, { read: TemplateRef, static: false })
   templateEntry!: TemplateRef<any>;
 

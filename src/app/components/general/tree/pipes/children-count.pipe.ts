@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { NtsTree } from '..';
+import { NtsTree } from '../tree';
 
 const countChildren = (data: NtsTree.TreeNode[] | undefined, depthCurrent = 0, depthsToInclude?: number[]): number => {
   let count = 0;

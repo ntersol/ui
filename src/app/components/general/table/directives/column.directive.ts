@@ -9,12 +9,13 @@ export class TableColumnDirective {
   // Add custom props here for overrides in the cell templates
 
   // Cell Templates
-  @ContentChild(TableColumnCellDirective, { read: TemplateRef })
+  @ContentChild(TableColumnCellDirective, { read: TemplateRef, static: false })
   templateCell!: TemplateRef<any>;
 
   // Header Templates
   @ContentChild(TableColumnHeaderDirective, {
     read: TemplateRef,
+    static: false,
   })
   templateHeader!: TemplateRef<any>;
 }

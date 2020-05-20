@@ -1,4 +1,4 @@
-import { NtsTree } from '..';
+import { NtsTree } from '../tree';
 
 /**
  *  Set/change a property for all nodes, configurable by depth

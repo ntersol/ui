@@ -35,4 +35,14 @@
   .nts-zoom-4 .fa {
     transform: scale(1.4);
   }
+
+  .multi-doc {
+    .ui-tabview-nav {
+      position: relative;
+    }
+    .ui-tabview-nav li:last-child {
+      position: absolute;
+      right: 0;
+    }
+  }
 }

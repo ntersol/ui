@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { isApiState } from '../utils/guards.util';
-import { NtsState } from '..';
+import { NtsState } from '../state';
+
 /**
  * Determines if the source observable containing multiple entity states has data loaded for each of them
  * Pretty much only useful for multi-entity state arrays or combine arrays of entity and non-entity states
@@ -19,10 +20,15 @@ export class EntityIsLoaded implements PipeTransform {
     // return null;
     if (value === null || value === undefined) {
       return false;
-    } // If not an array, return either the source data or the entity state data property
+    }
+
+    // If not an array, return either the source data or the entity state data property
     if (!Array.isArray(value)) {
       return isApiState(value) && value.data ? true : false;
     }
-    return value.filter(d => isApiState(d)).reduce((a, b) => (b.data === undefined || a === false ? false : a), <boolean>true);
+
+    return value
+      .filter(d => isApiState(d))
+      .reduce((a, b) => (b.data === undefined || a === false ? false : a), <boolean>true);
   }
 }

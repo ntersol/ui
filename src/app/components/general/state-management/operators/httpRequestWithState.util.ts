@@ -1,6 +1,7 @@
 import { Observable, of } from 'rxjs';
 import { map, startWith, catchError } from 'rxjs/operators';
-import { NtsState } from '..';
+import { NtsState } from '../state';
+
 /**
  * Intercept an http request and return a state object
  * @param source

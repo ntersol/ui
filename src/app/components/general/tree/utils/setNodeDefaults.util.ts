@@ -1,4 +1,4 @@
-import { NtsTree } from '..';
+import { NtsTree } from '../tree';
 
 /**
  * Recursively merge the defaults with the supplied nodes

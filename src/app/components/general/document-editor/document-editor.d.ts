@@ -1,4 +1,4 @@
-export module NtsDocumentEditor {
+export namespace NtsDocumentEditor {
   interface Document {
     label: string | null;
     pages: Page[];
@@ -6,7 +6,7 @@ export module NtsDocumentEditor {
   /** How to handle the initial view if multiple documents are added */
   type MultipleAction = 'merge' | 'separate';
   type InputTypes = string | Blob;
-  type Workflow = 'default' | 'merge' | 'pageAdd' | 'split';
+  type Workflow = 'default' | 'multiDoc' | 'display';
 
   type Resolver = (val: t) => t;
 
@@ -18,7 +18,7 @@ export module NtsDocumentEditor {
   }
 
   interface Page {
-    [key: string];
+    [key: string]
     /** Source pdf of this page */
     pdfSrcIndex: number;
     /** Original non modified position of this page in the document */
@@ -26,6 +26,10 @@ export module NtsDocumentEditor {
     excluded: boolean;
     rotation: number;
     annotations?: any | null;
+  }
+
+  interface PdfInfo {
+    label: string;
   }
 
   interface Preview {
@@ -45,6 +49,8 @@ export module NtsDocumentEditor {
     canSplit: boolean;
     canReorder: boolean;
     canSelect: boolean;
+    canViewFull: boolean;
+    canReset: boolean;
   }
 
   interface PageActive {
@@ -52,11 +58,24 @@ export module NtsDocumentEditor {
     pageIndex: number;
   }
 
+  interface DragSource {
+    pdfIndex: number;
+    pageIndex: number;
+    pageSrc: Page | null;
+  }
+
+  interface ViewerOptions {
+    canZoom?: boolean;
+    canChangePage?: boolean;
+    showThumbnails?: boolean;
+  }
+
   type Selection = number[][];
 
   interface State {
     loadingScript: boolean;
     loadingPdf: boolean;
+    resetting: boolean;
     /** Source input pdfs, can be one or many doc types */
     pdfSrcs: InputTypes[] | null;
     /** Pdf JS conversion of source inputs */
@@ -68,5 +87,8 @@ export module NtsDocumentEditor {
     selection: Selection;
     /** Which tab or document is active in the editor */
     docActive: number;
+    pdfInfo: PdfInfo[];
+    error: string | null;
+    scrollPosition: number | null;
   }
 }

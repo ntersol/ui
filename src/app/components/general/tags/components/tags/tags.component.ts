@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
 import { NtsTags } from '../../tags';
 
 /**
@@ -16,47 +15,28 @@ import { NtsTags } from '../../tags';
 export class TagsComponent implements OnInit {
   @Input() tags: NtsTags.TagDef[] = [];
 
-  @Output() tagCreated = new EventEmitter<any>();
-  @Output() tagUpdated = new EventEmitter<any>();
-  @Output() tagDeleted = new EventEmitter<any>();
+  @Output() tagCreated = new EventEmitter<NtsTags.TagDef>();
+  @Output() tagUpdated = new EventEmitter<NtsTags.TagDef>();
+  @Output() tagDeleted = new EventEmitter<NtsTags.TagDef>();
 
-  public isEditing = false;
+  // public formTag: any;
+  public tagActive: NtsTags.TagDef | null = null;
+ 
 
-  // Formgroup
-  public formTag = this.fb.group({
-    guid: [null, []],
-    type: ['Document'],
-    tagText: ['My Tag', [Validators.required]],
-    description: ['', []],
-    textColor: ['#ffffff', [Validators.required]],
-    backgroundColor: ['#515287', [Validators.required]],
-  });
-
-  constructor(private fb: FormBuilder) {}
+  constructor() {}
 
   ngOnInit() {
   }
 
-  /**
-   * Create a new tag
-   */
-  public tagAdd() {
-    // Get instance of tag data
-    const tag = this.formTag.value;
-    // Trim any whitespace
-    Object.keys(tag).forEach(key =>
-      tag[key] && typeof tag[key] === 'string' ? (tag[key] = tag[key].trim()) : tag[key],
-    );
-    this.tagCreated.emit(tag);
-  }
+  
 
   /**
    * Edit an existing tag
    * @param tag
    */
   public tagEdit(tag: NtsTags.TagDef) {
-    this.isEditing = true;
-    this.formTag.patchValue(tag);
+    this.tagActive = {...tag};
+    // this.formTag.patchValue(tag);
   }
 
   /**
@@ -70,16 +50,5 @@ export class TagsComponent implements OnInit {
     }
   }
 
-  /**
-   * Reset tag
-   */
-  public tagReset() {
-    this.formTag.reset();
-    /**
-    this.formTag.patchValue(this.tagDefault);
-    this.textColor = this.tagDefault.textColor;
-    this.backgroundColor = this.tagDefault.backgroundColor;
-    this.isEditing = false;
-     */
-  }
+ 
 }

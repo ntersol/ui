@@ -1,7 +1,6 @@
 {
   "name": "@bit/nts.angular.components.general.tree",
-  "sideEffects": false,
-  "version": "0.0.1",
+  "version": "0.0.4",
   "homepage": "https://bit.dev/nts/angular/components/general/tree",
   "main": "index.ts",
   "dependencies": {

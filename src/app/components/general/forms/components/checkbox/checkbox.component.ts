@@ -15,6 +15,7 @@ import {
 })
 export class NtsCheckboxComponent implements OnInit, OnChanges {
   @Input() control?: boolean;
+  @Input() label?: string;
   @Input() binary?: boolean;
   @Output() propSelected = new EventEmitter<any>();
   public value: any;

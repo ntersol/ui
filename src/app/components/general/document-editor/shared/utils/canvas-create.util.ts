@@ -1,4 +1,4 @@
-import { NtsDocumentEditor } from '../..';
+import { NtsDocumentEditor } from '../../document-editor';
 import { pdfjsDist } from '../models/pdf';
 
 export class DocumentPreview implements NtsDocumentEditor.Preview {

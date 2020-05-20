@@ -1,6 +1,10 @@
 <div
   class="nts-docs-page"
-  [ngClass]="{ 'nts-docs-tn-selected': isSelected, 'nts-docs-tn-active': isActive }"
+  [ngClass]="{
+    'nts-docs-tn-selected': isSelected,
+    'nts-docs-tn-active': isActive,
+    'nts-docs-tn-dropzone': !canDropFromAny && !page
+  }"
   (click)="setActive()"
 >
   <div
@@ -12,6 +16,7 @@
     (dragleave)="dragOver($event)"
     (dragstart)="dragStart($event)"
   >
+    <!-- Top page controls-->
     <div class="nts-docs-tn-controls" [ngClass]="{ 'nts-docs-tn-controls-sm': tnSettings?.width < 100 }">
       <button
         class="nts-docs-tn-button"
@@ -35,6 +40,8 @@
         *ngIf="settings?.canRotate"
       ></button>
     </div>
+
+    <!-- Bottom page controls-->
     <div class="nts-docs-tn-controls bottom" [ngClass]="{ 'nts-docs-tn-controls-sm': tnSettings?.width < 100 }">
       <button
         *ngIf="settings?.canSelect"
@@ -43,7 +50,23 @@
         [icon]="isSelected ? 'fa fa-remove' : 'fa fa-hand-pointer-o'"
         (click)="toggleSelected()"
       ></button>
+      <button
+        class="nts-docs-tn-button"
+        pButton
+        title="View full size page"
+        [icon]="'fa fa-search'"
+        (click)="setActive(true)"
+      ></button>
+      <button
+        *ngIf="settings?.canReset && page?.pdfSrcIndex !== docIndex"
+        class="nts-docs-tn-button"
+        pButton
+        title="Remove this page"
+        [icon]="'fa fa-remove'"
+        (click)="pageReset()"
+      ></button>
     </div>
+
     <div
       class="nts-docs-tn-dropzone"
       (dragover)="dragOver($event)"

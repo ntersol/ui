@@ -47,8 +47,9 @@ export class NtsSignalRService {
    * If using a string, be sure to use the tokenUpdate method in this file when the token changes.
    * The closure should return the token, IE () => this.settings.token
    * @param retryTime - If signalR is unavailable, retry in this many milliseconds
+   * @param isReconnecting - Indicates signalR connection closed and needs to reconnect
    */
-  public connectionStart(signalRUrl: string, token: string | tokenFn, retryTime = 10000) {
+  public connectionStart(signalRUrl: string, token: string | tokenFn, retryTime = 10000, isReconnecting: boolean = false) {
     // Set/update token
     this._token = token;
 
@@ -58,13 +59,31 @@ export class NtsSignalRService {
     }
 
     // If connection already exists, return that. No need to reinitialize
-    if (this.hubConnection) {
-      return this.hubConnection;
-    }
+      if (this.hubConnection && !isReconnecting) {
+        return this.hubConnection;
+      }
 
-    this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(signalRUrl, <signalR.IHttpConnectionOptions>{ accessTokenFactory: () => this.token })
-      .build();
+      if(!this.hubConnection) {
+        this.hubConnection = new signalR.HubConnectionBuilder()
+          .withUrl(signalRUrl, <signalR.IHttpConnectionOptions>{ accessTokenFactory: () => this.token })
+          .build();
+
+        // increase default timeout from 30s
+        this.hubConnection.serverTimeoutInMilliseconds = 60000;
+
+        // restart connection if timeout
+        this.hubConnection.onclose(err => {
+          if (
+            String(err)
+              .toLowerCase()
+              .includes('timeout')
+          ) {
+            console.error("SignalR Connection Timeout:", err);
+            console.log('Restarting SignalR Connection');
+            setTimeout(() => this.connectionStart(signalRUrl, <string | tokenFn>this.token, 5000, true), 5000);
+          }
+        });
+      }
 
     // Start signalR
     const hubConnection = this.hubConnection.start();

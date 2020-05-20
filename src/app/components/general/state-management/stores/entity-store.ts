@@ -1,9 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { tap, catchError, map, switchMap, share, take } from 'rxjs/operators';
 import { throwError, Observable, isObservable } from 'rxjs';
-import { applyTransaction, EntityStore, QueryEntity, SelectAllOptionsB } from '@datorama/akita';
+import {
+  applyTransaction,
+  EntityStore,
+  QueryEntity,
+  SelectAllOptionsB,
+  SelectAllOptionsA,
+  SelectAllOptionsC,
+  SelectAllOptionsD,
+  SelectAllOptionsE,
+} from '@datorama/akita';
 import { initialEntityState } from '../utils/initialState';
-import { NtsState } from '..';
+import { NtsState } from '../state';
 
 /**
  * Dynamically created an Akita store for entities
@@ -14,7 +23,14 @@ export class NtsEntityStore<t> {
   /** Select the store state and all entities */
   public select$: Observable<NtsState.EntityState<t, any>>;
   /** Select the store state and a subset of entities using Akita's standard query parameters for selectAll */
-  public selectAll$: (select: SelectAllOptionsB<t>) => Observable<NtsState.EntityState<t, any>>;
+  public selectAll$: (
+    select?:
+      | SelectAllOptionsA<t>
+      | SelectAllOptionsB<t>
+      | SelectAllOptionsC<t>
+      | SelectAllOptionsD<t>
+      | SelectAllOptionsE<t>,
+  ) => Observable<NtsState.EntityState<t, any>>;
 
   /** Unique ID of the entity */
   private idKey: string | number = 'guid';
@@ -59,12 +75,20 @@ export class NtsEntityStore<t> {
     );
 
     // Create select all query that accepts default akita parameters
-    this.selectAll$ = (select: SelectAllOptionsB<t>) => {
-      return this.query.selectAll(select).pipe(
+    this.selectAll$ = (
+      select?:
+        | SelectAllOptionsA<t>
+        | SelectAllOptionsB<t>
+        | SelectAllOptionsC<t>
+        | SelectAllOptionsD<t>
+        | SelectAllOptionsE<t>,
+    ) => {
+      return this.query.selectAll({ ...select }).pipe(
         switchMap(entities =>
           this.query.select().pipe(
             map(stateSrc => {
-              const stateNew: Partial<NtsState.EntityState<t, t>> = {
+              const stateNew: NtsState.EntityState<t, any> = {
+                ...initialEntityState,
                 entities: {},
                 ids: entities.map(entity => (<any>entity)[this.idKey]),
                 // Data will always be null or undefined until initial get success
@@ -83,30 +107,35 @@ export class NtsEntityStore<t> {
    * Get entities and load into store
    * By default requests are cached and subsequent requests are ignored unless refresh is specified
    * Subs may need to act on successful api response and 'return this.query.selectAll()' will return immediately
-   * @param refreshCache Force refresh of data in store
+   * @param options
    */
-  public get(refreshCache = false): Observable<t[]> {
+  public get(options?: NtsState.Options): Observable<t[]> {
     // If not cached or refresh cache is set or a get request is already active, make http call and load store
-    if (refreshCache || !this.query.getHasCache()) {
+    if (!this.httpGet$ || !this.query.getHasCache() || (options && options.refreshCache)) {
       applyTransaction(() => {
         this.store.setLoading(true);
         this.store.setError(null);
         this.store.update({ errorModify: false });
       });
-      // Check if this is the default apiUrl or a custom get url
-      const apiUrl = this.config.apiUrls && this.config.apiUrls.get ? this.config.apiUrls.get : this.config.apiUrl;
-      // Check if this is a function or a string, if function resolve the method to return a string
-      const apiUrlResolved = typeof apiUrl === 'function' ? apiUrl() : apiUrl;
 
+      // Get default api URL
+      let apiUrl = this.config.apiUrl;
+      // If url specified as an argument, use that one
+      if (options && options.apiUrl) {
+        apiUrl = options.apiUrl;
+        // Else check for a custom url override
+      } else if (this.config.apiUrls && this.config.apiUrls.get) {
+        apiUrl = this.config.apiUrls.get;
+      }
+      // Check if this is a function or a string, if function resolve the method to return a string
+      const apiUrlResolved = typeof apiUrl === 'function' ? apiUrl(null) : apiUrl; // Null to make TS happy, no payload to pass
       if (!apiUrlResolved) {
         console.error('Please supply an api url for this action');
         return throwError(null);
       }
-
       const httpRequest = !isObservable<string>(apiUrlResolved)
         ? this.http.get<t[]>(apiUrlResolved)
-        : apiUrlResolved.pipe(switchMap(url => this.http.get<t[]>(url)));
-
+        : apiUrlResolved.pipe(switchMap(path => this.http.get<t[]>(path)));
       // If instance of get hasn't been created yet, add as a single instance with resolved api url
       this.httpGet$ = httpRequest.pipe(
         tap(entities => {
@@ -122,25 +151,32 @@ export class NtsEntityStore<t> {
           });
           return throwError(err);
         }),
-        share(),
+        take(1), // Ensure http request only fires once since the memory reference is stored
+        share(), // If multiple components are requesting data at the same time, share the stream to avoid multiple http requests
       );
-
       // Make get request
       return this.httpGet$;
     }
     // No request pending or cache refresh forced, just return the store data
-    return this.query.selectAll().pipe(take(1));
+    return this.httpGet$;
   }
 
   /**
    * Create new entity via post
    * @param entity
    */
-  public post(entity: Partial<t> | Partial<t>[]) {
-    // Check if this is the default apiUrl or a custom get url
-    const apiUrl = this.config.apiUrls && this.config.apiUrls.post ? this.config.apiUrls.post : this.config.apiUrl;
+  public post(entity: Partial<t> | Partial<t>[], options?: NtsState.Options) {
+    // Get default api URL
+    let apiUrl = this.config.apiUrl;
+    // If url specified as an argument, use that one
+    if (options && options.apiUrl) {
+      apiUrl = options.apiUrl;
+      // Else check for a custom url override
+    } else if (this.config.apiUrls && this.config.apiUrls.post) {
+      apiUrl = this.config.apiUrls.post;
+    }
     // Check if this is a function or a string, if function resolve the method to return a string
-    const apiUrlResolved = typeof apiUrl === 'function' ? apiUrl() : apiUrl;
+    const apiUrlResolved = typeof apiUrl === 'function' ? apiUrl(entity) : apiUrl;
     if (!apiUrlResolved) {
       console.error('Please supply an api url for this action');
       return throwError(null);
@@ -148,8 +184,7 @@ export class NtsEntityStore<t> {
     // Check if api url is observable
     const httpRequest = !isObservable<string>(apiUrlResolved)
       ? this.http.post<Partial<t>>(apiUrlResolved, entity)
-      : apiUrlResolved.pipe(switchMap(url => this.http.post<Partial<t>>(url, entity)));
-
+      : apiUrlResolved.pipe(switchMap(path => this.http.post<Partial<t>>(path, entity)));
     // If a map from the api response is needed
     const mapped = this.config.map && this.config.map.post ? this.config.map.post : null;
     return this.upsert(httpRequest, entity, mapped);
@@ -159,83 +194,80 @@ export class NtsEntityStore<t> {
    * Create new entity via post
    * @param entity
    */
-  public put(entity: Partial<t> | Partial<t>[]) {
-    const key: keyof Partial<t> = <any>this.idKey; // @Todo: Type without any
-    // Get the api url, either the default global one or a custom one for this verb
-    const apiUrl = this.config.apiUrls && this.config.apiUrls.put ? this.config.apiUrls.put : this.config.apiUrl;
-    // Determine if an additional slug (usually the guid or id) needs to be appended to this request
-    // An additional slug is never appended to a custom url and must be added by the input source
-    const entitySlug =
-      this.config.apiUrls && this.config.apiUrls.patch
-        ? null
+  public put(entity: Partial<t> | Partial<t>[], options?: NtsState.Options) {
+    const key: keyof Partial<t> = this.idKey as keyof Partial<t>;
+    // Get default api URL
+    let apiUrl = this.config.apiUrl;
+    // If url specified as an argument, use that one
+    if (options && options.apiUrl) {
+      apiUrl = options.apiUrl;
+      // Else check for a custom url override
+    } else if (this.config.apiUrls && this.config.apiUrls.put) {
+      apiUrl = this.config.apiUrls.put;
+    }
+    // Append the unique ID to the http request unless appendID for PATCH was set to false
+    // If an array was supplied, grab ID from the first entity (edge case)
+    const entityId =
+      this.config.disableAppendId && this.config.disableAppendId.put
+        ? ''
         : '/' + (!Array.isArray(entity) ? entity[key] : entity[0][key]);
-
     // Hold final http request, may be null if no conditions match
     let httpRequest: Observable<Partial<t>> | null = null;
     // If type is string
     if (typeof apiUrl === 'string') {
-      const slug = entitySlug ? apiUrl + entitySlug : apiUrl; // Only append slug if NOT custom
-      httpRequest = this.http.put<Partial<t>>(slug, entity);
+      httpRequest = this.http.put<Partial<t>>(apiUrl + entityId, entity);
       // If type is function
     } else if (typeof apiUrl === 'function') {
-      const slug = entitySlug ? apiUrl() + entitySlug : apiUrl; // Only append slug if NOT custom
-      httpRequest = this.http.put<Partial<t>>(slug, entity);
+      httpRequest = this.http.put<Partial<t>>(apiUrl(entity) + entityId, entity);
       // If type is observable
     } else if (isObservable<string>(apiUrl)) {
-      httpRequest = apiUrl.pipe(
-        switchMap(url => {
-          const slug = entitySlug ? url + entitySlug : url; // Only append slug if NOT custom
-          return this.http.put<Partial<t>>(slug, entity);
-        }),
-      );
+      httpRequest = apiUrl.pipe(switchMap(path => this.http.put<Partial<t>>(path + entityId, entity)));
     } else {
       console.error('Please supply an api url for PUT');
       return throwError(null);
     }
-
     // If a map from the api response is needed
     const mapped = this.config.map && this.config.map.put ? this.config.map.put : null;
     return this.upsert(httpRequest, entity, mapped);
   }
 
   /**
-   * Create new entity via post
-   * @param entity
+   * Create/Update new entity via PATCH
+   * @param entity - Payload to pass to web api
+   * @param url - Custom override for url path
    */
-  public patch(entity: Partial<t> | Partial<t>[]) {
-    const key: keyof Partial<t> = <any>this.idKey; // @Todo: Type without any
-    // Get the api url, either the default global one or a custom one for this verb
-    const apiUrl = this.config.apiUrls && this.config.apiUrls.patch ? this.config.apiUrls.patch : this.config.apiUrl;
-    // Determine if an additional slug (usually the guid or id) needs to be appended to this request
-    // An additional slug is never appended to a custom url and must be added by the input source
-    const entitySlug =
-      this.config.apiUrls && this.config.apiUrls.patch
-        ? null
+  public patch(entity: Partial<t> | Partial<t>[], options?: NtsState.Options) {
+    const key: keyof Partial<t> = this.idKey as keyof Partial<t>;
+    // Get default api URL
+    let apiUrl = this.config.apiUrl;
+    // If url specified as an argument, use that one
+    if (options && options.apiUrl) {
+      apiUrl = options.apiUrl;
+      // Else check for a custom url override
+    } else if (this.config.apiUrls && this.config.apiUrls.patch) {
+      apiUrl = this.config.apiUrls.patch;
+    }
+    // Append the unique ID to the http request unless appendID for PATCH was set to false
+    // If an array was supplied, grab ID from the first entity (edge case)
+    const entityId =
+      this.config.disableAppendId && this.config.disableAppendId.patch
+        ? ''
         : '/' + (!Array.isArray(entity) ? entity[key] : entity[0][key]);
-
     // Hold final http request, may be null if no conditions match
     let httpRequest: Observable<Partial<t>> | null = null;
     // If type is string
     if (typeof apiUrl === 'string') {
-      const slug = entitySlug ? apiUrl + entitySlug : apiUrl; // Only append slug if NOT custom
-      httpRequest = this.http.patch<Partial<t>>(slug, entity);
+      httpRequest = this.http.patch<Partial<t>>(apiUrl + entityId, entity);
       // If type is function
     } else if (typeof apiUrl === 'function') {
-      const slug = entitySlug ? apiUrl() + entitySlug : apiUrl; // Only append slug if NOT custom
-      httpRequest = this.http.patch<Partial<t>>(slug, entity);
+      httpRequest = this.http.patch<Partial<t>>(apiUrl(entity) + entityId, entity);
       // If type is observable
     } else if (isObservable<string>(apiUrl)) {
-      httpRequest = apiUrl.pipe(
-        switchMap(url => {
-          const slug = entitySlug ? url + entitySlug : url; // Only append slug if NOT custom
-          return this.http.patch<Partial<t>>(slug, entity);
-        }),
-      );
+      httpRequest = apiUrl.pipe(switchMap(path => this.http.patch<Partial<t>>(path + entityId, entity)));
     } else {
       console.error('Please supply an api url for PATCH');
       return throwError(null);
     }
-
     // If a map from the api response is needed
     const mapped = this.config.map && this.config.map.patch ? this.config.map.patch : null;
     return this.upsert(httpRequest, entity, mapped);
@@ -252,7 +284,6 @@ export class NtsEntityStore<t> {
       tap(res => {
         // If web api response is nill, default to supplied entity
         let result = res === null || res === undefined ? <t | t[]>entity : res;
-
         // If string returned, it is the unique ID and replace the entity property for that
         if (typeof res === 'string') {
           (<any>result)[this.idKey] = res; // TODO: Fix any
@@ -260,7 +291,6 @@ export class NtsEntityStore<t> {
         } else if (typeof res === 'object' && !Array.isArray(res)) {
           result = Object.assign(entity, res);
         }
-
         // If map function pass result through that
         result = mapped ? mapped(result) : result;
         // Convert to array
@@ -285,19 +315,40 @@ export class NtsEntityStore<t> {
    * Delete entity
    * @param entity
    */
-  public delete(entity: string | number | Partial<t>) {
-    const id: keyof Partial<t> = <any>this.idKey; // @Todo: Type without any
+  public delete(entity: string | number | Partial<t>, options?: NtsState.Options) {
+    const id: keyof Partial<t> = this.idKey as keyof Partial<t>;
+    // const id: keyof Partial<t> = <any>this.idKey; // @Todo: Type without any
     const key = typeof entity === 'string' || typeof entity === 'number' ? entity : entity[id];
-    this.store.update({ modifying: true, errorModify: false });
-    // Check if this is the default apiUrl or a custom get url
-    const apiUrl = this.config.apiUrls && this.config.apiUrls.delete ? this.config.apiUrls.delete : this.config.apiUrl;
-    // Check if this is a function or a string, if function resolve the method to return a string
-    const apiUrlResolved = typeof apiUrl === 'function' ? apiUrl() : apiUrl + '/' + key;
-
-    // Check if api url is observable
-    const httpRequest = !isObservable<string>(apiUrlResolved)
-      ? this.http.delete<Partial<t>>(apiUrlResolved)
-      : apiUrlResolved.pipe(switchMap(url => this.http.delete<Partial<t>>(url)));
+    // Get default api URL
+    let apiUrl = this.config.apiUrl;
+    // If url specified as an argument, use that one
+    if (options && options.apiUrl) {
+      apiUrl = options.apiUrl;
+      // Else check for a custom url override
+    } else if (this.config.apiUrls && this.config.apiUrls.delete) {
+      apiUrl = this.config.apiUrls.delete;
+    }
+    // Append the unique ID to the http request unless appendID for PATCH was set to false
+    // If an array was supplied, grab ID from the first entity (edge case)
+    const entityId =
+      this.config.disableAppendId && this.config.disableAppendId.delete
+        ? ''
+        : '/' + (!Array.isArray(entity) ? key : entity[0][id]);
+    // Hold final http request, may be null if no conditions match
+    let httpRequest: Observable<Partial<t>> | null = null;
+    // If type is string
+    if (typeof apiUrl === 'string') {
+      httpRequest = this.http.delete<Partial<t>>(apiUrl + entityId);
+      // If type is function
+    } else if (typeof apiUrl === 'function') {
+      httpRequest = this.http.delete<Partial<t>>(apiUrl(entity) + entityId);
+      // If type is observable
+    } else if (isObservable<string>(apiUrl)) {
+      httpRequest = apiUrl.pipe(switchMap(path => this.http.delete<Partial<t>>(path + entityId)));
+    } else {
+      console.error('Please supply an api url for DELETE');
+      return throwError(null);
+    }
 
     return httpRequest.pipe(
       tap(() => {

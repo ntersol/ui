@@ -1,6 +1,6 @@
 {
   "name": "@bit/nts.angular.components.general.tags",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "homepage": "https://bit.dev/nts/angular/components/general/tags",
   "main": "index.ts",
   "dependencies": {

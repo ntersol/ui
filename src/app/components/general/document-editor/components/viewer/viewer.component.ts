@@ -7,9 +7,10 @@ import {
   ElementRef,
   OnChanges,
   SimpleChanges,
+  OnDestroy,
 } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
-import { NtsDocumentEditor } from '../..';
+import { NtsDocumentEditor } from '../../document-editor';
 import { pdfjsDist } from '../../shared/models/pdf';
 
 @Component({
@@ -18,11 +19,13 @@ import { pdfjsDist } from '../../shared/models/pdf';
   styleUrls: ['./viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ViewerComponent implements OnInit, OnChanges {
+export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('viewer', { static: true }) viewer!: ElementRef;
   @ViewChild('container', { static: true }) container!: ElementRef;
   @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[];
+  @Input() document?: NtsDocumentEditor.Document;
 
+  @Input() viewerOptions?: NtsDocumentEditor.ViewerOptions | false;
   @Input() pageActive?: NtsDocumentEditor.PageActive;
   @Input() rotation = 0;
 
@@ -41,10 +44,10 @@ export class ViewerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(model: SimpleChanges) {
+    // console.warn('Viewer', model);
     if (this.loaded && model.pageActive && this.pdfSrcs && this.pageActive !== (null || undefined)) {
       this.pageGet(this.pdfSrcs, this.pageActive);
     }
-    // console.log(this.pageActive);
   }
 
   /**
@@ -66,12 +69,12 @@ export class ViewerComponent implements OnInit, OnChanges {
   public pageRender(page: pdfjsDist.PDFPageProxy) {
     const scale = 1;
     const viewport = page.getViewport({ scale: scale });
-    // Prepare canvas using PDF page dimensions
+
+    /**
+     *  // Prepare canvas using PDF page dimensions
     const canvas = this.viewer.nativeElement;
     canvas.height = viewport.height;
     canvas.width = viewport.width;
-
-    /**
     // Render PDF page into canvas context
      const context = canvas.getContext('2d');
     const renderContext = {
@@ -103,4 +106,6 @@ export class ViewerComponent implements OnInit, OnChanges {
     });
      */
   }
+
+  ngOnDestroy() {}
 }

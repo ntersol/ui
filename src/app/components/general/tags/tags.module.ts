@@ -6,10 +6,13 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { ButtonModule } from 'primeng/button';
 
 import { TagsComponent } from './components/tags/tags.component';
+import { TagBuilderComponent } from './components/tag-builder/tag-builder.component';
+
+const COMPS = [TagsComponent, TagBuilderComponent];
 
 @NgModule({
-  declarations: [TagsComponent],
+  declarations: [COMPS],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, ColorPickerModule, ButtonModule],
-  exports: [TagsComponent],
+  exports: [COMPS],
 })
 export class NtsTagsModule {}

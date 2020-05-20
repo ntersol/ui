@@ -6,13 +6,13 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  ElementRef,
   Output,
   EventEmitter,
+  SimpleChanges,
 } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
-import { filter, debounceTime, tap, skip } from 'rxjs/operators';
-import { NtsDocumentEditor } from '../..';
+import { filter, debounceTime, skip, tap } from 'rxjs/operators';
+import { NtsDocumentEditor } from '../../document-editor';
 
 @Component({
   selector: 'nts-document-editor',
@@ -25,13 +25,18 @@ import { NtsDocumentEditor } from '../..';
 export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   /** Which type of workflow for the document editor */
   @Input() workflow: NtsDocumentEditor.Workflow = 'default';
-  /** Input sources for documents, can be a url, a byte array or an array of urls and byte arrays */
-  @Input() set pdfSrcs(srcs: NtsDocumentEditor.InputTypes | NtsDocumentEditor.InputTypes[] | null | undefined) {
-    if (this.docSvc && srcs) {
-      const sources = Array.isArray(srcs) ? srcs : [srcs];
-      this.docSvc.stateChange({ pdfSrcs: sources });
+  @Input() pdfSrcs?: NtsDocumentEditor.InputTypes | NtsDocumentEditor.InputTypes[] | null;
+
+  /** Display information for pdfs */
+  @Input() set pdfInfo(info: NtsDocumentEditor.PdfInfo[] | null | undefined) {
+    if (this.docSvc && info) {
+      const hasNils = info.some(x => x === null || x === undefined); // Ensure no nils in the editor, all docs must be present
+      if (!hasNils) {
+        this.docSvc.stateChange({ pdfInfo: info });
+      }
     }
   }
+
   /** Default thumbnail sizes */
   @Input() thumbnailSizes: NtsDocumentEditor.ThumbnailSize[] = [
     { width: 60, height: 75 },
@@ -42,23 +47,38 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   /** How to handle multiple documents*/
   @Input() multipleAction: NtsDocumentEditor.MultipleAction = 'merge';
   /** DOM reference from the parent container with a scrollbar. Used to determine if a thumbnail is in view for rendering purposes */
-  @Input() scrollbarRef?: ElementRef;
+  @Input() scrollbarRef?: HTMLDivElement;
 
   @Input() canRotate = true;
   @Input() canReorder = true;
   @Input() canRemove = true;
   @Input() canSplit = true;
   @Input() canSelect = true;
+  @Input() canViewFull = true;
+  @Input() canReset = true;
+
   @Input() selection: NtsDocumentEditor.Selection = [];
+  /** Configure options that appear in the doc viewer. False means no configuration */
+  @Input() viewerOptions: NtsDocumentEditor.ViewerOptions | false = false;
 
   @Input() pdfJsSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.min.js';
   @Input() pdfJsWorkerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.worker.min.js';
 
   @Output() pdfModelChange = new EventEmitter<NtsDocumentEditor.Document[]>();
+  @Output() stateChange = new EventEmitter<NtsDocumentEditor.State>();
 
-  public state$ = this.docSvc.state$.pipe(debounceTime(1));
-  public documentsModel$ = this.docSvc.documentsModel$.pipe(filter(x => !!x));
-  public viewModels$ = this.docSvc.viewModels$.pipe(filter(x => !!x));
+  public state$ = this.docSvc.state$.pipe(
+    debounceTime(10),
+    tap(state => this.stateChange.emit(state)),
+  );
+  public documentsModel$ = this.docSvc.documentsModel$.pipe(
+    filter(x => !!x),
+    debounceTime(10),
+  );
+  public viewModels$ = this.docSvc.viewModels$.pipe(
+    filter(x => !!x),
+    debounceTime(10),
+  );
 
   private subs = [
     // Notify parent of doc model changes
@@ -66,29 +86,38 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(
         skip(1), // Don't take initial hydration of observable
         debounceTime(250),
-        tap(docs => (docs ? this.pdfModelChange.emit(docs) : null)),
       )
-      .subscribe(),
+      .subscribe(docs => (docs ? this.pdfModelChange.emit(docs) : null)),
   ];
+
+  private loaded = false;
 
   constructor(public docSvc: DocumentEditorService) {}
 
   ngOnInit() {
     this.docSvc.scriptsLoad(this.pdfJsSrc, this.pdfJsWorkerSrc);
+
     if (this.multipleAction !== 'merge') {
       this.docSvc.stateChange({ multipleAction: this.multipleAction });
     }
 
-    this.initialStateSet();
+    // If a div with a scrollbar reference was passed
+    if (this.scrollbarRef) {
+      this.docSvc.scrollBarAdd(this.scrollbarRef);
+    }
+
+    this.initialize();
+    this.docSvc.stateChanges();
+    this.loaded = true;
     // this.state$.subscribe(x => console.log('State', x));
     // this.documentsModel$.subscribe(x => console.log('Documents', x));
     // this.viewModels$.subscribe(x => console.log('View Models', x));
   }
 
   /**
-   * Set initial state of store by passing input properties to state model
+   * Start the editor
    */
-  public initialStateSet() {
+  private initialize() {
     // Set initial state based on
     const initialState: Partial<NtsDocumentEditor.State> = {
       settings: {
@@ -96,20 +125,45 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
         canRemove: this.canRemove,
         canSplit: this.canSplit,
         canReorder: this.canReorder,
-        canSelect: this.canSelect
+        canSelect: this.canSelect,
+        canViewFull: this.canViewFull,
+        canReset: this.canReset,
       },
     };
-    if (this.multipleAction !== 'merge') {
+    if (this.multipleAction !== 'merge' && this.workflow === 'default') {
       initialState.multipleAction = this.multipleAction;
     }
+
     this.docSvc.stateChange(initialState);
   }
 
-  ngOnChanges() {}
+  ngOnChanges(model: SimpleChanges) {
+    // On permission changes
+    if (
+      this.loaded &&
+      (model.canRotate ||
+        model.canRemove ||
+        model.canSplit ||
+        model.canReorder ||
+        model.canSelect ||
+        model.canViewFull ||
+        model.multipleAction)
+    ) {
+      this.initialize();
+    }
+
+    // If pdf input changes
+    if (model.pdfSrcs && this.pdfSrcs) {
+      const sources = Array.isArray(this.pdfSrcs) ? this.pdfSrcs : [this.pdfSrcs];
+      const hasNils = sources.some(x => x === null || x === undefined); // Ensure no nils in the editor, all docs must be present
+      if (!hasNils) {
+        this.docSvc.stateChange({ pdfSrcs: sources });
+      }
+    }
+  }
 
   ngOnDestroy() {
     this.subs.forEach(sub => sub.unsubscribe());
-    // TODO: Unsub Svc??
-    // this.docSvc.destroy();
+    this.docSvc.reset();
   }
 }

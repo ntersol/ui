@@ -7,23 +7,28 @@ nts-tree {
     .ui-tree-container {
       overflow: initial;
     }
-    
+
     .ui-treenode {
       .ui-treenode-children {
         padding: 0 0 0 3em;
       }
       .ui-treenode-content {
         display: flex;
-        align-items: center;
-        padding: 1px 0px!important;
+        align-items: flex-start;
+        padding: 1px 0px !important;
         &:hover {
           background-color: #add3f8;
         }
         .ui-treenode-content,
         .ui-state-highlight,
         .ui-treenode-label {
-          width: 100%;
-          &:hover, &.ui-state-highlight{background-color:initial!important;color:initial!important;}
+          flex-grow: 1 !important; 
+          white-space: initial;
+          &:hover,
+          &.ui-state-highlight {
+            background-color: initial !important;
+            color: initial !important;
+          }
         }
         .ui-treenode-icon {
           min-width: 10px;
@@ -31,8 +36,8 @@ nts-tree {
       }
     }
   }
-  
-  /* Compact View */ 
+
+  /* Compact View */
   .nts-tree-compact .ui-tree {
     .ui-tree-container > p-treenode > .ui-treenode > .ui-treenode-content {
       padding: 5px;
@@ -41,7 +46,7 @@ nts-tree {
       line-height: 16px;
       font-size: 13px;
       &.ui-treenode-content-selected {
-        background-color: #d1edf7 ;
+        background-color: #d1edf7;
         color: #000000;
       }
     }

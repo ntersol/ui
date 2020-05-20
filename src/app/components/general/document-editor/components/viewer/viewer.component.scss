@@ -5,11 +5,10 @@ svg {
 }
 */
 
-#nts-doc-viewer {
+.nts-doc-viewer-container {
   overflow: auto;
   .nts-doc-viewer-card {
     background: #fff;
-    padding: 5px;
     display: inline-block;
     border: 1px solid #ccc;
   }

@@ -1,14 +1,14 @@
-// import { Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+
 export namespace NtsState {
-  
   /** Structure of entity state supplied by the store */
   export interface EntityState<t = any, IDType = any> extends ApiState {
     [key: string]: any;
     entities: HashMap<t>;
     ids: IDType[];
     data: null | t[];
-  } 
-  
+  }
+
   /** Api state only interface */
   export interface ApiState<t = boolean> {
     loading: boolean;
@@ -17,12 +17,23 @@ export namespace NtsState {
     errorModify: any;
     data: null | t;
   }
-  
-  export type ApiUrl = string | UrlResolver | Observable<string>;
-  
+
+  /**
+   * Custom settings for arguments
+   */
+  export interface Options {
+    /** Override the default url supplied in the store config */
+    apiUrl?: string;
+    /** Force the store to refresh the data from the remote url. Otherwise if the store has data subsequent get calls are ignored */
+    refreshCache?: boolean;
+  }
+
+  /** Different methods to pass the api url string to the store */
+  export type ApiUrl = string | Observable<string> | (<t>(x: t) => string);
+
   export interface EntityStoreConfig {
     /** Full path to webapi. Assumes restful conventions for verbs */
-    apiUrl?: string;
+    apiUrl?: ApiUrl;
     /** The uniqueID or guid or the entity format. Default is 'guid' */
     idKey?: string | number;
     /** Overwrite the default webapi url for a specific verb. Optionally supports a url resolver */
@@ -33,6 +44,13 @@ export namespace NtsState {
       put?: ApiUrl;
       patch?: ApiUrl;
       delete?: ApiUrl;
+    };
+    /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests. 
+     * If true the url to the web api must added manually via a callback function or observable */
+    disableAppendId?: {
+      put?: true;
+      patch?: true;
+      delete?: true;
     };
     /** Map the webapi response before it is passed to the store on a per verb basis */
     map?: {
@@ -53,7 +71,4 @@ export namespace NtsState {
     /** A name of the store, will be auto generated if not supplied */
     name?: string;
   }
-  /** Receives the entity passed to the store and should return a string of the web api url.
-   * Used to generate non standard or complex api urls with dynamic properties */
-  type UrlResolver = <t>(x?: t) => string;
 }

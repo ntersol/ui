@@ -1,4 +1,4 @@
-import { NtsTree } from '..';
+import { NtsTree } from '../tree';
 
 export const nodeCompareLabel = (filterTerm: string | null) => (node: NtsTree.TreeNode | null) => {
   if (!node) {

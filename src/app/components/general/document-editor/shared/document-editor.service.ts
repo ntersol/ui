@@ -1,10 +1,10 @@
-import { BehaviorSubject, combineLatest } from 'rxjs';
-import { distinctUntilChanged, map, filter } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Subscription, fromEvent } from 'rxjs';
+import { distinctUntilChanged, map, filter, debounceTime } from 'rxjs/operators';
 import { documentModelCreate, documentMerge } from './utils/models-create.util';
 import { viewModelCreate } from './utils/view-model-create.util';
 import { insertAt } from './utils/arrays.util';
-import { Injectable } from '@angular/core';
-import { NtsDocumentEditor } from '..';
+import { isNotNil } from './guards/guards.utils';
+import { NtsDocumentEditor } from '../document-editor';
 import { pdfjsDist } from './models/pdf';
 const cloneDeep = require('lodash/cloneDeep');
 
@@ -14,32 +14,39 @@ declare global {
   }
 }
 
-@Injectable()
+const stateInitial: NtsDocumentEditor.State = {
+  loadingScript: true,
+  loadingPdf: true,
+  resetting: false,
+  pdfSrcs: null,
+  pdfs: null,
+  pageActive: {
+    pdfIndex: 0,
+    pageIndex: 0,
+  },
+  tnSettings: {
+    width: 100,
+    height: 125,
+  },
+  multipleAction: 'merge',
+  settings: {
+    canRotate: true,
+    canRemove: true,
+    canSplit: true,
+    canReorder: true,
+    canSelect: true,
+    canViewFull: true,
+    canReset: false,
+  },
+  selection: [],
+  docActive: 0,
+  pdfInfo: [],
+  error: null,
+  scrollPosition: null,
+};
+
 export class DocumentEditorService {
-  private _state: NtsDocumentEditor.State = {
-    loadingScript: true,
-    loadingPdf: true,
-    pdfSrcs: null,
-    pdfs: null,
-    pageActive: {
-      pdfIndex: 0,
-      pageIndex: 0,
-    },
-    tnSettings: {
-      width: 100,
-      height: 125,
-    },
-    multipleAction: 'merge',
-    settings: {
-      canRotate: true,
-      canRemove: true,
-      canSplit: true,
-      canReorder: true,
-      canSelect: true,
-    },
-    selection: [],
-    docActive: 0,
-  };
+  private _state: NtsDocumentEditor.State = cloneDeep(stateInitial);
   public state$ = new BehaviorSubject(this._state);
 
   private _documentsModelSrc: NtsDocumentEditor.Document[] = [];
@@ -49,53 +56,84 @@ export class DocumentEditorService {
   private _viewModels: NtsDocumentEditor.Preview[][] = [];
   public viewModels$ = new BehaviorSubject<NtsDocumentEditor.Preview[][] | null>(null);
   /** The index of the page currently being dragged */
-  public dragIndex: NtsDocumentEditor.PageActive = {
+  public dragIndex: NtsDocumentEditor.DragSource = {
     pdfIndex: 0,
     pageIndex: 0,
+    pageSrc: null,
   };
 
-  private pdfs: pdfjsDist.PDFDocumentProxy[] | undefined;
+  // private pdfs: pdfjsDist.PDFDocumentProxy[] | undefined;
   public pdfJs: typeof pdfjsDist | undefined;
 
-  constructor() {
-    combineLatest([
-      // When pdf sources are available
-      this.state$.pipe(
-        map(state => state.pdfSrcs),
-        filter(x => x !== null),
-        distinctUntilChanged(),
-      ),
-      // Get how to handle multiple documents
-      this.state$.pipe(
-        map(state => state.multipleAction),
-        distinctUntilChanged(),
-      ),
-      // Wait till the script is finished loading
-      this.state$.pipe(
-        map(state => state.loadingScript),
-        filter(x => !x),
-        distinctUntilChanged(),
-      ),
-    ]).subscribe(([pdfSrcs, multipleAction]) => this.getDocument(pdfSrcs, multipleAction));
+  public subs: Subscription[] = [];
 
-    combineLatest([
-      this.state$.pipe(
-        map(state => state.pdfs),
-        filter(x => x !== null),
-        distinctUntilChanged(),
-      ),
-      this.state$.pipe(
-        map(state => state.tnSettings),
-        filter(x => x !== null),
-        distinctUntilChanged(),
-      ),
-    ]).subscribe(state => {
-      if (!state[0] || !state[1].width || !state[1].height) {
-        return;
-      }
-      this._viewModels = viewModelCreate(state[0], state[1].width, state[1].height);
-      this.viewModels$.next(this._viewModels);
-    });
+  constructor() {}
+
+  /**
+   * Manage state changes via observables
+   */
+  public stateChanges() {
+    // Add state change subs
+    this.subs = [
+      combineLatest([
+        // When pdf sources are available
+        this.state$.pipe(
+          map(state => state.pdfSrcs),
+          // filter(x => x !== null),
+          distinctUntilChanged(),
+        ),
+        // Get how to handle multiple documents
+        this.state$.pipe(
+          map(state => state.multipleAction),
+          distinctUntilChanged(),
+        ),
+        // Wait till the script is finished loading
+        this.state$.pipe(
+          map(state => state.loadingScript),
+          filter(x => !x),
+          distinctUntilChanged(),
+        ),
+      ]).subscribe(([pdfSrcs, multipleAction]) => {
+        if (pdfSrcs) {
+          this.getDocument(pdfSrcs, multipleAction);
+        }
+      }),
+      combineLatest([
+        this.state$.pipe(
+          map(state => state.pdfs),
+          filter(x => x !== null),
+          distinctUntilChanged(),
+        ),
+        this.state$.pipe(
+          map(state => state.tnSettings),
+          filter(x => x !== null),
+          distinctUntilChanged(),
+        ),
+      ]).subscribe(state => {
+        if (!state[0] || !state[1].width || !state[1].height) {
+          return;
+        }
+        this._viewModels = viewModelCreate(state[0], state[1].width, state[1].height);
+        this.viewModels$.next(this._viewModels);
+      }),
+    ];
+  }
+
+  /**
+   * Add a scrollbar for handy reasons
+   * TODO: Edge case, cancel previous scrollbar sub before adding new one
+   * @param scrollbarRef
+   */
+  public scrollBarAdd(scrollbarRef: HTMLDivElement) {
+    this.subs.push(
+      fromEvent(scrollbarRef, 'scroll')
+        .pipe(
+          debounceTime(100),
+          filter(x => x.type === 'scroll'),
+          map(x => (x && x.target ? Math.floor((<any>x).target.scrollTop) : 0)),
+        )
+        .subscribe(x => this.stateChange({ scrollPosition: x })),
+    );
   }
 
   /**
@@ -114,7 +152,11 @@ export class DocumentEditorService {
    */
   public pageStateChange(pageIndex: number, stateNew: Partial<NtsDocumentEditor.Page>) {
     const documentsModel = [...this._documentsModel];
-    documentsModel[this._state.docActive].pages[pageIndex] = Object.assign({}, documentsModel[this._state.docActive].pages[pageIndex], stateNew);
+    documentsModel[this._state.docActive].pages[pageIndex] = Object.assign(
+      {},
+      documentsModel[this._state.docActive].pages[pageIndex],
+      stateNew,
+    );
     this._documentsModel = documentsModel;
     this.documentsModel$.next(this._documentsModel);
   }
@@ -139,15 +181,46 @@ export class DocumentEditorService {
    * Change the selection status of a page
    * @param pageIndex
    */
-  public pageSelectionChange(pageIndex: number, setSelection?: boolean) {
+  public pageSelectionChange(docIndex: number, pageIndex: number, setSelection?: boolean) {
+    // console.log(docIndex, pageIndex)
     const selection = [...this._state.selection];
     // If set selection is set to true and the index is not already
-    if (selection[this._state.docActive].includes(pageIndex) && setSelection !== true) {
-      selection[this._state.docActive] = selection[this._state.docActive].filter(i => i !== pageIndex).sort();
-    } else if (!selection[this._state.docActive].includes(pageIndex)) {
-      selection[this._state.docActive] = [...selection[this._state.docActive], pageIndex].sort();
+    if (selection[docIndex].includes(pageIndex) && setSelection !== true) {
+      selection[docIndex] = selection[docIndex].filter(i => i !== pageIndex).sort();
+    } else if (!selection[docIndex].includes(pageIndex)) {
+      selection[docIndex] = [...selection[docIndex], pageIndex].sort();
     }
     this.stateChange({ selection: selection });
+  }
+
+  /**
+   * Reset selection
+   */
+  public pagegSelectionReset() {
+    this.stateChange({ selection: this._state.selection.map(() => []) });
+  }
+
+  /**
+   * Return a page to it's original document
+   * @param srcDoc
+   * @param page
+   */
+  public pageReset(srcDoc: number, page: NtsDocumentEditor.Page) {
+    // Remove the selected page from the source document
+    const documentsModel = [...this._documentsModel];
+    const pagesDestination = documentsModel[srcDoc].pages.filter(
+      pageDest => pageDest.pdfSrcIndex !== page.pdfSrcIndex || pageDest.pageSrcIndex !== page.pageSrcIndex,
+    );
+    documentsModel[srcDoc] = { ...documentsModel[srcDoc], pages: pagesDestination };
+
+    // Add the page back to it's original document, resort to ensure its in the correct position
+    const pagesSource = [...documentsModel[page.pdfSrcIndex].pages, page].sort(
+      (a, b) => b.pageSrcIndex - a.pageSrcIndex,
+    );
+    documentsModel[page.pdfSrcIndex] = { ...documentsModel[page.pdfSrcIndex], pages: pagesSource };
+    // Update doc model
+    this._documentsModel = documentsModel;
+    this.documentsModel$.next(this._documentsModel);
   }
 
   /**
@@ -159,50 +232,89 @@ export class DocumentEditorService {
   }
 
   /**
+   * Go to the next available page in the document
+   * @param pageActive
+   */
+  public pageActiveNext() {
+    if (!this._state.pdfs) {
+      return;
+    }
+    const max = this._state.pdfs[this._state.pageActive.pdfIndex].numPages;
+    const pageActive: NtsDocumentEditor.PageActive = {
+      pdfIndex: this._state.pageActive.pdfIndex,
+      pageIndex: this._state.pageActive.pageIndex + 1 <= max ? this._state.pageActive.pageIndex + 1 : max,
+    };
+    this.stateChange({ pageActive: pageActive });
+  }
+
+  /**
+   * Go to the previous page available in the document
+   */
+  public pageActivePrevious() {
+    if (!this._state.pdfs) {
+      return;
+    }
+    const pageActive: NtsDocumentEditor.PageActive = {
+      pdfIndex: this._state.pageActive.pdfIndex,
+      pageIndex: this._state.pageActive.pageIndex - 1 < 0 ? 0 : this._state.pageActive.pageIndex - 1,
+    };
+    this.stateChange({ pageActive: pageActive });
+  }
+
+  /**
    * Reorder the pages
    * @param from
    * @param to
    */
-  public pageReorder(pageDestination: NtsDocumentEditor.Page, side: 'left' | 'right') {
-    // console.log('pageReorder', pageDestination, index, side); /** */
-    const documentsModel = [...this._documentsModel];
+  public pageReorder(docIndex: number, pageDestination: NtsDocumentEditor.Page | null, side: 'left' | 'right') {
+    // console.log('pageReorder', docIndex, pageDestination, side, this._state.selection);
+    let documentsModel = [...this._documentsModel];
 
-    // Get the pages to be moved. Combines the currently dragged page and any selected pages
-    const pagesSelected = documentsModel[this._state.docActive].pages.filter((_page, i) => {
-      return this._state.selection[this._state.docActive] && this._state.selection[this._state.docActive].includes(i) ? true : false;
-    });
-    // The current count of pages with all selected pages removed
-    const pagesWithSelectedRemoved = documentsModel[this._state.docActive].pages.filter((_page, i) =>
-      this._state.selection[this._state.docActive] && this._state.selection[this._state.docActive].includes(i) ? false : true,
+    // Get an array of pages that were selected
+    const pagesSelected = documentsModel
+      .map((doc, j) =>
+        doc.pages.filter((_page, i) =>
+          this._state.selection[j] && this._state.selection[j].includes(i) ? true : false,
+        ),
+      )
+      .reduce((a, b) => [...a, ...b]);
+
+    // The current list of pages with all selected pages removed
+    const pagesWithSelectedRemoved = documentsModel.map((doc, j) =>
+      doc.pages.filter((_page, i) => (this._state.selection[j] && this._state.selection[j].includes(i) ? false : true)),
     );
 
     // Determine where to insert the removed pages by finding the page that was dropped onto
     let insertAtIndex = 0;
-    for (let i = 0; i < pagesWithSelectedRemoved.length; i++) {
-      const page = pagesWithSelectedRemoved[i];
-      if (page.pdfSrcIndex === pageDestination.pdfSrcIndex && page.pageSrcIndex === pageDestination.pageSrcIndex) {
-        insertAtIndex = side === 'left' ? i : i + 1;
-        break;
+    if (pageDestination) {
+      for (let i = 0; i <= pagesWithSelectedRemoved[docIndex].length; i++) {
+        const page = pagesWithSelectedRemoved[docIndex][i];
+        if (page.pdfSrcIndex === pageDestination.pdfSrcIndex && page.pageSrcIndex === pageDestination.pageSrcIndex) {
+          insertAtIndex = side === 'left' ? i : i + 1;
+          break;
+        }
       }
     }
 
     // Handle out of bounds for array items
     if (insertAtIndex < 0) {
       insertAtIndex = 0;
-    } else if (insertAtIndex > documentsModel[this._state.docActive].pages.length) {
-      insertAtIndex = documentsModel[this._state.docActive].pages.length - 1;
+    } else if (insertAtIndex > documentsModel[docIndex].pages.length) {
+      insertAtIndex = documentsModel[docIndex].pages.length - 1;
     }
 
     // Now inserted the selected pages at the appropriate index
-    const pages = insertAt(pagesWithSelectedRemoved, insertAtIndex, pagesSelected);
+    const pages = insertAt(pagesWithSelectedRemoved[docIndex], insertAtIndex, pagesSelected);
 
-    // Update the document model with the new pages
-    documentsModel[this._state.docActive] = {
-      ...documentsModel[this._state.docActive],
-      pages: pages,
-    };
+    documentsModel = documentsModel.map((doc, i) => {
+      if (i === docIndex) {
+        return Object.assign({}, doc, { pages: pages });
+      } else {
+        return Object.assign({}, doc, { pages: pagesWithSelectedRemoved[i] });
+      }
+    });
 
-    this.stateChange({ selection: this._state.selection.map(() => []) });
+    this.pagegSelectionReset();
 
     // Update doc model
     this._documentsModel = documentsModel;
@@ -213,7 +325,7 @@ export class DocumentEditorService {
    * Reset pages to their original configuration
    * TODO: Reset state too such as selection
    */
-  public pageReset() {
+  public docReset() {
     this._documentsModel = cloneDeep(this._documentsModelSrc);
     this.documentsModel$.next(this._documentsModel);
   }
@@ -267,6 +379,7 @@ export class DocumentEditorService {
    * @param multipleAction
    */
   public getDocument(srcs: NtsDocumentEditor.InputTypes[] | null, multipleAction: NtsDocumentEditor.MultipleAction) {
+    // console.warn('getDocument', this._state.pdfSrcs, srcs, multipleAction);
     if (!this.pdfJs || !srcs) {
       return;
     }
@@ -279,31 +392,41 @@ export class DocumentEditorService {
         if (src instanceof Blob) {
           inputType = URL.createObjectURL(src);
         }
-        if (!this.pdfJs) {
-          return;
-        }
-
-        return this.pdfJs.getDocument(inputType).promise;
+        return this.pdfJs ? this.pdfJs.getDocument(inputType).promise : null;
       })
-      .filter((x): x is Promise<pdfjsDist.PDFDocumentProxy> => x !== undefined);
-
+      .filter(isNotNil);
     // Wait till all promises complete
-    Promise.all(promises).then(docs => {
-      this.pdfs = docs;
-      const model = documentModelCreate(this.pdfs);
-      this._documentsModelSrc = multipleAction === 'merge' ? documentMerge(model) : model;
-      this._documentsModel = cloneDeep(this._documentsModelSrc);
-      // console.log(this._documentsModelSrc, this._documentsModel);
-      this.documentsModel$.next(this._documentsModel);
-      this.stateChange({
-        loadingPdf: false,
-        pdfs: this.pdfs,
-        selection: this._documentsModelSrc.map(() => []),
+    Promise.all(promises)
+      .then(docs => {
+        const model = documentModelCreate(docs);
+        this._documentsModelSrc = multipleAction === 'merge' ? documentMerge(model) : model;
+        this._documentsModel = cloneDeep(this._documentsModelSrc);
+        // console.log(this._documentsModelSrc, this._documentsModel);
+        this.documentsModel$.next(this._documentsModel);
+        this.stateChange({
+          loadingPdf: false,
+          pdfs: docs,
+          selection: this._documentsModelSrc.map(() => []),
+        });
+      })
+      .catch(err => {
+        this.stateChange({ error: err.message, loadingPdf: false, loadingScript: false });
       });
-    });
   }
 
-  public destroy() {
-    this.state$.complete();
+  /**
+   * Reset editor state
+   */
+  public reset() {
+    this._documentsModelSrc = [];
+    this._documentsModel = [];
+    this.documentsModel$.next(this._documentsModel);
+    this._viewModels = [];
+    this.viewModels$.next(this._viewModels);
+    this._state = cloneDeep(stateInitial);
+    this.state$.next(this._state);
+    this._documentsModel = [];
+    this.subs.forEach(sub => sub.unsubscribe());
+    this.subs = [];
   }
 }

@@ -1,4 +1,4 @@
-import { NtsTree } from '..';
+import { NtsTree } from '../tree';
 
 /**
  * Filter the tree recursively by doing a string match against the label
@@ -7,7 +7,7 @@ import { NtsTree } from '..';
  * @param depth - TODO: Wire this up. Will limit the filter operations to tree nodes within this depth
  * @param depthCurrent - How deep the function has recursed
  */
-export const NtsFilterTreeNodes = (
+export const filterTreeNodes = (
   nodes: NtsTree.TreeNode[] = [],
   fn: (node: NtsTree.TreeNode) => boolean,
   depth: number[] = [],
@@ -16,7 +16,7 @@ export const NtsFilterTreeNodes = (
   return nodes.filter(node => {
     // Recurse through any children
     if (node.children) {
-      node.children = NtsFilterTreeNodes(node.children, fn, depth, depthCurrent + 1);
+      node.children = filterTreeNodes(node.children, fn, depth, depthCurrent + 1);
       if (node.children.length) {
         return true;
       }

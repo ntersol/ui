@@ -1,0 +1,34 @@
+<app-viewer-toolbar
+  [pageActive]="pageActive"
+  [viewerOptions]="viewerOptions"
+  [document]="document"
+  [rotation]="rotation"
+>
+</app-viewer-toolbar>
+<div class="d-flex">
+  <div class="tn-viewer mr-3" #scrollbar>
+    <p-card *ngIf="document?.pages">
+      <ng-container *ngFor="let page of document?.pages; let i = index">
+        <app-page
+          [page]="page"
+          [viewModels]="viewModels"
+          [settings]="settings"
+          [tnSettings]="tnSettings"
+          [isSelected]="selection?.includes(i)"
+          [isActive]="pageActive?.pdfIndex === page?.pdfSrcIndex && pageActive?.pageIndex === page?.pageSrcIndex"
+          [docIndex]="0"
+          [pageIndex]="i"
+        ></app-page>
+      </ng-container>
+    </p-card>
+  </div>
+  <div class="viewer-container flex-grow-1">
+    <app-viewer
+      [pdfSrcs]="pdfSrcs"
+      [pageActive]="pageActive"
+      [viewerOptions]="viewerOptions"
+      [document]="document"
+      [rotation]="rotation"
+    ></app-viewer>
+  </div>
+</div>

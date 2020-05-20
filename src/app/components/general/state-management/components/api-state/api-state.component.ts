@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { NtsCombineEntityState } from '../../utils/combineEntityState.util';
-import { NtsState } from '../..';
+import { NtsState } from '../../state';
 
 @Component({
   selector: 'nts-api-state',

@@ -1,7 +1,6 @@
 {
   "name": "@bit/nts.angular.components.general.document-editor",
-  "sideEffects": false,
-  "version": "0.0.1",
+  "version": "0.0.5",
   "homepage": "https://bit.dev/nts/angular/components/general/document-editor",
   "main": "index.ts",
   "dependencies": {

@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { Table } from 'primeng/table';
 import { TableColumnDirective } from '../../directives/column.directive';
-import { NtsTable } from '../..';
+import { NtsTable } from '../../table';
 
 @Component({
   selector: 'nts-table',
@@ -90,7 +90,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
         this.ref.markForCheck();
       });
     }
-
   }
 
   /**

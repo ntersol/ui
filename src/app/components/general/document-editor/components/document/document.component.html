@@ -1,15 +1,31 @@
-<div class="nts-docs-tns" *ngIf="document && viewModels">
-  <ng-container *ngFor="let page of document.pages; let i = index">
-    <div>
+<div class="nts-docs-tns">
+  <ng-container *ngIf="document?.pages && viewModels">
+    <ng-container *ngFor="let page of document?.pages; let i = index">
       <app-page
         [page]="page"
-        [view]="viewModels[page.pdfSrcIndex][page.pageSrcIndex]"
+        [viewModels]="viewModels"
         [settings]="settings"
         [tnSettings]="tnSettings"
         [isSelected]="selection?.includes(i)"
         [isActive]="pageActive?.pdfIndex === page?.pdfSrcIndex && pageActive?.pageIndex === page?.pageSrcIndex"
+        [docIndex]="docIndex"
         [pageIndex]="i"
+        [canDropFromAny]="canDropFromAny"
+        (setActivePage)="setActivePage.emit($event)"
       ></app-page>
-    </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="!document?.pages?.length && settings?.canReorder">
+    <app-page
+      [page]="null"
+      [viewModels]="viewModels"
+      [settings]="settings"
+      [tnSettings]="tnSettings"
+      [isSelected]="false"
+      [isActive]="false"
+      [docIndex]="docIndex"
+      [pageIndex]="0"
+      [canDropFromAny]="canDropFromAny"
+    ></app-page>
   </ng-container>
 </div>

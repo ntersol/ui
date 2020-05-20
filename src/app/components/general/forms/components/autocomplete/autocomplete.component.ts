@@ -26,6 +26,7 @@ export class NtsAutocompleteComponent implements OnInit, OnChanges {
   @Input() dropdown = true;
   @Input() minLength = 2;
   @Input() dataKey = 'guid';
+  @Input() size = 30;
   @Output() termSelected = new EventEmitter<any>();
 
   public value: any;
@@ -39,10 +40,10 @@ export class NtsAutocompleteComponent implements OnInit, OnChanges {
     // Load default value if one is found in the form control
     if (this.control && this.terms) {
       const termDefault = this.terms.filter(term => {
-        const val: string = this.field ? (<any>term)[this.field] : term;
         if (!this.control) {
-          return;
+          return false;
         }
+        const val: string = this.field ? (<any>term)[this.field] : term;
         return this.control.value === val;
       })[0];
       // Differentiate between string array and object array

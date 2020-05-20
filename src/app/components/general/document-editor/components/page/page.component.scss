@@ -4,6 +4,12 @@
   &.nts-docs-tn-selected {
     border-color: rgba(255, 0, 0, 0.5) !important;
   }
+  &.nts-docs-tn-dropzone{
+    .nts-docs-page-tn{
+      border: 2px dashed #ccc;
+      background-color: #f9f9f9;
+    }
+  }
   &.nts-docs-tn-active .nts-docs-page-tn {
     background-color: #75a0db;
   }

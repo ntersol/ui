@@ -1,4 +1,7 @@
-<div class="nts-document-editor" *ngIf="{ documentsModel: documentsModel$ | async, state: state$ | async } as editor">
+<div
+  class="nts-document-editor"
+  *ngIf="{ documentsModel: documentsModel$ | async, viewModels: viewModels$ | async, state: state$ | async } as editor"
+>
   <div
     class="nts-document-loading p-3"
     *ngIf="!editor?.state?.pdfs && (editor?.state?.loadingScript || editor?.state?.loadingPdf)"
@@ -9,68 +12,94 @@
     <ng-container *ngIf="editor?.state?.loadingScript">
       Loading Document Editor...
     </ng-container>
-    <ng-container *ngIf="editor?.state?.loadingPdf">
+    <ng-container *ngIf="editor?.state?.loadingPdf && !editor?.state?.loadingScript">
       Loading Pdf...
     </ng-container>
   </div>
 
-  <div class="alert alert-info p-3 m-3" *ngIf="!editor?.state?.pdfs && !editor?.state?.loadingScript && !editor?.state?.loadingPdf">No documents available</div>
+  <div class="alert alert-danger p-3 m-3" *ngIf="editor?.state?.error">
+    {{ editor?.state?.error }}
+  </div>
+
+  <div
+    class="alert alert-info p-3 m-3"
+    *ngIf="!editor?.state?.pdfs && !editor?.state?.loadingScript && !editor?.state?.loadingPdf && !editor?.state?.error"
+  >
+    No documents available
+  </div>
 
   <div *ngIf="editor?.state?.pdfs">
-    <div class="ui-g">
-      <div class="ui-g-12 ui-lg-6">
-        <!--
+    <!--
           <app-toolbar [state]="editor.state" [thumbnailSizes]="thumbnailSizes"></app-toolbar>
           -->
-        <!-- Tab View -->
-        <ng-container *ngIf="workflow === 'split'; else noSplit">
-          <p-tabView [activeIndex]="editor.state?.docActive" (onChange)="docSvc.tabChange($event)">
-            <p-tabPanel
-              [header]="document.label"
-              *ngFor="let document of editor.documentsModel; let i = index"
-              [selected]="i === 0"
-            >
-              <ng-template pTemplate="content">
-                <app-document
-                  [document]="document"
-                  [viewModels]="viewModels$ | async"
-                  [settings]="editor.state?.settings"
-                  [tnSettings]="editor.state?.tnSettings"
-                  [selection]="(editor.state?.selection)[i]"
-                  [pageActive]="editor.state?.pageActive"
-                ></app-document>
-              </ng-template>
-            </p-tabPanel>
-          </p-tabView>
-        </ng-container>
+    <!-- Tab View -->
+    <ng-container [ngSwitch]="workflow">
+      <!-- Multidoc management view-->
+      <ng-container *ngSwitchCase="'multiDoc'">
+        <app-multi-doc
+          [documents]="editor?.documentsModel"
+          [viewModels]="editor?.viewModels"
+          [settings]="editor.state?.settings"
+          [tnSettings]="editor.state?.tnSettings"
+          [selection]="editor.state?.selection"
+          [pageActive]="editor.state?.pageActive"
+          [pdfSrcs]="editor.state?.pdfs"
+          [pdfInfo]="editor.state?.pdfInfo"
+          [rotation]="
+            ((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]
+              ?.rotation
+          "
+        ></app-multi-doc>
+      </ng-container>
 
-        <!-- No tab View -->
-        <ng-template #noSplit>
-          <p-card>
-            <app-document
-              [document]="editor.documentsModel[0]"
-              [viewModels]="viewModels$ | async"
-              [settings]="editor.state?.settings"
-              [tnSettings]="editor.state?.tnSettings"
-              [selection]="(editor.state?.selection)[0]"
-              [pageActive]="editor.state?.pageActive"
-            ></app-document>
-          </p-card>
-        </ng-template>
-      </div>
-      <div class="ui-g-12 ui-lg-6" style="overflow:auto;">
+      <!-- Viewer Only -->
+      <ng-container *ngSwitchCase="'display'">
+        <app-display
+          [document]="editor?.documentsModel[editor.state.docActive]"
+          [viewerOptions]="viewerOptions"
+          [viewModels]="editor?.viewModels"
+          [settings]="editor.state?.settings"
+          [tnSettings]="editor.state?.tnSettings"
+          [selection]="editor.state?.selection"
+          [pageActive]="editor.state?.pageActive"
+          [pdfSrcs]="editor.state?.pdfs"
+          [pdfInfo]="editor.state?.pdfInfo"
+          [rotation]="
+            ((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]
+              ?.rotation
+          "
+        ></app-display>
         <!--
-          Full size viewer
-        -->
         <app-viewer
-          [pdfSrcs]="editor.state.pdfs"
-          [pageActive]="editor.state.pageActive"
+          [pdfSrcs]="editor.state?.pdfs"
+          [pageActive]="editor.state?.pageActive"
+          [viewerOptions]="viewerOptions"
+          [document]="editor?.documentsModel[editor.state.docActive]"
           [rotation]="
             ((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]
               ?.rotation
           "
         ></app-viewer>
-      </div>
-    </div>
+        -->
+      </ng-container>
+
+      <!-- Default View -->
+      <ng-container *ngSwitchDefault>
+        <app-default
+          [documents]="editor?.documentsModel"
+          [viewModels]="editor?.viewModels"
+          [settings]="editor.state?.settings"
+          [tnSettings]="editor.state?.tnSettings"
+          [selection]="editor.state?.selection"
+          [pageActive]="editor.state?.pageActive"
+          [pdfSrcs]="editor.state?.pdfs"
+          [pdfInfo]="editor.state?.pdfInfo"
+          [rotation]="
+            ((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]
+              ?.rotation
+          "
+        ></app-default>
+      </ng-container>
+    </ng-container>
   </div>
 </div>
