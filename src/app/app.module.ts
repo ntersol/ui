@@ -61,7 +61,6 @@ persistState({
 // Enables faster prod mode, does disable some dirty error checking though
 enableProdMode();
 
-
 // Components
 export const APP_COMPONENTS = [
   // App component
@@ -80,7 +79,7 @@ export let InjectorInstance: Injector;
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {
-      useHash: true,
+      useHash: !environment.production,
       preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,
       scrollPositionRestoration: 'enabled',
     }),
