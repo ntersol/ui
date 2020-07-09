@@ -62,15 +62,20 @@ export class NtsServiceWorkerService {
   /** Handle click events on notifications */
   public notificationClicks$ = this.swPush.notificationClicks;
   /** Does this app have permission to send push notifications? */
-  private permission: NotificationPermission = 'Notification' in window ? Notification.permission : 'denied';
+  private permission: NotificationPermission = 'Notification' ? Notification.permission : 'denied';
   /** Service worker instance */
-  public worker$ = from(navigator.serviceWorker.getRegistration());
+  public worker$: Observable<ServiceWorkerRegistration | undefined | null> = new BehaviorSubject(null);
   /** Get the current active push notification. Null if it does not exist */
-  public pushSubscription$ = this.worker$.pipe(switchMap(registration => (registration ? from(registration.pushManager.getSubscription()) : of(null))));
-  /** Does the user have an active push subscription */
+  public pushSubscription$: Observable<PushSubscription | null> = new BehaviorSubject(null);
   public isPushActive$ = this.pushSubscription$.pipe(map(x => !!x));
 
-  constructor(private sw: SwUpdate, private swPush: SwPush, private http: HttpClient) {}
+  constructor(private sw: SwUpdate, private swPush: SwPush, private http: HttpClient) {
+    // Add legacy support to browsers without a service worker
+    if (navigator && navigator.serviceWorker) {
+      this.worker$ = from(navigator.serviceWorker.getRegistration());
+      this.pushSubscription$ = this.worker$.pipe(switchMap(registration => (registration ? from(registration.pushManager.getSubscription()) : of(null))));
+    }
+  }
 
   /**
    * Ask the user for permission to send push notifications
