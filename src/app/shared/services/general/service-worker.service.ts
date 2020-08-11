@@ -62,7 +62,7 @@ export class NtsServiceWorkerService {
   /** Handle click events on notifications */
   public notificationClicks$ = this.swPush.notificationClicks;
   /** Does this app have permission to send push notifications? */
-  private permission: NotificationPermission = 'Notification' ? Notification.permission : 'denied';
+  private permission: NotificationPermission = ('Notification' in window) ? Notification.permission : 'denied';
   /** Service worker instance */
   public worker$: Observable<ServiceWorkerRegistration | undefined | null> = new BehaviorSubject(null);
   /** Get the current active push notification. Null if it does not exist */
