@@ -7,8 +7,11 @@ import {
   Optional,
   OnDestroy,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnChanges,
+  Output, EventEmitter,
 } from '@angular/core';
-import { NgControl, FormControl } from '@angular/forms';
+import { NgControl, FormControl, FormArray } from '@angular/forms';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { isRequired } from '../../utils/isRequired.util';
 import { Spinner } from 'primeng/spinner';
@@ -16,6 +19,7 @@ import { SelectItem } from 'primeng/api';
 import { slugCreateUniqueId } from '../../utils/slug.util';
 import { currencyChange } from '../../utils/currency.util';
 import { formControlGetFieldName } from '../../utils/formFieldName.util';
+import { isType } from '../../utils/typeguard.util';
 
 export type FormFieldType =
   | 'text'
@@ -36,7 +40,11 @@ export type FormFieldType =
   | 'radio'
   | 'toggle'
   | 'autoComplete'
-  | 'date';
+  | 'file'
+  | 'buttons'
+  | 'date'
+  | 'buttonGroup'
+  | 'buttonToggle';
 
 /**
  * Tools for rapidly creating and managing forms
@@ -49,7 +57,7 @@ export type FormFieldType =
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NtsFormFieldComponent implements OnInit, OnDestroy {
+export class NtsFormFieldComponent implements OnInit, OnChanges, OnDestroy {
   /** A dictionary that helps manage unique name and id properties. This is on the class so all instances on a page can be made unique */
   static uniqueIds: Record<string, number>;
   /** Some ui controls need an ngModel to store data if a form control is not supplied */
@@ -59,34 +67,34 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   /** Determine if this is a generic fieldtype */
   public fieldType!: string;
   /** Placeholder text */
-  @Input() placeholder: string | undefined;
+  @Input() placeholder?: string;
   /** Should the placeholder be a traditional inline one or a float version */
   @Input() placeholderFloat = true;
 
   /** Text to use for ID attribute */
-  @Input() id: string | undefined;
+  @Input() id?: string;
   /** Text to use for name attribute */
-  @Input() name: string | undefined;
+  @Input() name?: string;
   /** Any css classes */
   @Input() class = '';
   /** Is disabled */
   @Input() disabled = false;
 
   /** If form field type is select, supply list of options */
-  @Input() options: SelectItem[] | string[] | undefined;
+  @Input() options?: SelectItem[] | string[];
   /** The human readable label for an option */
   @Input() optionLabel = 'label';
   /** The value for the option to supply to the form control */
   @Input() optionValue = 'value';
 
   /** Tooltip text */
-  @Input() tooltip: string | undefined;
+  @Input() tooltip?: string;
   /** Hint text */
-  @Input() hint: string | undefined;
+  @Input() hint?: string;
   /** HTML code to place in the prefix position in FRONT of the form field */
-  @Input() prefix: string | undefined;
+  @Input() prefix?: string;
   /** HTML code to place in the suffix position in BACK of the form field */
-  @Input() suffix: string | undefined;
+  @Input() suffix?: string;
 
   /** Show success icon when valid */
   @Input() showSuccess = false;
@@ -98,37 +106,45 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   /** If field type is text area, use this many columns */
   @Input() rows = 4;
   /** If NUMBER, the max value allowed */
-  @Input() max: number | undefined;
+  @Input() max?: number;
   /** If NUMBER, the min value allowed */
-  @Input() min: number | undefined;
+  @Input() min?: number;
   /** The MAXIMUM number of characters allowed by this input */
-  @Input() maxlength: number | undefined;
+  @Input() maxlength?: number;
   /** The MINIMUM number of characters allowed by this input */
-  @Input() minlength: number | undefined;
+  @Input() minlength?: number;
 
   /** Should form controls with input masks return the raw data or the masksed/formatted data? */
   @Input() unmask = true;
   /** Content for autocomplete html ATTRIBUTE, not autocomplete control */
-  @Input() autocomplete: string | undefined;
+  @Input() autocomplete?: string;
 
   /** Pass formcontrol reference */
-  public formControl!: FormControl;
+  @Input() formControl!: FormControl | FormArray;
   /** Does the current input have focus or data. Used to toggle the label */
+
+  @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
+
   public focused = false;
 
-  public autoCompleteSuggestions: any[] | undefined;
+  public autoCompleteSuggestions?: any[];
 
-  public optionsOutput: SelectItem[] | undefined;
+  public optionsOutput?: SelectItem[];
 
   public optionIsObjectsArray = true;
+  /** Typeguards */
+  public isType = isType;
 
   /** Is this field required */
   public required = false;
 
+  private isLoaded = false;
+
   constructor(
     @Self()
     @Optional()
-    public ngControl?: NgControl,
+    public ngControl: NgControl,
+    private ref: ChangeDetectorRef,
   ) {
     // This is required to successfully implement ControlValueAccessor and
     // also be able to reference ngControl within the template
@@ -139,53 +155,71 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Check if required, set required flag
-    if (this.ngControl && this.ngControl.control) {
+    if (!this.formControl && this.ngControl && this.ngControl.control) {
       this.required = isRequired(this.ngControl);
       this.formControl = <FormControl>this.ngControl.control;
-    } else {
+    } else if (!this.formControl) {
       this.formControl = new FormControl();
     }
 
-    // If this is an options based control, determine if it is a string array or an object array
-    if (this.options && typeof this.options[0] === 'string') {
-      this.optionIsObjectsArray = false;
+    // Fixes a bug with input masks where default data is not displayed on load
+    if (this.type === 'phoneNumber') {
+      setTimeout(() => this.formControl.patchValue(this.formControl.value), 10);
     }
 
-    // If field type is a dropdown, add a null option
-    if (this.type === 'dropdown' && this.options && this.optionIsObjectsArray) {
-      this.optionsOutput = this.dropdownAddNullOption(<SelectItem[]>(
-        this.options
-      ));
+    // Fixes a bug with input masks where default data is not displayed on load
+    // Also fix a bug with the input mask where it can't handle normal JS datestamps
+    // IE convert 2020-07-02T00:00:00Z > 07/02/2020
+    if (this.type === 'date') {
+      let val = this.formControl.value;
+      // Server timestamped
+      if (val && val.includes('T')) {
+        const dt = val.split('T')[0].split('-');
+        val = dt[1] + '/' + dt[2] + '/' + dt[0];
+      }
+      setTimeout(() => this.formControl.patchValue(val), 10);
     }
 
-    // Set model for default
-    this.model = this.formControl.value;
+    // Set dollar sign as default prefix for currency controls
+    if (this.type === 'currency' && this.prefix === undefined) {
+      this.prefix = '$';
+    }
+
+    // Dates by default have two placeholders. Set focused so that the label isn't covering the control
+    if (this.type === 'date') {
+      this.focused = true;
+    }
+
     // Update model if form control changes
-    this.formControl.valueChanges
-      .pipe(untilDestroyed(this))
-      .subscribe(val => (this.model = val));
+    this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe(val => {
+      this.model = val;
+      this.formControl.markAsDirty(); // Dynamically created form controls do not set dirty flag automatically
+    });
+    // If form control statuses are updated programatically, fire change detection
+    this.formControl.statusChanges.pipe(untilDestroyed(this)).subscribe(() => this.ref.markForCheck());
 
+    this.inputChanged();
+    this.isLoaded = true;
+  }
+
+  ngOnChanges() {
+    if (this.isLoaded) {
+      this.inputChanged();
+    }
+  }
+
+  /**
+   * When an input was changed
+   */
+  public inputChanged() {
     // Determine if this is a generic field type
-    this.fieldType = [
-      'text',
-      'number',
-      'numberAsString',
-      'currency',
-      'phoneNumber',
-      'email',
-      'ssn',
-      'password',
-      'date',
-      'colorpicker',
-    ].includes(this.type)
+    this.fieldType = ['text', 'number', 'numberAsString', 'currency', 'phoneNumber', 'email', 'ssn', 'password', 'date', 'colorpicker'].includes(this.type)
       ? 'generic'
       : this.type;
 
     // Determine if the control needs to generate a unique id and or name property from the placeholder or the field name
     if ((this.placeholder && (!this.name || !this.id)) || !this.placeholder) {
-      const name = this.placeholder
-        ? this.placeholder
-        : formControlGetFieldName(this.formControl);
+      const name = this.placeholder ? this.placeholder : formControlGetFieldName(this.formControl as FormControl); // TODO: Add typeguard
       // Create slug, ensure slug is unique
       const slug = slugCreateUniqueId(name, NtsFormFieldComponent);
       // If name not supplied, autogenerate one from the placeholder
@@ -197,6 +231,17 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
         this.id = slug;
       }
     }
+    // If this is an options based control, determine if it is a string array or an object array
+    if (this.options && typeof this.options[0] === 'string') {
+      this.optionIsObjectsArray = false;
+    }
+
+    // Set model for default
+    this.model = this.formControl.value;
+    // If field type is a dropdown, add a null option
+    if (this.type === 'dropdown' && this.options && this.optionIsObjectsArray) {
+      this.optionsOutput = this.dropdownAddNullOption(<SelectItem[]>this.options);
+    }
   }
 
   /**
@@ -206,7 +251,15 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
    * @param date
    */
   public dateChange(date: any) {
-    setTimeout(() => this.formControl.patchValue(date.inputFieldValue));
+    // Selected date not immediately available from control
+    setTimeout(() => {
+      if (!date || !date.inputFieldValue) {
+        return;
+      }
+      // Patch value from datepicker to control
+      // Cap str length to 10, fixes bug with datepicker output format
+      this.formControl.patchValue(date.inputFieldValue.substring(0, 10));
+    });
   }
 
   /**
@@ -214,7 +267,7 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
    * @param currency
    */
   public currencyChange(currency: Spinner) {
-    // Get unmasked value, manage all currency change logic
+    // Get cursorPositionSeted value, manage all currency change logic
     const val = currencyChange(currency);
     // Update source control and remove any formatted
     this.formControl.setValue(val.replace(/[^\d.]/, ''), {
@@ -247,36 +300,31 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
    * Filter the available autocomplete terms based on the query typed by the user
    * @param result
    */
-  public autoCompleteFilterTerms(result: {
-    originalEvent: Event;
-    query: string;
-  }) {
+  public autoCompleteFilterTerms(result: { originalEvent: Event; query: string }) {
     const term = result.query.toLowerCase().trim();
     if (this.options && this.options.length) {
       if (typeof this.options[0] === 'object') {
-        this.autoCompleteSuggestions = (<SelectItem[]>this.options).filter(
-          option => {
-            const optionTerm = String((<any>option)[this.optionLabel])
-              .toLowerCase()
-              .trim();
-            return optionTerm.indexOf(term) !== -1 ? true : false;
-          },
-        );
+        this.autoCompleteSuggestions = (<SelectItem[]>this.options).filter(option => {
+          const optionTerm = String((<any>option)[this.optionLabel])
+            .toLowerCase()
+            .trim();
+          return optionTerm.indexOf(term) !== -1 ? true : false;
+        });
       } else if (typeof this.options[0] === 'string') {
-        this.autoCompleteSuggestions = (<string[]>this.options).filter(
-          option => {
-            const optionTerm = String(option)
-              .toLowerCase()
-              .trim();
-            return optionTerm.indexOf(term) !== -1 ? true : false;
-          },
-        );
+        this.autoCompleteSuggestions = (<string[]>this.options).filter(option => {
+          const optionTerm = String(option).toLowerCase().trim();
+          return optionTerm.indexOf(term) !== -1 ? true : false;
+        });
       } else {
         console.error('Unknown types in options array');
       }
     }
   }
 
+  /**
+   * When an autocomplete is selected, patch it back to the control
+   * @param term
+   */
   public autoCompleteSelection(term: SelectItem) {
     const val = (<any>term)[this.optionValue] || term;
     if (val !== undefined) {
@@ -286,15 +334,27 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   }
 
   /**
+   *  Used by the checkbox button to add remove selected values to ngmodel and update the form array
+   * @param value
+   */
+  public toggleInArray(value: string | number | boolean) {
+    if (!this.model) {
+      this.model = [];
+    }
+
+    if (Array.isArray(this.model)) {
+      this.model = this.model.includes(value) ? this.model.filter(x => x !== value) : [...this.model, value];
+      this.ngModelToFormArray();
+    }
+  }
+
+  /**
    * For select dropdowns, add a nicely formatted value for nulls
    * @param options
    */
   private dropdownAddNullOption(options: SelectItem[]): SelectItem[] {
     // Make sure a default null value was not passed
-    const hasNull = options.reduce(
-      (a, b) => (a || b.value === null ? true : false),
-      false,
-    );
+    const hasNull = options.reduce((a, b) => (a || b.value === null ? true : false), false);
     if (!hasNull) {
       const option: any = { disabled: true, styleClass: 'disabled' }; // SelectItem
       option[this.optionLabel] = '-- Please Select --';
@@ -304,8 +364,33 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
     return options;
   }
 
+  /**
+   * Sync an ngmodel array with a form array
+   * Works by removing all controls within the form array and only adding back in the ones selected in ngmodel
+   */
+  public ngModelToFormArray() {
+    const src = [...this.model];
+    if (this.isType.formArray(this.formControl)) {
+      const length = this.formControl.controls.length;
+      for (let i = 0; i < length; i++) {
+        this.formControl.removeAt(0);
+      }
+      if (Array.isArray(this.model)) {
+        src.forEach(m => {
+          if (this.isType.formArray(this.formControl)) {
+            this.formControl.push(new FormControl(m));
+          }
+        });
+      }
+    }
+  }
+
+  onChangeDropdown(event: any): void {
+    this.onChange.emit(event);
+  }
+
   // These are required for implementing ControlValueAccessor, but they are not used
-  // since the FormControl is being passed directly to the  directive in the template
+  // since the FormControl is being passed directly to the directive in the template
   writeValue(): void {}
   registerOnChange(): void {}
   registerOnTouched(): void {}

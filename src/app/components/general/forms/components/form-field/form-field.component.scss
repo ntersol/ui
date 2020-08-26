@@ -8,6 +8,16 @@ nts-form-field {
     padding: 0.25rem;
     margin-left: 0.25rem;
   }
+  .btn {
+    transition: 0.3s ease;
+  }
+
+  // Spinner
+  .ui-spinner {
+    .ui-inputtext {
+      padding: 0.629em;
+    }
+  }
 
   .nts-form-field-hint {
     font-size: 80%;
@@ -19,6 +29,27 @@ nts-form-field {
   // Boolean checkbox
   .nts-checkbox-boolean {
     display: flex;
+  }
+
+  // Dropdown
+  .nts-form-field-type-dropdown {
+    position: relative;
+    // padding-top: 6px;
+    .dropdown {
+      position: relative;
+      margin-top: 17px;
+      .dropdown-label {
+        position: absolute;
+        font-size: 11px;
+        left: 0.5em;
+        top: -17px;
+        opacity: 0.7;
+      }
+      .ui-dropdown-label {
+        white-space: normal;
+        max-height: 2rem;
+      }
+    }
   }
 
   // Manage the floating label styling and animation
@@ -34,6 +65,12 @@ nts-form-field {
       top: -0.75em;
       font-size: 11px;
     }
+    &.ui-focus.ui-float-label-suffix > .ui-inputwrapper-focus ~ label,
+    &.ui-focus.ui-input-float.ui-float-label-suffix label,
+    &.ui-float-label-suffix > textarea:focus ~ label {
+      left: -26px;
+    }
+
     & > label {
       font-size: 14px;
       left: 0.5em;
@@ -110,10 +147,65 @@ nts-form-field {
   }
 
   // Checkbox and radio
+  p-checkbox {
+    display: flex;
+  }
   .nts-form-field-type-checkbox,
   .nts-form-field-type-radio {
     label {
       display: inline;
+    }
+  }
+  .ui-chkbox {
+    margin-bottom: 0.5rem;
+  }
+  .ui-chkbox-label {
+    position: relative;
+    top: -4px;
+  }
+
+  // Button Group
+  .nts-button-group,
+  .nts-form-field-type-buttonToggle,
+  .nts-form-field-type-checkboxButtons {
+    text-align: center;
+    /*
+    .nts-button-icon {
+      transition: 0.3s ease;
+      &:before {
+        content: '\f128';
+        font-family: FontAwesome;
+        font-size: 60px;
+      }
+      display: block;
+      margin: auto;
+      margin-bottom: 10px;
+     
+    }
+     */
+    .btn {
+      min-width: 150px;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 25px;
+      padding-top: 25px;
+      padding-bottom: 25px;
+      &:hover {
+        .nts-button-icon {
+          transform: scale(1.2);
+        }
+      }
+      &:focus {
+        outline: 0;
+      }
+    }
+    @media (max-width: 768px) {
+      .btn {
+        min-width: 120px;
+      }
+      .nts-button-icon:before {
+        font-size: 50px;
+      }
     }
   }
 
@@ -131,6 +223,9 @@ nts-form-field {
     .ui-inputgroup .ui-inputgroup-addon {
       padding: 0;
       overflow: hidden;
+      .ui-datepicker-trigger {
+        padding: 2px;
+      }
     }
   }
 
@@ -169,7 +264,7 @@ nts-form-field {
   }
 
   // Validation States
-  &.ng-invalid.ng-touched {
+  .ng-invalid.ng-touched {
     input,
     select,
     textarea,
@@ -178,7 +273,8 @@ nts-form-field {
     .ui-radiobutton .ui-radiobutton-box,
     .ui-inputgroup .ui-inputgroup-addon,
     .ui-inputswitch .ui-inputswitch-slider,
-    .ui-selectbutton {
+    .ui-selectbutton,
+    &.ui-inputtext {
       border-color: red !important;
     }
   }
