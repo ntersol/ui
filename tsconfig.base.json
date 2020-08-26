@@ -1,0 +1,41 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "baseUrl": ".",
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2017", "dom"],
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./dist/out-tsc",
+    "paths": {
+      "$site": ["./src/app/site.module"],
+      "$modals": ["./src/app/components/project/modals"],
+      "$ui": ["./src/app/shared/stores/ui"],
+      "$domain": ["./src/app/shared/stores/domain"],
+      "$settings": ["./src/app/shared/stores/settings"],
+      "$utils": ["./src/app/shared/utils"],
+      "$env": ["./src/environments/environment.ts"],
+      "$enums": ["./src/shared/models/enums.ts"]
+    },
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "target": "es5",
+    "module": "es2020",
+    "typeRoots": ["node_modules/@types"]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "preserveWhitespaces": false
+  },
+  "include": ["src/**/*"],
+  "exclude": ["e2e", "**/*.spec.ts", "node_modules"]
+}

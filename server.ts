@@ -10,6 +10,9 @@ import { join } from 'path';
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
 
+global['Event'] = null;
+global['KeyboardEvent'] = null;
+
 // Express server
 const app = express();
 

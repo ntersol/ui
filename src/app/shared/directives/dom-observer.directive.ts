@@ -137,7 +137,7 @@ export class DomObserverDirective implements OnInit, OnDestroy, AfterViewInit {
    */
   @HostListener('window:resize', ['$event'])
   @debounce(200)
-  onResize(_event: Event) {
+  onResize(_event: any) {
     if (this.changesToWindowResize) {
       this.executeCallback();
     }

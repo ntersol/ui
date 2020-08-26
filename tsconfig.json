@@ -1,41 +1,20 @@
+/*
+  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
+  It is not intended to be used to perform a compilation.
+
+  To learn more about this file see: https://angular.io/config/solution-tsconfig.
+*/
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "baseUrl": ".",
-    "declaration": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "lib": ["es2017", "dom"],
-    "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "outDir": "./dist/out-tsc",
-    "paths": {
-      "$site": ["./src/app/site.module"],
-      "$modals": ["./src/app/components/project/modals"],
-      "$ui": ["./src/app/shared/stores/ui"],
-      "$domain": ["./src/app/shared/stores/domain"],
-      "$settings": ["./src/app/shared/stores/settings"],
-      "$utils": ["./src/app/shared/utils"],
-      "$env": ["./src/environments/environment.ts"],
-      "$enums": ["./src/shared/models/enums.ts"]
+  "files": [],
+  "references": [
+    {
+      "path": "./src/tsconfig.app.json"
     },
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "target": "es5",
-    "module": "esnext",
-    "typeRoots": ["node_modules/@types"]
-  },
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "preserveWhitespaces": false
-  },
-  "include": ["src/**/*"],
-  "exclude": ["e2e", "**/*.spec.ts", "node_modules"]
+    {
+      "path": "./src/tsconfig.spec.json"
+    },
+    {
+      "path": "./src/tsconfig.server.json"
+    }
+  ]
 }
