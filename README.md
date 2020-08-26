@@ -57,6 +57,9 @@ ng update
 
 # Deploy dist folder to git pages. Be sure to update deploy script in package.json
 npm run deploy
+
+# Run a dev server with server side rendering (SSR) enabled
+npm run serve:ssr
 ```
 
 ## Localizing Your App

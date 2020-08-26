@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { SwUpdate, SwPush } from '@angular/service-worker';
 import { interval, Observable, BehaviorSubject, from, of } from 'rxjs';
 import { delay } from 'helpful-decorators';
 import { HttpClient } from '@angular/common/http';
 import { map, take, switchMap, filter } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 
 /** Model that needs to be sent from the server to the service worker */
 export interface NotificationServerResponse {
@@ -55,6 +56,8 @@ export interface PushResponse {
  */
 @Injectable({ providedIn: 'root' })
 export class NtsServiceWorkerService {
+  /** Is the browsers available, used for SSR/Angular universal */
+  private isBrowser = isPlatformBrowser(this.platformId);
   /** Is an update available */
   public updateAvailable$ = new BehaviorSubject<boolean>(false);
   /** Is the service worker enabled */
@@ -62,16 +65,16 @@ export class NtsServiceWorkerService {
   /** Handle click events on notifications */
   public notificationClicks$ = this.swPush.notificationClicks;
   /** Does this app have permission to send push notifications? */
-  private permission: NotificationPermission = ('Notification' in window) ? Notification.permission : 'denied';
+  private permission: NotificationPermission = this.isBrowser && 'Notification' in window ? Notification.permission : 'denied';
   /** Service worker instance */
   public worker$: Observable<ServiceWorkerRegistration | undefined | null> = new BehaviorSubject(null);
   /** Get the current active push notification. Null if it does not exist */
   public pushSubscription$: Observable<PushSubscription | null> = new BehaviorSubject(null);
   public isPushActive$ = this.pushSubscription$.pipe(map(x => !!x));
 
-  constructor(private sw: SwUpdate, private swPush: SwPush, private http: HttpClient) {
+  constructor(private sw: SwUpdate, private swPush: SwPush, private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) {
     // Add legacy support to browsers without a service worker
-    if (navigator && navigator.serviceWorker) {
+    if (this.isBrowser && navigator && navigator.serviceWorker) {
       this.worker$ = from(navigator.serviceWorker.getRegistration());
       this.pushSubscription$ = this.worker$.pipe(switchMap(registration => (registration ? from(registration.pushManager.getSubscription()) : of(null))));
     }
@@ -81,7 +84,7 @@ export class NtsServiceWorkerService {
    * Ask the user for permission to send push notifications
    */
   public requestPermission() {
-    if ('Notification' in window) {
+    if (this.isBrowser && 'Notification' in window) {
       Notification.requestPermission(status => (this.permission = status));
     }
   }
@@ -94,7 +97,7 @@ export class NtsServiceWorkerService {
   public sendNotification(title: string, options?: NotificationOptions): Observable<PushResponse> {
     return new Observable<PushResponse>(obs => {
       // Check if notification api is available
-      if (!('Notification' in window)) {
+      if (this.isBrowser && !('Notification' in window)) {
         obs.error('Notifications are not available in this environment');
         obs.complete();
       }
@@ -193,6 +196,8 @@ export class NtsServiceWorkerService {
    * @param callback Function to execute after sw has been unregistered
    */
   public remove() {
-    navigator.serviceWorker.getRegistrations().then(registrations => registrations.forEach(reg => reg.unregister()));
+    if (this.isBrowser) {
+      navigator.serviceWorker.getRegistrations().then(registrations => registrations.forEach(reg => reg.unregister()));
+    }
   }
 }

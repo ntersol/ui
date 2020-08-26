@@ -1214,18 +1214,6 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "nts.angular/services/general/index@1.0.10": {
-        "files": [
-            {
-                "name": "index.ts",
-                "relativePath": "src/app/shared/services/general/index.ts",
-                "test": false
-            }
-        ],
-        "mainFile": "src/app/shared/services/general/index.ts",
-        "origin": "AUTHORED",
-        "exported": true
-    },
     "nts.angular/services/general/post-messageservice@1.0.3": {
         "files": [
             {

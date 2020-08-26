@@ -16,21 +16,11 @@ import { LayoutSingleComponent } from './masterpage/single/layout-single.compone
 import { NavComponent } from './masterpage/nav/nav.component';
 import { NavSearchComponent } from './masterpage/nav/search/nav-search.component';
 
-
-
 // Modals include
 const APP_MODALS = [LogoutModalComponent, FeedbackModalComponent];
 
 // Components to include
-export const APP_COMPONENTS = [
-  ...APP_MODALS,
-  FooterComponent,
-  HeaderComponent,
-  LayoutMainComponent,
-  LayoutSingleComponent,
-  NavComponent,
-  NavSearchComponent,
-];
+export const APP_COMPONENTS = [...APP_MODALS, FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent];
 
 @NgModule({
   imports: [

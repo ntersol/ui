@@ -6,6 +6,7 @@ import { SwUpdate } from '@angular/service-worker';
 import { NtsServiceWorkerService, NtsVersionManagementService } from '../../services/general';
 import { StoreConfig, Store, Query } from '@datorama/akita';
 import { UIState } from './ui-state';
+import { SettingsService } from '../settings/settings.service';
 
 export function createInitialState(): UIState {
   return {
@@ -47,6 +48,7 @@ export class UiStateService {
     private sw: SwUpdate,
     private ntsSw: NtsServiceWorkerService,
     private ntsVersion: NtsVersionManagementService,
+    private settings: SettingsService,
   ) {
     // this.query.uiState$.subscribe(state => console.log('UI STATE', state));
     this.updateAvailable$.pipe(filter(val => val)).subscribe(() => this.updateAppModal());
@@ -91,6 +93,9 @@ export class UiStateService {
   }
 
   public updateAppModal() {
+    if (!this.settings.isBrowser) {
+      return;
+    }
     this.confirmationService.confirm({
       message: 'An update for this application is available, would you like to update?',
       header: 'Confirmation',

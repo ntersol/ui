@@ -5,6 +5,7 @@ import { map, filter, mergeMap } from 'rxjs/operators';
 
 import { environment } from '$env';
 import { NtsVersionManagementService, NtsServiceWorkerService } from './shared/services/general';
+import { SettingsService } from './shared/stores/settings/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
     private title: Title,
     private version: NtsVersionManagementService,
     private sw: NtsServiceWorkerService,
+    public settings: SettingsService,
   ) {}
 
   ngOnInit() {

@@ -14,4 +14,6 @@
 <!-- Main Router -->
 <router-outlet></router-outlet>
 
-<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+<ng-container *ngIf="settings.isBrowser">
+  <p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+</ng-container>

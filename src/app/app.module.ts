@@ -1,7 +1,7 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, enableProdMode, ErrorHandler, Injector } from '@angular/core'; // APP_INITIALIZER,
+import { NgModule, enableProdMode, ErrorHandler, Injector, Inject, PLATFORM_ID, APP_ID } from '@angular/core'; // APP_INITIALIZER,
 import { RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -24,12 +24,14 @@ if (environment.production) {
   enableAkitaProdMode();
 }
 
+const isServer = typeof process !== 'undefined' && process.versions != null && process.versions.node != null;
+
 /**
  * Tell Akita to persist state with the following options
  * Currently only set up with global UI State
  */
 persistState({
-  storage: localStorage, // Session storage or local storage
+  storage: isServer ? undefined : localStorage, // Session storage or local storage
   key: 'appState', // Property to set state under
   include: ['uiState', 'settings'], // Which stores to include
   // Obfuscate the app state
@@ -79,7 +81,8 @@ export let InjectorInstance: Injector;
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {
-      useHash: !environment.production,
+      useHash: false,
+      initialNavigation: 'enabled', // Required if using BOTH SSR & lazy loading
       preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,
       scrollPositionRestoration: 'enabled',
     }),
@@ -118,8 +121,10 @@ export let InjectorInstance: Injector;
   entryComponents: [],
 })
 export class AppModule {
-  constructor(private injector: Injector) {
+  constructor(private injector: Injector, @Inject(PLATFORM_ID) public platformId: object, @Inject(APP_ID) public appId: string) {
     InjectorInstance = this.injector;
+    // const platform = isPlatformBrowser(platformId) ? 'in the browser' : 'on the server';
+    // console.log(`Running ${platform} with appId=${appId}`);
   }
 }
 

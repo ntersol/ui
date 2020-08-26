@@ -2,16 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { merge, interval, BehaviorSubject, fromEvent } from 'rxjs';
-import {
-  throttleTime,
-  tap,
-  switchMap,
-  filter,
-  map,
-  distinctUntilChanged,
-  startWith,
-  take,
-} from 'rxjs/operators';
+import { throttleTime, tap, switchMap, filter, map, distinctUntilChanged, startWith, take } from 'rxjs/operators';
 import { DialogService } from 'primeng/dynamicdialog';
 import { environment } from '$env';
 import { DomainService } from '$domain';
@@ -44,14 +35,12 @@ export class AuthService {
   private logoutModalVisible = false;
 
   /** User interaction events. Watches mouse movement, clicks and key presses */
-  private refreshEvent$ = merge(
-    fromEvent(document, 'keypress'),
-    fromEvent(document, 'mousemove'),
-    fromEvent(document, 'click'),
-  ).pipe(
-    throttleTime(1000), // Throttle to every one second
-    startWith(0),
-  ); // 10 seconds
+  private refreshEvent$ = this.settings.isBrowser
+    ? merge(fromEvent(document, 'keypress'), fromEvent(document, 'mousemove'), fromEvent(document, 'click')).pipe(
+        throttleTime(1000), // Throttle to every one second
+        startWith(0),
+      )
+    : new BehaviorSubject(0); // 10 seconds
 
   /** Logout timer that resets after every user interaction event */
   private logoutTimerExpired$ = this.refreshEvent$.pipe(
@@ -73,12 +62,10 @@ export class AuthService {
   ) {
     // Manage logout timer
     // Only fire events when timer expires and is not inactive (IE the logout modal is active)
-    this.logoutTimerExpired$
-      .pipe(filter(expired => expired && !this.logoutModalVisible))
-      .subscribe(() => {
-        this.launchLogoutModal();
-        this.logoutModalVisible = true;
-      });
+    this.logoutTimerExpired$.pipe(filter(expired => expired && !this.logoutModalVisible)).subscribe(() => {
+      this.launchLogoutModal();
+      this.logoutModalVisible = true;
+    });
 
     // If an endpoint for auth refresh provided
     if (environment.endpoints.authTokenRefresh) {
@@ -125,10 +112,7 @@ export class AuthService {
     // Determine if valid auth endpoint available. If not use stubbed out one
     const authApi =
       environment.endpoints.apiUrl && environment.endpoints.authLogin
-        ? this.http.post<Models.Auth>(
-            environment.endpoints.apiUrl + environment.endpoints.authLogin,
-            data,
-          )
+        ? this.http.post<Models.Auth>(environment.endpoints.apiUrl + environment.endpoints.authLogin, data)
         : this.http.get<Models.Auth>('assets/mock-data/login.json');
     return authApi.pipe(
       tap(response => {
@@ -147,16 +131,10 @@ export class AuthService {
    */
   public refreshToken() {
     // Null check against env files
-    if (
-      !environment.endpoints.apiUrl ||
-      !environment.endpoints.authTokenRefresh
-    ) {
+    if (!environment.endpoints.apiUrl || !environment.endpoints.authTokenRefresh) {
       return false;
     }
-    const refreshApi = this.http.post<Models.Auth>(
-      environment.endpoints.apiUrl + environment.endpoints.authLogin,
-      {},
-    );
+    const refreshApi = this.http.post<Models.Auth>(environment.endpoints.apiUrl + environment.endpoints.authLogin, {});
 
     refreshApi.subscribe(
       response => {
@@ -203,10 +181,7 @@ export class AuthService {
     this.authState$.next(authState);
     this.domain.resetAll(); // Clear out all API data on log out for security
     // Don't throw a redirect url if this is the dashboard since that is default on login
-    const returnUrl =
-      this.router.url !== '/' && this.router.url !== '/login'
-        ? this.router.url.split('?')[0]
-        : null;
+    const returnUrl = this.router.url !== '/' && this.router.url !== '/login' ? this.router.url.split('?')[0] : null;
     this.router.navigate(['/login'], { queryParams: { returnUrl: returnUrl } });
   } // end LogOut
 }
