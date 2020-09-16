@@ -1,0 +1,25 @@
+<!---->
+<div class="ui-container-fluid" *ngIf="{ users: users$ | async } as comp">
+  <nts-api-state [state]="comp.users">
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Website</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of comp.users.data">
+          <td>{{ user.username }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.website }}</td>
+          <td>{{ user.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </nts-api-state>
+</div>

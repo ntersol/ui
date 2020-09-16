@@ -8,6 +8,7 @@ import { TablesComponent } from './routes/tables/tables.component';
 import { GridComponent } from './routes/grid/grid.component';
 import { FormsComponent } from './routes/forms/forms.component';
 import { CalendarComponent } from './routes/calendar/calendar.component';
+import { StateManagementComponent } from './routes/state-management/state-management.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,11 @@ const routes: Routes = [
     path: 'forms',
     component: FormsComponent,
     data: { title: 'Forms' },
+  },
+  {
+    path: 'state-management',
+    component: StateManagementComponent,
+    data: { title: 'State Management' },
   },
   {
     path: 'calendar',

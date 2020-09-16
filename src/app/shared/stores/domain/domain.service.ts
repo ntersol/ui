@@ -10,7 +10,7 @@ import { ntsCreateEntityStore } from 'src/app/components/general/state-managemen
 })
 export class DomainService {
 
-  public users = ntsCreateEntityStore(this.http)({ idKey: 'id', apiUrl: '//jsonplaceholder.typicode.com/users' });
+  public users = ntsCreateEntityStore(this.http)({ idKey: 'id', apiUrl: 'https://jsonplaceholder.typicode.com/users' });
 
   // List all store services here
   constructor(
