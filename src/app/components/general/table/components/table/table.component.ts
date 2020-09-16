@@ -13,7 +13,9 @@ import {
   ViewChildren,
   ElementRef,
   ChangeDetectorRef,
-  OnDestroy,, Inject, PLATFORM_ID
+  OnDestroy,
+  Inject,
+  PLATFORM_ID,
 } from '@angular/core';
 import { Table } from 'primeng/table';
 import { TableColumnDirective } from '../../directives/column.directive';
