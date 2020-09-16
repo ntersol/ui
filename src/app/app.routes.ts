@@ -61,7 +61,7 @@ export const ROUTES: Routes = [
         loadChildren: () =>
           import('./routes/qa/qa.module').then(m => m.QaModule),
         data: { title: 'E2E Testing' },
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
 
       {

@@ -5,6 +5,7 @@ import { DemoModalComponent } from './components/modal/demo-modal/demo-modal.com
 import { LogoutModalComponent, FeedbackModalComponent } from '$modals';
 import { filter } from 'rxjs/operators';
 import { NtsServiceWorkerService } from 'src/app/shared/services/general';
+import { SettingsService } from '$settings';
 
 @Component({
   selector: 'app-qa',
@@ -31,6 +32,7 @@ export class QaComponent implements OnInit {
   ];
 
   constructor(
+    public settings: SettingsService,
     private confirmationService: ConfirmationService,
     public dialogService: DialogService,
     private sw: NtsServiceWorkerService,

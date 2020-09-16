@@ -1,12 +1,8 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { timer, Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'nts-counter',
@@ -16,8 +12,9 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 })
 export class NtsCounterComponent implements OnInit, OnDestroy {
   public timer$!: Observable<string> | null;
-
-  constructor() {}
+  /** Is the browsers available, used for SSR/Angular universal */
+  public isBrowser = isPlatformBrowser(this.platformId);
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit() {
     this.start();
