@@ -12,6 +12,7 @@
     [minLength]="minLength"
     [appendTo]="'body'"
     (onBlur)="onBlur()"
+    (onKeyUp)="onKeyUp($event)"
     (onSelect)="onSelect($event)"
     (completeMethod)="filterTerms($event)"
   >
@@ -22,5 +23,4 @@
   <a class="nts-autocomplete-icon">
     <i class="fa fa-search" aria-hidden="true"></i>
   </a>
- 
 </div>

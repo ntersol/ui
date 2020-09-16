@@ -1,4 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -10,6 +20,7 @@ import { FormControl } from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
 })
 export class NtsAutocompleteComponent implements OnInit, OnChanges {
+  @Input()  value?: any;
   @Input() terms: (string | Record<string, any>)[] | null = [];
   @Input() label?: string;
   @Input() field?: string;
@@ -22,7 +33,6 @@ export class NtsAutocompleteComponent implements OnInit, OnChanges {
   @Input() size = 30;
   @Output() termSelected = new EventEmitter<any>();
 
-  public value: any;
   public termsFiltered: (string | Record<string, any>)[] = [];
 
   constructor() {}
@@ -74,6 +84,20 @@ export class NtsAutocompleteComponent implements OnInit, OnChanges {
       this.control.patchValue(value);
     }
     this.termSelected.emit(value);
+  }
+
+  /**
+   * On key up
+   * @param event
+   */
+  public onKeyUp(event: KeyboardEvent) {
+    // If enter is presssed, emit value
+    if (event.key === 'Enter') {
+      if (this.control) {
+        this.control.patchValue(this.value);
+      }
+      this.termSelected.emit(this.value);
+    }
   }
 
   /**
