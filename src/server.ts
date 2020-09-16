@@ -8,6 +8,23 @@ import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import { AppServerModule } from './app/app.server.module';
 
+/**
+ * Add domino, which exposes a DOM to nodejs
+ * https://github.com/fgnass/domino
+ * This will catch a lot of SSR errors
+ */
+const domino = require('domino');
+const fs = require('fs');
+const path = require('path');
+const htmlFolder = join(process.cwd(), 'dist/browser');
+const template = fs.readFileSync(path.join(htmlFolder, 'index.html')).toString();
+const win = domino.createWindow(template);
+(<any>global)['window'] = win;
+(<any>global)['document'] = win.document;
+(<any>global)['Element'] = win.Element;
+(<any>global)['CSS'] = null;
+
+
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
   const server = express();

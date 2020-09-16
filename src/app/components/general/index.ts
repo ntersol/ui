@@ -1,5 +1,6 @@
 // Calendar
-export * from './calendar';
+// export * from './calendar';
+
 // Charts
 export * from './chart/chart.module';
 // Doc Editor

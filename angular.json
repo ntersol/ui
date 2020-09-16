@@ -13,7 +13,6 @@
           "options": {
             "aot": true,
             "lazyModules": [
-              "src/app/components/general/calendar/calendar.module",
               "src/app/components/general/chart/chart.module",
               "src/app/components/general/document-editor/document-editor.module",
               "src/app/components/general/forms/forms.module",
@@ -180,21 +179,21 @@
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
-            "browserTarget": "realtytrac:build",
-            "serverTarget": "realtytrac:server"
+            "browserTarget": "angular-starter:build",
+            "serverTarget": "angular-starter:server"
           },
           "configurations": {
             "production": {
-              "browserTarget": "realtytrac:build:production",
-              "serverTarget": "realtytrac:server:production"
+              "browserTarget": "angular-starter:build:production",
+              "serverTarget": "angular-starter:server:production"
             }
           }
         },
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "browserTarget": "realtytrac:build:production",
-            "serverTarget": "realtytrac:server:production",
+            "browserTarget": "angular-starter:build:production",
+            "serverTarget": "angular-starter:server:production",
             "routes": ["/"]
           },
           "configurations": {
