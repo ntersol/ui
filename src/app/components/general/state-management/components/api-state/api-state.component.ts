@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { NtsCombineEntityState } from '../../utils/combineEntityState.util';
+import { ntsCombineEntityState } from '../../utils/combineEntityState.util';
 import { NtsState } from '../../state';
 
 @Component({
@@ -10,7 +10,7 @@ import { NtsState } from '../../state';
 export class NtsDomainStateComponent implements OnInit, OnChanges {
   /** Default domain state */
   @Input() set state(state: NtsState.EntityState | (NtsState.EntityState | unknown)[] | null) {
-    this.stateSrc = NtsCombineEntityState(state);
+    this.stateSrc = ntsCombineEntityState(state);
   }
 
   /** Should the state component look the modify state instead of load state */

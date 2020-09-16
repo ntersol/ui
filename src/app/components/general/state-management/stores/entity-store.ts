@@ -24,12 +24,7 @@ export class NtsEntityStore<t> {
   public select$: Observable<NtsState.EntityState<t, any>>;
   /** Select the store state and a subset of entities using Akita's standard query parameters for selectAll */
   public selectAll$: (
-    select?:
-      | SelectAllOptionsA<t>
-      | SelectAllOptionsB<t>
-      | SelectAllOptionsC<t>
-      | SelectAllOptionsD<t>
-      | SelectAllOptionsE<t>,
+    select?: SelectAllOptionsA<t> | SelectAllOptionsB<t> | SelectAllOptionsC<t> | SelectAllOptionsD<t> | SelectAllOptionsE<t>,
   ) => Observable<NtsState.EntityState<t, any>>;
 
   /** Unique ID of the entity */
@@ -43,7 +38,7 @@ export class NtsEntityStore<t> {
    * Multiple components can call GET at the same time but only one http request is made and the result shared with all subscribers */
   private httpGet$: Observable<t[]> | undefined;
 
-  constructor(private http: HttpClient, private config: NtsState.EntityStoreConfig) {
+  constructor(private http: HttpClient, private config: NtsState.EntityStoreConfig<t>) {
     // Generate initial state. Note that this state does not have undefined props like the source entity state does
     const state: NtsState.EntityState<t> = Object.assign(initialEntityState, config.initialState);
     // Set default idkey to guid
@@ -72,17 +67,17 @@ export class NtsEntityStore<t> {
         // const data: t[] | null = this.hasData ? stateSrc.ids.map(id => stateSrc.entities[id]) : null;
         return Object.assign({}, stateSrc, { data: data });
       }),
+      // If select was requested and no data is in the store, load the data
+      tap(() => {
+        if ((!this.httpGet$ || (!this.query.getHasCache() && !this.hasData)) && this.hasData !== true) {
+          this.hasData = true;
+          this.get().pipe(take(1)).subscribe();
+        }
+      }),
     );
 
     // Create select all query that accepts default akita parameters
-    this.selectAll$ = (
-      select?:
-        | SelectAllOptionsA<t>
-        | SelectAllOptionsB<t>
-        | SelectAllOptionsC<t>
-        | SelectAllOptionsD<t>
-        | SelectAllOptionsE<t>,
-    ) => {
+    this.selectAll$ = (select?: SelectAllOptionsA<t> | SelectAllOptionsB<t> | SelectAllOptionsC<t> | SelectAllOptionsD<t> | SelectAllOptionsE<t>) => {
       return this.query.selectAll({ ...select }).pipe(
         switchMap(entities =>
           this.query.select().pipe(
@@ -111,13 +106,12 @@ export class NtsEntityStore<t> {
    */
   public get(options?: NtsState.Options): Observable<t[]> {
     // If not cached or refresh cache is set or a get request is already active, make http call and load store
-    if (!this.httpGet$ || !this.query.getHasCache() || (options && options.refreshCache)) {
+    if (!this.httpGet$ || (!this.query.getHasCache() && !this.hasData) || (options && options.refreshCache)) {
       applyTransaction(() => {
         this.store.setLoading(true);
         this.store.setError(null);
         this.store.update({ errorModify: false });
       });
-
       // Get default api URL
       let apiUrl = this.config.apiUrl;
       // If url specified as an argument, use that one
@@ -207,10 +201,7 @@ export class NtsEntityStore<t> {
     }
     // Append the unique ID to the http request unless appendID for PATCH was set to false
     // If an array was supplied, grab ID from the first entity (edge case)
-    const entityId =
-      this.config.disableAppendId && this.config.disableAppendId.put
-        ? ''
-        : '/' + (!Array.isArray(entity) ? entity[key] : entity[0][key]);
+    const entityId = this.config.disableAppendId && this.config.disableAppendId.put ? '' : '/' + (!Array.isArray(entity) ? entity[key] : entity[0][key]);
     // Hold final http request, may be null if no conditions match
     let httpRequest: Observable<Partial<t>> | null = null;
     // If type is string
@@ -249,10 +240,7 @@ export class NtsEntityStore<t> {
     }
     // Append the unique ID to the http request unless appendID for PATCH was set to false
     // If an array was supplied, grab ID from the first entity (edge case)
-    const entityId =
-      this.config.disableAppendId && this.config.disableAppendId.patch
-        ? ''
-        : '/' + (!Array.isArray(entity) ? entity[key] : entity[0][key]);
+    const entityId = this.config.disableAppendId && this.config.disableAppendId.patch ? '' : '/' + (!Array.isArray(entity) ? entity[key] : entity[0][key]);
     // Hold final http request, may be null if no conditions match
     let httpRequest: Observable<Partial<t>> | null = null;
     // If type is string
@@ -330,10 +318,7 @@ export class NtsEntityStore<t> {
     }
     // Append the unique ID to the http request unless appendID for PATCH was set to false
     // If an array was supplied, grab ID from the first entity (edge case)
-    const entityId =
-      this.config.disableAppendId && this.config.disableAppendId.delete
-        ? ''
-        : '/' + (!Array.isArray(entity) ? key : entity[0][id]);
+    const entityId = this.config.disableAppendId && this.config.disableAppendId.delete ? '' : '/' + (!Array.isArray(entity) ? key : entity[0][id]);
     // Hold final http request, may be null if no conditions match
     let httpRequest: Observable<Partial<t>> | null = null;
     // If type is string
@@ -384,5 +369,4 @@ export class NtsEntityStore<t> {
  * @param http
  * @param config
  */
-export const NtsCreateEntityStore = (http: HttpClient) => <t>(config: NtsState.EntityStoreConfig) =>
-  new NtsEntityStore<t>(http, config);
+export const ntsCreateEntityStore = (http: HttpClient) => <t>(config: NtsState.EntityStoreConfig<t>) => new NtsEntityStore<t>(http, config);

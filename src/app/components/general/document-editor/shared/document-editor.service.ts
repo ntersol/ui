@@ -6,6 +6,7 @@ import { insertAt } from './utils/arrays.util';
 import { isNotNil } from './guards/guards.utils';
 import { NtsDocumentEditor } from '../document-editor';
 import { pdfjsDist } from './models/pdf';
+import { Injectable } from "@angular/core";
 const cloneDeep = require('lodash/cloneDeep');
 
 declare global {
@@ -45,6 +46,7 @@ const stateInitial: NtsDocumentEditor.State = {
   scrollPosition: null,
 };
 
+@Injectable()
 export class DocumentEditorService {
   private _state: NtsDocumentEditor.State = cloneDeep(stateInitial);
   public state$ = new BehaviorSubject(this._state);

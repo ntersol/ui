@@ -8,8 +8,8 @@ import { NtsState } from '../state';
  * @param states
  * @param data
  */
-export const NtsCombineEntityState = (
-  states: NtsState.EntityState | (NtsState.EntityState | unknown)[] | null | undefined,
+export const ntsCombineEntityState = <t>(
+  states: NtsState.EntityState | (NtsState.EntityState | t)[] | null | undefined,
 ): NtsState.ApiState => {
   const state: NtsState.ApiState = {
     loading: false,

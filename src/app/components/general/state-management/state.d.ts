@@ -15,7 +15,7 @@ export namespace NtsState {
     modifying: boolean;
     error: any;
     errorModify: any;
-    data: null | t;
+    data: undefined | null | t;
   }
 
   /**
@@ -31,7 +31,7 @@ export namespace NtsState {
   /** Different methods to pass the api url string to the store */
   export type ApiUrl = string | Observable<string> | (<t>(x: t) => string);
 
-  export interface EntityStoreConfig {
+  export interface EntityStoreConfig<t> {
     /** Full path to webapi. Assumes restful conventions for verbs */
     apiUrl?: ApiUrl;
     /** The uniqueID or guid or the entity format. Default is 'guid' */
@@ -45,7 +45,7 @@ export namespace NtsState {
       patch?: ApiUrl;
       delete?: ApiUrl;
     };
-    /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests. 
+    /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests.
      * If true the url to the web api must added manually via a callback function or observable */
     disableAppendId?: {
       put?: true;
@@ -54,10 +54,10 @@ export namespace NtsState {
     };
     /** Map the webapi response before it is passed to the store on a per verb basis */
     map?: {
-      get?: (x: any) => any;
-      post?: (x: any) => any;
-      put?: (x: any) => any;
-      patch?: (x: any) => any;
+      get?: (x: t[]) => any;
+      post?: (x: Partial<t>) => any;
+      put?: (x: Partial<t>) => any;
+      patch?: (x: t) => any;
       // delete?: (x: any) => any;
     };
     /** Can the store be reset? Default is true */

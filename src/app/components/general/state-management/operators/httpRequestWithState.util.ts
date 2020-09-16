@@ -12,10 +12,10 @@ export const httpRequestWithState = () => <t>(source: Observable<t>) => {
     modifying: false,
     errorModify: null,
     error: null,
-    data: null,
+    data: undefined,
   };
   return source.pipe(
-    map(x => <NtsState.ApiState<t>>Object.assign({}, state, { loading: false, error: null, data: x })),
+    map(x => <NtsState.ApiState<t>>Object.assign({}, state, { loading: false, error: null, data: x ? x : undefined })),
     catchError(err => of(<NtsState.ApiState<t>>Object.assign({}, state, { loading: false, error: err }))),
     startWith(state),
   );
