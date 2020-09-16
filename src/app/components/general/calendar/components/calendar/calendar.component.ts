@@ -1,13 +1,12 @@
 import { Component, OnInit, Input, ViewChild, ViewEncapsulation, ChangeDetectionStrategy, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { FullCalendar } from 'primeng/fullcalendar';
-
-import { BehaviorSubject } from 'rxjs';
-import { NtsCalendar } from '../../calendar';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import listPlugin from '@fullcalendar/list';
+import { BehaviorSubject } from 'rxjs';
+import { NtsCalendar } from '../../calendar';
 
 // const ics = require('../../utils/ics.util.js');
 /**
@@ -17,7 +16,7 @@ import listPlugin from '@fullcalendar/list';
   selector: 'nts-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: [
-    '../../../../../../../node_modules/@fullcalendar/common/main.css',
+    '../../../../../../../node_modules/@fullcalendar/core/main.css',
     '../../../../../../../node_modules/@fullcalendar/daygrid/main.css',
     '../../../../../../../node_modules/@fullcalendar/timegrid/main.css',
     '../../../../../../../node_modules/@fullcalendar/list/main.css',
@@ -32,15 +31,13 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Input() defaultView: NtsCalendar.DefaultView = 'dayGridMonth';
   @Input() events: NtsCalendar.Event[] = [];
   @Input() selectable = false;
-  @Input() height = 100;
+  @Input() height: number | undefined;
   /** https://fullcalendar.io/docs/header */
   @Input() header: any | undefined;
   /** A string with the START time for the timegrid view, IE "07:00:00" */
   @Input() minTime: string | undefined;
   /** A string with the END time for the timegrid view, IE "07:00:00" */
   @Input() maxTime: string | undefined;
-
-  public options = {};
 
   @Output() dateClick = new EventEmitter<NtsCalendar.DateClick>();
   @Output() eventClick = new EventEmitter<NtsCalendar.EventClick>();

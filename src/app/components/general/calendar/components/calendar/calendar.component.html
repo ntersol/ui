@@ -1,5 +1,6 @@
 <div [ngStyle]="{ 'min-height': height + 'px' }">
-  <!--
+  <full-calendar
+    #fc
     [defaultView]="defaultView"
     [events]="events"
     [height]="height"
@@ -8,6 +9,8 @@
     [selectable]="selectable"
     [minTime]="minTime"
     [maxTime]="maxTime"
-  -->
-  <full-calendar #fc [options]="options" (dateClick)="dateClick.emit($event)" (eventClick)="handleEventClick($event)" (select)="select($event)"></full-calendar>
+    (dateClick)="dateClick.emit($event)"
+    (eventClick)="handleEventClick($event)"
+    (select)="select($event)"
+  ></full-calendar>
 </div>
