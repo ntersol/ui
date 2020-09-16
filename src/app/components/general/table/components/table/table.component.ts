@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
   Component,
   OnInit,
@@ -12,7 +13,7 @@ import {
   ViewChildren,
   ElementRef,
   ChangeDetectorRef,
-  OnDestroy,
+  OnDestroy,, Inject, PLATFORM_ID
 } from '@angular/core';
 import { Table } from 'primeng/table';
 import { TableColumnDirective } from '../../directives/column.directive';
@@ -63,10 +64,12 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   private rowsSrc: any[] | undefined;
   /** Keep an instance of the last sorted option. Used to unset sort */
   private sortLast: { field?: string; order?: number } = {};
+  /** SSR Compatibility */
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   @ViewChildren('th') tableHeaders!: QueryList<ElementRef>;
 
-  constructor(private ref: ChangeDetectorRef) {}
+  constructor(private ref: ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit() {
     if (this.rows) {
@@ -84,7 +87,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
       this.rowsSrc = [...this.rows];
     }
 
-    if (this.tableHeaders) {
+    if (this.tableHeaders && this.isBrowser) {
       setTimeout(() => {
         this.columnWidthsPercent = this.columnWidthFix(this.tableHeaders.toArray());
         this.ref.markForCheck();
