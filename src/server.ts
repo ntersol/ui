@@ -12,7 +12,7 @@ import { AppServerModule } from './app/app.server.module';
  * Add domino, which exposes a DOM to nodejs
  * https://github.com/fgnass/domino
  * This will catch a lot of SSR errors
- */
+
 const domino = require('domino');
 const fs = require('fs');
 const path = require('path');
@@ -23,7 +23,7 @@ const win = domino.createWindow(template);
 (<any>global)['document'] = win.document;
 (<any>global)['Element'] = win.Element;
 (<any>global)['CSS'] = null;
-
+ */
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
@@ -44,6 +44,11 @@ export function app() {
 
   // TODO: implement data requests securely
   server.get('/api/**', (_req, res) => {
+    res.status(404).send('data requests are not yet supported');
+  });
+
+  // TODO: implement data requests securely
+  server.get('/wp-json/**', (_req, res) => {
     res.status(404).send('data requests are not yet supported');
   });
 

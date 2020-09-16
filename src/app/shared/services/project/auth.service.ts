@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { merge, interval, BehaviorSubject, fromEvent } from 'rxjs';
+import { merge, interval, BehaviorSubject, fromEvent, Observable } from 'rxjs';
 import { throttleTime, tap, switchMap, filter, map, distinctUntilChanged, startWith, take } from 'rxjs/operators';
 import { DialogService } from 'primeng/dynamicdialog';
 import { environment } from '$env';
@@ -35,22 +35,9 @@ export class AuthService {
   private logoutModalVisible = false;
 
   /** User interaction events. Watches mouse movement, clicks and key presses */
-  private refreshEvent$ = this.settings.isBrowser
-    ? merge(fromEvent(document, 'keypress'), fromEvent(document, 'mousemove'), fromEvent(document, 'click')).pipe(
-        throttleTime(1000), // Throttle to every one second
-        startWith(0),
-      )
-    : new BehaviorSubject(0); // 10 seconds
-
+  private refreshEvent$?: Observable<number | Event>;
   /** Logout timer that resets after every user interaction event */
-  private logoutTimerExpired$ = this.refreshEvent$.pipe(
-    switchMap(() => interval(1000)), // Reset interval everytime refresh fires
-    // tap(val => console.log(val, this.idleDuration)), // Test auth functionality
-    filter(() => !!this.settings.token), // Only capture refresh events if token present
-    map(val => (val > this.idleDuration ? true : false)), // If val is greater than duration, convert to true or false
-    startWith(false),
-    distinctUntilChanged(),
-  );
+  private logoutTimerExpired$?: Observable<boolean>;
 
   constructor(
     private http: HttpClient,
@@ -60,6 +47,35 @@ export class AuthService {
     public dialogService: DialogService,
     private domain: DomainService,
   ) {
+    // If a token was passed in via query param
+    this.route.queryParams.pipe(take(1)).subscribe(params => {
+      if (params.token) {
+        this.settings.token = params.token;
+      }
+    });
+
+    // Browser check
+    if (!this.settings.isBrowser) {
+      return;
+    }
+
+    // Start subs to DOM events
+    this.refreshEvent$ = merge(fromEvent(document, 'keypress'), fromEvent(document, 'mousemove'), fromEvent(document, 'click'))
+      .pipe(
+        throttleTime(1000), // Throttle to every one second
+        startWith(0),
+      )
+      .pipe();
+
+    this.logoutTimerExpired$ = this.refreshEvent$.pipe(
+      switchMap(() => interval(1000)), // Reset interval everytime refresh fires
+      // tap(val => console.log(val, this.idleDuration)), // Test auth functionality
+      filter(() => !!this.settings.token), // Only capture refresh events if token present
+      map(val => (val > this.idleDuration ? true : false)), // If val is greater than duration, convert to true or false
+      startWith(false),
+      distinctUntilChanged(),
+    );
+
     // Manage logout timer
     // Only fire events when timer expires and is not inactive (IE the logout modal is active)
     this.logoutTimerExpired$.pipe(filter(expired => expired && !this.logoutModalVisible)).subscribe(() => {
@@ -77,13 +93,6 @@ export class AuthService {
         )
         .subscribe(() => this.refreshToken()); // Refresh token
     }
-
-    // If a token was passed in via query param
-    this.route.queryParams.pipe(take(1)).subscribe(params => {
-      if (params.token) {
-        this.settings.token = params.token;
-      }
-    });
 
     /** Extract a token passed in via matrix notation
     // If a token is passed in via matrix notation params, update app settings.

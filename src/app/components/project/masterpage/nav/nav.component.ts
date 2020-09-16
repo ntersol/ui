@@ -5,7 +5,7 @@ import { SettingsService } from '$settings';
 
 import { MenuItem } from 'primeng/api';
 import { UiStateService } from '$ui';
-import { AuthService, AuthState } from 'src/app/shared/services/project/auth.service';
+import { AuthService } from 'src/app/shared/services/project/auth.service';
 
 const startCase = require('lodash/startCase');
 const toLower = require('lodash/toLower');
@@ -71,7 +71,7 @@ export class NavComponent {
   );
    */
 
-  constructor(private auth: AuthService, private settings: SettingsService, private ui: UiStateService, private router: Router) {
+  constructor( public settings: SettingsService, private ui: UiStateService, private router: Router, public auth: AuthService) {
     // On route change, if mobile nav is open close it
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => (this.sidebarVisible = false));
   }
@@ -87,6 +87,6 @@ export class NavComponent {
    * Log out
    */
   public logOut() {
-    this.auth.logOut(AuthState.loggedOut);
+    // this.auth.logOut(AuthState.loggedOut);
   }
 }

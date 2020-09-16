@@ -1,40 +1,31 @@
-<p-menubar [model]="navMenu">
-  <div>
-    <ng-container *ngIf="hasUpdate$ | async as hasUpdate">
-      <button
-        pButton
-        type="button"
-        icon="fa fa-warning"
-        label="Update Available"
-        (click)="updateApp()"
-      ></button>
-    </ng-container>
-    <p-slideMenu
-      #menu
-      [model]="utilityMenu"
-      [popup]="true"
-      [viewportHeight]="utilityMenu.length * 65"
-    ></p-slideMenu>
-    <a label="Show" (click)="menu.toggle($event)">
-      <i class="fa fa-user mr-2"></i> <span class="mr-2">{{ userName }}</span>
-      <i class="fa fa-caret-down mr-1"></i>
-    </a>
-  </div>
-</p-menubar>
+<div class="d-none d-md-block d-lg-block d-xl-block">
+  <p-menubar [model]="navMenu">
+    <div>
+      <ng-container *ngIf="hasUpdate$ | async as hasUpdate">
+        <button pButton type="button" icon="fa fa-warning" label="Update Available" (click)="updateApp()"></button>
+      </ng-container>
+      <p-slideMenu #menu [model]="utilityMenu" [popup]="true" [viewportHeight]="utilityMenu.length * 65"></p-slideMenu>
+      <a label="Show" (click)="menu.toggle($event)">
+        <i class="fa fa-user mr-2"></i> <span class="mr-2">{{ userName }}</span>
+        <i class="fa fa-caret-down mr-1"></i>
+      </a>
+    </div>
+  </p-menubar>
+</div>
 
-<ng-template #mobileTemplate>
-  <div class="pt-2 float-right">
-    <a (click)="sidebarVisible = true" class="p-2">
-      <i class="fa fa-bars fa-lg mr-2"></i>
-    </a>
-  </div>
-</ng-template>
+<div class="pt-2 float-right d-md-none d-lg-none d-xl-none">
+  <a (click)="sidebarVisible = true" class="p-2">
+    <i class="fa fa-bars fa-lg mr-2"></i>
+  </a>
+</div>
 
-<p-sidebar [(visible)]="sidebarVisible">
-  <p-menu [model]="navMenu"></p-menu>
-  <hr />
-  <p-menu [model]="utilityMenu"></p-menu>
-</p-sidebar>
+<ng-container *ngIf="settings.isBrowser">
+  <p-sidebar [(visible)]="sidebarVisible">
+    <p-menu [model]="navMenu"></p-menu>
+    <hr />
+    <p-menu [model]="utilityMenu"></p-menu>
+  </p-sidebar>
+</ng-container>
 
 <!--
 <div class="nav-component">
