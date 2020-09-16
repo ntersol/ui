@@ -115,14 +115,12 @@
     "ngx-take-until-destroy": "5.4.0",
     "node-sass": "4.12.0",
     "primeicons": "4.0.0",
-    "primeng": "10.0.0-rc.3",
+    "primeng": "10.0.0",
     "rxjs": "6.6.2",
     "ts-loader": "6.0.4",
     "tslib": "1.10.0",
     "typescript-fsa": "3.0.0",
-    "zone.js": "0.10.3",
-    "@bit/nts.angular.components.general.document-editor": "file:./src/app/components/general/document-editor",
-    "@bit/nts.angular.components.general.state-management": "file:./src/app/components/general/state-management"
+    "zone.js": "0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.1000.7",
