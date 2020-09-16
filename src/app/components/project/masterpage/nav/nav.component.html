@@ -1,4 +1,4 @@
-<p-menubar [model]="navMenu" *ngIf="isDesktop$ | async; else mobileTemplate">
+<p-menubar [model]="navMenu">
   <div>
     <ng-container *ngIf="hasUpdate$ | async as hasUpdate">
       <button

@@ -52,9 +52,9 @@ export class GlobalErrorHandler implements ErrorHandler {
   private resetState(error: AngularError) {
     console.error({ error: error });
     const resetAction = () => {
-      localStorage.clear();
-      sessionStorage.clear();
       if (this.settings.isBrowser) {
+        localStorage.clear();
+        sessionStorage.clear();
         window.location.href = '/';
       }
     };
@@ -67,7 +67,7 @@ export class GlobalErrorHandler implements ErrorHandler {
    * Use XMLHttpRequest since httpClient may not be available
    */
   private logError(error: AngularError) {
-    if (!environment.endpoints.apiUrl || !environment.endpoints.errorPath) {
+    if (!environment.endpoints.apiUrl || !environment.endpoints.errorPath || !this.settings.isBrowser) {
       return;
     }
     const http = new XMLHttpRequest();
