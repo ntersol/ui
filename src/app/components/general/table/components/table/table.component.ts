@@ -44,6 +44,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   /** Shows a dropdown with how many results per page */
   @Input() rowsPerPageOptions: number[] | undefined;
 
+  @Input() rowTrackBy?: Function;
+
   @Input() compact = false;
 
   public columnWidthsPercent: number[] | null = null;
@@ -121,7 +123,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     if (!tableWidth) {
       return null;
     }
-    return widthsPx.map(x => Math.floor((x / tableWidth) * 100000) / 1000);
+    return widthsPx.map(x => Math.floor((x / tableWidth) * 100));
   }
 
   ngOnDestroy() {}

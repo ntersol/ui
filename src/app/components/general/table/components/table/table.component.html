@@ -9,6 +9,7 @@
     [rowsPerPageOptions]="rowsPerPageOptions"
     [rows]="paginateRows"
     [autoLayout]="false"
+    [rowTrackBy]="rowTrackBy"
   >
     <!-- Global filter-->
     <ng-template pTemplate="caption" *ngIf="showFilter || headerText">
