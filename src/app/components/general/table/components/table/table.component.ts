@@ -48,6 +48,11 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() compact = false;
 
+  /** Required input for ngPrime expander - expands all rows with the same key */
+  @Input() dataKey?: string | null;
+
+  public shouldShowExpandRow = false;
+
   public columnWidthsPercent: number[] | null = null;
 
   /** Holds custom DOM templates passed from parent */
@@ -74,6 +79,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     if (this.rows) {
       this.rowsSrc = [...this.rows];
     }
+
+    this.updateShouldShowExpandRow();
   }
 
   ngOnChanges(model: SimpleChanges) {
@@ -92,6 +99,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
         this.ref.markForCheck();
       });
     }
+
+    this.updateShouldShowExpandRow();
   }
 
   /**
@@ -124,6 +133,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
       return null;
     }
     return widthsPx.map(x => Math.floor((x / tableWidth) * 100));
+  }
+
+  private updateShouldShowExpandRow() {
+    this.shouldShowExpandRow = !!this.templates['expansion'] && !!this.templates['expansion'].templateExpansion && !!this.dataKey;
   }
 
   ngOnDestroy() {}
