@@ -49,13 +49,11 @@ export const isNonEmptyString = (t?: unknown): t is string => isString(t) && t.l
 /**
  * Marks keys in RS as required
  */
-export type markRequired<T extends Record<any, any>, RS extends keyof T> = Required<Pick<T, RS>> &
-  Pick<T, Exclude<keyof T, RS>>;
+export type markRequired<T extends Record<any, any>, RS extends keyof T> = Required<Pick<T, RS>> & Pick<T, Exclude<keyof T, RS>>;
 
 /**
  * Check if an object has a property
  * @param key
  */
-export const hasField = <T extends Record<any, any>, K extends keyof T>(key: K) => (
-  obj: T,
-): obj is T & markRequired<T, K> => isNotNil(obj) && isNotNil(obj[key]);
+export const hasField = <T extends Record<any, any>, K extends keyof T>(key: K) => (obj: T): obj is T & markRequired<T, K> =>
+  isNotNil(obj) && isNotNil(obj[key]);

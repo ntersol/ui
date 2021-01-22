@@ -10,10 +10,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SlugPipe implements PipeTransform {
   transform(value: any): any {
-    return value && typeof value === 'string' ? String(value)
-      .trim()
-      .toLowerCase()
-      .replace(/ /gi, '-')
-      .replace(/[^A-Z0-9-]/gi, '') : value;
+    return value && typeof value === 'string'
+      ? String(value)
+          .trim()
+          .toLowerCase()
+          .replace(/ /gi, '-')
+          .replace(/[^A-Z0-9-]/gi, '')
+      : value;
   }
 }

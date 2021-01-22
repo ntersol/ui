@@ -70,10 +70,10 @@ export class GridComponent implements OnInit {
       this.domain.users.delete(5).subscribe();
     }, 1000);
 
-      this.domain.users.select$.subscribe(x => console.log(x));
+    this.domain.users.select$.subscribe(x => console.log(x));
   }
 
-  public gridStateChange(gridState: NtsGridState ) {
+  public gridStateChange(gridState: NtsGridState) {
     // console.warn('gridStateChange', JSON.stringify(gridState));
     window.localStorage.setItem('qaGrid', JSON.stringify(gridState));
   }

@@ -1,15 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewEncapsulation,
-  Input,
-  OnChanges,
-  OnDestroy,
-  Output,
-  EventEmitter,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, Input, OnChanges, OnDestroy, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
 import { filter, debounceTime, skip, tap } from 'rxjs/operators';
 import { NtsDocumentEditor } from '../../document-editor';
@@ -141,13 +130,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     // On permission changes
     if (
       this.loaded &&
-      (model.canRotate ||
-        model.canRemove ||
-        model.canSplit ||
-        model.canReorder ||
-        model.canSelect ||
-        model.canViewFull ||
-        model.multipleAction)
+      (model.canRotate || model.canRemove || model.canSplit || model.canReorder || model.canSelect || model.canViewFull || model.multipleAction)
     ) {
       this.initialize();
     }

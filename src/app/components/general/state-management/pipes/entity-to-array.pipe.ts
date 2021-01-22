@@ -10,9 +10,7 @@ import { EntityState } from '@datorama/akita';
 export class EntityToArray implements PipeTransform {
   transform(value: EntityState<any>): any {
     if (value && value.ids && value.entities) {
-      return value.ids.map(id =>
-        value && value.entities ? value.entities[id] : null,
-      );
+      return value.ids.map(id => (value && value.entities ? value.entities[id] : null));
     }
 
     return value;

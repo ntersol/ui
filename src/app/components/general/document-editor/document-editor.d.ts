@@ -18,7 +18,7 @@ export namespace NtsDocumentEditor {
   }
 
   interface Page {
-    [key: string]
+    [key: string];
     /** Source pdf of this page */
     pdfSrcIndex: number;
     /** Original non modified position of this page in the document */

@@ -9,15 +9,10 @@ import { routing } from './routes';
 import { RootComponent } from './root.component';
 import { RouteUiStateService, RouteUiStateStore, RouteUiStateQuery } from './shared/state/ui/route-ui-state.service';
 
-
 @NgModule({
   imports: [CommonModule, SiteModule, routing],
   declarations: [RootComponent],
-  providers: [
-    RouteUiStateService,
-    RouteUiStateStore,
-    RouteUiStateQuery,
-  ],
+  providers: [RouteUiStateService, RouteUiStateStore, RouteUiStateQuery],
   exports: [],
   entryComponents: [],
 })

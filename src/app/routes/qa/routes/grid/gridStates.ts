@@ -127,13 +127,7 @@ export const gridState2 = {
   sorts: [{ colId: 'website', sort: 'asc' }],
   filters: {
     email: {
-      values: [
-        'Karley_Dach@jasper.info',
-        'Chaim_McDermott@dana.io',
-        'Nathan@yesenia.net',
-        'Shanna@melissa.tv',
-        'Sincere@april.biz',
-      ],
+      values: ['Karley_Dach@jasper.info', 'Chaim_McDermott@dana.io', 'Nathan@yesenia.net', 'Shanna@melissa.tv', 'Sincere@april.biz'],
       filterType: 'set',
     },
   },
@@ -199,16 +193,7 @@ export const gridState3 = {
   sorts: [{ colId: 'name', sort: 'asc' }],
   filters: {
     username: {
-      values: [
-        'Antonette',
-        'Bret',
-        'Delphine',
-        'Kamren',
-        'Karianne',
-        'Leopoldo_Corkery',
-        'Maxime_Nienow',
-        'Moriah.Stanton',
-      ],
+      values: ['Antonette', 'Bret', 'Delphine', 'Kamren', 'Karianne', 'Leopoldo_Corkery', 'Maxime_Nienow', 'Moriah.Stanton'],
       filterType: 'set',
     },
   },

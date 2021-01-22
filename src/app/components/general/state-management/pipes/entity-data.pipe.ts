@@ -12,7 +12,7 @@ import { NtsState } from '../state';
 })
 export class EntityData implements PipeTransform {
   /**
-   * 
+   *
    * @param value - Any data type. This pipe will combine data from entity and non entity states supplied
    * @param allowPartial - Allow data through if undefined. If false will only emit data when all supplied data is not undefined
    */

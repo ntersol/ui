@@ -9,7 +9,6 @@ import { NtsCreateEntityStore } from 'src/app/components/general/state-managemen
   providedIn: 'root',
 })
 export class DomainService {
-
   public users = NtsCreateEntityStore(this.http)({ idKey: 'id', apiUrl: '//jsonplaceholder.typicode.com/users' });
 
   // List all store services here

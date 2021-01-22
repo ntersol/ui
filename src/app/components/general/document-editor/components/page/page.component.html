@@ -18,13 +18,7 @@
   >
     <!-- Top page controls-->
     <div class="nts-docs-tn-controls" [ngClass]="{ 'nts-docs-tn-controls-sm': tnSettings?.width < 100 }">
-      <button
-        class="nts-docs-tn-button"
-        pButton
-        icon="fa fa-undo"
-        (click)="rotate(-90)"
-        *ngIf="settings?.canRotate"
-      ></button>
+      <button class="nts-docs-tn-button" pButton icon="fa fa-undo" (click)="rotate(-90)" *ngIf="settings?.canRotate"></button>
       <button
         *ngIf="settings?.canRemove"
         class="nts-docs-tn-button m-auto"
@@ -32,13 +26,7 @@
         [icon]="page?.excluded ? 'fa fa-square-o' : 'fa fa-check-square'"
         (click)="toggleExclusion(!page?.excluded)"
       ></button>
-      <button
-        class="nts-docs-tn-button"
-        pButton
-        icon="fa fa-repeat"
-        (click)="rotate(90)"
-        *ngIf="settings?.canRotate"
-      ></button>
+      <button class="nts-docs-tn-button" pButton icon="fa fa-repeat" (click)="rotate(90)" *ngIf="settings?.canRotate"></button>
     </div>
 
     <!-- Bottom page controls-->
@@ -50,13 +38,7 @@
         [icon]="isSelected ? 'fa fa-remove' : 'fa fa-hand-pointer-o'"
         (click)="toggleSelected()"
       ></button>
-      <button
-        class="nts-docs-tn-button"
-        pButton
-        title="View full size page"
-        [icon]="'fa fa-search'"
-        (click)="setActive(true)"
-      ></button>
+      <button class="nts-docs-tn-button" pButton title="View full size page" [icon]="'fa fa-search'" (click)="setActive(true)"></button>
       <button
         *ngIf="settings?.canReset && page?.pdfSrcIndex !== docIndex"
         class="nts-docs-tn-button"

@@ -19,11 +19,7 @@ import {
   LimitPipe,
 } from './pipes';
 // Directives
-import {
-  FullScreenDirective,
-  FocusDirective,
-  DomObserverDirective,
-} from './directives';
+import { FullScreenDirective, FocusDirective, DomObserverDirective } from './directives';
 
 // Pipes + Directives
 export const APP_PIPES_DIRECTIVES = [

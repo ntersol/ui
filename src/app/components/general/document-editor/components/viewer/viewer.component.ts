@@ -1,14 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  ViewChild,
-  ElementRef,
-  OnChanges,
-  SimpleChanges,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ViewChild, ElementRef, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
 import { NtsDocumentEditor } from '../../document-editor';
 import { pdfjsDist } from '../../shared/models/pdf';

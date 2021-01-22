@@ -17,7 +17,6 @@ type DashType =
 
 export module CanvasJS {
   export interface Chart {
-
     /**
      * The current options of the chart.
      */

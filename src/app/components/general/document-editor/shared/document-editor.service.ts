@@ -152,11 +152,7 @@ export class DocumentEditorService {
    */
   public pageStateChange(pageIndex: number, stateNew: Partial<NtsDocumentEditor.Page>) {
     const documentsModel = [...this._documentsModel];
-    documentsModel[this._state.docActive].pages[pageIndex] = Object.assign(
-      {},
-      documentsModel[this._state.docActive].pages[pageIndex],
-      stateNew,
-    );
+    documentsModel[this._state.docActive].pages[pageIndex] = Object.assign({}, documentsModel[this._state.docActive].pages[pageIndex], stateNew);
     this._documentsModel = documentsModel;
     this.documentsModel$.next(this._documentsModel);
   }
@@ -214,9 +210,7 @@ export class DocumentEditorService {
     documentsModel[srcDoc] = { ...documentsModel[srcDoc], pages: pagesDestination };
 
     // Add the page back to it's original document, resort to ensure its in the correct position
-    const pagesSource = [...documentsModel[page.pdfSrcIndex].pages, page].sort(
-      (a, b) => b.pageSrcIndex - a.pageSrcIndex,
-    );
+    const pagesSource = [...documentsModel[page.pdfSrcIndex].pages, page].sort((a, b) => b.pageSrcIndex - a.pageSrcIndex);
     documentsModel[page.pdfSrcIndex] = { ...documentsModel[page.pdfSrcIndex], pages: pagesSource };
     // Update doc model
     this._documentsModel = documentsModel;
@@ -272,11 +266,7 @@ export class DocumentEditorService {
 
     // Get an array of pages that were selected
     const pagesSelected = documentsModel
-      .map((doc, j) =>
-        doc.pages.filter((_page, i) =>
-          this._state.selection[j] && this._state.selection[j].includes(i) ? true : false,
-        ),
-      )
+      .map((doc, j) => doc.pages.filter((_page, i) => (this._state.selection[j] && this._state.selection[j].includes(i) ? true : false)))
       .reduce((a, b) => [...a, ...b]);
 
     // The current list of pages with all selected pages removed

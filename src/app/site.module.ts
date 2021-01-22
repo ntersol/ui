@@ -20,12 +20,7 @@ import { NtsStateManagementModule } from './components/general';
     NtsStateManagementModule,
   ],
   declarations: [],
-  exports: [
-    VendorModule,
-    SharedModule,
-    ComponentsModule,
-    NtsStateManagementModule,
-  ],
+  exports: [VendorModule, SharedModule, ComponentsModule, NtsStateManagementModule],
 })
 export class SiteModule {
   static forRoot(): ModuleWithProviders<SiteModule> {

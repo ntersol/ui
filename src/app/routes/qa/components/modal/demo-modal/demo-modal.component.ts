@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DialogService} from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-demo-modal',
@@ -7,9 +7,7 @@ import {DialogService} from 'primeng/dynamicdialog';
   styleUrls: ['./demo-modal.component.css'],
 })
 export class DemoModalComponent implements OnInit {
-  constructor(
-    public dialogService: DialogService
-  ) {}
+  constructor(public dialogService: DialogService) {}
 
   ngOnInit() {
     console.log(this.dialogService); // Modal controls

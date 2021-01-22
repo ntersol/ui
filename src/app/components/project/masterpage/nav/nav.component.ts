@@ -1,12 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import {
-  filter,
-  debounceTime,
-  map,
-  startWith,
-  distinctUntilChanged,
-} from 'rxjs/operators';
+import { filter, debounceTime, map, startWith, distinctUntilChanged } from 'rxjs/operators';
 import { SettingsService } from '$settings';
 
 import { MenuItem } from 'primeng/api';
@@ -77,16 +71,9 @@ export class NavComponent {
     distinctUntilChanged(), // Only update on changes
   );
 
-  constructor(
-    private auth: AuthService,
-    private settings: SettingsService,
-    private ui: UiStateService,
-    private router: Router,
-  ) {
+  constructor(private auth: AuthService, private settings: SettingsService, private ui: UiStateService, private router: Router) {
     // On route change, if mobile nav is open close it
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => (this.sidebarVisible = false));
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => (this.sidebarVisible = false));
   }
 
   /**

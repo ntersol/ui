@@ -1,10 +1,4 @@
-<app-viewer-toolbar
-  [pageActive]="pageActive"
-  [viewerOptions]="viewerOptions"
-  [document]="document"
-  [rotation]="rotation"
->
-</app-viewer-toolbar>
+<app-viewer-toolbar [pageActive]="pageActive" [viewerOptions]="viewerOptions" [document]="document" [rotation]="rotation"> </app-viewer-toolbar>
 <div class="d-flex">
   <div class="tn-viewer mr-3" #scrollbar>
     <p-card *ngIf="document?.pages">
@@ -23,12 +17,6 @@
     </p-card>
   </div>
   <div class="viewer-container flex-grow-1">
-    <app-viewer
-      [pdfSrcs]="pdfSrcs"
-      [pageActive]="pageActive"
-      [viewerOptions]="viewerOptions"
-      [document]="document"
-      [rotation]="rotation"
-    ></app-viewer>
+    <app-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [viewerOptions]="viewerOptions" [document]="document" [rotation]="rotation"></app-viewer>
   </div>
 </div>

@@ -6,11 +6,7 @@ import { NtsTree } from '../tree';
  * @param defaults
  * @param depth
  */
-export const setNodeDefaults = (
-  nodes: NtsTree.TreeNode[],
-  defaults: Partial<NtsTree.TreeNode>[],
-  depth = 0,
-): NtsTree.TreeNode[] => {
+export const setNodeDefaults = (nodes: NtsTree.TreeNode[], defaults: Partial<NtsTree.TreeNode>[], depth = 0): NtsTree.TreeNode[] => {
   return nodes.map(node => {
     const nodeNew = Object.assign({}, defaults[depth], node);
     if (nodeNew.children) {

@@ -45,7 +45,7 @@ export namespace NtsState {
       patch?: ApiUrl;
       delete?: ApiUrl;
     };
-    /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests. 
+    /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests.
      * If true the url to the web api must added manually via a callback function or observable */
     disableAppendId?: {
       put?: true;

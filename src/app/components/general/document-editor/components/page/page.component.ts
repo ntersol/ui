@@ -1,15 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  ElementRef,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
 import { NtsDocumentEditor } from '../../document-editor';
 
@@ -216,11 +205,7 @@ export class PageComponent implements OnInit, OnChanges {
    * @param side
    */
   private canReorder(side: 'left' | 'right'): boolean {
-    if (
-      this.page === null &&
-      this.docsSvc.dragIndex.pageSrc &&
-      this.docsSvc.dragIndex.pageSrc.pdfSrcIndex === this.docIndex
-    ) {
+    if (this.page === null && this.docsSvc.dragIndex.pageSrc && this.docsSvc.dragIndex.pageSrc.pdfSrcIndex === this.docIndex) {
       return true;
     }
 
@@ -232,12 +217,8 @@ export class PageComponent implements OnInit, OnChanges {
       // If candropAny is set, only allow documents from the same pdf to be reordered and dropped
       (!this.canDropFromAny && this.docsSvc.dragIndex.pdfIndex !== this.page.pdfSrcIndex) ||
       (this.pageIndex === this.docsSvc.dragIndex.pageIndex && this.docIndex === this.docsSvc.dragIndex.pdfIndex) ||
-      (this.pageIndex + 1 === this.docsSvc.dragIndex.pageIndex &&
-        this.docIndex === this.docsSvc.dragIndex.pdfIndex &&
-        side === 'right') ||
-      (this.pageIndex - 1 === this.docsSvc.dragIndex.pageIndex &&
-        this.docIndex === this.docsSvc.dragIndex.pdfIndex &&
-        side === 'left')
+      (this.pageIndex + 1 === this.docsSvc.dragIndex.pageIndex && this.docIndex === this.docsSvc.dragIndex.pdfIndex && side === 'right') ||
+      (this.pageIndex - 1 === this.docsSvc.dragIndex.pageIndex && this.docIndex === this.docsSvc.dragIndex.pdfIndex && side === 'left')
     ) {
       return false;
     }

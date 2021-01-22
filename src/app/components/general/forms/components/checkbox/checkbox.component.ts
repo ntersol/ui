@@ -1,17 +1,9 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 @Component({
   selector: 'nts-checkbox',
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NtsCheckboxComponent implements OnInit, OnChanges {
   @Input() control?: boolean;
@@ -20,10 +12,9 @@ export class NtsCheckboxComponent implements OnInit, OnChanges {
   @Output() propSelected = new EventEmitter<any>();
   public value: any;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnChanges() {
     // Load default value if one is found in the form control
@@ -32,12 +23,11 @@ export class NtsCheckboxComponent implements OnInit, OnChanges {
     }
   }
 
-    /**
+  /**
    * When a user checks a value from the checkbox
    * @param event
    */
   public onSelect(event: boolean) {
     this.propSelected.emit(event);
   }
-
 }

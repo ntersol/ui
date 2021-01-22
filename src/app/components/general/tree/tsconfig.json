@@ -1,27 +1,26 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-      "allowUnreachableCode": false,
-      "allowUnusedLabels": false,
-      "declaration": false,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "lib": ["es2017", "dom"],
-      "moduleResolution": "node",
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "skipLibCheck": true,
-      "sourceMap": true,
-      "strict": true,
-      "strictNullChecks": true,
-      "noImplicitAny": true,
-      "target": "es5",
-      "module": "esnext",
-      "typeRoots": ["node_modules/@types"]
-    },
-    "angularCompilerOptions": {
-      "fullTemplateTypeCheck": true,
-      "preserveWhitespaces": false
-    },
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2017", "dom"],
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "target": "es5",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "preserveWhitespaces": false
   }
-  
+}

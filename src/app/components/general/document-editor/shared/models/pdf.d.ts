@@ -1,9 +1,7 @@
-
 /**
  * @module pdfjs-dist
  */
 export module pdfjsDist {
-
   export interface GlobalWorkerOptions {
     workerPort: null | string;
     workerSrc: null | string;
@@ -35,16 +33,7 @@ export module pdfjsDist {
   /**
    * @typedef {Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Uint8ClampedArray | Float32Array | Float64Array} TypedArray //
    */
-  type TypedArray =
-    | Int8Array
-    | Uint8Array
-    | Int16Array
-    | Uint16Array
-    | Int32Array
-    | Uint32Array
-    | Uint8ClampedArray
-    | Float32Array
-    | Float64Array;
+  type TypedArray = Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Uint8ClampedArray | Float32Array | Float64Array;
   /**
    * Document initialization / loading parameters object.
    *
@@ -177,9 +166,7 @@ export module pdfjsDist {
    * already populated with data or parameter object.
    * @returns {PDFDocumentLoadingTask}
    */
-  function getDocument(
-    src: string | TypedArray | DocumentInitParameters | PDFDataRangeTransport,
-  ): PDFDocumentLoadingTask;
+  function getDocument(src: string | TypedArray | DocumentInitParameters | PDFDataRangeTransport): PDFDocumentLoadingTask;
   /**
    * The loading task controls the operations required to load a PDF document
    * (such as network requests) and provides a way to listen for completion,

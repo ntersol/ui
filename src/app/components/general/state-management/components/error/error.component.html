@@ -1,16 +1,5 @@
-
-<div
-  class="ui-message ui-message-error ui-corner-all w-100 mb-3"
-  *ngIf="error"
-  id="nts-error"
->
-  <button
-    type="button"
-    class="close float-right"
-    aria-label="Close"
-    *ngIf="canClose"
-    (click)="error = null"
-  >
+<div class="ui-message ui-message-error ui-corner-all w-100 mb-3" *ngIf="error" id="nts-error">
+  <button type="button" class="close float-right" aria-label="Close" *ngIf="canClose" (click)="error = null">
     <span aria-hidden="true">&times;</span>
   </button>
 

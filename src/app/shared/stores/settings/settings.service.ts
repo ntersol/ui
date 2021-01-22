@@ -55,11 +55,7 @@ export class SettingsService {
   /** Holds the current synchronous value of the store. The getters retrieve data from this object */
   private settings = createInitialState();
 
-  constructor(
-    private store: SettingsStore,
-    private query: SettingsQuery,
-    @Inject(PLATFORM_ID) private platformId: Object,
-  ) {
+  constructor(private store: SettingsStore, private query: SettingsQuery, @Inject(PLATFORM_ID) private platformId: Object) {
     // On settings changes, update synchronous properties
     this.query.select().subscribe(state => (this.settings = { ...state }));
   }

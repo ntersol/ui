@@ -21,8 +21,8 @@ export class NtsDomainStateComponent implements OnInit, OnChanges {
   @Input() showModifying = true;
   /** Should this component show loading error */
   @Input() showErrorLoading = true;
-   /** Should this component show modifying error? */
-   @Input() showErrorModifying = true;
+  /** Should this component show modifying error? */
+  @Input() showErrorModifying = true;
 
   /** Holds combined state of any number entity state objects */
   public stateSrc: NtsState.ApiState | undefined;

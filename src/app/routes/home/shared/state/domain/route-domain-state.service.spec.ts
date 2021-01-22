@@ -6,9 +6,7 @@ describe('RouteDomainStateService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: RouteDomainStateService = TestBed.get(
-      RouteDomainStateService,
-    );
+    const service: RouteDomainStateService = TestBed.get(RouteDomainStateService);
     expect(service).toBeTruthy();
   });
 });

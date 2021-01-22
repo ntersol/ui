@@ -15,19 +15,13 @@ interface StaticState {
 export class StaticService {
   public todos$ = this.query.select(state => state.todos);
 
-  constructor(
-    private simpleStore: StaticStore,
-    private http: HttpClient,
-    private query: StaticQuery,
-  ) {}
+  constructor(private simpleStore: StaticStore, private http: HttpClient, private query: StaticQuery) {}
 
   /**
    * Load todos into the store
    */
   public todos() {
-    this.http
-      .get<any[]>('//jsonplaceholder.typicode.com/todos')
-      .subscribe(todos => this.simpleStore.update({ todos: todos }));
+    this.http.get<any[]>('//jsonplaceholder.typicode.com/todos').subscribe(todos => this.simpleStore.update({ todos: todos }));
   }
 }
 
@@ -49,5 +43,3 @@ export class StaticQuery extends Query<StaticState> {
     super(store);
   }
 }
-
-

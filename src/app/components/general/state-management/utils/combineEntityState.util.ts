@@ -8,15 +8,13 @@ import { NtsState } from '../state';
  * @param states
  * @param data
  */
-export const NtsCombineEntityState = (
-  states: NtsState.EntityState | (NtsState.EntityState | unknown)[] | null | undefined,
-): NtsState.ApiState => {
+export const NtsCombineEntityState = (states: NtsState.EntityState | (NtsState.EntityState | unknown)[] | null | undefined): NtsState.ApiState => {
   const state: NtsState.ApiState = {
     loading: false,
     modifying: false,
     error: null,
     errorModify: null,
-    data: null
+    data: null,
   };
 
   // If state is nil
@@ -34,7 +32,7 @@ export const NtsCombineEntityState = (
     state.modifying = statesEntity.reduce((a, b) => a || b.modifying, <boolean>false);
     state.error = statesEntity.reduce((a, b) => a || b.error, <any>null);
     state.errorModify = statesEntity.reduce((a, b) => a || b.errorModify, <any>null);
-    state.data = statesEntity.reduce((a, b) => b.data === undefined || b.data === null || a === false ? false : a, <boolean>true);
+    state.data = statesEntity.reduce((a, b) => (b.data === undefined || b.data === null || a === false ? false : a), <boolean>true);
   }
   return state;
 };

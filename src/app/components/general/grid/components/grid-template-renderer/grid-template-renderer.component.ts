@@ -4,9 +4,7 @@ import { ICellRendererParams } from 'ag-grid-community';
 // https://blog.angularindepth.com/easier-embedding-of-angular-ui-in-ag-grid-52db93b73884
 @Component({
   selector: 'app-template-renderer',
-  template: `
-    <ng-container *ngTemplateOutlet="template; context: templateContext"></ng-container>
-  `,
+  template: ` <ng-container *ngTemplateOutlet="template; context: templateContext"></ng-container> `,
 })
 export class GridTemplateRendererComponent implements ICellRendererAngularComp {
   template!: TemplateRef<any>;

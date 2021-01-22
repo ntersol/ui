@@ -9,15 +9,7 @@ export namespace NtsCalendar {
     center: string;
     right: string;
   }
-  export type DefaultView =
-    | 'dayGridMonth'
-    | 'dayGridWeek'
-    | 'timeGridWeek'
-    | 'listWeek'
-    | 'listDay'
-    | 'listWeek'
-    | 'listMonth'
-    | 'listYear';
+  export type DefaultView = 'dayGridMonth' | 'dayGridWeek' | 'timeGridWeek' | 'listWeek' | 'listDay' | 'listWeek' | 'listMonth' | 'listYear';
   /** https://fullcalendar.io/docs/event-object */
   export interface Event {
     title: string;

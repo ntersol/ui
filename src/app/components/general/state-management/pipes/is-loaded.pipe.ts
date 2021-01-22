@@ -27,8 +27,6 @@ export class EntityIsLoaded implements PipeTransform {
       return isApiState(value) && value.data ? true : false;
     }
 
-    return value
-      .filter(d => isApiState(d))
-      .reduce((a, b) => (b.data === undefined || a === false ? false : a), <boolean>true);
+    return value.filter(d => isApiState(d)).reduce((a, b) => (b.data === undefined || a === false ? false : a), <boolean>true);
   }
 }

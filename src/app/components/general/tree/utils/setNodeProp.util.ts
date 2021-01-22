@@ -8,13 +8,7 @@ import { NtsTree } from '../tree';
  * @param depth
  * @param depthCurrent
  */
-export const setNodeProp = (
-  nodes: NtsTree.TreeNode[],
-  prop: string,
-  value: any,
-  depth: number[] = [],
-  depthCurrent = 0,
-): NtsTree.TreeNode[] => {
+export const setNodeProp = (nodes: NtsTree.TreeNode[], prop: string, value: any, depth: number[] = [], depthCurrent = 0): NtsTree.TreeNode[] => {
   return nodes.map(nodeSrc => {
     // Create new reference
     const node: NtsTree.TreeNode = Object.assign({}, nodeSrc);

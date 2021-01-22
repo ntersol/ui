@@ -1,16 +1,10 @@
 <div class="tag-add">
-  <a class="float-right small" *ngIf="tagActive" (click)="tagActive = null">
-    <i class="fa fa-remove"></i> Cancel
-  </a>
+  <a class="float-right small" *ngIf="tagActive" (click)="tagActive = null"> <i class="fa fa-remove"></i> Cancel </a>
   <h3>
     <ng-container *ngIf="tagActive"> <i class="fa fa-gear"></i> Update Existing Tag </ng-container>
     <ng-container *ngIf="!tagActive"> <i class="fa fa-plus"></i> Add New Tag </ng-container>
   </h3>
-  <nts-tags-quick
-    [tag]="tagActive"
-    (tagCreated)="tagCreated.emit($event)"
-    (tagUpdated)="tagUpdated.emit($event)"
-  ></nts-tags-quick>
+  <nts-tags-quick [tag]="tagActive" (tagCreated)="tagCreated.emit($event)" (tagUpdated)="tagUpdated.emit($event)"></nts-tags-quick>
 </div>
 
 <div class="nts-tags">
@@ -54,8 +48,6 @@
   </table>
 
   <ng-template #notags>
-    <div class="alert alert-info">
-      <i class="fa fa-info-circle" aria-hidden="true"></i> No tags created, please create one below
-    </div>
+    <div class="alert alert-info"><i class="fa fa-info-circle" aria-hidden="true"></i> No tags created, please create one below</div>
   </ng-template>
 </div>

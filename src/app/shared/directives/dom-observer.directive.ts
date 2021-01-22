@@ -1,12 +1,4 @@
-import {
-  Directive,
-  Input,
-  OnInit,
-  OnDestroy,
-  ElementRef,
-  HostListener,
-  AfterViewInit,
-} from '@angular/core';
+import { Directive, Input, OnInit, OnDestroy, ElementRef, HostListener, AfterViewInit } from '@angular/core';
 import { debounce } from 'helpful-decorators';
 
 interface DomOptions {
@@ -84,10 +76,7 @@ export class DomObserverDirective implements OnInit, OnDestroy, AfterViewInit {
    * Check for changes to this elements dimensions
    */
   public startPollingDimensions() {
-    const result = this.dimensionsCheck(
-      this.dimensionsLast,
-      this.dimensionsGetNew(),
-    );
+    const result = this.dimensionsCheck(this.dimensionsLast, this.dimensionsGetNew());
     if (result) {
       this.dimensionsLast = result;
       this.executeCallback();

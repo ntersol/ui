@@ -27,7 +27,7 @@
       </div>
     </ng-template>
   </div>
-  <div class="ui-g-12 ui-lg-6 multi-doc" style="overflow:auto;">
+  <div class="ui-g-12 ui-lg-6 multi-doc" style="overflow: auto;">
     <p-tabView [activeIndex]="activeIndexDest" (onChange)="indexChangeDest($event)">
       <p-tabPanel [header]="pdfInfo && pdfInfo[0]?.label ? pdfInfo[0].label : 'Source Document'">
         <ng-template pTemplate="content">

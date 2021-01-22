@@ -1,7 +1,6 @@
 import { StoreConfig, Store, Query } from '@datorama/akita';
 import { Injectable } from '@angular/core';
 
-
 const storeName = 'route-UIState'; // Change this property to be unique & route specific, IE 'route-UIState' => 'dashboard-UIState'
 
 interface RouteUIState {

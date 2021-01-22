@@ -1,11 +1,5 @@
-<div
-  class="nts-document-editor"
-  *ngIf="{ documentsModel: documentsModel$ | async, viewModels: viewModels$ | async, state: state$ | async } as editor"
->
-  <div
-    class="nts-document-loading p-3"
-    *ngIf="!editor?.state?.pdfs && (editor?.state?.loadingScript || editor?.state?.loadingPdf)"
-  >
+<div class="nts-document-editor" *ngIf="{ documentsModel: documentsModel$ | async, viewModels: viewModels$ | async, state: state$ | async } as editor">
+  <div class="nts-document-loading p-3" *ngIf="!editor?.state?.pdfs && (editor?.state?.loadingScript || editor?.state?.loadingPdf)">
     <p>
       <p-progressBar mode="indeterminate" class="mb-3"></p-progressBar>
     </p>
@@ -21,10 +15,7 @@
     {{ editor?.state?.error }}
   </div>
 
-  <div
-    class="alert alert-info p-3 m-3"
-    *ngIf="!editor?.state?.pdfs && !editor?.state?.loadingScript && !editor?.state?.loadingPdf && !editor?.state?.error"
-  >
+  <div class="alert alert-info p-3 m-3" *ngIf="!editor?.state?.pdfs && !editor?.state?.loadingScript && !editor?.state?.loadingPdf && !editor?.state?.error">
     No documents available
   </div>
 
@@ -45,17 +36,14 @@
           [pageActive]="editor.state?.pageActive"
           [pdfSrcs]="editor.state?.pdfs"
           [pdfInfo]="editor.state?.pdfInfo"
-          [rotation]="
-            ((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]
-              ?.rotation
-          "
+          [rotation]="((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]?.rotation"
         ></app-multi-doc>
       </ng-container>
 
       <!-- Viewer Only -->
       <ng-container *ngSwitchCase="'display'">
         <app-display
-          [document]="editor?.documentsModel[editor.state.docActive]"
+          [document]="(editor?.documentsModel)[editor.state.docActive]"
           [viewerOptions]="viewerOptions"
           [viewModels]="editor?.viewModels"
           [settings]="editor.state?.settings"
@@ -64,10 +52,7 @@
           [pageActive]="editor.state?.pageActive"
           [pdfSrcs]="editor.state?.pdfs"
           [pdfInfo]="editor.state?.pdfInfo"
-          [rotation]="
-            ((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]
-              ?.rotation
-          "
+          [rotation]="((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]?.rotation"
         ></app-display>
         <!--
         <app-viewer
@@ -94,10 +79,7 @@
           [pageActive]="editor.state?.pageActive"
           [pdfSrcs]="editor.state?.pdfs"
           [pdfInfo]="editor.state?.pdfInfo"
-          [rotation]="
-            ((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]
-              ?.rotation
-          "
+          [rotation]="((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]?.rotation"
         ></app-default>
       </ng-container>
     </ng-container>

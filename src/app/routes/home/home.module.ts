@@ -9,22 +9,13 @@ import { routing } from './home.routes';
 import { HomeComponent } from './home.component';
 
 // Route State Management
-import {
-  RouteUiStateQuery,
-  RouteUiStateService,
-  RouteUiStateStore,
-} from './shared/state/ui';
+import { RouteUiStateQuery, RouteUiStateService, RouteUiStateStore } from './shared/state/ui';
 import { RouteDomainStateService } from './shared/state/domain';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing],
   declarations: [HomeComponent],
-  providers: [
-    RouteUiStateService,
-    RouteUiStateStore,
-    RouteUiStateQuery,
-    RouteDomainStateService,
-  ],
+  providers: [RouteUiStateService, RouteUiStateStore, RouteUiStateQuery, RouteDomainStateService],
   exports: [],
   entryComponents: [],
 })

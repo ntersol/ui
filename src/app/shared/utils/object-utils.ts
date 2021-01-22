@@ -20,14 +20,8 @@ export class ObjectUtils {
    */
   static cleanup(obj: any) {
     return (function prune(current) {
-      forOwn(current, function(value: any, key: any) {
-        if (
-          isUndefined(value) ||
-          isNull(value) ||
-          isNaN(value) ||
-          (isString(value) && isEmpty(value)) ||
-          (isObject(value) && isEmpty(prune(value)))
-        ) {
+      forOwn(current, function (value: any, key: any) {
+        if (isUndefined(value) || isNull(value) || isNaN(value) || (isString(value) && isEmpty(value)) || (isObject(value) && isEmpty(prune(value)))) {
           delete current[key];
         }
       });

@@ -59,31 +59,27 @@ export class NtsSignalRService {
     }
 
     // If connection already exists, return that. No need to reinitialize
-      if (this.hubConnection && !isReconnecting) {
-        return this.hubConnection;
-      }
+    if (this.hubConnection && !isReconnecting) {
+      return this.hubConnection;
+    }
 
-      if(!this.hubConnection) {
-        this.hubConnection = new signalR.HubConnectionBuilder()
-          .withUrl(signalRUrl, <signalR.IHttpConnectionOptions>{ accessTokenFactory: () => this.token })
-          .build();
+    if (!this.hubConnection) {
+      this.hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl(signalRUrl, <signalR.IHttpConnectionOptions>{ accessTokenFactory: () => this.token })
+        .build();
 
-        // increase default timeout from 30s
-        this.hubConnection.serverTimeoutInMilliseconds = 60000;
+      // increase default timeout from 30s
+      this.hubConnection.serverTimeoutInMilliseconds = 60000;
 
-        // restart connection if timeout
-        this.hubConnection.onclose(err => {
-          if (
-            String(err)
-              .toLowerCase()
-              .includes('timeout')
-          ) {
-            console.error("SignalR Connection Timeout:", err);
-            console.log('Restarting SignalR Connection');
-            setTimeout(() => this.connectionStart(signalRUrl, <string | tokenFn>this.token, 5000, true), 5000);
-          }
-        });
-      }
+      // restart connection if timeout
+      this.hubConnection.onclose(err => {
+        if (String(err).toLowerCase().includes('timeout')) {
+          console.error('SignalR Connection Timeout:', err);
+          console.log('Restarting SignalR Connection');
+          setTimeout(() => this.connectionStart(signalRUrl, <string | tokenFn>this.token, 5000, true), 5000);
+        }
+      });
+    }
 
     // Start signalR
     const hubConnection = this.hubConnection.start();
@@ -103,11 +99,7 @@ export class NtsSignalRService {
       // If error on start, retry
       .catch(err => {
         // If error is "unauthorized", end connection and do not retry. Otherwise keep trying
-        if (
-          String(err)
-            .toLowerCase()
-            .includes('unauthorized')
-        ) {
+        if (String(err).toLowerCase().includes('unauthorized')) {
           this.connectionEnd();
         } else {
           setTimeout(() => this.connectionStart(signalRUrl, <string | tokenFn>this.token, retryTime), retryTime);
