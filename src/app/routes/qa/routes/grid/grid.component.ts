@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { cars } from '../tables/cars';
-import { ColDef, GridOptions } from 'ag-grid-community';
+import { ColDef, GridOptions } from '@ag-grid-community/core';
 import { DomainService } from '$domain';
 import { gridState1, gridState2, gridState3 } from './gridStates';
 import { environment } from '$env';

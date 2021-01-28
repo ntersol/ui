@@ -15,9 +15,10 @@ import {
   HostListener,
   SimpleChanges,
 } from '@angular/core';
-import { AgGridAngular } from 'ag-grid-angular';
-import { GridOptions, ColumnApi, ColDef, GridApi, RowNode } from 'ag-grid-community';
-import { LicenseManager } from 'ag-grid-enterprise';
+
+import { AgGridAngular } from '@ag-grid-community/angular';
+import { GridOptions, ColumnApi, ColDef, GridApi, RowNode } from '@ag-grid-community/core';
+import { LicenseManager } from '@ag-grid-enterprise/core';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -28,18 +29,20 @@ import { GridColumnDirective } from '../../directives/column.directive';
 import { columnsTemplateAttach } from '../../utils/attachColumnTemplates.util';
 import { rowsReselect } from '../../utils/reselectRows.util';
 import { NtsGridState } from '../../grid';
-const defaultsDeep = require('lodash/defaultsDeep');
-const cloneDeep = require('lodash/cloneDeep');
+import { defaultsDeep } from 'lodash-es';
+import { cloneDeep } from 'lodash-es';
+
 /**
  * A powerful data grid for visualizing and managing complex information
  */
+// import { RowNode } from '@ag-grid-community/core/dist/styles/ag-theme-balham.css';
 @Component({
   selector: 'nts-grid',
   templateUrl: './grid.component.html',
   styleUrls: [
     // After moving starter OUT of monorepo, update path to node_modules
-    '../../../../../../../node_modules/ag-grid-community/dist/styles/ag-grid.css',
-    '../../../../../../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css',
+    '../../../../../../../node_modules/@ag-grid-community/core/dist/styles/ag-grid.css',
+    '../../../../../../../node_modules/@ag-grid-community/core/dist/styles/ag-theme-balham.css',
     './grid.component.scss',
   ],
   // tslint:disable-next-line:use-component-view-encapsulation

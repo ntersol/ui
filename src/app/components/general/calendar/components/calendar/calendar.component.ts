@@ -6,7 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import listPlugin from '@fullcalendar/list';
 import { BehaviorSubject } from 'rxjs';
-import { NtsCalendar } from '../..';
+import { NtsCalendar } from '../../calendar';
 
 // const ics = require('../../utils/ics.util.js');
 /**

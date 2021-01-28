@@ -28,8 +28,8 @@
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
-    "target": "es5",
-    "module": "esnext",
+    "target": "es2018",
+    "module": "es2020",
     "typeRoots": ["node_modules/@types"]
   },
   "angularCompilerOptions": {

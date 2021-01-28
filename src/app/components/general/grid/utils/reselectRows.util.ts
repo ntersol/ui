@@ -1,4 +1,4 @@
-import { GridApi } from 'ag-grid-community';
+import { GridApi } from '@ag-grid-community/core';
 /**
  * Reselect rows. Row selection is cleared after new data is passed in and this method will keep them selected
  * @param rowsToSelect

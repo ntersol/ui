@@ -1,8 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { ColumnApi } from 'ag-grid-community';
-import { AgGridAngular } from 'ag-grid-angular';
+import { ColumnApi } from '@ag-grid-community/core';
+import { AgGridAngular } from '@ag-grid-community/angular';
 import { NtsGridState } from '../../grid';
-const cloneDeep = require('lodash/cloneDeep');
+// const cloneDeep = require('lodash/cloneDeep');
+// import * as cloneDeep from 'lodash-es/cloneDeep';
+import { cloneDeep } from 'lodash-es';
 @Component({
   selector: 'app-grid-status-bar',
   templateUrl: './grid-status-bar.component.html',

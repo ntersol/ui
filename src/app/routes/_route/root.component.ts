@@ -10,9 +10,7 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RootComponent implements OnInit, OnDestroy {
-  constructor() // private domainState: DomainService, // Global domain state
-  // public uiState: UiStateService, // Global UI state
-  {}
+  constructor() {} // public uiState: UiStateService, // Global UI state // private domainState: DomainService, // Global domain state
 
   ngOnInit() {}
 

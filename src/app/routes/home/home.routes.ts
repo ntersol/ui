@@ -10,4 +10,4 @@ const routes: Routes = [
   },
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forChild(routes);
+export const routing: ModuleWithProviders<any> = RouterModule.forChild(routes);

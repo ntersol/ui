@@ -1,4 +1,4 @@
-import { ColDef } from 'ag-grid-community';
+import { ColDef } from '@ag-grid-community/core';
 import { QueryList } from '@angular/core';
 import { GridColumnDirective } from '../directives/column.directive';
 import { GridTemplateRendererComponent } from '../components/grid-template-renderer/grid-template-renderer.component';
