@@ -62,7 +62,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   /** Hold and set default options for grid*/
   private _gridOptions: GridOptions = {
     context: {
-      this: this.parentRef,
+      // this: this.parentRef,
     },
     // A default column definition with properties that get applied to every column
     defaultColDef: {

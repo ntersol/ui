@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgGridModule } from '@ag-grid-community/angular';
- 
+
 import '@ag-grid-enterprise/core';
 import { GridColumnDirective } from './directives/column.directive';
 import { GridColumnHeaderDirective } from './directives/cell-header.directive';

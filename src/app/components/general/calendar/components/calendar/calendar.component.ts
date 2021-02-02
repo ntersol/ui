@@ -2,6 +2,8 @@ import { Component, OnInit, Input, ViewChild, ViewEncapsulation, ChangeDetection
 import { FullCalendar } from 'primeng/fullcalendar';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { CalendarOptions } from '@fullcalendar/core';
+// import { CalendarOptions, Calendar } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import listPlugin from '@fullcalendar/list';
@@ -16,7 +18,7 @@ import { NtsCalendar } from '../../calendar';
   selector: 'nts-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: [
-    '../../../../../../../node_modules/@fullcalendar/core/main.css',
+    // '../../../../../../../node_modules/@fullcalendar/core/main.css',
     '../../../../../../../node_modules/@fullcalendar/daygrid/main.css',
     '../../../../../../../node_modules/@fullcalendar/timegrid/main.css',
     '../../../../../../../node_modules/@fullcalendar/list/main.css',
@@ -78,4 +80,9 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
     this.fc.calendar.changeView(defaultView);
   }
+
+  /**New added in @Fullcalendar@5  */
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+  };
 }

@@ -3,6 +3,7 @@
     #tt
     [value]="rows"
     [columns]="columns"
+    styleClass="p-datatable-striped"
     sortMode="single"
     (onSort)="onSort($event)"
     [paginator]="rows?.length && paginateRows && rows?.length > paginateRows ? !!paginateRows : false"

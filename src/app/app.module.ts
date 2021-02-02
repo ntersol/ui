@@ -18,6 +18,7 @@ import { AppComponent } from './app.component';
 import { ROUTES } from './app.routes';
 import { environment } from '$env';
 import { StringUtils } from '$utils';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 // Set Akita to work in prod mode in prod
 if (environment.production) {
@@ -78,10 +79,12 @@ export let InjectorInstance: Injector;
     BrowserModule.withServerTransition({ appId: 'angular-starter' }),
     HttpClientModule,
     BrowserAnimationsModule,
+    FullCalendarModule,
     RouterModule.forRoot(ROUTES, {
       useHash: !environment.production,
       preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,
       scrollPositionRestoration: 'enabled',
+      relativeLinkResolution: 'legacy',
     }),
 
     ServiceWorkerModule.register('ngsw-worker.js', {
