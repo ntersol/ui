@@ -6,7 +6,7 @@
           <button
             class="nts-docs-tn-button mr-2"
             pButton
-            icon="fa fa-arrow-left"
+            icon="fas fa-arrow-left"
             title="Previous Page"
             [disabled]="pageActive?.pageIndex === 0"
             (click)="docSvc.pageActivePrevious()"
@@ -14,7 +14,7 @@
           <button
             class="nts-docs-tn-button mr-2"
             pButton
-            icon="fa fa-arrow-right"
+            icon="fas fa-arrow-right"
             title="Next Page"
             [disabled]="pageActive?.pageIndex + 1 >= document?.pages?.length"
             (click)="docSvc.pageActiveNext()"

@@ -21,7 +21,7 @@
       <button
         class="nts-docs-tn-button"
         pButton
-        icon="fa fa-undo"
+        icon="fas fa-undo"
         (click)="rotate(-90)"
         *ngIf="settings?.canRotate"
       ></button>
@@ -29,13 +29,13 @@
         *ngIf="settings?.canRemove"
         class="nts-docs-tn-button m-auto"
         pButton
-        [icon]="page?.excluded ? 'fa fa-square-o' : 'fa fa-check-square'"
+        [icon]="page?.excluded ? 'far fa-square' : 'fas fa-check-square'"
         (click)="toggleExclusion(!page?.excluded)"
       ></button>
       <button
         class="nts-docs-tn-button"
         pButton
-        icon="fa fa-repeat"
+        icon="fas fa-redo"
         (click)="rotate(90)"
         *ngIf="settings?.canRotate"
       ></button>
@@ -47,14 +47,14 @@
         *ngIf="settings?.canSelect"
         class="nts-docs-tn-button"
         pButton
-        [icon]="isSelected ? 'fa fa-remove' : 'fa fa-hand-pointer-o'"
+        [icon]="isSelected ? 'fas fa-times' : 'far fa-hand-pointer'"
         (click)="toggleSelected()"
       ></button>
       <button
         class="nts-docs-tn-button"
         pButton
         title="View full size page"
-        [icon]="'fa fa-search'"
+        [icon]="'fas fa-search'"
         (click)="setActive(true)"
       ></button>
       <button
@@ -62,7 +62,7 @@
         class="nts-docs-tn-button"
         pButton
         title="Remove this page"
-        [icon]="'fa fa-remove'"
+        [icon]="'fas fa-times'"
         (click)="pageReset()"
       ></button>
     </div>

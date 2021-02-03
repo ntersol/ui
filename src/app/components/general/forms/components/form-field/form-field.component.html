@@ -22,7 +22,7 @@
               (click)="model = null; formControl.patchValue(null)"
               *ngIf="formControl.value !== null"
               title="Remove selection"
-              ><i class="fa fa-remove"></i
+              ><i class="fas fa-times"></i
             ></a>
           </div>
         </ng-container>
@@ -159,7 +159,7 @@
       [ngClass]="{ 'mt-3': placeholderFloat && placeholder }"
     >
       <a [pTooltip]="tooltip" tooltipPosition="bottom"
-        ><i class="fa fa-question-circle" aria-hidden="true"></i
+        ><i class="fas fa-question-circle" aria-hidden="true"></i
       ></a>
     </div>
   </div>
@@ -385,7 +385,7 @@
 </ng-container>
 -->
 
-<!-- autoCompleteAddress 
+<!-- autoCompleteAddress
       <ng-container *ngIf="type === 'autoCompleteAddress'">
         <ng-container *ngTemplateOutlet="autoCompleteAddress"></ng-container>
       </ng-container>
@@ -402,13 +402,13 @@
 </ng-container>
  -->
 
-<!-- Icon Group 
+<!-- Icon Group
 <ng-container *ngIf="type === 'iconGroup'">
   <ng-container *ngTemplateOutlet="iconGroup"></ng-container>
 </ng-container>
 -->
 
-<!-- Error messages 
+<!-- Error messages
   <div *ngIf="formControl?.invalid && formControl?.touched && formControl?.errors && showError" class="anim-fade-in text-center">
     <div *ngIf="errorCustom && formControl?.errors?.required" [innerHtml]="errorCustom"></div>
     <div *ngIf="!errorCustom && formControl?.errors?.required" class="small">
