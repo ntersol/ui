@@ -18,6 +18,7 @@ export * from './state-management';
 export * from './table';
 // Tags
 export * from './tags';
-
 // Tags
 export * from './tree';
+// Visible
+export * from './visible';

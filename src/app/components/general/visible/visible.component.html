@@ -1,0 +1,17 @@
+<!-- If this is a browser -->
+<ng-container *ngIf="isBrowser; else isNotBrowser">
+  <ng-container *ngIf="show$ | async">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </ng-container>
+</ng-container>
+<!-- Not a browser, IE server side rendering -->
+<ng-template #isNotBrowser>
+  <div [ngClass]="bootstrapClasses">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </div>
+</ng-template>
+
+<!-- Display content from parent component, only one instance of ng-content can be present in component so wrap in template-->
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>
