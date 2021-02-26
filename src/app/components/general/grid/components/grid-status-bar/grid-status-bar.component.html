@@ -2,7 +2,7 @@
   <!-- Clear all button -->
   <button class="btn btn-xs btn-outline-primary btn-grid-sort float-right" title="Remove all" (click)="reset()">
     <span class="mr-1">Clear All</span>
-    <i class="fa fa-remove"></i>
+    <i class="fas fa-times"></i>
   </button>
 
   <!-- Sort Option -->
@@ -10,7 +10,7 @@
     <span class="mr-1">Sorted By:</span>
     <button class="btn btn-xs btn-outline-primary btn-grid-sort mr-2" title="Remove sorting" (click)="removeSort()">
       <span class="mr-1">{{ gridState.sorts[0].colId | textCase }}, {{ gridState.sorts[0].sort | textCase }}</span>
-      <i class="fa fa-remove"></i>
+      <i class="fas fa-times"></i>
     </button>
   </div>
 
@@ -25,7 +25,7 @@
         (click)="removeGroup(group.colId)"
       >
         <span class="mr-1">{{ group.colId | textCase }}</span>
-        <i class="fa fa-remove"></i>
+        <i class="fas fa-times"></i>
       </button>
     </div>
   </ng-container>
@@ -54,7 +54,7 @@
             </ng-container>
           </ng-template>
         </span>
-        <i class="fa fa-remove"></i>
+        <i class="fas fa-times"></i>
       </button>
     </div>
   </ng-container>

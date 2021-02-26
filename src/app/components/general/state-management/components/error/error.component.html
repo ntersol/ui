@@ -20,7 +20,7 @@
     <div #ref><ng-content></ng-content></div>
 
     <div *ngIf="!ref.innerHTML.trim()">
-      <i class="fa fa-remove"></i>
+      <i class="fas fa-times"></i>
       {{ error.message || 'An error has occured.' }}
     </div>
 

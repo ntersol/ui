@@ -37,18 +37,18 @@ export class NavComponent {
   public navMenu: MenuItem[] = [
     {
       label: 'Home',
-      icon: 'fa fa-tachometer mr-1',
+      icon: 'fas fa-tachometer mr-1',
       routerLink: '/',
       routerLinkActiveOptions: { exact: true },
     },
     {
       label: 'Demo Route',
-      icon: 'fa fa-cubes mr-1',
+      icon: 'fas fa-cubes mr-1',
       routerLink: '/route',
     },
     {
       label: 'QA',
-      icon: 'fa fa-question-circle',
+      icon: 'fas fa-question-circle',
       routerLink: '/qa',
     },
   ];
@@ -56,12 +56,12 @@ export class NavComponent {
   public utilityMenu: MenuItem[] = [
     {
       label: 'Version 1.0.0.5',
-      icon: 'fa fa-tachometer mr-1',
+      icon: 'fas fa-tachometer mr-1',
       disabled: true,
     },
     {
       label: 'Sign Out',
-      icon: 'fa fa-cubes mr-1',
+      icon: 'fas fa-cubes mr-1',
       command: () => this.logOut(),
     },
   ];

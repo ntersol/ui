@@ -1,10 +1,10 @@
 <div class="tag-add">
   <a class="float-right small" *ngIf="tagActive" (click)="tagActive = null">
-    <i class="fa fa-remove"></i> Cancel
+    <i class="fas fa-times"></i> Cancel
   </a>
   <h3>
-    <ng-container *ngIf="tagActive"> <i class="fa fa-gear"></i> Update Existing Tag </ng-container>
-    <ng-container *ngIf="!tagActive"> <i class="fa fa-plus"></i> Add New Tag </ng-container>
+    <ng-container *ngIf="tagActive"> <i class="fas fa-cog"></i> Update Existing Tag </ng-container>
+    <ng-container *ngIf="!tagActive"> <i class="fas fa-plus"></i> Add New Tag </ng-container>
   </h3>
   <nts-tags-quick
     [tag]="tagActive"
@@ -40,14 +40,14 @@
           </ng-container>
         </td>
         <td>
-          <i class="fa fa-check" *ngIf="tag.globalTag"></i>
+          <i class="fas fa-check" *ngIf="tag.globalTag"></i>
         </td>
         -->
         <td>
-          <a (click)="tagEdit(tag)"><i class="fa fa-gear"></i> Edit</a>
+          <a (click)="tagEdit(tag)"><i class="fas fa-cog"></i> Edit</a>
         </td>
         <td>
-          <a (click)="tagDelete(tag)"><i class="fa fa-remove"></i> Delete</a>
+          <a (click)="tagDelete(tag)"><i class="fas fa-times"></i> Delete</a>
         </td>
       </tr>
     </tbody>
@@ -55,7 +55,7 @@
 
   <ng-template #notags>
     <div class="alert alert-info">
-      <i class="fa fa-info-circle" aria-hidden="true"></i> No tags created, please create one below
+      <i class="fas fa-info-circle" aria-hidden="true"></i> No tags created, please create one below
     </div>
   </ng-template>
 </div>

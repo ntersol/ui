@@ -5,14 +5,14 @@
       <button
         class="nts-docs-tn-button mr-2"
         pButton
-        icon="fa fa-hand-pointer-o"
+        icon="far fa-hand-pointer"
         (click)="selectionChange(true)"
         title="Select All Documents"
       ></button>
       <button
         class="nts-docs-tn-button mr-2"
         pButton
-        icon="fa fa-remove"
+        icon="fas fa-times"
         (click)="selectionChange(false)"
         title="Deselect All Documents"
       ></button>
@@ -22,14 +22,14 @@
       <button
         class="nts-docs-tn-button mr-2"
         pButton
-        icon="fa fa-check-square"
+        icon="fas fa-check-square"
         (click)="inclusionChange(false)"
         title="Set all documents to excluded"
       ></button>
       <button
         class="nts-docs-tn-button mr-2"
         pButton
-        icon="fa fa-square-o"
+        icon="far fa-square"
         (click)="inclusionChange(true)"
         title="Set all documents to included"
       ></button>
@@ -39,14 +39,14 @@
       <button
         class="nts-docs-tn-button mr-2"
         pButton
-        icon="fa fa-undo"
+        icon="fas fa-undo"
         title="Rotate all documents left 90 degrees"
         (click)="rotateAll(990)"
       ></button>
       <button
         class="nts-docs-tn-button mr-2"
         pButton
-        icon="fa fa-repeat"
+        icon="fas fa-redo"
         title="Rotate all documents right 90 degrees"
         (click)="rotateAll(90)"
       ></button>
@@ -55,7 +55,7 @@
         <button
           class="nts-docs-tn-button"
           pButton
-          icon="fa fa-file-pdf-o"
+          icon="far fa-file-pdf"
           title="Rotate all documents right 90 degrees"
           *ngFor="let size of thumbnailSizes; let i = index"
           [ngClass]="['nts-zoom-' + (i + 1), state?.tnSettings.width === size.width && state?.tnSettings.height === size.height ? 'nts-zoom-active' : 'nts-zoom-inactive' ]"

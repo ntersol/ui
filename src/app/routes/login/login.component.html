@@ -3,7 +3,7 @@
 <div class="container mt-3">
   <div class="m-auto" style="max-width:480px;">
     <form [formGroup]="formMain" novalidate (ngSubmit)="onLogin()">
-      <h1 class="title"><i class="fa fa-user"></i> Please sign in</h1>
+      <h1 class="title"><i class="fas fa-user"></i> Please sign in</h1>
       <p-card>
         <!-- Logout and session expired messages -->
         <ng-container *ngIf="authState$ | async as state">
@@ -72,7 +72,7 @@
               pButton
               type="submit"
               label="Sign In"
-              icon="fa fa-power-off"
+              icon="fas fa-power-off"
               [disabled]="formMain.invalid || waiting"
               [ngClass]="{ 'btn-waiting': waiting }"
             ></button>
