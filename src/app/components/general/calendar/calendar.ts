@@ -1,23 +1,38 @@
+import {
+  Calendar,
+  EventDef,
+  EventInstance,
+  EventMutation,
+  EmitterInterface,
+  ViewSpec,
+  DateProfileGenerator,
+  Duration,
+  DateMarker,
+  ViewProps,
+  DateProfile,
+  EventStore,
+  DateSpan,
+  EventRenderRange,
+  EventUi,
+  EventInteractionState,
+} from '@fullcalendar/core';
+import EventSourceApi from '@fullcalendar/core/api/EventSourceApi';
+import { DurationInput } from '@fullcalendar/core/datelib/duration';
+import { DateInput } from '@fullcalendar/core/datelib/env';
+import { FormatterInput } from '@fullcalendar/core/datelib/formatting';
+
 /**
  * Definitions for fullCalendar. Their repo isn't strongly typed...
  * Pulled from node_modules\@fullcalendar\core\main.d.ts
  */
-export namespace NtsCalendar {
+export module NtsCalendar {
   export interface Header {
     /** Space delimited with the following options: title, today, prev, next, prevYear, nextYear, today */
     left: string;
     center: string;
     right: string;
   }
-  export type DefaultView =
-    | 'dayGridMonth'
-    | 'dayGridWeek'
-    | 'timeGridWeek'
-    | 'listWeek'
-    | 'listDay'
-    | 'listWeek'
-    | 'listMonth'
-    | 'listYear';
+  export type DefaultView = 'dayGridMonth' | 'dayGridWeek' | 'timeGridWeek' | 'listWeek' | 'listDay' | 'listWeek' | 'listMonth' | 'listYear';
   /** https://fullcalendar.io/docs/event-object */
   export interface Event {
     title: string;

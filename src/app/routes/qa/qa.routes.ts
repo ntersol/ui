@@ -8,6 +8,7 @@ import { TablesComponent } from './routes/tables/tables.component';
 import { GridComponent } from './routes/grid/grid.component';
 import { FormsComponent } from './routes/forms/forms.component';
 import { CalendarComponent } from './routes/calendar/calendar.component';
+import { QaModule } from './qa.module';
 
 const routes: Routes = [
   {
@@ -47,4 +48,4 @@ const routes: Routes = [
   },
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forChild(routes);
+export const routing: ModuleWithProviders<QaModule> = RouterModule.forChild(routes);

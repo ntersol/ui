@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
+@UntilDestroy()
 @Component({
   selector: 'app-logout-modal',
   templateUrl: './logout-modal.component.html',

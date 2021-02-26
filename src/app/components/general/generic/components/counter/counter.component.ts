@@ -6,8 +6,9 @@ import {
 } from '@angular/core';
 import { timer, Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'nts-counter',
   templateUrl: './counter.component.html',

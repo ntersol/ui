@@ -373,7 +373,7 @@ export class NtsEntityStore<t> {
    */
   public reset() {
     if (!this.store || !this.query) {
-      return throwError(null);
+      throwError(null);
     }
     this.store.reset();
   }

@@ -51,16 +51,14 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('gridContainer') gridContainer!: ElementRef;
   /** The property containing the unique ID of the row data */
   @Input() rowUniqueId!: string;
-  @Input() parentRef: any;
+  @Input() parentRef?: any;
   @Input() license: string | undefined;
   @Input() enableSorting = true;
   @Input() enableFilter = true;
   @Input() enableColResize = true;
+
   /** Hold and set default options for grid*/
   private _gridOptions: GridOptions = {
-    context: {
-      this: this.parentRef,
-    },
     // A default column definition with properties that get applied to every column
     defaultColDef: {
       width: 150, // Set every column width
@@ -93,7 +91,12 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
     this._gridOptions = defaultsDeep(this._gridOptions, options);
   }
   get gridOptions() {
-    return this._gridOptions;
+    return {
+      ...this._gridOptions,
+      context: {
+        this: this.parentRef,
+      },
+    };
   }
   // Global filter term
   @Input() gridFilterTerm: string | null = null;
@@ -170,9 +173,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   public gridComponents = { statusBarComponent: GridStatusBarComponent };
   public gridStatusComponent: GridStatusBarComponent | undefined;
   /** Watch all grid state changes */
-  public gridEvent$ = new Subject<
-    'sortChanged' | 'filterChanged' | 'columnRowGroupChanged' | 'columnPinned' | 'columnMoved' | 'columnResized'
-  >();
+  public gridEvent$ = new Subject<'sortChanged' | 'filterChanged' | 'columnRowGroupChanged' | 'columnPinned' | 'columnMoved' | 'columnResized'>();
   /** Hold latest gridstate */
   public gridState$ = new BehaviorSubject<any>(this.gridState);
   public columns$ = new BehaviorSubject<ColDef[] | null>(null);
@@ -304,9 +305,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
     this.gridColumnApi = params.columnApi;
     this.gridApi = this.grid.api;
     // Set reference to status component so state can be pushed
-    this.gridStatusComponent = (<any>this).gridOptions.api
-      .getStatusPanel('statusBarComponent')
-      .getFrameworkComponentInstance();
+    this.gridStatusComponent = (<any>this).gridOptions.api.getStatusPanel('statusBarComponent').getFrameworkComponentInstance();
     if (this.gridStatusComponent) {
       // Attach reset method to status component so the status method
       this.gridStatusComponent.reset = this.gridReset.bind(this);
@@ -385,14 +384,8 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
         selections.forEach(selection => {
           if (selection.startRow && selection.endRow) {
             // Determine if this is a top to bottom or bottom to top drag, set appropriate index for FOR loop below
-            const start =
-              selection.startRow.rowIndex < selection.endRow.rowIndex
-                ? selection.startRow.rowIndex
-                : selection.endRow.rowIndex;
-            const end =
-              selection.startRow.rowIndex > selection.endRow.rowIndex
-                ? selection.startRow.rowIndex
-                : selection.endRow.rowIndex;
+            const start = selection.startRow.rowIndex < selection.endRow.rowIndex ? selection.startRow.rowIndex : selection.endRow.rowIndex;
+            const end = selection.startRow.rowIndex > selection.endRow.rowIndex ? selection.startRow.rowIndex : selection.endRow.rowIndex;
             // Loop through all nodes, if it's index falls between start and end, add it to nodes list
             this.grid.api.forEachNode((node: any) => {
               if (node.rowIndex >= start && node.rowIndex <= end) {

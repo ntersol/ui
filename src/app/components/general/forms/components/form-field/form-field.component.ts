@@ -9,7 +9,7 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { NgControl, FormControl } from '@angular/forms';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { isRequired } from '../../utils/isRequired.util';
 import { Spinner } from 'primeng/spinner';
 import { SelectItem } from 'primeng/api';
@@ -41,6 +41,7 @@ export type FormFieldType =
 /**
  * Tools for rapidly creating and managing forms
  */
+@UntilDestroy()
 @Component({
   selector: 'nts-form-field',
   templateUrl: './form-field.component.html',

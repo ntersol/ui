@@ -2,6 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { RootComponent } from './root.component';
+import { RouteModule } from './route.module';
 
 const routes: Routes = [
   {
@@ -11,4 +12,4 @@ const routes: Routes = [
   },
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forChild(routes);
+export const routing: ModuleWithProviders<RouteModule> = RouterModule.forChild(routes);

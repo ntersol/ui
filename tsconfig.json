@@ -24,22 +24,15 @@
     },
     "skipLibCheck": true,
     "sourceMap": true,
-    "target": "es2018",
-    "module": "es2020",
-    "typeRoots": ["node_modules/@types"],
     "strict": true,
     "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
-    "strictPropertyInitialization": true
+    "target": "es5",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"]
   },
   "angularCompilerOptions": {
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true,
     "fullTemplateTypeCheck": true,
     "preserveWhitespaces": false
   },
