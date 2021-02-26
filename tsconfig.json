@@ -33,7 +33,8 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "strictPropertyInitialization": true
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
