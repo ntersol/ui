@@ -5,29 +5,29 @@
 }
 
 body {
-    .ui-widget {
+    .p-widget {
         font-family: $fontFamily;
         font-size: $fontSize;
         text-decoration: none;
     }
     
-    .ui-corner-all {
+    .p-corner-all {
         @include border-radius($borderRadius);
     }
 
-    .ui-corner-top {
+    .p-corner-top {
         @include border-radius-top($borderRadius);
     }
 
-    .ui-corner-bottom {
+    .p-corner-bottom {
         @include border-radius-bottom($borderRadius);
     }
 
-    .ui-corner-left {
+    .p-corner-left {
         @include border-radius-left($borderRadius);
     }
 
-    .ui-corner-right {
+    .p-corner-right {
         @include border-radius-right($borderRadius);
     }
 
@@ -44,11 +44,11 @@ body {
         }
     }
 
-    .ui-helper-reset {
+    .p-helper-reset {
         line-height: normal;
     }
 
-    .ui-state-disabled, .ui-widget:disabled {
+    .p-state-disabled, .p-widget:disabled {
         @include opacity($disabledOpacity);
     }
 

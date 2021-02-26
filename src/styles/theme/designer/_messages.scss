@@ -1,184 +1,184 @@
 body {
-    .ui-messages {
+    .p-messages {
         padding: $messagesPadding;
         margin: $messagesMargin;
         
-        &.ui-messages-info {
+        &.p-messages-info {
             background-color: $infoMessageBgColor;
             border: $infoMessageBorder;
             color: $infoMessageTextColor;
             
-            .ui-messages-icon {
+            .p-messages-icon {
                 color: $infoMessageIconColor;
             }
             
-            .ui-messages-close {
+            .p-messages-close {
                 color:  $infoMessageIconColor;
             }
         }
 
-        &.ui-messages-success {
+        &.p-messages-success {
             background-color: $successMessageBgColor;
             border: $successMessageBorder;
             color: $successMessageTextColor;
             
-            .ui-messages-icon {
+            .p-messages-icon {
                 color: $successMessageIconColor;
             }
             
-            .ui-messages-close {
+            .p-messages-close {
                 color:  $successMessageIconColor;
             }
         }
 
-        &.ui-messages-warn {
+        &.p-messages-warn {
             background-color: $warnMessageBgColor;
             border: $warnMessageBorder;
             color: $warnMessageTextColor;
             
-            .ui-messages-icon {
+            .p-messages-icon {
                 color: $warnMessageIconColor;
             }
             
-            .ui-messages-close {
+            .p-messages-close {
                 color:  $warnMessageIconColor;
             }
         }
 
-        &.ui-messages-error {
+        &.p-messages-error {
             background-color: $errorMessageBgColor;
             border: $errorMessageBorder;
             color: $errorMessageTextColor;
             
-            .ui-messages-icon {
+            .p-messages-icon {
                 color: $errorMessageIconColor;
             }
             
-            .ui-messages-close {
+            .p-messages-close {
                 color:  $errorMessageIconColor;
             }
         }
         
-        .ui-messages-close {
+        .p-messages-close {
             top: .25em;
             right: .5em;
             font-size: $messageCloseIconFontSize;
         }
 
-        .ui-messages-icon {
+        .p-messages-icon {
             font-size: $messagesIconFontSize;
         }
     }
 
-    .ui-message {
+    .p-message {
         padding: $messagePadding;
         margin: $messageMargin;
         
-        &.ui-message-info {
+        &.p-message-info {
             background-color: $infoMessageBgColor;
             border: $infoMessageBorder;
             color: $infoMessageTextColor;
             
-            .ui-message-icon {
+            .p-message-icon {
                 color: $infoMessageIconColor;
             }
         }
 
-        &.ui-message-success {
+        &.p-message-success {
             background-color: $successMessageBgColor;
             border: $successMessageBorder;
             color: $successMessageTextColor;
             
-            .ui-message-icon {
+            .p-message-icon {
                 color: $successMessageIconColor;
             }
         }
 
-        &.ui-message-warn {
+        &.p-message-warn {
             background-color: $warnMessageBgColor;
             border: $warnMessageBorder;
             color: $warnMessageTextColor;
             
-            .ui-message-icon {
+            .p-message-icon {
                 color: $warnMessageIconColor;
             }
         }
 
-        &.ui-message-error {
+        &.p-message-error {
             background-color: $errorMessageBgColor;
             border: $errorMessageBorder;
             color: $errorMessageTextColor;
             
-            .ui-message-icon {
+            .p-message-icon {
                 color: $errorMessageIconColor;
             }
         }
 
-        .ui-message-icon {
+        .p-message-icon {
             font-size: $messageIconFontSize;
         }
 
-        .ui-message-text {
+        .p-message-text {
             font-size: $messageTextFontSize;
         }
     }
         
-    .ui-growl {
+    .p-growl {
         top: $growlTopLocation;
         
-        .ui-growl-item-container {
+        .p-growl-item-container {
             margin: $growlMargin;
             @include opacity($growlOpacity);
             @include shadow($growlShadow);
 
-            .ui-growl-item {
+            .p-growl-item {
                 padding: $growlPadding;
 
-                .ui-growl-message {
+                .p-growl-message {
                     margin: $growlMessageTextMargin;
                 }
     
-                .ui-growl-image {
+                .p-growl-image {
                     font-size: $growlIconFontSize;
                 }
             }
             
-            &.ui-growl-message-info {
+            &.p-growl-message-info {
                 background-color: $infoMessageBgColor;
                 border: $infoMessageBorder;
                 color: $infoMessageTextColor;
                 
-                .ui-growl-image {
+                .p-growl-image {
                     color: $infoMessageIconColor;
                 }
             }  
 
-            &.ui-growl-message-success {
+            &.p-growl-message-success {
                 background-color: $successMessageBgColor;
                 border: $successMessageBorder;
                 color: $successMessageTextColor;
                 
-                .ui-growl-image {
+                .p-growl-image {
                     color: $successMessageIconColor;
                 }
             }  
             
-            &.ui-growl-message-warn {
+            &.p-growl-message-warn {
                 background-color: $warnMessageBgColor;
                 border: $warnMessageBorder;
                 color: $warnMessageTextColor;
                 
-                .ui-growl-image {
+                .p-growl-image {
                     color: $warnMessageIconColor;
                 }
             }
             
-            &.ui-growl-message-error {
+            &.p-growl-message-error {
                 background-color: $errorMessageBgColor;
                 border: $errorMessageBorder;
                 color: $errorMessageTextColor;
                 
-                .ui-growl-image {
+                .p-growl-image {
                     color: $errorMessageIconColor;
                 }
             }
@@ -186,47 +186,47 @@ body {
         }
     }
 
-    .ui-toast {
-        .ui-toast-message {
+    .p-toast {
+        .p-toast-message {
             @include shadow($toastShadow);
             margin: $toastMessageMargin;
 
-            &.ui-toast-message-info {
+            &.p-toast-message-info {
                 background-color: $infoMessageBgColor;
                 border: $infoMessageBorder;
                 color: $infoMessageTextColor;
                 
-                .ui-toast-close-icon {
+                .p-toast-close-icon {
                     color: $infoMessageTextColor;
                 }
             }
     
-            &.ui-toast-message-success {
+            &.p-toast-message-success {
                 background-color: $successMessageBgColor;
                 border: $successMessageBorder;
                 color: $successMessageTextColor;
                 
-                .ui-toast-close-icon {
+                .p-toast-close-icon {
                     color: $successMessageIconColor;
                 }
             }
     
-            &.ui-toast-message-warn {
+            &.p-toast-message-warn {
                 background-color: $warnMessageBgColor;
                 border: $warnMessageBorder;
                 color: $warnMessageTextColor;
                 
-                .ui-toast-close-icon {
+                .p-toast-close-icon {
                     color: $warnMessageTextColor;
                 }
             }
     
-            &.ui-toast-message-error {
+            &.p-toast-message-error {
                 background-color: $errorMessageBgColor;
                 border: $errorMessageBorder;
                 color: $errorMessageTextColor;
                 
-                .ui-toast-close-icon {
+                .p-toast-close-icon {
                     color: $errorMessageTextColor;
                 }
             }

@@ -1,7 +1,7 @@
 nts-form-field {
   input,
-  .ui-inputgroup > p-inputmask,
-  .ui-spinner {
+  .p-inputgroup > p-inputmask,
+  .p-spinner {
     width: 100%;
   }
   .nts-form-field-tooltip {
@@ -22,14 +22,14 @@ nts-form-field {
   }
 
   // Manage the floating label styling and animation
-  .ui-float-label {
-    & > .ui-inputwrapper-focus ~ label,
-    & > .ui-inputwrapper-filled ~ label {
+  .p-float-label {
+    & > .p-inputwrapper-focus ~ label,
+    & > .p-inputwrapper-filled ~ label {
       top: 50%;
       font-size: 14px;
     }
-    &.ui-focus > .ui-inputwrapper-focus ~ label,
-    &.ui-focus.ui-input-float label,
+    &.p-focus > .p-inputwrapper-focus ~ label,
+    &.p-focus.p-input-float label,
     & > textarea:focus ~ label {
       top: -0.75em;
       font-size: 11px;
@@ -46,11 +46,11 @@ nts-form-field {
     }
   } // end
 
-  .ui-inputgroup {
-    .ui-inputgroup-addon {
+  .p-inputgroup {
+    .p-inputgroup-addon {
       padding: 4px;
     }
-    .ui-input-float {
+    .p-input-float {
       flex-grow: 1;
       &:not(:last-child) input {
         // border-color:yellow;
@@ -87,9 +87,9 @@ nts-form-field {
   .nts-form-field-type-textarea,
   .nts-form-field-type-dropdown,
   .nts-form-field-type-autoComplete {
-    .ui-widget,
-    .ui-dropdown,
-    .ui-autocomplete {
+    .p-widget,
+    .p-dropdown,
+    .p-autocomplete {
       width: 100%;
     }
   }
@@ -119,34 +119,34 @@ nts-form-field {
 
   // Date input
   .nts-form-field-type-date {
-    .ui-datepicker {
+    .p-datepicker {
       top: 2rem !important;
     }
-    .ui-calendar .ui-inputtext {
+    .p-calendar .p-inputtext {
       display: none;
     }
-    .ui-inputgroup-addon {
+    .p-inputgroup-addon {
       // overflow: hidden;
     }
-    .ui-inputgroup .ui-inputgroup-addon {
+    .p-inputgroup .p-inputgroup-addon {
       padding: 0;
       overflow: hidden;
     }
   }
 
   // Spinner
-  .nts-form-field-type-currency .ui-spinner {
-    .ui-spinner-button {
+  .nts-form-field-type-currency .p-spinner {
+    .p-spinner-button {
       display: none;
     }
   }
 
   // Colorpicker
   .nts-form-field-type-colorpicker {
-    .ui-inputgroup-addon {
+    .p-inputgroup-addon {
       width: 32px;
     }
-    .ui-colorpicker {
+    .p-colorpicker {
       input {
         border: 0;
         border-radius: 0;
@@ -156,14 +156,14 @@ nts-form-field {
 
   // Toggle
   .nts-form-field-type-toggle {
-    .ui-inputswitch .ui-inputswitch-slider {
+    .p-inputswitch .p-inputswitch-slider {
       border: 1px solid rgba(0, 0, 0, 0);
     }
   }
 
   // Toggle
   .nts-form-field-type-buttonGroup {
-    .ui-selectbutton {
+    .p-selectbutton {
       border: 1px solid rgba(0, 0, 0, 0);
     }
   }
@@ -173,12 +173,12 @@ nts-form-field {
     input,
     select,
     textarea,
-    .ui-dropdown,
-    .ui-chkbox .ui-chkbox-box,
-    .ui-radiobutton .ui-radiobutton-box,
-    .ui-inputgroup .ui-inputgroup-addon,
-    .ui-inputswitch .ui-inputswitch-slider,
-    .ui-selectbutton {
+    .p-dropdown,
+    .p-chkbox .p-chkbox-box,
+    .p-radiobutton .p-radiobutton-box,
+    .p-inputgroup .p-inputgroup-addon,
+    .p-inputswitch .p-inputswitch-slider,
+    .p-selectbutton {
       border-color: red !important;
     }
   }

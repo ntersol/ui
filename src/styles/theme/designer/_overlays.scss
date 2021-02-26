@@ -1,20 +1,20 @@
 body {
-    .ui-widget-overlay {
+    .p-widget-overlay {
         background-color: $maskBgColor;
     }
 
-    .ui-overlaypanel {
+    .p-overlaypanel {
         background-color: $panelContentBgColor;
         color: $panelContentTextColor;
         padding: 0;
         border: $overlayContentBorder;
         @include border-radius(0);
 
-        .ui-overlaypanel-content {
+        .p-overlaypanel-content {
             padding: $panelContentPadding;
         }
 
-        .ui-overlaypanel-close {
+        .p-overlaypanel-close {
             background-color: $overlayPanelCloseIconBgColor;
             color: $overlayPanelCloseIconColor;
             width: 1.538em;
@@ -31,7 +31,7 @@ body {
                 color: $overlayPanelCloseIconHoverColor;
             }
 
-            .ui-overlaypanel-close-icon {
+            .p-overlaypanel-close-icon {
                 line-height: inherit;
             }
         }
@@ -46,7 +46,7 @@ body {
             border-bottom-color: $overlayContentBorderColor;
         }
 
-        &.ui-overlaypanel-flipped {
+        &.p-overlaypanel-flipped {
             &:after {
                 border-top-color: $panelContentBgColor;
             }
@@ -57,11 +57,11 @@ body {
         }
     }
 
-    .ui-dialog {
+    .p-dialog {
         padding: 0;
         @include shadow($overlayContainerShadow);
 
-        .ui-dialog-titlebar {
+        .p-dialog-titlebar {
             border: $panelHeaderBorder;
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
@@ -69,12 +69,12 @@ body {
             font-weight: $panelHeaderFontWeight;
             border-bottom: 0 none;
 
-            .ui-dialog-title {
+            .p-dialog-title {
                 margin: 0;
                 float: none;
             }
 
-            .ui-dialog-titlebar-icon {
+            .p-dialog-titlebar-icon {
                 color: $panelHeaderIconColor;
                 border: 0 none;
                 padding: 0;
@@ -87,14 +87,14 @@ body {
             }
         }
 
-        .ui-dialog-content {
+        .p-dialog-content {
             background-color: $panelContentBgColor;
             color: $panelContentTextColor;
             border: $overlayContentBorder;
             padding: $panelContentPadding;
         }
 
-        .ui-dialog-footer {
+        .p-dialog-footer {
             border: $panelFooterBorder;
             background-color: $panelFooterBgColor;
             color: $panelFooterTextColor;
@@ -110,8 +110,8 @@ body {
             }
         }
 
-        &.ui-confirm-dialog {
-            .ui-dialog-content {
+        &.p-confirm-dialog {
+            .p-dialog-content {
                 padding: $confirmDialogPadding;
 
                 > span {
@@ -121,7 +121,7 @@ body {
                     line-height: $fontSize;
                     margin: 0;
 
-                    &.ui-icon {
+                    &.p-icon {
                         margin-right: .35em;
                         font-size: $fontSize + 2;
                     }
@@ -130,14 +130,14 @@ body {
         }
     }
 
-    .ui-sidebar {
+    .p-sidebar {
         background-color: $panelContentBgColor;
         color: $panelContentTextColor;
         padding: $panelContentPadding;
         border: $overlayContentBorder;
         @include shadow($overlayContainerShadow);
 
-        .ui-sidebar-close {
+        .p-sidebar-close {
             color: $textSecondaryColor;
 
             &:hover {
@@ -146,43 +146,43 @@ body {
         }
     }
 
-    .ui-tooltip {
-        .ui-tooltip-text {
+    .p-tooltip {
+        .p-tooltip-text {
             background-color: $tooltipBgColor;
             color: $tooltipTextColor;
             padding: $tooltipPadding;
             @include shadow($overlayContainerShadow);
         }
 
-        &.ui-tooltip-right {
-            .ui-tooltip-arrow {
+        &.p-tooltip-right {
+            .p-tooltip-arrow {
                 border-right-color: $tooltipBgColor;
             }
         }
 
-        &.ui-tooltip-left {
-            .ui-tooltip-arrow {
+        &.p-tooltip-left {
+            .p-tooltip-arrow {
                 border-left-color: $tooltipBgColor;
             }
         }
 
-        &.ui-tooltip-top {
-            .ui-tooltip-arrow {
+        &.p-tooltip-top {
+            .p-tooltip-arrow {
                 border-top-color: $tooltipBgColor;
             }
         }
 
-        &.ui-tooltip-bottom {
-            .ui-tooltip-arrow {
+        &.p-tooltip-bottom {
+            .p-tooltip-arrow {
                 border-bottom-color: $tooltipBgColor;
             }
         }
     }
 
-    .ui-lightbox {
+    .p-lightbox {
         @include shadow($overlayContainerShadow);
 
-        .ui-lightbox-caption {
+        .p-lightbox-caption {
             border: $panelHeaderBorder;
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
@@ -190,12 +190,12 @@ body {
             font-weight: $panelHeaderFontWeight;
 
 
-            .ui-lightbox-caption-text {
+            .p-lightbox-caption-text {
                 color: $panelHeaderTextColor;
                 margin: 0;
             }
 
-            .ui-lightbox-close {
+            .p-lightbox-close {
                 padding: 0;
                 color: $panelHeaderIconColor;
                 @include transition(color $transitionDuration);
@@ -206,7 +206,7 @@ body {
             }
         }
 
-        .ui-lightbox-content-wrapper {
+        .p-lightbox-content-wrapper {
             overflow: hidden;
             background-color: $panelContentBgColor;
             color: $panelContentTextColor;
@@ -214,7 +214,7 @@ body {
             padding: 0;
             @include border-radius(0);
 
-            .ui-lightbox-nav-left, .ui-lightbox-nav-right {
+            .p-lightbox-nav-left, .p-lightbox-nav-right {
                 @include transition(all $transitionDuration);
                 font-size: $lightBoxNavIconFontSize;
                 color: $lightBoxNavIconColor;
@@ -225,7 +225,7 @@ body {
                 }
             }
 
-            .ui-lightbox-content.ui-lightbox-loading ~ a {
+            .p-lightbox-content.p-lightbox-loading ~ a {
                 display: none;
             }
         }

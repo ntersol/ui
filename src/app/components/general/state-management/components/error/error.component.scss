@@ -5,8 +5,8 @@
     background: #ffeeef;
   }
 
-  .ui-accordion {
-    .ui-accordion-header {
+  .p-accordion {
+    .p-accordion-header {
       margin-bottom: 0;
 
       a {
@@ -22,13 +22,13 @@
       }
     }
 
-    .ui-accordion-content {
+    .p-accordion-content {
       background-color: #ffeeef;
 
       border: 0;
     }
 
-    .ui-accordion-toggle-icon {
+    .p-accordion-toggle-icon {
       color: #721c24 !important;
     }
   }

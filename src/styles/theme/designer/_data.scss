@@ -1,13 +1,13 @@
 body {
-    .ui-paginator {
+    .p-paginator {
         background-color: $paginatorBgColor;
         border: $paginatorBorder;
         padding: $paginatorPadding;
 
-        .ui-paginator-first,
-        .ui-paginator-prev,
-        .ui-paginator-next,
-        .ui-paginator-last {
+        .p-paginator-first,
+        .p-paginator-prev,
+        .p-paginator-next,
+        .p-paginator-last {
             color: $paginatorIconColor;
             height: $paginatorElementHeight;
             min-width: $paginatorElementWidth;
@@ -18,66 +18,66 @@ body {
             vertical-align: top;
             @include border-radius($paginatorElementBorderRadius);
 
-            &:not(.ui-state-disabled):not(.ui-state-active):hover {
+            &:not(.p-state-disabled):not(.p-state-active):hover {
                 background-color: $paginatorElementHoverBgColor;
                 color: $paginatorElementHoverIconColor;
             }
         }
 
-        .ui-paginator-current {
+        .p-paginator-current {
             color: $paginatorIconColor;
             height: $paginatorElementHeight;
             min-width: $paginatorElementWidth;
             line-height: $paginatorElementHeight;
         }
 
-        .ui-dropdown {
+        .p-dropdown {
             border: 0 none;
 
-            .ui-dropdown-trigger, .ui-dropdown-label {
+            .p-dropdown-trigger, .p-dropdown-label {
                 color: $paginatorIconColor;
             }
 
             &:hover {
-                .ui-dropdown-trigger, .ui-dropdown-label {
+                .p-dropdown-trigger, .p-dropdown-label {
                     color: $paginatorElementHoverIconColor;
                 }
             }
         }
 
-        .ui-paginator-first {
+        .p-paginator-first {
             &:before {
                 position: relative;
                 top: 1px;
             }
         }
 
-        .ui-paginator-prev {
+        .p-paginator-prev {
             &:before {
                 position: relative;
             }
         }
 
-        .ui-paginator-next {
-            &:before {
-                position: relative;
-                top: 1px;
-            }
-        }
-
-        .ui-paginator-last {
+        .p-paginator-next {
             &:before {
                 position: relative;
                 top: 1px;
             }
         }
 
-        .ui-paginator-pages {
+        .p-paginator-last {
+            &:before {
+                position: relative;
+                top: 1px;
+            }
+        }
+
+        .p-paginator-pages {
             vertical-align: top;
             display: inline-block;
             padding: 0;
 
-            .ui-paginator-page {
+            .p-paginator-page {
                 color: $paginatorIconColor;
                 height: $paginatorElementHeight;
                 min-width: $paginatorElementWidth;
@@ -88,28 +88,28 @@ body {
                 vertical-align: top;
                 @include border-radius($paginatorElementBorderRadius);
 
-                &.ui-state-active {
+                &.p-state-active {
                     background-color: $highlightBgColor;
                     color: $highlightColorText;
                 }
 
-                &:not(.ui-state-active):hover {
+                &:not(.p-state-active):hover {
                     background-color: $paginatorElementHoverBgColor;
                     color: $paginatorElementHoverIconColor;
                 }
             }
         }
 
-        .ui-dropdown {
+        .p-dropdown {
             margin-left: $inlineSpacing;
             height: $paginatorElementHeight;
             min-width: auto;
         }
     }
 
-    .ui-table {
-        .ui-table-caption,
-        .ui-table-summary {
+    .p-table {
+        .p-table-caption,
+        .p-table-summary {
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
             border: $panelHeaderBorder;
@@ -117,17 +117,17 @@ body {
             text-align: center;
         }
 
-        .ui-table-caption {
+        .p-table-caption {
             border-bottom: 0 none;
             font-weight: $tableCaptionFontWeight;
         }
 
-        .ui-table-summary {
+        .p-table-summary {
             border-top: 0 none;
             font-weight: $tableSummaryFontWeight;
         }
 
-        .ui-table-thead > tr > th {
+        .p-table-thead > tr > th {
             padding: $tableHeaderCellPadding;
             border: $tableHeaderCellBorder;
             font-weight: $tableHeaderCellFontWeight;
@@ -135,11 +135,11 @@ body {
             background-color: $tableHeaderCellBgColor;
         }
 
-        .ui-table-tbody > tr > td {
+        .p-table-tbody > tr > td {
             padding: $tableBodyCellPadding;
         }
 
-        .ui-table-tfoot > tr > td {
+        .p-table-tfoot > tr > td {
             padding: $tableFooterCellPadding;
             border: $tableFooterCellBorder;
             font-weight: $tableFooterCellFontWeight;
@@ -147,31 +147,31 @@ body {
             background-color: $tableFooterCellBgColor;
         }
 
-        .ui-sortable-column {
-            .ui-sortable-column-icon {
+        .p-sortable-column {
+            .p-sortable-column-icon {
                 color: $tableHeaderCellIconColor;
             }
 
-            &:not(.ui-state-highlight):hover {
+            &:not(.p-state-highlight):hover {
                 background-color: $tableHeaderCellHoverBgColor;
                 color: $tableHeaderCellHoverTextColor;
 
-                .ui-sortable-column-icon {
+                .p-sortable-column-icon {
                     color: $tableHeaderCellHoverIconColor;
                 }
             }
 
-            &.ui-state-highlight {
+            &.p-state-highlight {
                 background-color: $highlightBgColor;
                 color: $highlightColorText;
 
-                .ui-sortable-column-icon {
+                .p-sortable-column-icon {
                     color: $highlightColorText;
                 }
             }
         }
 
-        .ui-editable-column {
+        .p-editable-column {
             input {
                 font-size: $fontSize;
                 font-family: $fontFamily;
@@ -183,7 +183,7 @@ body {
             }
         }
 
-        .ui-table-tbody {
+        .p-table-tbody {
             > tr {
                 background-color: $tableBodyRowBgColor;
                 color: $tableBodyRowTextColor;
@@ -193,7 +193,7 @@ body {
                     border: $tableBodyCellBorder;
                 }
 
-                &.ui-state-highlight {
+                &.p-state-highlight {
                     background-color: $highlightBgColor;
                     color: $highlightColorText;
 
@@ -202,12 +202,12 @@ body {
                     }
                 }
 
-                &.ui-contextmenu-selected {
+                &.p-contextmenu-selected {
                     background-color: $highlightBgColor;
                     color: $highlightColorText;
                 }
 
-                &.ui-table-dragpoint-bottom > td {
+                &.p-table-dragpoint-bottom > td {
                     @include shadow(inset 0 -2px 0 0 $highlightBgColor);
                 }
             }
@@ -215,7 +215,7 @@ body {
             > tr:nth-child(even) {
                 background-color: $tableBodyRowEvenBgColor;
 
-                &.ui-state-highlight {
+                &.p-state-highlight {
                     background-color: $highlightBgColor;
                     color: $highlightColorText;
 
@@ -224,46 +224,46 @@ body {
                     }
                 }
 
-                &.ui-contextmenu-selected {
+                &.p-contextmenu-selected {
                     background-color: $highlightBgColor;
                     color: $highlightColorText;
                 }
             }
         }
 
-        &.ui-table-hoverable-rows {
-            .ui-table-tbody > tr.ui-selectable-row:not(.ui-state-highlight):not(.ui-contextmenu-selected):hover {
+        &.p-table-hoverable-rows {
+            .p-table-tbody > tr.p-selectable-row:not(.p-state-highlight):not(.p-contextmenu-selected):hover {
                 cursor: pointer;
                 background-color: $tableBodyRowHoverBgColor;
                 color: $tableBodyRowHoverTextColor;
             }
         }
 
-        .ui-column-resizer-helper {
+        .p-column-resizer-helper {
             background-color: $tableResizerHelperBgColor;
         }
     }
 
     @media screen and (max-width: 40em) {
-        .ui-table {
-            &.ui-table-responsive {
-                .ui-paginator-top {
+        .p-table {
+            &.p-table-responsive {
+                .p-paginator-top {
                     border-bottom: $paginatorBorder;
                 }
 
-                .ui-paginator-bottom {
+                .p-paginator-bottom {
                     border-top: $paginatorBorder;
                 }
 
-                .ui-table-tbody > tr > td {
+                .p-table-tbody > tr > td {
                     border: 0 none;
                 }
             }
         }
     }
 
-    .ui-datagrid {
-        .ui-datagrid-header {
+    .p-datagrid {
+        .p-datagrid-header {
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
             border: $panelHeaderBorder;
@@ -272,7 +272,7 @@ body {
             border-bottom: 0 none;
         }
 
-        .ui-datagrid-content {
+        .p-datagrid-content {
             padding: $panelContentPadding;
             border: $panelContentBorder;
             background-color: $panelContentBgColor;
@@ -280,7 +280,7 @@ body {
             padding: $panelContentPadding;
         }
 
-        .ui-datagrid-footer {
+        .p-datagrid-footer {
             background-color: $panelFooterBgColor;
             color: $panelFooterTextColor;
             border: $panelFooterBorder;
@@ -289,8 +289,8 @@ body {
         }
     }
 
-    .ui-datalist {
-        .ui-datalist-header {
+    .p-datalist {
+        .p-datalist-header {
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
             border: $panelHeaderBorder;
@@ -299,7 +299,7 @@ body {
             border-bottom: 0 none;
         }
 
-        .ui-datalist-content {
+        .p-datalist-content {
             padding: $panelContentPadding;
             border: $panelContentBorder;
             background-color: $panelContentBgColor;
@@ -307,7 +307,7 @@ body {
             padding: $panelContentPadding;
         }
 
-        .ui-datalist-footer {
+        .p-datalist-footer {
             background-color: $panelFooterBgColor;
             color: $panelFooterTextColor;
             border: $panelFooterBorder;
@@ -316,8 +316,8 @@ body {
         }
     }
 
-    .ui-datascroller {
-        .ui-datascroller-header {
+    .p-datascroller {
+        .p-datascroller-header {
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
             border: $panelHeaderBorder;
@@ -326,7 +326,7 @@ body {
             border-bottom: 0 none;
         }
 
-        .ui-datascroller-content {
+        .p-datascroller-content {
             padding: $panelContentPadding;
             border: $panelContentBorder;
             background-color: $panelContentBgColor;
@@ -334,7 +334,7 @@ body {
             padding: $panelContentPadding;
         }
 
-        .ui-datascroller-footer {
+        .p-datascroller-footer {
             background-color: $panelFooterBgColor;
             color: $panelFooterTextColor;
             border: $panelFooterBorder;
@@ -343,8 +343,8 @@ body {
         }
     }
 
-    .ui-virtualscroller {
-        .ui-virtualscroller-header {
+    .p-virtualscroller {
+        .p-virtualscroller-header {
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
             border: $panelHeaderBorder;
@@ -353,18 +353,18 @@ body {
             border-bottom: 0 none;
         }
 
-        .ui-virtualscroller-content {
+        .p-virtualscroller-content {
             border: $panelContentBorder;
             background-color: $panelContentBgColor;
             color: $panelContentTextColor;
-            .ui-virtualscroller-list {
+            .p-virtualscroller-list {
                 li {
                     border-bottom: $panelHeaderBorder;
                 }
             }
         }
 
-        .ui-virtualscroller-footer {
+        .p-virtualscroller-footer {
             background-color: $panelFooterBgColor;
             color: $panelFooterTextColor;
             border: $panelFooterBorder;
@@ -373,8 +373,8 @@ body {
         }
     }
 
-    .ui-dataview {
-        .ui-dataview-header {
+    .p-dataview {
+        .p-dataview-header {
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
             border: $panelHeaderBorder;
@@ -383,7 +383,7 @@ body {
             border-bottom: 0 none;
         }
 
-        .ui-dataview-content {
+        .p-dataview-content {
             padding: $panelContentPadding;
             border: $panelContentBorder;
             background-color: $panelContentBgColor;
@@ -391,7 +391,7 @@ body {
             padding: $panelContentPadding;
         }
 
-        .ui-dataview-footer {
+        .p-dataview-footer {
             background-color: $panelFooterBgColor;
             color: $panelFooterTextColor;
             border: $panelFooterBorder;
@@ -409,7 +409,7 @@ body {
         }
 
         td {
-            &.ui-widget-content {
+            &.p-widget-content {
                 background-color: $panelContentBgColor;
                 border: $panelContentBorder;
                 color: $panelContentTextColor;
@@ -485,7 +485,7 @@ body {
         }
     }
 
-    .ui-fluid {
+    .p-fluid {
         .fc {
             .fc-toolbar {
                 .fc-button {
@@ -495,14 +495,14 @@ body {
         }
     }
 
-    .ui-picklist {
-        .ui-picklist-buttons {
+    .p-picklist {
+        .p-picklist-buttons {
             button {
                 font-size: $fontSize + 2;
             }
         }
 
-        .ui-picklist-caption {
+        .p-picklist-caption {
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
             border: $panelHeaderBorder;
@@ -512,7 +512,7 @@ body {
             @include border-radius-top($borderRadius);
         }
 
-        .ui-picklist-filter-container {
+        .p-picklist-filter-container {
             padding: $inputListHeaderPaddingTop $inputListHeaderPaddingRight $inputListHeaderPaddingBottom $inputListHeaderPaddingLeft;
             border: $panelHeaderBorder;
             color: $inputListHeaderTextColor;
@@ -520,13 +520,13 @@ body {
             margin: $inputListHeaderMargin;
             border-bottom: 0 none;
 
-            input.ui-picklist-filter {
+            input.p-picklist-filter {
                 width: 100%;
                 padding-right: 2em;
                 text-indent: 0;
             }
 
-            .ui-picklist-filter-icon {
+            .p-picklist-filter-icon {
                 top: 50%;
                 margin-top: -.5em;
                 left: auto;
@@ -535,50 +535,50 @@ body {
             }
         }
 
-        .ui-picklist-buttons {
+        .p-picklist-buttons {
             padding: $panelContentPadding;
         }
 
-        .ui-picklist-list {
+        .p-picklist-list {
             border: $panelContentBorder;
             background-color: $panelContentBgColor;
             color: $panelContentTextColor;
             padding: $inputListPadding;
 
-            .ui-picklist-item {
+            .p-picklist-item {
                 padding: $inputListItemPadding;
                 margin: $inputListItemMargin;
                 border: $inputListItemBorder;
                 color: $inputListItemTextColor;
                 background-color: $inputListItemBgColor;
 
-                &:not(.ui-state-highlight):hover {
+                &:not(.p-state-highlight):hover {
                     background-color: $inputListItemHoverBgColor;
                     color: $inputListItemHoverTextColor;
                 }
 
-                &.ui-state-highlight {
+                &.p-state-highlight {
                     background-color: $inputListItemHighlightBgColor;
                     color: $inputListItemHighlightTextColor;
                 }
             }
 
-            .ui-picklist-droppoint-highlight {
+            .p-picklist-droppoint-highlight {
                 background-color: $highlightBgColor;
             }
         }
     }
 
     @media (max-width: 40em) {
-        .ui-picklist.ui-picklist-responsive {
-            .ui-picklist-buttons {
+        .p-picklist.p-picklist-responsive {
+            .p-picklist-buttons {
                 padding: $panelContentPadding;
             }
         }
     }
 
-    .ui-orderlist {
-        .ui-orderlist-controls {
+    .p-orderlist {
+        .p-orderlist-controls {
             padding: $panelContentPadding;
 
             button {
@@ -586,7 +586,7 @@ body {
             }
         }
 
-        .ui-orderlist-caption {
+        .p-orderlist-caption {
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
             border: $panelHeaderBorder;
@@ -596,7 +596,7 @@ body {
             @include border-radius-top($borderRadius);
         }
 
-        .ui-orderlist-filter-container {
+        .p-orderlist-filter-container {
             padding: $inputListHeaderPaddingTop $inputListHeaderPaddingRight $inputListHeaderPaddingBottom $inputListHeaderPaddingLeft;
             border: $panelHeaderBorder;
             color: $inputListHeaderTextColor;
@@ -604,13 +604,13 @@ body {
             margin: $inputListHeaderMargin;
             border-bottom: 0 none;
 
-            input.ui-inputtext {
+            input.p-inputtext {
                 width: 100%;
                 padding-right: 2em;
                 text-indent: 0;
             }
 
-            .ui-orderlist-filter-icon {
+            .p-orderlist-filter-icon {
                 top: 50%;
                 margin-top: -.5em;
                 left: auto;
@@ -619,54 +619,54 @@ body {
             }
         }
 
-        .ui-orderlist-list {
+        .p-orderlist-list {
             border: $panelContentBorder;
             background-color: $panelContentBgColor;
             color: $panelContentTextColor;
             padding: $inputListPadding;
 
-            .ui-orderlist-item {
+            .p-orderlist-item {
                 padding: $inputListItemPadding;
                 margin: $inputListItemMargin;
                 border: $inputListItemBorder;
                 color: $inputListItemTextColor;
                 background-color: $inputListItemBgColor;
 
-                &:not(.ui-state-highlight):hover {
+                &:not(.p-state-highlight):hover {
                     background-color: $inputListItemHoverBgColor;
                     color: $inputListItemHoverTextColor;
                 }
 
-                &.ui-state-highlight {
+                &.p-state-highlight {
                     background-color: $inputListItemHighlightBgColor;
                     color: $inputListItemHighlightTextColor;
                 }
             }
 
-            .ui-orderlist-droppoint-highlight {
+            .p-orderlist-droppoint-highlight {
                 background-color: $highlightBgColor;
             }
         }
     }
 
-    .ui-tree {
+    .p-tree {
         border: $panelContentBorder;
         background-color: $panelContentBgColor;
         color: $panelContentTextColor;
         padding: $panelContentPadding;
 
-        .ui-tree-container {
+        .p-tree-container {
             padding: 0.286em;
             margin: 0;
 
-            .ui-treenode {
+            .p-treenode {
                 padding: $treeNodePadding;
 
-                .ui-treenode-content {
+                .p-treenode-content {
                     padding: 0;
                     border: 1px solid transparent;
 
-                    .ui-tree-toggler {
+                    .p-tree-toggler {
                         vertical-align: middle;
                         display: inline-block;
                         float: none;
@@ -674,35 +674,35 @@ body {
                         color: $dataIconColor;
                     }
 
-                    .ui-treenode-icon {
+                    .p-treenode-icon {
                         vertical-align: middle;
                         display: inline-block;
                         margin: 0 $treeNodeContentSpacing 0 0;
                         color: $dataIconColor;
                     }
 
-                    .ui-treenode-label {
+                    .p-treenode-label {
                         margin: 0;
                         vertical-align: middle;
                         display: inline-block;
                         padding: $treeNodeLabelPadding;
 
-                        &.ui-state-highlight {
+                        &.p-state-highlight {
                             background-color: $highlightBgColor;
                             color: $highlightColorText;
                         }
                     }
 
-                    .ui-chkbox {
+                    .p-chkbox {
                         margin: 0 $inlineSpacing 0 0;
 
-                        .ui-chkbox-icon {
+                        .p-chkbox-icon {
                             margin: 1px 0 0 0;
                         }
                     }
 
-                    &.ui-treenode-selectable {
-                        .ui-treenode-label:not(.ui-state-highlight):hover {
+                    &.p-treenode-selectable {
+                        .p-treenode-label:not(.p-state-highlight):hover {
                             background-color: $inputListItemHoverBgColor;
                             color: $inputListItemHoverTextColor;
                         }
@@ -712,49 +712,49 @@ body {
                         line-height: inherit;
                     }
 
-                    &.ui-treenode-dragover {
+                    &.p-treenode-dragover {
                         background-color: $inputListItemHoverBgColor;
                         color: $inputListItemHoverTextColor;
                     }
                 }
             }
 
-            .ui-treenode-droppoint {
-                &.ui-treenode-droppoint-active {
+            .p-treenode-droppoint {
+                &.p-treenode-droppoint-active {
                     background-color: $highlightBgColor;
                 }
             }
         }
 
-        &.ui-tree-horizontal {
+        &.p-tree-horizontal {
             padding-left: 0;
             padding-right: 0;
 
-            .ui-treenode {
+            .p-treenode {
 
-                .ui-treenode-content {
+                .p-treenode-content {
                     border: $panelContentBorder;
                     background-color: $panelContentBgColor;
                     color: $panelContentTextColor;
                     padding: $panelContentPadding;
 
-                    &.ui-state-highlight {
+                    &.p-state-highlight {
                         background-color: $highlightBgColor;
                         color: $highlightColorText;
                     }
 
-                    .ui-chkbox {
-                        .ui-icon {
+                    .p-chkbox {
+                        .p-icon {
                             color: $primaryColor;
                         }
                     }
 
-                    .ui-treenode-label:not(.ui-state-highlight):hover {
+                    .p-treenode-label:not(.p-state-highlight):hover {
                         background-color: inherit;
                         color: inherit;
                     }
 
-                    &.ui-treenode-selectable:not(.ui-state-highlight):hover {
+                    &.p-treenode-selectable:not(.p-state-highlight):hover {
                         background-color: $inputListItemHoverBgColor;
                         color: $inputListItemHoverTextColor;
                     }
@@ -762,13 +762,13 @@ body {
             }
         }
 
-        .ui-tree-filter-container {
-            .ui-tree-filter {
+        .p-tree-filter-container {
+            .p-tree-filter {
                 width: 100%;
                 padding-right: 2em;
             }
 
-            .ui-tree-filter-icon {
+            .p-tree-filter-icon {
                 top: 50%;
                 left: auto;
                 margin-top: -.5em;
@@ -778,18 +778,18 @@ body {
         }
     }
 
-    .ui-organizationchart {
-        .ui-organizationchart-node-content {
-            &.ui-organizationchart-selectable-node:not(.ui-state-highlight):hover {
+    .p-organizationchart {
+        .p-organizationchart-node-content {
+            &.p-organizationchart-selectable-node:not(.p-state-highlight):hover {
                 background-color: $inputListItemHoverBgColor;
                 color: $inputListItemHoverTextColor;
             }
 
-            &.ui-state-highlight {
+            &.p-state-highlight {
                 background-color: $highlightBgColor;
                 color: $highlightColorText;
 
-                .ui-node-toggler {
+                .p-node-toggler {
                     i {
                         color: darken($highlightBgColor, 25%);
                     }
@@ -797,38 +797,38 @@ body {
             }
         }
 
-        .ui-organizationchart-line-down {
+        .p-organizationchart-line-down {
             background-color: $organizationChartConnectorColor;
         }
 
-        .ui-organizationchart-line-left {
+        .p-organizationchart-line-left {
             border-right: $panelContentBorder;
             border-color: $organizationChartConnectorColor;
         }
 
-        .ui-organizationchart-line-top {
+        .p-organizationchart-line-top {
             border-top: $panelContentBorder;
             border-color: $organizationChartConnectorColor;
         }
 
-        .ui-organizationchart-node-content {
+        .p-organizationchart-node-content {
             border: $panelContentBorder;
             background-color: $panelContentBgColor;
             color: $panelContentTextColor;
             padding: $panelContentPadding;
         }
 
-        .ui-organizationchart-node-content .ui-node-toggler {
+        .p-organizationchart-node-content .p-node-toggler {
             bottom: -.7em;
             margin-left: -.46em;
             color: $dataIconColor;
         }
     }
 
-    .ui-carousel {
+    .p-carousel {
         padding: 0;
 
-        .ui-carousel-header {
+        .p-carousel-header {
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
             padding: $panelHeaderPadding;
@@ -836,25 +836,25 @@ body {
             margin: 0;
             font-weight: $panelHeaderFontWeight;
 
-            .ui-carousel-header-title {
+            .p-carousel-header-title {
                 padding: 0;
             }
         }
 
-        .ui-carousel-viewport {
+        .p-carousel-viewport {
             border: $panelContentBorder;
             background-color: $panelContentBgColor;
             color: $panelContentTextColor;
             padding: 0;
 
-            .ui-carousel-items {
-                .ui-carousel-item {
+            .p-carousel-items {
+                .p-carousel-item {
                     border: $panelContentBorder;
                 }
             }
         }
 
-        .ui-carousel-footer {
+        .p-carousel-footer {
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
             padding: $panelHeaderPadding;
@@ -862,27 +862,27 @@ body {
             margin: 0;
         }
 
-        .ui-carousel-button {
+        .p-carousel-button {
             color: $panelHeaderIconColor;
             @include transition(color $transitionDuration);
 
-            &.ui-carousel-next-button {
+            &.p-carousel-next-button {
                 @include icon-override("\e92a");
             }
 
-            &.ui-carousel-prev-button {
+            &.p-carousel-prev-button {
                 @include icon-override("\e928");
             }
 
-            &:not(.ui-state-disabled):hover {
+            &:not(.p-state-disabled):hover {
                 color: $panelHeaderIconHoverColor;
             }
         }
 
-        .ui-carousel-page-links {
+        .p-carousel-page-links {
             margin: .125em $inlineSpacing;
 
-            .ui-carousel-page-link {
+            .p-carousel-page-link {
                 color: $panelHeaderIconColor;
                 @include transition(color $transitionDuration);
 
@@ -893,9 +893,9 @@ body {
         }
     }
 
-    .ui-treetable {
-        .ui-treetable-caption,
-        .ui-treetable-summary {
+    .p-treetable {
+        .p-treetable-caption,
+        .p-treetable-summary {
             background-color: $panelHeaderBgColor;
             color: $panelHeaderTextColor;
             border: $panelHeaderBorder;
@@ -903,17 +903,17 @@ body {
             text-align: center;
         }
 
-        .ui-treetable-caption {
+        .p-treetable-caption {
             border-bottom: 0 none;
             font-weight: $tableCaptionFontWeight;
         }
 
-        .ui-treetable-summary {
+        .p-treetable-summary {
             border-top: 0 none;
             font-weight: $tableSummaryFontWeight;
         }
 
-        .ui-treetable-thead > tr > th {
+        .p-treetable-thead > tr > th {
             padding: $tableHeaderCellPadding;
             border: $tableHeaderCellBorder;
             font-weight: $tableHeaderCellFontWeight;
@@ -921,11 +921,11 @@ body {
             background-color: $tableHeaderCellBgColor;
         }
 
-        .ui-treetable-tbody > tr > td {
+        .p-treetable-tbody > tr > td {
             padding: $tableBodyCellPadding;
         }
 
-        .ui-treetable-tfoot > tr > td {
+        .p-treetable-tfoot > tr > td {
             padding: $tableFooterCellPadding;
             border: $tableFooterCellBorder;
             font-weight: $tableFooterCellFontWeight;
@@ -933,31 +933,31 @@ body {
             background-color: $tableFooterCellBgColor;
         }
 
-        .ui-sortable-column {
-            .ui-sortable-column-icon {
+        .p-sortable-column {
+            .p-sortable-column-icon {
                 color: $tableHeaderCellIconColor;
             }
 
-            &:not(.ui-state-highlight):hover {
+            &:not(.p-state-highlight):hover {
                 background-color: $tableHeaderCellHoverBgColor;
                 color: $tableHeaderCellHoverTextColor;
 
-                .ui-sortable-column-icon {
+                .p-sortable-column-icon {
                     color: $tableHeaderCellHoverIconColor;
                 }
             }
 
-            &.ui-state-highlight {
+            &.p-state-highlight {
                 background-color: $highlightBgColor;
                 color: $highlightColorText;
 
-                .ui-sortable-column-icon {
+                .p-sortable-column-icon {
                     color: $highlightColorText;
                 }
             }
         }
 
-        .ui-editable-column {
+        .p-editable-column {
             input {
                 font-size: $fontSize;
                 font-family: $fontFamily;
@@ -969,7 +969,7 @@ body {
             }
         }
 
-        .ui-treetable-tbody {
+        .p-treetable-tbody {
             > tr {
                 background-color: $tableBodyRowBgColor;
                 color: $tableBodyRowTextColor;
@@ -978,18 +978,18 @@ body {
                     background-color: inherit;
                     border: $tableBodyCellBorder;
 
-                    .ui-treetable-toggler {
+                    .p-treetable-toggler {
                         color: $dataIconColor;
                         vertical-align: middle;
                     }
 
-                    .ui-treetable-chkbox {
+                    .p-treetable-chkbox {
                         vertical-align: middle;
                         margin-right: $inlineSpacing;
                     }
                 }
 
-                &.ui-state-highlight {
+                &.p-state-highlight {
                     background-color: $highlightBgColor;
                     color: $highlightColorText;
 
@@ -997,13 +997,13 @@ body {
                         background-color: inherit;
                         border: $tableBodyCellBorder;
 
-                        .ui-treetable-toggler {
+                        .p-treetable-toggler {
                             color: $highlightColorText;
                         }
                     }
                 }
 
-                &.ui-contextmenu-selected {
+                &.p-contextmenu-selected {
                     background-color: $highlightBgColor;
                     color: $highlightColorText;
 
@@ -1011,7 +1011,7 @@ body {
                         background-color: inherit;
                         border: $tableBodyCellBorder;
 
-                        .ui-treetable-toggler {
+                        .p-treetable-toggler {
                             color: $highlightColorText;
                         }
                     }
@@ -1019,15 +1019,15 @@ body {
             }
         }
 
-        &.ui-treetable-hoverable-rows {
-            .ui-treetable-tbody > tr:not(.ui-state-highlight):not(.ui-contextmenu-selected):hover {
+        &.p-treetable-hoverable-rows {
+            .p-treetable-tbody > tr:not(.p-state-highlight):not(.p-contextmenu-selected):hover {
                 cursor: pointer;
                 background-color: $tableBodyRowHoverBgColor;
                 color: $tableBodyRowHoverTextColor;
             }
         }
 
-        .ui-column-resizer-helper {
+        .p-column-resizer-helper {
             background-color: $tableResizerHelperBgColor;
         }
     }

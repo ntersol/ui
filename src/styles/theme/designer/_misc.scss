@@ -1,25 +1,25 @@
 body {
-    .ui-progressbar {
+    .p-progressbar {
         border: $progressBarBorder;
         height: $progressBarHeight;
         background-color: $progressBarBgColor;
         
-        .ui-progressbar-value {
+        .p-progressbar-value {
             border: 0 none;
             margin: 0;
             background: $progressBarValueBgColor;
         }
         
-        .ui-progressbar-label {
+        .p-progressbar-label {
             margin-top: 0;
             color: $textColor;
             line-height: $progressBarHeight;
         }
     }
 
-    .ui-galleria {
-        .ui-galleria-nav-prev,
-        .ui-galleria-nav-next {
+    .p-galleria {
+        .p-galleria-nav-prev,
+        .p-galleria-nav-next {
             @include transition(all $transitionDuration);
             position: absolute;
             color: $textSecondaryColor;
@@ -29,51 +29,51 @@ body {
             }
         }
 
-        .ui-galleria-nav-prev {
+        .p-galleria-nav-prev {
             font-size: $fontSize + 2;
         }
 
-        .ui-galleria-nav-next {
+        .p-galleria-nav-next {
             font-size: $fontSize + 2;
         }
     }
     
-    .ui-terminal {
+    .p-terminal {
         background-color: $panelContentBgColor;
         color: $panelContentTextColor;
         border: $panelContentBorder;
         padding: $panelContentPadding;
 
-        .ui-terminal-input {
+        .p-terminal-input {
             font-size: $fontSize;
             font-family: $fontFamily;
             height: $fontSize + 2;
         }
 
-        .ui-terminal-command {
+        .p-terminal-command {
             height: $fontSize + 2;
         }
     }
 
-    .ui-inplace {
+    .p-inplace {
         min-height: 2.357em;
 
-        .ui-inplace-display {
+        .p-inplace-display {
             padding: $inplacePadding;
             @include border-radius($borderRadius);
             @include transition($inplaceTransition);
 
-            &:not(.ui-state-disabled):hover {
+            &:not(.p-state-disabled):hover {
                 background-color: $inplaceHoverBgColor;
                 color: $inplaceHoverTextColor;
             }
         }
     }
 
-    .ui-fluid {
-        .ui-inplace {
-            &.ui-inplace-closable {
-                .ui-inplace-content > :first-child {
+    .p-fluid {
+        .p-inplace {
+            &.p-inplace-closable {
+                .p-inplace-content > :first-child {
                     display: inline-block;
                     width: calc(100% - #{$buttonIconOnlyWidth});
                 }

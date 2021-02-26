@@ -1,5 +1,5 @@
-<div class="ui-g">
-  <div class="ui-g-12 ui-lg-6">
+<div class="p-g">
+  <div class="p-g-12 p-lg-6">
     <p-tabView [activeIndex]="activeIndex" (onChange)="indexChange($event)" *ngIf="docsSource?.length; noDocsSource">
       <p-tabPanel
         *ngFor="let document of docsSource; let i = index"
@@ -27,7 +27,7 @@
       </div>
     </ng-template>
   </div>
-  <div class="ui-g-12 ui-lg-6 multi-doc" style="overflow:auto;">
+  <div class="p-g-12 p-lg-6 multi-doc" style="overflow:auto;">
     <p-tabView [activeIndex]="activeIndexDest" (onChange)="indexChangeDest($event)">
       <p-tabPanel [header]="pdfInfo && pdfInfo[0]?.label ? pdfInfo[0].label : 'Source Document'">
         <ng-template pTemplate="content">

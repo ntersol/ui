@@ -1,5 +1,5 @@
 body {
-    .ui-button {
+    .p-button {
         margin: 0;
         color: $buttonTextColor;
         background-color: $buttonBgColor;
@@ -25,84 +25,84 @@ body {
             border-color: $buttonActiveBorderColor;
         }
 
-        &.ui-button-text-only {
-            .ui-button-text {
+        &.p-button-text-only {
+            .p-button-text {
                 padding: $buttonTextOnlyPadding;
             }
         }
 
-        &.ui-button-text-icon-left {
-            .ui-button-text {
+        &.p-button-text-icon-left {
+            .p-button-text {
                 padding: $buttonWithLeftIconPadding;
             }
         }
 
-        &.ui-button-text-icon-right {
-            .ui-button-text {
+        &.p-button-text-icon-right {
+            .p-button-text {
                 padding: $buttonWithRightIconPadding;
             }
         }
 
-        &.ui-button-icon-only {
+        &.p-button-icon-only {
             width: $buttonIconOnlyWidth;
 
-            .ui-button-text {
+            .p-button-text {
                 padding: $buttonIconOnlyPadding;
             }
         }
 
-        &.ui-button-raised {
+        &.p-button-raised {
             @include shadow($raisedButtonShadow);
         }
 
-        &.ui-button-rounded {
+        &.p-button-rounded {
             @include border-radius($roundedButtonBorderRadius);
         }
     }
 
-    .ui-fluid {
-        .ui-button-icon-only {
+    .p-fluid {
+        .p-button-icon-only {
             width: $buttonIconOnlyWidth;
         }
     }
 
-    .ui-togglebutton {
+    .p-togglebutton {
         background-color: $toggleButtonBgColor;
         border: $toggleButtonBorder;
         color: $toggleButtonTextColor;
         @include transition($buttonTransition);
 
-        .ui-button-icon-left {
+        .p-button-icon-left {
             color: $toggleButtonIconColor;
         }
 
-        &:not(.ui-state-disabled):not(.ui-state-active):hover {
+        &:not(.p-state-disabled):not(.p-state-active):hover {
             background-color: $toggleButtonHoverBgColor;
             border-color: $toggleButtonHoverBorderColor;
             color: $toggleButtonHoverTextColor;
 
-            .ui-button-icon-left {
+            .p-button-icon-left {
                 color: $toggleButtonHoverIconColor;
             }
         }
 
-        &:not(.ui-state-disabled):not(.ui-state-active).ui-state-focus {
+        &:not(.p-state-disabled):not(.p-state-active).p-state-focus {
             background-color: $toggleButtonFocusBgColor;
             border-color: $toggleButtonFocusBorderColor;
             color: $toggleButtonFocusTextColor;
             outline: $toggleButtonFocusOutline;
 
-            .ui-button-icon-left {
+            .p-button-icon-left {
                 color: $toggleButtonFocusIconColor;
             }
         }
 
-        &.ui-state-active {
+        &.p-state-active {
             background-color: $toggleButtonActiveBgColor;
             border-color: $toggleButtonActiveBorderColor;
             color: $toggleButtonActiveTextColor;
 
-            .ui-button-icon-left {
+            .p-button-icon-left {
                 color: $toggleButtonActiveIconColor;
             }
 
@@ -111,80 +111,80 @@ body {
                 border-color: $toggleButtonActiveHoverBorderColor;
                 color: $toggleButtonActiveHoverTextColor;
 
-                .ui-button-icon-left {
+                .p-button-icon-left {
                     color: $toggleButtonActiveHoverIconColor;
                 }
             }
 
-            &.ui-state-focus {
+            &.p-state-focus {
                 background-color: $toggleButtonActiveFocusBgColor;
                 border-color: $toggleButtonActiveFocusBorderColor;
                 color: $toggleButtonActiveFocusTextColor;
     
-                .ui-button-icon-left {
+                .p-button-icon-left {
                     color: $toggleButtonActiveFocusIconColor;
                 }
             }
         }
     }
 
-    .ui-selectbutton {
-        .ui-button {
+    .p-selectbutton {
+        .p-button {
             background-color: $toggleButtonBgColor;
             border: $toggleButtonBorder;
             color: $toggleButtonTextColor;
             @include transition($buttonTransition);
     
-            .ui-button-icon-left {
+            .p-button-icon-left {
                 color: $toggleButtonIconColor;
             }
     
-            &:not(.ui-state-disabled):not(.ui-state-active):hover {
+            &:not(.p-state-disabled):not(.p-state-active):hover {
                 background-color: $toggleButtonHoverBgColor;
                 border-color: $toggleButtonHoverBorderColor;
                 color: $toggleButtonHoverTextColor;
     
-                .ui-button-icon-left {
+                .p-button-icon-left {
                     color: $toggleButtonHoverIconColor;
                 }
             }
     
-            &:not(.ui-state-disabled):not(.ui-state-active).ui-state-focus {
+            &:not(.p-state-disabled):not(.p-state-active).p-state-focus {
                 background-color: $toggleButtonFocusBgColor;
                 border-color: $toggleButtonFocusBorderColor;
                 color: $toggleButtonFocusTextColor;
                 outline: $toggleButtonFocusOutline;
     
-                .ui-button-icon-left {
+                .p-button-icon-left {
                     color: $toggleButtonFocusIconColor;
                 }
             }
     
-            &.ui-state-active {
+            &.p-state-active {
                 background-color: $toggleButtonActiveBgColor;
                 border-color: $toggleButtonActiveBorderColor;
                 color: $toggleButtonActiveTextColor;
     
-                .ui-button-icon-left {
+                .p-button-icon-left {
                     color: $toggleButtonActiveIconColor;
                 }
 
-                &:not(.ui-state-disabled):hover {
+                &:not(.p-state-disabled):hover {
                     background-color: $toggleButtonActiveHoverBgColor;
                     border-color: $toggleButtonActiveHoverBorderColor;
                     color: $toggleButtonActiveHoverTextColor;
     
-                    .ui-button-icon-left {
+                    .p-button-icon-left {
                         color: $toggleButtonActiveHoverIconColor;
                     }
                 }
     
-                &.ui-state-focus {
+                &.p-state-focus {
                     background-color: $toggleButtonActiveFocusBgColor;
                     border-color: $toggleButtonActiveFocusBorderColor;
                     color: $toggleButtonActiveFocusTextColor;
         
-                    .ui-button-icon-left {
+                    .p-button-icon-left {
                         color: $toggleButtonActiveFocusIconColor;
                     }
                 }
@@ -201,25 +201,25 @@ body {
     }
 
     @media (max-width: 640px) {
-        .ui-buttonset:not(.ui-splitbutton) {
-            .ui-button {
+        .p-buttonset:not(.p-splitbutton) {
+            .p-button {
                 margin-bottom: 1px;
                 @include border-radius($borderRadius);
             }
         }
     }
 
-    .ui-splitbutton.ui-buttonset {
-        .ui-button {
+    .p-splitbutton.p-buttonset {
+        .p-button {
             border: 1px solid transparent;
         }
 
-        .ui-menu {
+        .p-menu {
             min-width: 100%;
         }
     }
 
-    .ui-button.ui-state-default.ui-button-secondary, .ui-buttonset.ui-button-secondary > .ui-button.ui-state-default  {
+    .p-button.p-state-default.p-button-secondary, .p-buttonset.p-button-secondary > .p-button.p-state-default  {
         color: $secondaryButtonTextColor;
         background-color: $secondaryButtonBgColor;
         border: $secondaryButtonBorder;
@@ -241,7 +241,7 @@ body {
         }
     }
 
-    .ui-button.ui-state-default.ui-button-info, .ui-buttonset.ui-button-info > .ui-button.ui-state-default  {
+    .p-button.p-state-default.p-button-info, .p-buttonset.p-button-info > .p-button.p-state-default  {
         color: $infoButtonTextColor;
         background-color: $infoButtonBgColor;
         border: $infoButtonBorder;
@@ -263,7 +263,7 @@ body {
         }
     }
 
-    .ui-button.ui-state-default.ui-button-success, .ui-buttonset.ui-button-success > .ui-button.ui-state-default  {
+    .p-button.p-state-default.p-button-success, .p-buttonset.p-button-success > .p-button.p-state-default  {
         color: $successButtonTextColor;
         background-color: $successButtonBgColor;
         border: $successButtonBorder;
@@ -285,7 +285,7 @@ body {
         }
     }
 
-    .ui-button.ui-state-default.ui-button-warning, .ui-buttonset.ui-button-warning > .ui-button.ui-state-default  {
+    .p-button.p-state-default.p-button-warning, .p-buttonset.p-button-warning > .p-button.p-state-default  {
         color: $warningButtonTextColor;
         background-color: $warningButtonBgColor;
         border: $warningButtonBorder;
@@ -307,7 +307,7 @@ body {
         }
     }
 
-    .ui-button.ui-state-default.ui-button-danger, .ui-buttonset.ui-button-danger > .ui-button.ui-state-default  {
+    .p-button.p-state-default.p-button-danger, .p-buttonset.p-button-danger > .p-button.p-state-default  {
         color: $dangerButtonTextColor;
         background-color: $dangerButtonBgColor;
         border: $dangerButtonBorder;

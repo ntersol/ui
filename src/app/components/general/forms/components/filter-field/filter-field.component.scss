@@ -1,9 +1,9 @@
 :host {
   .nts-filter-small{
     height:21px;
-    .ui-inputgroup{height: 24px;}
-    .ui-inputgroup-addon{font-size: 10px;}
-    .ui-widget{font-size: 12px;}
+    .p-inputgroup{height: 24px;}
+    .p-inputgroup-addon{font-size: 10px;}
+    .p-widget{font-size: 12px;}
     .filter-clear{top:4%;}
   }
   .nts-filter-field {
@@ -15,7 +15,7 @@
     right: 9px;
     top: 16%;
   }
-  .ui-inputgroup-addon {
+  .p-inputgroup-addon {
     font-size: 14px;
   }
 }

@@ -1,8 +1,8 @@
-<div class="ui-container-fluid" *ngIf="{ users: users$ | async } as comp">
+<div class="p-container-fluid" *ngIf="{ users: users$ | async } as comp">
   <nts-api-state [state]="comp.users">
     <div class="d-flex">
-      <div class="ui-inputgroup mb-3 w-100">
-        <span class="ui-inputgroup-addon"><i class="fas fa-filter"></i></span>
+      <div class="p-inputgroup mb-3 w-100">
+        <span class="p-inputgroup-addon"><i class="fas fa-filter"></i></span>
         <input
           type="text"
           pInputText

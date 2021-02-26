@@ -1,25 +1,25 @@
 .nts-table {
-  .ui-table {
+  .p-table {
     border: 0;
     table {
       table-layout: auto;
     }
-    .ui-table-wrapper {
+    .p-table-wrapper {
       border: 1px solid #e3e3e3;
       border-bottom: 0;
     }
-    .ui-table-caption {
+    .p-table-caption {
       border: 0;
       background: transparent;
       padding-left: 0;
       padding-right: 0;
     }
-    .ui-table-tbody > tr > td,
-    .ui-table-thead > tr > th {
+    .p-table-tbody > tr > td,
+    .p-table-thead > tr > th {
       border: 0;
       border-bottom: 1px solid #e3e3e3;
     }
-    .ui-table-tbody > tr > td {
+    .p-table-tbody > tr > td {
       word-break: break-word;
     }
     .nts-table-no-content {
@@ -81,7 +81,7 @@
     td {
       padding: 0.25em 0.3em !important;
     }
-    .ui-widget {
+    .p-widget {
       font-size: 12px !important;
     }
   }
