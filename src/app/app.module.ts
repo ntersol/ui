@@ -1,7 +1,7 @@
 // @angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, enableProdMode, ErrorHandler, Injector } from '@angular/core'; // APP_INITIALIZER,
+import { NgModule, ErrorHandler, Injector } from '@angular/core'; // APP_INITIALIZER,
 import { RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -59,7 +59,7 @@ persistState({
 });
 
 // Enables faster prod mode, does disable some dirty error checking though
-enableProdMode();
+// enableProdMode();
 
 // Components
 export const APP_COMPONENTS = [

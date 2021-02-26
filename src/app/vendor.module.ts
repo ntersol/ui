@@ -58,7 +58,7 @@ const modules = [
   exports: [
     RouterModule,
     FormsModule,
-    ReactiveFormsModule, // NgbModule,
+    ReactiveFormsModule,
     ...modules,
   ],
   declarations: [],
