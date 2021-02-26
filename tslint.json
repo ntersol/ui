@@ -2,6 +2,9 @@
   "extends": ["tslint-angular"],
   "defaultSeverity": "warning",
   "rules": {
+    "deprecation": {
+      "severity": "warning"
+    },
     "no-trailing-whitespace": false,
     "use-view-encapsulation": false
   }
