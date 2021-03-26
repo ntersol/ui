@@ -11,6 +11,7 @@ import { GridComponent } from './routes/grid/grid.component';
 import { FormsComponent } from './routes/forms/forms.component';
 import { CalendarComponent } from './routes/calendar/calendar.component';
 import { NtsChartModule, NtsGenericModule, NtsGridModule, NtsFormsModule, NtsCalendarModule, NtsTableModule } from 'src/app/components/general';
+import { EntityStoreComponent } from './routes/entity-store/entity-store.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, NtsChartModule, NtsGenericModule, NtsGridModule, NtsFormsModule, NtsCalendarModule, NtsTableModule],
@@ -24,6 +25,7 @@ import { NtsChartModule, NtsGenericModule, NtsGridModule, NtsFormsModule, NtsCal
     FormsComponent,
     FormsComponent,
     CalendarComponent,
+    EntityStoreComponent,
   ],
   entryComponents: [DemoModalComponent],
 })

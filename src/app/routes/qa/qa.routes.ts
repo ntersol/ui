@@ -9,6 +9,7 @@ import { GridComponent } from './routes/grid/grid.component';
 import { FormsComponent } from './routes/forms/forms.component';
 import { CalendarComponent } from './routes/calendar/calendar.component';
 import { QaModule } from './qa.module';
+import { EntityStoreComponent } from './routes/entity-store/entity-store.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,11 @@ const routes: Routes = [
     path: 'calendar',
     component: CalendarComponent,
     data: { title: 'Calendar' },
+  },
+  {
+    path: 'entity-store',
+    component: EntityStoreComponent,
+    data: { title: 'Entity Store' },
   },
   {
     path: '',

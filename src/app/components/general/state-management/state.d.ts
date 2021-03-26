@@ -15,7 +15,7 @@ export namespace NtsState {
     modifying: boolean;
     error: any;
     errorModify: any;
-    data: null | t;
+    data: undefined | null | t;
   }
 
   /**
@@ -26,12 +26,14 @@ export namespace NtsState {
     apiUrl?: string;
     /** Force the store to refresh the data from the remote url. Otherwise if the store has data subsequent get calls are ignored */
     refreshCache?: boolean;
+    /** If true, will empty out the store of data prior to completing the operation */
+    reset?: boolean;
   }
 
   /** Different methods to pass the api url string to the store */
   export type ApiUrl = string | Observable<string> | (<t>(x: t) => string);
 
-  export interface EntityStoreConfig {
+  export interface EntityStoreConfig<t> {
     /** Full path to webapi. Assumes restful conventions for verbs */
     apiUrl?: ApiUrl;
     /** The uniqueID or guid or the entity format. Default is 'guid' */
@@ -45,7 +47,9 @@ export namespace NtsState {
       patch?: ApiUrl;
       delete?: ApiUrl;
     };
-    /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests. 
+    /** If the store has a subscriber but no data, automatically perform a get request. Default true */
+    autoLoad?: boolean;
+    /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests.
      * If true the url to the web api must added manually via a callback function or observable */
     disableAppendId?: {
       put?: true;
