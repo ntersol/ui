@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-// @import '~bootstrap/scss/bootstrap';
-
+// Bootstrap
+// Option 1: Import only parts of Bootstrap
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
@@ -9,13 +9,21 @@
 @import '~bootstrap/scss/reboot';
 @import '~bootstrap/scss/utilities';
 @import '~bootstrap/scss/tables';
+// Option 2: Import all of Bootstrap
+// @import '~bootstrap/scss/bootstrap';
+
+// Font Awesome Free 5
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
+// PrimeNG
 @import '../node_modules/primeicons/primeicons.css';
 @import '../node_modules/primeng/resources/primeng.min.css';
 @import '../node_modules/primeflex/primeflex.css';
-// @import "../node_modules/primeng/resources/themes/nova/theme.css";
-@import 'styles/theme/nova-light/theme';
+// Option 1: Pre-built PrimeNG theme
+@import "../node_modules/primeng/resources/themes/nova/theme.css";
+// Option 2: Custom theme using PrimeNG Theme Designer
+// TODO: Update Theme Designer to support PrimeNG 11
+//@import 'styles/theme/nova-light/theme';
 
 // Global styling
 @import './styles/globals';
