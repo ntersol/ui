@@ -51,7 +51,7 @@ export class NtsTreeComponent implements OnInit, OnChanges {
   public nodes$ = this.nodesSrc$.pipe(
     map(nodes => {
       if (!nodes) {
-        return nodes;
+        return [];
       }
       let nodesFiltered = nodes;
       // If filter term supplied, filter nodes

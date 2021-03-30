@@ -28,9 +28,9 @@ import { NtsTable } from '../../table';
 })
 export class TableComponent implements OnInit, OnChanges, OnDestroy {
   /** Rows */
-  @Input() rows?: any[] | null;
+  @Input() rows: any[] | null = [];
   /** Columns */
-  @Input() columns?: NtsTable.Column[] | null;
+  @Input() columns: NtsTable.Column[] | null = [];
   /** Custom header text */
   @Input() headerText?: string | null;
   /** Show the custom filter box */
@@ -44,12 +44,12 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   /** Shows a dropdown with how many results per page */
   @Input() rowsPerPageOptions?: number[] | null;
 
-  @Input() rowTrackBy?: Function;
+  @Input() rowTrackBy: Function | null = null;
 
   @Input() compact = false;
 
   /** Required input for ngPrime expander - expands all rows with the same key */
-  @Input() dataKey?: string | null;
+  @Input() dataKey: string | null = '';
 
   public shouldShowExpandRow = false;
 
