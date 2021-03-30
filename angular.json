@@ -175,6 +175,29 @@
             "jestConfig": "libs/ui/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/ui/ && npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd dist/libs/ui/ && npm pack && npm publish --access public"
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run ui:patch", 
+              "ng run ui:build:production",
+              "ng run ui:pack"
+            ],
+            "parallel": false
+          }
         }
       }
     }
