@@ -30,7 +30,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   /** Rows */
   @Input() rows: any[] | null = [];
   /** Columns */
-  @Input() columns: NtsTable.Column[] | null = [];
+  @Input() columns: NtsTable.Column[] = [];
   /** Custom header text */
   @Input() headerText?: string | null;
   /** Show the custom filter box */
@@ -40,19 +40,20 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   /** Custom global filter term */
   @Input() filterTerm: string | null = null;
   /** Enable paginate and only display this many entries */
-  @Input() paginateRows?: number | null;
+  @Input() paginateRows = 0;
   /** Shows a dropdown with how many results per page */
-  @Input() rowsPerPageOptions?: number[] | null;
+  @Input() rowsPerPageOptions: number[] = [];
 
-  @Input() rowTrackBy: Function | null = null;
+  @Input() rowTrackBy: any = null; // Function | null
 
   @Input() compact = false;
 
   /** Required input for ngPrime expander - expands all rows with the same key */
-  @Input() dataKey: string | null = '';
+  @Input() dataKey: any = null; // String
 
   public shouldShowExpandRow = false;
-
+  /** Show/hide the paginator based on if paginateRows was defined */
+  public paginator = false;
   public columnWidthsPercent: number[] | null = null;
 
   /** Holds custom DOM templates passed from parent */
@@ -81,6 +82,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     this.updateShouldShowExpandRow();
+    this.paginator = !!this.rows?.length && !!this.paginateRows && this.rows.length > this.paginateRows ? !!this.paginateRows : false;
   }
 
   ngOnChanges(model: SimpleChanges) {
@@ -116,6 +118,13 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       this.sortLast = { ...sort };
     }
+  }
+
+  /**
+   * Make changes to global filter
+   */
+  public filterGlobalUpdate(e: any) {
+    this.table.filterGlobal(e?.target?.value || null, 'contains');
   }
 
   /**

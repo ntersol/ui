@@ -1,11 +1,12 @@
+<
 <div class="nts-table" [ngClass]="{ 'nts-table-compact': compact }">
   <p-table
     #tt
-    [value]="rows"
+    [value]="rows || []"
     [columns]="columns"
     sortMode="single"
     (onSort)="onSort($event)"
-    [paginator]="rows?.length && paginateRows && rows?.length > paginateRows ? !!paginateRows : false"
+    [paginator]="paginator"
     [rowsPerPageOptions]="rowsPerPageOptions"
     [rows]="paginateRows"
     [autoLayout]="false"
@@ -18,16 +19,8 @@
         <div *ngIf="headerText" [innerHTML]="headerText"></div>
         <div class="p-filter ml-auto" *ngIf="showFilter">
           <i class="fas fa-search mr-2" style="margin: 4px 4px 0 0;"></i>
-          <input
-            #filter
-            type="text"
-            pInputText
-            size="50"
-            placeholder="Global Filter"
-            (input)="tt.filterGlobal($event.target.value || '', 'contains')"
-            style="width: auto;"
-          />
-          <a class="filter-clear" (click)="tt.filterGlobal(null, 'contains'); filter.value = ''" *ngIf="filter.value">
+          <input #filter type="text" pInputText size="50" placeholder="Global Filter" (input)="filterGlobalUpdate($event)" style="width: auto;" />
+          <a class="filter-clear" (click)="filterGlobalUpdate($event); filter.value = ''" *ngIf="filter.value">
             <i class="fas fa-times"></i>
           </a>
         </div>
@@ -173,3 +166,4 @@
     </ng-template>
   </p-table>
 </div>
+>
