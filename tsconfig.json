@@ -26,6 +26,9 @@
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "target": "es5",
@@ -33,6 +36,7 @@
     "typeRoots": ["node_modules/@types"]
   },
   "angularCompilerOptions": {
+    "strictTemplates": true,
     "fullTemplateTypeCheck": true,
     "preserveWhitespaces": false
   },

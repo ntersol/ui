@@ -28,11 +28,11 @@ import { NtsTable } from '../../table';
 })
 export class TableComponent implements OnInit, OnChanges, OnDestroy {
   /** Rows */
-  @Input() rows: any[] | undefined;
+  @Input() rows?: any[] | null;
   /** Columns */
-  @Input() columns: NtsTable.Column[] | undefined;
+  @Input() columns?: NtsTable.Column[] | null;
   /** Custom header text */
-  @Input() headerText: string | undefined;
+  @Input() headerText?: string | null;
   /** Show the custom filter box */
   @Input() showFilter = false;
   /** Show table headers */
@@ -40,9 +40,9 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   /** Custom global filter term */
   @Input() filterTerm: string | null = null;
   /** Enable paginate and only display this many entries */
-  @Input() paginateRows: number | undefined;
+  @Input() paginateRows?: number | null;
   /** Shows a dropdown with how many results per page */
-  @Input() rowsPerPageOptions: number[] | undefined;
+  @Input() rowsPerPageOptions?: number[] | null;
 
   @Input() rowTrackBy?: Function;
 
