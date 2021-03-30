@@ -1,12 +1,13 @@
 <div class="nts-tree" [ngClass]="{ 'nts-tree-compact': compactView }">
   <p-tree
     #tree
-    [value]="nodes$ | async"
+    *ngIf="nodes$ | async as nodes"
+    [value]="nodes || []"
     [selectionMode]="selectionMode"
     [draggableNodes]="draggable"
     [droppableNodes]="droppable"
     [contextMenu]="contextMenu"
-    [propagateSelectionUp]="propagateSelectionUp" 
+    [propagateSelectionUp]="propagateSelectionUp"
     [propagateSelectionDown]="propagateSelectionDown"
     [filter]="false"
     [(selection)]="selection"

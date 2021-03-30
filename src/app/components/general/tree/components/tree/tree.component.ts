@@ -16,7 +16,7 @@ import {
 import { TreeNode } from 'primeng/api';
 import { Tree } from 'primeng/tree';
 import { TreeTemplateDirective } from '../../directives/template.directive';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { setNodeProp } from '../../utils/setNodeProp.util';
 import { filterTreeNodes } from '../../utils/filterNodes.util';
@@ -46,9 +46,9 @@ export class NtsTreeComponent implements OnInit, OnChanges {
   @Input() filterFn: ((node: NtsTree.TreeNode) => boolean) | null = null;
 
   /** Node source for tree */
-  public nodesSrc$ = new BehaviorSubject<TreeNode[] | null>(this.value);
+  public nodesSrc$ = new BehaviorSubject<TreeNode[]>(this.value || []);
   /** Final out put of nodes with filtering applied */
-  public nodes$ = this.nodesSrc$.pipe(
+  public nodes$: Observable<TreeNode<any>[]> = this.nodesSrc$.pipe(
     map(nodes => {
       if (!nodes) {
         return [];
