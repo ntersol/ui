@@ -23,6 +23,7 @@
   "projects": {
     "demo": { "tags": [] },
     "demo-e2e": { "tags": [], "implicitDependencies": ["demo"] },
-    "ui": { "tags": [] }
+    "ui": { "tags": [] },
+    "calendar": { "tags": [] }
   }
 }

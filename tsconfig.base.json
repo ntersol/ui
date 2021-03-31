@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ntersol/ui": ["libs/ui/src/index.ts"]
+      "@ntersol/ui": ["libs/ui/src/index.ts"],
+      "@ntersol/calendar": ["libs/calendar/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
