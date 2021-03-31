@@ -16,10 +16,10 @@ import {
     EventUi,
     EventInteractionState,
   } from '@fullcalendar/core';
-  import EventSourceApi from '@fullcalendar/core/api/EventSourceApi';
-  import { DurationInput } from '@fullcalendar/core/datelib/duration';
-  import { DateInput } from '@fullcalendar/core/datelib/env';
-  import { FormatterInput } from '@fullcalendar/core/datelib/formatting';
+  // import EventSourceApi from '@fullcalendar/core/api/EventSourceApi';
+  // import { DurationInput } from '@fullcalendar/core/datelib/duration';
+  // import { DateInput } from '@fullcalendar/core/datelib/env';
+  // import { FormatterInput } from '@fullcalendar/core/datelib/formatting';
   
   /**
    * Definitions for fullCalendar. Their repo isn't strongly typed...
@@ -80,7 +80,7 @@ import {
     }
   
     export interface EventApi {
-      readonly source: EventSourceApi | null;
+      readonly source: any | null;
       readonly start: Date | null;
       readonly end: Date | null;
       readonly id: string;
@@ -105,36 +105,36 @@ import {
       setProp(name: string, val: string): void;
       setExtendedProp(name: string, val: any): void;
       setStart(
-        startInput: DateInput,
+        startInput: any,
         options?: {
           granularity?: string;
           maintainDuration?: boolean;
         },
       ): void;
       setEnd(
-        endInput: DateInput | null,
+        endInput: any | null,
         options?: {
           granularity?: string;
         },
       ): void;
       setDates(
-        startInput: DateInput,
-        endInput: DateInput | null,
+        startInput: any,
+        endInput: any | null,
         options?: {
           allDay?: boolean;
           granularity?: string;
         },
       ): void;
-      moveStart(deltaInput: DurationInput): void;
-      moveEnd(deltaInput: DurationInput): void;
-      moveDates(deltaInput: DurationInput): void;
+      moveStart(deltaInput: any): void;
+      moveEnd(deltaInput: any): void;
+      moveDates(deltaInput: any): void;
       setAllDay(
         allDay: boolean,
         options?: {
           maintainDuration?: boolean;
         },
       ): void;
-      formatRange(formatInput: FormatterInput): any;
+      formatRange(formatInput: any): any;
       mutate(mutation: EventMutation): void;
       remove(): void;
     }
