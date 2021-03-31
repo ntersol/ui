@@ -253,10 +253,33 @@
           "options": {
             "commands": [
               "ng run calendar:patch",
+              "ng run calendar:readme",
               "ng run calendar:build:production",
               "ng run calendar:pack"
             ],
             "parallel": false
+          }
+        },
+        "compodoc": {
+          "builder": "@twittwer/compodoc:compodoc",
+          "options": {
+            "tsConfig": "libs/calendar/tsconfig.lib.json",
+            "outputPath": "dist/compodoc/calendar",
+            "workspaceDocs": true
+          },
+          "configurations": {
+            "json": {
+              "exportFormat": "json"
+            }
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/calendar/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/calendar.component.ts --tsconfig ./tsconfig.json",
+              "cp libs/calendar/docs/README.md libs/calendar/README.md"
+            ]
           }
         }
       }

@@ -1,5 +1,3 @@
-@ntersol/calendar / [Exports](modules.md)
-
 [@ntersol/calendar](../README.md) / [Exports](../modules.md) / CalendarComponent
 
 # Class: CalendarComponent
