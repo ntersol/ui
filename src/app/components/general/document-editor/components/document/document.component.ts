@@ -8,10 +8,10 @@ import { NtsDocumentEditor } from '../../document-editor';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentComponent implements OnInit, OnChanges {
-  @Input() document?: NtsDocumentEditor.Document;
-  @Input() viewModels?: NtsDocumentEditor.Preview[][];
-  @Input() settings?: NtsDocumentEditor.Settings;
-  @Input() tnSettings?: NtsDocumentEditor.ThumbnailSize;
+  @Input() document?: NtsDocumentEditor.Document | null;
+  @Input() viewModels?: NtsDocumentEditor.Preview[][] | null;
+  @Input() settings?: NtsDocumentEditor.Settings | null;
+  @Input() tnSettings?: NtsDocumentEditor.ThumbnailSize | null;
   @Input() selection: NtsDocumentEditor.Selection = [];
   @Input() pageActive?: NtsDocumentEditor.PageActive;
   @Input() pdfInfo?: NtsDocumentEditor.PdfInfo[];

@@ -11,16 +11,16 @@ import { pdfjsDist } from '../../../shared/models/pdf';
 })
 export class MultiDocComponent implements OnInit, OnChanges {
   // Documents
-  @Input() documents?: NtsDocumentEditor.Document[];
-  @Input() viewModels?: NtsDocumentEditor.Preview[][];
-  @Input() settings?: NtsDocumentEditor.Settings;
-  @Input() tnSettings?: NtsDocumentEditor.ThumbnailSize;
-  @Input() selection: NtsDocumentEditor.Selection = [];
+  @Input() documents?: NtsDocumentEditor.Document[] | null;
+  @Input() viewModels?: NtsDocumentEditor.Preview[][] | null;
+  @Input() settings?: NtsDocumentEditor.Settings | null;
+  @Input() tnSettings?: NtsDocumentEditor.ThumbnailSize | null;
+  @Input() selection?: number[] = [];
   @Input() pageActive?: NtsDocumentEditor.PageActive;
   @Input() pdfInfo?: NtsDocumentEditor.PdfInfo[];
 
   // Viewer
-  @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[];
+  @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[] | null;
   @Input() rotation = 0;
 
   public docsSource?: NtsDocumentEditor.Document[];
