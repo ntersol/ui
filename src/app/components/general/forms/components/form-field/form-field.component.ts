@@ -51,16 +51,16 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
 
   @Input() type: FormFieldType = 'text';
   /** Determine if this is a generic fieldtype */
-  public fieldType!: string;
+  public fieldType = '';
   /** Placeholder text */
-  @Input() placeholder: string | undefined;
+  @Input() placeholder = '';
   /** Should the placeholder be a traditional inline one or a float version */
   @Input() placeholderFloat = true;
 
   /** Text to use for ID attribute */
-  @Input() id: string | undefined;
+  @Input() id = '';
   /** Text to use for name attribute */
-  @Input() name: string | undefined;
+  @Input() name = '';
   /** Any css classes */
   @Input() class = '';
   /** Is disabled */
@@ -74,13 +74,13 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   @Input() optionValue: keyof SelectItem = 'value';
 
   /** Tooltip text */
-  @Input() tooltip: string | undefined;
+  @Input() tooltip: string | null = null;
   /** Hint text */
-  @Input() hint: string | undefined;
+  @Input() hint: string | null = null;
   /** HTML code to place in the prefix position in FRONT of the form field */
-  @Input() prefix: string | undefined;
+  @Input() prefix: string | null = null;
   /** HTML code to place in the suffix position in BACK of the form field */
-  @Input() suffix: string | undefined;
+  @Input() suffix: string | null = null;
 
   /** Show success icon when valid */
   @Input() showSuccess = false;
@@ -92,27 +92,27 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   /** If field type is text area, use this many columns */
   @Input() rows = 4;
   /** If NUMBER, the max value allowed */
-  @Input() max: number | undefined;
+  @Input() max: number | null = null;
   /** If NUMBER, the min value allowed */
-  @Input() min: number | undefined;
+  @Input() min: number | null = null;
   /** The MAXIMUM number of characters allowed by this input */
-  @Input() maxlength: number | undefined;
+  @Input() maxlength: number | null = null;
   /** The MINIMUM number of characters allowed by this input */
-  @Input() minlength: number | undefined;
+  @Input() minlength: number | null = null;
 
   /** Should form controls with input masks return the raw data or the masksed/formatted data? */
   @Input() unmask = true;
   /** Content for autocomplete html ATTRIBUTE, not autocomplete control */
-  @Input() autocomplete: string | undefined;
+  @Input() autocomplete: string | null = null;
 
   /** Pass formcontrol reference */
   public formControl!: FormControl;
   /** Does the current input have focus or data. Used to toggle the label */
   public focused = false;
 
-  public autoCompleteSuggestions: any[] | undefined;
+  public autoCompleteSuggestions: any[] = [];
 
-  public optionsOutput: SelectItem[] | undefined;
+  public optionsOutput: SelectItem[] = [];
 
   public optionIsObjectsArray = true;
 

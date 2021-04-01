@@ -11,9 +11,9 @@
         <ng-container *ngSwitchCase="'autoComplete'">
           <div class="autocomplete">
             <p-autoComplete
-              [field]="optionIsObjectsArray ? optionLabel || '' : ''"
+              [field]="optionIsObjectsArray ? optionLabel : ''"
               [(ngModel)]="model"
-              [suggestions]="autoCompleteSuggestions || []"
+              [suggestions]="autoCompleteSuggestions"
               (completeMethod)="autoCompleteFilterTerms($event)"
               (ngModelChange)="autoCompleteSelection($event)"
             ></p-autoComplete>
@@ -25,7 +25,7 @@
 
         <!-- Button group -->
         <ng-container *ngSwitchCase="'buttonGroup'">
-          <p-selectButton [options]="options || []" [formControl]="formControl"></p-selectButton>
+          <p-selectButton [options]="options" [formControl]="formControl"></p-selectButton>
         </ng-container>
 
         <!-- Toggle -->
@@ -52,7 +52,7 @@
         <ng-container *ngSwitchCase="'select'">
           <select class="p-widget p-dropdown p-corner-all" [formControl]="formControl">
             <option [ngValue]="null" disabled>-- Please Select --</option>
-            <ng-container *ngIf="options?.length">
+            <ng-container *ngIf="is.selectItemArray(options) && options?.length">
               <ng-container *ngFor="let option of options">
                 <option
                   *ngIf="is.selectItem(option) && option[optionValue] !== undefined && option[optionLabel] !== undefined; else optionsSelectStringArray"
@@ -75,9 +75,9 @@
         -->
         <ng-container *ngSwitchCase="'dropdown'">
           <p-dropdown
-            [options]="optionsOutput || []"
-            [name]="name || ''"
-            [id]="id || ''"
+            [options]="optionsOutput"
+            [name]="name"
+            [id]="id"
             [formControl]="formControl"
             [showTransitionOptions]="'100ms'"
             [hideTransitionOptions]="'50ms'"
@@ -86,14 +86,14 @@
 
         <!-- Checkboxes -->
         <ng-container *ngSwitchCase="'checkbox'">
-          <ng-container *ngIf="options?.length">
+          <ng-container *ngIf="is.selectItemArray(options) && options?.length">
             <div *ngFor="let option of options">
               <p-checkbox
-                [name]="name || ''"
+                [name]="name"
                 [id]="id"
                 [formControl]="formControl"
-                [label]="option[optionLabel] !== undefined ? option[optionLabel] : option"
-                [value]="option[optionValue] !== undefined ? option[optionValue] : option"
+                [label]="is.selectItem(option) && option[optionLabel] !== undefined ? option[optionLabel] : option"
+                [value]="is.selectItem(option) && option[optionValue] !== undefined ? option[optionValue] : option"
               ></p-checkbox>
             </div>
           </ng-container>
@@ -101,26 +101,19 @@
 
         <!-- Single checkbox that returns a boolean value -->
         <ng-container *ngSwitchCase="'checkboxBoolean'">
-          <p-checkbox
-            class="nts-checkbox-boolean"
-            [binary]="true"
-            [name]="name || ''"
-            [id]="id || ''"
-            [formControl]="formControl"
-            [label]="placeholder || ''"
-          ></p-checkbox>
+          <p-checkbox class="nts-checkbox-boolean" [binary]="true" [name]="name" [id]="id" [formControl]="formControl" [label]="placeholder"></p-checkbox>
         </ng-container>
 
         <!-- Radio -->
         <ng-container *ngSwitchCase="'radio'">
-          <ng-container *ngIf="options?.length">
+          <ng-container *ngIf="is.selectItemArray(options) && options?.length">
             <div *ngFor="let option of options">
               <p-radioButton
-                [name]="name || ''"
-                [id]="id || ''"
+                [name]="name"
+                [id]="id"
                 [formControl]="formControl"
-                [label]="option[optionLabel] !== undefined ? option[optionLabel] : option"
-                [value]="option[optionValue] !== undefined ? option[optionValue] : option"
+                [label]="is.selectItem(option) && option[optionLabel] !== undefined ? option[optionLabel] : option"
+                [value]="is.selectItem(option) && option[optionValue] !== undefined ? option[optionValue] : option"
               ></p-radioButton>
             </div>
           </ng-container>
