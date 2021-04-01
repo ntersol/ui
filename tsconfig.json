@@ -27,6 +27,7 @@
     "strict": true,
     "strictNullChecks": true,
     "noImplicitReturns": true,
+    "strictPropertyInitialization": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
