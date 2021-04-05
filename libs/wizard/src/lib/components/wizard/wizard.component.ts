@@ -52,7 +52,7 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   set columnTemplates(val: QueryList<WizardFeatureDirective>) {
     const arr = val.toArray();
     if (arr.length) {
-      arr.forEach(template => (this.templates[template.id] = template));
+      arr.forEach((template) => (this.templates[template.id] = template));
     }
   }
 
@@ -66,7 +66,7 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
 
   public state$ = this.svc.state$.pipe(
     // Emit wizard complete action to parent
-    tap(state => {
+    tap((state) => {
       this.stateChange.emit(state);
       if (state.complete) {
         this.complete.emit();
@@ -80,8 +80,8 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   /** Pass section state changes to parent component */
   public sectionsState$ = this.svc.sectionsState$.pipe(
     untilDestroyed(this),
-    filter(s => !!s),
-    tap(s => {
+    filter((s) => !!s),
+    tap((s) => {
       if (s) {
         this.sectionStateChanged.emit(s);
       }
@@ -90,26 +90,39 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
 
   /** Should previous button be visible */
   public previousButtonVisible$ = combineLatest([this.state$, this.svc.sectionsSrc$]).pipe(
-    map(([state, sections]) => (sections && state.sectionUrl === sections[0].urlSlug && state.routeUrl === sections[0].routeStart ? false : true)),
+    map(([state, sections]) =>
+      sections && state.sectionUrl === sections[0].urlSlug && state.routeUrl === sections[0].routeStart ? false : true,
+    ),
   );
 
   public pageActive$ = this.svc.pageActive$.pipe(
     startWith(null),
     pairwise(), // Get previous value
     // Emit current and previous page to parent
-    tap(x => this.routeChanged.emit({ previous: x && x[0] ? x[0].src : null, current: x && x[1] ? x[1].src : null, dir: 'next' })), // TODO dir
-    map(p => p[1]),
+    tap((x) =>
+      this.routeChanged.emit({
+        previous: x && x[0] ? x[0].src : null,
+        current: x && x[1] ? x[1].src : null,
+        dir: 'next',
+      }),
+    ), // TODO dir
+    map((p) => p[1]),
   );
 
   private routeParams: Wizard.RouteParams = {};
   private isReady = false;
   private isLoaded = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private location: Location) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private location: Location,
+  ) {}
 
   ngOnInit() {
     // Watch route param changes to manage routing changes
-    this.route.params.pipe(untilDestroyed(this)).subscribe(params => {
+    this.route.params.pipe(untilDestroyed(this)).subscribe((params) => {
       this.routeParams = { sectionUrl: params.sectionUrl, routeUrl: params.routeUrl };
       if (this.isLoaded) {
         this.svc.routeChange({ sectionUrl: this.routeParams.sectionUrl, routeUrl: this.routeParams.routeUrl });
@@ -155,7 +168,7 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
         validators: this.validators,
         sectionsState: this.sectionsState,
         baseUrl: getBaseUrl(this.router.url, this.route.snapshot.params),
-        state: this.state
+        state: this.state,
       });
       this.isLoaded = true;
       this.ready.emit(this.svc);

@@ -92,7 +92,11 @@ export const routeGetNext = (
         routeParams: { sectionUrl: routeNext.sectionId, routeUrl: routeNext.urlSlug },
       };
     } else {
-      console.error('<Wizard> That section and route combination does not exist:', state.sectionUrl, routeCurrent.routeNext);
+      console.error(
+        '<Wizard> That section and route combination does not exist:',
+        state.sectionUrl,
+        routeCurrent.routeNext,
+      );
     }
   }
 

@@ -6,7 +6,7 @@ export const sectionControlCreate = (
   section: Wizard.Section,
   position: number,
   expressionReplacer: (str: string | null | undefined) => string,
-  routeCount = 0
+  routeCount = 0,
 ): Wizard.SectionControl => {
   const src = clone<Wizard.Section>(section);
   return assign<Wizard.SectionControl>(src, {

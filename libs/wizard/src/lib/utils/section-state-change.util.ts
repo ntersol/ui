@@ -1,6 +1,12 @@
 import { Wizard } from '../wizard';
 
-export type SectionChangeType = 'initial' | 'routeChange' | 'routePrev' | 'sectionChange' | 'sectionComplete' | 'wizardComplete';
+export type SectionChangeType =
+  | 'initial'
+  | 'routeChange'
+  | 'routePrev'
+  | 'sectionChange'
+  | 'sectionComplete'
+  | 'wizardComplete';
 
 /**
  * Reducer to manage section state changes
@@ -38,10 +44,10 @@ export const sectionStateChange = (
       });
     case 'routeChange':
       // Attach route history to active route
-      return sections.map(s => (s.active ? { ...s, routeHistory: routeHistory } : s));
+      return sections.map((s) => (s.active ? { ...s, routeHistory: routeHistory } : s));
     case 'routePrev':
       // Remove route from
-      return sections.map(s => {
+      return sections.map((s) => {
         const rtHistory = s.routeHistory;
         if (s.active && rtHistory.length) {
           rtHistory.length = s.routeHistory.length - 1;
@@ -49,7 +55,7 @@ export const sectionStateChange = (
         return s.active ? { ...s, routeHistory: rtHistory } : s;
       });
     case 'sectionChange':
-      return sections.map(s => {
+      return sections.map((s) => {
         const section = { ...s };
         // If section has not been started yet, set start flag and date
         if (!section.started) {
@@ -57,10 +63,12 @@ export const sectionStateChange = (
           section.startedDate = new Date();
         }
         // Set active for current section, inactive for all others
-        return section.sectionId === sectionNext ? { ...section, active: true, routeHistory: routeHistory } : { ...section, active: false };
+        return section.sectionId === sectionNext
+          ? { ...section, active: true, routeHistory: routeHistory }
+          : { ...section, active: false };
       });
     case 'sectionComplete':
-      return sections.map(s => {
+      return sections.map((s) => {
         const section = { ...s };
         // If section has not been started yet, set start flag and date
         if (!section.started) {

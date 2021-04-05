@@ -72,7 +72,7 @@ export class NtsSignalRService {
         this.hubConnection.serverTimeoutInMilliseconds = 60000;
 
         // restart connection if timeout
-        this.hubConnection.onclose(err => {
+        this.hubConnection.onclose((err: any) => {
           if (
             String(err)
               .toLowerCase()
@@ -101,7 +101,7 @@ export class NtsSignalRService {
         }
       })
       // If error on start, retry
-      .catch(err => {
+      .catch((err: any) => {
         // If error is "unauthorized", end connection and do not retry. Otherwise keep trying
         if (
           String(err)
@@ -145,7 +145,7 @@ export class NtsSignalRService {
         // Null out existing connection after stopping
         this.hubConnection = null;
       })
-      .catch(err => {
+      .catch((err: any) => {
         console.log('Error while stopping connection: ' + err);
         // On error, attempt to end connection every 10 seconds
         setTimeout(() => this.connectionEnd(), 10000);
@@ -169,7 +169,7 @@ export class NtsSignalRService {
     // Make sure hub connection has been started
     if (this.hubConnection) {
       // Add event listener to hub connection
-      this.hubConnection.on(id, data => this.connections[id].next(JSON.parse(data)));
+      this.hubConnection.on(id, (data: any) => this.connections[id].next(JSON.parse(data)));
     } else {
       // Hub connection has not been created yet, add ID to queue. listenStart will be rerun after hub connects
       this.queuedIDs = [...this.queuedIDs, id];
@@ -205,7 +205,7 @@ export class NtsSignalRService {
     // Invoke data
     const connection = this.hubConnection.invoke(id, data);
     // Handle responses
-    connection.catch(err => console.error(err));
+    connection.catch((err: any) => console.error(err));
     // Return status promise
     return connection;
   }

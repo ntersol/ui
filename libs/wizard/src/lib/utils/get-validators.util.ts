@@ -29,7 +29,7 @@ export const getValidators = (validators: Wizard.FieldValidator | undefined | nu
     validatorsResult.push(Validators.max(validators.max));
   }
   if (validators.custom && validators.custom.length) {
-    validators.custom.forEach(validator => validatorsResult.push(validator));
+    validators.custom.forEach((validator) => validatorsResult.push(validator));
   }
 
   return validatorsResult;

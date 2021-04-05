@@ -29,13 +29,15 @@ export class WizardStore {
   private baseUrl?: string;
   // private sections?: Wizard.Section[];
   public sectionsSrc$ = new BehaviorSubject<Wizard.SectionControl[] | null>(null);
-  public sections$ = this.sectionsSrc$.pipe(map(s => (!s ? null : arrayToRecord<Wizard.SectionControl>(s, 'urlSlug'))));
+  public sections$ = this.sectionsSrc$.pipe(
+    map((s) => (!s ? null : arrayToRecord<Wizard.SectionControl>(s, 'urlSlug'))),
+  );
 
   public routesSrc$ = new BehaviorSubject<Wizard.RouteControl[] | null>(null);
-  public routes$ = this.routesSrc$.pipe(map(r => arrayToTree<Wizard.RouteControl>(r, 'sectionId', 'urlSlug')));
+  public routes$ = this.routesSrc$.pipe(map((r) => arrayToTree<Wizard.RouteControl>(r, 'sectionId', 'urlSlug')));
 
   public pagesSrc$ = new BehaviorSubject<Wizard.PageControl[] | null>(null);
-  public pages$ = this.pagesSrc$.pipe(map(p => arrayToTree<Wizard.PageControl>(p, 'sectionId', 'id')));
+  public pages$ = this.pagesSrc$.pipe(map((p) => arrayToTree<Wizard.PageControl>(p, 'sectionId', 'id')));
 
   private _sectionState: Wizard.SectionState[] | null = null;
   public sectionsState$ = new BehaviorSubject<Wizard.SectionState[] | null>(null);
@@ -57,7 +59,7 @@ export class WizardStore {
   private _state$ = new BehaviorSubject<Wizard.State>(this.state);
   public state$ = this._state$.pipe(
     debounceTime(10),
-    tap(state => {
+    tap((state) => {
       if (state.ready) {
         localStorage.setItem(this.wizardId, JSON.stringify(state));
       }
@@ -77,7 +79,14 @@ export class WizardStore {
   public pageActive$ = combineLatest([this.state$, this.routes$, this.pages$]).pipe(
     filter(([state]) => state.ready), // Only return page when ready
     map(([state, routes, pages]) => {
-      if (!routes || !pages || !state.sectionUrl || !state.routeUrl || !routes[state.sectionUrl] || !routes[state.sectionUrl][state.routeUrl]) {
+      if (
+        !routes ||
+        !pages ||
+        !state.sectionUrl ||
+        !state.routeUrl ||
+        !routes[state.sectionUrl] ||
+        !routes[state.sectionUrl][state.routeUrl]
+      ) {
         return null;
       }
       const pageId = routes[state.sectionUrl][state.routeUrl].pageId;
@@ -96,7 +105,18 @@ export class WizardStore {
   /**
    * Kick things off
    */
-  public initialize({ sections, pages, routes, form, arrayIndexes, routeParams, baseUrl, validators, sectionsState, state }: Wizard.Initial) {
+  public initialize({
+    sections,
+    pages,
+    routes,
+    form,
+    arrayIndexes,
+    routeParams,
+    baseUrl,
+    validators,
+    sectionsState,
+    state,
+  }: Wizard.Initial) {
     // console.log('initialize');
     this.baseUrl = baseUrl;
     this.formGroup = form;
@@ -110,7 +130,7 @@ export class WizardStore {
 
     const validatorRecord: Record<string, Wizard.PageValidatorFn> = {};
     if (validators && validators.length) {
-      validators.forEach(v => (validatorRecord[v.id] = v.fn));
+      validators.forEach((v) => (validatorRecord[v.id] = v.fn));
     }
 
     // Create controls
@@ -120,9 +140,18 @@ export class WizardStore {
         return sectionControlCreate(s, i, expressionReplacerSrc, routeCounts);
       }),
     );
-    this.routesSrc$.next(routes.map(r => routeControlCreate(r)));
+    this.routesSrc$.next(routes.map((r) => routeControlCreate(r)));
     this.pagesSrc$.next(
-      pages.map(p => pageControlCreate(p, rulesEngineSrc, expressionReplacerSrc, form, formGroupActive, p.validatorId ? validatorRecord[p.validatorId] : null)),
+      pages.map((p) =>
+        pageControlCreate(
+          p,
+          rulesEngineSrc,
+          expressionReplacerSrc,
+          form,
+          formGroupActive,
+          p.validatorId ? validatorRecord[p.validatorId] : null,
+        ),
+      ),
     );
 
     let localState = state;
@@ -226,13 +255,15 @@ export class WizardStore {
           }
           if (!routeParams.routeUrl && s) {
             // Check for section history
-            const matchingState = (sectionsState || []).filter(state => state.sectionId === routeParams.sectionUrl)[0];
+            const matchingState = (sectionsState || []).filter(
+              (state) => state.sectionId === routeParams.sectionUrl,
+            )[0];
             if (matchingState && matchingState.routeHistory && matchingState.routeHistory.length) {
               routeUrl = matchingState.routeHistory[matchingState.routeHistory.length - 1];
               this.stateChange({ routeHistory: matchingState.routeHistory });
             } else {
               // else use first section in route
-              const sectionCurrent = s.filter(s2 => s2.urlSlug === routeParams.sectionUrl)[0];
+              const sectionCurrent = s.filter((s2) => s2.urlSlug === routeParams.sectionUrl)[0];
               routeUrl = sectionCurrent.routeStart;
               this.stateChange({ routeHistory: [routeUrl] });
             }
@@ -304,7 +335,9 @@ export class WizardStore {
           pageActive.controlsMarkAsUntouched();
           pageActive.pageTouched = false;
 
-          this.router.navigate([`${this.baseUrl}/${routeAction.routeParams.sectionUrl}/${routeAction.routeParams.routeUrl}`]);
+          this.router.navigate([
+            `${this.baseUrl}/${routeAction.routeParams.sectionUrl}/${routeAction.routeParams.routeUrl}`,
+          ]);
         }
       });
   }
@@ -328,7 +361,9 @@ export class WizardStore {
       for (let i = 0; i < this._sectionState.length; i++) {
         if (this.state.sectionUrl === this._sectionState[i].sectionId) {
           const sectionPrev = this._sectionState[i - 1];
-          let routeUrl = sectionPrev.routeHistory[sectionPrev.routeHistory.length - 1] || sectionPrev.routeHistory[sectionPrev.routeHistory.length - 0];
+          let routeUrl =
+            sectionPrev.routeHistory[sectionPrev.routeHistory.length - 1] ||
+            sectionPrev.routeHistory[sectionPrev.routeHistory.length - 0];
           if (!routeUrl) {
             routeUrl = sectionPrev.routeStart;
           }

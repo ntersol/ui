@@ -49,22 +49,22 @@
     }
   }
 
-  &.nts-wizard-section-review{
-    .ui-chkbox-label{
+  &.nts-wizard-section-review {
+    .ui-chkbox-label {
       display: inline-block;
     }
   }
 
-  .ui-chkbox-label{
-    margin-top: .5em;
+  .ui-chkbox-label {
+    margin-top: 0.5em;
   }
-  
-  .checkbox-single{
+
+  .checkbox-single {
     text-align: left;
   }
 
-  &.nts-wizard-page-complete.nts-wizard-section-review{
-    .nts-wizard-content{
+  &.nts-wizard-page-complete.nts-wizard-section-review {
+    .nts-wizard-content {
       margin-bottom: 0rem;
     }
   }

@@ -351,6 +351,173 @@
           }
         }
       }
+    },
+    "starter": {
+      "root": "archive",
+      "sourceRoot": "archive/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "lazyModules": [
+              "archive/src/app/components/general/calendar/calendar.module",
+              "archive/src/app/components/general/chart/chart.module",
+              "archive/src/app/components/general/document-editor/document-editor.module",
+              "archive/src/app/components/general/forms/forms.module",
+              "archive/src/app/components/general/generic/generic.module",
+              "archive/src/app/components/general/grid/grid.module",
+              "archive/src/app/components/general/table/table.module",
+              "archive/src/app/components/general/tags/tags.module"
+            ],
+            "outputPath": "dist/browser",
+            "index": "archive/src/index.html",
+            "main": "archive/src/main.ts",
+            "tsConfig": "archive/src/tsconfig.app.json",
+            "preserveSymlinks": true,
+            "showCircularDependencies": true,
+            "polyfills": "archive/src/polyfills.ts",
+            "assets": [
+              "archive/src/assets",
+              "archive/src/favicon.ico",
+              "archive/src/apple-touch-icon.png",
+              "archive/src/safari-pinned-tab.svg",
+              "archive/src/manifest.webmanifest"
+            ],
+            "styles": ["archive/src/styles.scss"],
+            "scripts": [
+              {
+                "input": "node_modules/document-register-element/build/document-register-element.js",
+                "inject": true
+              },
+              {
+                "input": "node_modules/document-register-element/build/document-register-element.js",
+                "inject": true
+              }
+            ]
+          },
+          "configurations": {
+            "qa": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": true,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "fileReplacements": [
+                {
+                  "replace": "archive/src/environments/environment.ts",
+                  "with": "archive/src/environments/environment.qa.ts"
+                }
+              ]
+            },
+            "uat": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": true,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "fileReplacements": [
+                {
+                  "replace": "archive/src/environments/environment.ts",
+                  "with": "archive/src/environments/environment.uat.ts"
+                }
+              ]
+            },
+            "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": true,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "fileReplacements": [
+                {
+                  "replace": "archive/src/environments/environment.ts",
+                  "with": "archive/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "starter:build",
+            "aot": true,
+            "port": 4200
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "starter:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "starter:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "archive/src/test.ts",
+            "karmaConfig": "archive/src/karma.conf.js",
+            "polyfills": "archive/src/polyfills.ts",
+            "tsConfig": "archive/src/tsconfig.spec.json",
+            "scripts": [],
+            "styles": ["archive/src/styles.scss"],
+            "assets": [
+              "archive/src/assets",
+              "archive/src/favicon.ico",
+              "archive/src/apple-touch-icon.png",
+              "archive/src/safari-pinned-tab.svg",
+              "archive/src/manifest.webmanifest"
+            ]
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/server",
+            "main": "archive/src/main.server.ts",
+            "tsConfig": "archive/src/tsconfig.server.json"
+          }
+        }
+      }
     }
   },
   "defaultProject": "showcase"

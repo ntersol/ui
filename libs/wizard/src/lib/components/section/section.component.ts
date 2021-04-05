@@ -5,16 +5,14 @@ import { Wizard } from '../../wizard';
   selector: 'app-section',
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SectionComponent implements OnInit {
-
   @Input() section?: Wizard.SectionControl;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    this.section
+    this.section;
   }
-
 }

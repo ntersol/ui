@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
  */
 export const syncActiveModels = (form: FormGroup, formGroupActive: FormGroup) => {
   // Loop through all the controls in the active form group
-  Object.keys(formGroupActive.controls).forEach(key => {
+  Object.keys(formGroupActive.controls).forEach((key) => {
     // Get control
     const control = formGroupActive.controls[key];
     if (control.dirty) {

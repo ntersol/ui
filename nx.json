@@ -1,13 +1,18 @@
 {
   "implicitDependencies": {
     "angular.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": { "defaultBase": "master" },
+  "affected": {
+    "defaultBase": "master"
+  },
   "npmScope": "@ntersol",
   "tasksRunnerOptions": {
     "default": {
@@ -20,5 +25,18 @@
       }
     }
   },
-  "projects": { "calendar": { "tags": [] }, "showcase": { "tags": [] }, "wizard": { "tags": [] } }
+  "projects": {
+    "calendar": {
+      "tags": []
+    },
+    "showcase": {
+      "tags": []
+    },
+    "wizard": {
+      "tags": []
+    },
+    "starter": {
+      "tags": []
+    }
+  }
 }

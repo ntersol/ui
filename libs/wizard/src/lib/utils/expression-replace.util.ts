@@ -7,7 +7,9 @@ import { FormGroup } from '@angular/forms';
  * @param form
  * @param indexes
  */
-export const expressionReplacer = (model: FormGroup, arrayIndexes: FormGroup) => (str: string | null | undefined): string => {
+export const expressionReplacer = (model: FormGroup, arrayIndexes: FormGroup) => (
+  str: string | null | undefined,
+): string => {
   // Get model and array index values
   const modelSrc = model.getRawValue();
   const arrayIndexesSrc = arrayIndexes.getRawValue();
@@ -15,7 +17,7 @@ export const expressionReplacer = (model: FormGroup, arrayIndexes: FormGroup) =>
   return str && typeof str === 'string' && str.match(/[^{{\}\}]+(?=})/g)
     ? str
         // Get all mustache replacements
-        .replace(/[^{{\}\}]+(?=})/g, strNew => {
+        .replace(/[^{{\}\}]+(?=})/g, (strNew) => {
           // Get field value
           const result = getByPath(strNew, modelSrc, arrayIndexesSrc);
           // Only return if value is present

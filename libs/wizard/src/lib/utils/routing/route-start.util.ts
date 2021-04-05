@@ -17,7 +17,7 @@ export const routeStart = (params: Wizard.RouteParams, sections: Wizard.Section[
     return { sectionUrl: params.sectionUrl, routeUrl: params.routeUrl };
   } else if (params.sectionUrl && !params.routeUrl) {
     // Has section but no route, add first route in section
-    const section = sections.filter(s => s.urlSlug === params.sectionUrl)[0];
+    const section = sections.filter((s) => s.urlSlug === params.sectionUrl)[0];
     return { sectionUrl: params.sectionUrl, routeUrl: section.routeStart };
   }
   // Initial start, no section or route url supplied. Go to first section and first route

@@ -38,8 +38,8 @@ const cloneDeep = require('lodash/cloneDeep');
   templateUrl: './grid.component.html',
   styleUrls: [
     // After moving starter OUT of monorepo, update path to node_modules
-    '../../../../../../../node_modules/ag-grid-community/dist/styles/ag-grid.css',
-    '../../../../../../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css',
+    '../../../../../../../../node_modules/ag-grid-community/dist/styles/ag-grid.css',
+    '../../../../../../../../node_modules/ag-grid-community/dist/styles/ag-theme-balham.css',
     './grid.component.scss',
   ],
   // tslint:disable-next-line:use-component-view-encapsulation
@@ -418,7 +418,9 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
     this.grid.api.setSortModel(null);
     Object.keys(this.gridState.filters).forEach(key => {
       const instance = this.grid.api.getFilterInstance(key);
-      instance.setModel(null);
+      if (instance) {
+        instance.setModel(null);
+      }
     });
     this.grid.api.setFilterModel(null);
     if (this.gridColumnApi) {
@@ -451,11 +453,15 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
     });
     // Create grid state
     return <NtsGridState>{
-      columnDefs: this.gridColumnApi.getAllGridColumns().map(col => {
+      columnDefs: this.gridColumnApi.getAllGridColumns().map((col: any) => {
         const colSrc = col.getUserProvidedColDef(); // Extract source column info
-        delete colSrc.cellRendererFramework; // Remove custom templates which cause an error when converting to JSON
-        delete colSrc.cellRendererParams;
-        return colSrc;
+        if (colSrc) {
+          delete colSrc.cellRendererFramework; // Remove custom templates which cause an error when converting to JSON
+          delete colSrc.cellRendererParams;
+          return colSrc;
+        } else {
+          return null;
+        }
       }),
       columnsState: this.gridColumnApi.getColumnState(),
       groupsColumns: this.grid.columnApi.getColumnGroupState(),
@@ -492,7 +498,9 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
       if (gridState.filters) {
         Object.keys(gridState.filters).forEach(key => {
           const instance = this.grid.api.getFilterInstance(key);
-          instance.setModel(gridState.filters[key]);
+          if (instance) {
+            instance.setModel(gridState.filters[key]);
+          }
         });
         this.grid.api.setFilterModel(gridState.filters);
         this.grid.api.onFilterChanged();
@@ -521,7 +529,9 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
     if (this.gridLoaded && this.gridState && this.gridState.filters) {
       Object.keys(this.gridState.filters).forEach(key => {
         const instance = this.grid.api.getFilterInstance(key);
-        instance.setModel(this.gridState.filters[key]);
+        if (instance) {
+          instance.setModel(this.gridState.filters[key]);
+        }
       });
       // this.grid.api.setFilterModel(this.gridState.filters);
       this.grid.api.onFilterChanged();

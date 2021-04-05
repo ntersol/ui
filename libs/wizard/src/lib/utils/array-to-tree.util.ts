@@ -6,7 +6,7 @@ export const arrayToTree = <t>(arr: t[] | null | undefined, level1Id: string, le
   const tree: Record<string, Record<string, t>> = {};
   arr.forEach((r: any) => {
     if (!tree[r[level1Id]]) {
-        tree[r[level1Id]] = {};
+      tree[r[level1Id]] = {};
     }
     tree[r[level1Id]][r[level2Id]] = r;
   });

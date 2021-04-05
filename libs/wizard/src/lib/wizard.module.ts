@@ -14,11 +14,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MultiSelectModule } from 'primeng/multiselect';
 
-const DEPS = [WizardComponent, WizNavSidebarComponent, WizNavTopComponent, WizardFeatureDirective, WizardFeatureTemplateDirective];
+const DEPS = [
+  WizardComponent,
+  WizNavSidebarComponent,
+  WizNavTopComponent,
+  WizardFeatureDirective,
+  WizardFeatureTemplateDirective,
+];
 
 @NgModule({
   declarations: [SectionComponent, PageComponent, ContentComponent, DEPS],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ProgressBarModule, NtsFormsModule, CheckboxModule, MultiSelectModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ProgressBarModule,
+    NtsFormsModule,
+    CheckboxModule,
+    MultiSelectModule,
+  ],
   exports: [DEPS],
 })
 export class NtsWizardModule {}

@@ -8,18 +8,15 @@
             [formControl]="content?.formControl"
             [value]="content?.options[0]?.value"
             [label]="content?.options[0]?.label"
-            >
+          >
           </p-checkbox>
         </ng-container>
         <ng-container *ngIf="content?.options && content?.options[0] && content?.options.length > 1">
           <ng-container *ngFor="let option of content?.options">
             <div class="checkbox-single">
-              <p-checkbox
-              [formControl]="content?.formControl"
-              [value]="option?.value"
-              [label]="option.label">
-            </p-checkbox>
-          </div>
+              <p-checkbox [formControl]="content?.formControl" [value]="option?.value" [label]="option.label">
+              </p-checkbox>
+            </div>
           </ng-container>
         </ng-container>
       </ng-container>
@@ -37,12 +34,11 @@
           [min]="content?.min"
           [max]="content?.max"
           [maxlength]="content?.maxlength"
-          [minlength]="content?.minlength">
+          [minlength]="content?.minlength"
+        >
         </nts-form-field>
       </ng-container>
     </ng-container>
-
-
   </ng-container>
 
   <ng-container *ngIf="isType.html(content)">
@@ -57,7 +53,9 @@
 
   <ng-container *ngIf="isType.feature(content)">
     <ng-container *ngIf="templates && content.featureId && templates[content.featureId]; else noFeature">
-      <ng-container *ngTemplateOutlet="templates[content.featureId].template; context: { content: content }"></ng-container>
+      <ng-container
+        *ngTemplateOutlet="templates[content.featureId].template; context: { content: content }"
+      ></ng-container>
     </ng-container>
     <ng-template #noFeature>
       No feature found with an ID of <strong>{{ content.featureId }}</strong>

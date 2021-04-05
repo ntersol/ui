@@ -2,7 +2,11 @@
   <h1 *ngIf="page?.title" [innerHtml]="page?.title"></h1>
   <div class="alert alert-danger" *ngIf="!page?.valid && page?.pageTouched">Please fix the issues below</div>
   <ng-container *ngIf="page?.content?.length; else noContent">
-    <div class="nts-wizard-content-container" *ngFor="let content of page.content; let i = index" [ngStyle]="{ 'animation-delay': (i/10) +'s' }">
+    <div
+      class="nts-wizard-content-container"
+      *ngFor="let content of page.content; let i = index"
+      [ngStyle]="{ 'animation-delay': i / 10 + 's' }"
+    >
       <!-- If is row -->
       <ng-container *ngIf="content.type === 'row'; else noRow">
         <div class="p-grid">
@@ -37,7 +41,5 @@
   <ng-template #noContent> </ng-template>
 </div>
 <ng-template #noPage>
-  <div class="alert alert-info">
-    Page not found
-  </div>
+  <div class="alert alert-info">Page not found</div>
 </ng-template>

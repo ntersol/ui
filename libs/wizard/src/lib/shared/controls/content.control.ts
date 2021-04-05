@@ -72,8 +72,13 @@ export const contentControlCreate = (
           const path = getFormControlPath(castMe.field.trim());
 
           const frmSrc = path.includes('$$active') ? formActive : form;
-          const pathSrc = path.includes('$$active') ? path.split('.').filter(s => s !== '$$active').join(',') : path;
-           const isFormArray = castMe.formFieldType === 'checkbox' ? true : false;
+          const pathSrc = path.includes('$$active')
+            ? path
+                .split('.')
+                .filter((s) => s !== '$$active')
+                .join(',')
+            : path;
+          const isFormArray = castMe.formFieldType === 'checkbox' ? true : false;
           const formField = getOrCreateFormControl(frmSrc)(pathSrc, isFormArray);
           // TODO: Separate util to check for and extract active field if found
           if (formField) {

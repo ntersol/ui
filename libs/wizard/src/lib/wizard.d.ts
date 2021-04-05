@@ -3,7 +3,8 @@ import { WizardOperator } from './wizard.enums';
 /**
  * Marks keys in RS as required
  */
-type MarkRequired<T extends Record<any, any>, RS extends keyof T> = Required<Pick<T, RS>> & Pick<T, Exclude<keyof T, RS>>;
+type MarkRequired<T extends Record<any, any>, RS extends keyof T> = Required<Pick<T, RS>> &
+  Pick<T, Exclude<keyof T, RS>>;
 // type SomeDataHelper = MarkRequired<SomeData, 'propA'> | MarkRequired<SomeData, 'propB'>;
 
 export namespace Wizard {
@@ -199,7 +200,15 @@ export namespace Wizard {
   }
 
   interface FormFieldMulti extends FormFieldSrc {
-    readonly formFieldType: 'select' | 'dropdown' | 'checkbox' | 'checkboxBoolean' | 'radio' | 'toggle' | 'buttonToggle' | 'checkboxButtons';
+    readonly formFieldType:
+      | 'select'
+      | 'dropdown'
+      | 'checkbox'
+      | 'checkboxBoolean'
+      | 'radio'
+      | 'toggle'
+      | 'buttonToggle'
+      | 'checkboxButtons';
     readonly options?: Options[] | string[]; // TODO | Union type either options or datafield
   }
 
@@ -210,7 +219,7 @@ export namespace Wizard {
     formFieldType: string;
     placeholder?: string;
     hint?: string;
-    tooltip?: string; 
+    tooltip?: string;
     prefix?: string;
     suffix?: string;
     min?: number;

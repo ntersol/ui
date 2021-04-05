@@ -16,11 +16,11 @@ import { NtsCalendar } from '../..';
   selector: 'nts-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: [
-    '../../../../../../../node_modules/@fullcalendar/core/main.css',
-    '../../../../../../../node_modules/@fullcalendar/daygrid/main.css',
-    '../../../../../../../node_modules/@fullcalendar/timegrid/main.css',
-    '../../../../../../../node_modules/@fullcalendar/list/main.css',
-    '../../../../../../../node_modules/@fullcalendar/resource-timeline/main.css',
+    '../../../../../../../../node_modules/@fullcalendar/core/main.css',
+    '../../../../../../../../node_modules/@fullcalendar/daygrid/main.css',
+    '../../../../../../../../node_modules/@fullcalendar/timegrid/main.css',
+    '../../../../../../../../node_modules/@fullcalendar/list/main.css',
+    '../../../../../../../../node_modules/@fullcalendar/resource-timeline/main.css',
     './calendar.component.scss',
   ],
   // tslint:disable-next-line:use-component-view-encapsulation

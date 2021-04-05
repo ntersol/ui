@@ -47,8 +47,8 @@ export class WizNavTopComponent implements OnInit, OnChanges {
     }
     // Set up sectionState
     this.sectionsState$ = this.store.sectionsState$.pipe(
-      tap(sections => {
-        const sectionActive = sections?.filter(s => s.active)[0];
+      tap((sections) => {
+        const sectionActive = sections?.filter((s) => s.active)[0];
         const active = this.selector.get('active');
         if (sectionActive && active) {
           active.patchValue(sectionActive.sectionId);
@@ -57,16 +57,16 @@ export class WizNavTopComponent implements OnInit, OnChanges {
     );
     // Get active section
     this.activeSectionNumber$ = this.sectionsState$.pipe(
-      map(sections => {
+      map((sections) => {
         if (sections && sections.length) {
-          return sections.findIndex(section => section.active) + 1;
+          return sections.findIndex((section) => section.active) + 1;
         }
         return null;
       }),
     );
     //
     this.sectionsSelector$ = this.store.sectionsSrc$.pipe(
-      map(sections => (sections ? sections.map(s => Object.assign({}, { label: s.title, value: s.urlSlug })) : [])),
+      map((sections) => (sections ? sections.map((s) => Object.assign({}, { label: s.title, value: s.urlSlug })) : [])),
     );
   }
 }

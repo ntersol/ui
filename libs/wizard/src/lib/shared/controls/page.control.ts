@@ -25,12 +25,16 @@ export const pageControlCreate = (
 ): Wizard.PageControl => {
   const src = clone<Wizard.Page>(page);
   // Convert content to controls
-  const content = src.content.map(c => {
+  const content = src.content.map((c) => {
     // If row, recurse into columns content and convert those to a control
     if (isType.row(c)) {
       return Object.assign({}, c, {
-        columns: c.columns.map(c2 =>
-          Object.assign(c2, { content: c2.content.map(c3 => contentControlCreate(c3, rulesEngine, expressionReplacer, form, formActive)) }),
+        columns: c.columns.map((c2) =>
+          Object.assign(c2, {
+            content: c2.content.map((c3) =>
+              contentControlCreate(c3, rulesEngine, expressionReplacer, form, formActive),
+            ),
+          }),
         ),
       });
     }
@@ -68,14 +72,14 @@ export const pageControlCreate = (
     pageTouched: false,
     controlsMarkAsTouched: function () {
       const controls = getPageFormControls(content);
-      Object.keys(controls).forEach(key => {
+      Object.keys(controls).forEach((key) => {
         controls[key].markAsTouched();
         controls[key].updateValueAndValidity();
       });
     },
     controlsMarkAsUntouched: function () {
       const controls = getPageFormControls(content);
-      Object.keys(getPageFormControls(content)).forEach(key => {
+      Object.keys(getPageFormControls(content)).forEach((key) => {
         controls[key].markAsUntouched();
         controls[key].updateValueAndValidity();
       });

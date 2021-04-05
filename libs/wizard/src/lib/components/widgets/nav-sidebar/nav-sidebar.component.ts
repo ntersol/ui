@@ -5,13 +5,10 @@ import { WizardStateService } from '../../../shared/store/wizard.state.service';
   selector: 'nts-wizard-nav-sidebar',
   templateUrl: './nav-sidebar.component.html',
   styleUrls: ['./nav-sidebar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WizNavSidebarComponent implements OnInit {
+  constructor(public state: WizardStateService) {}
 
-  constructor(public state: WizardStateService) { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -8,7 +8,9 @@ import { ruleSet } from './rule-set.util';
  * @param model
  * @param arrayIndexs
  */
-export const rulesEngine = (model: FormGroup, arrayIndexes: FormGroup) => (ruleGroups: Wizard.RuleGroup[]): false | Wizard.RuleGroup => {
+export const rulesEngine = (model: FormGroup, arrayIndexes: FormGroup) => (
+  ruleGroups: Wizard.RuleGroup[],
+): false | Wizard.RuleGroup => {
   // Get model and array index values
   const modelSrc = model.getRawValue();
   const arrayIndexesSrc = arrayIndexes.getRawValue();

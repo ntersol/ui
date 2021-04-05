@@ -3,9 +3,9 @@ import { isType } from '../typeguards.util';
 
 /**
  * Generate the route history by starting at the beginning of the section and stopping when it hits the current route
- * @param sectionActive 
- * @param routes 
- * @param pages 
+ * @param sectionActive
+ * @param routes
+ * @param pages
  */
 export const routeCreateHistory = (
   sectionActive: Wizard.SectionControl,
@@ -19,17 +19,14 @@ export const routeCreateHistory = (
     history.push(routeUrlSlug);
     const routeNext = routes[routeUrlSlug].routeNext;
     if (isType.ruleGroup(routeNext)) {
-        console.log('Add logic for rulegroup', routeNext);
-        /**
-         * Next route is static
-         */
-      } else if (typeof routeNext === 'string') {
-        
-      }
+      console.log('Add logic for rulegroup', routeNext);
+      /**
+       * Next route is static
+       */
+    } else if (typeof routeNext === 'string') {
+    }
     routeUrlSlug = routes[routeUrlSlug].urlSlug;
   }
 
   return history;
 };
-
-

@@ -3,8 +3,8 @@ import { isType } from '../typeguards.util';
 
 /**
  * Return a form control from a formgroup. Create the tree within the formgroup if it does not exist
- * @param form 
- * @param path 
+ * @param form
+ * @param path
  * @param isFormArray Should the final property in the string be an array
  */
 export const getOrCreateFormControl = (form: FormGroup) => (path: string, isFormArray = false): FormControl => {
@@ -43,7 +43,7 @@ export const getOrCreateFormControl = (form: FormGroup) => (path: string, isForm
         } else {
           parentControl.addControl(pathCurrent, new FormControl(null, []));
         }
-        
+
         // If not a final path or a form array this this is a nested object
       } else {
         const parentControl = form.get(parentPath.join('.')) as FormGroup;

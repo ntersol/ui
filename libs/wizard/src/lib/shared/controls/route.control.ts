@@ -12,6 +12,6 @@ import { clone } from '../../utils/misc.util';
 export const routeControlCreate = (route: Wizard.Route): Wizard.RouteControl => {
   const src = clone<Wizard.Route>(route);
   return assign<Wizard.RouteControl>(src, {
-    src: route
+    src: route,
   });
 };

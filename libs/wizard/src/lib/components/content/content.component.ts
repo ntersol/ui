@@ -20,9 +20,7 @@ export class ContentComponent implements OnInit {
 
   ngOnInit() {}
 
-  public log(something: any){
-  console.log('something :', something);
-
+  public log(something: any) {
+    console.log('something :', something);
   }
-
 }
