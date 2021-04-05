@@ -20,5 +20,5 @@
       }
     }
   },
-  "projects": { "calendar": { "tags": [] }, "showcase": { "tags": [] } }
+  "projects": { "calendar": { "tags": [] }, "showcase": { "tags": [] }, "wizard": { "tags": [] } }
 }

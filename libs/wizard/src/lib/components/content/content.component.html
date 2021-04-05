@@ -1,0 +1,66 @@
+<div class="nts-wizard-content" *ngIf="content">
+  <!-- Form field control -->
+  <ng-container *ngIf="isType.formFieldControl(content)">
+    <ng-container [ngSwitch]="content?.formFieldType">
+      <ng-container *ngSwitchCase="'checkboxSingle'">
+        <ng-container *ngIf="content?.options && content?.options[0] && content?.options.length === 1">
+          <p-checkbox
+            [formControl]="content?.formControl"
+            [value]="content?.options[0]?.value"
+            [label]="content?.options[0]?.label"
+            >
+          </p-checkbox>
+        </ng-container>
+        <ng-container *ngIf="content?.options && content?.options[0] && content?.options.length > 1">
+          <ng-container *ngFor="let option of content?.options">
+            <div class="checkbox-single">
+              <p-checkbox
+              [formControl]="content?.formControl"
+              [value]="option?.value"
+              [label]="option.label">
+            </p-checkbox>
+          </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngSwitchDefault>
+        <nts-form-field
+          [formControl]="content?.formControl"
+          [options]="dataField || content?.options || []"
+          [type]="content?.formFieldType"
+          [placeholder]="content?.placeholder"
+          [tooltip]="content?.tooltip"
+          [hint]="content?.hint"
+          [prefix]="content?.prefix"
+          [suffix]="content?.suffix"
+          [min]="content?.min"
+          [max]="content?.max"
+          [maxlength]="content?.maxlength"
+          [minlength]="content?.minlength">
+        </nts-form-field>
+      </ng-container>
+    </ng-container>
+
+
+  </ng-container>
+
+  <ng-container *ngIf="isType.html(content)">
+    <div [innerHtml]="content.html"></div>
+  </ng-container>
+
+  <ng-container *ngIf="isType.buttonGroup(content)">
+    <button class="btn btn-primary mr-2" *ngFor="let button of content.options">
+      {{ button.label }}
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="isType.feature(content)">
+    <ng-container *ngIf="templates && content.featureId && templates[content.featureId]; else noFeature">
+      <ng-container *ngTemplateOutlet="templates[content.featureId].template; context: { content: content }"></ng-container>
+    </ng-container>
+    <ng-template #noFeature>
+      No feature found with an ID of <strong>{{ content.featureId }}</strong>
+    </ng-template>
+  </ng-container>
+</div>

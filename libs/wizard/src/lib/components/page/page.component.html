@@ -1,0 +1,43 @@
+<div class="nts-wizard-page" *ngIf="page; else noPage">
+  <h1 *ngIf="page?.title" [innerHtml]="page?.title"></h1>
+  <div class="alert alert-danger" *ngIf="!page?.valid && page?.pageTouched">Please fix the issues below</div>
+  <ng-container *ngIf="page?.content?.length; else noContent">
+    <div class="nts-wizard-content-container" *ngFor="let content of page.content; let i = index" [ngStyle]="{ 'animation-delay': (i/10) +'s' }">
+      <!-- If is row -->
+      <ng-container *ngIf="content.type === 'row'; else noRow">
+        <div class="p-grid">
+          <ng-container *ngFor="let column of content.columns">
+            <div class="p-col-12 p-md-{{ column.columnSize }}">
+              <ng-container *ngFor="let contentSub of column.content">
+                <app-content
+                  *ngIf="contentSub.visible"
+                  [content]="contentSub"
+                  [templates]="templates"
+                  [dataField]="dataFields && contentSub.dataField ? dataFields[contentSub.dataField] : null"
+                ></app-content>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+      <!-- Not a row, normal content -->
+      <ng-template #noRow>
+        <app-content
+          *ngIf="content.visible"
+          [content]="content"
+          [templates]="templates"
+          [dataField]="dataFields && content.dataField ? dataFields[content.dataField] : null"
+        ></app-content>
+      </ng-template>
+    </div>
+  </ng-container>
+  <!--
+    No content message?
+  -->
+  <ng-template #noContent> </ng-template>
+</div>
+<ng-template #noPage>
+  <div class="alert alert-info">
+    Page not found
+  </div>
+</ng-template>

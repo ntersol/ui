@@ -1,0 +1,73 @@
+<ng-container *ngIf="store">
+<nav class="nts-wizard-topnav" *ngIf="{
+  sectionsState: sectionsState$ | async,
+  activeSectionNumber: activeSectionNumber$ | async,
+  sections: store.sectionsSrc$ | async
+} as nav">
+  <ng-container *ngIf="nav?.sectionsState && nav?.sections?.length">
+    <div class="d-md-none d-lg-none d-xl-none">
+      <div class="nts-progress">
+        <div>
+          <a class="nts-wizard-loc mr-3">
+            <span>{{ nav.activeSectionNumber }}</span>
+            <span class="nts-wizard-loc-anim"></span>
+          </a>
+        </div>
+        <div>
+          <nts-form-field (onChange)="store.routeChange({ sectionUrl: $event.value })" [formControl]="selector.get('active')" [options]="sectionsSelector$ | async" type="dropdown"> </nts-form-field>
+        </div>
+      </div>
+
+      <!--
+      <div class="d-flex justify-content-between mb-3">
+        <ng-container *ngFor="let section of nav.sections; let i = index">
+          <ng-container *ngIf="section.urlSlug === nav.sectionsState[i].active">
+            <a (click)="state.routeChange({ sectionUrl: nav.sections[i - 1].urlSlug })" [ngStyle]="{ opacity: i === 0 ? '0' : '1' }">
+              <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </a>
+
+            <div class="text-center">{{ section.title }}</div>
+            <a (click)="state.routeChange({ sectionUrl: nav.sections[i + 1].urlSlug })" [ngStyle]="{ opacity: i === nav.sections.length - 1 ? '0' : '1' }">
+              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </ng-container>
+        </ng-container>
+      </div>
+-->
+    </div>
+    <div class="d-none d-md-block d-lg-block d-xl-block">
+      <div class="nts-progress">
+        <ng-container *ngFor="let section of nav.sections; let i = index">
+          <a
+            class="nts-wizard-loc"
+            (click)="store.routeChange({ sectionUrl: section.urlSlug })"
+            [ngClass]="{ completed: nav.sectionsState[i].completed, active: nav.sectionsState[i].active }"
+          >
+            <span *ngIf="!nav.sectionsState[i].completed">{{ i + 1 }}</span>
+            <span *ngIf="nav.sectionsState[i].completed"><i class="fa fa-check" aria-hidden="true"></i></span>
+            <span class="nts-wizard-loc-anim"></span>
+            <span class="nts-wizard-section-name" [ngClass]="section.urlSlug === nav.sectionsState[i].active ? 'active' : null">
+              {{ section.title }}
+            </span>
+          </a>
+          <div
+            class="nts-wizard-progress-bar"
+            [ngClass]="nav.sectionsState[i].completed && !nav.sectionsState[i].active ? 'nts-wizard-progress-bar-complete' : null"
+            *ngIf="i !== nav.sections.length - 1"
+          >
+            <div class="nts-wizard-progress-box">
+              <p-progressBar
+                [value]="
+                  nav.sectionsState[i].completed && !nav.sectionsState[i].active ? 100 : (nav.sectionsState[i].routeHistory.length / section.routeCount) * 100
+                "
+                [style]="{ height: '5px' }"
+                [showValue]="false"
+              ></p-progressBar>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+</nav>
+</ng-container>

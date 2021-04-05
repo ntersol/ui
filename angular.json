@@ -48,6 +48,117 @@
     }
   },
   "projects": {
+    "wizard": {
+      "projectType": "library",
+      "root": "libs/wizard",
+      "sourceRoot": "libs/wizard/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/wizard/tsconfig.lib.json",
+            "project": "libs/wizard/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/wizard/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/wizard/src/**/*.ts", "libs/wizard/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/wizard"],
+          "options": {
+            "jestConfig": "libs/wizard/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/wizard/ && npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd dist/libs/wizard/ && npm pack && npm publish --access public"
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run wizard:patch",
+              "ng run wizard:readme",
+              "ng run wizard:build:production",
+              "ng run wizard:pack"
+            ],
+            "parallel": false
+          }
+        },
+        "compodoc": {
+          "builder": "@twittwer/compodoc:compodoc",
+          "options": {
+            "tsConfig": "libs/wizard/tsconfig.lib.json",
+            "outputPath": "dist/compodoc/wizard",
+            "workspaceDocs": true
+          },
+          "configurations": {
+            "json": {
+              "exportFormat": "json"
+            }
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/wizard/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/wizard.component.ts --tsconfig ./tsconfig.json",
+              "cp libs/wizard/docs/README.md libs/wizard/README.md"
+            ]
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/wizard/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/wizard",
+            "config": {
+              "configFolder": "libs/wizard/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
     "calendar": {
       "projectType": "library",
       "root": "libs/calendar",
