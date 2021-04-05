@@ -7,12 +7,15 @@
         [header]="pdfInfo && pdfInfo[i + 1]?.label ? pdfInfo[i + 1].label : 'Document #' + (i + 1)"
       >
         <ng-template pTemplate="content">
+          <!--
+            TODO:
+            [selection]="selection[i + 1]"
+          -->
           <app-document
             [document]="document"
             [viewModels]="viewModels"
             [settings]="settingsSrc"
             [tnSettings]="tnSettings"
-            [selection]="selection[i + 1]"
             [pageActive]="pageActive"
             [docIndex]="i + 1"
             [canDropFromAny]="false"
@@ -27,16 +30,19 @@
       </div>
     </ng-template>
   </div>
-  <div class="p-col-12 p-lg-6 multi-doc" style="overflow:auto;">
+  <div class="p-col-12 p-lg-6 multi-doc" style="overflow: auto;">
     <p-tabView [activeIndex]="activeIndexDest" (onChange)="indexChangeDest($event)">
       <p-tabPanel [header]="pdfInfo && pdfInfo[0]?.label ? pdfInfo[0].label : 'Source Document'">
         <ng-template pTemplate="content">
+          <!--
+            TODO:
+             [selection]="selection[0]"
+          -->
           <app-document
-            [document]="documents ? documents[0] : null"
+            [document]="!!documents && documents?.length && documents[0] ? documents[0] : null"
             [viewModels]="viewModels"
             [settings]="settingsDest"
             [tnSettings]="tnSettings"
-            [selection]="selection[0]"
             [pageActive]="pageActive"
             [docIndex]="0"
             (setActivePage)="setActivePage()"

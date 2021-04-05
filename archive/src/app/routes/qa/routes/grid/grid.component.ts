@@ -25,7 +25,14 @@ export class GridComponent implements OnInit {
 
   public gridFilterTerm: string | null = null;
   public gridOptions: GridOptions = {};
-  public gridState: NtsGridState | undefined;
+  public gridState: NtsGridState = {
+    columnDefs: [],
+    columnsState: [],
+    sorts: [],
+    groupsColumns: [],
+    groupsRows: {},
+    filters: {},
+  };
 
   public stateToggle = {
     gridState1: gridState1,
@@ -70,10 +77,10 @@ export class GridComponent implements OnInit {
       this.domain.users.delete(5).subscribe();
     }, 1000);
 
-      this.domain.users.select$.subscribe(x => console.log(x));
+    this.domain.users.select$.subscribe(x => console.log(x));
   }
 
-  public gridStateChange(gridState: NtsGridState ) {
+  public gridStateChange(gridState: NtsGridState) {
     // console.warn('gridStateChange', JSON.stringify(gridState));
     window.localStorage.setItem('qaGrid', JSON.stringify(gridState));
   }

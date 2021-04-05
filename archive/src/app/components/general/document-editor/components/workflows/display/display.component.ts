@@ -11,17 +11,17 @@ import { pdfjsDist } from '../../../shared/models/pdf';
 })
 export class DisplayComponent implements OnInit {
   // Documents
-  @Input() document?: NtsDocumentEditor.Document;
-  @Input() viewModels?: NtsDocumentEditor.Preview[][];
+  @Input() document?: NtsDocumentEditor.Document | null;
+  @Input() viewModels?: NtsDocumentEditor.Preview[][] | null;
   @Input() viewerOptions?: NtsDocumentEditor.ViewerOptions | false;
-  @Input() settings?: NtsDocumentEditor.Settings;
-  @Input() tnSettings?: NtsDocumentEditor.ThumbnailSize;
+  @Input() settings?: NtsDocumentEditor.Settings | null;
+  @Input() tnSettings?: NtsDocumentEditor.ThumbnailSize | null;
   @Input() selection: NtsDocumentEditor.Selection = [];
   @Input() pageActive?: NtsDocumentEditor.PageActive;
   @Input() pdfInfo?: NtsDocumentEditor.PdfInfo[];
 
   // Viewer
-  @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[];
+  @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[] | null;
   @Input() rotation = 0;
 
   @ViewChild('scrollbar', { static: true }) scrollbar!: ElementRef;
