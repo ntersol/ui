@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   Input,
   ViewChild,
   ViewEncapsulation,
@@ -38,13 +37,13 @@ import { NtsCalendar } from './calendar';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarComponent implements OnInit, OnChanges {
+export class CalendarComponent implements OnChanges {
   @Input() defaultView: NtsCalendar.DefaultView = 'dayGridMonth';
   @Input() events: NtsCalendar.Event[] = [];
   @Input() selectable = false;
   @Input() height: number | undefined;
   /** https://fullcalendar.io/docs/header */
-  @Input() header: any | undefined;
+  @Input() header: unknown | undefined;
   /** A string with the START time for the timegrid view, IE "07:00:00" */
   @Input() minTime: string | undefined;
   /** A string with the END time for the timegrid view, IE "07:00:00" */
@@ -58,10 +57,6 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   @ViewChild('fc', { static: true }) fc?: FullCalendar;
 
-  constructor() {}
-
-  ngOnInit() {}
-
   ngOnChanges(model: SimpleChanges) {
     if (model.defaultView) {
       this.changeViewType(this.defaultView);
@@ -71,11 +66,11 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
   }
 
-  public select(select: any) {
+  public select(select: unknown) {
     console.log(select);
   }
 
-  handleEventClick(event: any) {
+  handleEventClick(event: NtsCalendar.EventClick) {
     this.eventClick.emit(event);
   }
 

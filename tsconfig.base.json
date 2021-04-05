@@ -18,10 +18,11 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "./dist/out-tsc",
     "paths": {
       "@ntersol/ui": ["libs/ui/src/index.ts"],
-      "@ntersol/calendar": ["libs/calendar/src/index.ts"]
+      "@ntersol/calendar": ["libs/calendar/src/index.ts"],
+      "@ntersol/calendar-clone": ["libs/calendar-clone/src/index.ts"],
+      "@ntersol/<lib-name>": ["libs/calendars/src/index.ts"]
     },
     "rootDir": ".",
     "skipDefaultLibCheck": true,
@@ -40,5 +41,5 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "exclude": ["e2e", "**/*.spec.ts", "node_modules", "tmp"]
+  "exclude": ["archive", "e2e", "**/*.spec.ts", "node_modules", "tmp"]
 }

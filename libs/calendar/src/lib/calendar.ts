@@ -25,7 +25,7 @@ import {
  * Definitions for fullCalendar. Their repo isn't strongly typed...
  * Pulled from node_modules\@fullcalendar\core\main.d.ts
  */
-export module NtsCalendar {
+export namespace NtsCalendar {
   export interface Header {
     /** Space delimited with the following options: title, today, prev, next, prevYear, nextYear, today */
     left: string;
@@ -57,19 +57,19 @@ export module NtsCalendar {
     durationEditable?: boolean;
     resourceEditable?: boolean;
     rendering?: 'background' | 'inverse-background';
-    overlap?: any;
+    overlap?: unknown;
     constraint?: string;
     backgroundColor?: string;
     borderColor?: string;
     textColor?: string;
-    extendedProps?: any;
-    source?: any;
+    extendedProps?: unknown;
+    source?: unknown;
   }
   export interface DateClick {
     date: Date;
     dateStr: string;
     allDay: boolean;
-    resource?: any;
+    resource?: unknown;
     dayEl: HTMLElement;
     jsEvent: MouseEvent;
     view: View;
@@ -88,7 +88,7 @@ export module NtsCalendar {
   }
 
   export interface EventApi {
-    readonly source: any | null;
+    readonly source: unknown | null;
     readonly start: Date | null;
     readonly end: Date | null;
     readonly id: string;
@@ -99,50 +99,50 @@ export module NtsCalendar {
     readonly rendering: string;
     readonly startEditable: boolean;
     readonly durationEditable: boolean;
-    readonly constraint: any;
-    readonly overlap: any;
-    readonly allow: any;
+    readonly constraint: unknown;
+    readonly overlap: unknown;
+    readonly allow: unknown;
     readonly backgroundColor: string;
     readonly borderColor: string;
     readonly textColor: string;
     readonly classNames: string[];
-    readonly extendedProps: any;
+    readonly extendedProps: unknown;
     _calendar: Calendar;
     _def: EventDef;
     _instance: EventInstance | null;
     setProp(name: string, val: string): void;
-    setExtendedProp(name: string, val: any): void;
+    setExtendedProp(name: string, val: unknown): void;
     setStart(
-      startInput: any,
+      startInput: unknown,
       options?: {
         granularity?: string;
         maintainDuration?: boolean;
       },
     ): void;
     setEnd(
-      endInput: any | null,
+      endInput: unknown | null,
       options?: {
         granularity?: string;
       },
     ): void;
     setDates(
-      startInput: any,
-      endInput: any | null,
+      startInput: unknown,
+      endInput: unknown | null,
       options?: {
         allDay?: boolean;
         granularity?: string;
       },
     ): void;
-    moveStart(deltaInput: any): void;
-    moveEnd(deltaInput: any): void;
-    moveDates(deltaInput: any): void;
+    moveStart(deltaInput: unknown): void;
+    moveEnd(deltaInput: unknown): void;
+    moveDates(deltaInput: unknown): void;
     setAllDay(
       allDay: boolean,
       options?: {
         maintainDuration?: boolean;
       },
     ): void;
-    formatRange(formatInput: any): any;
+    formatRange(formatInput: unknown): unknown;
     mutate(mutation: EventMutation): void;
     remove(): void;
   }
@@ -153,7 +153,7 @@ export module NtsCalendar {
     readonly currentStart: Date;
     readonly currentEnd: Date;
     usesMinMaxTime: boolean;
-    dateProfileGeneratorClass: any;
+    dateProfileGeneratorClass: unknown;
     on: EmitterInterface['on'];
     one: EmitterInterface['one'];
     off: EmitterInterface['off'];
@@ -164,14 +164,14 @@ export module NtsCalendar {
     dateProfileGenerator: DateProfileGenerator;
     type: string;
     title: string;
-    queuedScroll: any;
-    eventOrderSpecs: any;
+    queuedScroll: unknown;
+    eventOrderSpecs: unknown;
     nextDayThreshold: Duration;
     isNowIndicatorRendered: boolean;
     initialNowDate: DateMarker;
     initialNowQueriedMs: number;
-    nowIndicatorTimeoutID: any;
-    nowIndicatorIntervalID: any;
+    nowIndicatorTimeoutID: unknown;
+    nowIndicatorIntervalID: unknown;
     initialize(): void;
     render(props: ViewProps): void;
     destroy(): void;
@@ -191,7 +191,7 @@ export module NtsCalendar {
     unrenderEvents(): void;
     sliceEvents(eventStore: EventStore, allDay: boolean): EventRenderRange[];
     computeEventDraggable(eventDef: EventDef, eventUi: EventUi): boolean;
-    computeEventStartResizable(eventDef: EventDef, eventUi: EventUi): any;
+    computeEventStartResizable(eventDef: EventDef, eventUi: EventUi): unknown;
     computeEventEndResizable(eventDef: EventDef, eventUi: EventUi): boolean;
     renderEventSelectionWrap(instanceId: string): void;
     unrenderEventSelectionWrap(instanceId: string): void;
@@ -209,16 +209,16 @@ export module NtsCalendar {
     updateNowIndicator(): void;
     stopNowIndicator(): void;
     getNowIndicatorUnit(dateProfile: DateProfile): void;
-    renderNowIndicator(date: any): void;
+    renderNowIndicator(date: unknown): void;
     unrenderNowIndicator(): void;
-    addScroll(scroll: any): void;
+    addScroll(scroll: unknown): void;
     popScroll(isResize: boolean): void;
     applyQueuedScroll(isResize: boolean): void;
-    queryScroll(): any;
-    applyScroll(scroll: any, isResize: boolean): void;
-    computeDateScroll(duration: Duration): {};
-    queryDateScroll(): {};
-    applyDateScroll(scroll: any): void;
+    queryScroll(): unknown;
+    applyScroll(scroll: unknown, isResize: boolean): void;
+    computeDateScroll(duration: Duration): Record<string, unknown>;
+    queryDateScroll(): Record<string, unknown>;
+    applyDateScroll(scroll: unknown): void;
     scrollToDuration(duration: Duration): void;
   }
 }

@@ -8,7 +8,7 @@
     "nx.json": "*"
   },
   "affected": { "defaultBase": "master" },
-  "npmScope": "angular-starter",
+  "npmScope": "@ntersol",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
@@ -20,10 +20,5 @@
       }
     }
   },
-  "projects": {
-    "demo": { "tags": [] },
-    "demo-e2e": { "tags": [], "implicitDependencies": ["demo"] },
-    "ui": { "tags": [] },
-    "calendar": { "tags": [] }
-  }
+  "projects": { "calendar": { "tags": [] }, "showcase": { "tags": [] } }
 }

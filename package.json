@@ -1,5 +1,5 @@
 {
-  "name": "angular-starter",
+  "name": "ntersol",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -20,13 +20,14 @@
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
-    "format": "nx format:write --all",
+    "format": "nx format:write",
     "format:write": "nx format:write",
     "format:check": "nx format:check",
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
@@ -95,10 +96,5 @@
     "ts-jest": "26.4.0",
     "ts-node": "~9.1.1",
     "typescript": "~4.0.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "nx format:write && nx affected:lint"
-    }
   }
 }
