@@ -4,15 +4,9 @@
   "overrides": [
     {
       "files": ["*.ts"],
-      "extends": [
-        "plugin:@nrwl/nx/angular",
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ],
+      "extends": ["plugin:@nrwl/nx/angular", "plugin:@angular-eslint/template/process-inline-templates"],
       "parserOptions": {
-        "project": [
-          "libs/calendar/tsconfig.*?.json",
-          "libs/calendar/.storybook/tsconfig.json"
-        ]
+        "project": ["libs/calendar/tsconfig.*?.json", "libs/calendar/.storybook/tsconfig.json"]
       },
       "rules": {
         "@angular-eslint/directive-selector": [

@@ -102,10 +102,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/demo/src/**/*.ts",
-              "apps/demo/src/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/demo/src/**/*.ts", "apps/demo/src/**/*.html"]
           }
         },
         "test": {
@@ -191,11 +188,7 @@
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run ui:patch",
-              "ng run ui:build:production",
-              "ng run ui:pack"
-            ],
+            "commands": ["ng run ui:patch", "ng run ui:build:production", "ng run ui:pack"],
             "parallel": false
           }
         }
@@ -222,10 +215,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/calendar/src/**/*.ts",
-              "libs/calendar/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/calendar/src/**/*.ts", "libs/calendar/src/**/*.html"]
           }
         },
         "test": {

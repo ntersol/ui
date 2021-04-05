@@ -5,10 +5,5 @@
     "entryFile": "src/index.ts",
     "styleIncludePaths": ["./src/lib/calendar/component.scss"]
   },
-  "allowedNonPeerDependencies": [
-    "fullcalendar",
-    "primeng",
-    "primeicons",
-    "bootstrap"
-  ]
+  "allowedNonPeerDependencies": ["fullcalendar", "primeng", "primeicons", "bootstrap"]
 }

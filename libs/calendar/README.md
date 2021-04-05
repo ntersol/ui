@@ -8,8 +8,8 @@ An Outlook style calendar based on @fullCalendar
 
 ## Implements
 
-* *OnInit*
-* *OnChanges*
+- _OnInit_
+- _OnChanges_
 
 ## Table of contents
 
@@ -44,9 +44,9 @@ An Outlook style calendar based on @fullCalendar
 
 ### constructor
 
-\+ **new CalendarComponent**(): [*CalendarComponent*](calendarcomponent.md)
+\+ **new CalendarComponent**(): [_CalendarComponent_](calendarcomponent.md)
 
-**Returns:** [*CalendarComponent*](calendarcomponent.md)
+**Returns:** [_CalendarComponent_](calendarcomponent.md)
 
 Defined in: [calendar.component.ts:48](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L48)
 
@@ -58,15 +58,15 @@ Defined in: [calendar.component.ts:48](https://github.com/ntersol/angular-starte
 
 Defined in: [calendar.component.ts:45](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L45)
 
-___
+---
 
 ### dateClick
 
-• **dateClick**: *EventEmitter*<DateClick\>
+• **dateClick**: _EventEmitter_<DateClick\>
 
 Defined in: [calendar.component.ts:42](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L42)
 
-___
+---
 
 ### defaultView
 
@@ -74,15 +74,15 @@ ___
 
 Defined in: [calendar.component.ts:31](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L31)
 
-___
+---
 
 ### eventClick
 
-• **eventClick**: *EventEmitter*<EventClick\>
+• **eventClick**: _EventEmitter_<EventClick\>
 
 Defined in: [calendar.component.ts:43](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L43)
 
-___
+---
 
 ### events
 
@@ -90,65 +90,65 @@ ___
 
 Defined in: [calendar.component.ts:32](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L32)
 
-___
+---
 
 ### fc
 
-• `Optional` **fc**: *FullCalendar*
+• `Optional` **fc**: _FullCalendar_
 
 Defined in: [calendar.component.ts:48](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L48)
 
-___
+---
 
 ### header
 
-• **header**: *any*
+• **header**: _any_
 
 https://fullcalendar.io/docs/header
 
 Defined in: [calendar.component.ts:36](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L36)
 
-___
+---
 
 ### height
 
-• **height**: *undefined* \| *number*
+• **height**: _undefined_ \| _number_
 
 Defined in: [calendar.component.ts:34](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L34)
 
-___
+---
 
 ### maxTime
 
-• **maxTime**: *undefined* \| *string*
+• **maxTime**: _undefined_ \| _string_
 
 A string with the END time for the timegrid view, IE "07:00:00"
 
 Defined in: [calendar.component.ts:40](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L40)
 
-___
+---
 
 ### minTime
 
-• **minTime**: *undefined* \| *string*
+• **minTime**: _undefined_ \| _string_
 
 A string with the START time for the timegrid view, IE "07:00:00"
 
 Defined in: [calendar.component.ts:38](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L38)
 
-___
+---
 
 ### selectable
 
-• **selectable**: *boolean*= false
+• **selectable**: _boolean_= false
 
 Defined in: [calendar.component.ts:33](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L33)
 
-___
+---
 
 ### visible$
 
-• **visible$**: *BehaviorSubject*<boolean\>
+• **visible$**: _BehaviorSubject_<boolean\>
 
 Defined in: [calendar.component.ts:46](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L46)
 
@@ -156,79 +156,79 @@ Defined in: [calendar.component.ts:46](https://github.com/ntersol/angular-starte
 
 ### changeViewType
 
-▸ **changeViewType**(`defaultView`: DefaultView): *void*
+▸ **changeViewType**(`defaultView`: DefaultView): _void_
 
 Change the type of view full calendar is displaying
 Full calendar does not support this natively so reinstantiating the component is necessary
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`defaultView` | DefaultView |
+| Name          | Type        |
+| :------------ | :---------- |
+| `defaultView` | DefaultView |
 
-**Returns:** *void*
+**Returns:** _void_
 
 Defined in: [calendar.component.ts:75](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L75)
 
-___
+---
 
 ### handleEventClick
 
-▸ **handleEventClick**(`event`: *any*): *void*
+▸ **handleEventClick**(`event`: _any_): _void_
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | *any* |
+| Name    | Type  |
+| :------ | :---- |
+| `event` | _any_ |
 
-**Returns:** *void*
+**Returns:** _void_
 
 Defined in: [calendar.component.ts:67](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L67)
 
-___
+---
 
 ### ngOnChanges
 
-▸ **ngOnChanges**(`model`: SimpleChanges): *void*
+▸ **ngOnChanges**(`model`: SimpleChanges): _void_
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`model` | SimpleChanges |
+| Name    | Type          |
+| :------ | :------------ |
+| `model` | SimpleChanges |
 
-**Returns:** *void*
+**Returns:** _void_
 
 Implementation of: void
 
 Defined in: [calendar.component.ts:54](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L54)
 
-___
+---
 
 ### ngOnInit
 
-▸ **ngOnInit**(): *void*
+▸ **ngOnInit**(): _void_
 
-**Returns:** *void*
+**Returns:** _void_
 
 Implementation of: void
 
 Defined in: [calendar.component.ts:52](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L52)
 
-___
+---
 
 ### select
 
-▸ **select**(`select`: *any*): *void*
+▸ **select**(`select`: _any_): _void_
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`select` | *any* |
+| Name     | Type  |
+| :------- | :---- |
+| `select` | _any_ |
 
-**Returns:** *void*
+**Returns:** _void_
 
 Defined in: [calendar.component.ts:63](https://github.com/ntersol/angular-starter/blob/b6dd80a/libs/calendar/src/lib/calendar.component.ts#L63)

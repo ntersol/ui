@@ -20,7 +20,7 @@
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
-    "format": "nx format:write",
+    "format": "nx format:write --all",
     "format:write": "nx format:write",
     "format:check": "nx format:check",
     "update": "nx migrate latest",
@@ -66,6 +66,7 @@
     "@compodoc/compodoc": "^1.1.11",
     "@nrwl/cli": "11.5.2",
     "@nrwl/cypress": "11.5.2",
+    "@nrwl/devkit": "11.5.2",
     "@nrwl/eslint-plugin-nx": "11.5.2",
     "@nrwl/jest": "11.5.2",
     "@nrwl/linter": "11.5.2",
@@ -86,6 +87,7 @@
     "eslint": "7.10.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
+    "husky": "^6.0.0",
     "jest": "26.2.2",
     "jest-preset-angular": "8.3.2",
     "ng-packagr": "^11.0.0",
@@ -93,5 +95,10 @@
     "ts-jest": "26.4.0",
     "ts-node": "~9.1.1",
     "typescript": "~4.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "nx format:write && nx affected:lint"
+    }
   }
 }
