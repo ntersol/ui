@@ -26,17 +26,10 @@
     }
   },
   "projects": {
-    "calendar": {
-      "tags": []
-    },
-    "showcase": {
-      "tags": []
-    },
-    "wizard": {
-      "tags": []
-    },
-    "starter": {
-      "tags": []
-    }
+    "calendar": { "tags": [] },
+    "showcase": { "tags": [] },
+    "wizard": { "tags": [] },
+    "starter": { "tags": [] },
+    "forms": { "tags": [] }
   }
 }

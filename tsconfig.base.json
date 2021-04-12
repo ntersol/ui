@@ -23,7 +23,7 @@
       "@ntersol/calendar": ["libs/calendar/src/index.ts"],
       "@ntersol/calendar-clone": ["libs/calendar-clone/src/index.ts"],
       "@ntersol/wizard": ["libs/wizard/src/index.ts"],
-      "@ntersol/<lib-name>": ["libs/calendars/src/index.ts"]
+      "@ntersol/form": ["libs/forms/src/index.ts"]
     },
     "rootDir": ".",
     "skipDefaultLibCheck": true,

@@ -5,7 +5,7 @@ import { WizardComponent } from './components/wizard/wizard.component';
 import { SectionComponent } from './components/section/section.component';
 import { PageComponent } from './components/page/page.component';
 import { ContentComponent } from './components/content/content.component';
-import { NtsFormsModule } from '../forms';
+import { NtsFormsModule } from '../../../forms/src/lib/forms.module';
 import { WizNavSidebarComponent } from './components/widgets/nav-sidebar/nav-sidebar.component';
 import { WizNavTopComponent } from './components/widgets/nav-top/nav-top.component';
 import { WizardFeatureDirective } from './shared/directives/feature.directive';
