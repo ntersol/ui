@@ -11,7 +11,7 @@
     "nx.json": "*"
   },
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "dev/nx"
   },
   "npmScope": "@ntersol",
   "tasksRunnerOptions": {
@@ -26,10 +26,20 @@
     }
   },
   "projects": {
-    "calendar": { "tags": [] },
-    "showcase": { "tags": [] },
-    "wizard": { "tags": [] },
-    "starter": { "tags": [] },
-    "forms": { "tags": [] }
+    "calendar": {
+      "tags": []
+    },
+    "showcase": {
+      "tags": []
+    },
+    "wizard": {
+      "tags": []
+    },
+    "starter": {
+      "tags": []
+    },
+    "forms": {
+      "tags": []
+    }
   }
 }
