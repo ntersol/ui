@@ -5,7 +5,7 @@ import { AbstractControl, FormGroup, FormArray, FormControl } from '@angular/for
  * @param control
  */
 export const cloneAbstractControl = (control: AbstractControl) => {
-  let newControl: AbstractControl;
+  let newControl: AbstractControl = new FormGroup({});
 
   if (control instanceof FormGroup) {
     const formGroup = new FormGroup({}, control.validator, control.asyncValidator);
