@@ -23,7 +23,7 @@ import { filterTreeNodes } from '../../utils/filterNodes.util';
 import { setNodeDefaults } from '../../utils/setNodeDefaults.util';
 import { nodeCompareLabel } from '../../utils/nodeLabelCompare.util';
 import { NtsTree } from '../../tree';
-const cloneDeep = require('lodash/cloneDeep');
+import { cloneDeep } from 'lodash';
 
 @Component({
   selector: 'nts-tree',

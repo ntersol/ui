@@ -1,4 +1,13 @@
-import { Component, OnInit, Input, ViewEncapsulation, Self, Optional, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewEncapsulation,
+  Self,
+  Optional,
+  OnDestroy,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { NgControl, FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { isRequired } from '../../utils/isRequired.util';
@@ -155,10 +164,21 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
     // Set model for default
     this.model = this.formControl.value;
     // Update model if form control changes
-    this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe(val => (this.model = val));
+    this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe((val) => (this.model = val));
 
     // Determine if this is a generic field type
-    this.fieldType = ['text', 'number', 'numberAsString', 'currency', 'phoneNumber', 'email', 'ssn', 'password', 'date', 'colorpicker'].includes(this.type)
+    this.fieldType = [
+      'text',
+      'number',
+      'numberAsString',
+      'currency',
+      'phoneNumber',
+      'email',
+      'ssn',
+      'password',
+      'date',
+      'colorpicker',
+    ].includes(this.type)
       ? 'generic'
       : this.type;
 
@@ -230,14 +250,14 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
     const term = result.query.toLowerCase().trim();
     if (this.options && this.options.length) {
       if (typeof this.options[0] === 'object') {
-        this.autoCompleteSuggestions = (<SelectItem[]>this.options).filter(option => {
+        this.autoCompleteSuggestions = (<SelectItem[]>this.options).filter((option) => {
           const optionTerm = String((<any>option)[this.optionLabel])
             .toLowerCase()
             .trim();
           return optionTerm.indexOf(term) !== -1 ? true : false;
         });
       } else if (typeof this.options[0] === 'string') {
-        this.autoCompleteSuggestions = (<string[]>this.options).filter(option => {
+        this.autoCompleteSuggestions = (<string[]>this.options).filter((option) => {
           const optionTerm = String(option).toLowerCase().trim();
           return optionTerm.indexOf(term) !== -1 ? true : false;
         });

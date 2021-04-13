@@ -1,5 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import { jsonToFormGroup } from '../../../forms/utils/jsonToFormGroup.util';
+import { jsonToFormGroup } from '@ntersol/forms';
 
 export const createActiveFormGroup = (form: FormGroup): FormGroup => {
   const formValue = form.getRawValue();

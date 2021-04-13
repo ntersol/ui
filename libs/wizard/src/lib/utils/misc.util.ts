@@ -1,4 +1,4 @@
-const cloneDeep = require('lodash/cloneDeep');
+import { cloneDeep } from 'lodash';
 
 /**
  * Convert array to record using unique Id

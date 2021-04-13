@@ -29,7 +29,7 @@ import { columnsTemplateAttach } from '../../utils/attachColumnTemplates.util';
 import { rowsReselect } from '../../utils/reselectRows.util';
 import { NtsGridState } from '../../grid';
 const defaultsDeep = require('lodash/defaultsDeep');
-const cloneDeep = require('lodash/cloneDeep');
+import { cloneDeep } from 'lodash';
 /**
  * A powerful data grid for visualizing and managing complex information
  */

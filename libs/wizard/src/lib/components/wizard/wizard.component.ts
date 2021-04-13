@@ -14,7 +14,7 @@ import {
 import { Wizard } from '../../wizard';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { pairwise, tap, startWith, map, filter } from 'rxjs/operators';
 import { WizardFeatureDirective } from '../../shared/directives/feature.directive';
 import { audit, getBaseUrl } from '../../utils';
@@ -22,6 +22,7 @@ import { combineLatest } from 'rxjs';
 import { WizardStore, wizardStore } from '../../shared/store/wizard.store';
 import { Location } from '@angular/common';
 
+@UntilDestroy()
 @Component({
   selector: 'nts-wizard',
   templateUrl: './wizard.component.html',
@@ -122,7 +123,7 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     // Watch route param changes to manage routing changes
-    this.route.params.pipe(untilDestroyed(this)).subscribe((params) => {
+    this.route.params.pipe(untilDestroyed(this)).subscribe((params: any) => {
       this.routeParams = { sectionUrl: params.sectionUrl, routeUrl: params.routeUrl };
       if (this.isLoaded) {
         this.svc.routeChange({ sectionUrl: this.routeParams.sectionUrl, routeUrl: this.routeParams.routeUrl });

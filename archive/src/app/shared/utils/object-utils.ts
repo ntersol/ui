@@ -7,7 +7,7 @@ const isEmpty = require('lodash/isEmpty');
 const isObject = require('lodash/isObject');
 const isArray = require('lodash/isArray');
 const pull = require('lodash/pull');
-const cloneDeep = require('lodash/cloneDeep');
+import { cloneDeep } from 'lodash';
 
 /**
  * A collection of json/javascript helper utilities

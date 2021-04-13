@@ -7,7 +7,7 @@ import { isNotNil } from './guards/guards.utils';
 import { NtsDocumentEditor } from '../document-editor';
 import { pdfjsDist } from './models/pdf';
 import { Injectable } from "@angular/core";
-const cloneDeep = require('lodash/cloneDeep');
+import { cloneDeep } from 'lodash';
 
 declare global {
   interface Window {
