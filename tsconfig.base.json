@@ -19,19 +19,18 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
-      "@ntersol/ui": ["libs/ui/src/index.ts"],
       "@ntersol/calendar": ["libs/calendar/src/index.ts"],
       "@ntersol/calendar-clone": ["libs/calendar-clone/src/index.ts"],
-      "@ntersol/wizard": ["libs/wizard/src/index.ts"],
-      "@ntersol/forms": ["libs/forms/src/index.ts"],
-      "@ntersol/state-management": ["libs/state-management/src/index.ts"],
-      "@ntersol/visible": ["libs/visible/src/index.ts"],
       "@ntersol/chart": ["libs/chart/src/index.ts"],
       "@ntersol/document-editor": ["libs/document-editor/src/index.ts"],
+      "@ntersol/forms": ["libs/forms/src/index.ts"],
+      "@ntersol/state-management": ["libs/state-management/src/index.ts"],
       "@ntersol/table": ["libs/table/src/index.ts"],
-
       "@ntersol/tags": ["libs/tags/src/index.ts"],
-      "@ntersol/tree": ["libs/tree/src/index.ts"]
+      "@ntersol/tree": ["libs/tree/src/index.ts"],
+      "@ntersol/ui": ["libs/ui/src/index.ts"],
+      "@ntersol/wizard": ["libs/wizard/src/index.ts"],
+      "@ntersol/visible": ["libs/visible/src/index.ts"]
     },
     "rootDir": ".",
     "skipDefaultLibCheck": true,
