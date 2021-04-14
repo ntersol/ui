@@ -1,20 +1,20 @@
 <div class="nts-wizard-content" *ngIf="content">
   <!-- Form field control -->
   <ng-container *ngIf="isType.formFieldControl(content)">
-    <ng-container [ngSwitch]="content?.formFieldType">
+    <ng-container [ngSwitch]="content.formFieldType">
       <ng-container *ngSwitchCase="'checkboxSingle'">
-        <ng-container *ngIf="content?.options && content?.options[0] && content?.options.length === 1">
+        <ng-container *ngIf="content.options && content.options[0] && content.options.length === 1">
           <p-checkbox
-            [formControl]="content?.formControl"
-            [value]="content?.options[0]?.value"
-            [label]="content?.options[0]?.label"
+            [formControl]="content.formControl"
+            [value]="content.options[0]?.value"
+            [label]="content.options[0]?.label"
           >
           </p-checkbox>
         </ng-container>
-        <ng-container *ngIf="content?.options && content?.options[0] && content?.options.length > 1">
-          <ng-container *ngFor="let option of content?.options">
+        <ng-container *ngIf="content.options && content.options[0] && content.options.length > 1">
+          <ng-container *ngFor="let option of content.options">
             <div class="checkbox-single">
-              <p-checkbox [formControl]="content?.formControl" [value]="option?.value" [label]="option.label">
+              <p-checkbox [formControl]="content.formControl" [value]="option?.value" [label]="option.label">
               </p-checkbox>
             </div>
           </ng-container>
@@ -23,18 +23,18 @@
 
       <ng-container *ngSwitchDefault>
         <nts-form-field
-          [formControl]="content?.formControl"
-          [options]="dataField || content?.options || []"
-          [type]="content?.formFieldType"
-          [placeholder]="content?.placeholder"
-          [tooltip]="content?.tooltip"
-          [hint]="content?.hint"
-          [prefix]="content?.prefix"
-          [suffix]="content?.suffix"
-          [min]="content?.min"
-          [max]="content?.max"
-          [maxlength]="content?.maxlength"
-          [minlength]="content?.minlength"
+          [formControl]="content.formControl"
+          [options]="dataField || content.options || []"
+          [type]="content.formFieldType"
+          [placeholder]="content.placeholder"
+          [tooltip]="content.tooltip"
+          [hint]="content.hint"
+          [prefix]="content.prefix"
+          [suffix]="content.suffix"
+          [min]="content.min"
+          [max]="content.max"
+          [maxlength]="content.maxlength"
+          [minlength]="content.minlength"
         >
         </nts-form-field>
       </ng-container>
