@@ -12,5 +12,6 @@ module.exports = {
     '<rootDir>/libs/tags',
     '<rootDir>/libs/tree',
     '<rootDir>/libs/visible',
+    '<rootDir>/libs/grid',
   ],
 };

@@ -30,7 +30,8 @@
       "@ntersol/tree": ["libs/tree/src/index.ts"],
       "@ntersol/ui": ["libs/ui/src/index.ts"],
       "@ntersol/wizard": ["libs/wizard/src/index.ts"],
-      "@ntersol/visible": ["libs/visible/src/index.ts"]
+      "@ntersol/visible": ["libs/visible/src/index.ts"],
+      "@ntersol/grid": ["libs/grid/src/index.ts"]
     },
     "rootDir": ".",
     "skipDefaultLibCheck": true,
