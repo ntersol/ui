@@ -3,7 +3,17 @@
 ## Handy NX Commands
 
 Generate a new library. Make sure to immediately commit the stub after creation to avoid conflicts in git.
-`ng generate library <libname>`
+`ng generate library {libname}`
+
+Run storybook documentation
+`ng run {libname}:storybook`
+
+## Documentation Quick Links
+
+Generating package documentation with storybook
+https://ntersol.atlassian.net/wiki/spaces/NTER/pages/1527939105/Generating+Package+Documentation
+
+## Stub Documentation
 
 This project was generated using [Nx](https://nx.dev).
 

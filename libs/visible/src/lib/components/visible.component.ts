@@ -1,5 +1,14 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, Input, Inject, PLATFORM_ID, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  Inject,
+  PLATFORM_ID,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { MediaBreakpoints } from './visible.models';
 import { mediaQueries } from './breakpoints.utils';
 import { isVisible, breakpointsToBootStrapClasses } from './visible.utils';
@@ -20,7 +29,7 @@ import { debounceTime, distinctUntilChanged, map, startWith, tap } from 'rxjs/op
 export class VisibleComponent implements OnInit {
   @Input() visible?: MediaBreakpoints = 'all';
 
-  @Input() isVisible = new EventEmitter<boolean>();
+  @Output() isVisible = new EventEmitter<boolean>();
   /** Check for browser and matchMedia present */
   public isBrowser = isPlatformBrowser(this.platformId) && typeof matchMedia !== 'undefined';
   /** Show or hide this content based on the visible properties and media query selection */
@@ -30,7 +39,7 @@ export class VisibleComponent implements OnInit {
         debounceTime(50),
         map(() => isVisible(this.visible || 'all', mediaQueries)),
         distinctUntilChanged(),
-        tap(x => this.isVisible.emit(x)),
+        tap((x) => this.isVisible.emit(x)),
       )
     : of(true);
 
