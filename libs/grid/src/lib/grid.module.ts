@@ -9,6 +9,7 @@ import { TextCasePipe } from './pipes/text-case.pipe';
 import { GridTemplateRendererComponent } from './components/grid-template-renderer/grid-template-renderer.component';
 import { GridStatusBarComponent } from './components/grid-status-bar/grid-status-bar.component';
 import { GridComponent } from './components/grid/grid.component';
+import { GridRowExpansionDirective } from './directives/row-expansion.directive';
 @NgModule({
   imports: [CommonModule, AgGridModule.withComponents([GridTemplateRendererComponent])],
   providers: [],
@@ -20,6 +21,7 @@ import { GridComponent } from './components/grid/grid.component';
     GridColumnDirective,
     GridColumnHeaderDirective,
     GridColumnCellDirective,
+    GridRowExpansionDirective,
   ],
   exports: [
     AgGridModule,
@@ -29,6 +31,7 @@ import { GridComponent } from './components/grid/grid.component';
     GridColumnDirective,
     GridColumnHeaderDirective,
     GridColumnCellDirective,
+    GridRowExpansionDirective,
   ],
   entryComponents: [GridStatusBarComponent],
 })
