@@ -54,7 +54,7 @@ export type FormFieldType =
 })
 export class NtsFormFieldComponent implements OnInit, OnDestroy {
   /** A dictionary that helps manage unique name and id properties. This is on the class so all instances on a page can be made unique */
-  static uniqueIds: Record<string, number>;
+  static uniqueIds: Record<string, number> | null = null;
   /** Some ui controls need an ngModel to store data if a form control is not supplied */
   public model: any;
 
