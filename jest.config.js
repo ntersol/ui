@@ -13,5 +13,6 @@ module.exports = {
     '<rootDir>/libs/tree',
     '<rootDir>/libs/visible',
     '<rootDir>/libs/grid',
+    '<rootDir>/libs/storybook',
   ],
 };

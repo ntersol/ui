@@ -33,6 +33,7 @@
     "tags": { "tags": [] },
     "tree": { "tags": [] },
     "visible": { "tags": [] },
-    "grid": { "tags": [] }
+    "grid": { "tags": [] },
+    "storybook": { "tags": [] }
   }
 }
