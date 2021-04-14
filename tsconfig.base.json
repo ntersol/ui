@@ -24,7 +24,7 @@
       "@ntersol/calendar-clone": ["libs/calendar-clone/src/index.ts"],
       "@ntersol/wizard": ["libs/wizard/src/index.ts"],
       "@ntersol/forms": ["libs/forms/src/index.ts"],
-      "@ntersol/<lib-name>": ["libs/state-management/src/index.ts"]
+      "@ntersol/state-management": ["libs/state-management/src/index.ts"]
     },
     "rootDir": ".",
     "skipDefaultLibCheck": true,

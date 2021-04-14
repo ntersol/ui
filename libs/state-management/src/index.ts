@@ -1,1 +1,1 @@
-export * from './lib/state-management.module';
+export * from './lib';
