@@ -1,0 +1,15 @@
+/*
+svg {
+  width: 100%;
+  height: initial;
+}
+*/
+
+.nts-doc-viewer-container {
+  overflow: auto;
+  .nts-doc-viewer-card {
+    background: #fff;
+    display: inline-block;
+    border: 1px solid #ccc;
+  }
+}

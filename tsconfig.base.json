@@ -26,9 +26,9 @@
       "@ntersol/forms": ["libs/forms/src/index.ts"],
       "@ntersol/state-management": ["libs/state-management/src/index.ts"],
       "@ntersol/visible": ["libs/visible/src/index.ts"],
-
       "@ntersol/chart": ["libs/chart/src/index.ts"],
       "@ntersol/document-editor": ["libs/document-editor/src/index.ts"],
+
       "@ntersol/table": ["libs/table/src/index.ts"],
       "@ntersol/tags": ["libs/tags/src/index.ts"],
       "@ntersol/tree": ["libs/tree/src/index.ts"]

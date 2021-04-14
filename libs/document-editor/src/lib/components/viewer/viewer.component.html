@@ -1,0 +1,15 @@
+<!---->
+
+<p-card>
+
+    <div class="nts-doc-viewer-container p-2 text-center">
+      <div
+        id="nts-doc-viewer"
+        class="nts-doc-viewer-card"
+        #container
+        [ngStyle]="{ transform: 'rotate(' + rotation + 'deg)' }"
+      >
+        <canvas #viewer style="display:block;width:100%;"></canvas>
+      </div>
+    </div>
+  </p-card>
