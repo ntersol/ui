@@ -25,6 +25,7 @@
     "showcase": { "tags": [] },
     "wizard": { "tags": [] },
     "starter": { "tags": [] },
-    "forms": { "tags": [] }
+    "forms": { "tags": [] },
+    "state-management": { "tags": [] }
   }
 }

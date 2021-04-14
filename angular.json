@@ -553,6 +553,40 @@
           }
         }
       }
+    },
+    "state-management": {
+      "projectType": "library",
+      "root": "libs/state-management",
+      "sourceRoot": "libs/state-management/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/state-management/tsconfig.lib.json",
+            "project": "libs/state-management/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/state-management/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/state-management/src/**/*.ts", "libs/state-management/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/state-management"],
+          "options": {
+            "jestConfig": "libs/state-management/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "defaultProject": "showcase"

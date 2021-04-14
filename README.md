@@ -2,7 +2,7 @@
 
 ## Handy NX Commands
 
-Generate a new library. Make sure to immediately the stub after creation to avoid conflicts.
+Generate a new library. Make sure to immediately commit the stub after creation to avoid conflicts in git.
 `ng generate library <libname>`
 
 This project was generated using [Nx](https://nx.dev).
