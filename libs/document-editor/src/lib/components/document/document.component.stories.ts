@@ -1,24 +1,24 @@
-import { text, number, boolean } from '@storybook/addon-knobs';
+import { number, boolean } from '@storybook/addon-knobs';
 import { DocumentComponent } from './document.component';
 
 export default {
-  title: 'DocumentComponent'
-}
+  title: 'DocumentComponent',
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: []
+    imports: [],
   },
   component: DocumentComponent,
   props: {
-    document: text('document', ),
-    viewModels: text('viewModels', ),
-    settings: text('settings', ),
-    tnSettings: text('tnSettings', ),
-    selection: text('selection', []),
-    pageActive: text('pageActive', ),
-    pdfInfo: text('pdfInfo', ),
+    // document: text('document', ),
+    // viewModels: text('viewModels', ),
+    // settings: text('settings', ),
+    // tnSettings: text('tnSettings', ),
+    // selection: text('selection', []),
+    // pageActive: text('pageActive', ),
+    // pdfInfo: text('pdfInfo', ),
     docIndex: number('docIndex', 0),
     canDropFromAny: boolean('canDropFromAny', true),
-  }
-})
+  },
+});

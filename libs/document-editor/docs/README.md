@@ -1,5 +1,7 @@
 @ntersol/document-editor / [Exports](modules.md)
 
+@ntersol/document-editor / [Exports](modules.md)
+
 # document-editor
 
 This library was generated with [Nx](https://nx.dev).

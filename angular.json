@@ -97,7 +97,7 @@
           "options": {
             "commands": [
               "cd dist/libs/wizard/ && npm pack",
-              "npm publish --access public"
+              "cd dist/libs/wizard/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -215,7 +215,7 @@
           "options": {
             "commands": [
               "cd dist/libs/calendar/ && npm pack",
-              "npm publish --access public"
+              "cd dist/libs/calendar/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -587,7 +587,7 @@
           "options": {
             "commands": [
               "cd dist/libs/forms/ && npm pack",
-              "npm publish --access public"
+              "cd dist/libs/forms/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -696,7 +696,7 @@
           "options": {
             "commands": [
               "cd dist/libs/state-management/ && npm pack",
-              "npm publish --access public"
+              "cd dist/libs/state-management/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -805,7 +805,7 @@
           "options": {
             "commands": [
               "cd dist/libs/chart/ && npm pack",
-              "npm publish --access public"
+              "cd dist/libs/chart/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -914,7 +914,7 @@
           "options": {
             "commands": [
               "cd dist/libs/document-editor/ && npm pack",
-              "npm publish --access public"
+              "cd dist/libs/document-editor/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -1023,7 +1023,7 @@
           "options": {
             "commands": [
               "cd dist/libs/table/ && npm pack",
-              "npm publish --access public"
+              "cd dist/libs/table/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -1132,7 +1132,7 @@
           "options": {
             "commands": [
               "cd dist/libs/tags/ && npm pack",
-              "npm publish --access public"
+              "cd dist/libs/tags/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -1241,7 +1241,7 @@
           "options": {
             "commands": [
               "cd dist/libs/tree/ && npm pack",
-              "npm publish --access public"
+              "cd dist/libs/tree/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -1350,7 +1350,7 @@
           "options": {
             "commands": [
               "cd dist/libs/visible/ && npm pack",
-              "npm publish --access public"
+              "cd dist/libs/visible/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -1459,7 +1459,7 @@
           "options": {
             "commands": [
               "cd dist/libs/grid/ && npm pack",
-              "npm publish --access public"
+              "cd dist/libs/grid/ && npm publish --access public"
             ],
             "parallel": false
           }
