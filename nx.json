@@ -26,6 +26,12 @@
     "wizard": { "tags": [] },
     "starter": { "tags": [] },
     "forms": { "tags": [] },
-    "state-management": { "tags": [] }
+    "state-management": { "tags": [] },
+    "chart": { "tags": [] },
+    "document-editor": { "tags": [] },
+    "table": { "tags": [] },
+    "tags": { "tags": [] },
+    "tree": { "tags": [] },
+    "visible": { "tags": [] }
   }
 }

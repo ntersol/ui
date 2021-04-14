@@ -587,6 +587,210 @@
           }
         }
       }
+    },
+    "chart": {
+      "projectType": "library",
+      "root": "libs/chart",
+      "sourceRoot": "libs/chart/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/chart/tsconfig.lib.json",
+            "project": "libs/chart/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/chart/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/chart/src/**/*.ts", "libs/chart/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/chart"],
+          "options": {
+            "jestConfig": "libs/chart/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "document-editor": {
+      "projectType": "library",
+      "root": "libs/document-editor",
+      "sourceRoot": "libs/document-editor/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/document-editor/tsconfig.lib.json",
+            "project": "libs/document-editor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/document-editor/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/document-editor/src/**/*.ts", "libs/document-editor/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/document-editor"],
+          "options": {
+            "jestConfig": "libs/document-editor/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "table": {
+      "projectType": "library",
+      "root": "libs/table",
+      "sourceRoot": "libs/table/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/table/tsconfig.lib.json",
+            "project": "libs/table/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/table/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/table/src/**/*.ts", "libs/table/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/table"],
+          "options": {
+            "jestConfig": "libs/table/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "tags": {
+      "projectType": "library",
+      "root": "libs/tags",
+      "sourceRoot": "libs/tags/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/tags/tsconfig.lib.json",
+            "project": "libs/tags/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/tags/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/tags/src/**/*.ts", "libs/tags/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tags"],
+          "options": {
+            "jestConfig": "libs/tags/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "tree": {
+      "projectType": "library",
+      "root": "libs/tree",
+      "sourceRoot": "libs/tree/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/tree/tsconfig.lib.json",
+            "project": "libs/tree/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/tree/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/tree/src/**/*.ts", "libs/tree/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tree"],
+          "options": {
+            "jestConfig": "libs/tree/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "visible": {
+      "projectType": "library",
+      "root": "libs/visible",
+      "sourceRoot": "libs/visible/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/visible/tsconfig.lib.json",
+            "project": "libs/visible/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/visible/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/visible/src/**/*.ts", "libs/visible/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/visible"],
+          "options": {
+            "jestConfig": "libs/visible/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "defaultProject": "showcase"
