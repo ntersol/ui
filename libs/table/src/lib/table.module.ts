@@ -7,7 +7,14 @@ import { TableColumnCellDirective } from './directives/cell-body.directive';
 import { TableColumnHeaderDirective } from './directives/cell-header.directive';
 import { SlugPipe } from './pipes/slug.pipe';
 import { PhoneNumberPipe } from './pipes/phone-number.pipe';
-const DEPS = [TableComponent, TableColumnDirective, TableColumnCellDirective, TableColumnHeaderDirective];
+import { TableRowExpansionDirective } from './directives/row-expansion.directive';
+const DEPS = [
+  TableComponent,
+  TableColumnDirective,
+  TableColumnCellDirective,
+  TableColumnHeaderDirective,
+  TableRowExpansionDirective,
+];
 
 @NgModule({
   declarations: [DEPS, SlugPipe, PhoneNumberPipe],
