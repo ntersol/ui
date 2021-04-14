@@ -1,3 +1,7 @@
+@ntersol/chart / [Exports](modules.md)
+
+@ntersol/chart / [Exports](modules.md)
+
 # chart
 
 This library was generated with [Nx](https://nx.dev).

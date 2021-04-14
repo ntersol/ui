@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   ViewChild,
   ElementRef,
@@ -32,7 +31,7 @@ declare global {
   styleUrls: ['./chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   /** TEMP */
   @ViewChild('element') element!: ElementRef;
   @ViewChild('tooltipCustom') tooltipCustom!: ElementRef;
@@ -121,10 +120,6 @@ export class ChartComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     fontSize: 10,
     fontWeight: 'normal',
   };
-
-  constructor() {}
-
-  ngOnInit() {}
 
   ngAfterViewInit() {
     this.scriptsLoad();
