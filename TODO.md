@@ -1,7 +1,5 @@
-## Wild Ideas:
+## Lib Ideas:
 
-- Standardize commit messages with http://commitizen.github.io/cz-cli/
-- Standardize SDLC communication with https://conventionalcomments.org/
 - Standardize form field configurations with https://wiki.whatwg.org/wiki/Autocomplete_Types
   - Label
   - Control
@@ -21,7 +19,12 @@
 - Make sure these standards are running in the editor as well as the CLI in case there are discrepancies in developer tooling
 - Simplify UI Dependencies
 
-## Specific to starter:
+## Process
+
+- Standardize commit messages with http://commitizen.github.io/cz-cli/
+- Standardize SDLC communication with https://conventionalcomments.org/
+
+## Starter:
 
 - Remove components from within the application that are not a layout or page
   - Most components should be built or maintained in a relevant library using the standards in place on those schematics
