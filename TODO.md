@@ -28,7 +28,8 @@
 
 - Remove components from within the application that are not a layout or page
   - Most components should be built or maintained in a relevant library using the standards in place on those schematics
-- Standardize authorization? Is this possible?
+- Analytics - weigh cost of https://heap.io/ vs the cost of the client paying dev hours for GA/MP event implementation
+  - Heap captures everything automatically and let's the admin user reduce it down to what they want on their own
 - Are there any chores that you have to do when spinning up a new starter for a client?
 - With one .svg we can create a lot of required imagery for our clients:
   - Use https://ezgif.com/svg-to-png to convert the svg to png
