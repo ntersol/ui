@@ -17,7 +17,7 @@ import { environment } from '$env';
 import { DomainService } from '$domain';
 import { SettingsService } from '$settings';
 import { LogoutModalComponent } from '$modals';
-import { Models } from '../../models/models';
+import { Models } from '../../models/global.models';
 
 export enum AuthState {
   initial,

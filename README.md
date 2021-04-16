@@ -1,6 +1,6 @@
 # AngularStarter
 
-## Handy NX Commands
+## Handy Commands
 
 Generate a new library. Make sure to immediately commit the stub after creation to avoid conflicts in git.
 `ng generate library {libname}`

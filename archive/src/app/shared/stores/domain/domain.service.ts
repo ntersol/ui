@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { StaticService } from './services/static.service';
 import { HttpClient } from '@angular/common/http';
 import { ntsCreateEntityStore } from 'src/app/components/general/state-management';
-import { Models } from '../../models/models';
+import { Models } from '../../models/global.models';
 
 @Injectable({
   providedIn: 'root',

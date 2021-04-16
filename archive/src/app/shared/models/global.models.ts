@@ -13,7 +13,7 @@
   - Leave everything else blank or unchecked here
  */
 
-export namespace Models {
+export module Models {
   export interface Auth {
     data: {
       userGuid: string;
@@ -47,11 +47,27 @@ export namespace Models {
       bs?: string;
     };
   }
+
+  export enum Color {
+    red,
+    blue,
+    orange
+  }
+
+
   /********************************
    *  BEGIN NSWAG STUDIO COPY/PASTE
    ********************************/
 
   /********************************
    *  END NSWAG STUDIO COPY/PASTE
+   ********************************/
+
+    /********************************
+   *  BEGIN EXTENDS NSWAG
+   ********************************/
+
+  /********************************
+   *  END EXTENDS NSWAG
    ********************************/
 }

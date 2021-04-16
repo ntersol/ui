@@ -13,14 +13,15 @@
     "noUnusedParameters": true,
     "outDir": "./dist/out-tsc",
     "paths": {
+      "$libs": ["./src/app/libs"],
       "$site": ["./src/app/site.module"],
-      "$modals": ["./src/app/components/project/modals"],
       "$ui": ["./src/app/shared/stores/ui"],
       "$domain": ["./src/app/shared/stores/domain"],
       "$settings": ["./src/app/shared/stores/settings"],
       "$utils": ["./src/app/shared/utils"],
       "$env": ["./src/environments/environment.ts"],
-      "$enums": ["./src/shared/models/enums.ts"]
+      "$models": ["./src/shared/models"],
+      "$modals": ["./src/compoments/global/modals"]
     },
     "skipLibCheck": true,
     "sourceMap": true,
