@@ -15,6 +15,9 @@ git clone https://github.com/JerrolKrause/angular-starter.git
 # Change directory to the repo
 cd your-app
 
+# Localize
+Remove the following line from the app root tsconfig `"extends": "./../tsconfig.json",`
+
 # Install the repo with npm
 npm i
 ```

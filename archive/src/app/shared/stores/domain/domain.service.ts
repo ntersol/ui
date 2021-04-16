@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StaticService } from './services/static.service';
 import { HttpClient } from '@angular/common/http';
-import { ntsCreateEntityStore } from 'src/app/components/general/state-management';
+import { ntsCreateEntityStore } from '@ntersol/state-management';
 import { Models } from '../../models/global.models';
 
 @Injectable({

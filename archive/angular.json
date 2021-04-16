@@ -12,16 +12,6 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
-            "lazyModules": [
-              "archive/src/app/components/general/calendar/calendar.module",
-              "archive/src/app/components/general/chart/chart.module",
-              "archive/src/app/components/general/document-editor/document-editor.module",
-              "archive/src/app/components/general/forms/forms.module",
-              "archive/src/app/components/general/generic/generic.module",
-              "archive/src/app/components/general/grid/grid.module",
-              "archive/src/app/components/general/table/table.module",
-              "archive/src/app/components/general/tags/tags.module"
-            ],
             "outputPath": "dist/browser",
             "index": "archive/src/index.html",
             "main": "archive/src/main.ts",

@@ -1,5 +1,6 @@
 {
   "compileOnSave": false,
+  "extends": "./../tsconfig.json",
   "compilerOptions": {
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
