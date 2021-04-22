@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { StaticService } from './services/static.service';
 import { HttpClient } from '@angular/common/http';
 import { ntsCreateEntityStore } from '@ntersol/state-management';
 import { Models } from '../../models/global.models';
@@ -12,10 +11,7 @@ export class DomainService {
   public users = this.store<Models.User>({ idKey: 'id', apiUrl: '//jsonplaceholder.typicode.com/users' });
 
   // List all store services here
-  constructor(
-    public http: HttpClient,
-    public staticData: StaticService, // Simple webapi calls that are GET only
-  ) {}
+  constructor(public http: HttpClient) {}
 
   /**
    * Reset all stores

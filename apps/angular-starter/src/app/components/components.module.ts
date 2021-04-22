@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { VendorModule } from 'src/app/vendor.module';
@@ -16,21 +16,11 @@ import { LayoutSingleComponent } from './masterpage/single/layout-single.compone
 import { NavComponent } from './masterpage/nav/nav.component';
 import { NavSearchComponent } from './masterpage/nav/search/nav-search.component';
 
-
-
 // Modals include
 const APP_MODALS = [LogoutModalComponent, FeedbackModalComponent];
 
 // Components to include
-export const APP_COMPONENTS = [
-  ...APP_MODALS,
-  FooterComponent,
-  HeaderComponent,
-  LayoutMainComponent,
-  LayoutSingleComponent,
-  NavComponent,
-  NavSearchComponent,
-];
+export const APP_COMPONENTS = [...APP_MODALS, FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent];
 
 @NgModule({
   imports: [
@@ -46,11 +36,4 @@ export const APP_COMPONENTS = [
   exports: [APP_COMPONENTS],
   entryComponents: [APP_MODALS],
 })
-export class ComponentsModule {
-  static forRoot(): ModuleWithProviders<ComponentsModule> {
-    return {
-      ngModule: ComponentsModule,
-      providers: [],
-    };
-  }
-}
+export class ComponentsModule {}

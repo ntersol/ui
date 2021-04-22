@@ -1,10 +1,8 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
 import { DialogModule } from 'primeng/dialog';
 import { MenuModule } from 'primeng/menu';
 import { MenubarModule } from 'primeng/menubar';
@@ -12,7 +10,7 @@ import { SlideMenuModule } from 'primeng/slidemenu';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { CardModule } from 'primeng/card';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
@@ -22,6 +20,7 @@ import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmationService } from 'primeng/api';
 
 const modules = [
   // Prime NG UI Lib
@@ -54,20 +53,8 @@ const modules = [
     ReactiveFormsModule,
     ...modules,
   ],
-  providers: [],
-  exports: [
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ...modules,
-  ],
+  providers: [ConfirmationService, DialogService],
+  exports: [RouterModule, FormsModule, ReactiveFormsModule, ...modules],
   declarations: [],
 })
-export class VendorModule {
-  static forRoot(): ModuleWithProviders<VendorModule> {
-    return {
-      ngModule: VendorModule,
-      providers: [ConfirmationService, DialogService, MessageService],
-    };
-  }
-}
+export class VendorModule {}

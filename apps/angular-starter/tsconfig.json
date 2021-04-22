@@ -22,7 +22,7 @@
       "$utils": ["./src/app/shared/utils"],
       "$env": ["./src/environments/environment.ts"],
       "$models": ["./src/shared/models"],
-      "$modals": ["./src/compoments/global/modals"]
+      "$modals": ["./src/compoments/modals"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,

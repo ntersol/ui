@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Pipes, Angular
@@ -19,11 +19,7 @@ import {
   LimitPipe,
 } from './pipes';
 // Directives
-import {
-  FullScreenDirective,
-  FocusDirective,
-  DomObserverDirective,
-} from './directives';
+import { FullScreenDirective, FocusDirective, DomObserverDirective } from './directives';
 
 // Pipes + Directives
 export const APP_PIPES_DIRECTIVES = [
@@ -57,11 +53,4 @@ export const APP_PIPES_DIRECTIVES = [
   exports: [APP_PIPES_DIRECTIVES],
   entryComponents: [],
 })
-export class SharedModule {
-  static forRoot(): ModuleWithProviders<SharedModule> {
-    return {
-      ngModule: SharedModule,
-      providers: [],
-    };
-  }
-}
+export class SharedModule {}

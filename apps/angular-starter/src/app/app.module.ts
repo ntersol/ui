@@ -79,18 +79,18 @@ export let InjectorInstance: Injector;
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {
-    useHash: !environment.production,
-    preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,
-    scrollPositionRestoration: 'enabled',
-    relativeLinkResolution: 'legacy'
-}),
+      useHash: !environment.production,
+      preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,
+      scrollPositionRestoration: 'enabled',
+      relativeLinkResolution: 'legacy',
+    }),
 
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.settings.enableServiceWorker,
       registrationStrategy: 'registerImmediately',
     }),
 
-    SiteModule.forRoot(),
+    SiteModule,
   ],
   providers: [
     // AppConfigService, // App config/env settings
