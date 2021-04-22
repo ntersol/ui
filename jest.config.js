@@ -14,5 +14,6 @@ module.exports = {
     '<rootDir>/libs/visible',
     '<rootDir>/libs/grid',
     '<rootDir>/libs/storybook',
+    '<rootDir>/apps/angular-starter',
   ],
 };

@@ -34,6 +34,7 @@
     "tree": { "tags": [] },
     "visible": { "tags": [] },
     "grid": { "tags": [] },
-    "storybook": { "tags": [] }
+    "storybook": { "tags": [] },
+    "angular-starter": { "tags": [] }
   }
 }
