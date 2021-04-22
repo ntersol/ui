@@ -1,18 +1,18 @@
 {
   "compileOnSave": false,
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
     "baseUrl": ".",
+    "rootDir": ".",
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "importHelpers": true,
     "lib": ["es2017", "dom"],
+    "module": "esnext",
     "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "outDir": "./dist/out-tsc",
+    "target": "es2015",
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types"],
     "paths": {
       "$libs": ["./src/app/libs"],
       "$site": ["./src/app/site.module"],
@@ -24,27 +24,28 @@
       "$models": ["./src/shared/models"],
       "$modals": ["./src/compoments/global/modals"]
     },
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipDefaultLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
-    "noImplicitReturns": true,
-    "strictPropertyInitialization": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "target": "es5",
-    "module": "esnext",
-    "typeRoots": ["node_modules/@types"]
+    "strictPropertyInitialization": true
   },
   "angularCompilerOptions": {
-    "strictTemplates": true,
-    "strictInputAccessModifiers": true,
-    "strictInjectionParameters": true,
     "fullTemplateTypeCheck": true,
-    "preserveWhitespaces": false
+    "preserveWhitespaces": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["e2e", "**/*.spec.ts", "node_modules"]
+  "exclude": ["archive", "e2e", "**/*.spec.ts", "node_modules", "tmp"]
 }
