@@ -8,7 +8,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { enableAkitaProdMode, persistState } from '@datorama/akita';
 
 import { SiteModule } from '$site';
-import { LoginComponent } from './routes/login/login.component';
 import { NoContentComponent } from './routes/no-content/no-content.component';
 import { GlobalErrorHandler } from './shared/interceptors/error.interceptor';
 import { HttpInterceptorService } from './shared/interceptors/http.interceptor';
@@ -65,8 +64,6 @@ persistState({
 export const APP_COMPONENTS = [
   // App component
   AppComponent,
-  // Routes
-  LoginComponent,
   NoContentComponent,
 ];
 

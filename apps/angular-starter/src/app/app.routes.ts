@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
 import { LayoutMainComponent } from './components/masterpage';
-import { LoginComponent } from './routes/login/login.component';
 import { NoContentComponent } from './routes/no-content/no-content.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 export const ROUTES: Routes = [
   // Routes without masterpage or that do not need to be authenticated need to go first
+
   {
     path: 'login',
-    component: LoginComponent,
+    pathMatch: 'full',
+    loadChildren: () => import('./routes/login/login.module').then(m => m.LoginModule),
     data: { title: 'Please Log In' },
   },
 
