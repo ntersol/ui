@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { SettingsService } from '$settings';
 
-const camelCase = require('lodash/camelCase');
-
 interface EnvSettings {
   ApiUrl: string;
   ApiNamespace: string;
@@ -33,11 +31,11 @@ export class AppConfigService {
       // If defined, updated prop value
       // If not throw error
       const appSetting = <Settings>this.settings;
-      const appKey = camelCase(key);
+      const appKey = key;
       if (appSetting[appKey] !== undefined) {
         appSetting[appKey] = (<Settings>settings)[key];
       } else {
-        console.error(camelCase(key), `is not present in app settings`);
+        console.error(key, `is not present in app settings`);
       }
     });
   }

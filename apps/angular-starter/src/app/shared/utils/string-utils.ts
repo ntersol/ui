@@ -1,6 +1,3 @@
-const unescape = require('lodash/unescape');
-const escape = require('lodash/escape');
-
 /**
  * Helper utilities for string manipulation
  */
@@ -54,7 +51,7 @@ export class StringUtils {
    */
   static obfuscateAdd(val: string) {
     if (val && window) {
-      return window.btoa(unescape(encodeURIComponent(val.toString())));
+      return window.btoa(encodeURIComponent(val.toString()));
     }
     return val;
   }
@@ -65,7 +62,7 @@ export class StringUtils {
    */
   static obfuscateRemove(val: string) {
     if (val && window) {
-      return decodeURIComponent(escape(window.atob(val)));
+      return decodeURIComponent(window.atob(val));
     }
     return val;
   }
@@ -110,8 +107,7 @@ export class StringUtils {
    * @param offsetAmount
    */
   static charShift(str: string, offsetAmount: number = 1) {
-    const charsList =
-      ' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-=[{]}|;:",<.>/?';
+    const charsList = ' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-=[{]}|;:",<.>/?';
     let strNew = '';
 
     // Loop through all the chars in the string

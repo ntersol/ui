@@ -8,9 +8,6 @@ import { fromEvent } from 'rxjs';
 import { UiStateService } from '$ui';
 import { AuthService, AuthState } from 'src/app/shared/services/project/auth.service';
 
-const startCase = require('lodash/startCase');
-const toLower = require('lodash/toLower');
-
 @Component({
   selector: 'app-nav',
   styleUrls: ['./nav.component.scss'],
@@ -22,7 +19,7 @@ export class NavComponent {
   /** Is the dropdown menu open on mobile */
   public isOpen = false;
   /** Turn the username into title case */
-  public userName = startCase(toLower(this.settings.userName));
+  public userName = this.settings.userName;
   /**   Does the app have an update */
   public hasUpdate$ = this.ui.updateAvailable$;
   /** App version */
