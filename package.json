@@ -75,7 +75,7 @@
     "@angular-eslint/eslint-plugin": "~1.0.0",
     "@angular-eslint/eslint-plugin-template": "~1.0.0",
     "@angular-eslint/template-parser": "~1.0.0",
-    "@angular/cli": "~11.0.0",
+    "@angular/cli": "~11.2.10",
     "@angular/compiler-cli": "^11.2.11",
     "@angular/language-service": "^11.2.11",
     "@angular/platform-server": "^11.2.11",
