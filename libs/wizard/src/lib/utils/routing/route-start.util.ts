@@ -1,4 +1,4 @@
-import { Wizard } from '../../wizard';
+import { Wizard } from '../../wizard.models';
 
 /**
  * Determine the initial starting route of the application based on supplied query params

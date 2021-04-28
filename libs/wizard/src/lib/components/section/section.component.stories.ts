@@ -1,16 +1,16 @@
-import { text, number, boolean } from '@storybook/addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import { SectionComponent } from './section.component';
 
 export default {
-  title: 'SectionComponent'
-}
+  title: 'SectionComponent',
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: []
+    imports: [],
   },
   component: SectionComponent,
   props: {
-    section: text('section', ),
-  }
-})
+    section: text('section', ''),
+  },
+});

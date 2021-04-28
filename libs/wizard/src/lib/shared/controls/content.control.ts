@@ -1,4 +1,4 @@
-import { Wizard } from '../../wizard';
+import { Wizard } from '../../wizard.models';
 import { FormGroup, FormControl } from '@angular/forms';
 import { clone } from '../../utils/misc.util';
 import { isType } from '../../utils/typeguards.util';

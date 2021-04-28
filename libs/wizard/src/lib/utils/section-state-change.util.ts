@@ -1,4 +1,4 @@
-import { Wizard } from '../wizard';
+import { Wizard } from '../wizard.models';
 
 export type SectionChangeType =
   | 'initial'

@@ -1,6 +1,6 @@
 export * from './wizard.module';
 export * from './wizard.enums';
-export * from './wizard';
+export * from './wizard.models';
 export * from './components/wizard/wizard.component';
 export * from './shared/directives/feature-template.directive';
 export * from './shared/directives/feature.directive';

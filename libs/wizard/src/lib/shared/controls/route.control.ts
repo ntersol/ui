@@ -1,4 +1,4 @@
-import { Wizard } from '../../wizard';
+import { Wizard } from '../../wizard.models';
 import { assign } from '../../utils/assign.util';
 import { clone } from '../../utils/misc.util';
 

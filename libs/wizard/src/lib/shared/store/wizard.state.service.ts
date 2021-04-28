@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Wizard } from '../../wizard';
+import { Wizard } from '../../wizard.models';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { take, map, filter, debounceTime, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';

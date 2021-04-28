@@ -11,7 +11,8 @@ import {
   ContentChildren,
   QueryList,
 } from '@angular/core';
-import { Wizard } from '../../wizard';
+
+import { Wizard } from '../../wizard.models';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';

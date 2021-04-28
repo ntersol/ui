@@ -1,18 +1,18 @@
-import { text, number, boolean } from '@storybook/addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import { ContentComponent } from './content.component';
 
 export default {
-  title: 'ContentComponent'
-}
+  title: 'ContentComponent',
+};
 
 export const primary = () => ({
   moduleMetadata: {
-    imports: []
+    imports: [],
   },
   component: ContentComponent,
   props: {
-    content: text('content', ),
-    dataField: text('dataField', ),
-    templates: text('templates', {}),
-  }
-})
+    content: text('content', ''),
+    dataField: text('dataField', ''),
+    templates: text('templates', {} as any),
+  },
+});

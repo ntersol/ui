@@ -3,7 +3,7 @@ import { WizardOperator } from './wizard.enums';
 /**
  * Marks keys in RS as required
  */
-type MarkRequired<T extends Record<any, any>, RS extends keyof T> = Required<Pick<T, RS>> &
+export type MarkRequired<T extends Record<any, any>, RS extends keyof T> = Required<Pick<T, RS>> &
   Pick<T, Exclude<keyof T, RS>>;
 // type SomeDataHelper = MarkRequired<SomeData, 'propA'> | MarkRequired<SomeData, 'propB'>;
 
@@ -71,14 +71,14 @@ export namespace Wizard {
    * Sections
    */
   export interface SectionControl extends Section {
-    src: Wizard.Section;
+    src: Section;
     /** Position in the array */
     position: number;
     /** How many routes are in this section */
     readonly routeCount: number;
   }
 
-  interface Section {
+  export interface Section {
     /** Human readable title */
     readonly title: string;
     /** String to use for url, needs to be unique per section */
@@ -106,8 +106,8 @@ export namespace Wizard {
     readonly errorTop: string;
     readonly errorBottom: string;
     pageTouched: boolean;
-    controlsMarkAsTouched();
-    controlsMarkAsUntouched();
+    controlsMarkAsTouched(): void;
+    controlsMarkAsUntouched(): void;
   }
 
   export interface Page {
@@ -135,7 +135,7 @@ export namespace Wizard {
 
   type ContentFormat = 'formField' | 'html' | 'feature' | 'row' | 'buttonGroup';
 
-  interface Content {
+  export interface Content {
     /** Type of content */
     readonly type: ContentFormat;
     readonly classes?: string;
@@ -209,7 +209,7 @@ export namespace Wizard {
       | 'toggle'
       | 'buttonToggle'
       | 'checkboxButtons';
-    readonly options?: Options[] | string[]; // TODO | Union type either options or datafield
+    readonly options?: Option[] | string[]; // TODO | Union type either options or datafield
   }
 
   interface FormFieldSrc extends Content {
@@ -229,7 +229,7 @@ export namespace Wizard {
     /** If textarea */
     rows?: number;
     /** If a select or button group. This is only for fixed properties, alterntnatively use datafields */
-    options?: Option[];
+    options?: Option[] | string[];
     /** If a select or button group, use this data from inside the dataField input */
     dataField?: string;
     /** Format to pass to the pipe for custom control */
@@ -257,9 +257,7 @@ export namespace Wizard {
   }
   export interface RowControl extends Row<ContentControl> {}
 
-  export interface ContentControl extends ContentTypeControl {
-    src: Wizard.Content;
-  }
+  export type ContentControl = ContentTypeControl & { src: Content };
 
   export interface FormFieldControl extends FormFieldSrc {
     src: FormField;
@@ -271,6 +269,7 @@ export namespace Wizard {
    */
   export interface RouteControl extends RouteSrc {
     src: Row<ContentControl>;
+    routeNext: string;
   }
   /** Routes need at least one of 3 props: routeNext, ruleGRoups or sectionComplete */
   export type Route = RouteNext | RouteComplete;

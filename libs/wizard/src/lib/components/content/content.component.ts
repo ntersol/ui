@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Wizard } from '../../wizard';
+import { Wizard } from '../../wizard.models';
 import { isType } from '../../utils/typeguards.util';
 import { WizardFeatureDirective } from '../../shared/directives/feature.directive';
 

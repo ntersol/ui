@@ -1,5 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import { Wizard } from '../../wizard';
+import { Wizard } from '../../wizard.models';
 import { ruleSet } from './rule-set.util';
 
 /**

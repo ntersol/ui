@@ -56,6 +56,7 @@
     "@fullcalendar/timegrid": "^4.4.0",
     "@ngneat/until-destroy": "^8.0.4",
     "@ntersol/forms": "0.0.2",
+    "@ntersol/wizard": "0.0.2",
     "ag-grid-angular": "^25.1.0",
     "ag-grid-community": "^25.1.0",
     "ag-grid-enterprise": "^25.1.0",

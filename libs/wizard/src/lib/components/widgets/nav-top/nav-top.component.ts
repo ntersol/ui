@@ -3,8 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { WizardStore } from '../../../shared/store/wizard.store';
-import { Wizard } from '../../../wizard';
-
+import { Wizard } from '../../../wizard.models';
 @Component({
   selector: 'nts-wizard-nav-top',
   templateUrl: './nav-top.component.html',

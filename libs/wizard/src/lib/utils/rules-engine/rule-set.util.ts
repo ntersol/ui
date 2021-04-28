@@ -1,4 +1,4 @@
-import { Wizard } from '../../wizard';
+import { Wizard } from '../../wizard.models';
 import { getByPath } from '../get-by-path.util';
 import { ruleSingle } from './rule.util';
 

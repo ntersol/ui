@@ -1,4 +1,4 @@
-import { Wizard } from '../wizard';
+import { Wizard } from '../wizard.models';
 import { arrayToRecord } from './misc.util';
 
 const errorAppend = `<Wizard> `;
@@ -46,17 +46,17 @@ export const audit = (sections: Wizard.Section[], pages: Wizard.Page[], routes: 
 
   /**
    * Loop through sections after all records have been created
-  
+
   Object.keys(sectionsRecord).forEach(key => {
     const section: any = <any>sectionsRecord[key];
-   
+
     if (section.sectionNext && !sectionsRecord[section.sectionNext || '']) {
       console.error(errorAppend + 'Cannot find a section with this sectionNext prop: ', sectionsRecord[key]);
     }
     if (!section.sectionNext && !section.sectionLast) {
       console.error(errorAppend + 'This section is missing either a sectionNext or sessionLast prop. Need either one ', sectionsRecord[key]);
     }
-    
+
   });
    */
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Wizard } from '../../wizard';
+
+import { Wizard } from '../../wizard.models';
 
 @Component({
   selector: 'app-section',

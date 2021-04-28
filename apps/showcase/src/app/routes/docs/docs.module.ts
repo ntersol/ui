@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SiteModule } from '$site'; // Site modules
+import { NtsWizardModule } from '@ntersol/wizard';
+
 // Routing
 import { routing } from './docs.routes';
 import { TabViewModule } from 'primeng/tabview';
@@ -15,7 +17,7 @@ import { VisibleComponent } from './routes/visible/visible.component';
 import { HighlightService } from './shared/services/highlight.service';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, TabViewModule],
+  imports: [CommonModule, SiteModule, routing, TabViewModule, NtsWizardModule],
   declarations: [DocsComponent, WizardComponent, VisibleComponent],
   providers: [HighlightService, RouteUiStateService, RouteUiStateStore, RouteUiStateQuery, RouteDomainStateService],
   exports: [],

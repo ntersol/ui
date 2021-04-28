@@ -39,7 +39,7 @@ export class NtsAutocompleteComponent implements OnInit, OnChanges {
   ngOnChanges(model: SimpleChanges) {
     // Load default value if one is found in the form control
     if (this.control && this.terms) {
-      const termDefault = this.terms.filter(term => {
+      const termDefault = this.terms.filter((term) => {
         if (!this.control) {
           return false;
         }
@@ -95,8 +95,8 @@ export class NtsAutocompleteComponent implements OnInit, OnChanges {
   }
 
   private filterTermsAll(terms: string[] | any[], query: string | null) {
-    return terms.filter(term => {
-      const label: string = this.label && term && term[this.label] ? term[this.label] : term || '';
+    return terms.filter((term) => {
+      const label: string = this.label && term && term[this.label as any] ? term[this.label as any] : term || '';
       return String(label || '')
         .toLowerCase()
         .replace(/[^a-z0-9]/gi, '')
