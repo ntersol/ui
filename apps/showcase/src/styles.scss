@@ -12,6 +12,9 @@
 // Option 2: Import all of Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import '~prismjs/plugins/toolbar/prism-toolbar.css';
+@import '~prismjs/themes/prism.css';
+
 // Font Awesome Free 5
 @import '~@fortawesome/fontawesome-free/css/all.css';
 

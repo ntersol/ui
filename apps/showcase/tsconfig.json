@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": ".",
@@ -14,6 +15,9 @@
     "types": ["node"],
     "typeRoots": ["node_modules/@types"],
     "paths": {
+      "@ntersol/visible": ["../../libs/visible/src/index.ts"],
+      "@ntersol/wizard": ["../../libs/wizard/src/index.ts"],
+      "@ntersol/forms": ["../../libs/forms/src/index.ts"],
       "$libs": ["./src/app/libs"],
       "$site": ["./src/app/site.module"],
       "$ui": ["./src/app/shared/stores/ui"],
