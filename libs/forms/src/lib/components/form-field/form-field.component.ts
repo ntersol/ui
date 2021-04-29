@@ -10,13 +10,9 @@ import {
 } from '@angular/core';
 import { NgControl, FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { isRequired } from '../../utils/isRequired.util';
 import { Spinner } from 'primeng/spinner';
 import { SelectItem } from 'primeng/api';
-import { slugCreateUniqueId } from '../../utils/slug.util';
-import { currencyChange } from '../../utils/currency.util';
-import { formControlGetFieldName } from '../../utils/formFieldName.util';
-import { is } from '../../utils/is.util';
+import { is, isRequired, formControlGetFieldName, currencyChange, slugCreateUniqueId } from '../../utils';
 
 export type FormFieldType =
   | 'text'

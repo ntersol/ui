@@ -5,6 +5,7 @@
       <ng-container *ngSwitchCase="'checkboxSingle'">
         <ng-container *ngIf="content.options && content.options[0] && content.options.length === 1">
           <p-checkbox
+            *ngIf="isType.option(content.options[0])"
             [formControl]="content.formControl"
             [value]="content.options[0]?.value"
             [label]="content.options[0]?.label"

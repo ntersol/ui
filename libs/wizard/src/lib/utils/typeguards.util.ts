@@ -8,6 +8,7 @@ export const isType = {
     }
     return !isNaN(<any>str) && !isNaN(parseFloat(str));
   },
+  option: (content: any): content is Wizard.Option => !!content && !!content.label,
   formField: (content: Wizard.Content): content is Wizard.FormField => content && content.type === 'formField',
   formFieldControl: (content: any): content is Wizard.FormFieldControl =>
     content && content.type === 'formField' && content.formControl,
