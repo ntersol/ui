@@ -15,12 +15,13 @@ import { RouteDomainStateService } from './shared/state/domain';
 import { WizardComponent } from './routes/wizard/wizard.component';
 import { VisibleComponent } from './routes/visible/visible.component';
 import { HighlightService } from './shared/services/highlight.service';
+import { StateManagementComponent } from './routes/state-management/state-management.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, TabViewModule],
-  declarations: [DocsComponent, WizardComponent, VisibleComponent],
+  declarations: [DocsComponent, WizardComponent, VisibleComponent, StateManagementComponent],
   providers: [HighlightService, RouteUiStateService, RouteUiStateStore, RouteUiStateQuery, RouteDomainStateService],
-  exports: [],
+  exports: [StateManagementComponent],
   entryComponents: [],
 })
 export class DocsModule {}

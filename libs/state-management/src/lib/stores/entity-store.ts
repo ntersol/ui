@@ -49,7 +49,11 @@ export class NtsEntityStore<t> {
    * Multiple components can call GET at the same time but only one http request is made and the result shared with all subscribers */
   private httpGet$: Observable<t[]> | undefined;
 
-  constructor(private http: HttpClient, private config: NtsState.EntityStoreConfig) {
+  constructor(
+    private http: HttpClient,
+    private config: NtsState.EntityStoreConfig,
+    private options: NtsState.Options = {},
+  ) {
     // Generate initial state. Note that this state does not have undefined props like the source entity state does
     const state: NtsState.EntityState<t> = Object.assign(initialEntityState, config.initialState);
     // Set default idkey to guid
@@ -145,7 +149,8 @@ export class NtsEntityStore<t> {
    * Subs may need to act on successful api response and 'return this.query.selectAll()' will return immediately
    * @param options
    */
-  public get(options?: NtsState.Options): Observable<t[]> {
+  public get(optionsSrc?: NtsState.Options): Observable<t[]> {
+    const options = { ...this.options, ...optionsSrc };
     // If not cached or refresh cache is set or a get request is already active, make http call and load store
     if (!this.httpGet$ || (!this.query.getHasCache() && !this.hasData) || (options && options.refreshCache)) {
       applyTransaction(() => {
@@ -201,7 +206,8 @@ export class NtsEntityStore<t> {
    * Create new entity via post
    * @param entity
    */
-  public post(entity: Partial<t> | Partial<t>[], options?: NtsState.Options) {
+  public post(entity: Partial<t> | Partial<t>[], optionsSrc?: NtsState.Options) {
+    const options = { ...this.options, ...optionsSrc };
     // Get default api URL
     let apiUrl = this.config.apiUrl;
     // If url specified as an argument, use that one
@@ -230,7 +236,8 @@ export class NtsEntityStore<t> {
    * Create new entity via post
    * @param entity
    */
-  public put(entity: Partial<t> | Partial<t>[], options?: NtsState.Options) {
+  public put(entity: Partial<t> | Partial<t>[], optionsSrc?: NtsState.Options) {
+    const options = { ...this.options, ...optionsSrc };
     const key: keyof Partial<t> = this.idKey as keyof Partial<t>;
     // Get default api URL
     let apiUrl = this.config.apiUrl;
@@ -272,7 +279,8 @@ export class NtsEntityStore<t> {
    * @param entity - Payload to pass to web api
    * @param url - Custom override for url path
    */
-  public patch(entity: Partial<t> | Partial<t>[], options?: NtsState.Options) {
+  public patch(entity: Partial<t> | Partial<t>[], optionsSrc?: NtsState.Options) {
+    const options = { ...this.options, ...optionsSrc };
     const key: keyof Partial<t> = this.idKey as keyof Partial<t>;
     // Get default api URL
     let apiUrl = this.config.apiUrl;
@@ -318,8 +326,9 @@ export class NtsEntityStore<t> {
     request: Observable<Partial<t>>,
     entity: Partial<t> | Partial<t>[],
     mapped: ((x: any) => any) | null,
-    options?: NtsState.Options,
+    optionsSrc?: NtsState.Options,
   ) {
+    const options = { ...this.options, ...optionsSrc };
     this.store.update({ modifying: true, errorModify: false });
     return request.pipe(
       tap((res) => {
@@ -358,7 +367,8 @@ export class NtsEntityStore<t> {
    * Delete entity
    * @param entity
    */
-  public delete(entity: string | number | Partial<t>, options?: NtsState.Options) {
+  public delete(entity: string | number | Partial<t>, optionsSrc?: NtsState.Options) {
+    const options = { ...this.options, ...optionsSrc };
     const id: keyof Partial<t> = this.idKey as keyof Partial<t>;
     // const id: keyof Partial<t> = <any>this.idKey; // @Todo: Type without any
     const key = typeof entity === 'string' || typeof entity === 'number' ? entity : entity[id];
@@ -424,5 +434,6 @@ export class NtsEntityStore<t> {
  * @param http
  * @param config
  */
-export const ntsCreateEntityStore = (http: HttpClient) => <t>(config: NtsState.EntityStoreConfig) =>
-  new NtsEntityStore<t>(http, config);
+export const ntsCreateEntityStore = (http: HttpClient, options?: NtsState.Options) => <t>(
+  config: NtsState.EntityStoreConfig,
+) => new NtsEntityStore<t>(http, config, options);
