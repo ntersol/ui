@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { isApiState } from '../utils/guards.util';
-import { NtsState } from '../state';
+import { NtsState } from '../state.models';
 
 /**
  * Extracts the data property out of an entity state. Most useful for working with multi typed arrays with combinations
@@ -12,7 +12,7 @@ import { NtsState } from '../state';
 })
 export class EntityData implements PipeTransform {
   /**
-   * 
+   *
    * @param value - Any data type. This pipe will combine data from entity and non entity states supplied
    * @param allowPartial - Allow data through if undefined. If false will only emit data when all supplied data is not undefined
    */
@@ -28,6 +28,6 @@ export class EntityData implements PipeTransform {
     }
 
     // If array, extract data from entitystate, otherwise just grab source data
-    return value.map(d => (isApiState(d) ? d.data : d));
+    return value.map((d) => (isApiState(d) ? d.data : d));
   }
 }

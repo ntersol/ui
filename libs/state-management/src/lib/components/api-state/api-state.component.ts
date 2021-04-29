@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { NtsCombineEntityState } from '../../utils/combineEntityState.util';
-import { NtsState } from '../../state';
+import { NtsState } from '../../state.models';
 
 @Component({
   selector: 'nts-api-state',
@@ -21,8 +21,8 @@ export class NtsDomainStateComponent implements OnInit, OnChanges {
   @Input() showModifying = true;
   /** Should this component show loading error */
   @Input() showErrorLoading = true;
-   /** Should this component show modifying error? */
-   @Input() showErrorModifying = true;
+  /** Should this component show modifying error? */
+  @Input() showErrorModifying = true;
 
   /** Holds combined state of any number entity state objects */
   public stateSrc: NtsState.ApiState | undefined;

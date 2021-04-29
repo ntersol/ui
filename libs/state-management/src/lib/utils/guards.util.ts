@@ -1,5 +1,5 @@
 import { initialState, initialEntityState } from './initialState';
-import { NtsState } from '../state';
+import { NtsState } from '../state.models';
 const keysApi = Object.keys(initialState).sort();
 const keysEntity = Object.keys(initialEntityState).sort();
 /**

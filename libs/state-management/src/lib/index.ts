@@ -11,6 +11,6 @@ export * from './pipes/entity-to-array.pipe';
 export * from './pipes/is-loaded.pipe';
 
 export * from './stores/entity-store';
-export * from './state';
+export * from './state.models';
 
 export * from './state-management.module';
