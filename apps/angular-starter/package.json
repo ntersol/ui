@@ -5,6 +5,7 @@
   "scripts": {
     "localize": "git update-index --skip-worktree src/environments/environment.local.ts",
     "start": "npm run format && ng serve",
+    "reinstall": "del package-lock.json /q && rmdir node_modules /s /q && npm i",
     "format": "npm run format-glob -- \"src/{app,environments}/**/*{.ts,.js,.json,.css,.scss,.html}\"",
     "format-glob": "prettier --write",
     "ng": "ng",
