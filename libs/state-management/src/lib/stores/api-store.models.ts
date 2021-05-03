@@ -33,9 +33,11 @@ export namespace NtsState {
     /** Override the default webapi url for a specific verb. Optionally supports a callback function that returns a string */
     apiUrlOverride?: ApiUrlOverride;
     /** Force the store to refresh the data from the remote url. Otherwise if the store has data subsequent get calls are ignored */
-    refreshCache?: boolean;
+    refresh?: boolean;
     /** If true, will empty out the store of data prior to completing the operation */
     reset?: boolean;
+    /** If true, replace the entire entity in the store on a POST/PUT/PATCH instead of performing a deep merge */
+    replace?: boolean;
   }
 
   export interface Config extends Options {
@@ -43,6 +45,8 @@ export namespace NtsState {
     uniqueId?: string | number;
     /** If the store has a subscriber but no data, automatically perform a get request. Default true */
     autoLoad?: boolean;
+    /** Is this store using entity types (an array of objects)? The store will try to determine this automatically if not specified */
+    isEntityStore?: boolean;
     /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests.
      * If true the url to the web api must added manually via a callback function or observable */
     disableAppendId?: {

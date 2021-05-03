@@ -13,8 +13,12 @@ export class StateManagementComponent implements OnInit {
   constructor(private domain: StateManagementService) {}
 
   ngOnInit(): void {
-    this.users$.subscribe(x => console.log(x));
+    this.domain.users({}).data$;
+    this.users$.subscribe(x => console.log(x.data));
     this.domain.users.get().subscribe();
+
+    this.domain.post.state$.subscribe(x => console.log(x.data));
+    // this.domain.users.post().subscribe();
     // this.domain.post.state$.subscribe(x => console.log(x));
     // this.domain.post.get().subscribe();
 
