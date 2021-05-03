@@ -8,9 +8,19 @@ import { StateManagementService } from './shared/state-management.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StateManagementComponent implements OnInit {
-  public users$ = this.domain.users.select$;
+  public users$ = this.domain.users.state$;
 
   constructor(private domain: StateManagementService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.users$.subscribe(x => console.log(x));
+    this.domain.users.get().subscribe();
+    this.domain.users.get().subscribe();
+    setTimeout(() => {
+      this.domain.users.get().subscribe();
+    }, 1000);
+    setTimeout(() => {
+      this.domain.users.refresh().subscribe();
+    }, 2000);
+  }
 }

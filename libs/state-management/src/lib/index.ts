@@ -10,6 +10,7 @@ export * from './pipes/entity-data.pipe';
 export * from './pipes/entity-to-array.pipe';
 export * from './pipes/is-loaded.pipe';
 
+export * from './stores/api-store';
 export * from './stores/entity-store';
 export * from './state.models';
 

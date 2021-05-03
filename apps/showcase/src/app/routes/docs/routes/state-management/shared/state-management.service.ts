@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ntsCreateEntityStore } from '@ntersol/state-management';
+import { ntsApiStore } from '@ntersol/state-management';
 import { Models } from '../../../../../shared/models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StateManagementService {
-  private store = ntsCreateEntityStore(this.http);
+  private store = ntsApiStore(this.http, { apiUrlPrepend: '//jsonplaceholder.typicode.com' });
 
-  public users = this.store<Models.User>({ idKey: 'id', apiUrl: '//jsonplaceholder.typicode.com/users' });
+  public users = this.store<Models.User>({ uniqueId: 'id', apiUrl: '/users' });
 
   // List all store services here
   constructor(public http: HttpClient) {}
