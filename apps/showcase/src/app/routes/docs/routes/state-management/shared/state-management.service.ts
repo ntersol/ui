@@ -19,7 +19,7 @@ export class StateManagementService {
 
   // List all store services here
   constructor(public http: HttpClient) {
-    this.users2.state$.subscribe();
+    this.users2.state$.subscribe(x => console.warn(x));
   }
 
   /**

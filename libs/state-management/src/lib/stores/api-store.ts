@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, config, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, distinctUntilChanged, map, share, tap, take } from 'rxjs/operators';
 import { NtsState } from './api-store.models';
-import { mergeDeepRight, T } from 'ramda';
+import { mergeDeepRight } from 'ramda';
 import { isEntity } from './api-store.utils';
 
 /**
@@ -38,7 +38,7 @@ export class NtsApiStore<t, t_dataType = any> {
   private httpGet$: Observable<t>;
 
   /** Is this store an entity type? */
-  private isEntityStore = false;
+  public isEntityStore = false;
 
   /** Global store config config, contains mashup of all instances. Below is the default config */
   private config: NtsState.Config = {
@@ -230,6 +230,7 @@ export class NtsApiStore<t, t_dataType = any> {
   }
 }
 
+/**
 type StoreTypes<t> = NtsApiStore<t> | NtsApiStore<t[]>;
 
 function dependsOnParameter<B extends boolean>(x: B): B extends true ? number : string {
@@ -249,6 +250,7 @@ function temp<B extends boolean>(temp: User, x: B): B extends true ? number : st
 
 const a = temp({ v: true }, true);
 const b = temp({ v: false }, false);
+ */
 
 /**
  * Create an instance of an api store
@@ -259,7 +261,7 @@ const b = temp({ v: false }, false);
 export const ntsApiStore = (http: HttpClient, configSrc?: NtsState.Config) => <t>(config: NtsState.Config) =>
   new NtsApiStore<t>(http, config, configSrc);
 
-export const ntsApiStore2 = (http: HttpClient, configSrc?: NtsState.Config) => <t, B = true>(
+export const ntsApiStore2 = (http: HttpClient, configSrc?: NtsState.Config) => <t, B = boolean>(
   config: NtsState.Config,
   isEntityStore: B,
 ): B extends true ? NtsApiStore<t> : NtsApiStore<t[]> => {
@@ -267,3 +269,19 @@ export const ntsApiStore2 = (http: HttpClient, configSrc?: NtsState.Config) => <
     ? new NtsApiStore<t>(http, config, configSrc)
     : (new NtsApiStore<t>(http, config, configSrc) as unknown)) as B extends true ? NtsApiStore<t> : NtsApiStore<t[]>;
 };
+
+function ntsApiStore3<t>(config: NtsState.Config, isEntityStore: true): NtsApiStore<t>;
+function ntsApiStore3<t>(config: NtsState.Config, isEntityStore: false): NtsApiStore<t[]>;
+function ntsApiStore3<t>(config: NtsState.Config, isEntityStore: boolean): NtsApiStore<t> | NtsApiStore<t[]> {
+  if (isEntityStore) {
+    return new NtsApiStore<t[]>('' as any, config);
+  } else {
+    return new NtsApiStore<t>('' as any, config);
+  }
+}
+
+interface User {
+  v: boolean;
+}
+const temp = ntsApiStore3<User>({}, true);
+const temp2 = ntsApiStore3<User>({}, false);
