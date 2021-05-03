@@ -9,7 +9,9 @@ import { Models } from '../../../../../shared/models';
 export class StateManagementService {
   private store = ntsApiStore(this.http, { apiUrlPrepend: '//jsonplaceholder.typicode.com' });
 
-  public users = this.store<Models.User>({ uniqueId: 'id', apiUrl: '/users' });
+  public users = this.store<Models.User[]>({ uniqueId: 'id', apiUrl: '/users' });
+
+  public post = this.store<Models.User[]>({ apiUrl: '/posts/1' });
 
   // List all store services here
   constructor(public http: HttpClient) {}

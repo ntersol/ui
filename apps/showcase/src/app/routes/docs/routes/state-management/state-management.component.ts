@@ -15,12 +15,16 @@ export class StateManagementComponent implements OnInit {
   ngOnInit(): void {
     this.users$.subscribe(x => console.log(x));
     this.domain.users.get().subscribe();
+    // this.domain.post.state$.subscribe(x => console.log(x));
+    // this.domain.post.get().subscribe();
+
+    /**
     this.domain.users.get().subscribe();
-    setTimeout(() => {
-      this.domain.users.get().subscribe();
-    }, 1000);
+    this.domain.users.get().subscribe();
+
     setTimeout(() => {
       this.domain.users.refresh().subscribe();
     }, 2000);
+     */
   }
 }

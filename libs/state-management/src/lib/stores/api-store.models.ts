@@ -39,7 +39,7 @@ export namespace NtsState {
   }
 
   export interface Config extends Options {
-    /** The uniqueID or guid or the entity format. Default is 'guid' */
+    /** The uniqueID or guid or the entity format. Default is 'guid'. Required for entities to work */
     uniqueId?: string | number;
     /** If the store has a subscriber but no data, automatically perform a get request. Default true */
     autoLoad?: boolean;
@@ -58,7 +58,7 @@ export namespace NtsState {
       patch?: <t>(x: t | null) => any;
     };
     /** Can the store be reset? Default is true */
-    resettable?: boolean;
+    // resettable?: boolean;
     /** Remove items from the store cache based on a TTL. Default is false
       cache?: {
         ttl: number;

@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, throwError } from 'rxjs';
-import { catchError, distinctUntilChanged, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, distinctUntilChanged, map, share, tap, take } from 'rxjs/operators';
 import { NtsState } from './api-store.models';
 import { mergeDeepRight } from 'ramda';
 
 /**
  * Automatically create an entity store to manage interaction between a local flux store and a remote api
  */
-export class NtsApiStore<t> {
-  private state: NtsState.ApiState<t> = {
+export class NtsApiStore<dataType> {
+  private state: NtsState.ApiState<dataType> = {
     loading: false,
     modifying: false,
     error: false,
@@ -17,44 +17,52 @@ export class NtsApiStore<t> {
     data: null,
   };
 
-  /** Returns both the api state and any data */
+  /** Returns both the api state and data */
   private _state$ = new BehaviorSubject(this.state);
   public state$ = this._state$.pipe(
+    // Autoload??
     tap((s) => {
-      if (this.config?.autoLoad !== false && s.data === null && !s.loading) {
-        // this.refresh();
+      if (this.config.autoLoad && s.data === null && !s.loading) {
       }
     }),
   );
 
-  /** Returns just the data from the api state */
+  /** Returns just the data */
   public data$ = this.state$.pipe(
     map((s) => s.data),
     distinctUntilChanged(),
   );
 
-  /** Store config, contains both the global and specific */
-  private config: NtsState.Config = {};
+  private httpGet$: Observable<dataType>;
 
-  constructor(private http: HttpClient, private configInstance: NtsState.Config, private configBase?: NtsState.Config) {
-    this.config = mergeDeepRight(this.configBase, this.configInstance);
+  /** Global store config config, contains mashup of all instances. Below is the default config */
+  private config: NtsState.Config = {
+    autoLoad: true,
+    name: 'store-' + Math.floor(Math.random() * 10000000000),
+  };
+
+  constructor(private http: HttpClient, configInstance: NtsState.Config, configBase?: NtsState.Config) {
+    // Merge all configs into single entity
+    this.config = mergeDeepRight({ ...this.config, ...configBase }, configInstance);
     // If a custom initial state was defined, merge into initial state
     if (this.config.initialState) {
       this.state = mergeDeepRight(this.state, this.config.initialState);
     }
+    // Create initial instance of http get
+    this.httpGet$ = this.http.get<dataType>(this.apiUrlGet(this.config, 'get', null));
   }
 
   /**
    * Perform a get request to load data into the store
-   * @param optionsSrc
+   * @param optionsSrct
    */
   public get(optionsOverride: NtsState.Options = {}) {
     const options = mergeDeepRight(this.config, optionsOverride);
     // If data is null or refresh cache is requested, otherwise default to cache
-    if ((this.state.data === null || options.refreshCache) && !this.state.loading) {
+    if ((this.state.data === null || options.refreshCache || !this.httpGet$) && !this.state.loading) {
       const url = this.apiUrlGet(options, 'get', null);
       this.stateChange({ loading: true });
-      return this.http.get<t>(url).pipe(
+      this.httpGet$ = this.http.get<dataType>(url).pipe(
         // Handle api success
         tap((r) => {
           const result = this.config.map && this.config.map.get ? this.config.map.get(r) : r;
@@ -66,9 +74,8 @@ export class NtsApiStore<t> {
             typeof result[0] === 'object' &&
             !Array.isArray(result[0]) &&
             !!this.config.uniqueId
-              ? (result.reduce((a, b) => ({ ...a, [b[String(this.config.uniqueId)]]: b }), {}) as Record<string, t>)
+              ? result.reduce((a, b) => ({ ...a, [b[String(this.config.uniqueId)]]: b }), {})
               : null;
-
           // Update state
           this.stateChange({ loading: false, data: result, entities: entities });
         }),
@@ -78,9 +85,11 @@ export class NtsApiStore<t> {
           this.stateChange({ loading: false, error: err });
           return throwError(err);
         }),
+        take(1), // Ensure http request only fires once since the memory reference is stored
+        share(), // If multiple components are requesting data at the same time, share the stream to avoid multiple http requests
       );
     }
-    return this.http.get<t>('');
+    return this.httpGet$;
   }
 
   /**
@@ -105,7 +114,7 @@ export class NtsApiStore<t> {
    * @param verb
    * @returns
    */
-  private apiUrlGet(config: NtsState.Config, verb: keyof NtsState.ApiUrlOverride, e: t | null): string {
+  private apiUrlGet(config: NtsState.Config, verb: keyof NtsState.ApiUrlOverride, e: dataType | null): string {
     if (!config.apiUrl) {
       console.error('Please define an apiUrl');
       return '/';
@@ -113,7 +122,7 @@ export class NtsApiStore<t> {
     // Get default api URL
     let apiUrl: NtsState.ApiUrl = config.apiUrl;
 
-    if (!!config?.apiUrlOverride && config?.apiUrlOverride[verb]) {
+    if (!!config?.apiUrlOverride && !!config?.apiUrlOverride[verb]) {
       apiUrl = config.apiUrlOverride[verb] || ''; // TODO
     }
 
@@ -142,5 +151,5 @@ export class NtsApiStore<t> {
  * @param configSrc
  * @returns
  */
-export const ntsApiStore = (http: HttpClient, configSrc?: NtsState.Config) => <t>(config: NtsState.Config) =>
-  new NtsApiStore<t>(http, config, configSrc);
+export const ntsApiStore = (http: HttpClient, configSrc?: NtsState.Config) => <dataType>(config: NtsState.Config) =>
+  new NtsApiStore<dataType>(http, config, configSrc);
