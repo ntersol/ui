@@ -8,6 +8,7 @@ import { Models } from '../../../../../shared/models';
 })
 export class StateManagementService {
   private store = ntsCreateEntityStore(this.http);
+
   public users = this.store<Models.User>({ idKey: 'id', apiUrl: '//jsonplaceholder.typicode.com/users' });
 
   // List all store services here
