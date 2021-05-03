@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { VendorModule } from 'src/app/vendor.module';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { VendorModule } from '../vendor.module';
+import { SharedModule } from '../shared/shared.module';
 
 // Global modals
 import { LogoutModalComponent } from './modals/logout/logout-modal.component';
