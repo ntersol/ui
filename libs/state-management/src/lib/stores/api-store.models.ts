@@ -40,13 +40,18 @@ export namespace NtsState {
     replace?: boolean;
   }
 
-  export interface Config extends Options {
+  export type Config = EntityConfig | ConfigBase;
+
+  export interface EntityConfig extends ConfigBase {
+    /** The uniqueID or guid or the entity format. Default is 'guid'. Required for entities to work */
+    uniqueId: string | number;
+  }
+
+  export interface ConfigBase extends Options {
     /** The uniqueID or guid or the entity format. Default is 'guid'. Required for entities to work */
     uniqueId?: string | number;
     /** If the store has a subscriber but no data, automatically perform a get request. Default true */
     autoLoad?: boolean;
-    /** Is this store using entity types (an array of objects)? The store will try to determine this automatically if not specified */
-    isEntityStore?: boolean;
     /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests.
      * If true the url to the web api must added manually via a callback function or observable */
     disableAppendId?: {
@@ -69,7 +74,7 @@ export namespace NtsState {
       };
        */
     /** Define the initial state of the store */
-    initialState?: any;
+    initialState?: Record<string, any>;
     /** A name of the store, will be auto generated if not supplied */
     name?: string;
   }

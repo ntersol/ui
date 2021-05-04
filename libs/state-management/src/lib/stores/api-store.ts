@@ -3,12 +3,12 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, distinctUntilChanged, map, share, tap, take } from 'rxjs/operators';
 import { NtsState } from './api-store.models';
 import { mergeDeepRight } from 'ramda';
-import { isEntity } from './api-store.utils';
+import { is, isEntity, mergeDedupeArrays, mergePayloadWithApiResponse } from './api-store.utils';
 
 /**
  * Automatically create an entity store to manage interaction between a local flux store and a remote api
  */
-export class NtsApiStore<t, t_dataType = any> {
+export class NtsApiStore<t, t2 = any> {
   private state: NtsState.ApiState<t> = {
     loading: false,
     modifying: false,
@@ -55,10 +55,6 @@ export class NtsApiStore<t, t_dataType = any> {
     }
     // Create initial instance of http get
     this.httpGet$ = this.http.get<t>(this.apiUrlGet(this.config, 'get', null));
-
-    if (this.config.isEntityStore !== undefined) {
-      this.isEntityStore = this.config.isEntityStore;
-    }
   }
 
   /**
@@ -77,12 +73,12 @@ export class NtsApiStore<t, t_dataType = any> {
           // Map api response if requested
           const result = this.config.map && this.config.map.get ? this.config.map.get(r) : r;
           const state: Partial<NtsState.ApiState> = { loading: false, data: result };
-          let entities = null;
+          let entities: Record<string, t> | null = null;
           // Check if this api response has entities, create entity property
-          if (isEntity(result, this.config.uniqueId) && this.config.uniqueId) {
-            entities = result.reduce((a: any, b: any) => ({ ...a, [b[String(this.config.uniqueId)]]: b }), {});
+          const config = this.config; // Run through typeguard so it doesn't need to be typechecked again in the reduce
+          if (is.entityConfig(config) && isEntity(result, config.uniqueId) && config.uniqueId) {
+            entities = <Record<string, t>>result.reduce((a, b: any) => ({ ...a, [b[String(config.uniqueId)]]: b }), {});
             state.entities = entities;
-            this.isEntityStore = true;
           }
 
           // Update state
@@ -102,77 +98,71 @@ export class NtsApiStore<t, t_dataType = any> {
   }
 
   /**
-   *
+   * Make a POST request
    * @param data
    * @param optionsOverride
    * @returns
    */
-  public post<postResponse = Partial<t_dataType> | Partial<t_dataType>[]>(
-    data: Partial<t_dataType> | Partial<t_dataType>[],
-    optionsOverride?: NtsState.Options,
-  ) {
+  public post(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
     const options = mergeDeepRight(this.config, optionsOverride);
     const url = this.apiUrlGet(options, 'post', null);
-    return this.upsert(this.http.post<postResponse>(url, data), data);
-    /**
-    return this.http.post<postResponse>(url, data).pipe(
+    return this.upsert(this.http.post(url, data), data, this.config.map?.post);
+  }
+
+  /**
+   * Make a PUT request
+   * @param data
+   * @param optionsOverride
+   * @returns
+   */
+  public put(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
+    const options = mergeDeepRight(this.config, optionsOverride);
+    const url = this.apiUrlGet(options, 'put', data);
+    return this.upsert(this.http.put(url, data), data, this.config.map?.put);
+  }
+
+  /**
+   * Make a PATCH request
+   * @param data
+   * @param optionsOverride
+   * @returns
+   */
+  public patch(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
+    const options = mergeDeepRight(this.config, optionsOverride);
+    const url = this.apiUrlGet(options, 'patch', data);
+    return this.upsert(this.http.patch(url, data), data, this.config.map?.patch);
+  }
+
+  /**
+   *
+   * @param apiRequest
+   * @param data
+   * @returns
+   */
+  private upsert<t>(apiRequest: Observable<t>, data: t | t[], mapFn?: <t>(x: t | null) => any) {
+    // Reset state
+    this.stateChange({ modifying: true, errorModify: null });
+    // Make api request
+    return apiRequest.pipe(
+      // Handle success
       tap((r) => {
-        // Map api response if requested
-        const result: postResponse = this.config?.map?.post ? this.config.map.post(r) : r;
-        if (this.isEntityStore && Array.isArray(this.state.data) && this.config.uniqueId) {
-
-          // Create new data reference
-          const data = [...this.state.data];
-
-          // Loop through new data array and if/when a match is found, update the entity in the store in the array
-          for (let i = 0; i < data.length; i++) {
-            const element = data[i];
-            // If unique ID's match
-            if (element[this.config.uniqueId] === result[this.config.uniqueId]) {
-              // Update the data instance. If replace is requested, replace instead of deep merging
-              data[i] = this.config.replace ? result : mergeDeepRight(data[i], result);
-              break; // End loop
-            }
-            // Update state
-            this.stateChange({
-              modifying: false,
-              data: data,
-              // Replace reference in entities as well
-              entities: { ...this.state.data, [result[this.config.uniqueId]]: result },
-            });
-          }
-
+        // If a map function was provided, modify the data before executing anything else
+        const resMapped = mapFn ? mapFn(r) : r;
+        // Merge the api response with the payload
+        const resMerged = mergePayloadWithApiResponse(data, resMapped);
+        // If this
+        if (is.entityConfig(this.config) && !!this.state?.data && Array.isArray(this.state.data)) {
+          const delta = mergeDedupeArrays(this.state.data, resMerged, this.config.uniqueId as keyof t);
+          this.stateChange({ modifying: false, ...delta });
         } else {
-          this.stateChange({ modifying: false, data: result });
+          this.stateChange({ modifying: false, resMerged });
         }
       }),
+      // Handle error
       catchError((err) => {
         // Update state
         this.stateChange({ modifying: false, errorModify: err });
         return throwError(err);
-      }),
-
-    );
-    */
-  }
-
-  private upsert(apiRequest: Observable<any>, data: Partial<t_dataType> | Partial<t_dataType>[]) {
-    console.log(1);
-    return apiRequest.pipe(
-      tap((res) => {
-        // If web api response is nill, default to supplied entity
-        let result = res === null || res === undefined ? <t | t[]>data : res;
-        // If string returned, it is the unique ID and replace the entity property for that
-        if (typeof res === 'string' && this.config.uniqueId) {
-          result[this.config.uniqueId] = res;
-          // Object is returned, merge response with entity supplied. Response takes priority
-        } else if (typeof res === 'object' && !Array.isArray(res)) {
-          result = Object.assign(data, res);
-        }
-        // If map function pass result through that
-        //result = mapped ? mapped(result) : result;
-        // Convert to array
-        // const resultArray = !Array.isArray(result) ? [result] : result;
       }),
     );
   }
@@ -199,7 +189,12 @@ export class NtsApiStore<t, t_dataType = any> {
    * @param verb
    * @returns
    */
-  private apiUrlGet(config: NtsState.Config, verb: keyof NtsState.ApiUrlOverride, e: t | null): string {
+  private apiUrlGet(
+    config: NtsState.Config,
+    verb: keyof NtsState.ApiUrlOverride,
+    e: Partial<t2> | Partial<t2>[] | null,
+  ): string {
+    console.log(config, verb, null);
     if (!config.apiUrl) {
       console.error('Please define an apiUrl');
       return '/';
@@ -226,6 +221,15 @@ export class NtsApiStore<t, t_dataType = any> {
       apiUrl = apiUrl + config.apiUrlAppend;
     }
 
+    // If PUT/PATCH/DELETE, append unique ID
+    if (
+      (verb === 'put' && config.disableAppendId?.put !== true && config.uniqueId && e && !Array.isArray(e)) ||
+      (verb === 'patch' && config.disableAppendId?.patch !== true && config.uniqueId && e && !Array.isArray(e)) ||
+      (verb === 'delete' && config.disableAppendId?.delete !== true && config.uniqueId && e && !Array.isArray(e))
+    ) {
+      apiUrl = apiUrl + '/' + e[config.uniqueId as keyof t2];
+    }
+
     return apiUrl;
   }
 }
@@ -237,15 +241,10 @@ export class NtsApiStore<t, t_dataType = any> {
  * @returns
  */
 export function ntsApiStore<t>(http: HttpClient, config: NtsState.Config, isEntityStore: false): NtsApiStore<t>;
-export function ntsApiStore<t>(http: HttpClient, config: NtsState.Config, isEntityStore: true): NtsApiStore<t[]>;
+export function ntsApiStore<t>(http: HttpClient, config: NtsState.EntityConfig, isEntityStore: true): NtsApiStore<t[]>;
 export function ntsApiStore<t>(
   http: HttpClient,
-  config: NtsState.Config,
-  isEntityStore: boolean,
-): NtsApiStore<t> | NtsApiStore<t[]>;
-export function ntsApiStore<t>(
-  http: HttpClient,
-  config: NtsState.Config,
+  config: NtsState.Config | NtsState.EntityConfig,
   isEntityStore?: boolean,
 ): NtsApiStore<t> | NtsApiStore<t[]> {
   if (isEntityStore) {
