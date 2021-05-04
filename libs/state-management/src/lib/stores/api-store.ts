@@ -304,7 +304,11 @@ export function ntsApiStore4<t>(http: HttpClient, configBase: NtsState.Config, i
 
 function ntsApiStore5<t>(http: HttpClient, config: NtsState.Config, isEntityStore: false): NtsApiStore<t>;
 function ntsApiStore5<t>(http: HttpClient, config: NtsState.Config, isEntityStore: true): NtsApiStore<t[]>;
-function ntsApiStore5<t>(http: HttpClient, config: NtsState.Config, isEntityStore: boolean): any;
+function ntsApiStore5<t>(
+  http: HttpClient,
+  config: NtsState.Config,
+  isEntityStore: boolean,
+): NtsApiStore<t> | NtsApiStore<t[]>;
 function ntsApiStore5<t>(
   http: HttpClient,
   config: NtsState.Config,
@@ -321,14 +325,13 @@ function ntsApiStore5<t>(
 const temp = ntsApiStore5<User>('' as any, {}, false);
 const temp2 = ntsApiStore5<User>('' as any, {}, true);
 
-function ntsApiStore6<t>(test: true): NtsApiStore<t, t>;
-function ntsApiStore6<t>(test: false): NtsApiStore<t[], t>;
-function ntsApiStore6<t>(test: boolean) {
-  return ntsApiStore5<t>('' as any, {}, test);
-}
+export const ntsApiStore7 = (http: HttpClient, config: NtsState.Config) => {
+  return ntsApiStore5;
+};
 
-const temp3 = ntsApiStore6<User>(true);
-const temp4 = ntsApiStore6<User>(false);
+const storeBase = ntsApiStore7('' as any, {});
+const users = storeBase<User>('' as any, {}, true);
+const users2 = storeBase<User>('' as any, {}, false);
 
 interface User {
   v: boolean;
