@@ -270,9 +270,9 @@ export const ntsApiStore2 = (http: HttpClient, configSrc?: NtsState.Config) => <
     : (new NtsApiStore<t>(http, config, configSrc) as unknown)) as B extends true ? NtsApiStore<t> : NtsApiStore<t[]>;
 };
 
-function ntsApiStore3<t>(config: NtsState.Config, isEntityStore: true): NtsApiStore<t>;
-function ntsApiStore3<t>(config: NtsState.Config, isEntityStore: false): NtsApiStore<t[]>;
-function ntsApiStore3<t>(config: NtsState.Config, isEntityStore: boolean): NtsApiStore<t> | NtsApiStore<t[]> {
+export function ntsApiStore3<t>(config: NtsState.Config, isEntityStore: false): NtsApiStore<t>;
+export function ntsApiStore3<t>(config: NtsState.Config, isEntityStore: true): NtsApiStore<t[]>;
+export function ntsApiStore3<t>(config: NtsState.Config, isEntityStore: boolean): NtsApiStore<t[]> | NtsApiStore<t> {
   if (isEntityStore) {
     return new NtsApiStore<t[]>('' as any, config);
   } else {
@@ -280,8 +280,56 @@ function ntsApiStore3<t>(config: NtsState.Config, isEntityStore: boolean): NtsAp
   }
 }
 
+/**
+export function ntsApiStore4<t>(
+  http: HttpClient,
+  config: NtsState.Config,
+  isEntityStore?: false,
+): (http: HttpClient, config: NtsState.Config) => NtsApiStore<t, any>;
+export function ntsApiStore4<t>(
+  http: HttpClient,
+  config: NtsState.Config,
+  isEntityStore?: true,
+): (http: HttpClient, config: NtsState.Config) => NtsApiStore<t[], any>;
+export function ntsApiStore4<t>(http: HttpClient, configBase: NtsState.Config, isEntityStore = true) {
+  return function <y>(config: NtsState.Config) {
+    if (isEntityStore) {
+      return new NtsApiStore<t[]>(http, config, configBase);
+    } else {
+      return new NtsApiStore<t>(http, config, configBase);
+    }
+  };
+}
+*/
+
+function ntsApiStore5<t>(http: HttpClient, config: NtsState.Config, isEntityStore: false): NtsApiStore<t>;
+function ntsApiStore5<t>(http: HttpClient, config: NtsState.Config, isEntityStore: true): NtsApiStore<t[]>;
+function ntsApiStore5<t>(http: HttpClient, config: NtsState.Config, isEntityStore: boolean): any;
+function ntsApiStore5<t>(
+  http: HttpClient,
+  config: NtsState.Config,
+  isEntityStore?: boolean,
+): NtsApiStore<t> | NtsApiStore<t[]> {
+  if (isEntityStore) {
+    return new NtsApiStore<t[]>(http, config);
+  } else {
+    return new NtsApiStore<t>(http, config);
+  }
+}
+
+// This works!
+const temp = ntsApiStore5<User>('' as any, {}, false);
+const temp2 = ntsApiStore5<User>('' as any, {}, true);
+
+function ntsApiStore6<t>(test: true): NtsApiStore<t, t>;
+function ntsApiStore6<t>(test: false): NtsApiStore<t[], t>;
+function ntsApiStore6<t>(test: boolean) {
+  return ntsApiStore5<t>('' as any, {}, test);
+}
+
+const temp3 = ntsApiStore6<User>(true);
+const temp4 = ntsApiStore6<User>(false);
+
 interface User {
   v: boolean;
 }
-const temp = ntsApiStore3<User>({}, true);
-const temp2 = ntsApiStore3<User>({}, false);
