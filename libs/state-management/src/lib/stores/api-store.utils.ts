@@ -22,6 +22,7 @@ export const isEntity = <t extends object>(response: unknown, uniqueId?: string 
 export const is = {
   entityConfig: (c: NtsState.Config): c is NtsState.EntityConfig =>
     (c as NtsState.EntityConfig).uniqueId ? true : false,
+  callbackFn: (c: NtsState.ApiUrl): c is NtsState.ApiUrlCallback => typeof c === 'function',
 };
 
 /**
@@ -98,28 +99,60 @@ export const mergeDedupeArrays = <t>(
 };
 
 /**
- *
- * Dedupe an array from another array based on a unique ID. The second array will override any entities from the first
- * @param arraySrc
- * @param arrayOverwrite
- * @param uniqueId
-
-export const mergeDedupeArrays = <t extends object, k extends keyof t>(
-  arraySrc: t | t[],
-  arrayOverwrite: t | t[],
-  uniqueId: k | ObjectGetKey<t>,
-) => {
-  const arrSrc = Array.isArray(arraySrc) ? arraySrc : [arraySrc];
-  // Closure to get primary key if unique ID is a function
-  const getKey = (e: t) => (typeof uniqueId === 'function' ? uniqueId(e) : uniqueId);
-  // Convert first array to a record based on the unique ID
-  const record: Record<string | number, t> = arrSrc.reduce((a, b) => ({ ...a, [getKey(b)]: b }), {});
-  // Now loop through the second array and overwrite any instance in the record with an ID match
-  arrayOverwrite.forEach((l) => (record[getKey(l) as string | number] = l));
-  // Convert back to array, return
-  return Object.keys(record).map((y) => record[y]);
-};
-
-type ObjectGetKey<t> = (item: t) => keyof t | string;
-
+ * Create the correct url to use based on the config, rest verb type and entity
+ * @param config
+ * @param verb
+ * @param e
+ * @returns
  */
+export const apiUrlGet = <t2>(
+  config: NtsState.Config,
+  verb: keyof NtsState.ApiUrlOverride,
+  e: Partial<t2> | Partial<t2>[] | null,
+): string => {
+  if (!config.apiUrl) {
+    console.error('Please define an apiUrl');
+    return '/';
+  }
+
+  // Get default api URL
+  let apiUrl = config.apiUrl;
+
+  // If the api type is a function, execute it against the entity provided
+  if (is.callbackFn(apiUrl)) {
+    apiUrl = apiUrl(e);
+  }
+
+  // If prepend url is specified
+  if (config.apiUrlPrepend) {
+    apiUrl = config.apiUrlPrepend + apiUrl;
+  }
+
+  // If append url is specified
+  if (config.apiUrlAppend) {
+    apiUrl = apiUrl + config.apiUrlAppend;
+  }
+
+  // If a custom override url was specified for this verb
+  // Note that override replaces all previous settings like prepent/append etc
+  if (!!config?.apiUrlOverride && !!config?.apiUrlOverride[verb]) {
+    const urlOverride = config.apiUrlOverride[verb] || '';
+    // Check if the override is a string or a callback function that needs to return a string
+    if (typeof urlOverride === 'string') {
+      apiUrl = urlOverride;
+    } else {
+      apiUrl = urlOverride(e);
+    }
+  }
+
+  // If PUT/PATCH/DELETE, append unique ID provided it's not disabled
+  if (
+    (verb === 'put' && config.disableAppendId?.put !== true && config.uniqueId && e && !Array.isArray(e)) ||
+    (verb === 'patch' && config.disableAppendId?.patch !== true && config.uniqueId && e && !Array.isArray(e)) ||
+    (verb === 'delete' && config.disableAppendId?.delete !== true && config.uniqueId && e && !Array.isArray(e))
+  ) {
+    apiUrl = apiUrl + '/' + e[config.uniqueId as keyof t2];
+  }
+
+  return apiUrl;
+};

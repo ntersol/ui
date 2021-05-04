@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, distinctUntilChanged, map, share, tap, take } from 'rxjs/operators';
 import { NtsState } from './api-store.models';
 import { mergeDeepRight } from 'ramda';
-import { is, isEntity, mergeDedupeArrays, mergePayloadWithApiResponse } from './api-store.utils';
+import { apiUrlGet, is, isEntity, mergeDedupeArrays, mergePayloadWithApiResponse } from './api-store.utils';
 
 /**
  * Automatically create an entity store to manage interaction between a local flux store and a remote api
@@ -53,8 +53,8 @@ export class NtsApiStore<t, t2 = any> {
     if (this.config.initialState) {
       this.state = mergeDeepRight(this.state, this.config.initialState);
     }
-    // Create initial instance of http get
-    this.httpGet$ = this.http.get<t>(this.apiUrlGet(this.config, 'get', null));
+    // Create initial instance of http get, mostly just for type safety
+    this.httpGet$ = this.http.get<t>(apiUrlGet(this.config, 'get', null));
   }
 
   /**
@@ -65,7 +65,7 @@ export class NtsApiStore<t, t2 = any> {
     const options = mergeDeepRight(this.config, optionsOverride);
     // If data is null or refresh cache is requested, otherwise default to cache
     if ((this.state.data === null || options.refresh || !this.httpGet$) && !this.state.loading) {
-      const url = this.apiUrlGet(options, 'get', null);
+      const url = apiUrlGet(options, 'get', null);
       this.stateChange({ loading: true });
       this.httpGet$ = this.http.get<t>(url).pipe(
         // Handle api success
@@ -98,39 +98,65 @@ export class NtsApiStore<t, t2 = any> {
   }
 
   /**
-   * Make a POST request
+   * Perform a POST request
    * @param data
    * @param optionsOverride
    * @returns
    */
   public post(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
     const options = mergeDeepRight(this.config, optionsOverride);
-    const url = this.apiUrlGet(options, 'post', null);
+    const url = apiUrlGet(options, 'post', null);
     return this.upsert(this.http.post(url, data), data, this.config.map?.post);
   }
 
   /**
-   * Make a PUT request
+   * Perform a PUT request
    * @param data
    * @param optionsOverride
    * @returns
    */
   public put(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
     const options = mergeDeepRight(this.config, optionsOverride);
-    const url = this.apiUrlGet(options, 'put', data);
+    const url = apiUrlGet(options, 'put', data);
     return this.upsert(this.http.put(url, data), data, this.config.map?.put);
   }
 
   /**
-   * Make a PATCH request
+   * Perform a PATCH request
    * @param data
    * @param optionsOverride
    * @returns
    */
   public patch(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
     const options = mergeDeepRight(this.config, optionsOverride);
-    const url = this.apiUrlGet(options, 'patch', data);
+    const url = apiUrlGet(options, 'patch', data);
     return this.upsert(this.http.patch(url, data), data, this.config.map?.patch);
+  }
+
+  /**
+   * Perform a DELETE request
+   * @param data
+   * @param optionsOverride
+   * @returns
+   */
+  public delete(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
+    const options = mergeDeepRight(this.config, optionsOverride);
+    const url = apiUrlGet(options, 'delete', data);
+    // Reset state
+    this.stateChange({ modifying: true, errorModify: null });
+    return this.http.delete(url).pipe(
+      tap((r) => {
+        console.log(r);
+        // Perform delete
+        this.stateChange({ modifying: false });
+      }),
+      // Handle error
+      catchError((err) => {
+        // Update state
+        this.stateChange({ modifying: false, errorModify: err });
+        return throwError(err);
+      }),
+    );
   }
 
   /**
@@ -181,56 +207,6 @@ export class NtsApiStore<t, t2 = any> {
   private stateChange(state: Partial<NtsState.ApiState>) {
     this.state = { ...this.state, ...state };
     this._state$.next(this.state);
-  }
-
-  /**
-   * Get the api url for this request
-   * @param config
-   * @param verb
-   * @returns
-   */
-  private apiUrlGet(
-    config: NtsState.Config,
-    verb: keyof NtsState.ApiUrlOverride,
-    e: Partial<t2> | Partial<t2>[] | null,
-  ): string {
-    console.log(config, verb, null);
-    if (!config.apiUrl) {
-      console.error('Please define an apiUrl');
-      return '/';
-    }
-    // Get default api URL
-    let apiUrl: NtsState.ApiUrl = config.apiUrl;
-
-    if (!!config?.apiUrlOverride && !!config?.apiUrlOverride[verb]) {
-      apiUrl = config.apiUrlOverride[verb] || ''; // TODO
-    }
-
-    // If the api type is a function, execute it against the entity provided
-    if (typeof apiUrl === 'function') {
-      apiUrl = apiUrl(e || null);
-    }
-
-    // If prepend url is specified
-    if (config.apiUrlPrepend) {
-      apiUrl = config.apiUrlPrepend + apiUrl;
-    }
-
-    // If append url is specified
-    if (config.apiUrlAppend) {
-      apiUrl = apiUrl + config.apiUrlAppend;
-    }
-
-    // If PUT/PATCH/DELETE, append unique ID
-    if (
-      (verb === 'put' && config.disableAppendId?.put !== true && config.uniqueId && e && !Array.isArray(e)) ||
-      (verb === 'patch' && config.disableAppendId?.patch !== true && config.uniqueId && e && !Array.isArray(e)) ||
-      (verb === 'delete' && config.disableAppendId?.delete !== true && config.uniqueId && e && !Array.isArray(e))
-    ) {
-      apiUrl = apiUrl + '/' + e[config.uniqueId as keyof t2];
-    }
-
-    return apiUrl;
   }
 }
 

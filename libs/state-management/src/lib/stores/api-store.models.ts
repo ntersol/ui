@@ -12,11 +12,13 @@ export namespace NtsState {
   }
 
   /** Different methods to pass the api url string to the store */
-  export type ApiUrl = string | (<t>(x: t) => string);
+  export type ApiUrl = string | ApiUrlCallback;
+
+  export type ApiUrlCallback = <t>(x: t) => string;
 
   export interface ApiUrlOverride {
     get?: ApiUrl;
-    search?: ApiUrl;
+    request?: ApiUrl;
     post?: ApiUrl;
     put?: ApiUrl;
     patch?: ApiUrl;
