@@ -30,7 +30,7 @@ export const mergeEntities = <t>(
 ) => {
   // If web api response is nill, default to supplied entity
   let apiResponse = apiResponseSrc === null || apiResponseSrc === undefined ? <t | t[]>dataSentToApi : apiResponseSrc;
-
+  console.log(destination);
   // If no data sent to web api, just return response
   if (!dataSentToApi) {
     return apiResponse;
