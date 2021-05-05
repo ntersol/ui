@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ntsApiStore } from '@ntersol/state-management';
+import { ntsApiStoreCreator } from '@ntersol/state-management';
 import { Models } from '../../../../../shared/models';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Models } from '../../../../../shared/models';
 })
 export class StateManagementService {
   // Create a curried store creator instance with default settings
-  private store = ntsApiStore(this.http, { apiUrlBase: '//jsonplaceholder.typicode.com' });
+  private store = ntsApiStoreCreator(this.http, { apiUrlBase: '//jsonplaceholder.typicode.com' });
   // Create an instance of an entity based store
   public users = this.store<Models.User>({ uniqueId: 'id', apiUrl: '/users' });
   // Create an instance of a non-entity based store

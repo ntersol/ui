@@ -15,7 +15,7 @@ import {
 /**
  * Automatically create an entity store to manage interaction between a local flux store and a remote api
  */
-export class NtsApiStore<t, t2 = any> {
+export class NtsApiStoreCreator<t, t2 = any> {
   private state: NtsState.ApiState<t> = {
     loading: false,
     modifying: false,
@@ -234,12 +234,12 @@ export class NtsApiStore<t, t2 = any> {
  * Create a curried instance of the api store creator
  *
  * @example
- * private store = ntsApiStore(this.http, { apiUrlBase: '//jsonplaceholder.typicode.com' })
+ * private store = ntsApiStoreCreator(this.http, { apiUrlBase: '//jsonplaceholder.typicode.com' })
  * @param http A reference to Angular's http service
  * @param configBase Default configuration for all instances of this store. Will be overwritten by individual store properties
  * @returns
  */
-export const ntsApiStore = (http: HttpClient, configBase?: NtsState.Config | null) => {
+export const ntsApiStoreCreator = (http: HttpClient, configBase?: NtsState.Config | null) => {
   const store: {
     /**
      * Create an instance of an entity based api store. Used for managing an array of objects
@@ -249,7 +249,7 @@ export const ntsApiStore = (http: HttpClient, configBase?: NtsState.Config | nul
      * @param isEntityStore Should the store create and manage entities
      * @returns
      */
-    <t>(config: NtsState.ConfigEntity, isEntityStore?: true): NtsApiStore<t[]>;
+    <t>(config: NtsState.ConfigEntity, isEntityStore?: true): NtsApiStoreCreator<t[]>;
     /**
      * Create an instance of a non-entity based api store. Used for managing all none entity types
      * @example
@@ -258,11 +258,14 @@ export const ntsApiStore = (http: HttpClient, configBase?: NtsState.Config | nul
      * @param isEntityStore Should the store create and manage entities
      * @returns
      */
-    <t>(config: NtsState.Config, isEntityStore?: false): NtsApiStore<t>;
-  } = <t>(config: NtsState.Config | NtsState.ConfigEntity, isEntityStore = true): NtsApiStore<t> | NtsApiStore<t[]> =>
+    <t>(config: NtsState.Config, isEntityStore?: false): NtsApiStoreCreator<t>;
+  } = <t>(
+    config: NtsState.Config | NtsState.ConfigEntity,
+    isEntityStore = true,
+  ): NtsApiStoreCreator<t> | NtsApiStoreCreator<t[]> =>
     isEntityStore
-      ? new NtsApiStore<t[], t>(http, mergeDeepRight(configBase || {}, config), isEntityStore)
-      : new NtsApiStore<t, t>(http, mergeDeepRight(configBase || {}, config), isEntityStore);
+      ? new NtsApiStoreCreator<t[], t>(http, mergeDeepRight(configBase || {}, config), isEntityStore)
+      : new NtsApiStoreCreator<t, t>(http, mergeDeepRight(configBase || {}, config), isEntityStore);
   return store;
 };
 
@@ -272,17 +275,17 @@ export const ntsApiStore = (http: HttpClient, configBase?: NtsState.Config | nul
  * @param configSrc
  * @returns
 
-export function ntsApiStore<t>(http: HttpClient, config: NtsState.Config, isEntityStore: false): NtsApiStore<t>;
-export function ntsApiStore<t>(http: HttpClient, config: NtsState.EntityConfig, isEntityStore: true): NtsApiStore<t[]>;
-export function ntsApiStore<t>(
+export function ntsApiStoreCreator<t>(http: HttpClient, config: NtsState.Config, isEntityStore: false): NtsApiStoreCreator<t>;
+export function ntsApiStoreCreator<t>(http: HttpClient, config: NtsState.EntityConfig, isEntityStore: true): NtsApiStoreCreator<t[]>;
+export function ntsApiStoreCreator<t>(
   http: HttpClient,
   config: NtsState.Config | NtsState.EntityConfig,
   isEntityStore?: boolean,
-): NtsApiStore<t> | NtsApiStore<t[]> {
+): NtsApiStoreCreator<t> | NtsApiStoreCreator<t[]> {
   if (isEntityStore) {
-    return new NtsApiStore<t[], t>(http, config);
+    return new NtsApiStoreCreator<t[], t>(http, config);
   } else {
-    return new NtsApiStore<t, t>(http, config);
+    return new NtsApiStoreCreator<t, t>(http, config);
   }
 }
  */
@@ -291,18 +294,18 @@ export function ntsApiStore<t>(
  * interface User {
   v?: boolean;
 }
-const temp = ntsApiStore2('' as any, {});
+const temp = ntsApiStoreCreator2('' as any, {});
 const users = temp<User>({ uniqueId: 'test' }, true);
 const users2 = temp<User>({ uniqueId: 'test' }, false);
 // This works!
-const temp = ntsApiStore5<User>('' as any, {}, false);
-const temp2 = ntsApiStore5<User>('' as any, {}, true);
+const temp = ntsApiStoreCreator5<User>('' as any, {}, false);
+const temp2 = ntsApiStoreCreator5<User>('' as any, {}, true);
 
-export const ntsApiStore7 = (http: HttpClient, config: NtsState.Config) => {
-  return ntsApiStore5;
+export const ntsApiStoreCreator7 = (http: HttpClient, config: NtsState.Config) => {
+  return ntsApiStoreCreator5;
 };
 
-const storeBase = ntsApiStore7('' as any, {});
+const storeBase = ntsApiStoreCreator7('' as any, {});
 const users = storeBase<User>('' as any, {}, true);
 const users2 = storeBase<User>('' as any, {}, false);
 

@@ -5,14 +5,14 @@ export const importExample = `
   import { NtsStateManagementModule } from '@ntersol/state-management';`;
 
 export const usage1 = `
-  import { ntsApiStore } from &#39;@ntersol/state-management&#39;;
+  import { ntsApiStoreCreator } from &#39;@ntersol/state-management&#39;;
 
   @Injectable({
     providedIn: &#39;root&#39;,
   })
   export class SampleService {
     // Create a curried store creator instance with default settings
-    private store = ntsApiStore(this.http, { apiUrlBase: &#39;//jsonplaceholder.typicode.com&#39; });
+    private store = ntsApiStoreCreator(this.http, { apiUrlBase: &#39;//jsonplaceholder.typicode.com&#39; });
     // Create an instance of an entity based store
     public users = this.store&lt;Models.User&gt;({ apiUrl: &#39;/users&#39; });
     // Create an instance of a non-entity based store
