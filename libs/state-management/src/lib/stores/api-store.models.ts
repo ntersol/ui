@@ -1,13 +1,13 @@
 export namespace NtsState {
   /** Contains both the api state and any data */
-  export interface ApiState<t = any> {
+  export interface ApiState<t = any, e = any> {
     [key: string]: any;
     /** If api response type is an array of objects, create record here. Will be null otherwise */
-    entities: null | Record<string | number, t>;
+    entities?: null | Record<string | number, t>;
     loading: boolean;
     modifying: boolean;
-    error: null | any;
-    errorModify: null | any;
+    error: null | e;
+    errorModify: null | e;
     data: null | t;
   }
 

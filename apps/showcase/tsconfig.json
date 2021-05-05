@@ -12,7 +12,8 @@
       "$env": ["apps/showcase/src/environments/environment.ts"],
       "$models": ["apps/showcase/src/shared/models"],
       "$modals": ["apps/showcase/src/compoments/modals"],
-      "@ntersol/state-management": ["libs/state-management/src"]
+      "@ntersol/state-management": ["libs/state-management/src"],
+      "@ntersol/table": ["libs/table/src"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,

@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { Table } from 'primeng/table';
 import { TableColumnDirective } from '../../directives/column.directive';
-import { NtsTable } from '../../table';
+import { NtsTable } from '../../table.models';
 
 @Component({
   selector: 'nts-table',
@@ -62,7 +62,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   set columnTemplates(val: QueryList<TableColumnDirective>) {
     const arr = val.toArray();
     if (arr.length) {
-      arr.forEach(template => (this.templates[template.field] = template));
+      arr.forEach((template) => (this.templates[template.field] = template));
     }
   }
   /** Reference to the p-table instance */
@@ -82,7 +82,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     this.updateShouldShowExpandRow();
-    this.paginator = !!this.rows?.length && !!this.paginateRows && this.rows.length > this.paginateRows ? !!this.paginateRows : false;
+    this.paginator =
+      !!this.rows?.length && !!this.paginateRows && this.rows.length > this.paginateRows ? !!this.paginateRows : false;
   }
 
   ngOnChanges(model: SimpleChanges) {
@@ -136,16 +137,17 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     if (!th || !th.length) {
       return null;
     }
-    const widthsPx = th.map(x => x.nativeElement.clientWidth);
+    const widthsPx = th.map((x) => x.nativeElement.clientWidth);
     const tableWidth = widthsPx.reduce((a, b) => a + b);
     if (!tableWidth) {
       return null;
     }
-    return widthsPx.map(x => Math.floor((x / tableWidth) * 100));
+    return widthsPx.map((x) => Math.floor((x / tableWidth) * 100));
   }
 
   private updateShouldShowExpandRow() {
-    this.shouldShowExpandRow = !!this.templates['expansion'] && !!this.templates['expansion'].templateExpansion && !!this.dataKey;
+    this.shouldShowExpandRow =
+      !!this.templates['expansion'] && !!this.templates['expansion'].templateExpansion && !!this.dataKey;
   }
 
   ngOnDestroy() {}

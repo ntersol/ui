@@ -7,9 +7,11 @@ import { Models } from '../../../../../shared/models';
   providedIn: 'root',
 })
 export class StateManagementService {
+  // Create a curried store creator instance with default settings
   private store = ntsApiStore(this.http, { apiUrlBase: '//jsonplaceholder.typicode.com' });
-
-  public users = this.store<Models.User>({ apiUrl: '/users' });
+  // Create an instance of an entity based store
+  public users = this.store<Models.User>({ uniqueId: 'id', apiUrl: '/users' });
+  // Create an instance of a non-entity based store
   public post = this.store<Models.Post>({ apiUrl: '/posts/1' }, false);
 
   // List all store services here

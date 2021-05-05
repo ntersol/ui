@@ -1,4 +1,3 @@
-<
 <div class="nts-table" [ngClass]="{ 'nts-table-compact': compact }">
   <p-table
     #tt
@@ -18,8 +17,16 @@
       <div class="d-flex">
         <div *ngIf="headerText" [innerHTML]="headerText"></div>
         <div class="p-filter ml-auto" *ngIf="showFilter">
-          <i class="fas fa-search mr-2" style="margin: 4px 4px 0 0;"></i>
-          <input #filter type="text" pInputText size="50" placeholder="Global Filter" (input)="filterGlobalUpdate($event)" style="width: auto;" />
+          <i class="fas fa-search mr-2" style="margin: 4px 4px 0 0"></i>
+          <input
+            #filter
+            type="text"
+            pInputText
+            size="50"
+            placeholder="Global Filter"
+            (input)="filterGlobalUpdate($event)"
+            style="width: auto"
+          />
           <a class="filter-clear" (click)="filterGlobalUpdate($event); filter.value = ''" *ngIf="filter.value">
             <i class="fas fa-times"></i>
           </a>
@@ -28,7 +35,7 @@
     </ng-template>
     <!-- Table Headers -->
     <ng-template pTemplate="header" let-columns *ngIf="showHeader">
-      <tr class="nts-table-row" style="height: 30px;">
+      <tr class="nts-table-row" style="height: 30px">
         <ng-container *ngIf="shouldShowExpandRow">
           <th>
             <!-- Empty Header for Row Expand -->
@@ -78,7 +85,11 @@
         <!-- Loop through columns -->
         <td
           *ngFor="let col of columns"
-          [ngClass]="['nts-table-td-' + (col.field | slug), 'nts-table-td-type-' + (col.type | slug), col.type === 'limited' ? 'nts-limited' : '']"
+          [ngClass]="[
+            'nts-table-td-' + (col.field | slug),
+            'nts-table-td-type-' + (col.type | slug),
+            col.type === 'limited' ? 'nts-limited' : ''
+          ]"
         >
           <!-- Custom cell templates -->
           <ng-container *ngIf="templates[col.field] && templates[col.field].templateCell">
@@ -166,4 +177,3 @@
     </ng-template>
   </p-table>
 </div>
->

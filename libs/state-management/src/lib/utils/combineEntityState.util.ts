@@ -1,5 +1,5 @@
+import { NtsState } from '../stores/api-store.models';
 import { isApiState } from './guards.util';
-import { NtsState } from '../state.models';
 
 /**
  * Combines the domain state from multiple entity stores into a single state object.
@@ -9,7 +9,7 @@ import { NtsState } from '../state.models';
  * @param data
  */
 export const NtsCombineEntityState = (
-  states: NtsState.EntityState | (NtsState.EntityState | unknown)[] | null | undefined,
+  states: NtsState.ApiState | (NtsState.ApiState | unknown)[] | null | undefined,
 ): NtsState.ApiState => {
   const state: NtsState.ApiState = {
     loading: false,

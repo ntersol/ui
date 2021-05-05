@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { NtsState } from '../../stores/api-store.models';
 import { NtsCombineEntityState } from '../../utils/combineEntityState.util';
-import { NtsState } from '../../state.models';
 
 @Component({
   selector: 'nts-api-state',
@@ -9,7 +9,7 @@ import { NtsState } from '../../state.models';
 })
 export class NtsDomainStateComponent implements OnInit, OnChanges {
   /** Default domain state */
-  @Input() set state(state: NtsState.EntityState | (NtsState.EntityState | unknown)[] | null) {
+  @Input() set state(state: NtsState.ApiState | (NtsState.ApiState | unknown)[] | null) {
     this.stateSrc = NtsCombineEntityState(state);
   }
 

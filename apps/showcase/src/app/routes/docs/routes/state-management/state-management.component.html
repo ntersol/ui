@@ -1,1 +1,38 @@
-<p>state-management works!</p>
+<h1>State Management</h1>
+<p>This library is a collection of tools and utilities for managing state and api interaction.</p>
+<hr />
+
+<p-tabView>
+  <p-tabPanel header="Demo/Example">
+    <div class="container-fluid px-0">
+      <div class="row px-0">
+        <div class="col-12 col-md-9 pl-0">
+          <nts-api-state [state]="state" *ngIf="users$ | async as state">
+            <nts-table [rows]="state.data" [columns]="columns"> </nts-table>
+          </nts-api-state>
+        </div>
+        <div class="col-12 col-md-3 pr-0">
+          <div class="card">
+            <div class="card-body">
+              <h3>Add a new user</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Documentation">
+    <h2>Install</h2>
+    <pre>
+        <code class="language-ts" [innerHtml]="install"></code>
+    </pre>
+
+    <h2>Usage</h2>
+    <p>No module import is necessary, just import the "ntsApiStore" function into your service</p>
+    <pre>
+        <code class="language-ts" [innerHtml]="usage"></code>
+    </pre>
+  </p-tabPanel>
+
+  <p-tabPanel header="API"> Content 3 </p-tabPanel>
+</p-tabView>
