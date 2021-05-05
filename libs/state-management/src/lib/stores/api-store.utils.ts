@@ -1,20 +1,24 @@
 import { NtsState } from './api-store.models';
 import { mergeDeepRight } from 'ramda';
+
 /**
- *
- * @param response
- * @param uniqueId
+ * Deep merge config objects
+ * @param c1
+ * @param c2
  * @returns
  */
-export const isEntity = <t extends object>(response: unknown, uniqueId?: string | number | null): response is t[] =>
-  !!(
-    typeof response === 'object' &&
-    Array.isArray(response) &&
-    response.length &&
-    typeof response[0] === 'object' &&
-    !Array.isArray(response[0]) &&
-    !!uniqueId
-  );
+export const mergeConfig = (c1: NtsState.Config, c2: NtsState.Config): NtsState.Config => ({
+  disableAppendId: {
+    ...c1.disableAppendId,
+    ...c2.disableAppendId,
+  },
+  map: {
+    ...c1.map,
+    ...c2.map,
+  },
+  ...c1,
+  ...c2,
+});
 
 /**
  * Typeguards
@@ -46,7 +50,8 @@ export const mergePayloadWithApiResponse = <t>(data2Api: t, dataFromApi: unknown
     typeof data2Api === 'object' &&
     !Array.isArray(data2Api)
   ) {
-    return mergeDeepRight(data2Api, dataFromApi);
+    // Perform shallow merge
+    return { ...data2Api, ...dataFromApi };
   } else {
     console.error(
       `Api response or payload does not have a matched condition. Payload is a ${typeof data2Api} and response is ${typeof data2Api}`,

@@ -2,12 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, distinctUntilChanged, map, share, tap, take } from 'rxjs/operators';
 import { NtsState } from './api-store.models';
-import { mergeDeepRight } from 'ramda';
 import {
   apiUrlGet,
   deleteEntities,
   is,
-  isEntity,
+  mergeConfig,
   mergeDedupeArrays,
   mergePayloadWithApiResponse,
 } from './api-store.utils';
@@ -28,12 +27,17 @@ export class NtsApiStoreCreator<t, t2 = any> {
   /** Returns both the api state and data */
   private _state$ = new BehaviorSubject(this.state);
   public state$ = this._state$.pipe(
-    // Autoload??
+    // Autoload
     tap((s) => {
-      if (this.config.autoLoad && s.data === null && !s.loading) {
+      if (this.config.autoLoad && s.data === null && !this.autoloaded) {
+        this.autoloaded = true;
+        this.get().subscribe();
       }
     }),
   );
+
+  /** Keep track of whether an autoload request has been performed */
+  private autoloaded = false;
 
   /** Returns just the data */
   public data$ = this.state$.pipe(
@@ -52,10 +56,10 @@ export class NtsApiStoreCreator<t, t2 = any> {
 
   constructor(private http: HttpClient, config: NtsState.Config | NtsState.ConfigEntity, private isEntityStore = true) {
     // Merge all configs into single entity
-    this.config = mergeDeepRight(this.config, config);
+    this.config = mergeConfig(this.config, config);
     // If a custom initial state was defined, merge into initial state
     if (this.config.initialState) {
-      this.state = mergeDeepRight(this.state, this.config.initialState);
+      this.state = { ...this.state, ...this.config.initialState };
     }
     // Create initial instance of http get, mostly just for type safety
     this.httpGet$ = this.http.get<t>(apiUrlGet(this.config, 'get', null));
@@ -66,7 +70,7 @@ export class NtsApiStoreCreator<t, t2 = any> {
    * @param optionsSrct
    */
   public get(optionsOverride: NtsState.Options = {}) {
-    const options = mergeDeepRight(this.config, optionsOverride);
+    const options = mergeConfig(this.config, optionsOverride);
     // If data is null or refresh cache is requested, otherwise default to cache
     if ((this.state.data === null || options.refresh || !this.httpGet$) && !this.state.loading) {
       const url = apiUrlGet(options, 'get', null);
@@ -80,8 +84,10 @@ export class NtsApiStoreCreator<t, t2 = any> {
           let entities: Record<string, t> | null = null;
           // Check if this api response has entities, create entity property
           const config = this.config; // Run through typeguard so it doesn't need to be typechecked again in the reduce
-          if (this.isEntityStore && is.entityConfig(config) && isEntity(result, config.uniqueId) && config.uniqueId) {
-            entities = <Record<string, t>>result.reduce((a, b: any) => ({ ...a, [b[String(config.uniqueId)]]: b }), {});
+          if (this.isEntityStore && is.entityConfig(config) && config.uniqueId) {
+            entities = <Record<string, t>>(
+              result.reduce((a: any, b: any) => ({ ...a, [b[String(config.uniqueId)]]: b }), {})
+            );
             state.entities = entities;
           }
 
@@ -108,7 +114,7 @@ export class NtsApiStoreCreator<t, t2 = any> {
    * @returns
    */
   public post(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
-    const options = mergeDeepRight(this.config, optionsOverride);
+    const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'post', null);
     return this.upsert(this.http.post(url, data), data, this.config.map?.post);
   }
@@ -120,7 +126,7 @@ export class NtsApiStoreCreator<t, t2 = any> {
    * @returns
    */
   public put(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
-    const options = mergeDeepRight(this.config, optionsOverride);
+    const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'put', data);
     return this.upsert(this.http.put(url, data), data, this.config.map?.put);
   }
@@ -132,7 +138,7 @@ export class NtsApiStoreCreator<t, t2 = any> {
    * @returns
    */
   public patch(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
-    const options = mergeDeepRight(this.config, optionsOverride);
+    const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'patch', data);
     return this.upsert(this.http.patch(url, data), data, this.config.map?.patch);
   }
@@ -144,26 +150,26 @@ export class NtsApiStoreCreator<t, t2 = any> {
    * @returns
    */
   public delete(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
-    const options = mergeDeepRight(this.config, optionsOverride);
+    const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'delete', data);
     // Reset state
     this.stateChange({ modifying: true, errorModify: null });
     return this.http.delete(url).pipe(
-      tap(() => {
+      tap((r) => {
+        // Check if this is an entity store
         if (
           this.isEntityStore &&
           is.entityConfig(this.config) &&
           !!this.state?.data &&
           Array.isArray(this.state.data)
         ) {
-          console.log(deleteEntities(this.state.data, data, this.config.uniqueId));
+          // Delete entities from store
           const updated = deleteEntities(this.state.data, data, this.config.uniqueId);
           this.stateChange({ modifying: false, ...updated });
         } else {
-          this.stateChange({ modifying: false });
+          // Delete on a non entity format
+          this.stateChange({ modifying: false, data: r || null });
         }
-        // Perform delete
-        this.stateChange({ modifying: false });
       }),
       // Handle error
       catchError((err) => {
@@ -264,8 +270,8 @@ export const ntsApiStoreCreator = (http: HttpClient, configBase?: NtsState.Confi
     isEntityStore = true,
   ): NtsApiStoreCreator<t> | NtsApiStoreCreator<t[]> =>
     isEntityStore
-      ? new NtsApiStoreCreator<t[], t>(http, mergeDeepRight(configBase || {}, config), isEntityStore)
-      : new NtsApiStoreCreator<t, t>(http, mergeDeepRight(configBase || {}, config), isEntityStore);
+      ? new NtsApiStoreCreator<t[], t>(http, mergeConfig(configBase || {}, config), isEntityStore)
+      : new NtsApiStoreCreator<t, t>(http, mergeConfig(configBase || {}, config), isEntityStore);
   return store;
 };
 
