@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, distinctUntilChanged, map, share, tap, take } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, map, share, tap, take, filter } from 'rxjs/operators';
+import { NtsBaseStore } from '../base';
+import { ApiActions, ApiEvents } from '../store.enums';
 import { NtsState } from './api-store.models';
 import {
   apiUrlGet,
@@ -11,17 +13,21 @@ import {
   mergePayloadWithApiResponse,
 } from './api-store.utils';
 
+const initialState = {
+  loading: false,
+  modifying: false,
+  error: false,
+  errorModify: false,
+  entities: null,
+  data: null,
+};
+
 /**
  * Automatically create an entity store to manage interaction between a local flux store and a remote api
  */
-export class NtsApiStoreCreator<t, t2 = any> {
+export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
   private state: NtsState.ApiState<t> = {
-    loading: false,
-    modifying: false,
-    error: false,
-    errorModify: false,
-    entities: null,
-    data: null,
+    ...initialState,
   };
 
   /** Returns both the api state and data */
@@ -39,6 +45,9 @@ export class NtsApiStoreCreator<t, t2 = any> {
   /** Keep track of whether an autoload request has been performed */
   private autoloaded = false;
 
+  /** Events broadcast by this store */
+  public events$ = NtsApiStoreCreator._events$.pipe(filter((a) => a.storeId === this.config.storeId));
+
   /** Returns just the data */
   public data$ = this.state$.pipe(
     map((s) => s.data),
@@ -51,16 +60,36 @@ export class NtsApiStoreCreator<t, t2 = any> {
   /** Global store config config, contains mashup of all instances. Below is the default config */
   private config: NtsState.Config | NtsState.ConfigEntity = {
     autoLoad: true,
-    // storeId: 'store-' + Math.floor(Math.random() * 10000000000),
   };
 
   constructor(private http: HttpClient, config: NtsState.Config | NtsState.ConfigEntity, private isEntityStore = true) {
+    super();
+
     // Merge all configs into single entity
     this.config = mergeConfig(this.config, config);
+
     // If a custom initial state was defined, merge into initial state
     if (this.config.initialState) {
       this.state = { ...this.state, ...this.config.initialState };
     }
+
+    // If a store ID was supplied, listen for global actions
+    // Only listen for actions that match this store ID
+    if (this.config.storeId) {
+      this.events$.pipe(filter((a) => a.storeId === this.config.storeId)).subscribe((a) => {
+        switch (a.type) {
+          // Refresh data in store
+          case ApiActions.REFRESH:
+            this.refresh().subscribe();
+            break;
+          // Reset store
+          case ApiActions.RESET:
+            this.reset();
+            break;
+        }
+      });
+    }
+
     // Create initial instance of http get, mostly just for type safety
     this.httpGet$ = this.http.get<t>(apiUrlGet(this.config, 'get', null));
   }
@@ -75,6 +104,11 @@ export class NtsApiStoreCreator<t, t2 = any> {
     if ((this.state.data === null || options.refresh || !this.httpGet$) && !this.state.loading) {
       const url = apiUrlGet(options, 'get', null);
       this.stateChange({ loading: true });
+      // Dispatch event to the global scope
+      if (this.config.storeId) {
+        this.dispatch({ type: ApiEvents.GET_START, storeId: this.config.storeId, payload: null });
+      }
+
       this.httpGet$ = this.http.get<t>(url).pipe(
         // Handle api success
         tap((r) => {
@@ -93,11 +127,18 @@ export class NtsApiStoreCreator<t, t2 = any> {
 
           // Update state
           this.stateChange(state);
+          // Dispatch event to the global scope
+          if (this.config.storeId) {
+            this.dispatch({ type: ApiEvents.GET_SUCCESS, storeId: this.config.storeId, payload: r });
+          }
         }),
         // Handle api errors
         catchError((err) => {
           // Update state
           this.stateChange({ loading: false, error: err });
+          if (this.config.storeId) {
+            this.dispatch({ type: ApiEvents.GET_ERROR, storeId: this.config.storeId, payload: err });
+          }
           return throwError(err);
         }),
         take(1), // Ensure http request only fires once since the memory reference is stored
@@ -116,6 +157,7 @@ export class NtsApiStoreCreator<t, t2 = any> {
   public post(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'post', null);
+
     return this.upsert(this.http.post(url, data), data, this.config.map?.post);
   }
 
@@ -189,6 +231,10 @@ export class NtsApiStoreCreator<t, t2 = any> {
   private upsert<t>(apiRequest: Observable<t>, data: t | t[], mapFn?: <t>(x: t | null) => any) {
     // Reset state
     this.stateChange({ modifying: true, errorModify: null });
+    // Dispatch event to the global scope
+    if (this.config.storeId) {
+      this.dispatch({ type: ApiEvents.MODIFY_START, storeId: this.config.storeId, payload: null });
+    }
     // Make api request
     return apiRequest.pipe(
       // Handle success
@@ -197,7 +243,7 @@ export class NtsApiStoreCreator<t, t2 = any> {
         const resMapped = mapFn ? mapFn(r) : r;
         // Merge the api response with the payload
         const resMerged = mergePayloadWithApiResponse(data, resMapped);
-        // If this
+        // If this is an entity store
         if (
           this.isEntityStore &&
           is.entityConfig(this.config) &&
@@ -209,11 +255,18 @@ export class NtsApiStoreCreator<t, t2 = any> {
         } else {
           this.stateChange({ modifying: false, resMerged });
         }
+        // Dispatch event to the global scope
+        if (this.config.storeId) {
+          this.dispatch({ type: ApiEvents.MODIFY_SUCCESS, storeId: this.config.storeId, payload: r });
+        }
       }),
       // Handle error
       catchError((err) => {
         // Update state
         this.stateChange({ modifying: false, errorModify: err });
+        if (this.config.storeId) {
+          this.dispatch({ type: ApiEvents.MODIFY_ERROR, storeId: this.config.storeId, payload: err });
+        }
         return throwError(err);
       }),
     );
@@ -224,6 +277,13 @@ export class NtsApiStoreCreator<t, t2 = any> {
    */
   public refresh() {
     return this.get({ refresh: true });
+  }
+
+  /**
+   * Reset store to it's initial state
+   */
+  public reset() {
+    this.stateChange(initialState);
   }
 
   /**

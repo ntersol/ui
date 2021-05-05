@@ -76,4 +76,12 @@ export namespace NtsState {
     /** A unique name or id for this store*/
     storeId?: string;
   }
+
+  export interface Event<t = any> {
+    type: string | number;
+    storeId: string;
+    storeIdSrc?: string;
+    storeIdDest?: string;
+    payload: t | null;
+  }
 }
