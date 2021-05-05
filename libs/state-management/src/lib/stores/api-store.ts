@@ -3,7 +3,14 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, distinctUntilChanged, map, share, tap, take } from 'rxjs/operators';
 import { NtsState } from './api-store.models';
 import { mergeDeepRight } from 'ramda';
-import { apiUrlGet, is, isEntity, mergeDedupeArrays, mergePayloadWithApiResponse } from './api-store.utils';
+import {
+  apiUrlGet,
+  deleteEntities,
+  is,
+  isEntity,
+  mergeDedupeArrays,
+  mergePayloadWithApiResponse,
+} from './api-store.utils';
 
 /**
  * Automatically create an entity store to manage interaction between a local flux store and a remote api
@@ -142,8 +149,19 @@ export class NtsApiStore<t, t2 = any> {
     // Reset state
     this.stateChange({ modifying: true, errorModify: null });
     return this.http.delete(url).pipe(
-      tap((r) => {
-        console.log(r);
+      tap(() => {
+        if (
+          this.isEntityStore &&
+          is.entityConfig(this.config) &&
+          !!this.state?.data &&
+          Array.isArray(this.state.data)
+        ) {
+          console.log(deleteEntities(this.state.data, data, this.config.uniqueId));
+          const updated = deleteEntities(this.state.data, data, this.config.uniqueId);
+          this.stateChange({ modifying: false, ...updated });
+        } else {
+          this.stateChange({ modifying: false });
+        }
         // Perform delete
         this.stateChange({ modifying: false });
       }),

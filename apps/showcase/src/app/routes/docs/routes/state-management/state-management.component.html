@@ -3,7 +3,7 @@
 <hr />
 
 <p-tabView>
-  <p-tabPanel header="Demo/Example">
+  <p-tabPanel header="Example">
     <div class="container-fluid px-0">
       <div class="row px-0">
         <div class="col-12 col-md-9 pl-0">
@@ -13,7 +13,7 @@
                 <ng-template table-cell-template let-value="value" let-column="column" let-row="row">
                   <div class="text-right">
                     <a class="mr-2" (click)="edit(row)"><i class="fa fa-cog" aria-hidden="true"></i></a>
-                    <a (click)="delete(value)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a (click)="delete(row)"><i class="fa fa-trash" aria-hidden="true"></i></a>
                   </div>
                 </ng-template>
               </table-column>
@@ -38,7 +38,7 @@
               </form>
             </div>
           </div>
-          <button class="btn btn-primary w-100" (click)="refresh()">Refresh All Users</button>
+          <button class="btn btn-primary w-100" (click)="refresh()"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh All Users</button>
         </div>
       </div>
     </div>
@@ -49,12 +49,35 @@
         <code class="language-ts" [innerHtml]="install"></code>
     </pre>
 
-    <h2>Usage</h2>
-    <p>No module import is necessary, just import the "ntsApiStore" function into your service</p>
+    <h2>Setup</h2>
+    <p>1. Import into module</p>
     <pre>
-        <code class="language-ts" [innerHtml]="usage"></code>
+        <code class="language-ts" [innerHtml]="importExample"></code>
+    </pre>
+    <p>2. Set up api calls in a service</p>
+    <pre>
+        <code class="language-ts" [innerHtml]="usage1"></code>
+    </pre>
+    <p>3. Set up store connections in the component</p>
+    <pre>
+        <code class="language-ts" [innerHtml]="usage2"></code>
+    </pre>
+    <p>4. Wire up to template</p>
+    <pre>
+        <code class="language-html" [innerHtml]="usage3"></code>
     </pre>
   </p-tabPanel>
 
   <p-tabPanel header="API"> Content 3 </p-tabPanel>
 </p-tabView>
+
+<!-- nts-api-state will automatically display loader and error messages
+<nts-api-state [state]="users" *ngIf="users$ | async as users">
+  <ng-container *ngIf="users?.data?.length; else noData">
+    <ng-container *ngFor="let user of users.data">
+      <!-- Output User data here
+    </ng-container>
+  </ng-container>
+  <ng-template #noData> No users found </ng-template>
+</nts-api-state>
+-->

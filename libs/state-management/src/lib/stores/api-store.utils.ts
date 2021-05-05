@@ -99,6 +99,35 @@ export const mergeDedupeArrays = <t>(
 };
 
 /**
+ * Delete an entity or array of entities from the source array
+ * @param storeDataSrc
+ * @param payloadSrc
+ * @param uniqueId
+ * @returns
+ */
+export const deleteEntities = <t>(
+  storeDataSrc: t | t[],
+  payloadSrc: t | t[],
+  uniqueId: keyof t,
+): Partial<NtsState.ApiState> => {
+  // Ensure array types
+  const storeData = !Array.isArray(storeDataSrc) ? [storeDataSrc] : storeDataSrc;
+  const payload = !Array.isArray(payloadSrc) ? [payloadSrc] : payloadSrc;
+  // Convert both types to records
+  const storeRecord = arrayToRecord(storeData, uniqueId);
+  payload.forEach((e) => {
+    const key = e[uniqueId] as any;
+    if (storeRecord[key]) {
+      delete storeRecord[key];
+    }
+  });
+  return {
+    data: [...storeData.map((e) => storeRecord[e[uniqueId] as any]).filter((e) => !!e)],
+    entities: storeRecord,
+  };
+};
+
+/**
  * Create the correct url to use based on the config, rest verb type and entity
  * @param config
  * @param verb
@@ -133,6 +162,16 @@ export const apiUrlGet = <t2>(
     apiUrl = apiUrl + config.apiUrlAppend;
   }
 
+  // If PUT/PATCH/DELETE, append unique ID provided it's not disabled
+  if (
+    is.entityConfig(config) &&
+    ((verb === 'put' && config.disableAppendId?.put !== true && config.uniqueId && e && !Array.isArray(e)) ||
+      (verb === 'patch' && config.disableAppendId?.patch !== true && config.uniqueId && e && !Array.isArray(e)) ||
+      (verb === 'delete' && config.disableAppendId?.delete !== true && config.uniqueId && e && !Array.isArray(e)))
+  ) {
+    apiUrl = apiUrl + '/' + e[config.uniqueId as keyof t2];
+  }
+
   // If a custom override url was specified for this verb
   // Note that override replaces all previous settings like prepent/append etc
   if (!!config?.apiUrlOverride && !!config?.apiUrlOverride[verb]) {
@@ -143,16 +182,6 @@ export const apiUrlGet = <t2>(
     } else {
       apiUrl = urlOverride(e);
     }
-  }
-
-  // If PUT/PATCH/DELETE, append unique ID provided it's not disabled
-  if (
-    is.entityConfig(config) &&
-    ((verb === 'put' && config.disableAppendId?.put !== true && config.uniqueId && e && !Array.isArray(e)) ||
-      (verb === 'patch' && config.disableAppendId?.patch !== true && config.uniqueId && e && !Array.isArray(e)) ||
-      (verb === 'delete' && config.disableAppendId?.delete !== true && config.uniqueId && e && !Array.isArray(e)))
-  ) {
-    apiUrl = apiUrl + '/' + e[config.uniqueId as keyof t2];
   }
 
   return apiUrl;

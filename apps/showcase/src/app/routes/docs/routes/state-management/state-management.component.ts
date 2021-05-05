@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { NtsTable } from '@ntersol/table';
 import { Models } from '../../../../shared/models';
 import { HighlightService } from '../../shared/services/highlight.service';
+import { importExample, install, usage1, usage2, usage3 } from './code-examples';
 import { StateManagementService } from './shared/state-management.service';
 
 @Component({
@@ -32,31 +33,11 @@ export class StateManagementComponent implements OnInit {
   ];
   public users$ = this.api.users.state$;
 
-  public import = `import { NtsStateManagementModule } from '@ntersol/state-management';`;
-
-  public install = `
-  npm i @ntersol/state-management --save`;
-
-  public usage = `
-  // In your api service
-  import { ntsApiStore } from &#39;@ntersol/state-management&#39;;
-
-  @Injectable({
-    providedIn: &#39;root&#39;,
-  })
-  export class SampleService {
-    // Create a curried store creator instance with default settings
-    private store = ntsApiStore(this.http, { apiUrlBase: &#39;//jsonplaceholder.typicode.com&#39; });
-    // Create an instance of an entity based store
-    public users = this.store&lt;Models.User&gt;({ apiUrl: &#39;/users&#39; });
-    // Create an instance of a non-entity based store
-    public post = this.store&lt;Models.Post&gt;({ apiUrl: &#39;/posts/1&#39; }, false);
-
-    // List all store services here
-    constructor(public http: HttpClient) {}
-  }`;
-
-  public usage2 = ``;
+  public install = install;
+  public importExample = importExample;
+  public usage1 = usage1;
+  public usage2 = usage2;
+  public usage3 = usage3;
 
   public userForm = this.fb.group({
     address: [],
@@ -94,7 +75,10 @@ export class StateManagementComponent implements OnInit {
   }
 
   public delete(u: Models.User) {
-    this.api.users.delete(u).subscribe();
+    const c = confirm('Are you sure you want to delete this user?');
+    if (c) {
+      this.api.users.delete(u).subscribe();
+    }
   }
 
   public refresh() {
@@ -105,3 +89,39 @@ export class StateManagementComponent implements OnInit {
     this.highlight.highlightAll();
   }
 }
+
+/**
+export class SampleComponent implements OnInit {
+  // Get both users and api state
+  public users$ = this.api.users.state$;
+  // Get just the data without state
+  public userData$ = this.api.users.data$;
+  // Import service into component
+  constructor(private api: SampleService) {}
+
+  ngOnInit() {
+    // Load data into the store if autoload is disabled
+    this.api.users.get().subscribe();
+  }
+
+  // Create a new entity via POST
+  public create(e: Models.User) {
+    this.api.users.post(e).subscribe();
+  }
+
+  // Update an existing entity via PUT
+  public update(e: Models.User) {
+    this.api.users.put(e).subscribe();
+  }
+
+  // Remove a user via DELETE
+  public delete(e: Models.User) {
+    this.api.users.delete(e).subscribe();
+  }
+
+  // Refresh data manually
+  public refresh() {
+    this.api.users.refresh().subscribe();
+  }
+}
+ */
