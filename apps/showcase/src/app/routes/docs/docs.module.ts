@@ -20,12 +20,13 @@ import { WizardComponent } from './routes/wizard/wizard.component';
 import { VisibleComponent } from './routes/visible/visible.component';
 import { HighlightService } from './shared/services/highlight.service';
 import { StateManagementComponent } from './routes/state-management/state-management.component';
+import { ExampleComponent } from './routes/state-management/components/example.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, TabViewModule, NtsTableModule, NtsStateManagementModule, NtsFormsModule],
-  declarations: [DocsComponent, WizardComponent, VisibleComponent, StateManagementComponent],
+  declarations: [DocsComponent, WizardComponent, VisibleComponent, StateManagementComponent, ExampleComponent],
   providers: [HighlightService, RouteUiStateService, RouteUiStateStore, RouteUiStateQuery, RouteDomainStateService],
-  exports: [StateManagementComponent],
+  exports: [StateManagementComponent, ExampleComponent],
   entryComponents: [],
 })
 export class DocsModule {}
