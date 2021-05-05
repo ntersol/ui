@@ -1,4 +1,4 @@
-import { NtsState } from '../stores/api-store.models';
+import { NtsState } from '../stores/api';
 import { isApiState } from './guards.util';
 
 /**
