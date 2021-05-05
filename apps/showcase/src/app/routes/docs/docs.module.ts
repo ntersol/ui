@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SiteModule } from '$site'; // Site modules
 import { NtsTableModule } from '@ntersol/table';
+import { NtsFormsModule } from '@ntersol/forms';
 import { NtsStateManagementModule } from '@ntersol/state-management';
+import { TabViewModule } from 'primeng/tabview';
 // import { NtsWizardModule } from '@ntersol/wizard';
 
 // Routing
 import { routing } from './docs.routes';
-import { TabViewModule } from 'primeng/tabview';
+
 // Components
 import { DocsComponent } from './docs.component';
 
@@ -20,7 +22,7 @@ import { HighlightService } from './shared/services/highlight.service';
 import { StateManagementComponent } from './routes/state-management/state-management.component';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, TabViewModule, NtsTableModule, NtsStateManagementModule],
+  imports: [CommonModule, SiteModule, routing, TabViewModule, NtsTableModule, NtsStateManagementModule, NtsFormsModule],
   declarations: [DocsComponent, WizardComponent, VisibleComponent, StateManagementComponent],
   providers: [HighlightService, RouteUiStateService, RouteUiStateStore, RouteUiStateQuery, RouteDomainStateService],
   exports: [StateManagementComponent],

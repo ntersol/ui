@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { NtsTable } from '@ntersol/table';
 import { Models } from '../../../../shared/models';
 import { HighlightService } from '../../shared/services/highlight.service';
@@ -18,11 +19,15 @@ export class StateManagementComponent implements OnInit {
     },
     {
       field: 'email',
-      header: 'Eame',
+      header: 'Email',
     },
     {
       field: 'phone',
       header: 'Phone',
+    },
+    {
+      field: 'actions',
+      header: 'Actions',
     },
   ];
   public users$ = this.api.users.state$;
@@ -53,10 +58,47 @@ export class StateManagementComponent implements OnInit {
 
   public usage2 = ``;
 
-  constructor(private api: StateManagementService, private highlight: HighlightService) {}
+  public userForm = this.fb.group({
+    address: [],
+    company: [],
+    email: [],
+    id: [],
+    name: [],
+    phone: [],
+    username: [],
+    website: [],
+  });
+
+  public isEdit = false;
+
+  constructor(private api: StateManagementService, private highlight: HighlightService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.api.users.get().subscribe();
+  }
+
+  public save() {
+    const user = this.userForm.getRawValue() as Models.User;
+    const apiCall = this.isEdit ? this.api.users.put(user) : this.api.users.post(user);
+    apiCall.subscribe(() => this.userForm.reset());
+  }
+
+  public edit(u: Models.User) {
+    this.userForm.patchValue(u);
+    this.isEdit = true;
+  }
+
+  public editUndo() {
+    this.userForm.reset();
+    this.isEdit = false;
+  }
+
+  public delete(u: Models.User) {
+    this.api.users.delete(u).subscribe();
+  }
+
+  public refresh() {
+    this.api.users.refresh().subscribe();
   }
 
   ngAfterViewInit() {

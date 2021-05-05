@@ -8,15 +8,37 @@
       <div class="row px-0">
         <div class="col-12 col-md-9 pl-0">
           <nts-api-state [state]="state" *ngIf="users$ | async as state">
-            <nts-table [rows]="state.data" [columns]="columns"> </nts-table>
+            <nts-table [rows]="state.data" [columns]="columns">
+              <table-column field="actions">
+                <ng-template table-cell-template let-value="value" let-column="column" let-row="row">
+                  <div class="text-right">
+                    <a class="mr-2" (click)="edit(row)"><i class="fa fa-cog" aria-hidden="true"></i></a>
+                    <a (click)="delete(value)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  </div>
+                </ng-template>
+              </table-column>
+            </nts-table>
           </nts-api-state>
         </div>
         <div class="col-12 col-md-3 pr-0">
-          <div class="card">
+          <div class="card mb-3">
             <div class="card-body">
-              <h3>Add a new user</h3>
+              <a class="float-right" (click)="editUndo()" *ngIf="isEdit">Undo</a>
+              <h3 *ngIf="isEdit">Edit existing user</h3>
+              <h3 *ngIf="!isEdit">Add a new user</h3>
+              <hr />
+              <form [formGroup]="userForm">
+                <p><nts-form-field formControlName="name" placeholder="Name"> </nts-form-field></p>
+                <p><nts-form-field formControlName="email" placeholder="Email"> </nts-form-field></p>
+                <p><nts-form-field formControlName="phone" placeholder="Phone Number"> </nts-form-field></p>
+                <div class="float-right">
+                  <button class="btn btn-primary" *ngIf="isEdit" (click)="save()"><i class="fa fa-cog" aria-hidden="true"></i> Edit User</button>
+                  <button class="btn btn-primary" *ngIf="!isEdit" (click)="save()"><i class="fa fa-plus" aria-hidden="true"></i> Add New User</button>
+                </div>
+              </form>
             </div>
           </div>
+          <button class="btn btn-primary w-100" (click)="refresh()">Refresh All Users</button>
         </div>
       </div>
     </div>

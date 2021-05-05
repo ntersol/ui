@@ -5,9 +5,12 @@
   </ng-container>
 
   <!-- Loading with data OR modifying -->
-  <ng-container *ngIf="(showLoading && stateSrc?.loading && stateSrc?.data) || (showModifying && stateSrc?.modifying)">
+  <ng-container
+    *ngIf="(showLoading && stateSrc?.loading && stateSrc?.data) || (showModifying && stateSrc?.modifying); else spacer"
+  >
     <p-progressBar mode="indeterminate" [style]="{ height: '2px' }"></p-progressBar>
   </ng-container>
+  <ng-template #spacer><div class="nts-loader-spacer"></div></ng-template>
 
   <!-- Loading error -->
   <ng-container *ngIf="showLoading && showErrorLoading && stateSrc?.error">
@@ -19,7 +22,7 @@
     <nts-error [error]="stateSrc?.errorModify" [canClose]="false"></nts-error>
   </ng-container>
 
-  <!-- 
+  <!--
     Always show content if data prop is not null
   -->
   <ng-container *ngIf="stateSrc?.data">
