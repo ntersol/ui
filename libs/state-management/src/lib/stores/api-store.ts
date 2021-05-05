@@ -37,18 +37,15 @@ export class NtsApiStore<t, t2 = any> {
   /** Store a shared reference to the http get request so it can be canceled and shared */
   private httpGet$: Observable<t>;
 
-  /** Is this store an entity type? */
-  public isEntityStore = false;
-
   /** Global store config config, contains mashup of all instances. Below is the default config */
-  private config: NtsState.Config = {
+  private config: NtsState.Config | NtsState.ConfigEntity = {
     autoLoad: true,
-    name: 'store-' + Math.floor(Math.random() * 10000000000),
+    // storeId: 'store-' + Math.floor(Math.random() * 10000000000),
   };
 
-  constructor(private http: HttpClient, configInstance: NtsState.Config, configBase?: NtsState.Config) {
+  constructor(private http: HttpClient, config: NtsState.Config | NtsState.ConfigEntity, private isEntityStore = true) {
     // Merge all configs into single entity
-    this.config = mergeDeepRight({ ...this.config, ...configBase }, configInstance);
+    this.config = mergeDeepRight(this.config, config);
     // If a custom initial state was defined, merge into initial state
     if (this.config.initialState) {
       this.state = mergeDeepRight(this.state, this.config.initialState);
@@ -76,7 +73,7 @@ export class NtsApiStore<t, t2 = any> {
           let entities: Record<string, t> | null = null;
           // Check if this api response has entities, create entity property
           const config = this.config; // Run through typeguard so it doesn't need to be typechecked again in the reduce
-          if (is.entityConfig(config) && isEntity(result, config.uniqueId) && config.uniqueId) {
+          if (this.isEntityStore && is.entityConfig(config) && isEntity(result, config.uniqueId) && config.uniqueId) {
             entities = <Record<string, t>>result.reduce((a, b: any) => ({ ...a, [b[String(config.uniqueId)]]: b }), {});
             state.entities = entities;
           }
@@ -177,7 +174,12 @@ export class NtsApiStore<t, t2 = any> {
         // Merge the api response with the payload
         const resMerged = mergePayloadWithApiResponse(data, resMapped);
         // If this
-        if (is.entityConfig(this.config) && !!this.state?.data && Array.isArray(this.state.data)) {
+        if (
+          this.isEntityStore &&
+          is.entityConfig(this.config) &&
+          !!this.state?.data &&
+          Array.isArray(this.state.data)
+        ) {
           const delta = mergeDedupeArrays(this.state.data, resMerged, this.config.uniqueId as keyof t);
           this.stateChange({ modifying: false, ...delta });
         } else {
@@ -211,11 +213,47 @@ export class NtsApiStore<t, t2 = any> {
 }
 
 /**
+ * Create a curried instance of the api store creator
+ *
+ * @example
+ * private store = ntsApiStore(this.http, { apiUrlBase: '//jsonplaceholder.typicode.com' })
+ * @param http A reference to Angular's http service
+ * @param configBase Default configuration for all instances of this store. Will be overwritten by individual store properties
+ * @returns
+ */
+export const ntsApiStore = (http: HttpClient, configBase?: NtsState.Config | null) => {
+  const store: {
+    /**
+     * Create an instance of an entity based api store. Used for managing an array of objects
+     * @example
+     * public users = this.store<Models.User>({ apiUrl: '/users' });
+     * @param config Store configuration and options
+     * @param isEntityStore Should the store create and manage entities
+     * @returns
+     */
+    <t>(config: NtsState.ConfigEntity, isEntityStore?: true): NtsApiStore<t[]>;
+    /**
+     * Create an instance of a non-entity based api store. Used for managing all none entity types
+     * @example
+     * public users = this.store<Models.User>({ apiUrl: '/users' }, false);
+     * @param config Store configuration and options
+     * @param isEntityStore Should the store create and manage entities
+     * @returns
+     */
+    <t>(config: NtsState.Config, isEntityStore?: false): NtsApiStore<t>;
+  } = <t>(config: NtsState.Config | NtsState.ConfigEntity, isEntityStore = true): NtsApiStore<t> | NtsApiStore<t[]> =>
+    isEntityStore
+      ? new NtsApiStore<t[], t>(http, mergeDeepRight(configBase || {}, config), isEntityStore)
+      : new NtsApiStore<t, t>(http, mergeDeepRight(configBase || {}, config), isEntityStore);
+  return store;
+};
+
+/**
  * Create an instance of an api store
  * @param http
  * @param configSrc
  * @returns
- */
+
 export function ntsApiStore<t>(http: HttpClient, config: NtsState.Config, isEntityStore: false): NtsApiStore<t>;
 export function ntsApiStore<t>(http: HttpClient, config: NtsState.EntityConfig, isEntityStore: true): NtsApiStore<t[]>;
 export function ntsApiStore<t>(
@@ -229,7 +267,15 @@ export function ntsApiStore<t>(
     return new NtsApiStore<t, t>(http, config);
   }
 }
+ */
+
 /**
+ * interface User {
+  v?: boolean;
+}
+const temp = ntsApiStore2('' as any, {});
+const users = temp<User>({ uniqueId: 'test' }, true);
+const users2 = temp<User>({ uniqueId: 'test' }, false);
 // This works!
 const temp = ntsApiStore5<User>('' as any, {}, false);
 const temp2 = ntsApiStore5<User>('' as any, {}, true);

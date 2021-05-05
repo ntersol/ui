@@ -20,8 +20,8 @@ export const isEntity = <t extends object>(response: unknown, uniqueId?: string 
  * Typeguards
  */
 export const is = {
-  entityConfig: (c: NtsState.Config): c is NtsState.EntityConfig =>
-    (c as NtsState.EntityConfig).uniqueId ? true : false,
+  entityConfig: (c: NtsState.Config): c is NtsState.ConfigEntity =>
+    (c as NtsState.ConfigEntity).uniqueId ? true : false,
   callbackFn: (c: NtsState.ApiUrl): c is NtsState.ApiUrlCallback => typeof c === 'function',
 };
 
@@ -106,7 +106,7 @@ export const mergeDedupeArrays = <t>(
  * @returns
  */
 export const apiUrlGet = <t2>(
-  config: NtsState.Config,
+  config: NtsState.Config | NtsState.ConfigEntity,
   verb: keyof NtsState.ApiUrlOverride,
   e: Partial<t2> | Partial<t2>[] | null,
 ): string => {
@@ -124,8 +124,8 @@ export const apiUrlGet = <t2>(
   }
 
   // If prepend url is specified
-  if (config.apiUrlPrepend) {
-    apiUrl = config.apiUrlPrepend + apiUrl;
+  if (config.apiUrlBase) {
+    apiUrl = config.apiUrlBase + apiUrl;
   }
 
   // If append url is specified
@@ -147,9 +147,10 @@ export const apiUrlGet = <t2>(
 
   // If PUT/PATCH/DELETE, append unique ID provided it's not disabled
   if (
-    (verb === 'put' && config.disableAppendId?.put !== true && config.uniqueId && e && !Array.isArray(e)) ||
-    (verb === 'patch' && config.disableAppendId?.patch !== true && config.uniqueId && e && !Array.isArray(e)) ||
-    (verb === 'delete' && config.disableAppendId?.delete !== true && config.uniqueId && e && !Array.isArray(e))
+    is.entityConfig(config) &&
+    ((verb === 'put' && config.disableAppendId?.put !== true && config.uniqueId && e && !Array.isArray(e)) ||
+      (verb === 'patch' && config.disableAppendId?.patch !== true && config.uniqueId && e && !Array.isArray(e)) ||
+      (verb === 'delete' && config.disableAppendId?.delete !== true && config.uniqueId && e && !Array.isArray(e)))
   ) {
     apiUrl = apiUrl + '/' + e[config.uniqueId as keyof t2];
   }

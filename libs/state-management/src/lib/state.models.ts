@@ -28,7 +28,7 @@ export namespace NtsState {
    */
   export interface Options {
     /** Prepend this string to all api requests. Useful for defining the base domain url for api calls */
-    apiUrlPrepend?: string;
+    apiUrlBase?: string;
     /** Override the default url supplied in the store config */
     apiUrl?: string;
     /** Append this string to api call. Useful for rest endpoints that require a unique ID */

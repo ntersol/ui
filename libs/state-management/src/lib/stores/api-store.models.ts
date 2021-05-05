@@ -29,7 +29,7 @@ export namespace NtsState {
     /** Path to webapi. Assumes restful conventions for verbs */
     apiUrl?: string;
     /** Prepend this string to all api requests. Useful for defining the base domain url for api calls */
-    apiUrlPrepend?: string;
+    apiUrlBase?: string;
     /** Append this string to api call. Useful for rest endpoints that require a unique ID */
     apiUrlAppend?: string;
     /** Override the default webapi url for a specific verb. Optionally supports a callback function that returns a string */
@@ -42,16 +42,12 @@ export namespace NtsState {
     replace?: boolean;
   }
 
-  export type Config = EntityConfig | ConfigBase;
-
-  export interface EntityConfig extends ConfigBase {
+  export interface ConfigEntity extends Config {
     /** The uniqueID or guid or the entity format. Default is 'guid'. Required for entities to work */
     uniqueId: string | number;
   }
 
-  export interface ConfigBase extends Options {
-    /** The uniqueID or guid or the entity format. Default is 'guid'. Required for entities to work */
-    uniqueId?: string | number;
+  export interface Config extends Options {
     /** If the store has a subscriber but no data, automatically perform a get request. Default true */
     autoLoad?: boolean;
     /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests.
@@ -77,7 +73,7 @@ export namespace NtsState {
        */
     /** Define the initial state of the store */
     initialState?: Record<string, any>;
-    /** A name of the store, will be auto generated if not supplied */
-    name?: string;
+    /** A unique name or id for this store*/
+    storeId?: string;
   }
 }

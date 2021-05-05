@@ -13,6 +13,7 @@ export class StateManagementComponent implements OnInit {
   constructor(private domain: StateManagementService) {}
 
   ngOnInit(): void {
+    /**
     this.domain.users.get().subscribe();
     this.users$.subscribe(x => console.log(x));
 
@@ -23,8 +24,9 @@ export class StateManagementComponent implements OnInit {
     setTimeout(() => {
       this.domain.users.put({ id: 2, name: 'Winning' }).subscribe();
     }, 1000);
+     */
 
-    // this.domain.post.get().subscribe();
-    // this.domain.post.state$.subscribe(x => console.log(x));
+    this.domain.post.get().subscribe();
+    this.domain.post.state$.subscribe(x => console.log(x));
   }
 }
