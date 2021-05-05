@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApiActions, ntsApiStoreCreator } from '@ntersol/state-management';
+import { ApiActions, ntsApiStoreCreator, ntsBaseStore } from '@ntersol/state-management';
 import { Models } from '../../../../../shared/models';
 
 export enum StoreIds {
@@ -20,9 +20,8 @@ export class StateManagementService {
 
   // List all store services here
   constructor(public http: HttpClient) {
-    this.users.events$.subscribe(x => console.log(x));
-    setTimeout(() => {
-      this.users.dispatch({ storeId: StoreIds.USERS, type: ApiActions.REFRESH, payload: null });
-    }, 2000);
+    setTimeout(() => this.users.dispatch({ storeId: StoreIds.USERS, type: ApiActions.REFRESH, payload: null }), 2000);
+
+    ntsBaseStore().events$.subscribe(x => console.log(x));
   }
 }
