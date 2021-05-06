@@ -10,8 +10,9 @@ export * from './pipes/entity-data.pipe';
 export * from './pipes/entity-to-array.pipe';
 export * from './pipes/is-loaded.pipe';
 
-export * from './stores/api/';
 export * from './stores/base/';
+export * from './stores/api/';
+export * from './stores/ui/';
 
 export * from './stores/store.enums';
 export * from './stores/entity-store';

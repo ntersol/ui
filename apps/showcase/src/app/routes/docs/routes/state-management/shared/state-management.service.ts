@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ntsApiStoreCreator, ntsBaseStore } from '@ntersol/state-management';
+import { ntsApiStoreCreator, ntsBaseStore, ntsUIStoreCreator } from '@ntersol/state-management';
 import { Models } from '../../../../../shared/models';
 
 export enum StoreIds {
   USERS = 'USERS',
+}
+
+interface UIStoreModel {
+  temp: string;
 }
 
 @Injectable({
@@ -18,8 +22,15 @@ export class StateManagementService {
   // Create an instance of a non-entity based store
   public post = this.store<Models.Post>({ apiUrl: '/posts/1' }, false);
 
+  public uiStore = ntsUIStoreCreator<UIStoreModel>({ temp: '' }, { storeId: 'uiStore' });
+
   // List all store services here
   constructor(public http: HttpClient) {
+    this.uiStore.select$('temp').subscribe(x => console.log(x));
+
+    this.uiStore.update({ temp: '' });
+    // this.uiStore.update(s => ({ temp: '12345' }));
+
     setTimeout(() => {
       // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.POST, payload: { name: 'Jerrol!' } });
       // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.PUT, payload: { name: 'WINNING', id: 5 } });

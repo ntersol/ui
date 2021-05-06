@@ -59,7 +59,7 @@ export class UiStateService {
    <mat-tab-group [selectedIndex]="ui.query.tabActive$('home') | async" (selectedTabChange)="ui.tabChange('home', $event)">
    * @param tabInstanceId - A name or unique identifier for this tab instance
    * @param tabEvent - The tabChange event supplied by ng-boostrap
-  
+
   public tabChange(tabInstanceId: string, tabEvent: MatTabChangeEvent) {
     this.store.update(store => {
       const tabsActive = { ...store.tabsActive };
