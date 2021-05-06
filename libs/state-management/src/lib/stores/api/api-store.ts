@@ -80,7 +80,7 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
         switch (a.type) {
           // Refresh data in store
           case ApiActions.REFRESH:
-            this.refresh().subscribe();
+            this.refresh(a.payload).subscribe();
             break;
           // Reset store
           case ApiActions.RESET:
@@ -99,6 +99,26 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
    * @param optionsSrct
    */
   public get(optionsOverride: NtsState.Options = {}) {
+    return this._get(optionsOverride);
+  }
+
+  /**
+   * Request is a POST operation that functions a GET. A payload body is passed and the response is loaded into the store
+   *
+   * Useful for things like search requests that need parameters not in a query string
+   * @param payload
+   * @param optionsOverride
+   */
+  public request<p = unknown>(payload: p, optionsOverride: NtsState.Options = {}) {
+    return this._get(optionsOverride, payload);
+  }
+
+  /**
+   * Perform a get request to load data into the store
+   * @param optionsOverride
+   * @param postPayload
+   */
+  private _get<t>(optionsOverride: NtsState.Options = {}, postPayload?: any) {
     const options = mergeConfig(this.config, optionsOverride);
     // If data is null or refresh cache is requested, otherwise default to cache
     if ((this.state.data === null || options.refresh || !this.httpGet$) && !this.state.loading) {
@@ -108,8 +128,10 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
       if (this.config.storeId) {
         this.dispatch({ type: ApiEvents.GET_START, storeId: this.config.storeId, payload: null });
       }
-
-      this.httpGet$ = this.http.get<t>(url).pipe(
+      // Is this a GET request or a POST that functions as a GET
+      // Some data request require a post body
+      const httpRequest = postPayload ? this.http.post(url, postPayload) : this.http.get(url);
+      this.httpGet$ = httpRequest.pipe(
         // Handle api success
         tap((r) => {
           // Map api response if requested
@@ -275,8 +297,8 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
   /**
    * Refresh the data in the store
    */
-  public refresh() {
-    return this.get({ refresh: true });
+  public refresh(optionsOverride: NtsState.Options = {}) {
+    return this.get({ ...optionsOverride, refresh: true });
   }
 
   /**

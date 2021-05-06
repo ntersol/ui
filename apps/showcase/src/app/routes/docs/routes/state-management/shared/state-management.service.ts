@@ -20,8 +20,10 @@ export class StateManagementService {
 
   // List all store services here
   constructor(public http: HttpClient) {
-    setTimeout(() => this.users.dispatch({ storeId: StoreIds.USERS, type: ApiActions.REFRESH, payload: null }), 2000);
+    setTimeout(() => this.users.dispatch({ storeId: StoreIds.USERS, type: ApiActions.REFRESH }), 2000);
+    this.users.events$.subscribe(x => console.log('User store events', x));
+    ntsBaseStore().events$.subscribe(x => console.log('Global store events', x));
 
-    ntsBaseStore().events$.subscribe(x => console.log(x));
+    this.users.request({});
   }
 }

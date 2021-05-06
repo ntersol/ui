@@ -73,15 +73,13 @@ export namespace NtsState {
        */
     /** Define the initial state of the store */
     initialState?: Record<string, any>;
-    /** A unique name or id for this store*/
+    /** A unique name or id for this store. Only necessary if communication between stores is required */
     storeId?: string;
   }
 
-  export interface Event<t = any> {
+  export interface Action<t = any> {
     type: string | number;
     storeId: string;
-    storeIdSrc?: string;
-    storeIdDest?: string;
-    payload: t | null;
+    payload?: t | null;
   }
 }

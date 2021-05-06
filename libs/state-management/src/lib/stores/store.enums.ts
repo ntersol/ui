@@ -11,3 +11,7 @@ export enum ApiEvents {
   MODIFY_SUCCESS = 'MODIFY_SUCCESS',
   MODIFY_ERROR = 'MODIFY_ERROR',
 }
+
+export enum UIActions {}
+
+export enum UIEvents {}
