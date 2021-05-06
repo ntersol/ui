@@ -9,8 +9,8 @@ header {
     color: $interact-primary;
   }
   .brand {
-    display: inline-block;
-    line-height: 43px;
+    display: flex;
+    align-items: center;
     font-size: 1.25rem;
   }
   .nav {
