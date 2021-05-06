@@ -1,6 +1,12 @@
 export enum ApiActions {
   REFRESH = 'REFRESH',
   RESET = 'RESET',
+  GET = 'GET',
+  REQUEST = 'REQUEST',
+  POST = 'POST',
+  PUT = 'PUT',
+  PATCH = 'PATCH',
+  DELETE = 'DELETE',
 }
 
 export enum ApiEvents {

@@ -77,9 +77,12 @@ export namespace NtsState {
     storeId?: string;
   }
 
+  /** Actions to perform against the store */
   export interface Action<t = any> {
     type: string | number;
     storeId: string;
     payload?: t | null;
+    /** Api store options */
+    options?: Options;
   }
 }
