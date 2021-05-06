@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ntsApiStoreCreator, ntsBaseStore, ntsUIStoreCreator } from '@ntersol/state-management';
+import { ntsApiStoreCreator, ntsUIStoreCreator } from '@ntersol/state-management';
 import { Models } from '../../../../../shared/models';
 
 export enum StoreIds {
@@ -28,8 +28,11 @@ export class StateManagementService {
   constructor(public http: HttpClient) {
     this.uiStore.select$('temp').subscribe(x => console.log(x));
 
-    this.uiStore.update({ temp: '' });
-    // this.uiStore.update(s => ({ temp: '12345' }));
+    this.uiStore
+      .update(() => ({ temp: 'Winning!' }))
+      .then(s => {
+        console.log(1, s.temp);
+      });
 
     setTimeout(() => {
       // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.POST, payload: { name: 'Jerrol!' } });
@@ -37,6 +40,6 @@ export class StateManagementService {
       // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.DELETE, payload: { id: 4 } });
     }, 2000);
     // this.users.events$.subscribe(x => console.log('User store events', x));
-    ntsBaseStore().events$.subscribe(x => console.log('Global store events', x));
+    // ntsBaseStore().events$.subscribe(x => console.log('Global store events', x));
   }
 }

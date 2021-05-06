@@ -1,15 +1,13 @@
-import { BehaviorSubject } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { BehaviorSubject, of } from 'rxjs';
+import { distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
 import { NtsBaseStore } from '../base';
+import { UIStoreSelectOptions } from './ui-store.models';
 
-interface UIStoreOptions {
+export interface UIStoreConfig {
   storeId?: string;
 }
-export declare type UpsertStateCallback<State, NewState extends Partial<State> = Partial<State>> = (
-  state: State | {},
-) => NewState;
 
-type UIUpdate = <t>(v: t) => Partial<t>;
+export type UIUpdate = <t>(v: t) => Partial<t>;
 
 /**
  *
@@ -18,16 +16,30 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
   private state: t = { ...this.initialState };
   public state$ = new BehaviorSubject<t>({ ...this.state });
 
-  //  options?: UIStoreSelectOptions
-  public select$ = (k: keyof t) =>
+  /**
+   * Return data from the store
+   * @param k
+   * @param options
+   * @returns
+   */
+  public select$ = (k: keyof t, options?: UIStoreSelectOptions) =>
     this.state$.pipe(
       map((s) => s[k]),
-      distinctUntilChanged(),
+      switchMap((s) => {
+        if (options?.disableDistinct) {
+          of(s);
+        }
+        return of(s).pipe(distinctUntilChanged());
+      }),
     );
 
-  constructor(private initialState: t, private options?: UIStoreOptions) {
+  constructor(private initialState: t, private config: UIStoreConfig = {}) {
     super();
-    console.log(this.options);
+    if (this.config.storeId) {
+      this.events$.pipe(filter((a) => a.storeId === this.config.storeId)).subscribe((a) => {
+        console.log(a);
+      });
+    }
   }
 
   /**
@@ -36,7 +48,7 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
    * @returns
    */
   public update(value: Partial<t>): Promise<t>;
-  public update(value: UIUpdate): Promise<t>;
+  public update(value: (s: t) => Partial<t>): Promise<t>;
   public update(value: unknown): Promise<t> {
     if (typeof value === 'function') {
       const n = value(this.state);
@@ -45,7 +57,7 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
       this.stateChange(value as t);
     }
 
-    return this.state$.toPromise();
+    return this.state$.pipe(take(1)).toPromise();
   }
 
   /**
@@ -58,5 +70,5 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
   }
 }
 
-export const ntsUIStoreCreator = <t>(initialState: t, options?: UIStoreOptions) =>
+export const ntsUIStoreCreator = <t>(initialState: t, options: UIStoreConfig = {}) =>
   new NtsUIStoreCreator<t>(initialState, options);

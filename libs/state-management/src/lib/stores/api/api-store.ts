@@ -77,7 +77,6 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
     // Only listen for actions that match this store ID
     if (this.config.storeId) {
       this.events$.pipe(filter((a) => a.storeId === this.config.storeId)).subscribe((a) => {
-        console.log(a);
         switch (a.type) {
           // Refresh data in store
           case ApiActions.GET:
@@ -131,7 +130,6 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
    * @param optionsOverride
    */
   public request<p = unknown>(payload: p, optionsOverride?: NtsState.Options) {
-    console.warn(2, optionsOverride, payload);
     return this._get({ refresh: true, ...optionsOverride }, payload);
   }
 
@@ -141,7 +139,6 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
    * @param postPayload
    */
   private _get<t>(optionsOverride: NtsState.Options = {}, postPayload?: unknown) {
-    console.warn(3, optionsOverride, postPayload);
     const options = mergeConfig(this.config, optionsOverride);
     // If data is null or refresh cache is requested, otherwise default to cache
     if ((this.state.data === null || options.refresh || !this.httpGet$) && !this.state.loading) {
