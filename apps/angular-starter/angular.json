@@ -13,20 +13,14 @@
           "options": {
             "aot": true,
             "outputPath": "dist/browser",
-            "index": "apps/angular-starter/src/index.html",
-            "main": "apps/angular-starter/src/main.ts",
-            "tsConfig": "apps/angular-starter/src/tsconfig.app.json",
+            "index": "./src/index.html",
+            "main": "./src/main.ts",
+            "tsConfig": "./src/tsconfig.app.json",
             "preserveSymlinks": true,
             "showCircularDependencies": true,
-            "polyfills": "apps/angular-starter/src/polyfills.ts",
-            "assets": [
-              "apps/angular-starter/src/assets",
-              "apps/angular-starter/src/favicon.ico",
-              "apps/angular-starter/src/apple-touch-icon.png",
-              "apps/angular-starter/src/safari-pinned-tab.svg",
-              "apps/angular-starter/src/manifest.webmanifest"
-            ],
-            "styles": ["apps/angular-starter/src/styles.scss"],
+            "polyfills": "./src/polyfills.ts",
+            "assets": ["./src/assets", "./src/favicon.ico", "./src/apple-touch-icon.png", "./src/safari-pinned-tab.svg", "./src/manifest.webmanifest"],
+            "styles": ["./src/styles.scss"],
             "scripts": [
               {
                 "input": "node_modules/document-register-element/build/document-register-element.js",
@@ -58,8 +52,8 @@
               "ngswConfigPath": "ngsw-config.json",
               "fileReplacements": [
                 {
-                  "replace": "apps/angular-starter/src/environments/environment.ts",
-                  "with": "apps/angular-starter/src/environments/environment.qa.ts"
+                  "replace": "./src/environments/environment.ts",
+                  "with": "./src/environments/environment.qa.ts"
                 }
               ]
             },
@@ -82,8 +76,8 @@
               "ngswConfigPath": "ngsw-config.json",
               "fileReplacements": [
                 {
-                  "replace": "apps/angular-starter/src/environments/environment.ts",
-                  "with": "apps/angular-starter/src/environments/environment.uat.ts"
+                  "replace": "./src/environments/environment.ts",
+                  "with": "./src/environments/environment.uat.ts"
                 }
               ]
             },
@@ -106,8 +100,8 @@
               "ngswConfigPath": "ngsw-config.json",
               "fileReplacements": [
                 {
-                  "replace": "apps/angular-starter/src/environments/environment.ts",
-                  "with": "apps/angular-starter/src/environments/environment.prod.ts"
+                  "replace": "./src/environments/environment.ts",
+                  "with": "./src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -135,25 +129,19 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "apps/angular-starter/src/test.ts",
-            "karmaConfig": "apps/angular-starter/src/karma.conf.js",
-            "polyfills": "apps/angular-starter/src/polyfills.ts",
-            "tsConfig": "apps/angular-starter/src/tsconfig.spec.json",
+            "main": "./src/test.ts",
+            "karmaConfig": "./src/karma.conf.js",
+            "polyfills": "./src/polyfills.ts",
+            "tsConfig": "./src/tsconfig.spec.json",
             "scripts": [],
-            "styles": ["apps/angular-starter/src/styles.scss"],
-            "assets": [
-              "apps/angular-starter/src/assets",
-              "apps/angular-starter/src/favicon.ico",
-              "apps/angular-starter/src/apple-touch-icon.png",
-              "apps/angular-starter/src/safari-pinned-tab.svg",
-              "apps/angular-starter/src/manifest.webmanifest"
-            ]
+            "styles": ["./src/styles.scss"],
+            "assets": ["./src/assets", "./src/favicon.ico", "./src/apple-touch-icon.png", "./src/safari-pinned-tab.svg", "./src/manifest.webmanifest"]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/angular-starter/src/tsconfig.app.json", "apps/angular-starter/src/tsconfig.spec.json"],
+            "tsConfig": ["./src/tsconfig.app.json", "./src/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         },
@@ -161,8 +149,8 @@
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/server",
-            "main": "apps/angular-starter/src/main.server.ts",
-            "tsConfig": "apps/angular-starter/src/tsconfig.server.json"
+            "main": "./src/main.server.ts",
+            "tsConfig": "./src/tsconfig.server.json"
           }
         }
       }
