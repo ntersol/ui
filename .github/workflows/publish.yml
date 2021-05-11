@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Use Node
         uses: actions/setup-node@v1
         with:
@@ -23,7 +25,9 @@ jobs:
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Get Base
+        run: git fetch --no-tags --prune --depth=5 origin dev/nx
       - name: Build
-        run: npx nx affected --target build --base=${{ github.event.before }} --head=${{ github.event.base_ref }}
+        run: npx nx affected --target build --base=origin/dev/nx
       - name: Publish
-        run: npx nx affected --target publish --base=${{ github.event.before }} --head=${{ github.event.base_ref }}
+        run: npx nx affected --target publish --base=origin/dev/nx
