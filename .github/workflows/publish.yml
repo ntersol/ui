@@ -19,6 +19,6 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
-        run: npx nx affected --target build
+        run: npx nx affected --target build --base=dev/nx~1 --head=dev/nx
       - name: Publish
-        run: npx nx affected --target publish
+        run: npx nx affected --target publish --base=dev/nx~1 --head=dev/nx
