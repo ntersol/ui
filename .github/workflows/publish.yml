@@ -18,7 +18,12 @@ jobs:
           node-version: '12.x'
       - name: Install dependencies
         run: npm install
+      - name: Cache Modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Build
-        run: npx nx affected --target build --base=dev/nx~1 --head=dev/nx
+        run: npx nx affected --target build --base=origin/dev/nx~1 --head=origin/dev/nx
       - name: Publish
-        run: npx nx affected --target publish --base=dev/nx~1 --head=dev/nx
+        run: npx nx affected --target publish --base=origin/dev/nx~1 --head=origin/dev/nx
