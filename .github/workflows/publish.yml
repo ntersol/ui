@@ -1,3 +1,20 @@
-- uses: mansagroup/nrwl-nx-action@v2
-  with:
-    targets: build,publish
+name: Publish
+
+on:
+  push:
+    branches:
+      - 'dev/nx'
+
+jobs:
+  affected:
+    name: Run Affected Build and Publish Targets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        uses: mansagroup/nrwl-nx-action@v2
+        with:
+          targets: build
+      - name: Publish
+        uses: mansagroup/nrwl-nx-action@v2
+        with:
+          targets: publish
