@@ -47,5 +47,6 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
+  "files": ["src/main.ts", "src/polyfills.ts"],
   "exclude": ["archive", "e2e", "**/*.spec.ts", "node_modules", "tmp"]
 }

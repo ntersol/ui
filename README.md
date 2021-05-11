@@ -8,8 +8,12 @@ Generate a new library. Make sure to immediately commit the stub after creation 
 Run storybook documentation
 `ng run {libname}:storybook`
 
+Build a package, append `:production` for a prod build
+`ng build wizard`
+`nx run {libname}:build`
+
 Deploy update to NPM
-nx run {libname}:publish
+`nx run {libname}:publish`
 
 ## Documentation Quick Links
 
