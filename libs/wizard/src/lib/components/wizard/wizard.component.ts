@@ -123,7 +123,6 @@ export class WizardComponent implements OnInit, OnChanges, OnDestroy {
   ) {}
 
   ngOnInit() {
-    console.log('wizard');
     // Watch route param changes to manage routing changes
     this.route.params.pipe(untilDestroyed(this)).subscribe((params: any) => {
       this.routeParams = { sectionUrl: params.sectionUrl, routeUrl: params.routeUrl };
