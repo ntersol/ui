@@ -10,6 +10,14 @@ jobs:
     name: Run Affected Build and Publish Targets
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install dependencies
+        run: npm install
       - name: Build
         uses: MansaGroup/nrwl-nx-action@v2.1.0
         with:
