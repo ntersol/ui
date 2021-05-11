@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build
-        uses: mansagroup/nrwl-nx-action@v2
+        uses: MansaGroup/nrwl-nx-action@v2.1.0
         with:
           targets: build
       - name: Publish
-        uses: mansagroup/nrwl-nx-action@v2
+        uses: MansaGroup/nrwl-nx-action@v2.1.0
         with:
           targets: publish
