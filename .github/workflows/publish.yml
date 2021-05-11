@@ -19,10 +19,6 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
-        uses: MansaGroup/nrwl-nx-action@v2.1.0
-        with:
-          targets: build
+        run: npx nx affected --target build
       - name: Publish
-        uses: MansaGroup/nrwl-nx-action@v2.1.0
-        with:
-          targets: publish
+        run: npx nx affected --target publish
