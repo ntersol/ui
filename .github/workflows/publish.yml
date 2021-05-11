@@ -28,6 +28,6 @@ jobs:
       - name: Get Base
         run: git fetch --no-tags --prune --depth=5 origin dev/nx
       - name: Build
-        run: npx nx affected --target build --base=origin/dev/nx~1
+        run: npx nx affected --target build --with-deps --base=origin/dev/nx~1
       - name: Publish
         run: npx nx affected --target publish --base=origin/dev/nx~1
