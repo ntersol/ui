@@ -24,6 +24,6 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Build
-        run: npx nx affected --target build --base=origin/dev/nx~1 --head=origin/dev/nx
+        run: npx nx affected --target build --base=${{ github.event.before }} --head=${{ github.event.base_ref }}
       - name: Publish
-        run: npx nx affected --target publish --base=origin/dev/nx~1 --head=origin/dev/nx
+        run: npx nx affected --target publish --base=${{ github.event.before }} --head=${{ github.event.base_ref }}
