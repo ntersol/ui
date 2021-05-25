@@ -635,7 +635,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/state-management/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/state-management.module.ts --tsconfig ./tsconfig.json",
+              "npx typedoc --plugin typedoc-plugin-markdown libs/state-management/src/lib/state-management.module.ts --tsconfig libs/state-management/tsconfig.json --out libs/state-management/docs",
               "cp libs/state-management/docs/README.md libs/state-management/README.md"
             ],
             "parallel": false
