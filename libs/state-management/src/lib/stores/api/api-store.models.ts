@@ -51,7 +51,7 @@ export namespace NtsState {
     /** If the store has a subscriber but no data, automatically perform a get request. Default true */
     autoLoad?: boolean;
     /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests.
-     * If true the url to the web api must added manually via a callback function or observable */
+     * If true the url to the web api must added manually via the apiUrl property */
     disableAppendId?: {
       put?: true;
       patch?: true;
@@ -64,17 +64,25 @@ export namespace NtsState {
       put?: <t>(x: t | null) => any;
       patch?: <t>(x: t | null) => any;
     };
-    /** Can the store be reset? Default is true */
-    // resettable?: boolean;
+
+    /** Define the initial state of the store */
+    initialState?: Record<string, any>;
+    /** A unique name or id for this store. Only necessary if communication between stores is required */
+    storeId?: string;
+    /**
+     * TODO Features
+     */
     /** Remove items from the store cache based on a TTL. Default is false
       cache?: {
         ttl: number;
       };
        */
-    /** Define the initial state of the store */
-    initialState?: Record<string, any>;
-    /** A unique name or id for this store. Only necessary if communication between stores is required */
-    storeId?: string;
+    /** A stubbed model to mock api calls
+    offlineMode?: {
+      model: unknown;
+      count: number;
+    } | null;
+    */
   }
 
   /** Actions to perform against the store */
