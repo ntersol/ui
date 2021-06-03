@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { NtsState } from '../../stores/api';
+import { NtsState } from '../../state.models';
 import { NtsCombineEntityState } from '../../utils/combineEntityState.util';
 
 @Component({

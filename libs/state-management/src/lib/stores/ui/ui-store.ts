@@ -1,7 +1,7 @@
 import { BehaviorSubject, of } from 'rxjs';
-import { distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
+import { distinctUntilChanged, map, switchMap, take } from 'rxjs/operators';
 import { NtsBaseStore } from '../base';
-import { UIStoreSelectOptions } from './ui-store.models';
+import { NtsState } from '../../state.models';
 
 export interface UIStoreConfig {
   storeId?: string;
@@ -22,7 +22,7 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
    * @param options
    * @returns
    */
-  public select$ = (k: keyof t, options?: UIStoreSelectOptions) =>
+  public select$ = (k: keyof t, options?: NtsState.UIStoreOptions) =>
     this.state$.pipe(
       map((s) => s[k]),
       switchMap((s) => {
@@ -36,7 +36,7 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
   constructor(private initialState: t, private config: UIStoreConfig = {}) {
     super();
     if (this.config.storeId) {
-      this.events$.pipe(filter((a) => a.storeId === this.config.storeId)).subscribe((a) => {
+      this.events$.pipe().subscribe((a) => {
         console.log(a);
       });
     }

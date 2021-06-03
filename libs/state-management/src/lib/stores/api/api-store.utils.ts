@@ -1,4 +1,4 @@
-import { NtsState } from './api-store.models';
+import { NtsState } from '../../state.models';
 import { mergeDeepRight } from 'ramda';
 
 /**

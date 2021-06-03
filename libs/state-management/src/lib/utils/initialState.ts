@@ -8,7 +8,7 @@ export const initialState: NtsState.ApiState = {
   data: false,
 };
 
-export const initialEntityState: NtsState.EntityState = {
+export const initialEntityState: NtsState.ApiState = {
   ...initialState,
   entities: {},
   ids: [],

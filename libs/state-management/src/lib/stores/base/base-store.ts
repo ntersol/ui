@@ -1,12 +1,12 @@
 import { Subject } from 'rxjs';
-import { NtsState } from '../api/api-store.models';
+import { NtsState } from '../../state.models';
 
 export class NtsBaseStore {
-  static _events$ = new Subject<NtsState.Action>();
+  static _events$ = new Subject<NtsState.Action | NtsState.ApiAction>();
 
   public events$ = NtsBaseStore._events$.pipe();
 
-  public dispatch(a: NtsState.Action) {
+  public dispatch(a: NtsState.Action | NtsState.ApiAction) {
     NtsBaseStore._events$.next(a);
   }
 }

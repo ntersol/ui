@@ -7,7 +7,7 @@ import { NtsState } from '../state.models';
  * @param source
  */
 export const mapData = <t>(fn: (data?: t | null) => any) => (
-  source: Observable<NtsState.EntityState<t>>,
-): Observable<NtsState.EntityState<t>> => {
+  source: Observable<NtsState.ApiState<t>>,
+): Observable<NtsState.ApiState<t>> => {
   return source.pipe(map((state) => Object.assign({}, state, { data: fn(state.data as any) })));
 };

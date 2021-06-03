@@ -15,6 +15,5 @@ export * from './stores/api/';
 export * from './stores/ui/';
 
 export * from './stores/store.enums';
-export * from './stores/entity-store';
 
 export * from './state-management.module';

@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, distinctUntilChanged, map, share, tap, take, filter } from 'rxjs/operators';
 import { NtsBaseStore } from '../base';
 import { ApiActions, ApiEvents } from '../store.enums';
-import { NtsState } from './api-store.models';
+import { NtsState } from '../../state.models';
 import {
   apiUrlGet,
   deleteEntities,
@@ -12,6 +12,7 @@ import {
   mergeDedupeArrays,
   mergePayloadWithApiResponse,
 } from './api-store.utils';
+import { isApiAction } from '../../utils/guards.util';
 
 const initialState = {
   loading: false,
@@ -46,7 +47,7 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
   private autoloaded = false;
 
   /** Events broadcast by this store */
-  public events$ = NtsApiStoreCreator._events$.pipe(filter((a) => a.storeId === this.config.storeId));
+  public events$ = NtsApiStoreCreator._events$.pipe(filter((a) => isApiAction(a) && a.storeId === this.config.storeId));
 
   /** Returns just the data */
   public data$ = this.state$.pipe(
@@ -76,7 +77,11 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
     // If a store ID was supplied, listen for global actions
     // Only listen for actions that match this store ID
     if (this.config.storeId) {
-      this.events$.pipe(filter((a) => a.storeId === this.config.storeId)).subscribe((a) => {
+      this.events$.pipe(filter((a) => isApiAction(a) && a.storeId === this.config.storeId)).subscribe((a) => {
+        // Add typeguard for api actions
+        if (!isApiAction(a)) {
+          return;
+        }
         switch (a.type) {
           // Refresh data in store
           case ApiActions.GET:
