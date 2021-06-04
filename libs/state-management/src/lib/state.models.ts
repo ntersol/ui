@@ -94,7 +94,7 @@ export namespace NtsState {
   /** Actions to perform against the store */
   export interface Action<t = unknown, y = unknown> {
     type: string;
-    payload?: t | null;
+    payload: t | null;
     meta?: y;
   }
 
