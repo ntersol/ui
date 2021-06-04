@@ -4,11 +4,24 @@ const keysApi = Object.keys(initialState).sort();
 const keysEntity = Object.keys(initialEntityState).sort();
 
 /**
+ * Typeguard for actions, checks action and ensures payload is properly typed
+ * @param action
+ * @param actionCreator
+ * @returns
+ */
+export const isActionType = <t>(
+  action: NtsState.Action,
+  actionCreator: NtsState.ActionCreator,
+): action is NtsState.Action<t> => {
+  return action.type === actionCreator.type;
+};
+
+/**
  * Is this action an api action
  * @param action
  * @returns
  */
-export const isApiAction = <t>(action: NtsState.Action<t> | NtsState.ApiAction<t>): action is NtsState.ApiAction<t> =>
+export const isActionApi = <t>(action: NtsState.Action<t> | NtsState.ApiAction<t>): action is NtsState.ApiAction<t> =>
   !!(action as NtsState.ApiAction<t>).storeId;
 
 /**

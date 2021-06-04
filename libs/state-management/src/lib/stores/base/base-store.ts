@@ -11,12 +11,8 @@ export class NtsBaseStore {
   }
 }
 
-const ntsBaseStoreSrc = new NtsBaseStore();
-
 /**
- * Returns the base store instance shared by all stores
+ * Base store instance shared by all stores
  * @returns
  */
-export const ntsBaseStore = () => {
-  return ntsBaseStoreSrc;
-};
+export const ntsStore = new NtsBaseStore();

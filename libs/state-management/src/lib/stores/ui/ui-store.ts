@@ -7,10 +7,8 @@ export interface UIStoreConfig {
   storeId?: string;
 }
 
-export type UIUpdate = <t>(v: t) => Partial<t>;
-
 /**
- *
+ * Create an instance of a UI store
  */
 export class NtsUIStoreCreator<t> extends NtsBaseStore {
   private state: t = { ...this.initialState };
@@ -43,9 +41,9 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
   }
 
   /**
-   *
+   * Update data in the store
    * @param update
-   * @returns
+   * @returns A promise with the entire store state object
    */
   public update(value: Partial<t>): Promise<t>;
   public update(value: (s: t) => Partial<t>): Promise<t>;

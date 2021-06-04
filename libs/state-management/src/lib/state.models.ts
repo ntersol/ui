@@ -91,26 +91,28 @@ export namespace NtsState {
     disableDistinct?: true;
   }
 
-  export type Meta = null | { [key: string]: any };
-
   /** Actions to perform against the store */
-  export interface Action<t = any> {
+  export interface Action<t = unknown, y = unknown> {
     type: string;
     payload?: t | null;
-    meta?: Meta;
+    meta?: y;
   }
 
   /** Actions specific for the api store */
   export interface ApiAction<t = any> extends Action<t> {
-    /** Target api store that needs to receive this action */
+    /** Target api store that needs to receive this action. Note that the target store must have an assigned store ID which is optional by default */
     storeId: string;
-    /** Any store options */
+    /** Any store options, will override default store options */
     options?: Options;
   }
 
+  /***/
   export interface ActionCreator<t = any> {
     type: string;
-    match: (action: t) => action is t;
-    (payload: t, meta?: Meta): Action<t>;
+    // match: (action: t) => action is t;
+    match: (action: NtsState.Action) => action is NtsState.Action<t, unknown>;
+    (payload: t, meta?: unknown): Action<t>;
   }
+
+  // export type ActionCreator = <t = unknown, y = unknown>(payload: t, meta?: y) => Action<t, y>;
 }
