@@ -656,7 +656,6 @@
           "options": {
             "commands": [
               "ng run state-management:patch",
-              "ng run state-management:readme",
               "ng run state-management:build:production",
               "ng run state-management:pack"
             ],
