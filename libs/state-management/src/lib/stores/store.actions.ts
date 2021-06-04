@@ -4,9 +4,8 @@ import { NtsState } from '../state.models';
  * Typeguard for actions, checks action and ensures payload is properly typed
  * @example
  * if (isActionType(action, actionCreator)) {
-        console.log(action.payload); // '12345'
-   }
-
+ *      console.log(action.payload);
+ * }
  * @param action
  * @param actionCreator
  * @returns
@@ -22,10 +21,10 @@ export const isActionType = <t>(
  * Returns an action creator factory
  * @example
  * // Create the factory
- * const actionCreator = actionCreatorFactory();
- * // Create an action
+ * const actionCreatorFactory = actionCreatorFactory();
+ * // Create an action creator
  * const guidChanged = actionCreator<string>('GUID_CHANGE');
- * // Create a specific instance of that action with a payload
+ * // Create an action with a payload
  * const action = guidChanged('12345');
  * // Use built in typeguard to enforce type safety
  * if (guidChanged.match(action)) {
@@ -51,7 +50,7 @@ export const actionCreatorFactory = () => <t>(type: string): NtsState.ActionCrea
 
 /**
  * USAGE EXAMPLES
-const actionCreator = actionCreatorFactory();
+const actionCreatorFactory = actionCreatorFactory();
 const guidChanged = actionCreator<string>('GUID_CHANGE');
 const action = guidChanged('12345');
 

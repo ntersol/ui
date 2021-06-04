@@ -109,7 +109,13 @@ export namespace NtsState {
   /** Create actions with type safe payloads */
   export interface ActionCreator<t = any> {
     type: string;
-    // match: (action: t) => action is t;
+    /**
+     * Match an action against this action creator
+     * @example
+     * if (actionCreator.match(action)) {
+     *    console.log(action.payload); // Properly typed
+     * }
+     */
     match: (action: NtsState.Action) => action is NtsState.Action<t, unknown>;
     (payload: t, meta?: unknown): Action<t>;
   }

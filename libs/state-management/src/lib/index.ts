@@ -14,6 +14,7 @@ export * from './stores/base/';
 export * from './stores/api/';
 export * from './stores/ui/';
 
+export * from './stores/store.actions';
 export * from './stores/store.enums';
 
 export * from './state-management.module';
