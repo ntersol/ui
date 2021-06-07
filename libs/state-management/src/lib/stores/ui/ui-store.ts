@@ -2,7 +2,6 @@ import { BehaviorSubject, identity, Observable } from 'rxjs';
 import { distinctUntilChanged, map, take } from 'rxjs/operators';
 import { NtsBaseStore } from '../base';
 import { NtsState } from '../../state.models';
-
 /**
  * Create an instance of a UI store
  */
@@ -47,11 +46,13 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
    * @param options
    * @returns
    **/
-  // public select$(k: (s: t) => t[keyof t], options?: NtsState.UIStoreOptions): Observable<t[keyof t]>;
-  public select$(k: keyof t, options?: NtsState.UIStoreOptions): Observable<t[typeof k]> {
+  public select$(k: NtsState.Select<t>, options?: NtsState.UIStoreOptions): Observable<t[typeof k]> {
+    if (typeof k === 'function') {
+      return this.state$.pipe(map((s) => s[k]));
+    }
+
     return this.state$.pipe(
       map((s) => s[k]),
-      // switchMap((v) => (options?.disableDistinct ? of(v) : of(v).pipe(distinctUntilChanged()))),
       options?.disableDistinct ? identity : distinctUntilChanged(),
     );
   }
