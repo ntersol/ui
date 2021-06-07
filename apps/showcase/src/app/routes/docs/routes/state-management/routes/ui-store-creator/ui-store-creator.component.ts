@@ -8,7 +8,7 @@ import { StateManagementService } from '../../shared/state-management.service';
 })
 export class UiStoreCreatorComponent implements OnInit {
   public name$ = this.sm.uiStore.select$('name');
-  public name2$ = this.sm.uiStore.select$(state => state.user?.nameFirst);
+  public name2$ = this.sm.uiStore.select$(state => state.user?.age);
   public name: string | null = null;
 
   constructor(private sm: StateManagementService) {}

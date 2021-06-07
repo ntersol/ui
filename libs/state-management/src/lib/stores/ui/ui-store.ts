@@ -25,9 +25,9 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
    * Return data from the store
    * @param k
    * @param options
-   * @returns Observable<t[typeof k]>
+   * @returns
    **/
-  public select$(k: NtsState.Select<t>, options?: NtsState.UIStoreOptions): Observable<t[typeof k]>;
+  public select$<Key extends keyof t>(key: Key, options?: NtsState.UIStoreOptions): Observable<t[Key]>;
   public select$<Payload>(k: (store: t) => Payload, options?: NtsState.UIStoreOptions): Observable<Payload>;
   public select$(k: NtsState.Select<t> | NtsState.Callback<t>, options?: NtsState.UIStoreOptions) {
     return this.state$.pipe(
@@ -70,5 +70,8 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
   }
 }
 
+/**
+ * Create an instance of a UI store
+ */
 export const ntsUIStoreCreator = <t>(initialState: t, options?: NtsState.UIStoreOptions) =>
   new NtsUIStoreCreator<t>(initialState, options);
