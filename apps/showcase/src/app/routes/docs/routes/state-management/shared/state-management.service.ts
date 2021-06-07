@@ -8,7 +8,7 @@ export enum StoreIds {
 }
 
 interface UIStoreModel {
-  temp: string;
+  name: string | null;
 }
 
 @Injectable({
@@ -22,17 +22,19 @@ export class StateManagementService {
   // Create an instance of a non-entity based store
   public post = this.store<Models.Post>({ apiUrl: '/posts/1' }, false);
 
-  public uiStore = ntsUIStoreCreator<UIStoreModel>({ temp: '' }, { storeId: 'uiStore' });
+  public uiStore = ntsUIStoreCreator<UIStoreModel>({ name: null }, { persistId: 'uiStore' });
 
   // List all store services here
   constructor(public http: HttpClient) {
-    this.uiStore.select$('temp').subscribe(x => console.log(x));
+    /**
+    this.uiStore.select$('isString').subscribe(x => console.log(x));
 
     this.uiStore
-      .update(() => ({ temp: 'Winning!' }))
+      .update(() => ({ isString: 'Winning!' }))
       .then(s => {
-        console.log(1, s.temp);
+        console.log(1, s);
       });
+       */
 
     setTimeout(() => {
       // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.POST, payload: { name: 'Jerrol!' } });

@@ -1,1 +1,6 @@
-Coming soon!
+<h1>UI Store Creator</h1>
+<hr />
+<p>
+  Your Name: <strong>{{ name$ | async }}</strong>
+</p>
+<input placeholder="Your Name" [(ngModel)]="name" /> <button (click)="nameSave(name)">Save Name</button>

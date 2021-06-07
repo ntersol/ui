@@ -1,11 +1,7 @@
-import { BehaviorSubject, of } from 'rxjs';
-import { distinctUntilChanged, map, switchMap, take } from 'rxjs/operators';
+import { BehaviorSubject, identity, Observable } from 'rxjs';
+import { distinctUntilChanged, map, take } from 'rxjs/operators';
 import { NtsBaseStore } from '../base';
 import { NtsState } from '../../state.models';
-
-export interface UIStoreConfig {
-  storeId?: string;
-}
 
 /**
  * Create an instance of a UI store
@@ -19,25 +15,45 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
    * @param k
    * @param options
    * @returns
-   */
-  public select$ = (k: keyof t, options?: NtsState.UIStoreOptions) =>
+
+  public select$: (k: keyof t, options?: NtsState.UIStoreOptions) => Observable<t[keyof t]> = (
+    k: keyof t,
+    options?: NtsState.UIStoreOptions,
+  ) =>
     this.state$.pipe(
       map((s) => s[k]),
       switchMap((s) => {
         if (options?.disableDistinct) {
-          of(s);
+          return of(s);
         }
         return of(s).pipe(distinctUntilChanged());
       }),
     );
+     */
 
-  constructor(private initialState: t, private config: UIStoreConfig = {}) {
+  constructor(private initialState: t, private options?: NtsState.UIStoreOptions) {
     super();
-    if (this.config.storeId) {
-      this.events$.pipe().subscribe((a) => {
-        console.log(a);
-      });
+    if (this.options?.persistId) {
+      const state = localStorage.getItem(this.options.persistId);
+      if (state) {
+        this.update(JSON.parse(state));
+      }
     }
+  }
+
+  /**
+   * Return data from the store
+   * @param k
+   * @param options
+   * @returns
+   **/
+  // public select$(k: (s: t) => t[keyof t], options?: NtsState.UIStoreOptions): Observable<t[keyof t]>;
+  public select$(k: keyof t, options?: NtsState.UIStoreOptions): Observable<t[typeof k]> {
+    return this.state$.pipe(
+      map((s) => s[k]),
+      // switchMap((v) => (options?.disableDistinct ? of(v) : of(v).pipe(distinctUntilChanged()))),
+      options?.disableDistinct ? identity : distinctUntilChanged(),
+    );
   }
 
   /**
@@ -55,6 +71,10 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
       this.stateChange(value as t);
     }
 
+    if (this.options?.persistId) {
+      localStorage.setItem(this.options?.persistId, JSON.stringify(this.state));
+    }
+
     return this.state$.pipe(take(1)).toPromise();
   }
 
@@ -68,5 +88,5 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
   }
 }
 
-export const ntsUIStoreCreator = <t>(initialState: t, options: UIStoreConfig = {}) =>
+export const ntsUIStoreCreator = <t>(initialState: t, options?: NtsState.UIStoreOptions) =>
   new NtsUIStoreCreator<t>(initialState, options);
