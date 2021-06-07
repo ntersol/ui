@@ -93,9 +93,11 @@ export namespace NtsState {
     persistId?: string;
   }
 
-  // type Callback<t> = (t:t) => any;
-
+  /** Select model for UI store */
   export type Select<t> = keyof t;
+
+  /** Select callback function for UI store */
+  export type Callback<t> = <R>(store: t) => R;
 
   /** Actions to perform against the store */
   export interface Action<t = unknown, y = unknown> {

@@ -9,6 +9,10 @@ export enum StoreIds {
 
 interface UIStoreModel {
   name: string | null;
+  user?: {
+    nameFirst: string | null;
+    age: number;
+  };
 }
 
 @Injectable({
@@ -22,7 +26,7 @@ export class StateManagementService {
   // Create an instance of a non-entity based store
   public post = this.store<Models.Post>({ apiUrl: '/posts/1' }, false);
 
-  public uiStore = ntsUIStoreCreator<UIStoreModel>({ name: null }, { persistId: 'uiStore' });
+  public uiStore = ntsUIStoreCreator<UIStoreModel>({ name: null, user: { age: 12, nameFirst: 'NameFirst123' } }, { persistId: 'uiStore' });
 
   // List all store services here
   constructor(public http: HttpClient) {
