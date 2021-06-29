@@ -69,6 +69,13 @@ export namespace NtsState {
     initialState?: Record<string, any>;
     /** A unique name or id for this store. Only necessary if communication between stores is required */
     storeId?: string;
+    /** Options for managing offline mode */
+    offlineMode?: {
+      /** Store the last successful api response in local storage and in the event of an api error, return that instead */
+      saveLastSuccess?: boolean;
+      /** Use this model instead */
+      model: any;
+    };
     /**
      * TODO Features
      */

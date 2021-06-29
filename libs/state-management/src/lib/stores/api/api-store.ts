@@ -243,7 +243,8 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
     const url = apiUrlGet(options, 'delete', data);
     // Reset state
     this.stateChange({ modifying: true, errorModify: null });
-    return this.http.delete(url).pipe(
+    return this.http.delete<unknown>(url).pipe(
+      // Most deletes shouldn't return anything but sometimes it's necessary
       tap((r) => {
         // Check if this is an entity store
         if (

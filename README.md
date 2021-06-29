@@ -9,7 +9,7 @@ Run storybook documentation
 `ng run {libname}:storybook`
 
 Build a package, append `:production` for a prod build
-`ng build wizard`
+`ng build {libname}`
 `nx run {libname}:build`
 
 Deploy update to NPM
