@@ -18,6 +18,12 @@ export enum ApiEvents {
   MODIFY_ERROR = 'MODIFY_ERROR',
 }
 
+export enum StoreTypes {
+  ALL = 'ALL',
+  API_ONLY = 'API_ONLY',
+  UI_ONLY = 'UI_ONLY',
+}
+
 export enum UIActions {}
 
 export enum UIEvents {}
