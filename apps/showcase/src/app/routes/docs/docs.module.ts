@@ -6,6 +6,7 @@ import { NtsFormsModule } from '@ntersol/forms';
 import { NtsStateManagementModule } from '@ntersol/state-management';
 import { TabViewModule } from 'primeng/tabview';
 // import { NtsWizardModule } from '@ntersol/wizard';
+import { NtsVisibleModule } from '@ntersol/visible';
 
 // Routing
 import { routing } from './docs.routes';
@@ -26,7 +27,7 @@ import { UiStoreCreatorComponent } from './routes/state-management/routes/ui-sto
 import { StoreCommunicationComponent } from './routes/state-management/routes/store-communication/store-communication.component';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, TabViewModule, NtsTableModule, NtsStateManagementModule, NtsFormsModule],
+  imports: [CommonModule, SiteModule, routing, TabViewModule, NtsTableModule, NtsStateManagementModule, NtsFormsModule, NtsVisibleModule],
   declarations: [DocsComponent, WizardComponent, VisibleComponent, StateManagementComponent, ExampleComponent, ApiStoreCreatorComponent, UiStoreCreatorComponent, StoreCommunicationComponent],
   providers: [HighlightService, RouteUiStateService, RouteUiStateStore, RouteUiStateQuery, RouteDomainStateService],
   exports: [StateManagementComponent, ExampleComponent],

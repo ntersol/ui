@@ -258,10 +258,15 @@
             "main": "apps/showcase/src/main.ts",
             "polyfills": "apps/showcase/src/polyfills.ts",
             "tsConfig": "apps/showcase/tsconfig.app.json",
-            "aot": true,
             "assets": ["apps/showcase/src/favicon.ico", "apps/showcase/src/assets"],
             "styles": ["apps/showcase/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -291,7 +296,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -334,17 +340,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
-            "lazyModules": [
-              "archive/src/app/components/general/calendar/calendar.module",
-              "archive/src/app/components/general/chart/chart.module",
-              "archive/src/app/components/general/document-editor/document-editor.module",
-              "archive/src/app/components/general/forms/forms.module",
-              "archive/src/app/components/general/generic/generic.module",
-              "archive/src/app/components/general/grid/grid.module",
-              "archive/src/app/components/general/table/table.module",
-              "archive/src/app/components/general/tags/tags.module"
-            ],
             "outputPath": "dist/browser",
             "index": "archive/src/index.html",
             "main": "archive/src/main.ts",
@@ -369,7 +364,13 @@
                 "input": "node_modules/document-register-element/build/document-register-element.js",
                 "inject": true
               }
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "qa": {
@@ -383,9 +384,7 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
-              "vendorChunk": true,
               "buildOptimizer": true,
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
@@ -407,9 +406,7 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
-              "vendorChunk": true,
               "buildOptimizer": true,
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
@@ -431,9 +428,7 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
-              "vendorChunk": true,
               "buildOptimizer": true,
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
@@ -444,7 +439,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -488,8 +484,11 @@
           "options": {
             "outputPath": "dist/server",
             "main": "archive/src/main.server.ts",
-            "tsConfig": "archive/src/tsconfig.server.json"
-          }
+            "tsConfig": "archive/src/tsconfig.server.json",
+            "sourceMap": true,
+            "optimization": false
+          },
+          "defaultConfiguration": ""
         }
       }
     },
@@ -1462,10 +1461,15 @@
             "main": "apps/angular-starter/src/main.ts",
             "polyfills": "apps/angular-starter/src/polyfills.ts",
             "tsConfig": "apps/angular-starter/tsconfig.app.json",
-            "aot": true,
             "assets": ["apps/angular-starter/src/favicon.ico", "apps/angular-starter/src/assets"],
             "styles": ["apps/angular-starter/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -1495,7 +1499,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",

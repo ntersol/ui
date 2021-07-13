@@ -14,7 +14,8 @@
       "$modals": ["apps/showcase/src/compoments/modals"],
       "@ntersol/forms": ["libs/forms/src"],
       "@ntersol/state-management": ["libs/state-management/src"],
-      "@ntersol/table": ["libs/table/src"]
+      "@ntersol/table": ["libs/table/src"],
+      "@ntersol/visible": ["libs/visible/src"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,

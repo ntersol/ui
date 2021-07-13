@@ -47,6 +47,41 @@ const routes: Routes = [
         component: VisibleComponent,
         data: { title: 'Visible' },
       },
+      {
+        path: 'tags',
+        component: undefined,
+        data: { title: 'Tags' },
+      },
+      {
+        path: 'table',
+        component: undefined,
+        data: { title: 'Table' },
+      },
+      {
+        path: 'chart',
+        component: undefined,
+        data: { title: 'Chart' },
+      },
+      {
+        path: 'tree',
+        component: undefined,
+        data: { title: 'Tree' },
+      },
+      {
+        path: 'grid',
+        component: undefined,
+        data: { title: 'grid' },
+      },
+      {
+        path: 'forms',
+        component: undefined,
+        data: { title: 'Forms' },
+      },
+      {
+        path: 'calendar',
+        component: undefined,
+        data: { title: 'Calendar' },
+      },
     ],
   },
 ];
