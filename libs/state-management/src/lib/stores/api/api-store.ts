@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, distinctUntilChanged, map, share, tap, take, filter } from 'rxjs/operators';
 import { NtsBaseStore } from '../base';
-import { ApiActions, ApiEvents } from '../store.enums';
+import { ApiActions, ApiEvents, StoreTypes } from '../store.enums';
 import { NtsState } from '../../state.models';
 import {
   apiUrlGet,
@@ -75,44 +75,53 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
     }
 
     // If a store ID was supplied, listen for global actions
-    // Only listen for actions that match this store ID
+    // Only listen for actions that match this store ID OR all
     if (this.config.storeId) {
-      this.events$.pipe(filter((a) => isActionApi(a) && a.storeId === this.config.storeId)).subscribe((a) => {
-        // Add typeguard for api actions
-        if (!isActionApi(a)) {
-          return;
-        }
-        switch (a.type) {
-          // Refresh data in store
-          case ApiActions.GET:
-            this.get(a.options).subscribe();
-            break;
-          // Perform POST request
-          case ApiActions.POST:
-            this.post(a.payload, a.options).subscribe();
-            break;
-          // Perform PUT request
-          case ApiActions.PUT:
-            this.put(a.payload, a.options).subscribe();
-            break;
-          // Perform PATCH request
-          case ApiActions.PATCH:
-            this.patch(a.payload, a.options).subscribe();
-            break;
-          // Perform DELETE request
-          case ApiActions.DELETE:
-            this.delete(a.payload, a.options).subscribe();
-            break;
-          // Refresh data in store
-          case ApiActions.REFRESH:
-            this.refresh(a.options).subscribe();
-            break;
-          // Reset store
-          case ApiActions.RESET:
-            this.reset();
-            break;
-        }
-      });
+      this.events$
+        // Only allow through api actions AND if the store ID matches OR the store type is ALL or API_ONLY
+        .pipe(
+          filter(
+            (a) =>
+              isActionApi(a) &&
+              (a.storeId === this.config.storeId || a.storeId === StoreTypes.ALL || a.storeId === StoreTypes.API_ONLY),
+          ),
+        )
+        .subscribe((a) => {
+          // Add typeguard for api actions
+          if (!isActionApi(a)) {
+            return;
+          }
+          switch (a.type) {
+            // Refresh data in store
+            case ApiActions.GET:
+              this.get(a.options).subscribe();
+              break;
+            // Perform POST request
+            case ApiActions.POST:
+              this.post(a.payload, a.options).subscribe();
+              break;
+            // Perform PUT request
+            case ApiActions.PUT:
+              this.put(a.payload, a.options).subscribe();
+              break;
+            // Perform PATCH request
+            case ApiActions.PATCH:
+              this.patch(a.payload, a.options).subscribe();
+              break;
+            // Perform DELETE request
+            case ApiActions.DELETE:
+              this.delete(a.payload, a.options).subscribe();
+              break;
+            // Refresh data in store
+            case ApiActions.REFRESH:
+              this.refresh(a.options).subscribe();
+              break;
+            // Reset store
+            case ApiActions.RESET:
+              this.reset();
+              break;
+          }
+        });
     }
 
     // Create initial instance of http get, mostly just for type safety
@@ -148,7 +157,8 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
     // If data is null or refresh cache is requested, otherwise default to cache
     if ((this.state.data === null || options.refresh || !this.httpGet$) && !this.state.loading) {
       const url = apiUrlGet(options, 'get', null);
-      this.stateChange({ loading: true });
+      // Set loading to true, reset any errors
+      this.stateChange({ loading: true, error: null });
       // Dispatch event to the global scope
       if (this.config.storeId) {
         this.dispatch({ type: ApiEvents.GET_START, storeId: this.config.storeId, payload: null });

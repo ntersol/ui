@@ -22,6 +22,16 @@
         <code class="language-html" [innerHtml]="usage"></code>
     </pre>
   </p-tabPanel>
-  <p-tabPanel header="Demo/Example"> Coming soon! I hope... </p-tabPanel>
+  <p-tabPanel header="Demo/Example">
+    <!--
+
+    (ready)="ready($event)"
+    (routeChanged)="routeChanged()"
+    (complete)="complete = true"
+    -->
+    <!--
+    <nts-wizard [settings]="settings" [form]="formGroup" [dataFields]="{}" [sections]="[]" [pages]="[]" [routes]="[]"> </nts-wizard>
+  -->
+  </p-tabPanel>
   <p-tabPanel header="API"> Content 3 </p-tabPanel>
 </p-tabView>

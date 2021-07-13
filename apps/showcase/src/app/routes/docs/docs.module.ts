@@ -33,4 +33,4 @@ import { StoreCommunicationComponent } from './routes/state-management/routes/st
   exports: [StateManagementComponent, ExampleComponent],
   entryComponents: [],
 })
-export class DocsModule {}
+export class DocsModule { }

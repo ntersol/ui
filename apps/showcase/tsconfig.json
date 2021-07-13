@@ -15,7 +15,8 @@
       "@ntersol/forms": ["libs/forms/src"],
       "@ntersol/state-management": ["libs/state-management/src"],
       "@ntersol/table": ["libs/table/src"],
-      "@ntersol/visible": ["libs/visible/src"]
+      "@ntersol/visible": ["libs/visible/src"],
+      "@ntersol/wizard": ["libs/wizard/src"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
