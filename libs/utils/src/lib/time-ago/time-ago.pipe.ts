@@ -19,7 +19,6 @@ export class TimeAgoPipe implements PipeTransform {
    * in order to keep `ngx-pipes` "pure" from dependencies!
    */
   public transform(inputDate: any): string {
-    console.log('test');
     if (!inputDate || (!inputDate.getTime && !inputDate.toDate)) {
       return 'Invalid date';
     }
