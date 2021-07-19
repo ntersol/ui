@@ -16,5 +16,6 @@ module.exports = {
     '<rootDir>/libs/storybook',
     '<rootDir>/apps/angular-starter',
     '<rootDir>/apps/fresh',
+    '<rootDir>/libs/utils',
   ],
 };

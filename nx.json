@@ -1,13 +1,18 @@
 {
   "implicitDependencies": {
     "angular.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": { "defaultBase": "dev/nx" },
+  "affected": {
+    "defaultBase": "dev/nx"
+  },
   "npmScope": "@ntersol",
   "tasksRunnerOptions": {
     "default": {
@@ -21,20 +26,53 @@
     }
   },
   "projects": {
-    "calendar": { "tags": [] },
-    "showcase": { "tags": [] },
-    "wizard": { "tags": [] },
-    "starter": { "tags": [] },
-    "forms": { "tags": [] },
-    "state-management": { "tags": [] },
-    "chart": { "tags": [] },
-    "document-editor": { "tags": [] },
-    "table": { "tags": [] },
-    "tags": { "tags": [] },
-    "tree": { "tags": [] },
-    "visible": { "tags": [] },
-    "grid": { "tags": [] },
-    "storybook": { "tags": [] },
-    "angular-starter": { "tags": [] }
+    "calendar": {
+      "tags": []
+    },
+    "showcase": {
+      "tags": []
+    },
+    "wizard": {
+      "tags": []
+    },
+    "starter": {
+      "tags": []
+    },
+    "forms": {
+      "tags": []
+    },
+    "state-management": {
+      "tags": []
+    },
+    "chart": {
+      "tags": []
+    },
+    "document-editor": {
+      "tags": []
+    },
+    "table": {
+      "tags": []
+    },
+    "tags": {
+      "tags": []
+    },
+    "tree": {
+      "tags": []
+    },
+    "visible": {
+      "tags": []
+    },
+    "grid": {
+      "tags": []
+    },
+    "storybook": {
+      "tags": []
+    },
+    "angular-starter": {
+      "tags": []
+    },
+    "utils": {
+      "tags": []
+    }
   }
 }
