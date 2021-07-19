@@ -14,6 +14,9 @@ export class TimeAgoPipe implements PipeTransform {
     { single: 'just now', many: 'minutes', div: 60 },
   ];
 
+  /**
+   * @param inputDate: Date | Moment
+   */
   public transform(inputDate: any): string {
     if (!inputDate || (!inputDate.getTime && !inputDate.toDate)) {
       return 'Invalid date';
