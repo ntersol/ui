@@ -16,13 +16,13 @@
       },
       "library": {
         "buildable": true,
-        "importPath": "@ntersol/<lib-name>",
         "publishable": true,
-        "prefix": "nts",
         "style": "scss",
         "linter": "eslint",
         "unitTestRunner": "jest",
-        "strict": true
+        "strict": true,
+        "prefix": "nts",
+        "importPath": "@ntersol/{name}"
       }
     },
     "@schematics/angular": {
@@ -32,19 +32,6 @@
         "export": true,
         "flat": true
       }
-    },
-    "@nrwl/angular:application": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:library": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "scss"
     }
   },
   "projects": {
