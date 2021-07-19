@@ -111,7 +111,7 @@
     "core-js": "3.2.1",
     "document-register-element": "1.14.1",
     "helpful-decorators": "2.0.6",
-    "lodash": "4.17.19",
+    "lodash": "4.17.21",
     "ngx-take-until-destroy": "5.4.0",
     "node-sass": "4.13.1",
     "primeicons": "2.0.0",
