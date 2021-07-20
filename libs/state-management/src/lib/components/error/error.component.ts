@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   Input,
   ViewEncapsulation,
@@ -14,7 +13,7 @@ import {
   // tslint:disable-next-line:use-component-view-encapsulation
   encapsulation: ViewEncapsulation.None,
 })
-export class NtsErrorComponent implements OnInit {
+export class NtsErrorComponent {
   /** Error message to show */
   @Input() error: any;
   /** Will the close error button appear in the corner */
@@ -23,8 +22,4 @@ export class NtsErrorComponent implements OnInit {
   @Input() errorExpanded = false;
   /** Show error details in accordian */
   @Input() errorShowDetails = true;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

@@ -115,7 +115,8 @@ export namespace NtsState {
 
   /** Actions specifically for the api store */
   export interface ApiAction<t = any> extends Action<t> {
-    /** Target api store that needs to receive this action. Note that the target store must have an assigned store ID which is optional by default */
+    /** Target api store that needs to receive this action. Note that the target store must have an
+     * assigned store ID which is optional by default */
     storeId: string;
     /** Any store options, will override default store options */
     options?: Options;
