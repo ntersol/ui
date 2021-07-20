@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   Input,
   Output,
@@ -14,7 +13,7 @@ import { debounce } from 'helpful-decorators';
   styleUrls: ['./filter-field.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NtsFilterFieldComponent implements OnInit {
+export class NtsFilterFieldComponent {
   /** Term entered by the user */
   @Input() filterTerm: string | null = null;
   /** Character size of input box */
@@ -24,10 +23,6 @@ export class NtsFilterFieldComponent implements OnInit {
   @Output() filterTermChange: EventEmitter<string | null> = new EventEmitter();
 
   @Input() placeholder = 'Enter filter term...';
-
-  constructor() {}
-
-  ngOnInit() {}
 
   @debounce(200)
   onChanges(filterTerm: string | null) {

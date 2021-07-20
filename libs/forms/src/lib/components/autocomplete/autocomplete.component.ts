@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   Input,
   Output,
@@ -16,7 +15,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./autocomplete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NtsAutocompleteComponent implements OnInit, OnChanges {
+export class NtsAutocompleteComponent implements OnChanges {
   @Input() terms: (string | Record<string, any>)[] | null = [];
   @Input() label?: string;
   @Input() field?: string;
@@ -31,10 +30,6 @@ export class NtsAutocompleteComponent implements OnInit, OnChanges {
 
   public value: any;
   public termsFiltered: (string | Record<string, any>)[] = [];
-
-  constructor() {}
-
-  ngOnInit() {}
 
   ngOnChanges(model: SimpleChanges) {
     // Load default value if one is found in the form control

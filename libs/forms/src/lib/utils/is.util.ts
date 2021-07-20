@@ -5,7 +5,8 @@ import { SelectItem } from 'primeng/api';
  */
 export const is = {
   selectItemArray: (val?: unknown | null): val is SelectItem[] => {
-    if (val && Array.isArray(val) && ((typeof val[0] === 'object' && val[0].hasOwnProperty('value')) || !val.length)) {
+    if (val && Array.isArray(val) && ((typeof val[0] === 'object' && Object.prototype.isPrototypeOf.call(val[0], 'value'))
+      || !val.length)) {
       return true;
     }
     return false;
@@ -16,7 +17,7 @@ export const is = {
    * @returns
    */
   selectItem: (val?: unknown | null): val is SelectItem => {
-    if (val && typeof val === 'object' && !Array.isArray(val) && val.hasOwnProperty('value')) {
+    if (val && typeof val === 'object' && !Array.isArray(val) && Object.prototype.isPrototypeOf.call(val, 'value')) {
       return true;
     }
     return false;

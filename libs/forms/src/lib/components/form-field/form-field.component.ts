@@ -5,7 +5,6 @@ import {
   ViewEncapsulation,
   Self,
   Optional,
-  OnDestroy,
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { NgControl, FormControl } from '@angular/forms';
@@ -48,7 +47,7 @@ export type FormFieldType =
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NtsFormFieldComponent implements OnInit, OnDestroy {
+export class NtsFormFieldComponent implements OnInit {
   /** A dictionary that helps manage unique name and id properties. This is on the class so all instances on a page can be made unique */
   static uniqueIds: Record<string, number> | null = null;
   /** Some ui controls need an ngModel to store data if a form control is not supplied */
@@ -288,10 +287,14 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   }
 
   // These are required for implementing ControlValueAccessor, but they are not used
-  // since the FormControl is being passed directly to the  directive in the template
-  writeValue(): void {}
-  registerOnChange(): void {}
-  registerOnTouched(): void {}
-
-  ngOnDestroy() {}
+  // since the FormControl is being passed directly to the directive in the template
+  writeValue(): void {
+    // method required
+  }
+  registerOnChange(): void {
+    // method required
+  }
+  registerOnTouched(): void {
+    // method required
+  }
 }
