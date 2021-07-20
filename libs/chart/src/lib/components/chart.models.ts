@@ -15,7 +15,7 @@ type DashType =
   | 'longDashDot'
   | 'longDashDotDot';
 
-export module CanvasJS {
+export namespace CanvasJS {
   export interface Chart {
 
     /**
@@ -23,7 +23,8 @@ export module CanvasJS {
      */
     options?: ChartOptions;
     /**
-     * All Title options become available as properties after Chart Render. You can access them either via get method or dot notation. But you can change / set those values only via set method.
+     * All Title options become available as properties after Chart Render.
+     * You can access them either via get method or dot notation. But you can change / set those values only via set method.
      */
     readonly title?: ChartTitle;
     /**
@@ -79,7 +80,8 @@ export module CanvasJS {
      * @param index Index of the array where the new element is to be added. Defaults to the length (end) of array.
      * @param updateChart When true, Updates the chart automatically after setting the value. Defaults to true.
      */
-    addTo(propertyName: string, options: ChartAxisXOptions | ChartAxisYOptions | ChartDataSeriesOptions, index?: number, updateChart?: boolean): void;
+    addTo(propertyName: string, options: ChartAxisXOptions | ChartAxisYOptions | ChartDataSeriesOptions,
+      index?: number, updateChart?: boolean): void;
     /**
      * Export the chart as image (jpg / png).
      * @param options Setting when export
@@ -117,7 +119,7 @@ export module CanvasJS {
    * @param number Number to format.
    * @param formatString Default formatString is “#,##0.##” .
    * @param culture Default culture is “en”
- 
+
   function formatNumber(
     number: number,
     formatString?: string,
@@ -129,7 +131,7 @@ export module CanvasJS {
    * @param date Date type or timestamp number.
    * @param formatString Default formatString is “DD MMM YYYY”.
    * @param culture Default culture is “en”.
-  
+
   function formatDate(
     date: Date | number,
     formatString?: string,
@@ -235,12 +237,14 @@ export module CanvasJS {
      */
     animationEnabled?: boolean;
     /**
-     * While exporting any chart, "Chart" is used as the default fine name with corresponding extension "jpg" or "png". You can override this name using exportFileName property.
+     * While exporting any chart, "Chart" is used as the default fine name with corresponding extension "jpg" or "png".
+     * You can override this name using exportFileName property.
      * Default: Chart
      */
     exportFileName?: string;
     /**
-     * Setting exportEnabled to true enables the export feature. As of now JPG & PNG formats are supported. Export feature is available in all Chart Types.
+     * Setting exportEnabled to true enables the export feature. As of now JPG & PNG formats are supported.
+     * Export feature is available in all Chart Types.
      * Default: false
      * Options: true, false
      */
@@ -249,14 +253,16 @@ export module CanvasJS {
      * Setting zoomEnabled to true enables zooming and panning feature of Chart.
      * This way you can zoom into an area of interest when there is a large amount of data.
      * This will also allow you to pan through the chart.
-     * If not set, the property is automatically enabled for large number of dataPoints. You can switch between zooming & panning using the toolbar that appears on the chart.
+     * If not set, the property is automatically enabled for large number of dataPoints.
+     * You can switch between zooming & panning using the toolbar that appears on the chart.
      * After Zooming in, you can reset the chart by clicking the reset button.
      * Default: false
      * Options: true, false
      */
     zoomEnabled?: boolean;
     /**
-     * Sets the theme of the Chart. Various predefined themes are bundled along with the library. User can easily switch these themes by changing theme property to the below mentioned options.
+     * Sets the theme of the Chart. Various predefined themes are bundled along with the library.
+     * User can easily switch these themes by changing theme property to the below mentioned options.
      * Default: "theme1"
      * Options: "theme1","theme2", "theme3"
      */
@@ -268,15 +274,17 @@ export module CanvasJS {
      */
     backgroundColor?: string;
     /**
-     * Sets the colorSet of the Chart. Color Set is an array of colors that are used to render data. Various predefined Color Sets are bundled along with the library.
+     * Sets the colorSet of the Chart. Color Set is an array of colors that are used to render data.
+     * Various predefined Color Sets are bundled along with the library.
      * You can either choose from the pre-defined Color Sets or define your own Color Set.
      * Default: "colorset1" or as defined in the selected theme
      * Example: "colorSet1", "colorSet2", "colorSet3"
      */
     colorSet?: string;
     /**
-     * CanvasJS allows you to localize various culture / language / country specific elements in the Chart like number formatting style – where you can choose
-     * which character to use as a decimal separator and as a digit group separator (also referred to as a thousand separator).
+     * CanvasJS allows you to localize various culture / language / country specific elements in the Chart like number formatting style –
+     * where you can choose which character to use as a decimal separator and as a digit group separator
+     * (also referred to as a thousand separator).
      * By default CanvasJS is set to Neutral English Culture – "en".
      * Default: "en"
      */
@@ -308,12 +316,14 @@ export module CanvasJS {
     /**
      * Whenever the chart contains multiple dataSeries, it is recommended to represent each dataSeries in a legend.
      * This way it becomes easier for the user to know what exactly is represented by each of the dataSeries.
-     * In case of Pie and Doughnut charts, an entry is created for each dataPoint and in rest of the chart types entries are created for each dataSeries.
+     * In case of Pie and Doughnut charts,
+     * an entry is created for each dataPoint and in rest of the chart types entries are created for each dataSeries.
      * You can selectively show or hide a dataSeries in the Legend using showInLegend property of dataSeries.
      */
     legend?: ChartLegendOptions;
     /**
-     * axisX object lets you set various parameters of X Axis like interval, grid lines, etc. It is mostly horizontal, except when we are working with Bar Charts, where axisX is vertical.
+     * axisX object lets you set various parameters of X Axis like interval, grid lines, etc.
+     * It is mostly horizontal, except when we are working with Bar Charts, where axisX is vertical.
      */
     axisX?: ChartAxisXOptions | ChartAxisXOptions[];
     /**
@@ -322,15 +332,18 @@ export module CanvasJS {
      */
     axisX2?: ChartAxisXOptions | ChartAxisXOptions[];
     /**
-     * axisY object lets you set various parameters of Y Axis like interval, grid lines, etc. It is mostly vertical, except when we are working with Bar Charts, where axisY is horizontal.
+     * axisY object lets you set various parameters of Y Axis like interval, grid lines, etc.
+     * It is mostly vertical, except when we are working with Bar Charts, where axisY is horizontal.
      */
     axisY?: ChartAxisYOptions | ChartAxisYOptions[];
     /**
-     * axisY2 is the secondary axis which renders on the opposite of primary axis (axisY). It is mostly vertical, except when we are working with Bar Charts, where axisY2 is horizontal.
+     * axisY2 is the secondary axis which renders on the opposite of primary axis (axisY).
+     * It is mostly vertical, except when we are working with Bar Charts, where axisY2 is horizontal.
      */
     axisY2?: ChartAxisYOptions | ChartAxisYOptions[];
     /**
-     * toolTip object lets user set behaviour of toolTip at global level like enabling/disabling animation, setting Border Color, sharing toolTip between multiple dataSeries, etc.
+     * toolTip object lets user set behaviour of toolTip at global level like enabling/disabling animation,
+     * setting Border Color, sharing toolTip between multiple dataSeries, etc.
      * You can also disable the toolTip by setting enabled property to false.
      */
     toolTip?: ChartToolTipOptions;
@@ -340,7 +353,8 @@ export module CanvasJS {
     data: ChartDataSeriesOptions[];
     /**
      * subtitles is a collection of subtitle elements. This allows you to have as many subtitles as you want in a chart.
-     * subtitle allows you to set content, appearance and position of Chart’s subtitle. subtitle is very much like title except that its font size is lesser than title by default.
+     * subtitle allows you to set content, appearance and position of Chart’s subtitle.
+     * subtitle is very much like title except that its font size is lesser than title by default.
      */
     subtitles?: ChartTitleOptions[];
   }
@@ -395,7 +409,8 @@ export module CanvasJS {
      */
     fontStyle?: string;
     /**
-     * Sets the thickness of border around the Title in pixels. To display border around title, set the borderThickness to a number greater than zero.
+     * Sets the thickness of border around the Title in pixels.
+     * To display border around title, set the borderThickness to a number greater than zero.
      * Default: 0
      * Example: 2,4 ..
      */
@@ -431,7 +446,8 @@ export module CanvasJS {
      */
     padding?: number;
     /**
-     * Wrap specifies whether to wrap the title once its width crosses maxWidth or not. If it is set to false, title gets clipped after reaching maxWidth.
+     * Wrap specifies whether to wrap the title once its width crosses maxWidth or not.
+     * If it is set to false, title gets clipped after reaching maxWidth.
      * Default: true;
      * Example : true, false
      */
@@ -535,7 +551,8 @@ export module CanvasJS {
     markerMargin?: number;
     /**
      * Sets the mouseover event handler for the legend, which is triggered when the user moves the mouse(input device) over a legend item.
-     * After the event is triggered, the event related data is passed as a parameter to the assigned event handler. Parameters passed to the function are shown in the Event Object section below.
+     * After the event is triggered, the event related data is passed as a parameter to the assigned event handler.
+     * Parameters passed to the function are shown in the Event Object section below.
      * @param event a chart event
      */
     itemmouseover?(event: ChartEvent): void;
@@ -567,28 +584,32 @@ export module CanvasJS {
      */
     reversed?: boolean;
     /**
-     * Sets the maximum width of legend. If any item is longer than the maxWidth, it gets wrapped or clipped depending on the itemWrap property. itemWrap is true by default.
+     * Sets the maximum width of legend. If any item is longer than the maxWidth,
+     * it gets wrapped or clipped depending on the itemWrap property. itemWrap is true by default.
      * Whenever items are stacked horizontally, new items are moved to the next row once maxWidth is reached.
      * Default: Automatically calculated based on the chart size.
      * Example: 100, 200, 500 etc.
      */
     maxWidth?: number;
     /**
-     * Sets the maximum height of legend. Once the maximum height is reached, remaining legend items are not shown when horizontally stacked (while on top or bottom or plotArea)
+     * Sets the maximum height of legend. Once the maximum height is reached,
+     * remaining legend items are not shown when horizontally stacked (while on top or bottom or plotArea)
      * and a new column is created when items are vertically stacked (when displayed to the left or right of plotArea).
      * Default: Automatically calculated based on chart size.
      * Example: 100,200, 300 etc.
      */
     maxHeight?: number;
     /**
-     * Sets the maximum width of individual legend items after which they get wrapped or clipped depending on whether itemWrap is set to true (default) or false.
+     * Sets the maximum width of individual legend items after which they get wrapped
+     * or clipped depending on whether itemWrap is set to true (default) or false.
      * itemMaxWidth can’t be greater than maxWidth of legend.
      * Default: Automatically calculated based on the chart size.
      * Example: 100, 150, 200 etc.
      */
     itemMaxWidth?: number;
     /**
-     * Sets the width of individual legend items after which the it gets wrapped or clipped depending on whether itemWrap is set to true (default) or false.
+     * Sets the width of individual legend items after which the it gets wrapped
+     * or clipped depending on whether itemWrap is set to true (default) or false.
      * itemWidth can’t be greater than itemMaxWidth and maxWidth of legend.
      * Default: Automatically calculated based on chart size.
      * Example: 100, 200, 300 etc.
@@ -603,7 +624,8 @@ export module CanvasJS {
     /**
      * A custom formatter function that returns text to be displayed inside individual legend items.
      */
-    itemTextFormatter?(e?: { chart: Chart; legend: ChartLegendOptions; dataSeries: ChartDataSeriesOptions; dataPoint: ChartDataPoint }): string;
+    itemTextFormatter?(e?: { chart: Chart; legend: ChartLegendOptions; dataSeries: ChartDataSeriesOptions;
+      dataPoint: ChartDataPoint }): string;
     /**
      * When dockInsidePlotArea is set to true, legend renders inside the plot area there by giving more space to plot area.
      * Default: false
@@ -725,7 +747,8 @@ export module CanvasJS {
      */
     minimum?: number;
     /**
-     * Sets the maximum value permitted on Axis. Values greater than maximum are clipped. maximum also set the upper limit while panning chart.
+     * Sets the maximum value permitted on Axis. Values greater than maximum are clipped.
+     * maximum also set the upper limit while panning chart.
      * Default: Automatically Calculated based on the data.
      * Example: 100, 350..
      */
@@ -796,7 +819,8 @@ export module CanvasJS {
      */
     labelAlign?: string;
     /**
-     * Setting labelWrap to true wraps the labels at labelMaxWidth. Clips the same when set to false. It overrides the labelWrap set at axis level.
+     * Setting labelWrap to true wraps the labels at labelMaxWidth.
+     * Clips the same when set to false. It overrides the labelWrap set at axis level.
      * Default: true
      * Example: true, false.
      */
@@ -815,7 +839,8 @@ export module CanvasJS {
      */
     labelBackgroundColor?: string;
     /**
-     * Sets the font-family of stripLine’s label. If the first font is not found in the system from the specified font-family list, it tries to use the next font in the list.
+     * Sets the font-family of stripLine’s label. If the first font is not found in the system from the specified font-family list,
+     * it tries to use the next font in the list.
      * Default: "arial"
      * Example: "Arial, Trebuchet MS, Tahoma, sans-serif"
      */
@@ -894,7 +919,8 @@ export module CanvasJS {
      */
     titleWrap?: boolean;
     /**
-     * Sets the maximum width of title after which it gets wrapped or clipped depending on whether titleWrap is set to true (default) or false.
+     * Sets the maximum width of title after which it gets wrapped or
+     * clipped depending on whether titleWrap is set to true (default) or false.
      * Default: Automatically calculated based on the length of axis.
      * Example: 100, 200...
      */
@@ -906,7 +932,8 @@ export module CanvasJS {
      */
     labelBackgroundColor?: string;
     /**
-     * Sets the maximum width of label after which it gets wrapped or clipped depending on whether labelWrap is set to true (default) or false.
+     * Sets the maximum width of label after which it gets wrapped or
+     * clipped depending on whether labelWrap is set to true (default) or false.
      * Default: Automatically calculated based on the length of label.
      * Example: 4, 20, 100 etc.
      */
@@ -918,7 +945,8 @@ export module CanvasJS {
      */
     labelWrap?: boolean;
     /**
-     * Setting labelAutoFit to true automatically wraps and/or rotates and/or reduces font size of label when they are too long and overlaps,
+     * Setting labelAutoFit to true automatically wraps and/or rotates and/or
+     * reduces font size of label when they are too long and overlaps,
      * finds the best-fit and automatically manages label overlapping.
      * Default: true
      * Options: true, false
@@ -989,7 +1017,8 @@ export module CanvasJS {
     interval?: number;
     /**
      * intervalType is the unit of interval property.
-     *  intervalType is by default set to "number" and hence you need to specify the interval type (eg "week", "month", etc) depending on the type of interval you intend to set.
+     *  intervalType is by default set to "number" and hence you need
+     * to specify the interval type (eg "week", "month", etc) depending on the type of interval you intend to set.
      * If required interval is 3 months, you need to provide interval as 3 and intervalType as "month"
      * Default: Automatically handled when interval property is not set. Defaults to "number" when you set the interval.
      * Option: "number","millisecond" ,"second"," minute", "hour", "day", "month" ,"year"
@@ -1003,7 +1032,8 @@ export module CanvasJS {
      */
     reversed?: boolean;
     /**
-     * Setting logarithmic property to true changes axis scale to logarithmic scale. Default Logarithm Base is 10 – which you can customize using logarithmBase property.
+     * Setting logarithmic property to true changes axis scale to logarithmic scale.
+     * Default Logarithm Base is 10 – which you can customize using logarithmBase property.
      * Default: false
      * Options: true, false
      */
@@ -1034,7 +1064,8 @@ export module CanvasJS {
     tickThickness?: number;
     /**
      * Sets the Interlacing Color that alternates between the set interval.
-     * If the interval is not set explicitly, then the auto calculated interval is considered. The value of interlacedColor can be a “HTML Color Name” or “hex” code.
+     * If the interval is not set explicitly, then the auto calculated interval is considered.
+     * The value of interlacedColor can be a “HTML Color Name” or “hex” code.
      * Default: null
      * Example: "#F8F1E4", "#FEFDDF"...
      */
@@ -1065,7 +1096,8 @@ export module CanvasJS {
     labelFormatter?(e: { chart: Chart; axis: ChartAxisYOptions; value: number; label: string }): string;
     /**
      * Strip Lines / Trend Lines are vertical or horizontal lines used to highlight/mark a certain region on the plot area.
-     * You can choose whether to draw a line at a specific position or shade a region on the plot area. Strip Lines are also referred to as Trend Lines.
+     * You can choose whether to draw a line at a specific position or
+     * shade a region on the plot area. Strip Lines are also referred to as Trend Lines.
      */
     stripLines?: ChartStripLinesOptions | ChartStripLinesOptions[];
   }
@@ -1167,7 +1199,8 @@ export module CanvasJS {
   export interface ChartToolTipOptions {
     /**
      * While mouse hovers from one dataPoint to another there is a smooth transition in toolTip.
-     * This effect can be controlled by animationEnabled Property. Setting it to false, will disable the animation and toolTip will directly switch from one dataPoint to the other.
+     * This effect can be controlled by animationEnabled Property.
+     * Setting it to false, will disable the animation and toolTip will directly switch from one dataPoint to the other.
      * Default: True
      * Example: True, False
      */
@@ -1228,7 +1261,8 @@ export module CanvasJS {
      */
     fontWeight?: string;
     /**
-     * Sets the thickness of border around the toolTip in pixels. To display border around toolTip, set the borderThickness to a number greater than zero. Setting it to zero removes the border.
+     * Sets the thickness of border around the toolTip in pixels.
+     * To display border around toolTip, set the borderThickness to a number greater than zero. Setting it to zero removes the border.
      * Default: 2
      * Example: 2,4 ..
      */
@@ -1299,9 +1333,12 @@ export module CanvasJS {
      */
     highlightEnabled?: boolean;
     /**
-     * Instead of setting string values for all indexLabels, you can also use keywords like x, y, etc that will automatically show corresponding properties as indexLabel.
-     * This will allow you to define indexLabel at the series level once. While setting indexLabel you specify a keyword by enclosing it in flower brackets like {x}, {y}, {color}, etc.
-     * Range Charts have two indexLabels – one for each y value. This requires the use of a special keyword #index to show index label on either sides of the column/bar/area.
+     * Instead of setting string values for all indexLabels, you can also use keywords like x, y,
+     * etc that will automatically show corresponding properties as indexLabel.
+     * This will allow you to define indexLabel at the series level once.
+     * While setting indexLabel you specify a keyword by enclosing it in flower brackets like {x}, {y}, {color}, etc.
+     * Range Charts have two indexLabels – one for each y value.
+     * This requires the use of a special keyword #index to show index label on either sides of the column/bar/area.
      * eg: indexLabel: "{x}: {y[#index]}"
      * Important keywords to keep in mind are. {x}, {y}, {name}, {label}.
      * Default: null
@@ -1309,7 +1346,8 @@ export module CanvasJS {
      */
     indexLabel?: string;
     /**
-     * Sets the Dash Type for indexLabel’s line. It is applicable only for pie and doughnut charts when indexLabelPlacement is set to “outside”.
+     * Sets the Dash Type for indexLabel’s line.
+     * It is applicable only for pie and doughnut charts when indexLabelPlacement is set to “outside”.
      * For other chart-types, indexLabelLineThickness should be set greater than zero.
      * Default: solid
      */
@@ -1375,7 +1413,8 @@ export module CanvasJS {
      */
     indexLabelFontWeight?: string;
     /**
-     * Sets the color of line connecting index labels with their dataPoint. It is only applicable for pie and doughnut chart when indexLabelPlacment is outside.
+     * Sets the color of line connecting index labels with their dataPoint.
+     * It is only applicable for pie and doughnut chart when indexLabelPlacment is outside.
      * The value of indexLineColor can be a "HTML Color Name" or "Hex Code".
      * Default: "lightgrey"
      * Example: "red", "#FAC003" ..
@@ -1389,21 +1428,25 @@ export module CanvasJS {
      */
     indexLabelLineThickness?: number;
     /**
-     * Default Tooltip can be modified at dataSeries or dataPoint level. You can add content to be displayed in toolTip using toolTipContent.
+     * Default Tooltip can be modified at dataSeries or dataPoint level.
+     * You can add content to be displayed in toolTip using toolTipContent.
      * toolTipContent set at dataPoint will override toolTipContent set at dataSeries level.
      * Default: auto set depending on chart type.
      */
     toolTipContent?: string;
     /**
-     * Sets marker type to be rendered at each dataPoint. While markers are helpful in highlighting individual dataPoints, they do not help much when the dataPoints are crowded.
-     * In case of large number of dataPoints it is recommended to disable markers in order to improve the appearance and performance of chart.
+     * Sets marker type to be rendered at each dataPoint. While markers are helpful in highlighting individual dataPoints,
+     * they do not help much when the dataPoints are crowded.
+     * In case of large number of dataPoints it is recommended to
+     * disable markers in order to improve the appearance and performance of chart.
      * Same marker type is also used in legend unless overridden by legendMarkerType property.
      * Default: "circle"
      * Options: "none", "circle", "square", "triangle" and "cross"
      */
     markerType?: string;
     /**
-     * Sets the color of marker that is displayed on the Chart. Legend Marker for the series uses the same Color as set here unless overridden using legendMarkerColor property.
+     * Sets the color of marker that is displayed on the Chart.
+     * Legend Marker for the series uses the same Color as set here unless overridden using legendMarkerColor property.
      * Default: dataSeries Color
      * Example: "red", "#008000" ..
      */
@@ -1434,13 +1477,15 @@ export module CanvasJS {
      */
     legendText?: string;
     /**
-     * Sets the Legend Marker to one of the options below. This property is used to override the default marker in legend, which is same as dataSeries Marker Type.
+     * Sets the Legend Marker to one of the options below.
+     * This property is used to override the default marker in legend, which is same as dataSeries Marker Type.
      * Default: same as markerType
      * Options: "circle", "square", "cross" and "triangle"
      */
     legendMarkerType?: string;
     /**
-     * Sets the color of marker that is displayed on legend. This property overrides default Marker’s Color in Legend, which is same as dataSeries Marker Color.
+     * Sets the color of marker that is displayed on legend.
+     * This property overrides default Marker’s Color in Legend, which is same as dataSeries Marker Color.
      * Value of legendMarkerColor can be "HTML Color Name" or "hex code".
      * Default: dataSeries marker color
      * Example: "red", "#008000" ..
@@ -1519,15 +1564,19 @@ export module CanvasJS {
      */
     type?: string;
     /**
-     * Setting axisXType lets you choose between primary and secondary X Axis for a dataSeries to plot against. By choosing “secondary” Axis you can plot the series against axisX2.
+     * Setting axisXType lets you choose between primary and secondary X Axis for a dataSeries to plot against.
+     * By choosing “secondary” Axis you can plot the series against axisX2.
      * In case of Multi-Series or Combinational Charts, one can assign primary axis to some series and secondary axis to other series.
-     * This is helpful when dataSeries objects use different unit of measurement or range of data. By default, all series are plotted against primary X axis.
+     * This is helpful when dataSeries objects use different unit of measurement or range of data.
+     * By default, all series are plotted against primary X axis.
      */
     axisXType?: string;
     /**
-     * Setting axisYType lets you choose between primary and secondary Y Axis for a dataSeries to plot against. By choosing "secondary" Axis you can plot the series against axisY2.
+     * Setting axisYType lets you choose between primary and secondary Y Axis for a dataSeries to plot against.
+     * By choosing "secondary" Axis you can plot the series against axisY2.
      * In case of Multi-Series or Combinational Charts, one can assign primary axis to some series and secondary axis to other series.
-     * This is helpful when dataSeries objects use different unit of measurement or range of data. By default, all series are plotted against primary Y axis.
+     * This is helpful when dataSeries objects use different unit of measurement or range of data.
+     * By default, all series are plotted against primary Y axis.
      * Default: "primary"
      * Options: "primary", "secondary"
      */
@@ -1535,28 +1584,33 @@ export module CanvasJS {
     /**
      * Setting axisXIndex lets you choose to which X axis the dataSeries should be attached.
      * In case of Multi-Series or Combinational Charts, one can assign some series to first X axis and rest to another axis.
-     * This is helpful when dataSeries objects use different unit of measurement or range of data. By default, all series are plotted against first axis.
+     * This is helpful when dataSeries objects use different unit of measurement or range of data.
+     * By default, all series are plotted against first axis.
      */
     axisXIndex?: number;
     /**
      * Setting axisYIndex lets you choose to which Y axis the dataSeries should be attached to.
      * In case of Multi-Series or Combinational Charts, one can assign some series to first Y axis and rest to another axis.
-     * This is helpful when dataSeries objects use different unit of measurement or range of data. By default, all series are plotted against first axis.
+     * This is helpful when dataSeries objects use different unit of measurement or range of data.
+     * By default, all series are plotted against first axis.
      */
     axisYIndex?: number;
     /**
      * This defines the data type of x values. Data Type is normally figured out by default based on the object type that is assigned to x.
-     * But if you are providing time stamp (which is integer) values instead of Date objects, you’ll have to explicitly set the xValueType to "dateTime".
+     * But if you are providing time stamp (which is integer) values instead of Date objects,
+     * you’ll have to explicitly set the xValueType to "dateTime".
      * Default: Automatically Calculated
      * Options: "number", "dateTime"
      */
     xValueType?: string;
     /**
-     * Defines how y axis values must be formatted before they appear on the indexLabel or toolTip. You can format numbers and date time values using this property.
+     * Defines how y axis values must be formatted before they appear on the indexLabel or toolTip.
+     * You can format numbers and date time values using this property.
      */
     yValueFormatString?: string;
     /**
-     * Defines how x axis values must be formatted before they appear on the indexLabel or toolTip. You can format numbers and date time values using this property.
+     * Defines how x axis values must be formatted before they appear on the indexLabel or toolTip.
+     * You can format numbers and date time values using this property.
      */
     xValueFormatString?: string;
     /**
@@ -1564,7 +1618,8 @@ export module CanvasJS {
      */
     zValueFormatString?: string;
     /**
-     * Defines how percent values are formatted before they appear on the indexLabel or toolTip. You can format percent values using this property.
+     * Defines how percent values are formatted before they appear on the indexLabel or toolTip.
+     * You can format percent values using this property.
      */
     percentFormatString?: string;
     /**
@@ -1586,15 +1641,18 @@ export module CanvasJS {
     startAngle?: number;
     /**
      * innerRadius property allows you to set a Doughnut chart’s inner radius.
-     * Value can either be in pixels (number – ex: 100) or percent (string – ex: “80%”). Percent values are relative to the outer radius of doughnut chart.
+     * Value can either be in pixels (number – ex: 100) or percent (string – ex: “80%”).
+     * Percent values are relative to the outer radius of doughnut chart.
      * Default: “70%”
      * Example: 200, 150, “90%”, “75%”
      */
     innerRadius?: number | string;
     /**
      * radius property allows you to set the Pie/Doughnut chart’s (outer) radius.
-     * Value can either be in pixels (number – ex: 100) or percent (string – ex: “80%”). Percent values are relative to the plot area’s size.
-     * By default, a pie/doughnut chart’s size(radius) changes in order to best fit the indexLabels. This can lead to charts of different sizes in the same page.
+     * Value can either be in pixels (number – ex: 100) or percent (string – ex: “80%”).
+     * Percent values are relative to the plot area’s size.
+     * By default, a pie/doughnut chart’s size(radius) changes in order to best fit the indexLabels.
+     * This can lead to charts of different sizes in the same page.
      * In order to override this behavior and set equal sizes to all pie/doughnut charts in a page, you can use radius property.
      * Default: Automatically calculate in order to best fit the indexLabels.
      * Example: 200, 150, “90%”, “75%”
@@ -1607,7 +1665,8 @@ export module CanvasJS {
      */
     lineThickness?: number;
     /**
-     * Setting this property to true makes the dataSeries to appear in legend. In case of pie/ doughnut chart, dataPoints of the single series chart appear in legend.
+     * Setting this property to true makes the dataSeries to appear in legend.
+     * In case of pie/ doughnut chart, dataPoints of the single series chart appear in legend.
      * Default: false
      * Options: false, true
      */
@@ -1619,7 +1678,8 @@ export module CanvasJS {
      */
     explodeOnClick?: boolean;
     /**
-     * In candle Stick chart, when Closing Price is greater than Opening price, the body is filled with white by default and it can be overridden by risingColor property.
+     * In candle Stick chart, when Closing Price is greater than Opening price,
+     * the body is filled with white by default and it can be overridden by risingColor property.
      * Default: "white"
      * Options: "red", "#DD7E86", etc.
      */
@@ -1680,7 +1740,8 @@ export module CanvasJS {
 
   export interface ChartDataPoint extends ChartDataCommon {
     /**
-     * Sets the x value. It determines the position of the dataPoint on X Axis. It can be numeric or a dateTime value. Values can be positive or Negative.
+     * Sets the x value. It determines the position of the dataPoint on X Axis.
+     * It can be numeric or a dateTime value. Values can be positive or Negative.
      * If no x value is provided, they are automatically set sequentially starting from zero
      * Default: null
      * Example: 10, 20, 30 ..
@@ -1706,7 +1767,8 @@ export module CanvasJS {
      */
     label?: string;
     /**
-     * Sets the exploded value of dataPoint. It is applicable only in case of Pie and Doughnut Charts. This property causes the Pie/Doughnut slice to separate out.
+     * Sets the exploded value of dataPoint. It is applicable only in case of Pie and Doughnut Charts.
+     * This property causes the Pie/Doughnut slice to separate out.
      * Default: true
      * Example: true, false
      */
