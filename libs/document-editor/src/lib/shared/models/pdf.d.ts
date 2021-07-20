@@ -2,7 +2,7 @@
 /**
  * @module pdfjs-dist
  */
-export module pdfjsDist {
+export namespace pdfjsDist {
 
   export interface GlobalWorkerOptions {
     workerPort: null | string;
@@ -23,7 +23,7 @@ export module pdfjsDist {
   type IPDFStreamFactory = (params: DocumentInitParameters) => IPDFStream;
   /** @type IPDFStreamFactory
    */
-  var createPDFNetworkStream: IPDFStreamFactory;
+  let createPDFNetworkStream: IPDFStreamFactory;
   /**
    * Sets the function that instantiates a IPDFStream as an alternative PDF data
    * transport.
@@ -33,7 +33,8 @@ export module pdfjsDist {
    */
   function setPDFNetworkStreamFactory(pdfNetworkStreamFactory: IPDFStreamFactory): void;
   /**
-   * @typedef {Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Uint8ClampedArray | Float32Array | Float64Array} TypedArray //
+   * @typedef {Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array |
+   * Uint32Array | Uint8ClampedArray | Float32Array | Float64Array} TypedArray //
    */
   type TypedArray =
     | Int8Array
@@ -213,6 +214,16 @@ export module pdfjsDist {
      */
     fingerprint: string;
     /**
+     * @type {DocumentInitParameters} A subset of the current
+     *   {DocumentInitParameters}, which are either needed in the viewer and/or
+     *   whose default values may be affected by the `apiCompatibilityParams`.
+     */
+    loadingParams: DocumentInitParameters;
+    /**
+     * @type {PDFDocumentLoadingTask} The loadingTask for the current document.
+     */
+    loadingTask: PDFDocumentLoadingTask;
+    /**
      * @param {number} pageNumber - The page number to get. The first page is 1.
      * @returns {Promise<PDFPageProxy>} A promise that is resolved with
      *    a {@link PDFPageProxy} object.
@@ -337,16 +348,6 @@ export module pdfjsDist {
      * Destroys the current document instance and terminates the worker.
      */
     destroy(): void;
-    /**
-     * @type {DocumentInitParameters} A subset of the current
-     *   {DocumentInitParameters}, which are either needed in the viewer and/or
-     *   whose default values may be affected by the `apiCompatibilityParams`.
-     */
-    loadingParams: DocumentInitParameters;
-    /**
-     * @type {PDFDocumentLoadingTask} The loadingTask for the current document.
-     */
-    loadingTask: PDFDocumentLoadingTask;
   }
   /**
    * TODO https://github.com/mozilla/pdf.js/pull/10575
@@ -532,6 +533,10 @@ export module pdfjsDist {
      */
     view: number[];
     /**
+     * @type {Object} Returns page stats, if enabled; returns `null` otherwise.
+     */
+    stats: any;
+    /**
      * @param {GetViewportParameters} params - Viewport parameters.
      * @returns {PageViewport} Contains 'width' and 'height' properties
      *   along with transforms required for rendering.
@@ -572,10 +577,6 @@ export module pdfjsDist {
      *   The default value is `false`.
      */
     cleanup(resetStats?: boolean): void;
-    /**
-     * @type {Object} Returns page stats, if enabled; returns `null` otherwise.
-     */
-    stats: any;
   }
   /**
    * TODO https://github.com/mozilla/pdf.js/pull/10575

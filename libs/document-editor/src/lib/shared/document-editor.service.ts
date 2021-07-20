@@ -6,7 +6,7 @@ import { insertAt } from './utils/arrays.util';
 import { isNotNil } from './guards/guards.utils';
 import { NtsDocumentEditor } from '../document-editor';
 import { pdfjsDist } from './models/pdf';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { cloneDeep } from 'lodash';
 
 declare global {
@@ -68,8 +68,6 @@ export class DocumentEditorService {
   public pdfJs: typeof pdfjsDist | undefined;
 
   public subs: Subscription[] = [];
-
-  constructor() {}
 
   /**
    * Manage state changes via observables

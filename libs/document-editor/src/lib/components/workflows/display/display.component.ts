@@ -4,7 +4,7 @@ import { NtsDocumentEditor } from '../../../document-editor';
 import { pdfjsDist } from '../../../shared/models/pdf';
 
 @Component({
-  selector: 'app-display',
+  selector: 'nts-display',
   templateUrl: './display.component.html',
   styleUrls: ['./display.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

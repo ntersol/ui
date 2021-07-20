@@ -30,7 +30,7 @@
         <!--
           [selection]="editor.state?.selection"
         -->
-        <app-multi-doc
+        <nts-multi-doc
           [documents]="editor?.documentsModel"
           [viewModels]="editor?.viewModels"
           [settings]="editor.state?.settings"
@@ -39,7 +39,7 @@
           [pdfSrcs]="editor.state?.pdfs"
           [pdfInfo]="editor.state?.pdfInfo"
           [rotation]="rotation(editor)"
-        ></app-multi-doc>
+        ></nts-multi-doc>
       </ng-container>
 
       <!-- Viewer Only -->
@@ -48,7 +48,7 @@
           TODO:
           [selection]="editor.state?.selection"
         -->
-        <app-display
+        <nts-display
           [document]="(editor?.documentsModel || [])[editor?.state?.docActive || 0]"
           [viewerOptions]="viewerOptions"
           [viewModels]="editor?.viewModels"
@@ -58,7 +58,7 @@
           [pdfSrcs]="editor.state?.pdfs"
           [pdfInfo]="editor.state?.pdfInfo"
           [rotation]="rotation(editor)"
-        ></app-display>
+        ></nts-display>
         <!--
         <app-viewer
           [pdfSrcs]="editor.state?.pdfs"
@@ -79,7 +79,7 @@
           TODO:
           [selection]="editor.state?.selection"
         -->
-        <app-default
+        <nts-default
           [documents]="editor?.documentsModel"
           [viewModels]="editor?.viewModels"
           [settings]="editor.state?.settings"
@@ -88,7 +88,7 @@
           [pdfSrcs]="editor.state?.pdfs"
           [pdfInfo]="editor.state?.pdfInfo"
           [rotation]="rotation(editor)"
-        ></app-default>
+        ></nts-default>
       </ng-container>
     </ng-container>
   </div>

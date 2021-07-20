@@ -5,7 +5,7 @@
         TODO: Add
         [isSelected]="selection?.includes(i)"
       -->
-      <app-page
+      <nts-page
         [page]="page"
         [viewModels]="viewModels"
         [settings]="settings"
@@ -15,11 +15,11 @@
         [pageIndex]="i"
         [canDropFromAny]="canDropFromAny"
         (setActivePage)="setActivePage.emit($event)"
-      ></app-page>
+      ></nts-page>
     </ng-container>
   </ng-container>
   <ng-container *ngIf="!document?.pages?.length && settings?.canReorder">
-    <app-page
+    <nts-page
       [page]="null"
       [viewModels]="viewModels"
       [settings]="settings"
@@ -29,6 +29,6 @@
       [docIndex]="docIndex"
       [pageIndex]="0"
       [canDropFromAny]="canDropFromAny"
-    ></app-page>
+    ></nts-page>
   </ng-container>
 </div>

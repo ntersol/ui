@@ -11,7 +11,7 @@
             TODO:
             [selection]="selection[i + 1]"
           -->
-          <app-document
+          <nts-document
             [document]="document"
             [viewModels]="viewModels"
             [settings]="settingsSrc"
@@ -20,7 +20,7 @@
             [docIndex]="i + 1"
             [canDropFromAny]="false"
             (setActivePage)="setActivePage()"
-          ></app-document>
+          ></nts-document>
         </ng-template>
       </p-tabPanel>
     </p-tabView>
@@ -38,7 +38,7 @@
             TODO:
              [selection]="selection[0]"
           -->
-          <app-document
+          <nts-document
             [document]="!!documents && documents?.length && documents[0] ? documents[0] : null"
             [viewModels]="viewModels"
             [settings]="settingsDest"
@@ -46,13 +46,13 @@
             [pageActive]="pageActive"
             [docIndex]="0"
             (setActivePage)="setActivePage()"
-          ></app-document>
+          ></nts-document>
         </ng-template>
       </p-tabPanel>
       <p-tabPanel header="Viewer">
         <ng-template pTemplate="content">
           <!-- Full size viewer -->
-          <app-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [rotation]="rotation"></app-viewer>
+          <nts-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [rotation]="rotation"></nts-viewer>
         </ng-template>
       </p-tabPanel>
     </p-tabView>

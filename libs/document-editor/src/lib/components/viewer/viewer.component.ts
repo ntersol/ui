@@ -1,15 +1,24 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, ViewChild, ElementRef, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  ViewChild,
+  ElementRef,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
 import { NtsDocumentEditor } from '../../document-editor';
 import { pdfjsDist } from '../../shared/models/pdf';
 
 @Component({
-  selector: 'app-viewer',
+  selector: 'nts-viewer',
   templateUrl: './viewer.component.html',
   styleUrls: ['./viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
+export class ViewerComponent implements OnInit, OnChanges {
   @ViewChild('viewer', { static: true }) viewer!: ElementRef;
   @ViewChild('container', { static: true }) container!: ElementRef;
   @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[] | null;
@@ -96,6 +105,4 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
     });
      */
   }
-
-  ngOnDestroy() {}
 }

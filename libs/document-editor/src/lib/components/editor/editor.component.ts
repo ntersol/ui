@@ -1,4 +1,15 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, Input, OnChanges, OnDestroy, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ViewEncapsulation,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Output,
+  EventEmitter,
+  SimpleChanges
+} from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
 import { filter, debounceTime, skip, tap } from 'rxjs/operators';
 import { NtsDocumentEditor } from '../../document-editor';
@@ -56,13 +67,26 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   @Output() pdfModelChange = new EventEmitter<NtsDocumentEditor.Document[]>();
   @Output() stateChange = new EventEmitter<NtsDocumentEditor.State>();
 
-  public state$ = this.docSvc.state$.pipe(
-    debounceTime(10),
-    tap(state => this.stateChange.emit(state)),
-  );
+  private loaded = false;
+
   public documentsModel$ = this.docSvc.documentsModel$.pipe(
     filter(x => !!x),
     debounceTime(10),
+  );
+
+  private subs = [
+    // Notify parent of doc model changes
+    this.documentsModel$
+      .pipe(
+        skip(1), // Don't take initial hydration of observable
+        debounceTime(250),
+      )
+      .subscribe(docs => (docs ? this.pdfModelChange.emit(docs) : null)),
+  ];
+
+  public state$ = this.docSvc.state$.pipe(
+    debounceTime(10),
+    tap(state => this.stateChange.emit(state)),
   );
   public viewModels$ = this.docSvc.viewModels$.pipe(
     filter(x => !!x),
@@ -80,18 +104,6 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     }
     return 0;
   };
-
-  private subs = [
-    // Notify parent of doc model changes
-    this.documentsModel$
-      .pipe(
-        skip(1), // Don't take initial hydration of observable
-        debounceTime(250),
-      )
-      .subscribe(docs => (docs ? this.pdfModelChange.emit(docs) : null)),
-  ];
-
-  private loaded = false;
 
   constructor(public docSvc: DocumentEditorService) {}
 
@@ -142,7 +154,8 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     // On permission changes
     if (
       this.loaded &&
-      (model.canRotate || model.canRemove || model.canSplit || model.canReorder || model.canSelect || model.canViewFull || model.multipleAction)
+      (model.canRotate || model.canRemove || model.canSplit || model.canReorder ||
+        model.canSelect || model.canViewFull || model.multipleAction)
     ) {
       this.initialize();
     }

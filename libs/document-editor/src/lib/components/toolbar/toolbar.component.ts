@@ -1,20 +1,18 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
 import { NtsDocumentEditor } from '../../document-editor';
 
 @Component({
-  selector: 'app-toolbar',
+  selector: 'nts-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent {
   @Input() state: NtsDocumentEditor.State | undefined;
   @Input() thumbnailSizes: NtsDocumentEditor.ThumbnailSize[] | undefined;
 
   constructor(private docsSvc: DocumentEditorService) {}
-
-  ngOnInit() {}
 
   public zoomLevelChange(tnSize: NtsDocumentEditor.ThumbnailSize) {
     this.docsSvc.stateChange({ tnSettings: tnSize });

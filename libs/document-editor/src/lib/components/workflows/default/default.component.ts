@@ -1,14 +1,14 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { NtsDocumentEditor } from '../../../document-editor';
 import { pdfjsDist } from '../../../shared/models/pdf';
 
 @Component({
-  selector: 'app-default',
+  selector: 'nts-default',
   templateUrl: './default.component.html',
   styleUrls: ['./default.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DefaultComponent implements OnInit {
+export class DefaultComponent {
   @Input() documents?: NtsDocumentEditor.Document[] | null;
   @Input() viewModels?: NtsDocumentEditor.Preview[][] | null;
   @Input() settings?: NtsDocumentEditor.Settings | null;
@@ -19,7 +19,4 @@ export class DefaultComponent implements OnInit {
   // Viewer
   @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[] | null;
   @Input() rotation = 0;
-  constructor() {}
-
-  ngOnInit() {}
 }

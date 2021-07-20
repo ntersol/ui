@@ -1,15 +1,15 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { NtsDocumentEditor } from '../../../document-editor';
 import { pdfjsDist } from '../../../shared/models/pdf';
 
 @Component({
-  selector: 'app-multi-doc',
+  selector: 'nts-multi-doc',
   templateUrl: './multi-doc.component.html',
   styleUrls: ['./multi-doc.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MultiDocComponent implements OnInit, OnChanges {
+export class MultiDocComponent implements  OnChanges {
   // Documents
   @Input() documents?: NtsDocumentEditor.Document[] | null;
   @Input() viewModels?: NtsDocumentEditor.Preview[][] | null;
@@ -48,9 +48,6 @@ export class MultiDocComponent implements OnInit, OnChanges {
   };
 
   public documentsLeft$ = new BehaviorSubject<NtsDocumentEditor.Document[] | null>(null);
-  constructor() {}
-
-  ngOnInit() {}
 
   ngOnChanges(model: SimpleChanges) {
     if (model.documents && this.documents) {

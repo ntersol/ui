@@ -1,13 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { NtsDocumentEditor } from '../../document-editor';
 
 @Component({
-  selector: 'app-document',
+  selector: 'nts-document',
   templateUrl: './document.component.html',
   styleUrls: ['./document.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DocumentComponent implements OnInit, OnChanges {
+export class DocumentComponent {
   @Input() document?: NtsDocumentEditor.Document | null;
   @Input() viewModels?: NtsDocumentEditor.Preview[][] | null;
   @Input() settings?: NtsDocumentEditor.Settings | null;
@@ -20,10 +20,4 @@ export class DocumentComponent implements OnInit, OnChanges {
   @Input() canDropFromAny = true;
 
   @Output() setActivePage = new EventEmitter<NtsDocumentEditor.PageActive>();
-
-  constructor() {}
-
-  ngOnInit() {}
-
-  ngOnChanges() {}
 }

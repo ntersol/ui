@@ -1,4 +1,4 @@
-<app-viewer-toolbar [pageActive]="pageActive" [viewerOptions]="viewerOptions" [document]="document" [rotation]="rotation"> </app-viewer-toolbar>
+<nts-viewer-toolbar [pageActive]="pageActive" [viewerOptions]="viewerOptions" [document]="document" [rotation]="rotation"> </nts-viewer-toolbar>
 <div class="d-flex">
   <div class="tn-viewer mr-3" #scrollbar>
     <p-card *ngIf="document?.pages">
@@ -7,7 +7,7 @@
           TODO: selection is nested array
           [isSelected]="!!selection?.includes(i || 0)"
         -->
-        <app-page
+        <nts-page
           [page]="page"
           [viewModels]="viewModels"
           [settings]="settings"
@@ -15,11 +15,11 @@
           [isActive]="pageActive?.pdfIndex === page?.pdfSrcIndex && pageActive?.pageIndex === page?.pageSrcIndex"
           [docIndex]="0"
           [pageIndex]="i"
-        ></app-page>
+        ></nts-page>
       </ng-container>
     </p-card>
   </div>
   <div class="viewer-container flex-grow-1">
-    <app-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [viewerOptions]="viewerOptions" [document]="document" [rotation]="rotation"></app-viewer>
+    <nts-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [viewerOptions]="viewerOptions" [document]="document" [rotation]="rotation"></nts-viewer>
   </div>
 </div>
