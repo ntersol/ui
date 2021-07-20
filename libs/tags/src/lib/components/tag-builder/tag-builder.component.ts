@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   Input,
   Output,
@@ -25,12 +24,12 @@ const tagDefault = {
   styleUrls: ['./tag-builder.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TagBuilderComponent implements OnInit, OnChanges {
+export class TagBuilderComponent implements OnChanges {
   @Input() tag: NtsTags.TagDef | null = null;
 
   @Output() tagCreated = new EventEmitter<NtsTags.TagDef>();
   @Output() tagUpdated = new EventEmitter<NtsTags.TagDef>();
- 
+
   // Formgroup
   public formTag = this.fb.group({
     guid: [null, []],
@@ -43,9 +42,7 @@ export class TagBuilderComponent implements OnInit, OnChanges {
 
   public isEditing = false;
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit() {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnChanges(model: SimpleChanges) {
     if (model.tag) {

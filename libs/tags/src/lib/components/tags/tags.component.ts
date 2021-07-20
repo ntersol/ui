@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { NtsTags } from '../../tags';
 
 /**
@@ -12,7 +12,7 @@ import { NtsTags } from '../../tags';
   styleUrls: ['./tags.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TagsComponent implements OnInit {
+export class TagsComponent {
   @Input() tags: NtsTags.TagDef[] = [];
 
   @Output() tagCreated = new EventEmitter<NtsTags.TagDef>();
@@ -21,21 +21,13 @@ export class TagsComponent implements OnInit {
 
   // public formTag: any;
   public tagActive: NtsTags.TagDef | null = null;
- 
-
-  constructor() {}
-
-  ngOnInit() {
-  }
-
-  
 
   /**
    * Edit an existing tag
    * @param tag
    */
   public tagEdit(tag: NtsTags.TagDef) {
-    this.tagActive = {...tag};
+    this.tagActive = { ...tag };
     // this.formTag.patchValue(tag);
   }
 
@@ -49,6 +41,4 @@ export class TagsComponent implements OnInit {
       this.tagDeleted.emit(tag);
     }
   }
-
- 
 }
