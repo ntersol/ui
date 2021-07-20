@@ -1,6 +1,6 @@
 import { Directive, TemplateRef } from '@angular/core';
 
-@Directive({ selector: '[table-header-template]' })
+@Directive({ selector: '[ntsTableHeaderTemplate]' })
 export class TableColumnHeaderDirective {
-  constructor(public template: TemplateRef<any>) {}
+  constructor(public template: TemplateRef<any>) { }
 }

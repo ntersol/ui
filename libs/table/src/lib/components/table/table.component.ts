@@ -12,7 +12,6 @@ import {
   ViewChildren,
   ElementRef,
   ChangeDetectorRef,
-  OnDestroy,
 } from '@angular/core';
 import { Table } from 'primeng/table';
 import { TableColumnDirective } from '../../directives/column.directive';
@@ -26,7 +25,7 @@ import { NtsTable } from '../../table.models';
   // tslint:disable-next-line:use-component-view-encapsulation
   encapsulation: ViewEncapsulation.None,
 })
-export class TableComponent implements OnInit, OnChanges, OnDestroy {
+export class TableComponent implements OnInit, OnChanges {
   /** Rows */
   @Input() rows: any[] | null = [];
   /** Columns */
@@ -149,6 +148,4 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     this.shouldShowExpandRow =
       !!this.templates['expansion'] && !!this.templates['expansion'].templateExpansion && !!this.dataKey;
   }
-
-  ngOnDestroy() {}
 }

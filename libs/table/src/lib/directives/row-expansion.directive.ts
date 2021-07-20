@@ -1,6 +1,6 @@
 import { Directive, TemplateRef } from '@angular/core';
 
-@Directive({ selector: '[table-expansion-template]' })
+@Directive({ selector: '[ntsTableExpansionTemplate]' })
 export class TableRowExpansionDirective {
-  constructor(public template: TemplateRef<any>) {}
+  constructor(public template: TemplateRef<any>) { }
 }

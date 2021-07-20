@@ -3,7 +3,7 @@ import { TableColumnHeaderDirective } from './cell-header.directive';
 import { TableColumnCellDirective } from './cell-body.directive';
 import { TableRowExpansionDirective } from './row-expansion.directive';
 
-@Directive({ selector: 'table-column' })
+@Directive({ selector: '[ntsTableColumn]' })
 export class TableColumnDirective {
   @Input() name!: string;
   @Input() field!: string;
