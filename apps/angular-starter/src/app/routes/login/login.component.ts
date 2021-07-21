@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 
 import { SettingsService } from '$settings';
-import { AuthState, AuthService } from 'src/app/shared/services/project/auth.service';
-import { IErrorApi } from 'src/typings';
+import { AuthService, AuthState } from '../../../app/shared/services/project/auth.service';
+import { IErrorApi } from '../../../typings';
 
 @Component({
   selector: 'app-login',
@@ -29,15 +29,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private fb: FormBuilder,
     private settings: SettingsService,
-  ) {}
+    @Inject(PLATFORM_ID) private platformId: Record<string, unknown>
+  ) { }
 
   public ngOnInit() {
     let isLogin, hasLogin;
-    if (isPlatformBrowser && window.localStorage.rememberLogin && this.settings.userName) {
+    if (isPlatformBrowser(this.platformId) && window.localStorage.rememberLogin && this.settings.userName) {
       isLogin = this.settings.userName;
     }
 
-    if (isPlatformBrowser && window.localStorage.rememberLogin) {
+    if (isPlatformBrowser(this.platformId) && window.localStorage.rememberLogin) {
       hasLogin = true;
     }
 
@@ -88,5 +89,5 @@ export class LoginComponent implements OnInit, OnDestroy {
     );
   } // end onSubmit
 
-  ngOnDestroy() {}
+  ngOnDestroy() { }
 }

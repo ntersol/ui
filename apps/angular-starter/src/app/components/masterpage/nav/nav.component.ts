@@ -6,7 +6,7 @@ import { SettingsService } from '$settings';
 import { MenuItem } from 'primeng/api';
 import { fromEvent } from 'rxjs';
 import { UiStateService } from '$ui';
-import { AuthService, AuthState } from 'src/app/shared/services/project/auth.service';
+import { AuthService, AuthState } from '../../../../app/shared/services/project/auth.service';
 
 @Component({
   selector: 'app-nav',
