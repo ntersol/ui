@@ -3,7 +3,7 @@ import { GridColumnHeaderDirective } from './cell-header.directive';
 import { GridColumnCellDirective } from './cell-body.directive';
 import { GridRowExpansionDirective } from './row-expansion.directive';
 
-@Directive({ selector: 'grid-column' })
+@Directive({ selector: '[ntsGridColumn]' })
 export class GridColumnDirective {
   @Input() name!: string;
   @Input() field!: string;

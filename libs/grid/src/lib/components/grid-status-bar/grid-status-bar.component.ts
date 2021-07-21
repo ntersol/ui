@@ -4,7 +4,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { NtsGridState } from '../../grid';
 import { cloneDeep } from 'lodash';
 @Component({
-  selector: 'app-grid-status-bar',
+  selector: 'nts-grid-status-bar',
   templateUrl: './grid-status-bar.component.html',
   styleUrls: ['./grid-status-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,12 +20,13 @@ export class GridStatusBarComponent implements OnInit {
   };
   public gridFilters: any[] = [];
   public gridGroups: any[] = [];
+  public reset!: () => void;
   private grid!: AgGridAngular;
   private gridColumnApi!: ColumnApi;
   private params: any;
   /** Disable updates while resetting */
   private resetting = false;
-  constructor(private ref: ChangeDetectorRef) {}
+  constructor(private ref: ChangeDetectorRef) { }
   ngOnInit() {
     this.grid = this.params;
     this.gridColumnApi = this.params.columnApi;
@@ -70,8 +71,6 @@ export class GridStatusBarComponent implements OnInit {
   public agInit(params: any): void {
     this.params = params;
   }
-  /** Reset all sorts/filters/groups. Reference is passed by grid.component.ts */
-  public reset() {}
   /** Remove sorting */
   public removeSort() {
     this.grid.api.setSortModel(null);

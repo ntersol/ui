@@ -3,7 +3,7 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 // https://blog.angularindepth.com/easier-embedding-of-angular-p-in-ag-grid-52db93b73884
 @Component({
-  selector: 'app-template-renderer',
+  selector: 'nts-template-renderer',
   template: `
     <ng-container *ngTemplateOutlet="template; context: templateContext"></ng-container>
   `,

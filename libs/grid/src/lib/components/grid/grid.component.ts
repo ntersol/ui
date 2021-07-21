@@ -220,8 +220,6 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   @HostListener('document:keydown', ['$event']) keyPressed = (event: KeyboardEvent) => this.keyboardEvent(event);
   @HostListener('document:keyup', ['$event']) keyUp = (event: KeyboardEvent) => this.keyboardEvent(event);
 
-  constructor() {}
-
   ngOnInit() {
     // Set license
     if (this.license) {
