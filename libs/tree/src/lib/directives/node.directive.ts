@@ -1,6 +1,6 @@
 import { Directive, TemplateRef } from '@angular/core';
 
-@Directive({ selector: '[tree-template-node]' })
+@Directive({ selector: '[ntsTreeTemplateNode]' })
 export class TreeTemplateNodeDirective {
   constructor(public template: TemplateRef<any>) {}
 }

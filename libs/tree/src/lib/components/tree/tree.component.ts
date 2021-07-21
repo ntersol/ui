@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   Input,
   ViewEncapsulation,
@@ -33,7 +32,7 @@ import { cloneDeep } from 'lodash';
   // tslint:disable-next-line:use-component-view-encapsulation
   encapsulation: ViewEncapsulation.None,
 })
-export class NtsTreeComponent implements OnInit, OnChanges {
+export class NtsTreeComponent implements OnChanges {
   @ViewChild('tree', { static: true }) tree!: Tree;
 
   /** Tree nodes */
@@ -91,24 +90,15 @@ export class NtsTreeComponent implements OnInit, OnChanges {
     }
   }
 
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onNodeSelect = new EventEmitter<NtsTree.NodeEvent>();
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onNodeUnselect = new EventEmitter<NtsTree.NodeEvent>();
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onNodeUnselectAll = new EventEmitter();
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onNodeExpand = new EventEmitter<NtsTree.NodeEvent>();
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onNodeCollapse = new EventEmitter<NtsTree.NodeEvent>();
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onNodeContextMenuSelect = new EventEmitter<NtsTree.NodeEvent>();
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onNodeDrop = new EventEmitter<NtsTree.NodeDropEvent>();
+  @Output() nodeSelect = new EventEmitter<NtsTree.NodeEvent>();
+  @Output() nodeUnselect = new EventEmitter<NtsTree.NodeEvent>();
+  @Output() nodeUnselectAll = new EventEmitter();
+  @Output() nodeExpand = new EventEmitter<NtsTree.NodeEvent>();
+  @Output() nodeCollapse = new EventEmitter<NtsTree.NodeEvent>();
+  @Output() nodeContextMenuSelect = new EventEmitter<NtsTree.NodeEvent>();
+  @Output() nodeDrop = new EventEmitter<NtsTree.NodeDropEvent>();
 
   constructor(private ref: ChangeDetectorRef) {}
-
-  ngOnInit() {}
 
   ngOnChanges(model: SimpleChanges) {
     if (model.value || model.filterTerm || model.filterFn) {
@@ -120,14 +110,12 @@ export class NtsTreeComponent implements OnInit, OnChanges {
     }
   }
 
-  public selectAll() {}
-
   /**
    * Unselect all nodes
    */
   public unselectAll() {
     this.selection = [];
-    this.onNodeUnselectAll.emit();
+    this.nodeUnselectAll.emit();
     this.ref.markForCheck();
   }
 

@@ -11,12 +11,12 @@
     [propagateSelectionDown]="propagateSelectionDown"
     [filter]="false"
     [(selection)]="selection"
-    (onNodeSelect)="onNodeSelect.emit($event)"
-    (onNodeUnselect)="onNodeUnselect.emit($event)"
-    (onNodeExpand)="onNodeExpand.emit($event)"
-    (onNodeCollapse)="onNodeCollapse.emit($event)"
-    (onNodeContextMenuSelect)="onNodeContextMenuSelect.emit($event)"
-    (onNodeDrop)="onNodeDrop.emit($event)"
+    (onNodeSelect)="nodeSelect.emit($event)"
+    (onNodeUnselect)="nodeUnselect.emit($event)"
+    (onNodeExpand)="nodeExpand.emit($event)"
+    (onNodeCollapse)="nodeCollapse.emit($event)"
+    (onNodeContextMenuSelect)="nodeContextMenuSelect.emit($event)"
+    (onNodeDrop)="nodeDrop.emit($event)"
   >
     <ng-container *ngFor="let template of templates">
       <ng-template let-node [pTemplate]="template.field">

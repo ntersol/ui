@@ -1,7 +1,7 @@
 import { Directive, TemplateRef, ContentChild, Input } from '@angular/core';
 import { TreeTemplateNodeDirective } from './node.directive';
 
-@Directive({ selector: 'tree-template' })
+@Directive({ selector: '[ntsTreeTemplate]' })
 export class TreeTemplateDirective {
   @Input() name!: string;
   @Input() field!: string;
