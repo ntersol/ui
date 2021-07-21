@@ -21,7 +21,8 @@ export const usage1 = `
   })
   export class SampleService {
     // Create a ui store creator instance with default state using interface model and options
-    public uiStore = ntsUIStoreCreator<UIStoreModel>({ name: null, user: { age: 12, nameFirst: &#39;NameFirst123&#39; } }, { persistId: &#39;uiStore&#39; });
+    uiStore = ntsUIStoreCreator<UIStoreModel>({ name: null, user: { age: 12, nameFirst: &#39;NameFirst123&#39; } },
+      { persistId: &#39;uiStore&#39; });
 
     constructor() {}
   }`;
@@ -29,9 +30,9 @@ export const usage1 = `
 export const usage2 = `
   export class SampleComponent implements OnInit {
     // Get the name slice of state as an observable
-    public name$ = this.sm.uiStore.select$(&#39;name&#39;);
+    name$ = this.sm.uiStore.select$(&#39;name&#39;);
     // Get a specific piece of state by passing a callback function as an observable
-    public name2$ = this.sm.uiStore.select$(state => state.user?.age);
+    name2$ = this.sm.uiStore.select$(state => state.user?.age);
 
     ngOnInit() {
       //subscribe the the ui state for name and log any changes
@@ -48,4 +49,5 @@ export const usage2 = `
 
 export const usage3 = `
   Your Name: &lt;strong&gt;{{ name$ | async }}&lt;/strong&gt;
-  &lt;input placeholder=&quot;Your Name&quot; [(ngModel)]=&quot;name&quot; /&gt; &lt;button (click)=&quot;nameSave(name)&quot;&gt;Save Name&lt;/button&gt;`;
+  &lt;input placeholder=&quot;Your Name&quot; [(ngModel)]=&quot;name&quot;/&gt;
+  &lt;button (click)=&quot;nameSave(name)&quot;&gt;Save Name&lt;/button&gt;`;
