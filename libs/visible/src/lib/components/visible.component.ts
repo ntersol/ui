@@ -18,7 +18,7 @@ import { debounceTime, distinctUntilChanged, map, startWith, tap } from 'rxjs/op
 /**
  * Shows/hides elements in the DOM based on responsive breakpoints. Will fall back to bootstrap display utilities
  * if the browser or it's dependencies are not available
- * USAGE: <div visible="sm md lg"></div> OR <div visible="md-up"></div>
+ * USAGE: <nts-visible visible="sm md lg"></nts-visible> OR <nts-visible visible="md-up"></nts-visible>
  */
 @Component({
   selector: 'nts-visible',
