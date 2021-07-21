@@ -20,7 +20,7 @@ type overflow =
  * Resizes the attached DOM element to full all vertical space below it's current position
  */
 @Directive({
-  selector: '[appFullScreen]',
+  selector: '[ntsFullScreen]',
 })
 export class FullScreenDirective implements AfterViewInit, OnChanges {
   /** DOM reference */

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
@@ -7,10 +7,10 @@ import { AuthService, AuthState } from '../../shared/services/project/auth.servi
 import { IErrorApi } from '../../../typings';
 
 @Component({
-  selector: 'app-login',
+  selector: 'nts-show-login',
   templateUrl: './login.component.html',
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   public formMain!: FormGroup;
   public waiting: boolean | undefined;
   public errorApi: IErrorApi | null | undefined;
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
       error => {
         error.errorMsg = 'Error logging in.';
-        if ((error.statusText = 'Unauthorized')) {
+        if (error.statusText === 'Unauthorized') {
           error.errorMsg = 'Invalid username or password, please try again.';
           this.showErrorDetails = false;
         }
@@ -86,6 +86,4 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
     );
   } // end onSubmit
-
-  ngOnDestroy() {}
 }

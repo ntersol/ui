@@ -3,20 +3,20 @@ import { Directive, AfterViewInit, ElementRef, Input } from '@angular/core';
 /**
  * When this element is loaded, automatically attach focus
  * USAGE:
- * appFocus
- * [appFocus]="false" // Disable
+ * ntsFocus
+ * [ntsFocus]="false" // Disable
  */
 @Directive({
-  selector: '[appFocus]',
+  selector: '[ntsFocus]',
 })
 export class FocusDirective implements AfterViewInit {
   /** Default should focus on load, can be set to false to disable */
-  @Input() appFocus: boolean | undefined;
+  @Input() ntsFocus: boolean | undefined;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef) { }
 
   ngAfterViewInit() {
-    if (this.appFocus !== false && this.el && this.el.nativeElement) {
+    if (this.ntsFocus !== false && this.el && this.el.nativeElement) {
       setTimeout(() => this.el.nativeElement.focus(), 500);
     }
   }

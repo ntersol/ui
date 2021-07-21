@@ -58,7 +58,7 @@ export class SettingsService {
   constructor(
     private store: SettingsStore,
     private query: SettingsQuery,
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(PLATFORM_ID) private platformId: Record<string, unknown>,
   ) {
     // On settings changes, update synchronous properties
     this.query.select().subscribe(state => (this.settings = { ...state }));

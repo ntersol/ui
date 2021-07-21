@@ -6,7 +6,7 @@ export class ObjectUtils {
    * Sanitize a JS object
    * @param obj - Any object
    */
-  static sanitize(obj: Object) {
+  static sanitize(obj: Record<string, unknown>) {
     return JSON.parse(JSON.stringify(obj));
   }
 }

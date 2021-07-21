@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HighlightService } from '../../shared/services/highlight.service';
 
@@ -7,7 +7,7 @@ import { HighlightService } from '../../shared/services/highlight.service';
   templateUrl: './wizard.component.html',
   styleUrls: ['./wizard.component.scss'],
 })
-export class WizardComponent implements OnInit, AfterViewInit {
+export class WizardComponent implements AfterViewInit {
   public install = `
   npm i @ntersol/wizard --save
   npm i @ntersol/forms --save`;
@@ -36,8 +36,6 @@ export class WizardComponent implements OnInit, AfterViewInit {
   public formGroup = this.fb.group({});
 
   constructor(private highlight: HighlightService, private fb: FormBuilder) {}
-
-  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.highlight.highlightAll();

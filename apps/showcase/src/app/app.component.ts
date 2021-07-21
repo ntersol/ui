@@ -7,7 +7,7 @@ import { environment } from '$env';
 import { NtsVersionManagementService, NtsServiceWorkerService } from './shared/services/general';
 
 @Component({
-  selector: 'app-root',
+  selector: 'nts-showcase-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     private title: Title,
     private version: NtsVersionManagementService,
     private sw: NtsServiceWorkerService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.routeChange();

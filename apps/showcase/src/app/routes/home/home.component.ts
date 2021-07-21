@@ -1,8 +1,6 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
-  OnDestroy,
 } from '@angular/core';
 
 // Global state
@@ -15,21 +13,15 @@ import {
 // import { RouteDomainStateService } from '../../shared/state/domain';
 
 @Component({
-  selector: 'app-home',
+  selector: 'nts-show-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent implements OnInit, OnDestroy {
-  constructor() {}
+export class HomeComponent {
   // private domainState: DomainService, // Global domain state
   // public uiState: UiStateService, // Global UI state
   // private routeDomainState: RouteDomainStateService, // Route only domain state
   // private routeUIState: RouteUiStateService, // Route only UI state
   // private settings: SettingsService, // App settings/global properties
-
-  ngOnInit() {}
-
-  /** Must be present even if not used for autounsub */
-  ngOnDestroy() {}
 }

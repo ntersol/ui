@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NtsTable } from '@ntersol/table';
 import { Models } from '../../../../../shared/models';
@@ -10,7 +10,7 @@ import { StateManagementService } from '../shared/state-management.service';
   styleUrls: ['./example.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExampleComponent implements OnInit {
+export class ExampleComponent {
   /** Api state and data for users */
   public users$ = this.api.users.state$;
   /** Columns for table  */
@@ -48,9 +48,7 @@ export class ExampleComponent implements OnInit {
   /** Create or edit a user */
   public isEdit = false;
 
-  constructor(private api: StateManagementService, private fb: FormBuilder) {}
-
-  ngOnInit(): void {}
+  constructor(private api: StateManagementService, private fb: FormBuilder) { }
 
   /**
    * Save a new user or update existing

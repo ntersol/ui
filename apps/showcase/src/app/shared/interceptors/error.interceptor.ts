@@ -28,7 +28,7 @@ export class GlobalErrorHandler implements ErrorHandler {
   constructor(
     private settings: SettingsService,
     private sw: NtsServiceWorkerService,
-  ) {}
+  ) { }
 
   // Custom error handler for application/angular errors
   // Uses plain JS to eliminate any dependencies that may not be available due to the error
@@ -39,7 +39,7 @@ export class GlobalErrorHandler implements ErrorHandler {
     if (
       this.settings.isBrowser &&
       !error.errorMsg &&
-      !error.hasOwnProperty('status') &&
+      !Object.prototype.hasOwnProperty.call(error, 'status') &&
       environment.production
     ) {
       // If error endpoint specified, log errors

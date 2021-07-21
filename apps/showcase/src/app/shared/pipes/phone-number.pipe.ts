@@ -43,8 +43,6 @@ export class PhoneNumberPipe implements PipeTransform {
     if (number) {
       if (number.length > 3) {
         number = number.slice(0, 3) + '-' + number.slice(3, 7);
-      } else {
-        number = number;
       }
       result = ('(' + area + ') ' + number).trim().slice(0, 14);
     } else {

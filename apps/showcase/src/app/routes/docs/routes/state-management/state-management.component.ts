@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'nts-state-management',
@@ -6,8 +6,5 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./state-management.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StateManagementComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class StateManagementComponent {
 }

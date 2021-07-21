@@ -12,12 +12,12 @@ import 'prismjs/components/prism-scss';
 import 'prismjs/components/prism-css';
 import { isPlatformBrowser } from '@angular/common';
 
-declare var Prism: any;
+declare let Prism: any;
 @Injectable({
   providedIn: 'root',
 })
 export class HighlightService {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Record<string, unknown>) {}
 
   /**
    * Perform code syntax highlighting on the page

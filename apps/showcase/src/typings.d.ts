@@ -1,6 +1,6 @@
 /* SystemJS module definition */
-declare var module: NodeModule;
-declare var require: any;
+declare let module: NodeModule;
+declare let require: any;
 interface NodeModule {
   id: string;
 }
@@ -9,7 +9,7 @@ interface NodeModule {
 
 export interface IErrorApi {
   errorMsg?: string;
-  headers?: object;
+  headers?: Record<string, unknown>;
   message?: string;
   ok?: boolean;
   status?: number;

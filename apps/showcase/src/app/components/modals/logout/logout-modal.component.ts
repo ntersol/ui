@@ -1,18 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-logout-modal',
+  selector: 'nts-show-logout-modal',
   templateUrl: './logout-modal.component.html',
 })
-export class LogoutModalComponent implements OnInit, OnDestroy {
+export class LogoutModalComponent implements OnInit {
   public logoutTimer$: Subscription | undefined; // Holds the countdown obserable
   public counter: number | undefined; // Log out after this many seconds
 
-  constructor(public dialogService: DialogService, public ref: DynamicDialogRef) {}
+  constructor(public dialogService: DialogService, public ref: DynamicDialogRef) { }
 
   ngOnInit() {
     //  this.counter = this.config.data; // How long to display the modal window
@@ -35,6 +35,4 @@ export class LogoutModalComponent implements OnInit, OnDestroy {
   public logout() {
     this.ref.close(true);
   }
-
-  public ngOnDestroy() {}
 }

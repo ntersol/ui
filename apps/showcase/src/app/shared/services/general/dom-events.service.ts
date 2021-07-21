@@ -39,8 +39,6 @@ export class NtsKeyboardEventsService {
   /** Is this service actively listening for event handlers */
   private listenersActive: { [key: string]: any } = {};
 
-  constructor() {}
-
   /**
    * Create an event listener
    * @param keyEvent

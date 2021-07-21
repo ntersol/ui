@@ -9,7 +9,7 @@ import { UiStateService } from '$ui';
 import { AuthService, AuthState } from '../../../shared/services/project/auth.service';
 
 @Component({
-  selector: 'app-nav',
+  selector: 'nts-show-nav',
   styleUrls: ['./nav.component.scss'],
   templateUrl: './nav.component.html',
   // tslint:disable-next-line:use-component-view-encapsulation

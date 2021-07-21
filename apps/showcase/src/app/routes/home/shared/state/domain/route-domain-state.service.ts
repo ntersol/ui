@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 /**
  * This service is for holding domain state used by this route only
  * Copy paste the default domain store from /shared/state/domain/_store and localize
@@ -6,5 +6,4 @@ import { Injectable } from "@angular/core";
  */
 @Injectable()
 export class RouteDomainStateService {
-  constructor() {}
 }

@@ -5,6 +5,7 @@ import { TableRowExpansionDirective } from './row-expansion.directive';
 
 @Directive({ selector: '[ntsTableColumn]' })
 export class TableColumnDirective {
+  @Input() ntsTableColumn!: undefined;
   @Input() name!: string;
   @Input() field!: string;
   // Add custom props here for overrides in the cell templates

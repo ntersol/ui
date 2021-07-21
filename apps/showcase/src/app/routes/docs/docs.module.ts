@@ -28,7 +28,8 @@ import { StoreCommunicationComponent } from './routes/state-management/routes/st
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, TabViewModule, NtsTableModule, NtsStateManagementModule, NtsFormsModule, NtsVisibleModule],
-  declarations: [DocsComponent, WizardComponent, VisibleComponent, StateManagementComponent, ExampleComponent, ApiStoreCreatorComponent, UiStoreCreatorComponent, StoreCommunicationComponent],
+  declarations: [DocsComponent, WizardComponent, VisibleComponent, StateManagementComponent, ExampleComponent,
+    ApiStoreCreatorComponent, UiStoreCreatorComponent, StoreCommunicationComponent],
   providers: [HighlightService, RouteUiStateService, RouteUiStateStore, RouteUiStateQuery, RouteDomainStateService],
   exports: [StateManagementComponent, ExampleComponent],
   entryComponents: [],
