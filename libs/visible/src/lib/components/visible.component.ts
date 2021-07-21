@@ -21,7 +21,7 @@ import { debounceTime, distinctUntilChanged, map, startWith, tap } from 'rxjs/op
  * USAGE: <div visible="sm md lg"></div> OR <div visible="md-up"></div>
  */
 @Component({
-  selector: '[visible]',
+  selector: 'nts-visible',
   templateUrl: './visible.component.html',
   styleUrls: ['./visible.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,7 +46,7 @@ export class VisibleComponent implements OnInit {
   /** Holds fallback bootstrap classes to support SSR */
   public bootstrapClasses = '';
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Record<string, unknown>) {}
 
   ngOnInit(): void {
     this.bootstrapClasses = breakpointsToBootStrapClasses(this.visible);
