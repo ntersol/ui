@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
@@ -7,10 +7,8 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
   styleUrls: ['./feedback.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeedbackModalComponent implements OnInit {
-  constructor(public ref: DynamicDialogRef) {}
-
-  ngOnInit() {}
+export class FeedbackModalComponent {
+  constructor(public ref: DynamicDialogRef) { }
 
   /**
    * Submit the form

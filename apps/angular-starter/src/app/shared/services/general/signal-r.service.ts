@@ -78,7 +78,7 @@ export class NtsSignalRService {
               .toLowerCase()
               .includes('timeout')
           ) {
-            console.error("SignalR Connection Timeout:", err);
+            console.error('SignalR Connection Timeout:', err);
             console.log('Restarting SignalR Connection');
             setTimeout(() => this.connectionStart(signalRUrl, <string | tokenFn>this.token, 5000, true), 5000);
           }

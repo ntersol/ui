@@ -1,13 +1,13 @@
 import {
   Directive,
   Input,
-  OnInit,
   OnDestroy,
   ElementRef,
   HostListener,
   AfterViewInit,
 } from '@angular/core';
 import { debounce } from 'helpful-decorators';
+import { noop } from 'rxjs';
 
 interface DomOptions {
   attributes: boolean;
@@ -24,16 +24,16 @@ interface Dimensions {
  * Watches for any changes to a DOM element and fires a callback when that happens
  * Only callback is required. Be sure to bind the function.
  * Currently uses polling for width & height changes, mutation observer doesn't detect these
- * 
+ *
  * USAGE SHORT: appDomObserver [callback]="function.bind(this)"
  * USAGE FULL:
- * appDomObserver [callback]="function.bind(this)" [changesToAttr]="true" [changesToChildren]="false" [changesToData]="false" 
+ * appDomObserver [callback]="function.bind(this)" [changesToAttr]="true" [changesToChildren]="false" [changesToData]="false"
    [changesToElementResize]="true"  [changesToWindowResize]="true"
  */
 @Directive({
   selector: '[appDomObserver]',
 })
-export class DomObserverDirective implements OnInit, OnDestroy, AfterViewInit {
+export class DomObserverDirective implements OnDestroy, AfterViewInit {
   /** Watch attribute changes */
   @Input() changesToAttr = true;
   /** Watch changes to children nodes */
@@ -45,7 +45,7 @@ export class DomObserverDirective implements OnInit, OnDestroy, AfterViewInit {
   /** Watch changes to data */
   @Input() changesToWindowResize = true;
   /** Callback method to execute when this DOM element changes */
-  @Input() callback: Function | undefined;
+  @Input() callback: () => void | undefined = noop;
 
   /** Watch changes to data*/
   // @Output() domChange = new EventEmitter<any>();
@@ -67,8 +67,6 @@ export class DomObserverDirective implements OnInit, OnDestroy, AfterViewInit {
   };
 
   constructor(private el: ElementRef) {}
-
-  ngOnInit() {}
 
   ngAfterViewInit() {
     // If changesToElementResize is specified, set initial width & height and start polling

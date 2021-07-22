@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
@@ -11,7 +11,7 @@ import { IErrorApi } from '../../../typings';
   selector: 'app-login',
   templateUrl: './login.component.html',
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   public formMain!: FormGroup;
   public waiting: boolean | undefined;
   public errorApi: IErrorApi | null | undefined;
@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
       error => {
         error.errorMsg = 'Error logging in.';
-        if ((error.statusText = 'Unauthorized')) {
+        if ((error.statusText === 'Unauthorized')) {
           error.errorMsg = 'Invalid username or password, please try again.';
           this.showErrorDetails = false;
         }
@@ -88,6 +88,4 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
     );
   } // end onSubmit
-
-  ngOnDestroy() { }
 }

@@ -13,7 +13,7 @@
   - Leave everything else blank or unchecked here
  */
 
-export module Models {
+export namespace Models {
   export interface Auth {
     data: {
       userGuid: string;
@@ -63,9 +63,9 @@ export module Models {
    *  END NSWAG STUDIO COPY/PASTE
    ********************************/
 
-    /********************************
-   *  BEGIN EXTENDS NSWAG
-   ********************************/
+  /********************************
+ *  BEGIN EXTENDS NSWAG
+ ********************************/
 
   /********************************
    *  END EXTENDS NSWAG

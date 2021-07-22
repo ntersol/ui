@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 // import { DomainService } from '$domain';
 // import { UiStateService } from '$ui';
@@ -9,14 +9,12 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
   styleUrls: ['./root.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RootComponent implements OnInit, OnDestroy {
-  
+export class RootComponent {
+
   constructor(
     // private domainState: DomainService, // Global domain state
     // public uiState: UiStateService, // Global UI state
-  ) {}
-
-  ngOnInit() {}
-
-  ngOnDestroy() {}
+  ) {
+    // used for reference
+  }
 }

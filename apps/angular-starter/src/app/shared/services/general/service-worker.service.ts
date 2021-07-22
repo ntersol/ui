@@ -73,7 +73,9 @@ export class NtsServiceWorkerService {
     // Add legacy support to browsers without a service worker
     if (navigator && navigator.serviceWorker) {
       this.worker$ = from(navigator.serviceWorker.getRegistration());
-      this.pushSubscription$ = this.worker$.pipe(switchMap(registration => (registration ? from(registration.pushManager.getSubscription()) : of(null))));
+      this.pushSubscription$ = this.worker$.pipe(switchMap(registration =>
+        (registration ? from(registration.pushManager.getSubscription()) : of(null)))
+      );
     }
   }
 

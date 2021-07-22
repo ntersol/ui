@@ -24,8 +24,6 @@ export class NtsPostMessageService {
   /** Generate a random number to identify this app. Used to drop same domain postmessages */
   private appId = Math.floor(Math.random() * 10000000);
 
-  constructor() {}
-
   /**
    * Activates the post message listener
    * @param allowedDomains - Allowable domains to whitelist message responses. Based on window.location.origin
