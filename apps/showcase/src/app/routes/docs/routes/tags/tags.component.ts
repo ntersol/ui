@@ -37,10 +37,10 @@ export class TagsComponent {
   `;
   htmlExample = `
   &lt;nts-tags
-    [tags]="tags"
-    (tagCreated)="onTagCreated($event)"
-    (tagUpdated)="onTagUpdated($event)"
-    (tagDeleted)="onTagDeleted($event)"&gt;&lt;/nts-tags&gt;
+    [tags]=&quot;tags&quot;
+    (tagCreated)=&quot;onTagCreated($event)&quot;
+    (tagUpdated)=&quot;onTagUpdated($event)&quot;
+    (tagDeleted)=&quot;onTagDeleted($event)&quot;&gt;&lt;/nts-tags&gt;
   `;
   tags: NtsTags.TagDef[] = [];
 
