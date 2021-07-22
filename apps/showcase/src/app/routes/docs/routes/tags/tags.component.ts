@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { NtsTags } from '@ntersol/tags';
+import { HighlightService } from '../../shared/services/highlight.service';
 
 let index = 0;
 @Component({
@@ -7,7 +8,7 @@ let index = 0;
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss']
 })
-export class TagsComponent {
+export class TagsComponent implements AfterViewInit {
   installExample = `
   npm i @ntersol/tags`;
   importExample = `
@@ -43,6 +44,12 @@ export class TagsComponent {
     (tagDeleted)=&quot;onTagDeleted($event)&quot;&gt;&lt;/nts-tags&gt;
   `;
   tags: NtsTags.TagDef[] = [];
+
+  constructor(private highlight: HighlightService) { }
+
+  ngAfterViewInit() {
+    this.highlight.highlightAll();
+  }
 
   onTagCreated(tag: NtsTags.TagDef): void {
     tag.guid = ++index + '';

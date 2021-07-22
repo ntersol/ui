@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { HighlightService } from '../../shared/services/highlight.service';
 
 type sizes = 'sm' | 'md' | 'lg' | 'md-up';
@@ -8,7 +8,7 @@ type sizes = 'sm' | 'md' | 'lg' | 'md-up';
   templateUrl: './visible.component.html',
   styleUrls: ['./visible.component.scss']
 })
-export class VisibleComponent {
+export class VisibleComponent implements AfterViewInit {
 
   public exampleTS =
     `
