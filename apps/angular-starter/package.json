@@ -105,6 +105,7 @@
     "@ngneat/until-destroy": "8.0.3",
     "@nguniversal/express-engine": "8.1.1",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
+    "@ntersol/state-management": "0.0.11",
     "@schematics/update": "0.802.1",
     "ag-grid-angular": "21.2.0",
     "ag-grid-community": "21.2.0",

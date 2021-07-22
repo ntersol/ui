@@ -2,7 +2,7 @@
 
 A rapid starter project for creating Angular single page apps. Contains Angular, ngPrime, Akita and more. Built with Angular CLI.
 
-Available online @ https://jerrolkrause.github.io/angular-starter/#/
+Available online @ https://github.com/ntersol/angular-starter
 
 ## Quick Start
 
@@ -10,13 +10,15 @@ Available online @ https://jerrolkrause.github.io/angular-starter/#/
 # Clone the repo
 git clone https://github.com/JerrolKrause/angular-starter.git
 
-# Rename directory from `angular-starter` to `your-app`
+# Rename directory from `angular-starter` to `your-app` and copy the directory to your project location
 
-# Change directory to the repo
+# Change directory to the new directory you copied the project to
 cd your-app
 
 # Localize
-Remove the following line from the app root tsconfig `"extends": "./../tsconfig.json",`
+Remove the tsconfig.json from the root of the application.
+Rename tsconfig.json.bak to tsconfig.json
+Remove the extends line in the .eslintrc.json file: `"extends": ["../../.eslintrc.json"],`
 
 # Install the repo with npm
 npm i
