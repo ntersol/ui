@@ -5,6 +5,7 @@ import { DocsModule } from './docs.module';
 import { ApiStoreCreatorComponent } from './routes/state-management/routes/api-store-creator/api-store-creator.component';
 import { StoreCommunicationComponent } from './routes/state-management/routes/store-communication/store-communication.component';
 import { UiStoreCreatorComponent } from './routes/state-management/routes/ui-store-creator/ui-store-creator.component';
+import { TagsComponent } from './routes/tags/tags.component';
 
 import { VisibleComponent } from './routes/visible/visible.component';
 import { WizardComponent } from './routes/wizard/wizard.component';
@@ -49,7 +50,7 @@ const routes: Routes = [
       },
       {
         path: 'tags',
-        component: undefined,
+        component: TagsComponent,
         data: { title: 'Tags' },
       },
       {

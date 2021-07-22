@@ -1,0 +1,35 @@
+<h1>Tags</h1>
+<p>Allows creating different tags with text and background colors</p>
+<hr />
+
+<p-tabView>
+    <p-tabPanel header="Documentation">
+        <h2>Install</h2>
+        <pre>
+          <code class="language-ts" [innerHtml]="installExample"></code>
+        </pre>
+
+        <h2>Setup</h2>
+        <p>1. Import into module</p>
+        <pre>
+            <code class="language-ts" [innerHtml]="importExample"></code>
+        </pre>
+
+        <p>2. Add imports and inputs / outputs in component</p>
+        <pre>
+            <code class="language-ts" [innerHtml]="compExample"></code>
+        </pre>
+
+        <p>3. Add html template</p>
+        <pre>
+            <code class="language-ts" [innerHtml]="htmlExample"></code>
+        </pre>
+    </p-tabPanel>
+
+    <p-tabPanel header="Example">
+        <nts-tags [tags]="tags" (tagCreated)="onTagCreated($event)" (tagUpdated)="onTagUpdated($event)"
+            (tagDeleted)="onTagDeleted($event)"></nts-tags>
+    </p-tabPanel>
+
+    <p-tabPanel header="API"> Coming soon! </p-tabPanel>
+</p-tabView>
