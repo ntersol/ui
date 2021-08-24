@@ -62,4 +62,19 @@ export class ScriptLoaderService {
       }
     });
   }
+
+  public loadMultiple(scripts: ScriptModel[]): Observable<ScriptModel[]> {
+    return new Observable<ScriptModel[]>((observer: Observer<ScriptModel[]>) => {
+      let count = scripts.length;
+      scripts.forEach(script => {
+        this.load(script).subscribe(() => {
+          count--;
+          if (count <= 0) {
+            observer.next(scripts);
+            observer.complete();
+          }
+        });
+      });
+    });
+  }
 }
