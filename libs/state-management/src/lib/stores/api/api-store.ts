@@ -286,7 +286,7 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
    * @param data
    * @returns
    */
-  private upsert<t>(apiRequest: Observable<t>, data: t | t[], mapFn?: <t>(x: t | null) => any) {
+  private upsert<t>(apiRequest: Observable<t>, data: t | t[], mapFn?: <t>(x: t | null) => any): Observable<Partial<t>> {
     // Reset state
     this.stateChange({ modifying: true, errorModify: null });
     // Dispatch event to the global scope

@@ -8,6 +8,7 @@
     "primeng": "^11.2.3"
   },
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "@types/node": "^12.11.1"
   }
 }

@@ -50,7 +50,9 @@ export class ExampleComponent implements OnInit {
 
   constructor(private api: StateManagementService, private fb: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.users$.subscribe(x => console.log(x));
+  }
 
   /**
    * Save a new user or update existing
