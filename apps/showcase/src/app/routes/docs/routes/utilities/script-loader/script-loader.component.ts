@@ -18,10 +18,11 @@ export class ScriptLoaderComponent implements OnInit {
       // Script loaded successfully
     })
 
-    // Now with pipeable operator goodness
-    scriptLoad$('https://unpkg.com/dayjs@1.8.21/dayjs.min.js').pipe(debounceTime(100)).subscribe(() => {
-      // Script loaded successfully
-    })`;
+    // Now with pipeable operator goodness and error handling
+    scriptLoad$('https://unpkg.com/dayjs@1.8.21/dayjs.NOPE.js').pipe(debounceTime(100)).subscribe(
+      () => console.log('Script loaded successfully'),
+      error => console.error(error)
+    )`;
 
   constructor() { }
 
@@ -29,9 +30,10 @@ export class ScriptLoaderComponent implements OnInit {
     scriptLoad$('https://unpkg.com/dayjs@1.8.21/dayjs.min.js').subscribe(() => {
       console.log('Script loaded successfully')
     })
-    scriptLoad$('https://unpkg.com/dayjs@1.8.21/dayjs.min.js').pipe(debounceTime(100)).subscribe(() => {
-      console.log('Only one js file loaded even though this is a subsequent request')
-    })
+    scriptLoad$('https://unpkg.com/dayjs@1.8.21/dayjs.NOPE.js').pipe(debounceTime(100)).subscribe(
+      () => console.log('Script loaded successfully'),
+      error => console.error(error)
+    )
   }
 
 }
