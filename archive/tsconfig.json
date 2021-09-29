@@ -11,7 +11,7 @@
     "lib": ["es2017", "dom"],
     "moduleResolution": "node",
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "outDir": "./dist/out-tsc",
     "paths": {
       "$libs": ["./src/app/libs"],
