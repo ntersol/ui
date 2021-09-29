@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ViewEncapsulation } from '@angular/core';
 
 // Global state
 // import { DomainService } from '$domain';
@@ -19,17 +14,13 @@ import {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  constructor() {}
-  // private domainState: DomainService, // Global domain state
-  // public uiState: UiStateService, // Global UI state
-  // private routeDomainState: RouteDomainStateService, // Route only domain state
-  // private routeUIState: RouteUiStateService, // Route only UI state
-  // private settings: SettingsService, // App settings/global properties
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   /** Must be present even if not used for autounsub */
-  ngOnDestroy() {}
+  ngOnDestroy() { }
 }

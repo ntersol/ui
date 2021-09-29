@@ -26,6 +26,7 @@ export class NavComponent {
   public version$ = this.settings.version$;
 
   public navMenu: MenuItem[] = [
+    /**
     {
       label: 'Home',
       icon: 'fas fa-tachometer mr-1',
@@ -38,6 +39,7 @@ export class NavComponent {
       icon: 'fas fa-cubes mr-1',
       routerLink: '/docs',
     },
+     */
   ];
 
   public utilityMenu: MenuItem[] = [

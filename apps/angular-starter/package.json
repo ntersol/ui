@@ -139,7 +139,7 @@
     "@types/mocha": "5.2.7",
     "@types/node": "12.11.1",
     "@types/ramda": "^0.27.40",
-    "angular-cli-ghpages": "0.6.0-rc.2",
+    "angular-cli-ghpages": "1.0.0-rc.2",
     "codelyzer": "^6.0.0",
     "dotenv": "8.0.0",
     "express": "4.17.1",

@@ -8,7 +8,7 @@ export const defaults: EnvironmentConfig = {
   production: false,
   properties: {
     /** Name of application */
-    appName: 'Angular Starter',
+    appName: 'Ntersol UI',
   },
   settings: {
     /** Enable service worker functionality */
