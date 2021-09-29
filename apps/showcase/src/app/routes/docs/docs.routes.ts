@@ -5,6 +5,7 @@ import { DocsModule } from './docs.module';
 import { ApiStoreCreatorComponent } from './routes/state-management/routes/api-store-creator/api-store-creator.component';
 import { StoreCommunicationComponent } from './routes/state-management/routes/store-communication/store-communication.component';
 import { UiStoreCreatorComponent } from './routes/state-management/routes/ui-store-creator/ui-store-creator.component';
+import { ScriptLoaderComponent } from './routes/utilities/script-loader/script-loader.component';
 
 import { VisibleComponent } from './routes/visible/visible.component';
 import { WizardComponent } from './routes/wizard/wizard.component';
@@ -41,6 +42,18 @@ const routes: Routes = [
         path: 'wizard',
         component: WizardComponent,
         data: { title: 'Wizard' },
+      },
+      {
+        path: 'utilities',
+        // component: WizardComponent,
+        data: { title: 'Utilities' },
+        children: [
+          {
+            path: 'script-loader',
+            component: ScriptLoaderComponent,
+            data: { title: 'Script Loader' },
+          },
+        ]
       },
       {
         path: 'visible',

@@ -1,0 +1,37 @@
+<h1>Script Loader</h1>
+<p>A convenient way to load 3rd party script files as an observable.</p>
+<p>Key Features:</p>
+<ul>
+    <li>Full support for RXJS goodness</li>
+    <li>Script will only be loaded once, subsequent calls will complete immediately without reloading the script</li>
+    <li>Supports concurrency so that only one script will be loaded even if there are multiple subscribers</li>
+</ul>
+<hr />
+
+<p-tabView>
+    <p-tabPanel header="Documentation">
+        <div>
+            <h2>Setup</h2>
+            <pre>
+        <code class="language-ts" [innerHtml]="exampleTS"></code>
+      </pre>
+
+        </div>
+    </p-tabPanel>
+
+    <p-tabPanel header="Example">
+        <div>
+            <h2>Check the JS tab in the console to see the script loading</h2>
+            <div>
+                <h3>
+                    <code class="language-html">
+              &#060;div visible=&quot;lg&quot;&#062;Content lg&#060;/div&#062;
+            </code>
+                </h3>
+
+            </div>
+        </div>
+    </p-tabPanel>
+
+    <p-tabPanel header="API"> Coming soon! </p-tabPanel>
+</p-tabView>
