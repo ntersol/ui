@@ -44,16 +44,17 @@ export const ROUTES: Routes = [
         path: 'route',
         pathMatch: 'full',
         loadChildren: () => import('./routes/_route/route.module').then(m => m.RouteModule),
-        // canActivate: [AuthGuard],
       },
 
-      /**
-      // Docs
       {
-        path: 'docs',
-        loadChildren: () => import('./routes/docs/docs.module').then(m => m.DocsModule),
+        path: 'components',
+        loadChildren: () => import('./routes/components/components.module').then(m => m.ComponentsModule),
       },
-       */
+
+      {
+        path: 'utilities',
+        loadChildren: () => import('./routes/utilities/utilities.module').then(m => m.UtilitiesModule),
+      },
 
       // Empty path string for homepage ('') needs to be LAST otherwise it catches all other routes
       {

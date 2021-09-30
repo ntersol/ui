@@ -5,7 +5,6 @@ import { NtsTableModule } from '@ntersol/table';
 import { NtsFormsModule } from '@ntersol/forms';
 import { NtsStateManagementModule } from '@ntersol/state-management';
 import { TabViewModule } from 'primeng/tabview';
-// import { NtsWizardModule } from '@ntersol/wizard';
 import { NtsVisibleModule } from '@ntersol/visible';
 
 // Routing
@@ -25,11 +24,10 @@ import { ExampleComponent } from './routes/state-management/components/example.c
 import { ApiStoreCreatorComponent } from './routes/state-management/routes/api-store-creator/api-store-creator.component';
 import { UiStoreCreatorComponent } from './routes/state-management/routes/ui-store-creator/ui-store-creator.component';
 import { StoreCommunicationComponent } from './routes/state-management/routes/store-communication/store-communication.component';
-import { ScriptLoaderComponent } from './routes/utilities/script-loader/script-loader.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, TabViewModule, NtsTableModule, NtsStateManagementModule, NtsFormsModule, NtsVisibleModule],
-  declarations: [HomeComponent, WizardComponent, VisibleComponent, StateManagementComponent, ExampleComponent, ApiStoreCreatorComponent, UiStoreCreatorComponent, StoreCommunicationComponent, ScriptLoaderComponent],
+  declarations: [HomeComponent, WizardComponent, VisibleComponent, StateManagementComponent, ExampleComponent, ApiStoreCreatorComponent, UiStoreCreatorComponent, StoreCommunicationComponent],
   providers: [HighlightService, RouteUiStateService, RouteUiStateStore, RouteUiStateQuery, RouteDomainStateService],
   exports: [StateManagementComponent, ExampleComponent],
   entryComponents: [],
