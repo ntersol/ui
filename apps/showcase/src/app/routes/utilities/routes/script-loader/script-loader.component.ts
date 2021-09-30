@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { scriptLoad$ } from '@ntersol/utils';
 import { debounceTime } from 'rxjs/operators';
+import { HighlightService } from '../../../home/shared/services/highlight.service';
 
 @Component({
   selector: 'nts-script-loader',
@@ -24,7 +25,7 @@ export class ScriptLoaderComponent implements OnInit {
       error => console.error(error)
     )`;
 
-  constructor() { }
+  constructor(private highlight: HighlightService) { }
 
   ngOnInit(): void {
     scriptLoad$('https://unpkg.com/dayjs@1.8.21/dayjs.min.js').subscribe(() => {
@@ -34,6 +35,12 @@ export class ScriptLoaderComponent implements OnInit {
       () => console.log('Script loaded successfully'),
       error => console.error(error)
     )
+  }
+
+
+
+  ngAfterViewInit() {
+    this.highlight.highlightAll();
   }
 
 }
