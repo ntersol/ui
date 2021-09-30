@@ -21,7 +21,7 @@ export const usage1 = `
   })
   export class SampleService {
     // Create a ui store creator instance with default state using interface model and options
-    public uiStore = ntsUIStoreCreator<UIStoreModel>({ name: null, user: { age: 12, nameFirst: &#39;NameFirst123&#39; } }, { persistId: &#39;uiStore&#39; });
+    public uiStore = ntsUIStoreCreator&lt;UIStoreModel&gt;({ name: null, user: { age: 12, nameFirst: &#39;NameFirst123&#39; } }, { persistId: &#39;uiStore&#39; });
 
     constructor() {}
   }`;
