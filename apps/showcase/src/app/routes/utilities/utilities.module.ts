@@ -10,10 +10,11 @@ import { routing } from './routes';
 import { UtilitiesComponent } from './utilities.component';
 import { RouteUiStateService, RouteUiStateStore, RouteUiStateQuery } from './shared/state/ui/route-ui-state.service';
 import { ScriptLoaderComponent } from './routes/script-loader/script-loader.component';
+import { Formgroup2ApiComponent } from './routes/formgroup2-api/formgroup2-api.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, TabViewModule],
-  declarations: [UtilitiesComponent, ScriptLoaderComponent],
+  declarations: [UtilitiesComponent, ScriptLoaderComponent, Formgroup2ApiComponent],
   providers: [
     RouteUiStateService,
     RouteUiStateStore,
