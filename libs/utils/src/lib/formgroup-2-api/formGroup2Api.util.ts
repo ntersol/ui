@@ -64,7 +64,7 @@ type ApiUrl = (parent?: any, control?: AbstractControl) => string;
 
 /**
  * Manage relationships between a form group mega model and a REST endpoint. When this method is called, it will automatically determine which models in the form group need to be saved and where to save them. Includes POST/PUT/PATCH/DELETE.
- *
+ * @author Jerrol Krause
  * @example
  * // Call to save changes within the model
  * saveFormGroup$(this.http, formGroupModel, formGroup).subscribe()

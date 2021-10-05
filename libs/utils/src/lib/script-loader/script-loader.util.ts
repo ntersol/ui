@@ -7,6 +7,7 @@ let scriptsLoaded: Record<string, boolean> = {};
 /**
  * Load a remote javascript file asychronously. Supports caching and multiple concurrent requesters
  * @param srcUrl A url of a javascript file
+ * @author Jerrol Krause
  * @example
  * scriptLoad$('https://unpkg.com/dayjs@1.8.21/dayjs.min.js').subscribe(() => {
  * // Script loaded successfully
