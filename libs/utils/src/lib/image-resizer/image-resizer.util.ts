@@ -13,7 +13,7 @@
  * const newFile = await resizeImage(file, 850);
  * @returns Promise<File>
  */
-export const imageResize = (image: File, maxDimension: number) => new Promise((resolve, reject) => {
+export const imageResize = (image: File, maxDimension: number) => new Promise<File>((resolve, reject) => {
     makeImg(image).then((img: any) => {
         const newD = downscaleDimension(img, maxDimension);
         const canvas = document.createElement("canvas");
