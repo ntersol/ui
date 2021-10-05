@@ -37,8 +37,8 @@ export class ImageResizerComponent implements OnInit {
   }
 
   public display() {
-    imageResize(this.file, this.maxSize).then((newFile: any) => {
-      this.imagePreview$.next(URL.createObjectURL(newFile))
+    imageResize(this.file, this.maxSize).then(file => {
+      this.imagePreview$.next(URL.createObjectURL(file))
     });
 
   }
