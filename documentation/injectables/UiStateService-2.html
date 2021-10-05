@@ -1,0 +1,742 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ntersol documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ntersol documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li >UiStateService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>apps/showcase/src/app/shared/stores/ui/ui-state.service.ts</code>
+        </p>
+
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#tabActive$" >tabActive$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#toggles$" >toggles$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#uiState$" >uiState$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#updateAvailable$" >updateAvailable$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#reset" >reset</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#toggles" >toggles</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#updateAppModal" >updateAppModal</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(store: <a href="../injectables/UiStateStore.html" target="_self">UiStateStore</a>, query: <a href="../injectables/UiStateQuery.html" target="_self">UiStateQuery</a>, confirmationService: ConfirmationService, sw: <a href="https://angular.io/api/service-worker/SwUpdate" target="_blank">SwUpdate</a>, ntsSw: <a href="../injectables/NtsServiceWorkerService.html" target="_self">NtsServiceWorkerService</a>, ntsVersion: <a href="../injectables/NtsVersionManagementService.html" target="_self">NtsVersionManagementService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">apps/showcase/src/app/shared/stores/ui/ui-state.service.ts:41</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UiStateStore.html" target="_self" >UiStateStore</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>query</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UiStateQuery.html" target="_self" >UiStateQuery</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>confirmationService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ConfirmationService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>sw</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/service-worker/SwUpdate" target="_blank" >SwUpdate</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>ntsSw</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/NtsServiceWorkerService.html" target="_self" >NtsServiceWorkerService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>ntsVersion</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/NtsVersionManagementService.html" target="_self" >NtsVersionManagementService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reset"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>reset</b></span>
+                        <a href="#reset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>reset()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="105"
+                            class="link-to-prism">apps/showcase/src/app/shared/stores/ui/ui-state.service.ts:105</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reset store state</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggles"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>toggles</b></span>
+                        <a href="#toggles"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toggles(toggleProp: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, toggleValue: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="82"
+                            class="link-to-prism">apps/showcase/src/app/shared/stores/ui/ui-state.service.ts:82</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>A generic dictionary for simple key/value pair state changes
+IE: this.ui.toggles(&#39;sidebarOpen&#39;, true);
+&amp;&amp;: this.ui.query.toggles$(&#39;sidebarOpen&#39;);</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>toggleProp</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>toggleValue</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateAppModal"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>updateAppModal</b></span>
+                        <a href="#updateAppModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateAppModal()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="93"
+                            class="link-to-prism">apps/showcase/src/app/shared/stores/ui/ui-state.service.ts:93</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tabActive$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>tabActive$</b></span>
+                        <a href="#tabActive$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">apps/showcase/src/app/shared/stores/ui/ui-state.service.ts:26</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Return the active tab of the specified tab instance</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggles$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>toggles$</b></span>
+                        <a href="#toggles$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">apps/showcase/src/app/shared/stores/ui/ui-state.service.ts:34</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Return the toggle state of the specificed prop</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uiState$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>uiState$</b></span>
+                        <a href="#uiState$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.query.select()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">apps/showcase/src/app/shared/stores/ui/ui-state.service.ts:24</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>State of current UI store</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateAvailable$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>updateAvailable$</b></span>
+                        <a href="#updateAvailable$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>merge(this.ntsSw.updateAvailable$, this.ntsVersion.updateAvailable$)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">apps/showcase/src/app/shared/stores/ui/ui-state.service.ts:21</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Is an app update available, either from the service worker or the version checker</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { map, distinctUntilChanged, filter } from &#x27;rxjs/operators&#x27;;
+import { merge } from &#x27;rxjs&#x27;;
+import { ConfirmationService } from &#x27;primeng/api&#x27;;
+import { SwUpdate } from &#x27;@angular/service-worker&#x27;;
+import { NtsServiceWorkerService, NtsVersionManagementService } from &#x27;../../services/general&#x27;;
+import { StoreConfig, Store, Query } from &#x27;@datorama/akita&#x27;;
+import { UIState } from &#x27;./ui-state&#x27;;
+
+export function createInitialState(): UIState {
+  return {
+    tabsActive: {},
+    toggles: {},
+  };
+}
+
+// tslint:disable-next-line:max-classes-per-file
+@Injectable({ providedIn: &#x27;root&#x27; })
+export class UiStateService {
+  /** Is an app update available, either from the service worker or the version checker */
+  public updateAvailable$ &#x3D; merge(this.ntsSw.updateAvailable$, this.ntsVersion.updateAvailable$);
+
+  /** State of current UI store */
+  public uiState$ &#x3D; this.query.select();
+  /** Return the active tab of the specified tab instance */
+  public tabActive$ &#x3D; (tabInstanceId: string) &#x3D;&gt;
+    this.query
+      .select(state &#x3D;&gt; state.tabsActive)
+      .pipe(
+        map(val &#x3D;&gt; (val &amp;&amp; val[tabInstanceId] ? val[tabInstanceId] : 0)),
+        distinctUntilChanged(),
+      );
+  /** Return the toggle state of the specificed prop */
+  public toggles$ &#x3D; (toggleProp: string) &#x3D;&gt;
+    this.query
+      .select(state &#x3D;&gt; state.toggles)
+      .pipe(
+        map(val &#x3D;&gt; (val &amp;&amp; val[toggleProp] !&#x3D;&#x3D; null ? val[toggleProp] : null)),
+        filter(val &#x3D;&gt; typeof val !&#x3D;&#x3D; &#x27;undefined&#x27;),
+        distinctUntilChanged(),
+      );
+
+  constructor(
+    private store: UiStateStore,
+    private query: UiStateQuery,
+    private confirmationService: ConfirmationService,
+    private sw: SwUpdate,
+    private ntsSw: NtsServiceWorkerService,
+    private ntsVersion: NtsVersionManagementService,
+  ) {
+    // this.query.uiState$.subscribe(state &#x3D;&gt; console.log(&#x27;UI STATE&#x27;, state));
+    this.updateAvailable$.pipe(filter(val &#x3D;&gt; val)).subscribe(() &#x3D;&gt; this.updateAppModal());
+  }
+
+  /**
+   * Change and persist the visible tab of a tabset
+   * Make sure this service is public: constructor(public ui: UIStoreService) and that the first argument matches
+   * USAGE
+   &lt;mat-tab-group [selectedIndex]&#x3D;&quot;ui.query.tabActive$(&#x27;home&#x27;) | async&quot; (selectedTabChange)&#x3D;&quot;ui.tabChange(&#x27;home&#x27;, $event)&quot;&gt;
+   * @param tabInstanceId - A name or unique identifier for this tab instance
+   * @param tabEvent - The tabChange event supplied by ng-boostrap
+
+  public tabChange(tabInstanceId: string, tabEvent: MatTabChangeEvent) {
+    this.store.update(store &#x3D;&gt; {
+      const tabsActive &#x3D; { ...store.tabsActive };
+      tabsActive[tabInstanceId] &#x3D; tabEvent.index;
+      return &lt;UIState&gt;{
+        ...store,
+        tabsActive: tabsActive,
+      };
+    });
+  }
+   */
+
+  /**
+   * A generic dictionary for simple key/value pair state changes
+   * IE: this.ui.toggles(&#x27;sidebarOpen&#x27;, true);
+   * &amp;&amp;: this.ui.query.toggles$(&#x27;sidebarOpen&#x27;);
+   * @param toggleProp
+   * @param toggleValue
+   */
+  public toggles(toggleProp: string, toggleValue: any) {
+    this.store.update(store &#x3D;&gt; {
+      const toggles &#x3D; { ...store.toggles };
+      toggles[toggleProp] &#x3D; toggleValue;
+      return &lt;UIState&gt;{
+        ...store,
+        toggles: toggles,
+      };
+    });
+  }
+
+  public updateAppModal() {
+    this.confirmationService.confirm({
+      message: &#x27;An update for this application is available, would you like to update?&#x27;,
+      header: &#x27;Confirmation&#x27;,
+      accept: () &#x3D;&gt; (this.sw.isEnabled ? this.sw.activateUpdate().then(() &#x3D;&gt; document.location.reload()) : document.location.reload()),
+      // reject: () &#x3D;&gt; console.log(&#x27;Nope!!!&#x27;),
+    });
+  }
+
+  /**
+   * Reset store state
+   */
+  public reset() {
+    this.store.reset();
+  }
+}
+
+// tslint:disable-next-line:max-classes-per-file
+@Injectable({ providedIn: &#x27;root&#x27; })
+@StoreConfig({ name: &#x27;uiState&#x27;, resettable: true })
+export class UiStateStore extends Store&lt;UIState&gt; {
+  constructor() {
+    super(createInitialState());
+  }
+}
+
+// tslint:disable-next-line:max-classes-per-file
+@Injectable({ providedIn: &#x27;root&#x27; })
+export class UiStateQuery extends Query&lt;UIState&gt; {
+  constructor(protected store: UiStateStore) {
+    super(store);
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'UiStateService-2.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

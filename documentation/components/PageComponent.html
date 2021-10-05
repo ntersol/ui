@@ -1,0 +1,2112 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ntersol documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ntersol documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  PageComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>libs/document-editor/src/lib/components/page/page.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-page</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./page.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./page.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dragOverLeft" >dragOverLeft</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dragOverRight" >dragOverRight</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#loaded" >loaded</a>
+                            </li>
+                            <li>
+                                <a href="#pageRef" >pageRef</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#canReorder" >canReorder</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dragCatch" >dragCatch</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dragOver" >dragOver</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dragStart" >dragStart</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#drop" >drop</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#pageReset" >pageReset</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#rotate" >rotate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setActive" >setActive</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setCanvas" >setCanvas</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#toggleExclusion" >toggleExclusion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#toggleSelected" >toggleSelected</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#canDropFromAny" >canDropFromAny</a>
+                            </li>
+                            <li>
+                                <a href="#docIndex" >docIndex</a>
+                            </li>
+                            <li>
+                                <a href="#isActive" >isActive</a>
+                            </li>
+                            <li>
+                                <a href="#isSelected" >isSelected</a>
+                            </li>
+                            <li>
+                                <a href="#page" >page</a>
+                            </li>
+                            <li>
+                                <a href="#pageIndex" >pageIndex</a>
+                            </li>
+                            <li>
+                                <a href="#settings" >settings</a>
+                            </li>
+                            <li>
+                                <a href="#tnSettings" >tnSettings</a>
+                            </li>
+                            <li>
+                                <a href="#viewModels" >viewModels</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#setActivePage" >setActivePage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(docsSvc: <a href="../injectables/DocumentEditorService.html" target="_self">DocumentEditorService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>docsSvc</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DocumentEditorService.html" target="_self" >DocumentEditorService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="canDropFromAny"></a>
+                        <b>canDropFromAny</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:23</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Can this page have pages from other docs dropped. If false can only drop and reorder pages from same doc</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="docIndex"></a>
+                        <b>docIndex</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:17</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isActive"></a>
+                        <b>isActive</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:20</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isSelected"></a>
+                        <b>isSelected</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:19</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="page"></a>
+                        <b>page</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Page.html" target="_self" >NtsDocumentEditor.Page | null</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:14</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pageIndex"></a>
+                        <b>pageIndex</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:18</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="settings"></a>
+                        <b>settings</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>NtsDocumentEditor.Settings | null</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:15</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="tnSettings"></a>
+                        <b>tnSettings</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>NtsDocumentEditor.ThumbnailSize | null</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:16</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="viewModels"></a>
+                        <b>viewModels</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>NtsDocumentEditor.Preview[][] | null</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:13</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setActivePage"></a>
+                        <b>setActivePage</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Event.html" target="_self" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:25</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canReorder"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>canReorder</b></span>
+                        <a href="#canReorder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>canReorder(side: "left" | "right")</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="207"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:207</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>All the business logic for determinine if a reorder and drop are allowed</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>side</td>
+                                    <td>
+                                            <code>&quot;left&quot; | &quot;right&quot;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dragCatch"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>dragCatch</b></span>
+                        <a href="#dragCatch"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>dragCatch(event: <a href="../interfaces/Event.html" target="_self">DragEvent</a>, side: "left" | "right", value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="160"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:160</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Catch drag enter and leave events. Used for reordering</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                                <code><a href="../interfaces/Event.html" target="_self" >DragEvent</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>side</td>
+                                    <td>
+                                            <code>&quot;left&quot; | &quot;right&quot;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>value</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dragOver"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>dragOver</b></span>
+                        <a href="#dragOver"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>dragOver(event: <a href="../interfaces/Event.html" target="_self">DragEvent</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="129"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:129</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cancel drag over events in order to support drop</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                                <code><a href="../interfaces/Event.html" target="_self" >DragEvent</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dragStart"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>dragStart</b></span>
+                        <a href="#dragStart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>dragStart(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="139"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:139</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>When a drag is started</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="drop"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>drop</b></span>
+                        <a href="#drop"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>drop(event: <a href="../interfaces/Event.html" target="_self">DragEvent</a>, side: "left" | "right")</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="186"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:186</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Handle drop events for when a thumbnail is dragged onto a dropzone</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>event</td>
+                                    <td>
+                                                <code><a href="../interfaces/Event.html" target="_self" >DragEvent</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>side</td>
+                                    <td>
+                                            <code>&quot;left&quot; | &quot;right&quot;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(model: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:39</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>model</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:34</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pageReset"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>pageReset</b></span>
+                        <a href="#pageReset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>pageReset()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:118</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If this page is in a multi-doc component, reset it back to its original document</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rotate"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>rotate</b></span>
+                        <a href="#rotate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>rotate(rotation: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="106"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:106</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Rotate current page</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>rotation</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setActive"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>setActive</b></span>
+                        <a href="#setActive"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setActive(notifyParent)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:60</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>notifyParent</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>false</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setCanvas"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>setCanvas</b></span>
+                        <a href="#setCanvas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setCanvas(elem: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:45</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>elem</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleExclusion"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>toggleExclusion</b></span>
+                        <a href="#toggleExclusion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toggleExclusion(excluded: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="79"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:79</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Include/exclude pages</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>excluded</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleSelected"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>toggleSelected</b></span>
+                        <a href="#toggleSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toggleSelected(setSelection?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:89</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toggle whether or not the current page is included or excluded</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>setSelection</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dragOverLeft"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>dragOverLeft</b></span>
+                        <a href="#dragOverLeft"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dragOverRight"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>dragOverRight</b></span>
+                        <a href="#dragOverRight"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loaded"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>loaded</b></span>
+                        <a href="#loaded"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pageRef"></a>
+                    <span class="name">
+                        <span ><b>pageRef</b></span>
+                        <a href="#pageRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;pageRef&#x27;, {static: true})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">libs/document-editor/src/lib/components/page/page.component.ts:12</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, OnChanges, SimpleChanges, Output, EventEmitter } from &#x27;@angular/core&#x27;;
+import { DocumentEditorService } from &#x27;../../shared/document-editor.service&#x27;;
+import { NtsDocumentEditor } from &#x27;../../document-editor&#x27;;
+
+@Component({
+  selector: &#x27;app-page&#x27;,
+  templateUrl: &#x27;./page.component.html&#x27;,
+  styleUrls: [&#x27;./page.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class PageComponent implements OnInit, OnChanges {
+  @ViewChild(&#x27;pageRef&#x27;, { static: true }) pageRef!: ElementRef;
+  @Input() viewModels?: NtsDocumentEditor.Preview[][] | null;
+  @Input() page?: NtsDocumentEditor.Page | null;
+  @Input() settings?: NtsDocumentEditor.Settings | null;
+  @Input() tnSettings?: NtsDocumentEditor.ThumbnailSize | null;
+  @Input() docIndex &#x3D; 0;
+  @Input() pageIndex &#x3D; 0;
+  @Input() isSelected &#x3D; false;
+  @Input() isActive &#x3D; false;
+
+  /** Can this page have pages from other docs dropped. If false can only drop and reorder pages from same doc */
+  @Input() canDropFromAny &#x3D; true;
+
+  @Output() setActivePage &#x3D; new EventEmitter&lt;NtsDocumentEditor.PageActive&gt;();
+
+  public dragOverLeft &#x3D; false;
+  public dragOverRight &#x3D; false;
+
+  public loaded &#x3D; false;
+
+  constructor(private docsSvc: DocumentEditorService) {}
+
+  ngOnInit() {
+    this.setCanvas(this.pageRef.nativeElement);
+    this.loaded &#x3D; true;
+  }
+
+  ngOnChanges(model: SimpleChanges) {
+    if (this.loaded &amp;&amp; model.view) {
+      this.setCanvas(this.pageRef.nativeElement);
+    }
+  }
+
+  public setCanvas(elem: any) {
+    while (elem.firstChild) {
+      elem.removeChild(elem.firstChild);
+    }
+    if (this.viewModels &amp;&amp; this.page) {
+      elem.append(this.viewModels[this.page.pdfSrcIndex][this.page.pageSrcIndex].canvas);
+      setTimeout(() &#x3D;&gt; {
+        if (!this.viewModels || !this.page) {
+          return;
+        }
+        this.viewModels[this.page.pdfSrcIndex][this.page.pageSrcIndex].render();
+      }, this.pageIndex * 50);
+    }
+  }
+
+  public setActive(notifyParent &#x3D; false) {
+    if (!this.page) {
+      return;
+    }
+    const page &#x3D; {
+      pdfIndex: this.page.pdfSrcIndex,
+      pageIndex: this.page.pageSrcIndex,
+    };
+    if (notifyParent) {
+      this.setActivePage.emit(page);
+    }
+
+    this.docsSvc.pageActiveChange(page);
+  }
+
+  /**
+   * Include/exclude pages
+   * @param excluded
+   */
+  public toggleExclusion(excluded: boolean) {
+    if (!this.page) {
+      return;
+    }
+    this.docsSvc.pageStateChange(this.pageIndex, { excluded: excluded });
+  }
+
+  /**
+   * Toggle whether or not the current page is included or excluded
+   */
+  public toggleSelected(setSelection?: boolean) {
+    if (!this.page) {
+      return;
+    }
+
+    this.docsSvc.pageSelectionChange(this.docIndex, this.pageIndex, setSelection);
+
+    this.docsSvc.pageActiveChange({
+      pdfIndex: this.page.pdfSrcIndex,
+      pageIndex: this.page.pageSrcIndex,
+    });
+  }
+
+  /**
+   * Rotate current page
+   * @param rotation
+   */
+  public rotate(rotation: number) {
+    if (!this.page) {
+      return;
+    }
+    this.docsSvc.pageStateChange(this.pageIndex, {
+      rotation: this.page.rotation + rotation,
+    });
+  }
+
+  /**
+   * If this page is in a multi-doc component, reset it back to its original document
+   */
+  public pageReset() {
+    if (!this.page) {
+      return;
+    }
+    this.docsSvc.pageReset(this.docIndex, this.page);
+  }
+
+  /**
+   * Cancel drag over events in order to support drop
+   * @param event
+   */
+  public dragOver(event: DragEvent) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  /**
+   * When a drag is started
+   * @param event
+   * @param index
+   */
+  public dragStart(event: any) {
+    if (!this.settings?.canReorder || !this.page) {
+      return;
+    }
+    this.docsSvc.dragIndex &#x3D; {
+      pdfIndex: this.docIndex,
+      pageIndex: this.pageIndex,
+      pageSrc: this.page,
+    };
+    // Set page to selected
+    this.toggleSelected(true);
+    event.dataTransfer.setData(&#x27;text&#x27;, event.target.id);
+  }
+
+  /**
+   * Catch drag enter and leave events. Used for reordering
+   * @param event
+   * @param side
+   * @param value
+   * @param index
+   */
+  public dragCatch(event: DragEvent, side: &#x27;left&#x27; | &#x27;right&#x27;, value: boolean) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if (!this.canReorder(side)) {
+      return;
+    }
+
+    if (side) {
+      switch (side) {
+        case &#x27;left&#x27;:
+          this.dragOverLeft &#x3D; value;
+          break;
+        case &#x27;right&#x27;:
+          this.dragOverRight &#x3D; value;
+          break;
+      }
+    }
+  }
+
+  /**
+   * Handle drop events for when a thumbnail is dragged onto a dropzone
+   * @param event
+   * @param side
+   * @param index
+   */
+  public drop(event: DragEvent, side: &#x27;left&#x27; | &#x27;right&#x27;) {
+    // console.log(event, side, this.docsSvc.dragIndex);
+    event.preventDefault();
+
+    this.dragOverLeft &#x3D; false;
+    this.dragOverRight &#x3D; false;
+
+    if (!this.canReorder(side)) {
+      return;
+    }
+    // More null checking
+    if (this.page !&#x3D;&#x3D; undefined) {
+      this.docsSvc.pageReorder(this.docIndex, this.page, side);
+      this.docsSvc.pagegSelectionReset();
+    }
+  }
+
+  /**
+   * All the business logic for determinine if a reorder and drop are allowed
+   * @param side
+   */
+  private canReorder(side: &#x27;left&#x27; | &#x27;right&#x27;): boolean {
+    if (this.page &#x3D;&#x3D;&#x3D; null &amp;&amp; this.docsSvc.dragIndex.pageSrc &amp;&amp; this.docsSvc.dragIndex.pageSrc.pdfSrcIndex &#x3D;&#x3D;&#x3D; this.docIndex) {
+      return true;
+    }
+
+    if (
+      // Null check page
+      !this.page ||
+      !this.docsSvc.dragIndex ||
+      !this.settings?.canReorder ||
+      // If candropAny is set, only allow documents from the same pdf to be reordered and dropped
+      (!this.canDropFromAny &amp;&amp; this.docsSvc.dragIndex.pdfIndex !&#x3D;&#x3D; this.page.pdfSrcIndex) ||
+      (this.pageIndex &#x3D;&#x3D;&#x3D; this.docsSvc.dragIndex.pageIndex &amp;&amp; this.docIndex &#x3D;&#x3D;&#x3D; this.docsSvc.dragIndex.pdfIndex) ||
+      (this.pageIndex + 1 &#x3D;&#x3D;&#x3D; this.docsSvc.dragIndex.pageIndex &amp;&amp; this.docIndex &#x3D;&#x3D;&#x3D; this.docsSvc.dragIndex.pdfIndex &amp;&amp; side &#x3D;&#x3D;&#x3D; &#x27;right&#x27;) ||
+      (this.pageIndex - 1 &#x3D;&#x3D;&#x3D; this.docsSvc.dragIndex.pageIndex &amp;&amp; this.docIndex &#x3D;&#x3D;&#x3D; this.docsSvc.dragIndex.pdfIndex &amp;&amp; side &#x3D;&#x3D;&#x3D; &#x27;left&#x27;)
+    ) {
+      return false;
+    }
+    return true;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div
+  class&#x3D;&quot;nts-docs-page&quot;
+  [ngClass]&#x3D;&quot;{
+    &#x27;nts-docs-tn-selected&#x27;: isSelected,
+    &#x27;nts-docs-tn-active&#x27;: isActive,
+    &#x27;nts-docs-tn-dropzone&#x27;: !canDropFromAny &amp;&amp; !page
+  }&quot;
+  (click)&#x3D;&quot;setActive()&quot;
+&gt;
+  &lt;div
+    class&#x3D;&quot;nts-docs-page-tn&quot;
+    [ngClass]&#x3D;&quot;{ &#x27;nts-docs-tn-excluded&#x27;: page?.excluded }&quot;
+    [ngStyle]&#x3D;&quot;{ &#x27;min-width&#x27;: (tnSettings?.width || 0) + 12 + &#x27;px&#x27;, &#x27;min-height&#x27;: (tnSettings?.height || 0) + 15 + &#x27;px&#x27; }&quot;
+    [draggable]&#x3D;&quot;settings?.canReorder&quot;
+    (dragover)&#x3D;&quot;dragOver($event)&quot;
+    (dragleave)&#x3D;&quot;dragOver($event)&quot;
+    (dragstart)&#x3D;&quot;dragStart($event)&quot;
+  &gt;
+    &lt;!-- Top page controls--&gt;
+    &lt;div class&#x3D;&quot;nts-docs-tn-controls&quot; [ngClass]&#x3D;&quot;{ &#x27;nts-docs-tn-controls-sm&#x27;: (tnSettings?.width || 0) &lt; 100 }&quot;&gt;
+      &lt;button class&#x3D;&quot;nts-docs-tn-button&quot; pButton icon&#x3D;&quot;fas fa-undo&quot; (click)&#x3D;&quot;rotate(-90)&quot; *ngIf&#x3D;&quot;settings?.canRotate&quot;&gt;&lt;/button&gt;
+      &lt;button
+        *ngIf&#x3D;&quot;settings?.canRemove&quot;
+        class&#x3D;&quot;nts-docs-tn-button m-auto&quot;
+        pButton
+        [icon]&#x3D;&quot;page?.excluded ? &#x27;far fa-square&#x27; : &#x27;fas fa-check-square&#x27;&quot;
+        (click)&#x3D;&quot;toggleExclusion(!page?.excluded)&quot;
+      &gt;&lt;/button&gt;
+      &lt;button class&#x3D;&quot;nts-docs-tn-button&quot; pButton icon&#x3D;&quot;fas fa-redo&quot; (click)&#x3D;&quot;rotate(90)&quot; *ngIf&#x3D;&quot;settings?.canRotate&quot;&gt;&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Bottom page controls--&gt;
+    &lt;div class&#x3D;&quot;nts-docs-tn-controls bottom&quot; [ngClass]&#x3D;&quot;{ &#x27;nts-docs-tn-controls-sm&#x27;: (tnSettings?.width || 0) &lt; 100 }&quot;&gt;
+      &lt;button
+        *ngIf&#x3D;&quot;settings?.canSelect&quot;
+        class&#x3D;&quot;nts-docs-tn-button&quot;
+        pButton
+        [icon]&#x3D;&quot;isSelected ? &#x27;fas fa-times&#x27; : &#x27;far fa-hand-pointer&#x27;&quot;
+        (click)&#x3D;&quot;toggleSelected()&quot;
+      &gt;&lt;/button&gt;
+      &lt;button class&#x3D;&quot;nts-docs-tn-button&quot; pButton title&#x3D;&quot;View full size page&quot; [icon]&#x3D;&quot;&#x27;fas fa-search&#x27;&quot; (click)&#x3D;&quot;setActive(true)&quot;&gt;&lt;/button&gt;
+      &lt;button
+        *ngIf&#x3D;&quot;settings?.canReset &amp;&amp; page?.pdfSrcIndex !&#x3D;&#x3D; docIndex&quot;
+        class&#x3D;&quot;nts-docs-tn-button&quot;
+        pButton
+        title&#x3D;&quot;Remove this page&quot;
+        [icon]&#x3D;&quot;&#x27;fas fa-times&#x27;&quot;
+        (click)&#x3D;&quot;pageReset()&quot;
+      &gt;&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div
+      class&#x3D;&quot;nts-docs-tn-dropzone&quot;
+      (dragover)&#x3D;&quot;dragOver($event)&quot;
+      (dragenter)&#x3D;&quot;dragCatch($event, &#x27;left&#x27;, true)&quot;
+      (dragleave)&#x3D;&quot;dragCatch($event, &#x27;left&#x27;, false)&quot;
+      (drop)&#x3D;&quot;drop($event, &#x27;left&#x27;)&quot;
+      [ngClass]&#x3D;&quot;{ &#x27;nts-docs-tn-dropzone-dragover-left&#x27;: dragOverLeft }&quot;
+    &gt;&lt;/div&gt;
+    &lt;div
+      class&#x3D;&quot;nts-docs-tn-dropzone right&quot;
+      (dragover)&#x3D;&quot;dragOver($event)&quot;
+      (dragenter)&#x3D;&quot;dragCatch($event, &#x27;right&#x27;, true)&quot;
+      (dragleave)&#x3D;&quot;dragCatch($event, &#x27;right&#x27;, false)&quot;
+      (drop)&#x3D;&quot;drop($event, &#x27;right&#x27;)&quot;
+      [ngClass]&#x3D;&quot;{ &#x27;nts-docs-tn-dropzone-dragover-right&#x27;: dragOverRight }&quot;
+    &gt;&lt;/div&gt;
+    &lt;div class&#x3D;&quot;nts-docs-tn-canvas&quot; [ngStyle]&#x3D;&quot;{ height: (tnSettings?.height || 0) + &#x27;px&#x27; }&quot;&gt;
+      &lt;div #pageRef [ngStyle]&#x3D;&quot;{ transform: &#x27;rotate(&#x27; + page?.rotation + &#x27;deg)&#x27; }&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./page.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.nts-docs-page {
+  border: 2px solid transparent;
+  margin: 5px;
+  &amp;.nts-docs-tn-selected {
+    border-color: rgba(255, 0, 0, 0.5) !important;
+  }
+  &amp;.nts-docs-tn-dropzone{
+    .nts-docs-page-tn{
+      border: 2px dashed #ccc;
+      background-color: #f9f9f9;
+    }
+  }
+  &amp;.nts-docs-tn-active .nts-docs-page-tn {
+    background-color: #75a0db;
+  }
+  &amp;:hover {
+    border-color: #75a0db;
+  }
+}
+
+.nts-docs-page-tn {
+  padding: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  position: relative;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  &amp;:hover {
+    .nts-docs-tn-controls {
+      opacity: 1;
+    }
+  }
+  &amp;.nts-docs-tn-excluded .nts-docs-tn-canvas {
+    opacity: 0.1;
+    transition: 0.3s ease-out;
+  }
+  .nts-docs-tn-canvas {
+    transition: 0.3s ease-out;
+    overflow: hidden;
+    div {
+      max-width: 100%;
+    }
+  }
+  .nts-docs-tn-controls {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    opacity: 0.3;
+    transition: 0.2s ease-out;
+    z-index: 3;
+    &amp;.nts-docs-tn-controls-sm .nts-docs-tn-button {
+      font-size: 10px;
+      width: 2em;
+    }
+    &amp;.bottom{
+      bottom:5px; 
+    }
+  }
+  .nts-docs-tn-dropzone {
+    position: absolute;
+    width: 50%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    z-index: 2;
+    &amp;.right {
+      left: initial;
+      right: 0px;
+    }
+    &amp;.nts-docs-tn-dropzone-dragover-left {
+      background: linear-gradient(to right, red, rgba(255, 0, 0, 0));
+      opacity: 0.5;
+    }
+    &amp;.nts-docs-tn-dropzone-dragover-right {
+      background: linear-gradient(to left, red, rgba(255, 0, 0, 0));
+      opacity: 0.5;
+    }
+  }
+  .nts-docs-tn-button {
+    font-size: 12px;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div  class="nts-docs-page"  [ngClass]="{    \'nts-docs-tn-selected\': isSelected,    \'nts-docs-tn-active\': isActive,    \'nts-docs-tn-dropzone\': !canDropFromAny && !page  }"  (click)="setActive()">  <div    class="nts-docs-page-tn"    [ngClass]="{ \'nts-docs-tn-excluded\': page?.excluded }"    [ngStyle]="{ \'min-width\': (tnSettings?.width || 0) + 12 + \'px\', \'min-height\': (tnSettings?.height || 0) + 15 + \'px\' }"    [draggable]="settings?.canReorder"    (dragover)="dragOver($event)"    (dragleave)="dragOver($event)"    (dragstart)="dragStart($event)"  >    <!-- Top page controls-->    <div class="nts-docs-tn-controls" [ngClass]="{ \'nts-docs-tn-controls-sm\': (tnSettings?.width || 0) < 100 }">      <button class="nts-docs-tn-button" pButton icon="fas fa-undo" (click)="rotate(-90)" *ngIf="settings?.canRotate"></button>      <button        *ngIf="settings?.canRemove"        class="nts-docs-tn-button m-auto"        pButton        [icon]="page?.excluded ? \'far fa-square\' : \'fas fa-check-square\'"        (click)="toggleExclusion(!page?.excluded)"      ></button>      <button class="nts-docs-tn-button" pButton icon="fas fa-redo" (click)="rotate(90)" *ngIf="settings?.canRotate"></button>    </div>    <!-- Bottom page controls-->    <div class="nts-docs-tn-controls bottom" [ngClass]="{ \'nts-docs-tn-controls-sm\': (tnSettings?.width || 0) < 100 }">      <button        *ngIf="settings?.canSelect"        class="nts-docs-tn-button"        pButton        [icon]="isSelected ? \'fas fa-times\' : \'far fa-hand-pointer\'"        (click)="toggleSelected()"      ></button>      <button class="nts-docs-tn-button" pButton title="View full size page" [icon]="\'fas fa-search\'" (click)="setActive(true)"></button>      <button        *ngIf="settings?.canReset && page?.pdfSrcIndex !== docIndex"        class="nts-docs-tn-button"        pButton        title="Remove this page"        [icon]="\'fas fa-times\'"        (click)="pageReset()"      ></button>    </div>    <div      class="nts-docs-tn-dropzone"      (dragover)="dragOver($event)"      (dragenter)="dragCatch($event, \'left\', true)"      (dragleave)="dragCatch($event, \'left\', false)"      (drop)="drop($event, \'left\')"      [ngClass]="{ \'nts-docs-tn-dropzone-dragover-left\': dragOverLeft }"    ></div>    <div      class="nts-docs-tn-dropzone right"      (dragover)="dragOver($event)"      (dragenter)="dragCatch($event, \'right\', true)"      (dragleave)="dragCatch($event, \'right\', false)"      (drop)="drop($event, \'right\')"      [ngClass]="{ \'nts-docs-tn-dropzone-dragover-right\': dragOverRight }"    ></div>    <div class="nts-docs-tn-canvas" [ngStyle]="{ height: (tnSettings?.height || 0) + \'px\' }">      <div #pageRef [ngStyle]="{ transform: \'rotate(\' + page?.rotation + \'deg)\' }"></div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'ApiStoreCreatorComponent', 'selector': 'nts-api-store-creator'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'nts-calendar'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'ChartComponent', 'selector': 'nts-chart'},{'name': 'ChartsComponent', 'selector': 'app-charts'},{'name': 'ComponentsComponent', 'selector': 'app-components'},{'name': 'ContentComponent', 'selector': 'app-content'},{'name': 'DefaultComponent', 'selector': 'app-default'},{'name': 'DemoModalComponent', 'selector': 'app-demo-modal'},{'name': 'DisplayComponent', 'selector': 'app-display'},{'name': 'DocumentComponent', 'selector': 'app-document'},{'name': 'EditorComponent', 'selector': 'nts-document-editor'},{'name': 'EntityStoreComponent', 'selector': 'app-entity-store'},{'name': 'ExampleComponent', 'selector': 'nts-state-management-example'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'Formgroup2ApiComponent', 'selector': 'nts-formgroup2-api'},{'name': 'FormsComponent', 'selector': 'app-forms'},{'name': 'GridComponent', 'selector': 'nts-grid'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'GridStatusBarComponent', 'selector': 'app-grid-status-bar'},{'name': 'GridTemplateRendererComponent', 'selector': 'app-template-renderer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'MapComponent', 'selector': 'app-map-route'},{'name': 'MultiDocComponent', 'selector': 'app-multi-doc'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NtsAutocompleteComponent', 'selector': 'nts-autocomplete'},{'name': 'NtsDomainStateComponent', 'selector': 'nts-api-state'},{'name': 'NtsErrorComponent', 'selector': 'nts-error'},{'name': 'NtsFilterFieldComponent', 'selector': 'nts-filter-field'},{'name': 'NtsFormFieldComponent', 'selector': 'nts-form-field'},{'name': 'NtsTreeComponent', 'selector': 'nts-tree'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'QaComponent', 'selector': 'app-qa'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'ScriptLoaderComponent', 'selector': 'nts-script-loader'},{'name': 'SectionComponent', 'selector': 'app-section'},{'name': 'StateManagementComponent', 'selector': 'nts-state-management'},{'name': 'StoreCommunicationComponent', 'selector': 'nts-store-communication'},{'name': 'TableComponent', 'selector': 'nts-table'},{'name': 'TablesComponent', 'selector': 'app-tables'},{'name': 'TagBuilderComponent', 'selector': 'nts-tags-quick'},{'name': 'TagsComponent', 'selector': 'nts-tags'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UiStoreCreatorComponent', 'selector': 'nts-ui-store-creator'},{'name': 'UtilitiesComponent', 'selector': 'app-utilities'},{'name': 'ViewerComponent', 'selector': 'app-viewer'},{'name': 'ViewerToolbarComponent', 'selector': 'app-viewer-toolbar'},{'name': 'VisibleComponent', 'selector': '[visible]'},{'name': 'VisibleComponent', 'selector': 'nts-visible'},{'name': 'WizardComponent', 'selector': 'nts-wizard'},{'name': 'WizardComponent', 'selector': 'nts-wizard'},{'name': 'WizNavSidebarComponent', 'selector': 'nts-wizard-nav-sidebar'},{'name': 'WizNavTopComponent', 'selector': 'nts-wizard-nav-top'}];
+    var DIRECTIVES = [{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'GridColumnCellDirective', 'selector': '[grid-cell-template]'},{'name': 'GridColumnDirective', 'selector': 'grid-column'},{'name': 'GridColumnHeaderDirective', 'selector': '[grid-header-template]'},{'name': 'GridRowExpansionDirective', 'selector': '[grid-expansion-template]'},{'name': 'TableColumnCellDirective', 'selector': '[table-cell-template]'},{'name': 'TableColumnDirective', 'selector': 'table-column'},{'name': 'TableColumnHeaderDirective', 'selector': '[table-header-template]'},{'name': 'TableRowExpansionDirective', 'selector': '[table-expansion-template]'},{'name': 'TreeTemplateDirective', 'selector': 'tree-template'},{'name': 'TreeTemplateNodeDirective', 'selector': '[tree-template-node]'},{'name': 'WizardFeatureDirective', 'selector': 'feature'},{'name': 'WizardFeatureTemplateDirective', 'selector': '[feature-template]'}];
+    var ACTUAL_COMPONENT = {'name': 'PageComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PageComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

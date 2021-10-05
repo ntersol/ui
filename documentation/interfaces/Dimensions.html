@@ -1,0 +1,397 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ntersol documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ntersol documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li
+  >
+  Dimensions</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>archive/src/app/shared/directives/dom-observer.directive.ts</code>
+        </p>
+
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#height" 
+>
+                                            height
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#width" 
+>
+                                            width
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="height"></a>
+                                        <span class="name "><b>height</b>
+                                            <a href="#height">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>height:     <code>string | null</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>string | null</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="width"></a>
+                                        <span class="name "><b>width</b>
+                                            <a href="#width">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>width:     <code>string | null</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>string | null</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Directive,
+  Input,
+  OnInit,
+  OnDestroy,
+  ElementRef,
+  HostListener,
+  AfterViewInit,
+} from &#x27;@angular/core&#x27;;
+import { debounce } from &#x27;helpful-decorators&#x27;;
+
+interface DomOptions {
+  attributes: boolean;
+  childList: boolean;
+  subtree: boolean;
+}
+
+interface Dimensions {
+  width: string | null;
+  height: string | null;
+}
+
+/**
+ * Watches for any changes to a DOM element and fires a callback when that happens
+ * Only callback is required. Be sure to bind the function.
+ * Currently uses polling for width &amp; height changes, mutation observer doesn&#x27;t detect these
+ * 
+ * USAGE SHORT: appDomObserver [callback]&#x3D;&quot;function.bind(this)&quot;
+ * USAGE FULL:
+ * appDomObserver [callback]&#x3D;&quot;function.bind(this)&quot; [changesToAttr]&#x3D;&quot;true&quot; [changesToChildren]&#x3D;&quot;false&quot; [changesToData]&#x3D;&quot;false&quot; 
+   [changesToElementResize]&#x3D;&quot;true&quot;  [changesToWindowResize]&#x3D;&quot;true&quot;
+ */
+@Directive({
+  selector: &#x27;[appDomObserver]&#x27;,
+})
+export class DomObserverDirective implements OnInit, OnDestroy, AfterViewInit {
+  /** Watch attribute changes */
+  @Input() changesToAttr &#x3D; true;
+  /** Watch changes to children nodes */
+  @Input() changesToChildren &#x3D; false;
+  /** Watch changes to data */
+  @Input() changesToData &#x3D; false;
+  /** Watch changes to DOM element size (width/height) */
+  @Input() changesToElementResize &#x3D; true;
+  /** Watch changes to data */
+  @Input() changesToWindowResize &#x3D; true;
+  /** Callback method to execute when this DOM element changes */
+  @Input() callback: Function | undefined;
+
+  /** Watch changes to data*/
+  // @Output() domChange &#x3D; new EventEmitter&lt;any&gt;();
+
+  /** Configuration needed by mutation observer */
+  private config: DomOptions &#x3D; {
+    attributes: this.changesToAttr,
+    childList: this.changesToChildren,
+    subtree: this.changesToData,
+  };
+
+  /** Holds active observer */
+  private observer: MutationObserver | undefined;
+
+  /** Last dimensions of element */
+  private dimensionsLast: Dimensions &#x3D; {
+    width: null,
+    height: null,
+  };
+
+  constructor(private el: ElementRef) {}
+
+  ngOnInit() {}
+
+  ngAfterViewInit() {
+    // If changesToElementResize is specified, set initial width &amp; height and start polling
+    if (this.changesToElementResize &amp;&amp; this.el &amp;&amp; this.el.nativeElement) {
+      // Set default dimensions
+      this.dimensionsLast &#x3D; this.dimensionsGetNew();
+      this.startPollingDimensions();
+      this.startMutationObserver();
+    }
+  }
+
+  /**
+   * Check for changes to this elements dimensions
+   */
+  public startPollingDimensions() {
+    const result &#x3D; this.dimensionsCheck(
+      this.dimensionsLast,
+      this.dimensionsGetNew(),
+    );
+    if (result) {
+      this.dimensionsLast &#x3D; result;
+      this.executeCallback();
+    }
+    // Restart method
+    window.setTimeout(() &#x3D;&gt; this.startPollingDimensions(), 200);
+  }
+
+  /**
+   * Check element dimensions, return newer if changed
+   * @param old
+   * @param newer
+   */
+  public dimensionsCheck(old: Dimensions, newer: Dimensions) {
+    if (old.width !&#x3D;&#x3D; newer.width || old.height !&#x3D;&#x3D; newer.height) {
+      return newer;
+    }
+    return false;
+  }
+
+  /**
+   * Get latest element dimensions
+   */
+  private dimensionsGetNew() {
+    return &lt;Dimensions&gt;{
+      width: this.el.nativeElement.getBoundingClientRect().width,
+      height: this.el.nativeElement.getBoundingClientRect().height,
+    };
+  }
+
+  /**
+   * Start the mutation observer
+   */
+  private startMutationObserver() {
+    // If mutation observer available, start observable
+    if (&#x27;MutationObserver&#x27; in window) {
+      this.observer &#x3D; new MutationObserver(() &#x3D;&gt; {
+        this.executeCallback();
+      });
+      this.observer.observe(this.el.nativeElement, this.config);
+    }
+  }
+
+  /**
+   * On a window resize event
+   * @param _event
+   */
+  @HostListener(&#x27;window:resize&#x27;, [&#x27;$event&#x27;])
+  @debounce(200)
+  onResize(_event: Event) {
+    if (this.changesToWindowResize) {
+      this.executeCallback();
+    }
+  }
+
+  /** Execute callback after making sure it is a function */
+  @debounce(200)
+  private executeCallback() {
+    if (typeof this.callback &#x3D;&#x3D;&#x3D; &#x27;function&#x27;) {
+      this.callback();
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'Dimensions.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,586 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ntersol documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ntersol documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li
+  >
+  FormFieldMulti</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>libs/wizard/src/lib/wizard.models.ts</code>
+        </p>
+
+
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="../interfaces/FormFieldSrc.html" target="_self" >FormFieldSrc</a></code>
+            </p>
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#formFieldType" 
+>
+                                            formFieldType
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#options" 
+>
+                                            options
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="formFieldType"></a>
+                                        <span class="name "><b>formFieldType</b>
+                                            <a href="#formFieldType">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>formFieldType:     <code>&quot;select&quot; | &quot;dropdown&quot; | &quot;checkbox&quot; | &quot;checkboxBoolean&quot; | &quot;radio&quot; | &quot;toggle&quot; | &quot;buttonToggle&quot; | &quot;checkboxButtons&quot;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>&quot;select&quot; | &quot;dropdown&quot; | &quot;checkbox&quot; | &quot;checkboxBoolean&quot; | &quot;radio&quot; | &quot;toggle&quot; | &quot;buttonToggle&quot; | &quot;checkboxButtons&quot;</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="options"></a>
+                                        <span class="name "><b>options</b>
+                                            <a href="#options">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>options:         <code><a href="../interfaces/Option.html" target="_self" >Option[] | string[]</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/Option.html" target="_self" >Option[] | string[]</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { FormGroup, FormControl, AbstractControl, ValidatorFn } from &#x27;@angular/forms&#x27;;
+import { WizardOperator } from &#x27;./wizard.enums&#x27;;
+/**
+ * Marks keys in RS as required
+ */
+export type MarkRequired&lt;T extends Record&lt;any, any&gt;, RS extends keyof T&gt; &#x3D; Required&lt;Pick&lt;T, RS&gt;&gt; &amp;
+  Pick&lt;T, Exclude&lt;keyof T, RS&gt;&gt;;
+// type SomeDataHelper &#x3D; MarkRequired&lt;SomeData, &#x27;propA&#x27;&gt; | MarkRequired&lt;SomeData, &#x27;propB&#x27;&gt;;
+
+export namespace Wizard {
+  export interface Initial {
+    sections: Section[];
+    sectionsState?: SectionState[];
+    pages: Page[];
+    routes: Route[];
+    validators?: PageValidator[];
+    form: FormGroup;
+    arrayIndexes: FormGroup;
+    routeParams: RouteParams;
+    baseUrl: string;
+    state?: State;
+  }
+
+  export interface Settings {
+    stickyFooter?: boolean;
+  }
+
+  export interface RouteAction {
+    // sectionUrl?: string;
+    // routeUrl?: string;
+    event?: &#x27;wizardComplete&#x27; | &#x27;sectionComplete&#x27; | &#x27;routeNext&#x27;;
+    routeParams?: RouteParams;
+  }
+
+  export interface RouteParams {
+    sectionUrl?: string;
+    routeUrl?: string;
+  }
+
+  export interface State {
+    ready: boolean;
+    sectionUrl: string;
+    routeUrl: string;
+    routeHistory: string[];
+    errorTop: boolean | string;
+    errorBottom: boolean | string;
+    complete: boolean;
+    sectionState: SectionState[];
+  }
+
+  export interface SectionState {
+    /** UrlSlug of the section */
+    sectionId: string;
+    /** Is this the currently active section */
+    active: boolean;
+    /** Has this section been completed */
+    completed: boolean;
+    /** Date this section was completed */
+    completedDate: Date | null;
+    /** Last currently visited page */
+    routeHistory: string[];
+    /** The starting route of this section */
+    routeStart: string;
+    /** Has this section been started */
+    started: boolean;
+    /** Date this section was started */
+    startedDate: Date | null;
+  }
+
+  /**
+   * Sections
+   */
+  export interface SectionControl extends Section {
+    src: Section;
+    /** Position in the array */
+    position: number;
+    /** How many routes are in this section */
+    readonly routeCount: number;
+  }
+
+  export interface Section {
+    /** Human readable title */
+    readonly title: string;
+    /** String to use for url, needs to be unique per section */
+    readonly urlSlug: string;
+    /** First route of the section, corresponds to urlSlug  */
+    readonly routeStart: string;
+    readonly options?: Record&lt;string, unknown&gt;;
+    readonly data?: unknown;
+    /** Should the completion of this section trigger the wizard complete action? */
+    readonly wizardComplete?: true;
+  }
+  /**
+   *  &amp; ({ readonly sectionNext: string } | { readonly sectionLast: boolean })
+   */
+
+  /**
+   * Pages
+   */
+  export interface PageControl extends Page {
+    readonly src: Wizard.Page;
+    readonly controlsById: { [key: string]: AbstractControl };
+    readonly valid: boolean;
+    readonly validPage: boolean;
+    readonly validControls: boolean;
+    readonly errorTop: string;
+    readonly errorBottom: string;
+    pageTouched: boolean;
+    controlsMarkAsTouched(): void;
+    controlsMarkAsUntouched(): void;
+  }
+
+  export interface Page {
+    /** Human readable title */
+    readonly title?: string;
+    /** Text for browser title tag. Defaults to title if not supplied */
+    readonly titleTag?: string;
+    /** Unique ID for page, used for url and joining data */
+    readonly id: string;
+    /** ID of parent section */
+    readonly sectionId: string;
+    readonly options?: {
+      readonly hideBackButton?: boolean;
+      readonly hideNextButton?: boolean;
+    };
+    readonly data?: unknown;
+    readonly canSave?: boolean;
+    readonly content: ContentType[];
+    /** Corresponds to the ID in the PAGE validators array */
+    readonly validatorId?: string;
+  }
+
+  export type ContentType &#x3D; Html | Feature | Row | FormField | ButtonGroup;
+  export type ContentTypeControl &#x3D; Html | Feature | Row | FormFieldControl | Content;
+
+  type ContentFormat &#x3D; &#x27;formField&#x27; | &#x27;html&#x27; | &#x27;feature&#x27; | &#x27;row&#x27; | &#x27;buttonGroup&#x27;;
+
+  export interface Content {
+    /** Type of content */
+    readonly type: ContentFormat;
+    readonly classes?: string;
+    readonly data?: unknown;
+    /** Is this type of content hidden to the user */
+    visible?: boolean | RuleGroup[];
+  }
+
+  export interface Html extends Content {
+    readonly type: &#x27;html&#x27;;
+    readonly html: string;
+  }
+
+  export interface ButtonGroup extends Content {
+    readonly type: &#x27;buttonGroup&#x27;;
+    readonly options: [
+      {
+        label: string;
+      },
+    ];
+  }
+
+  export interface Feature extends Content {
+    readonly type: &#x27;feature&#x27;;
+    readonly featureId: string;
+    /** TODO: Implement so that page control can see feature validity */
+    readonly requiredFields?: any[];
+  }
+
+  export interface Row&lt;t &#x3D; ContentType&gt; extends Content {
+    readonly type: &#x27;row&#x27;;
+    readonly columns: Column&lt;t&gt;[];
+  }
+
+  export interface Column&lt;t &#x3D; ContentType&gt; {
+    readonly columnSize: number;
+    content: t[];
+  }
+
+  export type FormField &#x3D; FormFieldMulti | FormFieldSingle;
+
+  interface FormFieldSingle extends FormFieldSrc {
+    readonly formFieldType:
+      | &#x27;text&#x27;
+      | &#x27;number&#x27;
+      | &#x27;currency&#x27;
+      | &#x27;phoneNumber&#x27;
+      | &#x27;email&#x27;
+      | &#x27;ssn&#x27;
+      | &#x27;password&#x27;
+      | &#x27;colorpicker&#x27;
+      | &#x27;textarea&#x27;
+      | &#x27;autoComplete&#x27;
+      | &#x27;date&#x27;
+      | &#x27;file&#x27;
+      | &#x27;dropdown&#x27;
+      | &#x27;button&#x27;
+      | &#x27;buttons&#x27;
+      | &#x27;checkbox&#x27;
+      | &#x27;checkboxSingle&#x27;
+      | &#x27;multiSelect&#x27;;
+  }
+
+  interface FormFieldMulti extends FormFieldSrc {
+    readonly formFieldType:
+      | &#x27;select&#x27;
+      | &#x27;dropdown&#x27;
+      | &#x27;checkbox&#x27;
+      | &#x27;checkboxBoolean&#x27;
+      | &#x27;radio&#x27;
+      | &#x27;toggle&#x27;
+      | &#x27;buttonToggle&#x27;
+      | &#x27;checkboxButtons&#x27;;
+    readonly options?: Option[] | string[]; // TODO | Union type either options or datafield
+  }
+
+  interface FormFieldSrc extends Content {
+    type: &#x27;formField&#x27;;
+    /** Field or property in the loan model */
+    field: string;
+    formFieldType: string;
+    placeholder?: string;
+    hint?: string;
+    tooltip?: string;
+    prefix?: string;
+    suffix?: string;
+    min?: number;
+    max?: number;
+    maxlength?: number;
+    minlength?: number;
+    /** If textarea */
+    rows?: number;
+    /** If a select or button group. This is only for fixed properties, alterntnatively use datafields */
+    options?: Option[] | string[];
+    /** If a select or button group, use this data from inside the dataField input */
+    dataField?: string;
+    /** Format to pass to the pipe for custom control */
+    format?: string;
+    // required?: boolean;
+    /** ID of the validator */
+    validators?: FieldValidator;
+    disabled?: boolean;
+  }
+
+  export interface FieldValidator {
+    /** Default is true */
+    required?: boolean;
+    email?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    min?: number;
+    max?: number;
+    custom?: ValidatorFn[];
+  }
+
+  export interface Option {
+    label: string;
+    value: string | number | boolean;
+  }
+  export interface RowControl extends Row&lt;ContentControl&gt; {}
+
+  export type ContentControl &#x3D; ContentTypeControl &amp; { src: Content };
+
+  export interface FormFieldControl extends FormFieldSrc {
+    src: FormField;
+    formControl: FormControl;
+  }
+
+  /**
+   * Routing
+   */
+  export interface RouteControl extends RouteSrc {
+    src: Row&lt;ContentControl&gt;;
+    routeNext: string;
+  }
+  /** Routes need at least one of 3 props: routeNext, ruleGRoups or sectionComplete */
+  export type Route &#x3D; RouteNext | RouteComplete;
+
+  export interface RouteComplete extends RouteSrc {
+    /** Is this is the last route in the section */
+    readonly sectionComplete?: boolean;
+  }
+
+  export interface RouteNext extends RouteSrc {
+    readonly routeNext: string | (RouteRuleGroup | SectionRuleGroup)[];
+  }
+
+  /** Base routing */
+  interface RouteSrc {
+    /** String to use for url, needs to be unique per section */
+    readonly urlSlug: string;
+    /** The id of the corresponding section */
+    readonly sectionId: string;
+    /** The id of the corresponding page */
+    readonly pageId: string;
+  }
+
+  export interface RouteChange {
+    current: Page | null;
+    previous: Page | null;
+    dir: &#x27;back&#x27; | &#x27;next&#x27;;
+  }
+
+  /**
+   * Rulegroups
+   */
+  export type RulesEngine &#x3D; (ruleGroups: Wizard.RuleGroup[]) &#x3D;&gt; false | Wizard.RuleGroup;
+
+  export interface SectionRuleGroup extends RuleGroup {
+    sectionComplete: boolean;
+  }
+
+  export interface RouteRuleGroup extends RuleGroup {
+    routeNext: string;
+  }
+
+  /** TODO: Make condition required if more than one rule */
+  export interface RuleGroup {
+    [key: string]: any; // Support additional props for rule metadata
+    condition?: &#x27;AND&#x27; | &#x27;OR&#x27;;
+    rules: Rule[];
+  }
+
+  export interface Rule {
+    field: string;
+    operator: WizardOperator;
+    value: any;
+  }
+
+  export interface PageValidator {
+    id: string;
+    /** Custom error message, if any */
+    errorMessage?: string;
+    fn: PageValidatorFn;
+  }
+
+  export type PageValidatorFn &#x3D; (data: { page?: PageControl; form?: FormGroup }) &#x3D;&gt; boolean; // Add   when object &#x3D;&gt; class
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'FormFieldMulti.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

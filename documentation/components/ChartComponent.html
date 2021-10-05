@@ -1,0 +1,2376 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ntersol documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ntersol documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  ChartComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>libs/chart/src/lib/components/chart.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>A charting and data visualization library based on CanvasJS</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+                    <code><a href="../interfaces/View.html" target="_self" >AfterViewInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>nts-chart</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./chart.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./chart.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#chart" >chart</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#colorScheme" >colorScheme</a>
+                            </li>
+                            <li>
+                                <a href="#element" >element</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isLoaded" >isLoaded</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#styling" >styling</a>
+                            </li>
+                            <li>
+                                <a href="#tooltipCustom" >tooltipCustom</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#uniqueId" >uniqueId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#chartInit" >chartInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#chartOptionsCreate" >chartOptionsCreate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getColorScheme" >getColorScheme</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getGradientStep" >getGradientStep</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#mapChartData" >mapChartData</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#rerender" >rerender</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#scriptsLoad" >scriptsLoad</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#backgroundColor" >backgroundColor</a>
+                            </li>
+                            <li>
+                                <a href="#color" >color</a>
+                            </li>
+                            <li>
+                                <a href="#colorGradient" >colorGradient</a>
+                            </li>
+                            <li>
+                                <a href="#colorsCustom" >colorsCustom</a>
+                            </li>
+                            <li>
+                                <a href="#colorSet" >colorSet</a>
+                            </li>
+                            <li>
+                                <a href="#data" >data</a>
+                            </li>
+                            <li>
+                                <a href="#formatDatalabel" >formatDatalabel</a>
+                            </li>
+                            <li>
+                                <a href="#formatTooltip" >formatTooltip</a>
+                            </li>
+                            <li>
+                                <a href="#formatTooltipTitle" >formatTooltipTitle</a>
+                            </li>
+                            <li>
+                                <a href="#formatXLabels" >formatXLabels</a>
+                            </li>
+                            <li>
+                                <a href="#formatYLabels" >formatYLabels</a>
+                            </li>
+                            <li>
+                                <a href="#height" >height</a>
+                            </li>
+                            <li>
+                                <a href="#limit" >limit</a>
+                            </li>
+                            <li>
+                                <a href="#options" >options</a>
+                            </li>
+                            <li>
+                                <a href="#showIndexLabel" >showIndexLabel</a>
+                            </li>
+                            <li>
+                                <a href="#showLegend" >showLegend</a>
+                            </li>
+                            <li>
+                                <a href="#showTooltip" >showTooltip</a>
+                            </li>
+                            <li>
+                                <a href="#showXAxisLabels" >showXAxisLabels</a>
+                            </li>
+                            <li>
+                                <a href="#showYAxisLabels" >showYAxisLabels</a>
+                            </li>
+                            <li>
+                                <a href="#stacked" >stacked</a>
+                            </li>
+                            <li>
+                                <a href="#templateTooltip" >templateTooltip</a>
+                            </li>
+                            <li>
+                                <a href="#titleChart" >titleChart</a>
+                            </li>
+                            <li>
+                                <a href="#titleXAxis" >titleXAxis</a>
+                            </li>
+                            <li>
+                                <a href="#titleYAxis" >titleYAxis</a>
+                            </li>
+                            <li>
+                                <a href="#type" >type</a>
+                            </li>
+                            <li>
+                                <a href="#width" >width</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="backgroundColor"></a>
+                        <b>backgroundColor</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;#fff&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:66</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Background color</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="color"></a>
+                        <b>color</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;#000&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:64</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Text Color for title and labels</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="colorGradient"></a>
+                        <b>colorGradient</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[string, string]</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:72</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="colorsCustom"></a>
+                        <b>colorsCustom</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[] | undefined</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:73</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="colorSet"></a>
+                        <b>colorSet</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:71</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Colors for data points in RGB</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data"></a>
+                        <b>data</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>CanvasJS.ChartDataSeriesOptions[]</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:60</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="formatDatalabel"></a>
+                        <b>formatDatalabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:78</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="formatTooltip"></a>
+                        <b>formatTooltip</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:76</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="formatTooltipTitle"></a>
+                        <b>formatTooltipTitle</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:77</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="formatXLabels"></a>
+                        <b>formatXLabels</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:79</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="formatYLabels"></a>
+                        <b>formatYLabels</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:80</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="height"></a>
+                        <b>height</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:59</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="limit"></a>
+                        <b>limit</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | undefined</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:68</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Limit the number of datapoints displayed</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="options"></a>
+                        <b>options</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Partial&lt;CanvasJS.ChartOptions&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:61</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showIndexLabel"></a>
+                        <b>showIndexLabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:86</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Show or hide the values that appear inside the chart</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showLegend"></a>
+                        <b>showLegend</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:84</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Show or hide the tooltip which appears when you hover over a chart entry</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showTooltip"></a>
+                        <b>showTooltip</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:88</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Show or hide the tooltip which appears when you hover over a chart entry</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showXAxisLabels"></a>
+                        <b>showXAxisLabels</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:90</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Show or hide the labels that appear on the X axis</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showYAxisLabels"></a>
+                        <b>showYAxisLabels</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:92</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Show or hide the labels that appear on the Y axis</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="stacked"></a>
+                        <b>stacked</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:62</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="templateTooltip"></a>
+                        <b>templateTooltip</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:104</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Supply a custom html template for the tooltip</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="titleChart"></a>
+                        <b>titleChart</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:96</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Title to show for the main chart</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="titleXAxis"></a>
+                        <b>titleXAxis</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:98</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Title to show for the X Axis, leave null for none</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="titleYAxis"></a>
+                        <b>titleYAxis</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:100</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Title to show for the Y Axis, leave null for none</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="type"></a>
+                        <b>type</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;line&quot; | &quot;column&quot; | &quot;bar&quot; | &quot;area&quot; | &quot;spline&quot; | &quot;splineArea&quot; | &quot;stepLine&quot; | &quot;scatter&quot; | &quot;bubble&quot; | &quot;stackedColumn&quot; | &quot;stackedBar&quot; | &quot;stackedArea&quot; | &quot;stackedColumn100&quot; | &quot;stackedBar100&quot; | &quot;stackedArea100&quot; | &quot;pie&quot; | &quot;doughnut&quot;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;column&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:40</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="width"></a>
+                        <b>width</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:58</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chartInit"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>chartInit</b></span>
+                        <a href="#chartInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>chartInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="158"
+                            class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:158</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Initialize the chart</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chartOptionsCreate"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>chartOptionsCreate</b></span>
+                        <a href="#chartOptionsCreate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>chartOptionsCreate()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="184"
+                            class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:184</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Create the options needed by this chart</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getColorScheme"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>getColorScheme</b></span>
+                        <a href="#getColorScheme"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getColorScheme(startColor: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, endColor: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, steps: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="299"
+                            class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:299</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Creates a gradient with a fixed number of steps in a string array</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>startColor</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Hex start color</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>endColor</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Hex end color</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>steps</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>The number of hex colors to return</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getGradientStep"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>getGradientStep</b></span>
+                        <a href="#getGradientStep"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getGradientStep(startColor: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, endColor: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, percent: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="313"
+                            class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:313</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Get a color hex value between 2 input colors as part of a gradient</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>startColor</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Hex start color</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>endColor</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <ul>
+<li>Hex end color</li>
+</ul>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>percent</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mapChartData"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>mapChartData</b></span>
+                        <a href="#mapChartData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>mapChartData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="273"
+                            class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:273</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>CanvasJS.ChartDataSeriesOptions[]</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="124"
+                            class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:124</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="128"
+                            class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:128</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="408"
+                            class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:408</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Supply a formatter method OR an Angular pipe to the chart instance
+Used to format labels, values, datalabels, etc</p>
+<p>public formatData(option: FormatData | Formatter) {
+// Check if a custom formatter was supplied, if not use angular pipe
+if (typeof option !== &#39;function&#39; &amp;&amp; option.pipe) {
+let format = option.format;</p>
+<p>if (!option.format) {
+format = &#39;&#39;;
+}</p>
+<p>switch (option.pipe) {
+// Use decimal pipe
+case &#39;number&#39;:
+return (tooltipItem: Chart.ChartTooltipItem, _data: Chart.ChartData) =&gt;
+formatNumber(Number(tooltipItem.yLabel), &#39;en-US&#39;, format);
+// Datepipe
+case &#39;date&#39;:
+return (tooltipItem: Chart.ChartTooltipItem, _data: Chart.ChartData) =&gt;
+formatDate(Number(tooltipItem.yLabel), format, &#39;en-US&#39;);
+// Currency pipe
+case &#39;currency&#39;:
+return (tooltipItem: Chart.ChartTooltipItem, _data: Chart.ChartData) =&gt;
+formatCurrency(Number(tooltipItem.yLabel), &#39;en-US&#39;, &#39;&#39;, format);
+// Percent pipe
+case &#39;percent&#39;:
+return (tooltipItem: Chart.ChartTooltipItem, _data: Chart.ChartData) =&gt;
+formatPercent(Number(tooltipItem.yLabel), &#39;en-US&#39;, format);
+default:
+console.warn(&#39;Improper values supplied for chart formatter&#39;, option);
+break;
+}
+} else {
+return <Formatter>option;
+}</p>
+<p>}</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rerender"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>rerender</b></span>
+                        <a href="#rerender"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>rerender()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="360"
+                            class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:360</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Rerender chart. Used by dom observer directive</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scriptsLoad"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>scriptsLoad</b></span>
+                        <a href="#scriptsLoad"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>scriptsLoad()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="138"
+                            class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:138</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Check if Chart.js is loaded, if not, load it then initialize the chart in this component</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chart"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>chart</b></span>
+                        <a href="#chart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Chart.html" target="_self" >CanvasJS.Chart | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:110</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Chart reference</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="colorScheme"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>colorScheme</b></span>
+                        <a href="#colorScheme"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If custom colors supplied, this is the auto-generated name of the color scheme</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="element"></a>
+                    <span class="name">
+                        <span ><b>element</b></span>
+                        <a href="#element"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;element&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>TEMP</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoaded"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isLoaded</b></span>
+                        <a href="#isLoaded"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:116</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>After initial load</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="styling"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>styling</b></span>
+                        <a href="#styling"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    fontFamily: &#x60;&#x27;Helvetica Neue&#x27;, &#x27;Helvetica&#x27;, &#x27;Arial&#x27;, sans-serif&#x60;,
+    fontSize: 10,
+    fontWeight: &#x27;normal&#x27;,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:118</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tooltipCustom"></a>
+                    <span class="name">
+                        <span ><b>tooltipCustom</b></span>
+                        <a href="#tooltipCustom"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;tooltipCustom&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uniqueId"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>uniqueId</b></span>
+                        <a href="#uniqueId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;chart&#x27; + Math.floor(Math.random() * 1000000)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">libs/chart/src/lib/components/chart.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Randomly generated uniqueID for the div that holds the chart. Allows for multiple charts per page</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  ChangeDetectionStrategy,
+  ViewChild,
+  ElementRef,
+  Input,
+  OnChanges,
+  AfterViewInit,
+  OnDestroy,
+} from &#x27;@angular/core&#x27;;
+import { CanvasJS } from &#x27;./chart.models&#x27;;
+// import { CanvasJS } from &#x27;./chart&#x27;;
+// import { formatDate, formatNumber, formatCurrency, formatPercent } from &#x27;@angular/common&#x27;;
+import { defaultsDeep } from &#x27;lodash/fp&#x27;;
+
+// JS file source
+const chartSrc &#x3D; &#x27;assets/scripts/canvasjs.min.js&#x27;;
+
+declare global {
+  interface Window {
+    CanvasJS: any;
+  }
+}
+
+/**
+ * A charting and data visualization library based on CanvasJS
+ */
+@Component({
+  selector: &#x27;nts-chart&#x27;,
+  templateUrl: &#x27;./chart.component.html&#x27;,
+  styleUrls: [&#x27;./chart.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ChartComponent implements OnChanges, AfterViewInit, OnDestroy {
+  /** TEMP */
+  @ViewChild(&#x27;element&#x27;) element!: ElementRef;
+  @ViewChild(&#x27;tooltipCustom&#x27;) tooltipCustom!: ElementRef;
+
+  @Input()
+  type:
+    | &#x27;line&#x27;
+    | &#x27;column&#x27;
+    | &#x27;bar&#x27;
+    | &#x27;area&#x27;
+    | &#x27;spline&#x27;
+    | &#x27;splineArea&#x27;
+    | &#x27;stepLine&#x27;
+    | &#x27;scatter&#x27;
+    | &#x27;bubble&#x27;
+    | &#x27;stackedColumn&#x27;
+    | &#x27;stackedBar&#x27;
+    | &#x27;stackedArea&#x27;
+    | &#x27;stackedColumn100&#x27;
+    | &#x27;stackedBar100&#x27;
+    | &#x27;stackedArea100&#x27;
+    | &#x27;pie&#x27;
+    | &#x27;doughnut&#x27; &#x3D; &#x27;column&#x27;;
+  @Input() width!: string;
+  @Input() height!: string;
+  @Input() data!: CanvasJS.ChartDataSeriesOptions[];
+  @Input() options!: Partial&lt;CanvasJS.ChartOptions&gt;;
+  @Input() stacked!: boolean;
+  /** Text Color for title and labels */
+  @Input() color &#x3D; &#x27;#000&#x27;;
+  /** Background color */
+  @Input() backgroundColor &#x3D; &#x27;#fff&#x27;;
+  /** Limit the number of datapoints displayed */
+  @Input() limit: number | undefined;
+
+  /** Colors for data points in RGB */
+  @Input() colorSet!: string;
+  @Input() colorGradient!: [string, string];
+  @Input() colorsCustom: string[] | undefined;
+
+  // Format Elements
+  @Input() formatTooltip: any;
+  @Input() formatTooltipTitle: any;
+  @Input() formatDatalabel: any;
+  @Input() formatXLabels: any;
+  @Input() formatYLabels: any;
+
+  // Show/Hide Elements
+  /** Show or hide the tooltip which appears when you hover over a chart entry */
+  @Input() showLegend &#x3D; true;
+  /** Show or hide the values that appear inside the chart */
+  @Input() showIndexLabel &#x3D; false;
+  /** Show or hide the tooltip which appears when you hover over a chart entry */
+  @Input() showTooltip &#x3D; true;
+  /** Show or hide the labels that appear on the X axis */
+  @Input() showXAxisLabels &#x3D; true;
+  /** Show or hide the labels that appear on the Y axis */
+  @Input() showYAxisLabels &#x3D; true;
+
+  // Titles
+  /** Title to show for the main chart */
+  @Input() titleChart: string | undefined;
+  /** Title to show for the X Axis, leave null for none */
+  @Input() titleXAxis: string | undefined;
+  /** Title to show for the Y Axis, leave null for none */
+  @Input() titleYAxis: string | undefined;
+
+  // Template
+  /** Supply a custom html template for the tooltip */
+  @Input() templateTooltip: any &#x3D; null;
+
+  /** Randomly generated uniqueID for the div that holds the chart. Allows for multiple charts per page */
+  public uniqueId &#x3D; &#x27;chart&#x27; + Math.floor(Math.random() * 1000000);
+
+  /** Chart reference */
+  private chart: CanvasJS.Chart | undefined;
+
+  /** If custom colors supplied, this is the auto-generated name of the color scheme */
+  private colorScheme: string | undefined;
+
+  /** After initial load */
+  private isLoaded &#x3D; false;
+
+  private styling &#x3D; {
+    fontFamily: &#x60;&#x27;Helvetica Neue&#x27;, &#x27;Helvetica&#x27;, &#x27;Arial&#x27;, sans-serif&#x60;,
+    fontSize: 10,
+    fontWeight: &#x27;normal&#x27;,
+  };
+
+  ngAfterViewInit() {
+    this.scriptsLoad();
+  }
+
+  ngOnChanges() {
+    // Only update chart
+    if (this.isLoaded) {
+      this.chartInit();
+    }
+  }
+
+  /**
+   * Check if Chart.js is loaded, if not, load it then initialize the chart in this component
+   */
+  public scriptsLoad() {
+    if (window.CanvasJS) {
+      this.chartInit(); // Chart.js already loaded, init chart
+      this.isLoaded &#x3D; true;
+    } else {
+      // Dynamically load chart module
+      const script &#x3D; document.createElement(&#x27;script&#x27;);
+      script.type &#x3D; &#x27;text/javascript&#x27;;
+      script.src &#x3D; chartSrc;
+      script.onload &#x3D; () &#x3D;&gt; {
+        this.chartInit();
+        this.isLoaded &#x3D; true;
+      }; // After load, init chart
+      document.head.appendChild(script);
+    }
+  }
+
+  /**
+   * Initialize the chart
+   */
+  private chartInit() {
+    // Make sure DOM element exists
+    if (this.element &amp;&amp; this.element.nativeElement &amp;&amp; window.CanvasJS &amp;&amp; document.getElementById(this.uniqueId)) {
+      //  &amp;&amp; this.dataSets
+      // Clean up any previous references before reinitializing the chart
+      this.ngOnDestroy();
+
+      if (this.colorsCustom) {
+        this.colorScheme &#x3D; &#x27;customColors-&#x27; + this.colorsCustom.join;
+        window.CanvasJS.addColorSet(this.colorScheme, this.colorsCustom);
+      }
+
+      // Create chart from WINDOW reference not import
+      // Due to bug with plugins registered with global instance and not being available via imports
+      this.chart &#x3D; new window.CanvasJS.Chart(this.uniqueId, this.chartOptionsCreate());
+      if (this.chart) {
+        this.chart.render();
+      }
+    } else {
+      setTimeout(() &#x3D;&gt; this.chartInit(), 100);
+    }
+  }
+
+  /**
+   * Create the options needed by this chart
+   */
+  public chartOptionsCreate() {
+    // If color gradient is specified, create it to match datapoint range
+    if (this.colorGradient &amp;&amp; this.data &amp;&amp; this.data[0] &amp;&amp; this.data[0].dataPoints.length) {
+      this.colorsCustom &#x3D; this.getColorScheme(
+        this.colorGradient[0],
+        this.colorGradient[1],
+        this.limit || this.data[0].dataPoints.length,
+      );
+    }
+
+    // If custom colors supplied, register with chart plugin
+    if (this.colorsCustom) {
+      this.colorScheme &#x3D; &#x27;customColors-&#x27; + this.colorsCustom.join;
+      window.CanvasJS.addColorSet(this.colorScheme, this.colorsCustom);
+    }
+
+    // Create default options
+    const options &#x3D; &lt;CanvasJS.ChartOptions&gt;{
+      animationEnabled: true,
+      exportEnabled: false,
+      animationDuration: 600,
+      backgroundColor: this.backgroundColor,
+      title: {
+        text: this.titleChart,
+        fontSize: 18,
+        fontColor: this.color,
+        fontFamily: this.styling.fontFamily,
+        fontWeight: this.styling.fontWeight,
+      },
+      // theme: &quot;light2&quot;,
+      toolTip: {
+        enabled: this.showTooltip,
+        fontColor: this.formatTooltip ? this.formatTooltip : null,
+      },
+      legend: {
+        fontSize: this.styling.fontSize,
+        fontFamily: this.styling.fontFamily,
+        cursor: &#x27;pointer&#x27;,
+        // Enable the legend to toggle dataseries on or off
+        itemclick: (e) &#x3D;&gt; {
+          e.dataSeries.visible &#x3D; typeof e.dataSeries.visible &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27; || e.dataSeries.visible ? false : true;
+          if (this.chart) {
+            this.chart.render();
+          }
+        },
+      },
+      // Use built in color set if supplied, use custom colors if not
+      colorSet: this.colorSet ? this.colorSet : this.colorScheme ? this.colorScheme : null,
+      data: this.mapChartData(),
+      axisX: {
+        title: this.titleXAxis,
+        titleFontSize: 16,
+        interval: 1,
+        labelFontSize: this.styling.fontSize,
+        labelFontColor: this.color,
+        labelFontFamily: this.styling.fontFamily,
+        labelFormatter:
+          this.formatXLabels || this.showXAxisLabels &#x3D;&#x3D;&#x3D; false
+            ? (val) &#x3D;&gt; {
+                if (this.showXAxisLabels &#x3D;&#x3D;&#x3D; false) {
+                  return &#x27;&#x27;; // If show labels is disabled, return empty string which hides the labels
+                }
+                return this.formatXLabels(val); // If custom formatter supplied, format strings
+              }
+            : null, // Otherwise return default value
+      },
+      axisY: {
+        title: this.titleYAxis,
+        titleFontSize: 16,
+        labelFontColor: this.color,
+        labelFontSize: this.styling.fontSize,
+        labelFontFamily: this.styling.fontFamily,
+        labelFormatter:
+          this.formatYLabels || this.showYAxisLabels &#x3D;&#x3D;&#x3D; false
+            ? (val) &#x3D;&gt; {
+                if (this.showYAxisLabels &#x3D;&#x3D;&#x3D; false) {
+                  return &#x27;&#x27;; // If show labels is disabled, return empty string which hides the labels
+                }
+                return this.formatYLabels(val); // If custom formatter supplied, format strings
+              }
+            : null, // Otherwise return default value
+      },
+    };
+    // console.log(options)
+    // Return options object with overrides
+    return defaultsDeep(this.options, options);
+  }
+
+  /**  */
+  private mapChartData(): CanvasJS.ChartDataSeriesOptions[] {
+    return this.data.map((data) &#x3D;&gt; {
+      return &lt;CanvasJS.ChartDataSeriesOptions&gt;{
+        type: this.type,
+        showInLegend: this.showLegend,
+        indexLabel: this.showIndexLabel ? &#x27;{y}&#x27; : null,
+        indexLabelFontSize: 10,
+        ...data,
+        dataPoints: this.limit
+          ? [...data.dataPoints]
+              .sort((a, b) &#x3D;&gt; (a.y &amp;&amp; b.y &amp;&amp; a.y &gt; b.y ? -1 : 1))
+              .slice(0, this.limit)
+              .reverse()
+          : data.dataPoints,
+        // indexLabelFontColor: &#x27;#fff&#x27;,
+        // legendText: this.data[0].label,
+      };
+    });
+  }
+
+  /**
+   * Creates a gradient with a fixed number of steps in a string array
+   * @param startColor - Hex start color
+   * @param endColor - Hex end color
+   * @param steps - The number of hex colors to return
+   */
+  private getColorScheme(startColor: string, endColor: string, steps: number) {
+    const colorsCustom: string[] &#x3D; [];
+    for (let i &#x3D; 0; i &lt;&#x3D; steps; i++) {
+      colorsCustom.push(this.getGradientStep(startColor, endColor, i / steps));
+    }
+    return colorsCustom;
+  }
+
+  /**
+   * Get a color hex value between 2 input colors as part of a gradient
+   * @param startColor - Hex start color
+   * @param endColor - Hex end color
+   * @param percent
+   */
+  private getGradientStep(startColor: string, endColor: string, percent: number) {
+    // Strip the leading # if it&#x27;s there
+    startColor &#x3D; startColor.replace(/^\s*#|\s*$/g, &#x27;&#x27;);
+    endColor &#x3D; endColor.replace(/^\s*#|\s*$/g, &#x27;&#x27;);
+
+    // convert 3 char codes --&gt; 6, e.g. &#x60;E0F&#x60; --&gt; &#x60;EE00FF&#x60;
+    if (startColor.length &#x3D;&#x3D;&#x3D; 3) {
+      startColor &#x3D; startColor.replace(/(.)/g, &#x27;$1$1&#x27;);
+    }
+
+    if (endColor.length &#x3D;&#x3D;&#x3D; 3) {
+      endColor &#x3D; endColor.replace(/(.)/g, &#x27;$1$1&#x27;);
+    }
+
+    // Get colors
+    const startRed &#x3D; parseInt(startColor.substr(0, 2), 16),
+      startGreen &#x3D; parseInt(startColor.substr(2, 2), 16),
+      startBlue &#x3D; parseInt(startColor.substr(4, 2), 16);
+
+    const endRed &#x3D; parseInt(endColor.substr(0, 2), 16),
+      endGreen &#x3D; parseInt(endColor.substr(2, 2), 16),
+      endBlue &#x3D; parseInt(endColor.substr(4, 2), 16);
+
+    // Calculate new color
+    const diffRed &#x3D; endRed - startRed;
+    const diffGreen &#x3D; endGreen - startGreen;
+    const diffBlue &#x3D; endBlue - startBlue;
+
+    let diffRedStr &#x3D; (diffRed * percent + startRed).toString(16).split(&#x27;.&#x27;)[0];
+    let diffGreenStr &#x3D; (diffGreen * percent + startGreen).toString(16).split(&#x27;.&#x27;)[0];
+    let diffBlueStr &#x3D; (diffBlue * percent + startBlue).toString(16).split(&#x27;.&#x27;)[0];
+
+    // ensure 2 digits by color
+    if (diffRedStr.length &#x3D;&#x3D;&#x3D; 1) {
+      diffRedStr &#x3D; &#x27;0&#x27; + diffRed;
+    }
+    if (diffGreenStr.length &#x3D;&#x3D;&#x3D; 1) {
+      diffGreenStr &#x3D; &#x27;0&#x27; + diffGreenStr;
+    }
+    if (diffBlueStr.length &#x3D;&#x3D;&#x3D; 1) {
+      diffBlueStr &#x3D; &#x27;0&#x27; + diffBlueStr;
+    }
+
+    return &#x27;#&#x27; + diffRedStr + diffGreenStr + diffBlueStr;
+  }
+
+  /** Rerender chart. Used by dom observer directive */
+  public rerender() {
+    if (this.chart) {
+      this.chart.render();
+    }
+  }
+
+  /**
+   * Supply a formatter method OR an Angular pipe to the chart instance
+   * Used to format labels, values, datalabels, etc
+   * @param option
+
+  public formatData(option: FormatData | Formatter) {
+    // Check if a custom formatter was supplied, if not use angular pipe
+    if (typeof option !&#x3D;&#x3D; &#x27;function&#x27; &amp;&amp; option.pipe) {
+      let format &#x3D; option.format;
+
+      if (!option.format) {
+        format &#x3D; &#x27;&#x27;;
+      }
+
+      switch (option.pipe) {
+        // Use decimal pipe
+        case &#x27;number&#x27;:
+          return (tooltipItem: Chart.ChartTooltipItem, _data: Chart.ChartData) &#x3D;&gt;
+            formatNumber(Number(tooltipItem.yLabel), &#x27;en-US&#x27;, format);
+        // Datepipe
+        case &#x27;date&#x27;:
+          return (tooltipItem: Chart.ChartTooltipItem, _data: Chart.ChartData) &#x3D;&gt;
+            formatDate(Number(tooltipItem.yLabel), format, &#x27;en-US&#x27;);
+        // Currency pipe
+        case &#x27;currency&#x27;:
+          return (tooltipItem: Chart.ChartTooltipItem, _data: Chart.ChartData) &#x3D;&gt;
+            formatCurrency(Number(tooltipItem.yLabel), &#x27;en-US&#x27;, &#x27;&#x27;, format);
+        // Percent pipe
+        case &#x27;percent&#x27;:
+          return (tooltipItem: Chart.ChartTooltipItem, _data: Chart.ChartData) &#x3D;&gt;
+            formatPercent(Number(tooltipItem.yLabel), &#x27;en-US&#x27;, format);
+        default:
+          console.warn(&#x27;Improper values supplied for chart formatter&#x27;, option);
+          break;
+      }
+    } else {
+      return &lt;Formatter&gt;option;
+    }
+
+  }
+  */
+
+  ngOnDestroy() {
+    if (this.chart) {
+      this.chart.destroy();
+      if (this.chart) {
+        delete this.chart;
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;main-canvas-container&quot; [id]&#x3D;&quot;uniqueId&quot; #element [style.height]&#x3D;&quot;height&quot;&gt;&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./chart.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host {
+  display: flex;
+  flex-direction: column;
+
+  .main-canvas-container {
+    flex-grow: 1;
+    //border: 1px solid #ccc;
+    //border-radius: 0.2rem;
+    //overflow: hidden;
+    //padding: 0.5rem;
+    //background: #fff;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="main-canvas-container" [id]="uniqueId" #element [style.height]="height"></div></div>'
+    var COMPONENTS = [{'name': 'ApiStoreCreatorComponent', 'selector': 'nts-api-store-creator'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'nts-calendar'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'ChartComponent', 'selector': 'nts-chart'},{'name': 'ChartsComponent', 'selector': 'app-charts'},{'name': 'ComponentsComponent', 'selector': 'app-components'},{'name': 'ContentComponent', 'selector': 'app-content'},{'name': 'DefaultComponent', 'selector': 'app-default'},{'name': 'DemoModalComponent', 'selector': 'app-demo-modal'},{'name': 'DisplayComponent', 'selector': 'app-display'},{'name': 'DocumentComponent', 'selector': 'app-document'},{'name': 'EditorComponent', 'selector': 'nts-document-editor'},{'name': 'EntityStoreComponent', 'selector': 'app-entity-store'},{'name': 'ExampleComponent', 'selector': 'nts-state-management-example'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'Formgroup2ApiComponent', 'selector': 'nts-formgroup2-api'},{'name': 'FormsComponent', 'selector': 'app-forms'},{'name': 'GridComponent', 'selector': 'nts-grid'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'GridStatusBarComponent', 'selector': 'app-grid-status-bar'},{'name': 'GridTemplateRendererComponent', 'selector': 'app-template-renderer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'MapComponent', 'selector': 'app-map-route'},{'name': 'MultiDocComponent', 'selector': 'app-multi-doc'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NtsAutocompleteComponent', 'selector': 'nts-autocomplete'},{'name': 'NtsDomainStateComponent', 'selector': 'nts-api-state'},{'name': 'NtsErrorComponent', 'selector': 'nts-error'},{'name': 'NtsFilterFieldComponent', 'selector': 'nts-filter-field'},{'name': 'NtsFormFieldComponent', 'selector': 'nts-form-field'},{'name': 'NtsTreeComponent', 'selector': 'nts-tree'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'QaComponent', 'selector': 'app-qa'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'ScriptLoaderComponent', 'selector': 'nts-script-loader'},{'name': 'SectionComponent', 'selector': 'app-section'},{'name': 'StateManagementComponent', 'selector': 'nts-state-management'},{'name': 'StoreCommunicationComponent', 'selector': 'nts-store-communication'},{'name': 'TableComponent', 'selector': 'nts-table'},{'name': 'TablesComponent', 'selector': 'app-tables'},{'name': 'TagBuilderComponent', 'selector': 'nts-tags-quick'},{'name': 'TagsComponent', 'selector': 'nts-tags'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UiStoreCreatorComponent', 'selector': 'nts-ui-store-creator'},{'name': 'UtilitiesComponent', 'selector': 'app-utilities'},{'name': 'ViewerComponent', 'selector': 'app-viewer'},{'name': 'ViewerToolbarComponent', 'selector': 'app-viewer-toolbar'},{'name': 'VisibleComponent', 'selector': '[visible]'},{'name': 'VisibleComponent', 'selector': 'nts-visible'},{'name': 'WizardComponent', 'selector': 'nts-wizard'},{'name': 'WizardComponent', 'selector': 'nts-wizard'},{'name': 'WizNavSidebarComponent', 'selector': 'nts-wizard-nav-sidebar'},{'name': 'WizNavTopComponent', 'selector': 'nts-wizard-nav-top'}];
+    var DIRECTIVES = [{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'GridColumnCellDirective', 'selector': '[grid-cell-template]'},{'name': 'GridColumnDirective', 'selector': 'grid-column'},{'name': 'GridColumnHeaderDirective', 'selector': '[grid-header-template]'},{'name': 'GridRowExpansionDirective', 'selector': '[grid-expansion-template]'},{'name': 'TableColumnCellDirective', 'selector': '[table-cell-template]'},{'name': 'TableColumnDirective', 'selector': 'table-column'},{'name': 'TableColumnHeaderDirective', 'selector': '[table-header-template]'},{'name': 'TableRowExpansionDirective', 'selector': '[table-expansion-template]'},{'name': 'TreeTemplateDirective', 'selector': 'tree-template'},{'name': 'TreeTemplateNodeDirective', 'selector': '[tree-template-node]'},{'name': 'WizardFeatureDirective', 'selector': 'feature'},{'name': 'WizardFeatureTemplateDirective', 'selector': '[feature-template]'}];
+    var ACTUAL_COMPONENT = {'name': 'ChartComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ChartComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
