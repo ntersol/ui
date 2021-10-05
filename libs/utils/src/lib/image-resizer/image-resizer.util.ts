@@ -1,10 +1,10 @@
 /**
- * Resize and scale an image file
+ * Resize and scale an image file in the browser
  * @param image an object of type File
  * @param maxDimension a number for the maximum height and/or width of the new image file
  * @author John Edwards
  * @example
- * //feed an uploaded file and max dimensions. Function returns a Promise
+ * // Feed an uploaded file and max dimensions. Function returns a Promise
  * imageResize(file, 850).then((newFile: any) => {
  *   file = newFile;
  * })
