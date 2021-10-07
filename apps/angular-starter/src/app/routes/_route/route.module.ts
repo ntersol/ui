@@ -5,20 +5,21 @@ import { SiteModule } from '$site'; // Site modules
 // Routing
 import { routing } from './routes';
 
-// Components
-import { RootComponent } from './root.component';
-import { RouteUiStateService, RouteUiStateStore, RouteUiStateQuery } from './shared/state/ui/route-ui-state.service';
+import { RouteApiService } from './shared/stores/api/route-api.service'
+import { RouteUiService } from './shared/stores/ui/route-ui.service'
 
+// Components
+import { RouteComponent } from './_route.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing],
-  declarations: [RootComponent],
+  declarations: [RouteComponent],
   providers: [
-    RouteUiStateService,
-    RouteUiStateStore,
-    RouteUiStateQuery,
+    // Not provided in root since route specific
+    RouteApiService,
+    RouteUiService
   ],
   exports: [],
   entryComponents: [],
 })
-export class RouteModule {}
+export class RouteModule { }

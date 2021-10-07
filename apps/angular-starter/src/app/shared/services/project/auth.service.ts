@@ -5,7 +5,7 @@ import { merge, interval, BehaviorSubject, fromEvent } from 'rxjs';
 import { throttleTime, tap, switchMap, filter, map, distinctUntilChanged, startWith, take } from 'rxjs/operators';
 import { DialogService } from 'primeng/dynamicdialog';
 import { environment } from '$env';
-import { DomainService } from '$domain';
+import { ApiService, } from '$api';
 import { SettingsService } from '$settings';
 import { Models } from '../../models/global.models';
 import { LogoutModalComponent } from '../../../components/modals';
@@ -56,7 +56,7 @@ export class AuthService {
     private route: ActivatedRoute,
     private settings: SettingsService,
     public dialogService: DialogService,
-    private domain: DomainService,
+    private api: ApiService,
   ) {
     // Manage logout timer
     // Only fire events when timer expires and is not inactive (IE the logout modal is active)
@@ -177,7 +177,7 @@ export class AuthService {
     this.settings.token = null;
     this.logoutModalVisible = false;
     this.authState$.next(authState);
-    this.domain.resetAll(); // Clear out all API data on log out for security
+    this.api.resetAll(); // Clear out all API data on log out for security
     // Don't throw a redirect url if this is the dashboard since that is default on login
     const returnUrl = this.router.url !== '/' && this.router.url !== '/login' ? this.router.url.split('?')[0] : null;
     this.router.navigate(['/login'], { queryParams: { returnUrl: returnUrl } });

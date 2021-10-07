@@ -6,6 +6,7 @@ export const importExample = `
 
 export const usage1 = `
   import { ntsApiStoreCreator } from &#39;@ntersol/state-management&#39;;
+  import { HttpClient } from &#39;@angular/common/http&#39;;
 
   @Injectable({
     providedIn: &#39;root&#39;,

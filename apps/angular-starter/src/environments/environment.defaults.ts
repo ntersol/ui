@@ -3,7 +3,7 @@ import { EnvironmentConfig } from './environment.model';
 /**
  * Global defaults for environment configs
  */
-export const defaults: EnvironmentConfig = {
+export const environment: EnvironmentConfig = {
   /** Use production bundling */
   production: false,
   properties: {

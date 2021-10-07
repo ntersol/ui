@@ -3,7 +3,7 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 import { local } from './environment.local';
-import { defaults } from './defaults';
+import { environment as defaults } from './environment.defaults';
 import { EnvironmentConfig } from './environment.model';
 import { mergeDeepRight } from 'ramda';
 /**
