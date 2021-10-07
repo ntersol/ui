@@ -22,8 +22,6 @@ export class NavComponent {
   public userName = this.settings.userName;
   /**   Does the app have an update */
   public hasUpdate$ = this.ui.updateAvailable$;
-  /** App version */
-  public version$ = this.settings.version$;
 
   public navMenu: MenuItem[] = [
     {

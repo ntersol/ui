@@ -5,8 +5,8 @@ import { SiteModule } from '$site'; // Site modules
 // Routing
 import { routing } from './routes';
 
-import { RouteApiService } from './shared/stores/api/route-api.service'
-import { RouteUiService } from './shared/stores/ui/route-ui.service'
+import { RouteApiService } from './shared/stores/route-api-store.service'
+import { RouteUiService } from './shared/stores/route-ui-store.service'
 
 // Components
 import { RouteComponent } from './_route.component';

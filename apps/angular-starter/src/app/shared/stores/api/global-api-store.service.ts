@@ -13,15 +13,4 @@ export class ApiService {
   // List all store services here
   constructor(public http: HttpClient) { }
 
-  /**
-   * Reset all stores
-   */
-  public resetAll() {
-    Object.keys(this).forEach(key => {
-      const dependency = (<any>this)[key];
-      if (dependency && dependency.store && dependency.store.reset) {
-        dependency.store.reset();
-      }
-    });
-  }
 }

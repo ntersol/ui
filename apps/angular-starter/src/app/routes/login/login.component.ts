@@ -30,6 +30,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit() {
+
+    console.log(this.settings.token)
+
     let isLogin, hasLogin;
     if (window.localStorage.rememberLogin && this.settings.userName) {
       isLogin = this.settings.userName;
