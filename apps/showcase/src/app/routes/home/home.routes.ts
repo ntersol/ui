@@ -8,6 +8,7 @@ import { UiStoreCreatorComponent } from './routes/state-management/routes/ui-sto
 
 import { VisibleComponent } from './routes/visible/visible.component';
 import { WizardComponent } from './routes/wizard/wizard.component';
+import { ShowcaseTableComponent } from './routes/table/table.component';
 
 const routes: Routes = [
   {
@@ -55,7 +56,7 @@ const routes: Routes = [
       },
       {
         path: 'table',
-        component: undefined,
+        component: ShowcaseTableComponent,
         data: { title: 'Table' },
       },
       {

@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FormsModule } from '@angular/forms';
 import { UiStoreCreatorComponent } from './ui-store-creator.component';
+import { TabViewModule } from 'primeng/tabview';
 
 describe('UiStoreCreatorComponent', () => {
   let component: UiStoreCreatorComponent;
@@ -8,9 +10,10 @@ describe('UiStoreCreatorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UiStoreCreatorComponent ]
+      declarations: [UiStoreCreatorComponent],
+      imports: [HttpClientTestingModule, TabViewModule, FormsModule]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
