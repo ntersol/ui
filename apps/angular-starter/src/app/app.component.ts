@@ -4,7 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { map, filter, mergeMap } from 'rxjs/operators';
 
 import { environment } from '$env';
-import { NtsVersionManagementService, NtsServiceWorkerService } from './shared/services/general';
+import { NtsVersionManagementService } from './shared/services/general';
 
 @Component({
   selector: 'app-root',
@@ -18,16 +18,18 @@ export class AppComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private title: Title,
     private version: NtsVersionManagementService,
-    private sw: NtsServiceWorkerService,
-  ) {}
+    // private sw: NtsServiceWorkerService,
+  ) { }
 
   ngOnInit() {
     this.routeChange();
 
+    /**
     // If service worker
     if (environment.settings.enableServiceWorker) {
       this.sw.pollforUpdates();
     }
+     */
 
     // If version endpoint specified, poll for version changes
     if (environment.endpoints.versionPath) {

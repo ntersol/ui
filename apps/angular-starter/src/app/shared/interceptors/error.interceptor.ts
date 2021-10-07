@@ -2,7 +2,6 @@ import { ErrorHandler, Injectable } from '@angular/core';
 
 import { environment } from '$env';
 import { SettingsService } from '$settings';
-import { NtsServiceWorkerService } from '../services/general';
 
 interface AngularError {
   promise: any;
@@ -27,8 +26,7 @@ interface LogError {
 export class GlobalErrorHandler implements ErrorHandler {
   constructor(
     private settings: SettingsService,
-    private sw: NtsServiceWorkerService,
-  ) {}
+  ) { }
 
   // Custom error handler for application/angular errors
   // Uses plain JS to eliminate any dependencies that may not be available due to the error
@@ -59,13 +57,13 @@ export class GlobalErrorHandler implements ErrorHandler {
    */
   private resetState(error: AngularError) {
     console.error({ error: error });
-    const resetAction = () => {
-      localStorage.clear();
-      sessionStorage.clear();
-      window.location.href = '/#/login';
-    };
+    // const resetAction = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = '/#/login';
+    // };
     // If serviceworker is enabled, remove it first befire executing reset action, otherwise just reset
-    this.sw.isEnabled ? this.sw.remove() : resetAction();
+    // this.sw.isEnabled ? this.sw.remove() : resetAction();
   }
 
   /**

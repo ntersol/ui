@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { merge } from 'rxjs';
 import { ConfirmationService } from 'primeng/api';
-import { SwUpdate } from '@angular/service-worker';
-import { NtsServiceWorkerService, NtsVersionManagementService } from '../../services/general';
+import { NtsVersionManagementService } from '../../services/general';
 import { ntsUIStoreCreator } from '@ntersol/state-management';
 
 // Set up interface for the store
@@ -18,12 +17,10 @@ export class UiStateService {
   public uiStore = ntsUIStoreCreator<GlobalUIStoreModel>({}, { persistId: 'globalUIStore' });
 
   /** Is an app update available, either from the service worker or the version checker */
-  public updateAvailable$ = merge(this.ntsSw.updateAvailable$, this.ntsVersion.updateAvailable$);
+  public updateAvailable$ = merge(this.ntsVersion.updateAvailable$);
 
   constructor(
     private confirmationService: ConfirmationService,
-    private sw: SwUpdate,
-    private ntsSw: NtsServiceWorkerService,
     private ntsVersion: NtsVersionManagementService,
   ) {
     // this.query.uiState$.subscribe(state => console.log('UI STATE', state));
@@ -34,7 +31,8 @@ export class UiStateService {
     this.confirmationService.confirm({
       message: 'An update for this application is available, would you like to update?',
       header: 'Confirmation',
-      accept: () => (this.sw.isEnabled ? this.sw.activateUpdate().then(() => document.location.reload()) : document.location.reload()),
+      accept: () => document.location.reload(),
+      // accept: () => (this.sw.isEnabled ? this.sw.activateUpdate().then(() => document.location.reload()) : document.location.reload()),
       // reject: () => console.log('Nope!!!'),
     });
   }
