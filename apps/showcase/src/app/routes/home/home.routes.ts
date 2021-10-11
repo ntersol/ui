@@ -2,7 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { HomeModule } from './home.module';
-import { AngularStarterComponent } from './routes/angular-starter/angular-starter.component';
+import { AngularStarterComponent } from '../apps/routes/angular-starter/angular-starter.component';
 
 
 const routes: Routes = [

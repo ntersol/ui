@@ -17,11 +17,10 @@ import { HomeComponent } from './home.component';
 import { RouteUiStateQuery, RouteUiStateService, RouteUiStateStore } from './shared/state/ui';
 import { RouteDomainStateService } from './shared/state/domain';
 import { HighlightService } from '../../shared/services/highlight.service';
-import { AngularStarterComponent } from './routes/angular-starter/angular-starter.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, TabViewModule, NtsTableModule, NtsStateManagementModule, NtsFormsModule, NtsVisibleModule],
-  declarations: [HomeComponent, AngularStarterComponent],
+  declarations: [HomeComponent],
   providers: [HighlightService, RouteUiStateService, RouteUiStateStore, RouteUiStateQuery, RouteDomainStateService],
   exports: [],
   entryComponents: [],
