@@ -4,6 +4,7 @@ import { ShowcaseTableComponent } from './table.component';
 
 import { NtsTableModule } from '@ntersol/table';
 import { TabViewModule } from 'primeng/tabview';
+import { HighlightService } from '../../../../shared/services/highlight.service';
 
 describe('ShowcaseTableComponent', () => {
   let component: ShowcaseTableComponent;
@@ -12,7 +13,8 @@ describe('ShowcaseTableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ShowcaseTableComponent],
-      imports: [TabViewModule, NtsTableModule]
+      imports: [TabViewModule, NtsTableModule],
+      providers: [HighlightService]
     }).compileComponents();
   });
 

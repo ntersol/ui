@@ -7,7 +7,7 @@ import { ExampleComponent } from './example.component';
 import { NtsTableModule } from '@ntersol/table';
 import { NtsFormsModule } from '@ntersol/forms';
 import { NtsStateManagementModule } from '@ntersol/state-management';
-import { NtsVersionManagementService, NtsServiceWorkerService } from '../../../../../shared/services/general';
+import { NtsVersionManagementService, NtsServiceWorkerService } from '../../../shared/services/general';
 
 describe('ExampleComponent', () => {
   let component: ExampleComponent;
