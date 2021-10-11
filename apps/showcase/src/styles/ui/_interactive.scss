@@ -1,7 +1,7 @@
 // Global branded styling. App specific styling should NOT go in this file
 a {
   cursor: pointer;
-  color: $interact-primary-dk;
+  color: $interact-primary;
   &:hover {
   }
   &:active {
@@ -19,4 +19,7 @@ a {
   &:not([href]):not([tabindex]) {
     color: $interact-primary-dk;
   }
+}
+.fas {
+  color: $brand-primary-alt;
 }
