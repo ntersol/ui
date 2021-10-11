@@ -112,7 +112,7 @@
     "core-js": "3.2.1",
     "document-register-element": "1.14.1",
     "helpful-decorators": "2.1.0",
-    "node-sass": "4.13.1",
+    "sass": "^1.32.12",
     "primeflex": "^2.0.0",
     "primeicons": "4.1.0",
     "primeng": "11.2.3",
