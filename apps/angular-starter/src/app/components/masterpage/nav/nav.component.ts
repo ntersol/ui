@@ -6,7 +6,7 @@ import { SettingsService } from '$settings';
 import { MenuItem } from 'primeng/api';
 import { fromEvent } from 'rxjs';
 import { UiStateService } from '$ui';
-import { AuthService, AuthState } from 'src/app/shared/services/project/auth.service';
+import { AuthService, AuthState } from '../../../shared/services/project/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -22,8 +22,6 @@ export class NavComponent {
   public userName = this.settings.userName;
   /**   Does the app have an update */
   public hasUpdate$ = this.ui.updateAvailable$;
-  /** App version */
-  public version$ = this.settings.version$;
 
   public navMenu: MenuItem[] = [
     {

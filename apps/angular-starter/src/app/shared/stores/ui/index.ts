@@ -1,1 +1,1 @@
-export * from './ui-state.service';
+export * from './global-ui-store.service';

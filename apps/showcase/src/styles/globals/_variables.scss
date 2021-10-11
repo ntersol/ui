@@ -1,12 +1,14 @@
 // Global branded styling. App specific styling should NOT go in this file
 
 /***** Brand Colors *****/
-$brand-primary: #5e9aca;
+$brand-primary: rgb(255, 102, 0);
 $brand-primary-lt: #5e9aca;
 $brand-primary-dk: #2f6491;
 
+$brand-primary-alt: #00188a;
+
 /***** Brand Colors *****/
-$interact-primary: #74c0fa;
+$interact-primary: $brand-primary;
 $interact-primary-lt: #41a2ec;
 $interact-primary-dk: #2b87cc;
 

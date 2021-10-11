@@ -7,7 +7,9 @@ import { NtsState } from '../../state.models';
  * Create an instance of a UI store
  */
 export class NtsUIStoreCreator<t> extends NtsBaseStore {
-  private state: t = { ...this.initialState };
+  /** Internal state of the store */
+  public state: t = { ...this.initialState };
+  /** Observable of store state */
   public state$ = new BehaviorSubject<t>({ ...this.state });
 
   constructor(private initialState: t, private options?: NtsState.UIStoreOptions) {

@@ -1,13 +1,13 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { RootComponent } from './root.component';
+import { RouteComponent } from './_route.component';
 import { RouteModule } from './route.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: RootComponent,
+    component: RouteComponent,
     data: { title: 'Root' },
   },
 ];

@@ -16,21 +16,13 @@ import { HomeComponent } from './home.component';
 // Route State Management
 import { RouteUiStateQuery, RouteUiStateService, RouteUiStateStore } from './shared/state/ui';
 import { RouteDomainStateService } from './shared/state/domain';
-import { WizardComponent } from './routes/wizard/wizard.component';
-import { VisibleComponent } from './routes/visible/visible.component';
 import { HighlightService } from './shared/services/highlight.service';
-import { StateManagementComponent } from './routes/state-management/state-management.component';
-import { ExampleComponent } from './routes/state-management/components/example.component';
-import { ApiStoreCreatorComponent } from './routes/state-management/routes/api-store-creator/api-store-creator.component';
-import { UiStoreCreatorComponent } from './routes/state-management/routes/ui-store-creator/ui-store-creator.component';
-import { StoreCommunicationComponent } from './routes/state-management/routes/store-communication/store-communication.component';
-import { ShowcaseTableComponent } from './routes/table/table.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, TabViewModule, NtsTableModule, NtsStateManagementModule, NtsFormsModule, NtsVisibleModule],
-  declarations: [HomeComponent, WizardComponent, VisibleComponent, ShowcaseTableComponent, StateManagementComponent, ExampleComponent, ApiStoreCreatorComponent, UiStoreCreatorComponent, StoreCommunicationComponent],
+  declarations: [HomeComponent],
   providers: [HighlightService, RouteUiStateService, RouteUiStateStore, RouteUiStateQuery, RouteDomainStateService],
-  exports: [StateManagementComponent, ExampleComponent],
+  exports: [],
   entryComponents: [],
 })
 export class HomeModule { }

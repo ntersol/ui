@@ -21,7 +21,7 @@ export const isActionType = <t>(
  * Returns an action creator factory
  * @example
  * // Create the factory
- * const actionCreatorFactory = actionCreatorFactory();
+ * const actionCreator = actionCreatorFactory();
  * // Create an action creator
  * const guidChanged = actionCreator<string>('GUID_CHANGE');
  * // Create an action with a payload

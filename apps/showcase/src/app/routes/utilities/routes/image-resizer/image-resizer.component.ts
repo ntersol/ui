@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { imageResize } from '@ntersol/utils';
 import { BehaviorSubject } from 'rxjs';
-import { HighlightService } from '../../../home/shared/services/highlight.service';
+import { HighlightService } from '../../../../shared/services/highlight.service';
 
 @Component({
   selector: 'nts-image-resizer',

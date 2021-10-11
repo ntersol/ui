@@ -9,6 +9,7 @@
 @import '~bootstrap/scss/reboot';
 @import '~bootstrap/scss/utilities';
 @import '~bootstrap/scss/tables';
+@import '~bootstrap/scss/grid';
 // Option 2: Import all of Bootstrap
 // @import '~bootstrap/scss/bootstrap';
 
@@ -20,7 +21,7 @@
 @import '~primeng/resources/primeng.min.css';
 @import '~primeflex/primeflex.css';
 // Option 1: Pre-built PrimeNG theme
-@import "~primeng/resources/themes/nova/theme.css";
+@import '~primeng/resources/themes/nova/theme.css';
 // Option 2: Custom theme using PrimeNG Theme Designer
 // TODO: Update Theme Designer to support PrimeNG 11
 //@import 'styles/theme/nova-light/theme';

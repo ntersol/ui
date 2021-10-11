@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HighlightService } from '../../../home/shared/services/highlight.service';
+import { HighlightService } from '../../../../shared/services/highlight.service';
 
 @Component({
   selector: 'nts-formgroup2-api',

@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, ErrorHandler, Injector } from '@angular/core'; // APP_INITIALIZER,
 import { RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { enableAkitaProdMode, persistState } from '@datorama/akita';
 
 import { SiteModule } from '$site';
@@ -82,10 +81,12 @@ export let InjectorInstance: Injector;
       relativeLinkResolution: 'legacy',
     }),
 
+    /** Uncomment to enable SW
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.settings.enableServiceWorker,
       registrationStrategy: 'registerImmediately',
     }),
+     */
 
     SiteModule,
   ],

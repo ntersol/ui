@@ -47,6 +47,16 @@ export const ROUTES: Routes = [
       },
 
       {
+        path: 'state-management',
+        loadChildren: () => import('./routes/state-management/state-management.module').then(m => m.StateManagementModule),
+      },
+
+      {
+        path: 'apps',
+        loadChildren: () => import('./routes/apps/apps.module').then(m => m.AppsModule),
+      },
+
+      {
         path: 'components',
         loadChildren: () => import('./routes/components/components.module').then(m => m.ComponentsModule),
       },
