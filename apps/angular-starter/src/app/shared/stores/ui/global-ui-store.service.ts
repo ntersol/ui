@@ -8,8 +8,6 @@ import { ntsUIStoreCreator } from '@ntersol/state-management';
 // Set up interface for the store
 interface GlobalUIStoreModel { }
 
-
-// tslint:disable-next-line:max-classes-per-file
 @Injectable({ providedIn: 'root' })
 export class UiStateService {
 
