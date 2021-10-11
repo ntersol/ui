@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { scriptLoad$ } from '@ntersol/utils';
 import { debounceTime } from 'rxjs/operators';
-import { HighlightService } from '../../../home/shared/services/highlight.service';
+import { HighlightService } from '../../../../shared/services/highlight.service';
 
 @Component({
   selector: 'nts-script-loader',

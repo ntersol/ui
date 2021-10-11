@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { HighlightService } from '../../shared/services/highlight.service';
+import { HighlightService } from '../../../../shared/services/highlight.service';
 
 @Component({
   selector: 'nts-wizard',
@@ -35,9 +35,9 @@ export class WizardComponent implements OnInit, AfterViewInit {
   public settings = {};
   public formGroup = this.fb.group({});
 
-  constructor(private highlight: HighlightService, private fb: FormBuilder) {}
+  constructor(private highlight: HighlightService, private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngAfterViewInit() {
     this.highlight.highlightAll();

@@ -16,18 +16,14 @@ import { HomeComponent } from './home.component';
 // Route State Management
 import { RouteUiStateQuery, RouteUiStateService, RouteUiStateStore } from './shared/state/ui';
 import { RouteDomainStateService } from './shared/state/domain';
-import { WizardComponent } from './routes/wizard/wizard.component';
-import { VisibleComponent } from './routes/visible/visible.component';
-import { HighlightService } from './shared/services/highlight.service';
-import { StateManagementComponent } from './routes/state-management/state-management.component';
-import { ExampleComponent } from './routes/state-management/components/example.component';
+import { HighlightService } from '../../shared/services/highlight.service';
 import { AngularStarterComponent } from './routes/angular-starter/angular-starter.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, TabViewModule, NtsTableModule, NtsStateManagementModule, NtsFormsModule, NtsVisibleModule],
-  declarations: [HomeComponent, WizardComponent, VisibleComponent, StateManagementComponent, ExampleComponent, AngularStarterComponent],
+  declarations: [HomeComponent, AngularStarterComponent],
   providers: [HighlightService, RouteUiStateService, RouteUiStateStore, RouteUiStateQuery, RouteDomainStateService],
-  exports: [StateManagementComponent, ExampleComponent],
+  exports: [],
   entryComponents: [],
 })
 export class HomeModule { }

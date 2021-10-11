@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HighlightService } from '../../shared/services/highlight.service';
+import { HighlightService } from '../../../../shared/services/highlight.service';
 
 type sizes = 'sm' | 'md' | 'lg' | 'md-up';
 
@@ -27,7 +27,7 @@ export class VisibleComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  showVisibilityStatus(visibility: boolean, size: sizes): void {
+  showVisibilityStatus(visibility: any, size: sizes): void {
     console.log(`Content ${size} is visible: ${visibility}`);
   }
 

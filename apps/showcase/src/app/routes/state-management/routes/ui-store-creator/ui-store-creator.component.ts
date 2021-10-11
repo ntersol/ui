@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HighlightService } from '../../../home/shared/services/highlight.service';
+import { HighlightService } from '../../../../shared/services/highlight.service';
 import { StateManagementService } from '../../shared/state-management.service';
 import { install, importExample, usage1, usage2, usage3 } from './code-examples';
 

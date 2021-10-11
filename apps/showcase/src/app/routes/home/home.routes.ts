@@ -4,8 +4,6 @@ import { HomeComponent } from './home.component';
 import { HomeModule } from './home.module';
 import { AngularStarterComponent } from './routes/angular-starter/angular-starter.component';
 
-import { VisibleComponent } from './routes/visible/visible.component';
-import { WizardComponent } from './routes/wizard/wizard.component';
 
 const routes: Routes = [
   {
@@ -19,17 +17,7 @@ const routes: Routes = [
         data: { title: 'Angular Starter' },
       },
 
-      {
-        path: 'wizard',
-        component: WizardComponent,
-        data: { title: 'Wizard' },
-      },
 
-      {
-        path: 'visible',
-        component: VisibleComponent,
-        data: { title: 'Visible' },
-      },
       {
         path: 'tags',
         component: undefined,
