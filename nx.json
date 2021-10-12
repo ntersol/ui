@@ -26,28 +26,37 @@
     }
   },
   "projects": {
+    "angular-starter": {
+      "tags": []
+    },
+    "azure-maps": {
+      "tags": []
+    },
     "calendar": {
-      "tags": []
-    },
-    "showcase": {
-      "tags": []
-    },
-    "wizard": {
-      "tags": []
-    },
-    "starter": {
-      "tags": []
-    },
-    "forms": {
-      "tags": []
-    },
-    "state-management": {
       "tags": []
     },
     "chart": {
       "tags": []
     },
     "document-editor": {
+      "tags": []
+    },
+    "forms": {
+      "tags": []
+    },
+    "grid": {
+      "tags": []
+    },
+    "showcase": {
+      "tags": []
+    },
+    "starter": {
+      "tags": []
+    },
+    "state-management": {
+      "tags": []
+    },
+    "storybook": {
       "tags": []
     },
     "table": {
@@ -59,19 +68,13 @@
     "tree": {
       "tags": []
     },
+    "utils": {
+      "tags": []
+    },
     "visible": {
       "tags": []
     },
-    "grid": {
-      "tags": []
-    },
-    "storybook": {
-      "tags": []
-    },
-    "angular-starter": {
-      "tags": []
-    },
-    "utils": {
+    "wizard": {
       "tags": []
     }
   }

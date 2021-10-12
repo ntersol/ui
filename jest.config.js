@@ -17,5 +17,6 @@ module.exports = {
     '<rootDir>/apps/angular-starter',
     '<rootDir>/apps/fresh',
     '<rootDir>/libs/utils',
+    '<rootDir>/libs/azure-maps',
   ],
 };
