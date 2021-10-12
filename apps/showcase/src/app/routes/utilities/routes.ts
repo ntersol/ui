@@ -2,6 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { Formgroup2ApiComponent } from './routes/formgroup2-api/formgroup2-api.component';
 import { ImageResizerComponent } from './routes/image-resizer/image-resizer.component';
+import { LibLoaderComponent } from './routes/lib-loader/lib-loader.component';
 import { RemoveNilsComponent } from './routes/remove-nils/remove-nils.component';
 import { ScriptLoaderComponent } from './routes/script-loader/script-loader.component'
 import { UtilitiesComponent } from './utilities.component';
@@ -17,6 +18,11 @@ const routes: Routes = [
     path: 'script-loader',
     component: ScriptLoaderComponent,
     data: { title: 'Script Loader' },
+  },
+  {
+    path: 'lib-loader',
+    component: LibLoaderComponent,
+    data: { title: 'Lib Loader' },
   },
   {
     path: 'formgroup-2-api',

@@ -1,31 +1,41 @@
-import * as dayjs from 'dayjs';
+
 import { forkJoin, Observable, of } from 'rxjs';
+import { map, share, switchMap, take } from 'rxjs/operators';
+import { scriptLoad$ } from '@ntersol/utils';
 
-import { scriptLoad$ } from './script-loader.util';
-import { concatMap, map, share, switchMap, take, tap } from 'rxjs/operators';
+// Lib definitions
+import * as dayjs from 'dayjs';
+import * as jquery from 'jquery';
 
+// Window extension
 declare global {
   interface Window {
     dayjs: () => dayjs.Dayjs;
+    $: JQuery
   }
 }
 
 export namespace LibLoader {
-  export type Libs = DayJSLib;
+  export type Libs = DayJSLib | jQueryLib;
 
   // DayJS config
-  type DayJSPlugins = 'utc' | 'timezone' | 'calendar';
-  export interface DayJSLib extends Options<DayJSPlugins> {
+  export interface DayJSLib extends Options {
     lib: 'dayjs';
+    plugins?: ('utc' | 'timezone' | 'calendar')[];
+  }
+  // jQuery
+  export interface jQueryLib extends Options {
+    lib: 'jquery';
   }
 
-  export interface Options<t = string> {
+
+
+  export interface Options {
     lib: string;
     version: string;
-    plugins?: t[];
   }
 
-  export type AvailableLibs = 'dayjs';
+  export type AvailableLibs = 'dayjs' | 'jquery';
   export type Definitions = Record<AvailableLibs, DefinitionOptions>;
   export interface DefinitionOptions {
     /** Source url of the main library url file */
@@ -43,13 +53,20 @@ const libs: LibLoader.Definitions = {
     srcUrl: (version: string) => `https://cdnjs.cloudflare.com/ajax/libs/dayjs/${version}/dayjs.min.js`,
     srcUrlPlugins: (version: string, plugin: string) => `https://cdnjs.cloudflare.com/ajax/libs/dayjs/${version}/plugin/${plugin}.min.js`,
   },
+  jquery: {
+    srcUrl: (version: string) => `https://cdnjs.cloudflare.com/ajax/libs/jquery/${version}/jquery.min.js`,
+    srcUrlPlugins: (version: string, plugin: string) => `https://cdnjs.cloudflare.com/ajax/libs/jquery/${version}/plugin/${plugin}.min.js`,
+  }
 };
 
 /**
- * Keep track of which scripts have been loaded
+ * Load jQuery, are you really sure you have to?
+ * @param srcUrl
+ * @param options
  */
-const cache: Record<string, boolean> = {};
-
+export function libLoader$(
+  lib: LibLoader.jQueryLib,
+): Observable<typeof jquery>;
 /**
  * Load dayJS, a fantastic JS date manipulation library
  * @param srcUrl
@@ -67,16 +84,17 @@ export function libLoader$(lib: LibLoader.Libs): Observable<void>;
  */
 export function libLoader$(libType: LibLoader.Libs): Observable<any> {
   let lib = of();
+  let url = '';
   switch (libType.lib) {
     case 'dayjs':
       // Resolve url if string or callback function
-      const url = typeof libs.dayjs.srcUrl === 'string' ? libs.dayjs.srcUrl : libs.dayjs.srcUrl(libType.version);
+      url = typeof libs.dayjs.srcUrl === 'string' ? libs.dayjs.srcUrl : libs.dayjs.srcUrl(libType.version);
       // Get scripts for plugins
       const plugins = libType?.plugins?.length
         ? libType.plugins?.map(plugin => {
-            const urlPlugin = typeof plugin === 'string' ? plugin : libs.dayjs.srcUrlPlugins(libType.version, plugin);
-            return scriptLoad$(urlPlugin);
-          })
+          const urlPlugin = typeof plugin === 'string' && libs?.dayjs?.srcUrlPlugins ? plugin : libs.dayjs.srcUrlPlugins(libType.version, plugin);
+          return scriptLoad$(urlPlugin);
+        })
         : [of(null)];
       // Get main http call
       lib = scriptLoad$(url).pipe(
@@ -86,6 +104,15 @@ export function libLoader$(libType: LibLoader.Libs): Observable<any> {
         // Return window entity
         map(() => window.dayjs),
       );
+      break;
+    case 'jquery':
+      // Resolve url if string or callback function
+      url = typeof libs.jquery.srcUrl === 'string' ? libs.jquery.srcUrl : libs.jquery.srcUrl(libType.version);
+      // Get main http call
+      lib = scriptLoad$(url).pipe(
+        map(() => window.$),
+      );
+      break;
   }
   return lib.pipe(take(1), share());
 }
@@ -110,8 +137,3 @@ export function pluginsGet(plugins?: string[] | null) {
 
   return forkJoin(pluginsSrc);
 }
-
-/** */
-libLoader$({ lib: 'dayjs', version: '1.10.7', plugins: ['utc'] }).subscribe(dayjs => {
-  console.warn('Test', dayjs());
-});

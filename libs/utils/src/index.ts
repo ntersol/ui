@@ -4,3 +4,4 @@ export * from './lib/script-loader/script-loader.util';
 export * from './lib/formgroup-2-api/formGroup2Api.util';
 export * from './lib/image-resizer/image-resizer.util';
 export * from './lib/remove-nils/remove-nils.util';
+export * from './lib/lib-loader/lib-loader.util';

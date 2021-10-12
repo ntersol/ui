@@ -15,12 +15,12 @@ export class ScriptLoaderComponent implements OnInit {
     import { scriptLoad$ } from '@ntersol/utils';
 
     // Standard request
-    scriptLoad$('https://unpkg.com/dayjs@1.8.21/dayjs.min.js').subscribe(() => {
+    scriptLoad$('https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js').subscribe(() => {
       // Script loaded successfully
     })
 
     // Now with pipeable operator goodness and error handling
-    scriptLoad$('https://unpkg.com/dayjs@1.8.21/dayjs.NOPE.js').pipe(debounceTime(100)).subscribe(
+    scriptLoad$('https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.BAD.js').pipe(debounceTime(100)).subscribe(
       () => console.log('Script loaded successfully'),
       error => console.error(error)
     )`;
@@ -28,10 +28,10 @@ export class ScriptLoaderComponent implements OnInit {
   constructor(private highlight: HighlightService) { }
 
   ngOnInit(): void {
-    scriptLoad$('https://unpkg.com/dayjs@1.8.21/dayjs.min.js').subscribe(() => {
+    scriptLoad$('https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js').subscribe(() => {
       console.log('Script loaded successfully')
     })
-    scriptLoad$('https://unpkg.com/dayjs@1.8.21/dayjs.NOPE.js').pipe(debounceTime(100)).subscribe(
+    scriptLoad$('https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.BAD.js').pipe(debounceTime(100)).subscribe(
       () => console.log('Script loaded successfully'),
       error => console.error(error)
     )

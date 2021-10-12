@@ -13,10 +13,11 @@ import { ScriptLoaderComponent } from './routes/script-loader/script-loader.comp
 import { Formgroup2ApiComponent } from './routes/formgroup2-api/formgroup2-api.component';
 import { ImageResizerComponent } from './routes/image-resizer/image-resizer.component';
 import { RemoveNilsComponent } from './routes/remove-nils/remove-nils.component';
+import { LibLoaderComponent } from './routes/lib-loader/lib-loader.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, TabViewModule],
-  declarations: [UtilitiesComponent, ScriptLoaderComponent, Formgroup2ApiComponent, ImageResizerComponent, RemoveNilsComponent],
+  declarations: [UtilitiesComponent, ScriptLoaderComponent, Formgroup2ApiComponent, ImageResizerComponent, RemoveNilsComponent, LibLoaderComponent],
   providers: [
     RouteUiStateService,
     RouteUiStateStore,
