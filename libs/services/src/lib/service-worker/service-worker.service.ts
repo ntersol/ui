@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SwUpdate, SwPush } from '@angular/service-worker';
 import { interval, Observable, BehaviorSubject, from, of } from 'rxjs';
-import { delay } from 'helpful-decorators';
 import { HttpClient } from '@angular/common/http';
 import { map, take, switchMap, filter } from 'rxjs/operators';
 
@@ -120,7 +119,6 @@ export class NtsServiceWorkerService {
    * Start polling for SW/app changes based on the supplied interval
    * @param intervalTime Default 5 minutes, 5 * 60 * 1000
    */
-  @delay(100) // Ensures app is loaded
   public pollforUpdates(intervalTime = 5 * 60 * 1000) {
     if (!this.sw.isEnabled) {
       console.error('Service Worker not enabled');

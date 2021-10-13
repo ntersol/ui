@@ -62,6 +62,11 @@ export const ROUTES: Routes = [
       },
 
       {
+        path: 'services',
+        loadChildren: () => import('./routes/services/services.module').then(m => m.ServicesModule),
+      },
+
+      {
         path: 'utilities',
         loadChildren: () => import('./routes/utilities/utilities.module').then(m => m.UtilitiesModule),
       },
