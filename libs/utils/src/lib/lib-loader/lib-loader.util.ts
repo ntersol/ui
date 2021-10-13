@@ -1,7 +1,7 @@
 
 import { forkJoin, Observable, of } from 'rxjs';
 import { map, share, switchMap, take } from 'rxjs/operators';
-import { scriptLoad$ } from '@ntersol/utils';
+import { scriptLoad$ } from '../script-loader/script-loader.util';
 
 // Lib definitions
 import * as dayjs from 'dayjs';
