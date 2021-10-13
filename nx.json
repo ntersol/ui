@@ -59,6 +59,9 @@
     "storybook": {
       "tags": []
     },
+    "services": {
+      "tags": []
+    },
     "table": {
       "tags": []
     },

@@ -1430,6 +1430,63 @@
         }
       }
     },
+    "services": {
+      "projectType": "library",
+      "root": "libs/services",
+      "sourceRoot": "libs/services/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/services/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/services/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/services/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/services"],
+          "options": {
+            "jestConfig": "libs/services/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/services/src/**/*.ts", "libs/services/src/**/*.html"]
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/services/ && npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/services/ && npm pack", "cd dist/libs/services/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run services:patch", "ng run services:build:production", "ng run services:pack"],
+            "parallel": false
+          }
+        }
+      }
+    },
     "visible": {
       "projectType": "library",
       "root": "libs/visible",
