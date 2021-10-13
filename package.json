@@ -113,6 +113,7 @@
     "@types/webpack": "4.41.21",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
+    "azure-maps-control": "^2.1.5",
     "clipboard": "^2.0.8",
     "cypress": "^6.0.1",
     "document-register-element": "^1.14.10",

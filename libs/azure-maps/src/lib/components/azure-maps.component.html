@@ -1,0 +1,24 @@
+<div class="nts-azure-maps nts-azure-maps-fit">
+  <div
+    class="nts-maps-loader nts-azure-maps-fit"
+    [ngClass]="{ 'nts-maps-loaded': (state$ | async)?.loaded }"
+    [ngStyle]="{
+      'background-image': settings?.placeholder ? 'url(' + (settings?.placeholder || '') + ')' : null
+    }"
+  >
+    <noscript><div>Please enable JavaScript</div></noscript>
+    <div class="nts-maps-loading-label"><i class="fa fa-spinner fa-spin"></i> Loading Map...</div>
+  </div>
+  
+  <div
+    #mapContainer
+    [id]="uniqueId"
+    class="nts-azure-maps-map nts-azure-maps-fit"
+    [ngClass]="{ 'nts-maps-loaded': loadMap$ | async, 'nts-azure-maps-map--disabled': disabled }"
+    [ngStyle]="{
+      'background-image': settings?.placeholder ? 'url(' + (settings?.placeholder || '') + ')' : null
+    }"
+  >
+    <div></div>
+  </div>
+</div>
