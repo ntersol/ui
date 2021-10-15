@@ -2,15 +2,15 @@
 
 /***** Brand Colors *****/
 $brand-primary: rgb(255, 102, 0);
-$brand-primary-lt: #5e9aca;
-$brand-primary-dk: #2f6491;
+$brand-primary-lt: #f98d46;
+$brand-primary-dk: #d35400;
 
 $brand-primary-alt: #00188a;
 
 /***** Brand Colors *****/
 $interact-primary: $brand-primary;
-$interact-primary-lt: #41a2ec;
-$interact-primary-dk: #2b87cc;
+$interact-primary-lt: $brand-primary-lt;
+$interact-primary-dk: $brand-primary-dk;
 
 /***** Borders *****/
 $border: $brand-primary;

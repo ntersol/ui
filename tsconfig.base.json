@@ -14,6 +14,7 @@
     "types": ["node"],
     "typeRoots": ["node_modules/@types"],
     "paths": {
+      "$models": ["apps/showcase/src/shared/models"],
       "@ntersol/calendar": ["libs/calendar/src/index.ts"],
       "@ntersol/calendar-clone": ["libs/calendar-clone/src/index.ts"],
       "@ntersol/chart": ["libs/chart/src/index.ts"],
