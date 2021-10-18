@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "license": "MIT",
   "scripts": {
-    "localize": "git update-index --skip-worktree src/environments/environment.local.ts",
+    "localize": "ren tsconfig.json tsconfig.old.json && ren tsconfig.bak.json tsconfig.json",
     "start": "npm run format && ng serve",
     "reinstall": "del package-lock.json /q && rmdir node_modules /s /q && npm i",
     "format": "npm run format-glob -- \"src/{app,environments}/**/*{.ts,.js,.json,.css,.scss,.html}\"",

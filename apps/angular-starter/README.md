@@ -16,7 +16,7 @@ git clone https://github.com/JerrolKrause/angular-starter.git
 cd your-app
 
 # Localize
-Remove the following line from the app root tsconfig `"extends": "./../tsconfig.json",`
+Run `npm run localize`
 
 # Install the repo with npm
 npm i
@@ -110,13 +110,16 @@ npm run deploy
 - TS Lint (Note that this requires the project to be in a solution to work): https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebAnalyzer
 
 ## Bit Usage
+
 Review bit documentation here: https://docs.bit.dev/docs/quick-start. Ntersol bit library is here: https://bit.dev/nts/angular
 
 One line wonders:
+
 - Get and update to latest everything: `npm run bit:pull`
 - Tag and push everything: `npm run bit:push`
 
 Additional Info:
+
 - Install/update bit cli `npm install bit-bin -g`
 - See list of outdated components `bit list --outdated`
 - To get the latest version of everything, run `bit import && bit checkout latest --all`. Import downloads the latest version from the remote server and checkout switches to that version
@@ -124,16 +127,18 @@ Additional Info:
 - When components are ready to have their changes exported, first run `bit tag --all` or `bit tag --all 1.0.0` to set a new semver version and then export with `bit export nts.angular`
 - Add a new component to a namespaced project with `bit add src/app/components/general/new-component --namespace components/general`. See https://bit.dev/nts/angular for the locations and namespaces of components.
 
-
 When bit goes wrong:
+
 - Bit likes to add extra namespaced lines to the root package.json even if you aren't using the npm package. It can cause issues so remove that extra line
 - When adding a bit lib to a new project, but likes to add a node_modules directory into the lib directory. This should be deleted
 - Sometimes when getting the latest component, bit adds lots of extra carriage returns. To fix this run checkout with the reset command `npm run bit:reset`
 
 Add bit to a new project
+
 1. In the root directory, run `bit init`
 2. Add `.bit/` to your root .gitignore file
 3. In the root package.json directory, change the bit entry to the following. Update the componentsDefaultDirectory if necessary
+
 ```
 "bit": {
     "env": {},
@@ -147,6 +152,7 @@ Add bit to a new project
     }
   }
 ```
+
 4. Navigate to the newly created component folder, IE src/app/components/general and delete the node_modules folder and package.json files
 
 ## Useful Info
