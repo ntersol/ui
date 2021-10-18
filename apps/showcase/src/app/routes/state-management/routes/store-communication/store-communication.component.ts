@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StoreComsService } from './store-communication.service'
 import { ntsStore } from '@ntersol/state-management';
 import { tokenChangedAction } from './store.actions';
+import { HighlightService } from '../../../../shared/services/highlight.service';
 
 @Component({
   selector: 'nts-store-communication',
@@ -83,7 +84,7 @@ export class StoreComsService {
   public token: string | null = null;
   public token$ = this.svc.uiStore.select$('token');
 
-  constructor(public svc: StoreComsService) { }
+  constructor(public svc: StoreComsService, private highlight: HighlightService) { }
 
   ngOnInit(): void { }
 
@@ -107,6 +108,10 @@ export class StoreComsService {
     const tokenAction = tokenChangedAction(token);
     // Dispatch the action to a store. Note that all stores receive all actions regardless of where it was dispatched
     ntsStore.dispatch(tokenAction);
+  }
+
+  ngAfterViewInit() {
+    this.highlight.highlightAll();
   }
 
 }
