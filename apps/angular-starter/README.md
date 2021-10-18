@@ -2,18 +2,19 @@
 
 A rapid starter project for creating Angular single page apps. Contains Angular, ngPrime, Akita and more. Built with Angular CLI.
 
-Available online @ https://jerrolkrause.github.io/angular-starter/#/
-
 ## Quick Start
 
 ```bash
-# Clone the repo
-git clone https://github.com/JerrolKrause/angular-starter.git
+# Download the latest version of the starter from
+https://github.com/ntersol/angular-starter/archive/refs/heads/dev/nx.zip
 
-# Rename directory from `angular-starter` to `your-app`
+# Unzip the file locally
 
-# Change directory to the repo
-cd your-app
+# Navigate to the apps/angular-starter directory
+
+# Copy/paste the contents of this directory to wherever you need them to go
+
+# Open a command prompt, cd into the directory where you placed the files
 
 # Localize
 Run `npm run localize`
