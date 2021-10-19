@@ -6,7 +6,7 @@ import { ComponentsModule } from './components.module';
 import { ShowcaseTableComponent } from './routes/table/table.component';
 import { VisibleComponent } from './routes/visible/visible.component';
 import { WizardComponent } from './routes/wizard/wizard.component';
-
+import { ShowcaseTagsComponent } from './routes/tags/tags.component';
 
 const routes: Routes = [
   {
@@ -25,6 +25,12 @@ const routes: Routes = [
     path: 'table',
     component: ShowcaseTableComponent,
     data: { title: 'Table' },
+  },
+
+  {
+    path: 'tags',
+    component: ShowcaseTagsComponent,
+    data: { title: 'Tags' },
   },
 
   {
