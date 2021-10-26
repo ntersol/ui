@@ -15,6 +15,7 @@
     "typeRoots": ["node_modules/@types"],
     "paths": {
       "$models": ["apps/showcase/src/shared/models"],
+      "@ntersol/azure-maps": ["libs/azure-maps/src/index.ts"],
       "@ntersol/calendar": ["libs/calendar/src/index.ts"],
       "@ntersol/calendar-clone": ["libs/calendar-clone/src/index.ts"],
       "@ntersol/chart": ["libs/chart/src/index.ts"],
@@ -30,8 +31,7 @@
       "@ntersol/utils": ["libs/utils/src/index.ts"],
       "@ntersol/visible": ["libs/visible/src/index.ts"],
       "@ntersol/wizard": ["libs/wizard/src/index.ts"],
-      "@ntersol/wizard-old": ["dist/libs/wizard/index.ts"],
-      "@ntersol/azure-maps": ["libs/azure-maps/src/index.ts"]
+      "@ntersol/wizard-old": ["dist/libs/wizard/index.ts"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
