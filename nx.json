@@ -25,60 +25,60 @@
       }
     }
   },
-  "projects": {
-    "angular-starter": {
-      "tags": []
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
+  },
+  "defaultProject": "showcase",
+  "generators": {
+    "@nrwl/angular": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "unitTestRunner": "jest",
+        "e2eTestRunner": "none",
+        "strict": true,
+        "prefix": "nts"
+      },
+      "library": {
+        "buildable": true,
+        "publishable": true,
+        "style": "scss",
+        "linter": "eslint",
+        "unitTestRunner": "jest",
+        "strict": true,
+        "prefix": "nts",
+        "importPath": "@ntersol/{name}"
+      }
     },
-    "azure-maps": {
-      "tags": []
+    "@schematics/angular": {
+      "component": {
+        "style": "scss",
+        "changeDetection": "OnPush",
+        "export": true,
+        "flat": true
+      }
     },
-    "calendar": {
-      "tags": []
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
     },
-    "chart": {
-      "tags": []
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
     },
-    "document-editor": {
-      "tags": []
-    },
-    "forms": {
-      "tags": []
-    },
-    "grid": {
-      "tags": []
-    },
-    "showcase": {
-      "tags": []
-    },
-    "starter": {
-      "tags": []
-    },
-    "state-management": {
-      "tags": []
-    },
-    "storybook": {
-      "tags": []
-    },
-    "services": {
-      "tags": []
-    },
-    "table": {
-      "tags": []
-    },
-    "tags": {
-      "tags": []
-    },
-    "tree": {
-      "tags": []
-    },
-    "utils": {
-      "tags": []
-    },
-    "visible": {
-      "tags": []
-    },
-    "wizard": {
-      "tags": []
+    "@nrwl/angular:component": {
+      "style": "scss"
     }
   }
 }
