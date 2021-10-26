@@ -4,6 +4,7 @@
 
 Generate a new library. Make sure to immediately commit the stub after creation to avoid conflicts in git.
 `ng generate library {libname}`
+Replace '{name}' with '{libname}' in both tsconfig.base.json and the generated package.json within the library you created.
 
 Run storybook documentation
 `ng run {libname}:storybook`
@@ -70,6 +71,8 @@ When using Nx, you can create multiple applications and libraries in the same wo
 ## Generate a library
 
 Run `ng g @nrwl/angular:lib my-lib` to generate a library.
+
+Replace '{name}' with 'my-app' in both tsconfig.base.json and the generated package.json within the library you created.
 
 > You can also use any of the plugins above to generate libraries as well.
 
