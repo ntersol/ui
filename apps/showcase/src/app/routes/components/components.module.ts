@@ -6,6 +6,7 @@ import { NtsFormsModule } from '@ntersol/forms';
 import { NtsStateManagementModule } from '@ntersol/state-management';
 import { NtsTableModule } from '@ntersol/table';
 import { NtsTagsModule } from '@ntersol/tags';
+import { NtsMtgCalcModule } from '@ntersol/mtg-calc';
 
 // Routing
 import { routing } from './routes';
@@ -18,10 +19,11 @@ import { ShowcaseTagsComponent } from './routes/tags/tags.component';
 // Components
 import { ComponentsComponent } from './components.component';
 import { RouteUiStateService, RouteUiStateStore, RouteUiStateQuery } from './shared/state/ui/route-ui-state.service';
+import { MtgCalcComponent } from './routes/mtg-calc/mtg-calc.component';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, NtsStateManagementModule, TabViewModule, NtsFormsModule, NtsTableModule, NtsTagsModule],
-  declarations: [ComponentsComponent, WizardComponent, VisibleComponent, ShowcaseTableComponent, ShowcaseTagsComponent],
+  imports: [CommonModule, SiteModule, routing, NtsStateManagementModule, TabViewModule, NtsFormsModule, NtsTableModule, NtsTagsModule, NtsMtgCalcModule],
+  declarations: [ComponentsComponent, WizardComponent, VisibleComponent, ShowcaseTableComponent, ShowcaseTagsComponent, MtgCalcComponent],
   providers: [
     RouteUiStateService,
     RouteUiStateStore,

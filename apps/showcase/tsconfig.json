@@ -18,7 +18,8 @@
       "@ntersol/visible": ["libs/visible/src"],
       "@ntersol/wizard": ["libs/wizard/src"],
       "@ntersol/tags": ["libs/tags/src"],
-      "@ntersol/utils": ["libs/utils/src/index.ts"]
+      "@ntersol/utils": ["libs/utils/src/index.ts"],
+      "@ntersol/mtg-calc": ["libs/mtg-calc/src"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
