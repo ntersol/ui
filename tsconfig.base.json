@@ -31,7 +31,7 @@
       "@ntersol/visible": ["libs/visible/src/index.ts"],
       "@ntersol/wizard": ["libs/wizard/src/index.ts"],
       "@ntersol/wizard-old": ["dist/libs/wizard/index.ts"],
-      "@ntersol/{name}": ["libs/azure-maps/src/index.ts"]
+      "@ntersol/azure-maps": ["libs/azure-maps/src/index.ts"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
