@@ -1,5 +1,7 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, Input } from '@angular/core';
+import { mergeDeepRight } from 'ramda';
 import { MtgCalcConfig, PAndI } from './mtg-calc.model';
+import { DEFAULT } from './mtg-calc.constants';
 
 @Component({
   selector: 'nts-mtg-calc',
@@ -8,14 +10,19 @@ import { MtgCalcConfig, PAndI } from './mtg-calc.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MtgCalcComponent implements OnInit {
-  config: MtgCalcConfig = {
-    loanAmount: 350000,
-    terms: 30,
-    interestRate: 5
-  };
+  _config: MtgCalcConfig = DEFAULT;
   showAmortization = false;
   amortization: Array<PAndI> = [];
   monthlyAmount = 0;
+
+  get config(): MtgCalcConfig {
+    return this._config;
+  }
+
+  @Input() set config(value: MtgCalcConfig) {
+    this._config = mergeDeepRight(DEFAULT, value);
+    this.calculatePayments();
+  }
 
   ngOnInit(): void {
     this.calculatePayments();

@@ -1,8 +1,11 @@
 /** This is the config for the Mortgage Calculator */
 export interface MtgCalcConfig {
-  loanAmount: number;
-  terms: number;
-  interestRate: number;
+  /** Loan Amount Input */
+  loanAmount?: number | null;
+  /** Terms in years */
+  terms?: number | null;
+  /** interest rate as a yearly percent */
+  interestRate?: number | null;
 };
 
 export interface PAndI {

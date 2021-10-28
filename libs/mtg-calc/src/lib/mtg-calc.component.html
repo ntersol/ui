@@ -30,11 +30,11 @@
         <div class="row">
             <div class="col-6">
                 <h4>Principle</h4>
-                <span>{{ amortization[0].principle | currency}}</span>
+                <span>{{ (amortization.length ? amortization[0].principle : 0) | currency}}</span>
             </div>
             <div class="col-6">
                 <h4>Interest</h4>
-                <span>{{ amortization[0].interest | currency}}</span>
+                <span>{{ (amortization.length ? amortization[0].interest : 0) | currency}}</span>
             </div>
         </div>
     </div>
