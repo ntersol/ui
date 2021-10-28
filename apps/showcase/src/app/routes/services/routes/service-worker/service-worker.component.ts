@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NtsServiceWorkerService } from '../../../../shared/services/general';
+import { NtsServiceWorkerService } from '@ntersol/services';
 import { HighlightService } from '../../../../shared/services/highlight.service';
 
 @Component({

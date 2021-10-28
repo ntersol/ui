@@ -18,7 +18,8 @@
       "@ntersol/visible": ["libs/visible/src"],
       "@ntersol/wizard": ["libs/wizard/src"],
       "@ntersol/tags": ["libs/tags/src"],
-      "@ntersol/utils": ["libs/utils/src/index.ts"]
+      "@ntersol/utils": ["libs/utils/src/index.ts"],
+      "@ntersol/services": ["libs/services/src/index.ts"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
