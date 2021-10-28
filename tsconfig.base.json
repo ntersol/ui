@@ -22,6 +22,7 @@
       "@ntersol/document-editor": ["libs/document-editor/src/index.ts"],
       "@ntersol/forms": ["libs/forms/src/index.ts"],
       "@ntersol/grid": ["libs/grid/src/index.ts"],
+      "@ntersol/mtg-calc": ["libs/mtg-calc/src/index.ts"],
       "@ntersol/services": ["libs/services/src/index.ts"],
       "@ntersol/state-management": ["libs/state-management/src"],
       "@ntersol/storybook": ["libs/storybook/src/index.ts"],

@@ -665,6 +665,37 @@
       },
       "tags": []
     },
+    "mtg-calc": {
+      "projectType": "library",
+      "root": "libs/mtg-calc",
+      "sourceRoot": "libs/mtg-calc/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/mtg-calc"],
+          "options": {
+            "tsConfig": "libs/mtg-calc/tsconfig.lib.json",
+            "project": "libs/mtg-calc/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/mtg-calc/src/**/*.ts", "libs/mtg-calc/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/mtg-calc"],
+          "options": {
+            "jestConfig": "libs/mtg-calc/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "services": {
       "projectType": "library",
       "root": "libs/services",
