@@ -1,7 +1,4 @@
 {
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
   "projects": {
     "angular-starter": {
@@ -532,6 +529,40 @@
             "ci": {
               "quiet": true
             }
+          }
+        }
+      },
+      "tags": []
+    },
+    "google-places-autocomplete": {
+      "projectType": "library",
+      "root": "libs/google-places-autocomplete",
+      "sourceRoot": "libs/google-places-autocomplete/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/google-places-autocomplete"],
+          "options": {
+            "tsConfig": "libs/google-places-autocomplete/tsconfig.lib.json",
+            "project": "libs/google-places-autocomplete/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/google-places-autocomplete/src/**/*.ts",
+              "libs/google-places-autocomplete/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/google-places-autocomplete"],
+          "options": {
+            "jestConfig": "libs/google-places-autocomplete/jest.config.js",
+            "passWithNoTests": true
           }
         }
       },

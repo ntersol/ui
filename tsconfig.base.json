@@ -32,7 +32,8 @@
       "@ntersol/utils": ["libs/utils/src/index.ts"],
       "@ntersol/visible": ["libs/visible/src/index.ts"],
       "@ntersol/wizard": ["libs/wizard/src/index.ts"],
-      "@ntersol/wizard-old": ["dist/libs/wizard/index.ts"]
+      "@ntersol/wizard-old": ["dist/libs/wizard/index.ts"],
+      "@ntersol/google-places-autocomplete": ["libs/google-places-autocomplete/src/index.ts"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
