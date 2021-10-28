@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { MtgCalcComponent } from './mtg-calc.component';
 import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, DialogModule, DividerModule],
+  imports: [CommonModule, FormsModule, DialogModule, DividerModule, DropdownModule],
   declarations: [MtgCalcComponent],
   exports: [MtgCalcComponent],
 })

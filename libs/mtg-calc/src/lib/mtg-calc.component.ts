@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild } from '@angular/core';
 import { mergeDeepRight } from 'ramda';
 import { MtgCalcConfig, PAndI } from './mtg-calc.model';
 import { DEFAULT } from './mtg-calc.constants';
@@ -23,6 +23,8 @@ export class MtgCalcComponent implements OnInit {
     this._config = mergeDeepRight(DEFAULT, value);
     this.calculatePayments();
   }
+
+  @ViewChild('termDropdownRef') termDropdownRef: any;
 
   ngOnInit(): void {
     this.calculatePayments();
@@ -56,6 +58,13 @@ export class MtgCalcComponent implements OnInit {
         p = q;
       }
     }
+  }
+
+  showDropdown(): void {
+    if (!this.termDropdownRef) {
+      return;
+    }
+    this.termDropdownRef.show();
   }
 
   toggleSchedule(): void {

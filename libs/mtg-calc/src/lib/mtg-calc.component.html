@@ -10,9 +10,11 @@
         </span>
     </div>
     <div class="col-12 col-md-4 col-xl-2">
-        <label for="terms">Term (years)</label>
-        <input class="mtg-calc-input p-inputtext" type="number" id="terms" [(ngModel)]="config.terms"
-            (ngModelChange)="calculatePayments()" pInputText>
+        <label for="terms" (click)="showDropdown()">Term (years)</label>
+        <p-dropdown #termDropdownRef inputId="terms" [style]="{'width':'100%'}" class="mtg-calc-input"
+            [options]="config.termOptions || []" (onChange)="calculatePayments()" [(ngModel)]="config.terms"
+            optionLabel="name" optionValue="value">
+        </p-dropdown>
     </div>
     <div class="col-12 col-md-4 col-xl-2">
         <label for="interestRate">Interest Rate</label>

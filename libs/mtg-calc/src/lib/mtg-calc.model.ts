@@ -6,10 +6,17 @@ export interface MtgCalcConfig {
   terms?: number | null;
   /** interest rate as a yearly percent */
   interestRate?: number | null;
+  /** term options dropdown values */
+  termOptions?: Array<TermOptions>;
 };
 
 export interface PAndI {
   principle: number;
   interest: number;
   balance: number;
-}
+};
+
+export interface TermOptions {
+  name: string;
+  value: number;
+};
