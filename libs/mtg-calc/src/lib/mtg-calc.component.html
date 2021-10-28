@@ -1,7 +1,7 @@
 <h2>Mortgage Payment Calculator</h2>
 <p>Calculate how much your monthly mortgage payment could be.</p>
 <div class="row">
-    <div class="col-12 col-xl-2">
+    <div class="col-12 col-md-4 col-xl-2">
         <label for="loanAmount">Loan Amount</label>
         <span class="mtg-calc-input p-input-icon-left">
             <i class="pi pi-dollar"></i>
@@ -9,12 +9,12 @@
                 (ngModelChange)="calculatePayments()" pInputText>
         </span>
     </div>
-    <div class="col-12 col-xl-2">
+    <div class="col-12 col-md-4 col-xl-2">
         <label for="terms">Term (years)</label>
         <input class="mtg-calc-input p-inputtext" type="number" id="terms" [(ngModel)]="config.terms"
             (ngModelChange)="calculatePayments()" pInputText>
     </div>
-    <div class="col-12 col-xl-2">
+    <div class="col-12 col-md-4 col-xl-2">
         <label for="interestRate">Interest Rate</label>
         <span class="mtg-calc-input p-input-icon-right">
             <i class="pi pi-percentage"></i>
@@ -23,7 +23,7 @@
         </span>
     </div>
     <p-divider class="d-none d-xl-block col-1" layout="vertical"></p-divider>
-    <div class="col-12 col-xl-5">
+    <div class="col-12 col-md-7 col-xl-5">
         <h3>Monthly Payment</h3>
         <span class="mtg-calc-amt">{{ monthlyAmount | currency }}</span>
         <p-divider></p-divider>
