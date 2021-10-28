@@ -1,8 +1,32 @@
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { share, take } from 'rxjs/operators';
 
 // A cache that keep track of what scripts have been loaded by their request url
 let scriptsLoaded: Record<string, boolean> = {};
+
+/**
+ * Load a remote javascript file asychronously. Supports caching and multiple concurrent requesters
+ * @param srcUrl A url of a javascript file
+ * @author Jerrol Krause
+ * @example
+ * // Single script
+ * scriptLoad$('https://unpkg.com/dayjs@1.8.21/dayjs.min.js').subscribe(() => {
+ * // Script loaded successfully
+ * })
+ *
+ * // Multiple scripts
+ * scriptLoad$(['https://unpkg.com/dayjs@1.8.21/dayjs.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js']).subscribe(() => {
+ * // Script loaded successfully
+ * })
+ * @returns void
+ */
+export const scriptLoad$ = <t = void>(srcUrl: string | string[]) => {
+    const str = Array.isArray(srcUrl) ? srcUrl : [srcUrl];
+    return forkJoin(
+        str.map(s => scriptLoad<t>(s))
+    )
+}
+
 
 /**
  * Load a remote javascript file asychronously. Supports caching and multiple concurrent requesters
@@ -14,7 +38,7 @@ let scriptsLoaded: Record<string, boolean> = {};
  * })
  * @returns void
  */
-export const scriptLoad$ = <t = void>(srcUrl: string) =>
+const scriptLoad = <t = void>(srcUrl: string) =>
     new Observable<t>(obs => {
         // Check of this script has already been successfully loaded
         if (!!scriptsLoaded[srcUrl]) {
