@@ -1,13 +1,15 @@
 /** This is the config for the Mortgage Calculator */
 export interface MtgCalcConfig {
-  /** Loan Amount Input */
-  loanAmount?: number | null;
-  /** Terms in years */
-  terms?: number | null;
   /** interest rate as a yearly percent */
   interestRate?: number | null;
+  /** Loan Amount Input */
+  loanAmount?: number | null;
+  /** Displays the show amortization schedule button */
+  showAmortization?: boolean | null;
   /** term options dropdown values */
   termOptions?: Array<TermOptions>;
+  /** Terms in years */
+  terms?: number | null;
 };
 
 export interface PAndI {

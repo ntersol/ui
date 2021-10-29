@@ -43,7 +43,8 @@
 </div>
 <div class="row mtg-calc-btns">
     <div class="col-12 text-right">
-        <button type="button" class="btn btn-primary" (click)="toggleSchedule()">View Amortization Schedule</button>
+        <button type="button" class="btn btn-primary" *ngIf="config.showAmortization" (click)="toggleSchedule()">View
+            Amortization Schedule</button>
     </div>
 </div>
 <p-dialog header="Amortization Schedule" position="top" [(visible)]="showAmortization" [modal]="true"
