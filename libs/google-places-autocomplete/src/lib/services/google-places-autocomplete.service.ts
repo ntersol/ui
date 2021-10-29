@@ -17,17 +17,17 @@ export interface NtsAddressAutocompleteFormGroup {
     /** Form group reference */
     ref: FormGroup | null;
     /** Form control dot notation of where to put the address  */
-    address?: string;
+    address?: string | null;
     /** Form control dot notation of where to put the city name */
-    city?: string;
+    city?: string | null;
     /** Form control dot notation of where to put the county */
-    county?: string;
+    county?: string | null;
     /** Form control dot notation of where to put the state abbreviation response, IE "TN" */
-    state?: string;
+    state?: string | null;
     /** Form control dot notation of where to put the state full name, IE "Tennessee" */
-    state_long?: string;
+    state_long?: string | null;
     /** Form control dot notation of where to put the zip code */
-    zip?: string;
+    zip?: string | null;
 }
 
 
@@ -41,7 +41,7 @@ const isNode = typeof process !== 'undefined' && process.versions != null && pro
  * Install google maps definition with `npm i @types/google.maps --save-dev`
  */
 @Injectable({ providedIn: 'root' })
-export class NtsGooglePlacesAutocomplete {
+export class NtsGooglePlacesAutocompleteService {
     /** Api key */
     private apiKey: string | null = null;
     /** Keep subs and google references for memory management */

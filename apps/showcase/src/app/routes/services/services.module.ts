@@ -9,11 +9,10 @@ import { routing } from './routes';
 import { ServicesComponent } from './services.component';
 import { SignalRComponent } from './routes/signal-r/signal-r.component';
 import { ServiceWorkerComponent } from './routes/service-worker/service-worker.component';
-import { GooglePlacesAutocompleteComponent } from './routes/google-places-autocomplete/google-places-autocomplete.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, TabViewModule],
-  declarations: [ServicesComponent, SignalRComponent, ServiceWorkerComponent, GooglePlacesAutocompleteComponent],
+  declarations: [ServicesComponent, SignalRComponent, ServiceWorkerComponent],
   providers: [
 
   ],

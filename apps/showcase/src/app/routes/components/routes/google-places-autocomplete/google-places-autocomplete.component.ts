@@ -1,10 +1,10 @@
+/// <reference types="@types/google.maps" />
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { NtsGooglePlacesAutocomplete } from '@ntersol/services';
 import { HighlightService } from '../../../../shared/services/highlight.service';
 
 @Component({
-  selector: 'nts-google-places-autocomplete',
+  selector: 'nts-google-places-autocomplete-route',
   templateUrl: './google-places-autocomplete.component.html',
   styleUrls: ['./google-places-autocomplete.component.scss']
 })
@@ -139,7 +139,7 @@ export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
     "utc_offset_minutes": -240
   }`;
 
-  constructor(private highlight: HighlightService, public places: NtsGooglePlacesAutocomplete, private fb: FormBuilder) { }
+  constructor(private highlight: HighlightService, private fb: FormBuilder) { }
 
   ngOnInit() {
 
@@ -168,9 +168,17 @@ export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
 
   }
 
+  /**
+   *
+   * @param place
+   */
+  public placeSelected(place: google.maps.places.PlaceResult) {
+    console.log(place);
+  }
+
   ngOnDestroy() {
     // Clean up subscriptions and free up memory
-    this.places.destroy('autocomplete');
+    // this.places.destroy('autocomplete');
   }
 
 }
