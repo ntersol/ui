@@ -1,16 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TabViewModule } from 'primeng/tabview';
 import { LibLoaderComponent } from './lib-loader.component';
+import { HighlightService } from '../../../../shared/services/highlight.service';
 
 describe('LibLoaderComponent', () => {
   let component: LibLoaderComponent;
   let fixture: ComponentFixture<LibLoaderComponent>;
 
+  const highlightServiceMock = {
+    highlightAll: jest.fn(),
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LibLoaderComponent ]
+      imports: [TabViewModule],
+      declarations: [LibLoaderComponent],
+      providers: [
+        { provide: HighlightService, useValue: highlightServiceMock },
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

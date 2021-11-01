@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TabViewModule } from 'primeng/tabview';
 import { RemoveNilsComponent } from './remove-nils.component';
 
 describe('RemoveNilsComponent', () => {
@@ -8,9 +8,10 @@ describe('RemoveNilsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RemoveNilsComponent ]
+      imports: [TabViewModule],
+      declarations: [RemoveNilsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
