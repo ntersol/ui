@@ -30,10 +30,10 @@ describe('VisibleComponent', () => {
     }));
     it('given visible.utils isVisible returns false, should emit false for isVisible output', fakeAsync(async () => {
       const r = await setupBrowser(false)
-      tick(500)
+      tick(500) //  wait for async pipe on show$. Could also use whenStable.
       expect(r.isVisibleSpy).toHaveBeenCalled();
       expect(r.isVisibleSpy).toHaveBeenCalledWith(false);
-      expect(screen.queryByTestId('ssr')).not.toBeInTheDocument;
+      expect(screen.queryByTestId('ssr')).not.toBeInTheDocument();
     }));
   })
   describe('Using Server Side Rendering', () => {
