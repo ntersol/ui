@@ -17,7 +17,7 @@ declare var Prism: any;
   providedIn: 'root',
 })
 export class HighlightService {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   /**
    * Perform code syntax highlighting on the page
@@ -26,5 +26,14 @@ export class HighlightService {
     if (isPlatformBrowser(this.platformId)) {
       Prism.highlightAll();
     }
+  }
+
+  /**
+   * Encode a string to that html is displayed properly
+   * @param str
+   * @returns
+   */
+  public htmlEncode(str: string): string {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 }

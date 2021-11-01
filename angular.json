@@ -534,6 +534,40 @@
       },
       "tags": []
     },
+    "google-places-autocomplete": {
+      "projectType": "library",
+      "root": "libs/google-places-autocomplete",
+      "sourceRoot": "libs/google-places-autocomplete/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/google-places-autocomplete"],
+          "options": {
+            "tsConfig": "libs/google-places-autocomplete/tsconfig.lib.json",
+            "project": "libs/google-places-autocomplete/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/google-places-autocomplete/src/**/*.ts",
+              "libs/google-places-autocomplete/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/google-places-autocomplete"],
+          "options": {
+            "jestConfig": "libs/google-places-autocomplete/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "grid": {
       "projectType": "library",
       "root": "libs/grid",
@@ -626,6 +660,37 @@
             "ci": {
               "quiet": true
             }
+          }
+        }
+      },
+      "tags": []
+    },
+    "mtg-calc": {
+      "projectType": "library",
+      "root": "libs/mtg-calc",
+      "sourceRoot": "libs/mtg-calc/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/mtg-calc"],
+          "options": {
+            "tsConfig": "libs/mtg-calc/tsconfig.lib.json",
+            "project": "libs/mtg-calc/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/mtg-calc/src/**/*.ts", "libs/mtg-calc/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/mtg-calc"],
+          "options": {
+            "jestConfig": "libs/mtg-calc/jest.config.js",
+            "passWithNoTests": true
           }
         }
       },

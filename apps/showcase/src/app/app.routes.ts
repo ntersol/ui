@@ -45,6 +45,10 @@ export const ROUTES: Routes = [
         pathMatch: 'full',
         loadChildren: () => import('./routes/_route/route.module').then(m => m.RouteModule),
       },
+      {
+        path: 'coming-soon',
+        loadChildren: () => import('./routes/coming-soon/coming-soon.module').then(m => m.ComingSoonModule),
+      },
 
       {
         path: 'state-management',

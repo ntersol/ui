@@ -7,8 +7,15 @@ import { ShowcaseTableComponent } from './routes/table/table.component';
 import { VisibleComponent } from './routes/visible/visible.component';
 import { WizardComponent } from './routes/wizard/wizard.component';
 import { ShowcaseTagsComponent } from './routes/tags/tags.component';
+import { MtgCalcComponent } from './routes/mtg-calc/mtg-calc.component';
+import { GooglePlacesAutocompleteComponent } from './routes/google-places-autocomplete/google-places-autocomplete.component';
 
 const routes: Routes = [
+  {
+    path: 'google-places-autocomplete',
+    component: GooglePlacesAutocompleteComponent,
+    data: { title: 'Google Places Autocomplete' },
+  },
   {
     path: 'wizard',
     component: WizardComponent,
@@ -31,6 +38,12 @@ const routes: Routes = [
     path: 'tags',
     component: ShowcaseTagsComponent,
     data: { title: 'Tags' },
+  },
+
+  {
+    path: 'mtg-calc',
+    component: MtgCalcComponent,
+    data: { title: 'Mortgage Calculator' },
   },
 
   {

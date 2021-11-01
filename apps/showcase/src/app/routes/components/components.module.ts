@@ -6,6 +6,8 @@ import { NtsFormsModule } from '@ntersol/forms';
 import { NtsStateManagementModule } from '@ntersol/state-management';
 import { NtsTableModule } from '@ntersol/table';
 import { NtsTagsModule } from '@ntersol/tags';
+import { NtsMtgCalcModule } from '@ntersol/mtg-calc';
+import { NtsGooglePlacesAutocompleteModule } from '@ntersol/google-places-autocomplete';
 
 // Routing
 import { routing } from './routes';
@@ -17,16 +19,15 @@ import { ShowcaseTagsComponent } from './routes/tags/tags.component';
 
 // Components
 import { ComponentsComponent } from './components.component';
-import { RouteUiStateService, RouteUiStateStore, RouteUiStateQuery } from './shared/state/ui/route-ui-state.service';
+import { MtgCalcComponent } from './routes/mtg-calc/mtg-calc.component';
+import { GooglePlacesAutocompleteComponent } from './routes/google-places-autocomplete/google-places-autocomplete.component';
+import { NtsVisibleModule } from '@ntersol/visible';
+
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, NtsStateManagementModule, TabViewModule, NtsFormsModule, NtsTableModule, NtsTagsModule],
-  declarations: [ComponentsComponent, WizardComponent, VisibleComponent, ShowcaseTableComponent, ShowcaseTagsComponent],
-  providers: [
-    RouteUiStateService,
-    RouteUiStateStore,
-    RouteUiStateQuery,
-  ],
+  imports: [CommonModule, SiteModule, routing, NtsStateManagementModule, TabViewModule, NtsFormsModule, NtsTableModule, NtsTagsModule, NtsGooglePlacesAutocompleteModule, NtsMtgCalcModule, NtsVisibleModule],
+  declarations: [ComponentsComponent, WizardComponent, MtgCalcComponent, VisibleComponent, ShowcaseTableComponent, ShowcaseTagsComponent, GooglePlacesAutocompleteComponent],
+  providers: [],
   exports: [],
   entryComponents: [],
 })
