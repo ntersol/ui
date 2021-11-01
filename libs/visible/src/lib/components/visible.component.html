@@ -6,7 +6,7 @@
 </ng-container>
 <!-- Not a browser, IE server side rendering -->
 <ng-template #isNotBrowser>
-  <div [ngClass]="bootstrapClasses">
+  <div data-testid="ssr" [ngClass]="bootstrapClasses">
     <ng-container *ngTemplateOutlet="content"></ng-container>
   </div>
 </ng-template>
