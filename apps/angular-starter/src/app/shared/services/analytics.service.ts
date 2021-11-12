@@ -13,9 +13,10 @@ declare global {
 }
 export interface GAData {
   hitType: string;
-  eventCategory: string,
+  eventCategory?: string,
   eventAction: string;
-  eventLabel: string;
+  eventLabel?: string;
+  eventValue?: number;
 };
 // SSR Checks
 export const isNode = typeof process !== 'undefined' && process.versions != null && process.versions.node != null;
