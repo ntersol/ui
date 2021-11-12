@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { SettingsService } from '$settings';
-import { AuthService, AuthState } from '../../shared/services/project/auth.service';
+import { AuthService, AuthState } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',

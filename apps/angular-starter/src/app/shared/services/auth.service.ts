@@ -6,8 +6,8 @@ import { throttleTime, tap, switchMap, filter, map, distinctUntilChanged, startW
 import { DialogService } from 'primeng/dynamicdialog';
 import { environment } from '$env';
 import { SettingsService } from '$settings';
-import { Models } from '../../models/global.models';
-import { LogoutModalComponent } from '../../../components/modals';
+import { Models } from '../models/global.models';
+import { LogoutModalComponent } from '../../components/modals';
 
 export enum AuthState {
   initial,

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { merge } from 'rxjs';
 import { ConfirmationService } from 'primeng/api';
-import { NtsVersionManagementService } from '../../services/general';
+import { NtsVersionManagementService } from '../../services';
 import { ntsUIStoreCreator } from '@ntersol/state-management';
 
 // Set up interface for the store
