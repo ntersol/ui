@@ -53,6 +53,7 @@ export const actionCreator = <t>(type: string): NtsState.ActionCreator<t> => Obj
 // Import the actionCreator
 // import { actionCreator } from '@ntersol/state-management';
 
+/**
 // Create and export an actions creator dictionary
 export const actions = {
   // Initialize an action creator. An action needs a unique value and the type to associate with that
@@ -76,4 +77,4 @@ if (isActionType(action, actions.tokenChanged)) {
 if (tokenChangedAction.match(action)) {
   console.log(action.payload); // '12345'
 }
-
+ */

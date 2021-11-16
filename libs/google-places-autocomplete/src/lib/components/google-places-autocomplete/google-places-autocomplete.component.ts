@@ -1,10 +1,16 @@
-/// <reference types="@types/google.maps" />
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { GooglePlaceData } from '../../../google-autocomplete.model';
 
 import { NtsAddressAutocompleteOptions, NtsGooglePlacesAutocompleteService } from '../../services/google-places-autocomplete.service';
 
+/**
+ * Integrate with the google places api for location searches
+ * @example
+ * <nts-google-places-autocomplete apiKey="YOUR_KEY"
+    (placeSelected)="placeSelected($event)"></nts-google-places-autocomplete>
+ */
 @UntilDestroy()
 @Component({
   selector: 'nts-google-places-autocomplete',
@@ -24,8 +30,7 @@ export class NtsGooglePlacesAutocompleteComponent implements OnInit, OnDestroy, 
   @Input() state_long: string | null = null;
   @Input() zip: string | null = null;
 
-
-  @Output() placeSelected = new EventEmitter<google.maps.places.PlaceResult>();
+  @Output() placeSelected = new EventEmitter<GooglePlaceData>();
 
   constructor(private places: NtsGooglePlacesAutocompleteService) { }
 
@@ -53,7 +58,6 @@ export class NtsGooglePlacesAutocompleteComponent implements OnInit, OnDestroy, 
       }
     }
     this.places.autocomplete(options).pipe(untilDestroyed(this)).subscribe(place => this.placeSelected.emit(place));
-
   }
 
   ngOnDestroy() {

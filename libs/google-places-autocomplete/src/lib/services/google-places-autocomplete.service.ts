@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-
+import { GooglePlaceData } from '../..';
 
 export interface NtsAddressAutocompleteOptions {
     /** Google places api key */
@@ -30,7 +30,6 @@ export interface NtsAddressAutocompleteFormGroup {
     zip?: string | null;
 }
 
-
 declare var process: any;
 // SSR check
 const isNode = typeof process !== 'undefined' && process.versions != null && process.versions.node != null;
@@ -48,7 +47,7 @@ export class NtsGooglePlacesAutocompleteService {
     private autoCompleteRefs: Record<string, {
         autoComplete: google.maps.places.Autocomplete,
         listener: google.maps.MapsEventListener,
-        obs: Subject<google.maps.places.PlaceResult>,
+        obs: Subject<GooglePlaceData>,
     }> = {};
 
     constructor() { }
@@ -83,14 +82,14 @@ export class NtsGooglePlacesAutocompleteService {
             this.apiKey = options.apiKey;
         }
         // Create new subject to return place info
-        const ob$ = new Subject<google.maps.places.PlaceResult>();
+        const ob$ = new Subject<GooglePlaceData>();
 
         // No api key supplied by the input or the script load
         if (!this.apiKey) {
             console.error('An api key for google places was not supplied');
         }
         // Get input to attach the google places autocomplete
-        const input = document.getElementById(options.inputId) as HTMLInputElement;
+        const input = !isNode ? document.getElementById(options.inputId) as HTMLInputElement : null;
         if (!input) {
             console.error('Could not find an input with an ID of ', options.inputId);
         }
@@ -107,7 +106,7 @@ export class NtsGooglePlacesAutocompleteService {
                     if (options.formGroup) {
                         this.placeToFormGroup(place, options.formGroup);
                     }
-                    ob$.next(place);
+                    ob$.next(this.mapData(place));
                 });
                 // Store all references
                 this.autoCompleteRefs = {
@@ -191,8 +190,6 @@ export class NtsGooglePlacesAutocompleteService {
                 state_long.patchValue(stateR.long_name);
             }
         }
-
-
     }
 
     /**
@@ -226,6 +223,85 @@ export class NtsGooglePlacesAutocompleteService {
         });
     }
 
+
+    /**
+     * Convert the google places response into a format that is more easily consumed
+     * @param place
+     * @returns
+     */
+    private mapData(place: google.maps.places.PlaceResult): GooglePlaceData {
+        const loc: GooglePlaceData = {
+            placeResult: place,
+            addressComponents: {},
+            location: {}
+        };
+
+        // Get street address
+        const street_number = place.address_components?.filter(p => p?.types?.includes('street_number'))[0];
+        if (street_number) {
+            loc.addressComponents.street_number = street_number;
+        }
+        const route = place.address_components?.filter(p => p?.types?.includes('route'))[0];
+        if (street_number && route) {
+            loc.addressComponents.route = route;
+        }
+        if (street_number && route) {
+            loc.location.address = street_number.long_name + ' ' + route.long_name;
+        }
+
+        // City
+        const locality = place.address_components?.filter(p => p?.types?.includes('locality'))[0];
+        if (locality) {
+            loc.addressComponents.locality = locality;
+            loc.location.city = locality.long_name;
+        }
+
+        // Neigborhood
+        const neighborhood = place.address_components?.filter(p => p?.types?.includes('neighborhood'))[0];
+        if (neighborhood) {
+            loc.addressComponents.neighborhood = neighborhood;
+        }
+
+        // County
+        const administrative_area_level_2 = place.address_components?.filter(p => p?.types?.includes('administrative_area_level_2'))[0];
+        if (administrative_area_level_2) {
+            loc.addressComponents.administrative_area_level_2 = administrative_area_level_2;
+            loc.location.county = administrative_area_level_2.long_name;
+        }
+
+        // State
+        const administrative_area_level_1 = place.address_components?.filter(p => p?.types?.includes('administrative_area_level_1'))[0];
+        if (administrative_area_level_1) {
+            loc.addressComponents.administrative_area_level_1 = administrative_area_level_1;
+            loc.location.state = administrative_area_level_1.long_name;
+            loc.location.state_short = administrative_area_level_1.short_name;
+        }
+
+        // Zip/Postal Code
+        const postal_code = place.address_components?.filter(p => p?.types?.includes('postal_code'))[0];
+        if (postal_code) {
+            loc.addressComponents.postal_code = postal_code;
+            loc.location.zipCode = postal_code.long_name;
+        }
+
+        // Zip/Postal Code Suffix
+        const postal_code_suffix = place.address_components?.filter(p => p?.types?.includes('postal_code_suffix'))[0];
+        if (postal_code_suffix) {
+            loc.addressComponents.postal_code_suffix = postal_code_suffix;
+        }
+
+        // Country
+        const country = place.address_components?.filter(p => p?.types?.includes('country'))[0];
+        if (country) {
+            loc.addressComponents.country = country;
+            loc.location.country = country.long_name;
+            loc.location.country_short = country.short_name;
+        }
+
+        return loc;
+    }
+
+
     /**
      * Remove the autocomplete subscription and free up memory
      * @param id The ID on the input
@@ -244,5 +320,13 @@ export class NtsGooglePlacesAutocompleteService {
             google.maps.event.removeListener(ref.listener);
             google.maps.event.clearInstanceListeners(ref.autoComplete);
         }
+        // TODO: Do not mutate
+        delete this.autoCompleteRefs[id];
+    }
+
+    /** Clean up all open listeners */
+    public destroyAll() {
+        Object.keys(this.autoCompleteRefs).forEach(key => this.destroy(key));
+        this.autoCompleteRefs = {};
     }
 }

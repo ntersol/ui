@@ -1,6 +1,7 @@
 /// <reference types="@types/google.maps" />
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { GooglePlaceData } from '@ntersol/google-places-autocomplete';
 import { HighlightService } from '../../../../shared/services/highlight.service';
 
 @Component({
@@ -15,8 +16,25 @@ export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
   // Install this library
   npm i @ntersol/services --save`;
 
+  public html2 = this.highlight.htmlEncode(`
+  <nts-google-places-autocomplete
+    apiKey="YOUR_KEY"
+    (placeSelected)="placeSelected($event)">
+  </nts-google-places-autocomplete>`);
+
+  public exampleTS3 = this.highlight.htmlEncode(`
+  // Import interface
+  import { GooglePlaceData } from '@ntersol/google-places-autocomplete';
+
+  // Receive place selection from component
+  public placeSelected(place: GooglePlaceData) {
+    console.log(place);
+  }`);
+
+
   public html = this.highlight.htmlEncode(`
   <input id="autocomplete" />  `);
+
 
   public exampleTS = this.highlight.htmlEncode(
     `
@@ -172,7 +190,7 @@ export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
    *
    * @param place
    */
-  public placeSelected(place: google.maps.places.PlaceResult) {
+  public placeSelected(place: GooglePlaceData) {
     console.log(place);
   }
 
