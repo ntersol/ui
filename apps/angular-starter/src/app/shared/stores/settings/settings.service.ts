@@ -27,7 +27,7 @@ export class SettingsService {
     return this.store.state.token;
   }
 
-  public set userName(token: string | null) {
+  public set token(token: string | null) {
     this.store.update({ token: token });
   }
 
@@ -37,8 +37,8 @@ export class SettingsService {
     return this.store.state.userName;
   }
 
-  public set token(token: string | null) {
-    this.store.update({ token: token });
+  public set userName(userName: string | null) {
+    this.store.update({ userName: userName });
   }
 
   constructor(
