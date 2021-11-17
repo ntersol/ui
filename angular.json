@@ -534,6 +534,7 @@
       },
       "tags": []
     },
+
     "google-places-autocomplete": {
       "projectType": "library",
       "root": "libs/google-places-autocomplete",
@@ -542,10 +543,25 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": ["dist/libs/google-places-autocomplete"],
           "options": {
-            "tsConfig": "libs/google-places-autocomplete/tsconfig.lib.json",
             "project": "libs/google-places-autocomplete/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/google-places-autocomplete/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/google-places-autocomplete/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/google-places-autocomplete"],
+          "options": {
+            "jestConfig": "libs/google-places-autocomplete/jest.config.js",
+            "passWithNoTests": true
           }
         },
         "lint": {
@@ -555,14 +571,34 @@
               "libs/google-places-autocomplete/src/**/*.ts",
               "libs/google-places-autocomplete/src/**/*.html"
             ]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/google-places-autocomplete/ && npm version patch"
           }
         },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/google-places-autocomplete"],
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "jestConfig": "libs/google-places-autocomplete/jest.config.js",
-            "passWithNoTests": true
+            "commands": [
+              "cd dist/libs/google-places-autocomplete/ && npm pack",
+              "cd dist/libs/google-places-autocomplete/ && npm publish --access public"
+            ],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run google-places-autocomplete:patch",
+              "ng run google-places-autocomplete:build:production",
+              "ng run google-places-autocomplete:pack"
+            ],
+            "parallel": false
           }
         }
       },
