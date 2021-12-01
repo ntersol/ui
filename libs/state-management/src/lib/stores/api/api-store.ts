@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, distinctUntilChanged, map, share, tap, take, filter } from 'rxjs/operators';
-import { NtsBaseStore } from '../base';
+import { NtsBaseStore } from '../base/base-store';
 import { ApiActions, ApiEvents, StoreTypes } from '../store.enums';
 import { NtsState } from '../../state.models';
 import {
@@ -61,6 +61,7 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
   /** Global store config config, contains mashup of all instances. Below is the default config */
   private config: NtsState.Config | NtsState.ConfigEntity = {
     autoLoad: true,
+    uniqueId: 'guid'
   };
 
   constructor(private http: HttpClient, config: NtsState.Config | NtsState.ConfigEntity, private isEntityStore = true) {
@@ -215,7 +216,7 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'post', null);
 
-    return this.upsert(this.http.post(url, data), data, this.config.map?.post);
+    return this.upsert(this.http.post(url, data), data, this.config.map?.post) as Observable<Partial<t>>;
   }
 
   /**
@@ -227,7 +228,7 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
   public put(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'put', data);
-    return this.upsert(this.http.put(url, data), data, this.config.map?.put);
+    return this.upsert(this.http.put(url, data), data, this.config.map?.put) as Observable<Partial<t>>;
   }
 
   /**
@@ -239,7 +240,7 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
   public patch(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'patch', data);
-    return this.upsert(this.http.patch(url, data), data, this.config.map?.patch);
+    return this.upsert(this.http.patch(url, data), data, this.config.map?.patch) as Observable<Partial<t>>;
   }
 
   /**
@@ -386,9 +387,9 @@ export const ntsApiStoreCreator = (http: HttpClient, configBase?: NtsState.Confi
   } = <t>(
     config: NtsState.Config | NtsState.ConfigEntity,
     isEntityStore = true,
-  ): NtsApiStoreCreator<t> | NtsApiStoreCreator<t[]> =>
-    isEntityStore
-      ? new NtsApiStoreCreator<t[], t>(http, mergeConfig(configBase || {}, config), isEntityStore)
-      : new NtsApiStoreCreator<t, t>(http, mergeConfig(configBase || {}, config), isEntityStore);
+    ): NtsApiStoreCreator<t> | NtsApiStoreCreator<t[]> =>
+      isEntityStore
+        ? new NtsApiStoreCreator<t[], t>(http, mergeConfig(configBase || {}, config), isEntityStore)
+        : new NtsApiStoreCreator<t, t>(http, mergeConfig(configBase || {}, config), isEntityStore);
   return store;
 };

@@ -1,6 +1,6 @@
 import { BehaviorSubject, identity, Observable } from 'rxjs';
 import { distinctUntilChanged, map, take } from 'rxjs/operators';
-import { NtsBaseStore } from '../base';
+import { NtsBaseStore } from '../base/base-store';
 import { NtsState } from '../../state.models';
 
 /**

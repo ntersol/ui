@@ -10,9 +10,10 @@ export * from './pipes/entity-data.pipe';
 export * from './pipes/entity-to-array.pipe';
 export * from './pipes/is-loaded.pipe';
 
-export * from './stores/base/';
-export * from './stores/api/';
-export * from './stores/ui/';
+export * from './stores/base/base-store';
+export * from './stores/api/api-store';
+export * from './stores/api/api-store.utils';
+export * from './stores/ui/ui-store';
 
 export * from './stores/store.actions';
 export * from './stores/store.enums';
