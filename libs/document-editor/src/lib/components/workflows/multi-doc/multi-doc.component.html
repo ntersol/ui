@@ -1,26 +1,12 @@
-<div class="p-g">
-  <div class="p-col-12 p-lg-6">
+<div class="ui-g">
+  <div class="ui-g-12 ui-lg-6">
     <p-tabView [activeIndex]="activeIndex" (onChange)="indexChange($event)" *ngIf="docsSource?.length; noDocsSource">
-      <p-tabPanel
-        *ngFor="let document of docsSource; let i = index"
-        [selected]="i === activeIndex"
-        [header]="pdfInfo && pdfInfo[i + 1]?.label ? pdfInfo[i + 1].label : 'Document #' + (i + 1)"
-      >
+      <p-tabPanel *ngFor="let document of docsSource; let i = index" [selected]="i === activeIndex"
+        [header]="pdfInfo && pdfInfo[i + 1]?.label ? pdfInfo[i + 1].label : 'Document #' + (i + 1)">
         <ng-template pTemplate="content">
-          <!--
-            TODO:
-            [selection]="selection[i + 1]"
-          -->
-          <app-document
-            [document]="document"
-            [viewModels]="viewModels"
-            [settings]="settingsSrc"
-            [tnSettings]="tnSettings"
-            [pageActive]="pageActive"
-            [docIndex]="i + 1"
-            [canDropFromAny]="false"
-            (setActivePage)="setActivePage()"
-          ></app-document>
+          <app-document [document]="document" [viewModels]="viewModels" [settings]="settingsSrc"
+            [tnSettings]="tnSettings" [selection]="selection[i + 1]" [pageActive]="pageActive" [docIndex]="i + 1"
+            [canDropFromAny]="false" (setActivePage)="setActivePage()"></app-document>
         </ng-template>
       </p-tabPanel>
     </p-tabView>
@@ -30,23 +16,13 @@
       </div>
     </ng-template>
   </div>
-  <div class="p-col-12 p-lg-6 multi-doc" style="overflow: auto;">
+  <div class="ui-g-12 ui-lg-6 multi-doc" style="overflow:auto;">
     <p-tabView [activeIndex]="activeIndexDest" (onChange)="indexChangeDest($event)">
       <p-tabPanel [header]="pdfInfo && pdfInfo[0]?.label ? pdfInfo[0].label : 'Source Document'">
         <ng-template pTemplate="content">
-          <!--
-            TODO:
-             [selection]="selection[0]"
-          -->
-          <app-document
-            [document]="!!documents && documents?.length && documents[0] ? documents[0] : null"
-            [viewModels]="viewModels"
-            [settings]="settingsDest"
-            [tnSettings]="tnSettings"
-            [pageActive]="pageActive"
-            [docIndex]="0"
-            (setActivePage)="setActivePage()"
-          ></app-document>
+          <app-document [document]="documents ? documents[0] : null" [viewModels]="viewModels" [settings]="settingsDest"
+            [tnSettings]="tnSettings" [selection]="selection[0]" [pageActive]="pageActive" [docIndex]="0"
+            (setActivePage)="setActivePage()"></app-document>
         </ng-template>
       </p-tabPanel>
       <p-tabPanel header="Viewer">
