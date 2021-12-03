@@ -7,6 +7,7 @@ import { NtsStateManagementModule } from '@ntersol/state-management';
 import { NtsTableModule } from '@ntersol/table';
 import { NtsTagsModule } from '@ntersol/tags';
 import { NtsMtgCalcModule } from '@ntersol/mtg-calc';
+import { NtsDocumentEditorModule } from '@ntersol/document-editor';
 import { NtsGooglePlacesAutocompleteModule } from '@ntersol/google-places-autocomplete';
 
 // Routing
@@ -25,7 +26,7 @@ import { NtsVisibleModule } from '@ntersol/visible';
 
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, NtsStateManagementModule, TabViewModule, NtsFormsModule, NtsTableModule, NtsTagsModule, NtsGooglePlacesAutocompleteModule, NtsMtgCalcModule, NtsVisibleModule],
+  imports: [CommonModule, SiteModule, routing, NtsStateManagementModule, TabViewModule, NtsFormsModule, NtsTableModule, NtsTagsModule, NtsGooglePlacesAutocompleteModule, NtsMtgCalcModule, NtsVisibleModule, NtsDocumentEditorModule],
   declarations: [ComponentsComponent, WizardComponent, MtgCalcComponent, VisibleComponent, ShowcaseTableComponent, ShowcaseTagsComponent, GooglePlacesAutocompleteComponent],
   providers: [],
   exports: [],

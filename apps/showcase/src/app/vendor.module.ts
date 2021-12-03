@@ -36,4 +36,4 @@ const modules = [
   exports: [RouterModule, FormsModule, ReactiveFormsModule, ...modules],
   declarations: [],
 })
-export class VendorModule {}
+export class VendorModule { }
