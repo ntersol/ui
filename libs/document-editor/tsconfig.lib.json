@@ -14,12 +14,6 @@
     "strictMetadataEmit": true,
     "enableResourceInlining": true
   },
-  "exclude": [
-    "src/test-setup.ts",
-    "**/*.spec.ts",
-    "**/*.stories.ts",
-    "**/*.stories.js",
-    "src/lib/assets/pdf.worker.min.ts"
-  ],
+  "exclude": ["src/test-setup.ts", "**/*.spec.ts", "**/*.stories.ts", "**/*.stories.js"],
   "include": ["**/*.ts"]
 }
