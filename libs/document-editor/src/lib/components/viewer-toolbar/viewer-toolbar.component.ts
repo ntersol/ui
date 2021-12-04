@@ -5,7 +5,6 @@ import { NtsDocumentEditor } from '../../document-editor';
 @Component({
   selector: 'app-viewer-toolbar',
   templateUrl: './viewer-toolbar.component.html',
-  styleUrls: ['./viewer-toolbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViewerToolbarComponent implements OnInit {
@@ -15,7 +14,7 @@ export class ViewerToolbarComponent implements OnInit {
   @Input() pageActive?: NtsDocumentEditor.PageActive;
   @Input() rotation = 0;
 
-  constructor(public docSvc: DocumentEditorService) {}
+  constructor(public docSvc: DocumentEditorService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

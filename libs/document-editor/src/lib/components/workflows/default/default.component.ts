@@ -5,7 +5,6 @@ import { pdfjsDist } from '../../../shared/models/pdf';
 @Component({
   selector: 'app-default',
   templateUrl: './default.component.html',
-  styleUrls: ['./default.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultComponent implements OnInit {
@@ -19,7 +18,7 @@ export class DefaultComponent implements OnInit {
   // Viewer
   @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[] | null;
   @Input() rotation = 0;
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }
