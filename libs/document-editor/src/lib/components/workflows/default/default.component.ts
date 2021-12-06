@@ -5,7 +5,6 @@ import { pdfjsDist } from '../../../shared/models/pdf';
 @Component({
   selector: 'app-default',
   templateUrl: './default.component.html',
-  styleUrls: ['./default.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultComponent implements OnInit {

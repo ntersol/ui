@@ -6,7 +6,6 @@ import { pdfjsDist } from '../../../shared/models/pdf';
 @Component({
   selector: 'app-multi-doc',
   templateUrl: './multi-doc.component.html',
-  styleUrls: ['./multi-doc.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultiDocComponent implements OnInit, OnChanges {
