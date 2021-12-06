@@ -6,8 +6,7 @@ import { insertAt } from './utils/arrays.util';
 import { isNotNil } from './guards/guards.utils';
 import { NtsDocumentEditor } from '../document-editor';
 import { pdfjsDist } from './models/pdf';
-import { Injectable } from "@angular/core";
-import { cloneDeep } from 'lodash';
+const cloneDeep = require('lodash/cloneDeep');
 
 declare global {
   interface Window {
@@ -46,7 +45,6 @@ const stateInitial: NtsDocumentEditor.State = {
   scrollPosition: null,
 };
 
-@Injectable()
 export class DocumentEditorService {
   private _state: NtsDocumentEditor.State = cloneDeep(stateInitial);
   public state$ = new BehaviorSubject(this._state);
@@ -69,7 +67,7 @@ export class DocumentEditorService {
 
   public subs: Subscription[] = [];
 
-  constructor() {}
+  constructor() { }
 
   /**
    * Manage state changes via observables

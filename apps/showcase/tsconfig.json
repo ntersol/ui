@@ -21,6 +21,7 @@
       "@ntersol/utils": ["libs/utils/src/index.ts"],
       "@ntersol/services": ["libs/services/src/index.ts"],
       "@ntersol/mtg-calc": ["libs/mtg-calc/src"],
+      "@ntersol/document-editor": ["libs/document-editor/src"],
       "@ntersol/google-places-autocomplete": ["libs/google-places-autocomplete/src/index.ts"]
     },
     "allowSyntheticDefaultImports": true,

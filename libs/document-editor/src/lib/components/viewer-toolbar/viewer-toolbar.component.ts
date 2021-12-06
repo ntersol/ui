@@ -8,12 +8,12 @@ import { NtsDocumentEditor } from '../../document-editor';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViewerToolbarComponent implements OnInit {
-  @Input() document?: NtsDocumentEditor.Document | null;
+
+  @Input() document?: NtsDocumentEditor.Document;
 
   @Input() viewerOptions?: NtsDocumentEditor.ViewerOptions | false;
   @Input() pageActive?: NtsDocumentEditor.PageActive;
   @Input() rotation = 0;
-
   constructor(public docSvc: DocumentEditorService) { }
 
   ngOnInit() { }

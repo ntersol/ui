@@ -8,6 +8,7 @@ import { VisibleComponent } from './routes/visible/visible.component';
 import { WizardComponent } from './routes/wizard/wizard.component';
 import { ShowcaseTagsComponent } from './routes/tags/tags.component';
 import { MtgCalcComponent } from './routes/mtg-calc/mtg-calc.component';
+import { DocEditorComponent } from './routes/doc-editor/doc-editor.component';
 import { GooglePlacesAutocompleteComponent } from './routes/google-places-autocomplete/google-places-autocomplete.component';
 
 const routes: Routes = [
@@ -38,6 +39,12 @@ const routes: Routes = [
     path: 'tags',
     component: ShowcaseTagsComponent,
     data: { title: 'Tags' },
+  },
+
+  {
+    path: 'doc-editor',
+    component: DocEditorComponent,
+    data: { title: 'Document Editor' },
   },
 
   {

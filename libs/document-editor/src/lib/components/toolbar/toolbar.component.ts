@@ -12,9 +12,11 @@ export class ToolbarComponent implements OnInit {
   @Input() state: NtsDocumentEditor.State | undefined;
   @Input() thumbnailSizes: NtsDocumentEditor.ThumbnailSize[] | undefined;
 
-  constructor(private docsSvc: DocumentEditorService) {}
+  constructor(private docsSvc: DocumentEditorService) {
 
-  ngOnInit() {}
+  }
+
+  ngOnInit() { }
 
   public zoomLevelChange(tnSize: NtsDocumentEditor.ThumbnailSize) {
     this.docsSvc.stateChange({ tnSettings: tnSize });
