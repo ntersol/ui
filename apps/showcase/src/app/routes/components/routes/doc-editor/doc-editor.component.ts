@@ -14,7 +14,7 @@ export class DocEditorComponent implements AfterViewInit {
   npm i @ntersol/document-editor`;
 
   public html = this.highlight.htmlEncode(`
-  <nts-doc-editor></nts-doc-editor>  `);
+  <nts-doc-editor pdfSrcs="/assets/pdf/doc-editor-example.pdf"></nts-doc-editor>  `);
   constructor(private highlight: HighlightService) { }
 
   ngAfterViewInit() {

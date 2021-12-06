@@ -50,8 +50,8 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   /** Configure options that appear in the doc viewer. False means no configuration */
   @Input() viewerOptions: NtsDocumentEditor.ViewerOptions | false = false;
 
-  @Input() pdfJsSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.min.js';
-  @Input() pdfJsWorkerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.worker.min.js';
+  @Input() pdfJsSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js';
+  @Input() pdfJsWorkerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js';
 
   @Output() pdfModelChange = new EventEmitter<NtsDocumentEditor.Document[]>();
   @Output() stateChange = new EventEmitter<NtsDocumentEditor.State>();
@@ -93,7 +93,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
 
   private loaded = false;
 
-  constructor(public docSvc: DocumentEditorService) {}
+  constructor(public docSvc: DocumentEditorService) { }
 
   ngOnInit() {
     this.docSvc.scriptsLoad(this.pdfJsSrc, this.pdfJsWorkerSrc);
