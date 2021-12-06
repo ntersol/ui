@@ -1,7 +1,5 @@
-<div class="nts-document-editor"
-  *ngIf="{ documentsModel: documentsModel$ | async, viewModels: viewModels$ | async, state: state$ | async } as editor">
-  <div class="nts-document-loading p-3"
-    *ngIf="!editor?.state?.pdfs && (editor?.state?.loadingScript || editor?.state?.loadingPdf)">
+<div class="nts-document-editor" *ngIf="{ documentsModel: documentsModel$ | async, viewModels: viewModels$ | async, state: state$ | async } as editor">
+  <div class="nts-document-loading p-3" *ngIf="!editor?.state?.pdfs && (editor?.state?.loadingScript || editor?.state?.loadingPdf)">
     <p>
       <p-progressBar mode="indeterminate" class="mb-3"></p-progressBar>
     </p>
@@ -17,8 +15,7 @@
     {{ editor?.state?.error }}
   </div>
 
-  <div class="alert alert-info p-3 m-3"
-    *ngIf="!editor?.state?.pdfs && !editor?.state?.loadingScript && !editor?.state?.loadingPdf && !editor?.state?.error">
+  <div class="alert alert-info p-3 m-3" *ngIf="!editor?.state?.pdfs && !editor?.state?.loadingScript && !editor?.state?.loadingPdf && !editor?.state?.error">
     No documents available
   </div>
 
@@ -30,24 +27,38 @@
     <ng-container [ngSwitch]="workflow">
       <!-- Multidoc management view-->
       <ng-container *ngSwitchCase="'multiDoc'">
-        <app-multi-doc [documents]="editor?.documentsModel" [viewModels]="editor?.viewModels"
-          [settings]="editor.state?.settings" [tnSettings]="editor.state?.tnSettings"
-          [selection]="editor.state?.selection" [pageActive]="editor.state?.pageActive" [pdfSrcs]="editor.state?.pdfs"
-          [pdfInfo]="editor.state?.pdfInfo" [rotation]="
-            ((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]
-              ?.rotation
-          "></app-multi-doc>
+        <!--
+          [selection]="editor.state?.selection"
+        -->
+        <app-multi-doc
+          [documents]="editor?.documentsModel"
+          [viewModels]="editor?.viewModels"
+          [settings]="editor.state?.settings"
+          [tnSettings]="editor.state?.tnSettings"
+          [pageActive]="editor.state?.pageActive"
+          [pdfSrcs]="editor.state?.pdfs"
+          [pdfInfo]="editor.state?.pdfInfo"
+          [rotation]="rotation(editor)"
+        ></app-multi-doc>
       </ng-container>
 
       <!-- Viewer Only -->
       <ng-container *ngSwitchCase="'display'">
-        <app-display [document]="editor?.documentsModel[editor.state.docActive]" [viewerOptions]="viewerOptions"
-          [viewModels]="editor?.viewModels" [settings]="editor.state?.settings" [tnSettings]="editor.state?.tnSettings"
-          [selection]="editor.state?.selection" [pageActive]="editor.state?.pageActive" [pdfSrcs]="editor.state?.pdfs"
-          [pdfInfo]="editor.state?.pdfInfo" [rotation]="
-            ((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]
-              ?.rotation
-          "></app-display>
+        <!--
+          TODO:
+          [selection]="editor.state?.selection"
+        -->
+        <app-display
+          [document]="(editor?.documentsModel || [])[editor?.state?.docActive || 0]"
+          [viewerOptions]="viewerOptions"
+          [viewModels]="editor?.viewModels"
+          [settings]="editor.state?.settings"
+          [tnSettings]="editor.state?.tnSettings"
+          [pageActive]="editor.state?.pageActive"
+          [pdfSrcs]="editor.state?.pdfs"
+          [pdfInfo]="editor.state?.pdfInfo"
+          [rotation]="rotation(editor)"
+        ></app-display>
         <!--
         <app-viewer
           [pdfSrcs]="editor.state?.pdfs"
@@ -64,13 +75,20 @@
 
       <!-- Default View -->
       <ng-container *ngSwitchDefault>
-        <app-default [documents]="editor?.documentsModel" [viewModels]="editor?.viewModels"
-          [settings]="editor.state?.settings" [tnSettings]="editor.state?.tnSettings"
-          [selection]="editor.state?.selection" [pageActive]="editor.state?.pageActive" [pdfSrcs]="editor.state?.pdfs"
-          [pdfInfo]="editor.state?.pdfInfo" [rotation]="
-            ((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]
-              ?.rotation
-          "></app-default>
+        <!--
+          TODO:
+          [selection]="editor.state?.selection"
+        -->
+        <app-default
+          [documents]="editor?.documentsModel"
+          [viewModels]="editor?.viewModels"
+          [settings]="editor.state?.settings"
+          [tnSettings]="editor.state?.tnSettings"
+          [pageActive]="editor.state?.pageActive"
+          [pdfSrcs]="editor.state?.pdfs"
+          [pdfInfo]="editor.state?.pdfInfo"
+          [rotation]="rotation(editor)"
+        ></app-default>
       </ng-container>
     </ng-container>
   </div>

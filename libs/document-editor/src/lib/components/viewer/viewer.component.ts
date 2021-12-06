@@ -1,14 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  ViewChild,
-  ElementRef,
-  OnChanges,
-  SimpleChanges,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ViewChild, ElementRef, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
 import { NtsDocumentEditor } from '../../document-editor';
 import { pdfjsDist } from '../../shared/models/pdf';
@@ -22,8 +12,8 @@ import { pdfjsDist } from '../../shared/models/pdf';
 export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('viewer', { static: true }) viewer!: ElementRef;
   @ViewChild('container', { static: true }) container!: ElementRef;
-  @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[];
-  @Input() document?: NtsDocumentEditor.Document;
+  @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[] | null;
+  @Input() document?: NtsDocumentEditor.Document | null;
 
   @Input() viewerOptions?: NtsDocumentEditor.ViewerOptions | false;
   @Input() pageActive?: NtsDocumentEditor.PageActive;
@@ -33,7 +23,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
 
   private loaded = false;
 
-  constructor(public docSvc: DocumentEditorService) { }
+  constructor(public docSvc: DocumentEditorService) {}
 
   ngOnInit() {
     if (!this.pdfSrcs || this.pageActive === (null || undefined)) {
@@ -107,5 +97,5 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
      */
   }
 
-  ngOnDestroy() { }
+  ngOnDestroy() {}
 }

@@ -1,15 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  ElementRef,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
 import { NtsDocumentEditor } from '../../document-editor';
 
@@ -21,10 +10,10 @@ import { NtsDocumentEditor } from '../../document-editor';
 })
 export class PageComponent implements OnInit, OnChanges {
   @ViewChild('pageRef', { static: true }) pageRef!: ElementRef;
-  @Input() viewModels?: NtsDocumentEditor.Preview[][];
+  @Input() viewModels?: NtsDocumentEditor.Preview[][] | null;
   @Input() page?: NtsDocumentEditor.Page | null;
-  @Input() settings!: NtsDocumentEditor.Settings;
-  @Input() tnSettings?: NtsDocumentEditor.ThumbnailSize;
+  @Input() settings?: NtsDocumentEditor.Settings | null;
+  @Input() tnSettings?: NtsDocumentEditor.ThumbnailSize | null;
   @Input() docIndex = 0;
   @Input() pageIndex = 0;
   @Input() isSelected = false;
@@ -40,7 +29,7 @@ export class PageComponent implements OnInit, OnChanges {
 
   public loaded = false;
 
-  constructor(private docsSvc: DocumentEditorService) { }
+  constructor(private docsSvc: DocumentEditorService) {}
 
   ngOnInit() {
     this.setCanvas(this.pageRef.nativeElement);
@@ -148,7 +137,7 @@ export class PageComponent implements OnInit, OnChanges {
    * @param index
    */
   public dragStart(event: any) {
-    if (!this.settings.canReorder || !this.page) {
+    if (!this.settings?.canReorder || !this.page) {
       return;
     }
     this.docsSvc.dragIndex = {
@@ -216,11 +205,7 @@ export class PageComponent implements OnInit, OnChanges {
    * @param side
    */
   private canReorder(side: 'left' | 'right'): boolean {
-    if (
-      this.page === null &&
-      this.docsSvc.dragIndex.pageSrc &&
-      this.docsSvc.dragIndex.pageSrc.pdfSrcIndex === this.docIndex
-    ) {
+    if (this.page === null && this.docsSvc.dragIndex.pageSrc && this.docsSvc.dragIndex.pageSrc.pdfSrcIndex === this.docIndex) {
       return true;
     }
 
@@ -228,16 +213,12 @@ export class PageComponent implements OnInit, OnChanges {
       // Null check page
       !this.page ||
       !this.docsSvc.dragIndex ||
-      !this.settings.canReorder ||
+      !this.settings?.canReorder ||
       // If candropAny is set, only allow documents from the same pdf to be reordered and dropped
       (!this.canDropFromAny && this.docsSvc.dragIndex.pdfIndex !== this.page.pdfSrcIndex) ||
       (this.pageIndex === this.docsSvc.dragIndex.pageIndex && this.docIndex === this.docsSvc.dragIndex.pdfIndex) ||
-      (this.pageIndex + 1 === this.docsSvc.dragIndex.pageIndex &&
-        this.docIndex === this.docsSvc.dragIndex.pdfIndex &&
-        side === 'right') ||
-      (this.pageIndex - 1 === this.docsSvc.dragIndex.pageIndex &&
-        this.docIndex === this.docsSvc.dragIndex.pdfIndex &&
-        side === 'left')
+      (this.pageIndex + 1 === this.docsSvc.dragIndex.pageIndex && this.docIndex === this.docsSvc.dragIndex.pdfIndex && side === 'right') ||
+      (this.pageIndex - 1 === this.docsSvc.dragIndex.pageIndex && this.docIndex === this.docsSvc.dragIndex.pdfIndex && side === 'left')
     ) {
       return false;
     }

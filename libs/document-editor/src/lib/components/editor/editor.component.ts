@@ -1,15 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewEncapsulation,
-  Input,
-  OnChanges,
-  OnDestroy,
-  Output,
-  EventEmitter,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, Input, OnChanges, OnDestroy, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
 import { filter, debounceTime, skip, tap } from 'rxjs/operators';
 import { NtsDocumentEditor } from '../../document-editor';
@@ -80,6 +69,18 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     debounceTime(10),
   );
 
+  /** Determine the rotation, closure required for type safety */
+  public rotation = (editor: {
+    documentsModel: NtsDocumentEditor.Document[] | null;
+    viewModels: NtsDocumentEditor.Preview[][] | null;
+    state: NtsDocumentEditor.State | null;
+  }) => {
+    if (editor?.documentsModel && editor?.state?.pageActive) {
+      return editor?.documentsModel[editor.state.pageActive.pdfIndex]?.pages[editor.state.pageActive.pageIndex || 0]?.rotation;
+    }
+    return 0;
+  };
+
   private subs = [
     // Notify parent of doc model changes
     this.documentsModel$
@@ -92,7 +93,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
 
   private loaded = false;
 
-  constructor(public docSvc: DocumentEditorService) { }
+  constructor(public docSvc: DocumentEditorService) {}
 
   ngOnInit() {
     this.docSvc.scriptsLoad(this.pdfJsSrc, this.pdfJsWorkerSrc);
@@ -141,13 +142,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     // On permission changes
     if (
       this.loaded &&
-      (model.canRotate ||
-        model.canRemove ||
-        model.canSplit ||
-        model.canReorder ||
-        model.canSelect ||
-        model.canViewFull ||
-        model.multipleAction)
+      (model.canRotate || model.canRemove || model.canSplit || model.canReorder || model.canSelect || model.canViewFull || model.multipleAction)
     ) {
       this.initialize();
     }

@@ -18,9 +18,19 @@ import { DisplayComponent } from './components/workflows/display/display.compone
 import { ViewerToolbarComponent } from './components/viewer-toolbar/viewer-toolbar.component';
 
 @NgModule({
-  declarations: [EditorComponent, ViewerComponent, ToolbarComponent, PageComponent, DocumentComponent, DefaultComponent, MultiDocComponent, DisplayComponent, ViewerToolbarComponent],
+  declarations: [
+    EditorComponent,
+    ViewerComponent,
+    ToolbarComponent,
+    PageComponent,
+    DocumentComponent,
+    DefaultComponent,
+    MultiDocComponent,
+    DisplayComponent,
+    ViewerToolbarComponent,
+  ],
   imports: [CommonModule, TabViewModule, ButtonModule, ProgressBarModule, CardModule],
   providers: [DocumentEditorService],
   exports: [EditorComponent],
 })
-export class NtsDocumentEditorModule { }
+export class NtsDocumentEditorModule {}

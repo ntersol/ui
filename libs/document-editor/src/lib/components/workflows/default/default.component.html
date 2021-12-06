@@ -1,11 +1,18 @@
-<div class="ui-g">
-  <div class="ui-g-12 ui-lg-6">
+<div class="p-g">
+  <div class="p-col-12 p-lg-6">
     <p-card>
-      <app-document [document]="documents ? documents[0] : null" [viewModels]="viewModels" [settings]="settings"
-        [tnSettings]="tnSettings" [selection]="selection[0]" [pageActive]="pageActive" [docIndex]="0"></app-document>
+      <app-document
+        [document]="documents ? documents[0] : null"
+        [viewModels]="viewModels"
+        [settings]="settings"
+        [tnSettings]="tnSettings"
+        [selection]="selection[0]"
+        [pageActive]="pageActive"
+        [docIndex]="0"
+      ></app-document>
     </p-card>
   </div>
-  <div class="ui-g-12 ui-lg-6" style="overflow:auto;">
+  <div class="p-col-12 p-lg-6" style="overflow:auto;">
     <!-- Full size viewer -->
     <app-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [rotation]="rotation"></app-viewer>
   </div>

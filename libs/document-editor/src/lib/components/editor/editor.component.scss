@@ -1,15 +1,15 @@
 .nts-document-editor {
-  .ui-card {
+  .p-card {
     background-color: #fafafa;
   }
-  .ui-card-body {
+  .p-card-body {
     padding: 5px 10px;
   }
   .card-tns {
-    &.ui-card {
+    &.p-card {
       background-color: #f6f6f6;
     }
-    .ui-card-body {
+    .p-card-body {
       padding: 1em 5px 5px 5px;
     }
   }
@@ -37,10 +37,10 @@
   }
 
   .multi-doc {
-    .ui-tabview-nav {
+    .p-tabview-nav {
       position: relative;
     }
-    .ui-tabview-nav li:last-child {
+    .p-tabview-nav li:last-child {
       position: absolute;
       right: 0;
     }
