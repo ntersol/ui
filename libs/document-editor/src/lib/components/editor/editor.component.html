@@ -79,10 +79,7 @@
           [leftBox]="true" [documents]="editor.documentsModel" [viewModels]="editor?.viewModels"
           [settings]="editor.state.settings" [tnSettings]="editor.state.tnSettings" [selection]="editor.state.selection"
           [pageActive]="editor.state?.pageActive" [pdfSrcs]="editor.state.pdfs || []" [pdfInfo]="editor.state?.pdfInfo"
-          [rotation]="
-          ((editor.documentsModel)[editor.state.pageActive.pdfIndex]?.pages)[editor.state.pageActive.pageIndex]
-            .rotation || getRotation(editor)
-        " (pdfChange)="pdfEventHandler()" [maxHeight]="maxHeight"></app-default>
+          [rotation]="getRotation(editor)" (pdfChange)="pdfEventHandler()" [maxHeight]="maxHeight"></app-default>
       </ng-container>
     </ng-container>
   </div>
