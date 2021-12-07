@@ -1,6 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, ViewChild, ElementRef, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
-import { DocumentEditorService } from '../../shared/document-editor.service';
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+
 import { NtsDocumentEditor } from '../../document-editor';
+import { DocumentEditorService } from '../../shared/document-editor.service';
 import { pdfjsDist } from '../../shared/models/pdf';
 
 @Component({
@@ -12,30 +25,30 @@ import { pdfjsDist } from '../../shared/models/pdf';
 export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('viewer', { static: true }) viewer!: ElementRef;
   @ViewChild('container', { static: true }) container!: ElementRef;
-  @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[] | null;
-  @Input() document?: NtsDocumentEditor.Document | null;
+  @Input() pdfSrcs?: Array<pdfjsDist.PDFDocumentProxy>;
+  @Input() document?: NtsDocumentEditor.Document;
 
   @Input() viewerOptions?: NtsDocumentEditor.ViewerOptions | false;
   @Input() pageActive?: NtsDocumentEditor.PageActive;
   @Input() rotation = 0;
-
+  @Input() isSignature = false;
   // @Input() renderType
-
-  private loaded = false;
-
-  constructor(public docSvc: DocumentEditorService) {}
+  private _loaded = false;
+  private _origRotation = 0;
+  constructor(public docSvc: DocumentEditorService, private _cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     if (!this.pdfSrcs || this.pageActive === (null || undefined)) {
       return;
     }
     this.pageGet(this.pdfSrcs, this.pageActive);
-    this.loaded = true;
+    this._loaded = true;
   }
 
   ngOnChanges(model: SimpleChanges) {
     // console.warn('Viewer', model);
-    if (this.loaded && model.pageActive && this.pdfSrcs && this.pageActive !== (null || undefined)) {
+
+    if (this._loaded && model.pageActive && this.pdfSrcs && this.pageActive !== (null || undefined)) {
       this.pageGet(this.pdfSrcs, this.pageActive);
     }
   }
@@ -45,7 +58,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
    * @param pdfSrcs
    * @param pageActive
    */
-  public pageGet(pdfSrcs: pdfjsDist.PDFDocumentProxy[], pageActive: NtsDocumentEditor.PageActive) {
+  pageGet(pdfSrcs: Array<pdfjsDist.PDFDocumentProxy>, pageActive: NtsDocumentEditor.PageActive) {
     if (!this.pdfSrcs) {
       return;
     }
@@ -56,37 +69,42 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
    * Render a pdf page to the DOM
    * @param page
    */
-  public pageRender(page: pdfjsDist.PDFPageProxy) {
-    const scale = 1;
-    const viewport = page.getViewport({ scale: scale });
+  pageRender(page: pdfjsDist.PDFPageProxy) {
+    let scale = 1.2;
+    if (this.isSignature) {
+      scale = 1;
+    }
 
-    /**
-     *  // Prepare canvas using PDF page dimensions
+    const viewport = page.getViewport({ scale });
+    this._origRotation = page.rotate;
+    this._cdr.detectChanges();
+
+    // Prepare canvas using PDF page dimensions
     const canvas = this.viewer.nativeElement;
     canvas.height = viewport.height;
     canvas.width = viewport.width;
     // Render PDF page into canvas context
-     const context = canvas.getContext('2d');
+    const context = canvas.getContext('2d');
     const renderContext = {
       canvasContext: context,
       viewport: viewport,
     };
     page.render(renderContext);
-     */
 
-    page
-      .getOperatorList()
-      .then(opList => {
-        // Get svg render
-        const svgGfx = new (<any>this).docSvc.pdfJs.SVGGraphics((<any>page).commonObjs, (<any>page).objs);
-        return svgGfx.getSVG(opList, viewport);
-      })
-      .then(svg => {
-        // Remove any items in the div
-        this.container.nativeElement.textContent = '';
-        // Add new svg page
-        this.container.nativeElement.appendChild(svg);
-      });
+    // page
+    //   .getOperatorList()
+    //   .then(opList => {
+    //     // Get svg render
+    //     const svgGfx = new (this as any).docSvc.pdfJs.SVGGraphics((page as any).commonObjs, (page as any).objs);
+
+    //     return svgGfx.getSVG(opList, viewport);
+    //   })
+    //   .then(svg => {
+    //     // Remove any items in the div
+    //     this.container.nativeElement.textContent = '';
+
+    //     this.container.nativeElement.appendChild(svg);
+    //   });
 
     /**
     const renderTask = page.render(renderContext);
@@ -97,5 +115,9 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
      */
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() { }
+
+  get origRotation() {
+    return this._origRotation;
+  }
 }

@@ -1,0 +1,36 @@
+.nts-docs-page {
+  border: 1px solid transparent;
+  margin: 5px;
+  width: 120px;
+  background-color: grey;
+  text-align: center;
+}
+
+.do-not-show {
+  display: none;
+}
+
+.selected {
+  border: 1px solid grey;
+}
+
+.nts-docs-page-tn {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  width: 118px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  transition: 0.2s ease-out;
+
+  &.nts-docs-tn-excluded .nts-docs-tn-canvas {
+    opacity: 0.1;
+    transition: 0.3s ease-out;
+  }
+  .nts-docs-tn-canvas {
+    transition: 0.3s ease-out;
+    overflow: hidden;
+  }
+}

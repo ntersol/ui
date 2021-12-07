@@ -1,4 +1,4 @@
-export namespace NtsDocumentEditor {
+export module NtsDocumentEditor {
   interface Document {
     label: string | null;
     pages: Page[];
@@ -40,7 +40,7 @@ export namespace NtsDocumentEditor {
   interface ThumbnailSize {
     width: number;
     /** Height is optional, if not supplied the correct ratio from width will be determined */
-    height?: number;
+    height: number;
   }
 
   interface Settings {
