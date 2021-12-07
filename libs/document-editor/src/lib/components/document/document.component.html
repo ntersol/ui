@@ -1,4 +1,4 @@
-<div class="nts-docs-tns">
+<div class="nts-docs-tns" [style]="{'height': maxHeight + ' !important', 'overflow': 'auto'}">
   <ng-container *ngIf="document?.pages && viewModels && !splitView">
     <ng-container *ngFor="let page of document?.pages; let i = index">
       <app-page [isMerge]="isMerge" [isAdd]="isAdd" [leftBox]="leftBox" [page]="page" [viewModels]="viewModels"
@@ -11,7 +11,7 @@
   <ng-container *ngIf="!document?.pages?.length && settings?.canReorder && !splitView">
     <app-page [isMerge]="isMerge" [isAdd]="isAdd" [leftBox]="leftBox" [page]="null" [viewModels]="viewModels"
       [settings]="settings" [tnSettings]="tnSettings" [isSelected]="false" [isActive]="false" [docIndex]="docIndex"
-      [pageIndex]="0" [canDropFromAny]="canDropFromAny" (pdfChange)="pdfHasChange()"></app-page>
+      [pageIndex]="0" [canDropFromAny]="canDropFromAny" (pdfChange)="pdfHasChange()" ></app-page>
   </ng-container>
 
   <ng-container *ngIf="document?.pages && viewModels && splitView">

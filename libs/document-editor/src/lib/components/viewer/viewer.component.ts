@@ -31,6 +31,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   @Input() viewerOptions?: NtsDocumentEditor.ViewerOptions | false;
   @Input() pageActive?: NtsDocumentEditor.PageActive;
   @Input() rotation = 0;
+  @Input() maxHeight = '100%';
   @Input() isSignature = false;
   // @Input() renderType
   private _loaded = false;

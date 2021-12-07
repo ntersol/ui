@@ -63,6 +63,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() workflow: NtsDocumentEditor.Workflow = 'default';
   @Input() isAdd = false;
   @Input() isMerge = false;
+  @Input() maxHeight = '100%';
   /** Display information for pdfs */
   @Input() set pdfInfo(info: Array<NtsDocumentEditor.PdfInfo> | null | undefined) {
     if (this.docSvc && info) {
@@ -118,6 +119,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     // this.state$.subscribe(x => console.log('State', x));
     // this.documentsModel$.subscribe(x => console.log('Documents', x));
     // this.viewModels$.subscribe(x => console.log('View Models', x));
+    console.log(this.maxHeight)
   }
   ngOnChanges(model: SimpleChanges) {
     // On permission changes

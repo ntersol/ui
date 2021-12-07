@@ -1,15 +1,16 @@
 <div class="container">
   <div class="row">
-    <div class="col-3">
+    <div class="col-3 ">
       <p-card>
         <app-document [isMerge]="isMerge" [leftBox]="true" [document]="documents && documents[0]"
-          [viewModels]="viewModels" [settings]="settings" [tnSettings]="tnSettings" [selection]="selection"
-          [pageActive]="pageActive" [docIndex]="0"></app-document>
+        [viewModels]="viewModels" [settings]="settings" [tnSettings]="tnSettings" [selection]="selection"
+        [pageActive]="pageActive" [docIndex]="0" [maxHeight]="maxHeight"></app-document>
       </p-card>
+
     </div>
-    <div class="col-9" style="overflow: auto">
+    <div class="col-9">
       <!-- Full size viewer -->
-      <app-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [rotation]="rotation"></app-viewer>
+      <app-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [rotation]="rotation" [maxHeight]="maxHeight"></app-viewer>
     </div>
   </div>
 </div>

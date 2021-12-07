@@ -33,6 +33,7 @@ export class DocumentComponent implements OnInit, OnChanges {
   @Input() leftBox = false;
   @Input() isAdd = false;
   @Input() isMerge = false;
+  @Input() maxHeight = '100%';
   @Output() pdfChange = new EventEmitter<boolean>();
   @Output() setActivePage = new EventEmitter<NtsDocumentEditor.PageActive>();
 

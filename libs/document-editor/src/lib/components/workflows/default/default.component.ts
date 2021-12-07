@@ -25,14 +25,15 @@ export class DefaultComponent implements OnInit {
     canSelect: false,
     canViewFull: false,
     canReset: false,
-  };;
+  };
   @Input() tnSettings: NtsDocumentEditor.ThumbnailSize = { width: 0, height: 0 };;
   @Input() viewModels?: Array<Array<NtsDocumentEditor.Preview>>;
   @Input() leftBox = false;
   @Input() isMerge = false;
+  @Input() maxHeight = '100%';
   @Output() pdfChange = new EventEmitter<boolean>();
 
-  ngOnInit() { }
+  ngOnInit() { console.log(this.maxHeight)}
 
   pdfChangeHandler() {
     this.pdfChange.emit(true);

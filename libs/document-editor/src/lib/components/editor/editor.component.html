@@ -82,7 +82,7 @@
           [rotation]="
           ((editor.documentsModel)[editor.state.pageActive.pdfIndex].pages)[editor.state.pageActive.pageIndex]
             .rotation || getRotation(editor)
-        " (pdfChange)="pdfEventHandler()"></app-default>
+        " (pdfChange)="pdfEventHandler()" [maxHeight]="maxHeight"></app-default>
       </ng-container>
     </ng-container>
   </div>
