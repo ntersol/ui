@@ -1,47 +1,98 @@
-<div class="nts-docs-page" [ngClass]="{
-    'hide': !hasPages,
+<div
+  class="nts-docs-page"
+  [ngClass]="{
+    hide: !hasPages,
     'nts-docs-tn-selected': isSelected,
     'nts-docs-tn-active': isActive,
     'nts-docs-tn-dropzone': !canDropFromAny && !page
-  }" (click)="setActive()">
-  <div class="nts-docs-page-tn" [ngClass]="{ 'nts-docs-tn-excluded': page?.excluded }"
+  }"
+  (click)="setActive()"
+>
+  <div
+    class="nts-docs-page-tn"
+    [ngClass]="{ 'nts-docs-tn-excluded': page?.excluded }"
     [ngStyle]="{ 'min-width': tnSettings.width + 12 + 'px', 'min-height': tnSettings.height + 15 + 'px' }"
-    [draggable]="settings?.canReorder" (dragover)="dragOver($event)" (dragleave)="dragOver($event)"
-    (dragstart)="dragStart($event)">
+    [draggable]="settings?.canReorder"
+    (dragover)="dragOver($event)"
+    (dragleave)="dragOver($event)"
+    (dragstart)="dragStart($event)"
+  >
     <!-- Top page controls-->
     <div class="nts-docs-tn-controls top" [ngClass]="{ 'nts-docs-tn-controls-sm': tnSettings.width < 100 }">
-      <button class="nts-docs-tn-button" pButton icon="fa fa-undo" (click)="rotate(-90)"
-        *ngIf="settings?.canRotate"></button>
-      <button *ngIf="settings?.canRemove" class="nts-docs-tn-button m-auto" pButton
+      <button
+        class="nts-docs-tn-button"
+        pButton
+        icon="fa fa-undo"
+        (click)="rotate(-90)"
+        *ngIf="settings?.canRotate"
+      ></button>
+      <button
+        *ngIf="settings?.canRemove"
+        class="nts-docs-tn-button m-auto"
+        pButton
         [icon]="page?.excluded ? 'fa fa-square-o' : 'fa fa-check-square'"
-        (click)="toggleExclusion(!page?.excluded)"></button>
-      <button class="nts-docs-tn-button" pButton icon="fa fa-repeat" (click)="rotate(90)"
-        *ngIf="settings?.canRotate"></button>
+        (click)="toggleExclusion(!page?.excluded)"
+      ></button>
+      <button
+        class="nts-docs-tn-button"
+        pButton
+        icon="fa fa-repeat"
+        (click)="rotate(90)"
+        *ngIf="settings?.canRotate"
+      ></button>
     </div>
 
     <!-- Bottom page controls-->
     <div class="nts-docs-tn-controls bottom" [ngClass]="{ 'nts-docs-tn-controls-sm': tnSettings.width < 100 }">
-      <button *ngIf="settings?.canSelect" class="nts-docs-tn-button" pButton
-        [icon]="isSelected ? 'fa fa-remove' : 'fa fa-hand-pointer-o'" (click)="toggleSelected()"></button>
-      <button class="nts-docs-tn-button" pButton title="View full size page" [icon]="'fa fa-search'"
-        (click)="setActive(true)"></button>
-      <button *ngIf="settings?.canReset && page?.pdfSrcIndex !== docIndex" class="nts-docs-tn-button" pButton
-        title="Remove this page" [icon]="'fa fa-remove'" (click)="pageReset()"></button>
+      <button
+        *ngIf="settings?.canSelect"
+        class="nts-docs-tn-button"
+        pButton
+        [icon]="isSelected ? 'fa fa-remove' : 'fa fa-hand-pointer-o'"
+        (click)="toggleSelected()"
+      ></button>
+      <button
+        class="nts-docs-tn-button"
+        pButton
+        title="View full size page"
+        [icon]="'fa fa-search'"
+        (click)="setActive(true)"
+      ></button>
+      <button
+        *ngIf="settings?.canReset && page?.pdfSrcIndex !== docIndex"
+        class="nts-docs-tn-button"
+        pButton
+        title="Remove this page"
+        [icon]="'fa fa-remove'"
+        (click)="pageReset()"
+      ></button>
     </div>
 
-    <div class="nts-docs-tn-dropzone" (dragover)="dragOver($event)" (dragenter)="dragCatch($event, 'left', true)"
-      (dragleave)="dragCatch($event, 'left', false)" (drop)="drop($event, 'left')"
-      [ngClass]="{ 'nts-docs-tn-dropzone-dragover-left': dragOverLeft }"></div>
-    <div class="nts-docs-tn-dropzone right" (dragover)="dragOver($event)" (dragenter)="dragCatch($event, 'right', true)"
-      (dragleave)="dragCatch($event, 'right', false)" (drop)="drop($event, 'right')"
-      [ngClass]="{ 'nts-docs-tn-dropzone-dragover-right': dragOverRight }"></div>
+    <div
+      class="nts-docs-tn-dropzone"
+      (dragover)="dragOver($event)"
+      (dragenter)="dragCatch($event, 'left', true)"
+      (dragleave)="dragCatch($event, 'left', false)"
+      (drop)="drop($event, 'left')"
+      [ngClass]="{ 'nts-docs-tn-dropzone-dragover-left': dragOverLeft }"
+    ></div>
+    <div
+      class="nts-docs-tn-dropzone right"
+      (dragover)="dragOver($event)"
+      (dragenter)="dragCatch($event, 'right', true)"
+      (dragleave)="dragCatch($event, 'right', false)"
+      (drop)="drop($event, 'right')"
+      [ngClass]="{ 'nts-docs-tn-dropzone-dragover-right': dragOverRight }"
+    ></div>
     <div class="nts-docs-tn-canvas" [ngStyle]="{ height: (tnSettings?.height || 0) + 'px' }">
       <div #pageRef [ngStyle]="{ transform: 'rotate(' + page?.rotation + 'deg)' }"></div>
     </div>
   </div>
   <ng-container *ngIf="pageRef && page && page.pdfSrcIndex >= 0">
-    <span *ngIf="leftBox && !isMerge">{{page.pageSrcIndex + 1}}</span>
-    <span *ngIf="leftBox && isMerge">{{pageIndex + 1}}</span>
-    <span *ngIf="isAdd && !leftBox && page.pdfSrcIndex > 0">{{page.pdfSrcIndex}}-{{page.pageSrcIndex + 1}}</span>
+    <div class="text-center">
+      <span *ngIf="leftBox && !isMerge">{{ page.pageSrcIndex + 1 }}</span>
+      <span *ngIf="leftBox && isMerge">{{ pageIndex + 1 }}</span>
+      <span *ngIf="isAdd && !leftBox && page.pdfSrcIndex > 0">{{ page.pdfSrcIndex }}-{{ page.pageSrcIndex + 1 }}</span>
+    </div>
   </ng-container>
 </div>
