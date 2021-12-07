@@ -1,17 +1,18 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { NtsDocumentEditor } from '../../../document-editor';
 import { pdfjsDist } from '../../../shared/models/pdf';
 
 @Component({
-  selector: 'app-default',
-  templateUrl: './default.component.html',
+  selector: 'app-split',
+  templateUrl: './split.component.html',
+  styleUrls: ['./split.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DefaultComponent implements OnInit {
+export class SplitComponent implements OnInit {
   @Input() documents?: Array<NtsDocumentEditor.Document>;
   @Input() pageActive?: NtsDocumentEditor.PageActive;
+  @Input() pageIndex?: number;
   @Input() pdfInfo?: Array<NtsDocumentEditor.PdfInfo>;
   // Viewer
   @Input() pdfSrcs?: Array<pdfjsDist.PDFDocumentProxy>;
@@ -25,11 +26,10 @@ export class DefaultComponent implements OnInit {
     canSelect: false,
     canViewFull: false,
     canReset: false,
-  };;
-  @Input() tnSettings: NtsDocumentEditor.ThumbnailSize = { width: 0, height: 0 };;
+  };
+  @Input() tnSettings: NtsDocumentEditor.ThumbnailSize = { width: 0, height: 0 };
   @Input() viewModels?: Array<Array<NtsDocumentEditor.Preview>>;
-  @Input() leftBox = false;
-  @Input() isMerge = false;
+
   @Output() pdfChange = new EventEmitter<boolean>();
 
   ngOnInit() { }
