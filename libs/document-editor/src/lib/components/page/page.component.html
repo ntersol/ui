@@ -39,12 +39,9 @@
       <div #pageRef [ngStyle]="{ transform: 'rotate(' + page?.rotation + 'deg)' }"></div>
     </div>
   </div>
-  <<<<<<< HEAD <ng-container *ngIf="pageRef && page && page.pdfSrcIndex >= 0">
+  <ng-container *ngIf="pageRef && page && page.pdfSrcIndex >= 0">
     <span *ngIf="leftBox && !isMerge">{{page.pageSrcIndex + 1}}</span>
     <span *ngIf="leftBox && isMerge">{{pageIndex + 1}}</span>
     <span *ngIf="isAdd && !leftBox && page.pdfSrcIndex > 0">{{page.pdfSrcIndex}}-{{page.pageSrcIndex + 1}}</span>
-    </ng-container>
-
-    =======
-    >>>>>>> f7016c79621bd4a7a91217824a3686f2d1f7ab80
+  </ng-container>
 </div>
