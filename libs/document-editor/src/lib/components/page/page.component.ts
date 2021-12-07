@@ -53,9 +53,9 @@ export class PageComponent implements OnInit, OnChanges {
 
   loaded = false;
   isAssigned = false;
-  constructor(private _docsSvc: DocumentEditorService, private _cdr: ChangeDetectorRef) { }
+  constructor(private _docsSvc: DocumentEditorService, private _cdr: ChangeDetectorRef) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
   ngAfterViewInit() {
     this.setCanvas(this.pageRef.nativeElement);
     this.loaded = true;
@@ -263,6 +263,6 @@ export class PageComponent implements OnInit, OnChanges {
   }
 
   get hasPages() {
-    return this._docsSvc.documentsModel$.value[this.docIndex]?.pages.length > 0;
+    return this._docsSvc.documentsModel$.value[this.docIndex].pages.length > 0;
   }
 }

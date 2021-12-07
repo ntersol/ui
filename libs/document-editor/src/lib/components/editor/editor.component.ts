@@ -35,8 +35,8 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() canViewFull = true;
   /** How to handle multiple documents*/
   @Input() multipleAction: NtsDocumentEditor.MultipleAction = 'merge';
-  @Input() pdfJsSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js';
-  @Input() pdfJsWorkerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js';
+  @Input() pdfJsSrc = '/assets/scripts/pdf.min.js';
+  @Input() pdfJsWorkerSrc = '/assets/scripts/pdf.worker.min.js';
   @Input() pdfSrcs?: NtsDocumentEditor.InputTypes | Array<NtsDocumentEditor.InputTypes> | null;
   /** DOM reference from the parent container with a scrollbar. Used to determine if a thumbnail is in view for rendering purposes */
   @Input() scrollbarRef?: HTMLDivElement;

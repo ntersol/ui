@@ -1,7 +1,7 @@
 <div
   class="nts-docs-page"
   [ngClass]="{
-    hide: !hasPages,
+    'hide': !hasPages,
     'nts-docs-tn-selected': isSelected,
     'nts-docs-tn-active': isActive,
     'nts-docs-tn-dropzone': !canDropFromAny && !page
@@ -11,14 +11,14 @@
   <div
     class="nts-docs-page-tn"
     [ngClass]="{ 'nts-docs-tn-excluded': page?.excluded }"
-    [ngStyle]="{ 'min-width': tnSettings.width + 12 + 'px', 'min-height': tnSettings.height + 15 + 'px' }"
+    [ngStyle]="{ 'min-width': tnSettings?.width + 12 + 'px', 'min-height': tnSettings?.height + 15 + 'px' }"
     [draggable]="settings?.canReorder"
     (dragover)="dragOver($event)"
     (dragleave)="dragOver($event)"
     (dragstart)="dragStart($event)"
   >
     <!-- Top page controls-->
-    <div class="nts-docs-tn-controls top" [ngClass]="{ 'nts-docs-tn-controls-sm': tnSettings.width < 100 }">
+    <div class="nts-docs-tn-controls top" [ngClass]="{ 'nts-docs-tn-controls-sm': tnSettings?.width < 100 }">
       <button
         class="nts-docs-tn-button"
         pButton
@@ -43,7 +43,7 @@
     </div>
 
     <!-- Bottom page controls-->
-    <div class="nts-docs-tn-controls bottom" [ngClass]="{ 'nts-docs-tn-controls-sm': tnSettings.width < 100 }">
+    <div class="nts-docs-tn-controls bottom" [ngClass]="{ 'nts-docs-tn-controls-sm': tnSettings?.width < 100 }">
       <button
         *ngIf="settings?.canSelect"
         class="nts-docs-tn-button"
@@ -84,7 +84,7 @@
       (drop)="drop($event, 'right')"
       [ngClass]="{ 'nts-docs-tn-dropzone-dragover-right': dragOverRight }"
     ></div>
-    <div class="nts-docs-tn-canvas" [ngStyle]="{ height: (tnSettings?.height || 0) + 'px' }">
+    <div class="nts-docs-tn-canvas" [ngStyle]="{ height: tnSettings?.height + 'px' }">
       <div #pageRef [ngStyle]="{ transform: 'rotate(' + page?.rotation + 'deg)' }"></div>
     </div>
   </div>

@@ -44,6 +44,7 @@ export class MultiDocComponent implements OnInit, OnChanges {
   @Input() tnSettings: NtsDocumentEditor.ThumbnailSize = { width: 0, height: 0 };;
   @Input() viewModels?: Array<Array<NtsDocumentEditor.Preview>>;
   @Input() isAdd = false;
+  @Input() maxHeight = '100%';
   @Output() pdfChange = new EventEmitter<boolean>();
 
   @ViewChild('tabView') tabView?: TabView;

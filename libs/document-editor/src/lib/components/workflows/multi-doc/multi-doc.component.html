@@ -29,6 +29,7 @@
       >
         <ng-template pTemplate="content">
           <app-document
+            [maxHeight]="maxHeight"
             [isAdd]="isAdd"
             [leftBox]="true"
             [document]="document"
@@ -56,6 +57,7 @@
       <p-tabPanel [header]="pdfInfo && pdfInfo[0]?.label ? pdfInfo[0].label : 'Source Document'">
         <ng-template pTemplate="content">
           <app-document
+            [maxHeight]="maxHeight"
             [isAdd]="isAdd"
             [document]="documents && documents[0]"
             [viewModels]="viewModels"
@@ -70,7 +72,7 @@
       <p-tabPanel header="Viewer">
         <ng-template pTemplate="content">
           <!-- Full size viewer -->
-          <app-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [rotation]="rotation"></app-viewer>
+          <app-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [rotation]="rotation" [maxHeight]="maxHeight"></app-viewer>
         </ng-template>
       </p-tabPanel>
     </p-tabView>
