@@ -6,17 +6,21 @@
       (onChange)="selectTab($event)"
       *ngIf="docsSource?.length; noDocsSource"
     >
-      <div class="tab-button-left" *ngIf="docsSource && docsSource.length > 1">
-        <p-button styleClass="nav-btn" (click)="prevTab()" [disabled]="activeIndex === 0" icon="fas fa-arrow-left">
-        </p-button>
-      </div>
-      <div class="tab-button-right" *ngIf="docsSource && docsSource.length > 1">
-        <p-button
-          styleClass="nav-btn"
-          (click)="nextTab()"
-          [disabled]="activeIndex === docsSource.length - 1"
-          icon="fas fa-arrow-right"
-        ></p-button>
+      <div class="col-12 nav-container">
+        <div class="flex-container">
+          <div class="tab-button-left" *ngIf="docsSource && docsSource.length > 1">
+            <p-button styleClass="nav-btn" (click)="prevTab()" [disabled]="activeIndex === 0" icon="fas fa-arrow-left">
+            </p-button>
+          </div>
+          <div class="tab-button-right" *ngIf="docsSource && docsSource.length > 1">
+            <p-button
+              styleClass="nav-btn"
+              (click)="nextTab()"
+              [disabled]="activeIndex === docsSource.length - 1"
+              icon="fas fa-arrow-right"
+            ></p-button>
+          </div>
+        </div>
       </div>
       <p-tabPanel
         *ngFor="let document of docsSource; let i = index"
