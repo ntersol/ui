@@ -7,7 +7,7 @@
       *ngIf="docsSource?.length; noDocsSource"
     >
       <div class="col-12 nav-container">
-        <div class="flex-container">
+
           <div class="tab-button-left" *ngIf="docsSource && docsSource.length > 1">
             <p-button styleClass="nav-btn" (click)="prevTab()" [disabled]="activeIndex === 0" icon="fas fa-arrow-left">
             </p-button>
@@ -20,7 +20,6 @@
               icon="fas fa-arrow-right"
             ></p-button>
           </div>
-        </div>
       </div>
       <p-tabPanel
         *ngFor="let document of docsSource; let i = index"

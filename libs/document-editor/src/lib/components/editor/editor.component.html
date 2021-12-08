@@ -29,10 +29,7 @@
           [documents]="editor && editor.documentsModel" [viewModels]="editor.viewModels"
           [settings]="editor.state.settings" [tnSettings]="editor.state.tnSettings" [selection]="editor.state.selection"
           [pageActive]="editor.state?.pageActive" [pdfSrcs]="editor.state.pdfs || []" [pdfInfo]="editor.state?.pdfInfo"
-          [rotation]="
-          ((editor.documentsModel)[editor.state.pageActive.pdfIndex].pages)[editor.state.pageActive.pageIndex]
-            .rotation
-        " (pdfChange)="pdfEventHandler()" [maxHeight]="maxHeight"></app-multi-doc>
+          (pdfChange)="pdfEventHandler()" [maxHeight]="maxHeight"></app-multi-doc>
       </ng-container>
 
       <!-- Viewer Only -->
