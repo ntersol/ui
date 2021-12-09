@@ -14,8 +14,6 @@ const initialState: NtsState.ApiState<any> = {
 
 export class NtsApiStore<t> extends NtsApiStoreCreator<t> {
 
-    protected state: NtsState.ApiState<t> = { ...initialState };
-
     /** Global store config config, contains mashup of all instances. Below is the default config */
     protected config: NtsState.Config = {
         autoLoad: true,
@@ -30,8 +28,8 @@ export class NtsApiStore<t> extends NtsApiStoreCreator<t> {
         distinctUntilChanged(),
     );
 
-    constructor(http: HttpClient, config: NtsState.Config) {
-        super(http, config, true);
+    constructor(http: HttpClient, config: NtsState.Config,) {
+        super(http, config, initialState, false);
         // Merge all configs into single entity
         this.config = mergeConfig(this.config, config);
     }

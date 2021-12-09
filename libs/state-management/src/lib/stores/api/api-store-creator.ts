@@ -14,21 +14,11 @@ import {
 } from './api-store.utils';
 import { isActionApi } from '../../utils/guards.util';
 
-const initialState = {
-  loading: false,
-  modifying: false,
-  error: false,
-  errorModify: false,
-  data: null,
-};
-
 /**
  * Automatically create an entity store to manage interaction between a local flux store and a remote api
  */
 export class NtsApiStoreCreator<t> extends NtsBaseStore {
-  protected state: NtsState.ApiState<t> = {
-    ...initialState,
-  };
+  protected state: NtsState.ApiState<t> = { ...this.initialState, };
 
   /** Returns both the api state and data */
   private _state$ = new BehaviorSubject(this.state);
@@ -59,8 +49,9 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
     autoLoad: true,
   };
 
-  constructor(private http: HttpClient, config: NtsState.Config | NtsState.ConfigEntity, private isEntityStore = true) {
+  constructor(private http: HttpClient, config: NtsState.Config | NtsState.ConfigEntity, private initialState: any, private isEntityStore = true) {
     super();
+    this.state$.subscribe(s => console.info(s))
     // Merge all configs into single entity
     this.config = mergeConfig(this.config, config);
 
@@ -334,7 +325,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * Reset store to it's initial state
    */
   public reset() {
-    this.stateChange(initialState);
+    this.stateChange({ ...this.initialState });
   }
 
   /**
@@ -342,6 +333,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param state
    */
   private stateChange(state: Partial<NtsState.ApiState>) {
+    console.warn('stateChange', state)
     this.state = { ...this.state, ...state };
     this._state$.next(this.state);
   }

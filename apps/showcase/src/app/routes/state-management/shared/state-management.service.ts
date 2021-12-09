@@ -30,7 +30,6 @@ export class StateManagementService {
 
   // List all store services here
   constructor(public http: HttpClient) {
-
     /**
     this.uiStore.select$('isString').subscribe(x => console.log(x));
 
@@ -41,11 +40,13 @@ export class StateManagementService {
       });
        */
 
-    setTimeout(() => {
-      // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.POST, payload: { name: 'Jerrol!' } });
-      // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.PUT, payload: { name: 'WINNING', id: 5 } });
-      // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.DELETE, payload: { id: 4 } });
-    }, 2000);
+    /**
+  setTimeout(() => {
+    // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.POST, payload: { name: 'Jerrol!' } });
+    // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.PUT, payload: { name: 'WINNING', id: 5 } });
+    // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.DELETE, payload: { id: 4 } });
+  }, 2000);
+   */
     // this.users.events$.subscribe(x => console.log('User store events', x));
     // ntsBaseStore().events$.subscribe(x => console.log('Global store events', x));
   }

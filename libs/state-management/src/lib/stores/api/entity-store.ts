@@ -15,14 +15,6 @@ const initialState: NtsState.EntityApiState<any> = {
 
 export class NtsEntityStore<t> extends NtsApiStoreCreator<t[]> {
 
-    protected state: NtsState.EntityApiState<t> = { ...initialState };
-
-    /** Global store config config, contains mashup of all instances. Below is the default config */
-    protected config: NtsState.ConfigEntity = {
-        autoLoad: true,
-        uniqueId: 'guid'
-    };
-
     /** Select all of the entities in the store. Does not include state. */
     public selectAll$ = this.state$.pipe(
         map((s) => s.data),
@@ -45,7 +37,11 @@ export class NtsEntityStore<t> extends NtsApiStoreCreator<t[]> {
     );
 
     constructor(http: HttpClient, config: NtsState.ConfigEntity) {
-        super(http, config, true);
+        super(http, config, initialState, true);
+        // If a custom initial state was defined, merge into initial state
+        if (this.config.initialState) {
+            this.state = { ...this.state, ...this.config.initialState };
+        }
         // Merge all configs into single entity
         this.config = mergeConfig(this.config, config);
     }
