@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { NtsState } from "../../state.models";
 import { mergeConfig } from "./api-store.utils";
 import { NtsEntityStore } from "./entity-store";
-import { NtsApiStore } from "./object-store";
+import { NtsApiStore } from "./api-store";
 
 /**
  * Create a curried instance of the api store creator

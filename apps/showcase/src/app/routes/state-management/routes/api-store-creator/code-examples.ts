@@ -89,13 +89,13 @@ export const select = `
  * Entity Stores
  */
 // Subscribe to all data in the store without state
-public users$ = this.myStore.selectAll$; // Will be type t[]
+public usersAll$ = this.myStore.selectAll$; // Will be type t[]
 
-// Subscribe to a single record from the store without state
-public users$ = this.myStore.selectOne$; // Will be type t
+// Subscribe to a single record from the store without state. Uses the unique ID.
+public usersOne$ = this.myStore.selectOne$('12345'); // Will be type t
 
 // Subscribe to a smaller subset of data in the store using a callback function to modify the return
-public users$ = this.myStore.selectSome$(users => users.filter(user => user.age > 18)); // Will be type t[]
+public usersLess$ = this.myStore.selectSome$(users => users.filter(user => user.age > 18)); // Will be type t[]
 
 /**
  * Non-entity Stores

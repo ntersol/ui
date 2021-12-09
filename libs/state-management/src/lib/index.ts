@@ -11,7 +11,7 @@ export * from './pipes/entity-to-array.pipe';
 export * from './pipes/is-loaded.pipe';
 
 export * from './stores/base/base-store';
-export * from './stores/api/api-store';
+export * from './stores/api/api-store-creator';
 export * from './stores/api/api-store.utils';
 export * from './stores/ui/ui-store';
 
