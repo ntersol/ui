@@ -15,6 +15,8 @@ export * from './stores/api/api-store';
 export * from './stores/api/api-store.utils';
 export * from './stores/ui/ui-store';
 
+export * from './stores/api/creator';
+
 export * from './stores/store.actions';
 export * from './stores/store.enums';
 

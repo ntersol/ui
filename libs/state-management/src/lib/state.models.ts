@@ -1,9 +1,13 @@
 export namespace NtsState {
+
+  export interface EntityApiState<t = any, e = any> extends ApiState<t[], e> {
+    /** If api response type is an array of objects, create record here. Will be null otherwise */
+    entities: Record<string | number, t>;
+  }
+
   /** Contains both the api state and any data */
   export interface ApiState<t = any, e = any> {
     [key: string]: any;
-    /** If api response type is an array of objects, create record here. Will be null otherwise */
-    entities?: null | Record<string | number, t>;
     loading: boolean;
     modifying: boolean;
     error: null | e;
@@ -105,6 +109,9 @@ export namespace NtsState {
 
   /** Select callback function for UI store */
   export type Callback<t> = <R>(store: t) => R;
+
+  /** A callback function that works on an array of entities and returns a subset of that information */
+  export type SelectEntities<t> = (entities: t[] | null | undefined) => t[] | null | undefined;
 
   /** Actions to perform against the store */
   export interface Action<t = unknown, y = unknown> {

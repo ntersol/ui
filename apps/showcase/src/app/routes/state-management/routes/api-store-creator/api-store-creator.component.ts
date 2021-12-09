@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HighlightService } from '../../../../shared/services/highlight.service';
-import { install, importExample, usage1, usage2, usage3 } from './code-examples';
+import { install, importExample, usage1, usage2, usage3, state, select } from './code-examples';
 
 @Component({
   selector: 'nts-api-store-creator',
@@ -13,6 +13,8 @@ export class ApiStoreCreatorComponent implements OnInit {
   public usage1 = usage1;
   public usage2 = usage2;
   public usage3 = usage3;
+  public state = this.highlight.htmlEncode(state);
+  public select = this.highlight.htmlEncode(select);
 
   constructor(private highlight: HighlightService) { }
 

@@ -26,8 +26,6 @@ export const usage2 = `
   export class SampleComponent implements OnInit {
     // Get both users and api state
     public users$ = this.api.users.state$;
-    // Get just the data without state
-    public userData$ = this.api.users.data$;
     // Import service into component
     constructor(private api: SampleService) {}
 
@@ -63,3 +61,44 @@ export const usage3 = `
   &lt;/ng-container&gt;
   &lt;ng-template #noData&gt; No users found &lt;/ng-template&gt;
 &lt;/nts-api-state&gt;`;
+
+
+export const state = `
+// Subscribe to the state property on the store
+public users$ = this.myStore.state$; // state$ is an instance of ApiState
+
+...
+
+/** state$ contains both the api state and any data */
+export interface ApiState<t = any, e = any> {
+  [key: string]: any;
+  loading: boolean; // When the app performing a GET request
+  modifying: boolean; // When the app is performing a POST/PUT/PATCH/DELETE operation
+  error: null | e; // An error returned from a GET operation
+  errorModify: null | e; // An error from a POST/PUT/PATCH/DELETE operation
+  data: null | t | t[]; // Data is stored here. If an entity store then this will be an array of entities
+}
+
+/** Entity stores have an additional property with entity data stored as a record by unique ID */
+export interface EntityApiState<t = any, e = any> extends ApiState<t[], e> {
+  entities: Record<string | number, t>;
+}`;
+
+export const select = `
+/**
+ * Entity Stores
+ */
+// Subscribe to all data in the store without state
+public users$ = this.myStore.selectAll$; // Will be type t[]
+
+// Subscribe to a single record from the store without state
+public users$ = this.myStore.selectOne$; // Will be type t
+
+// Subscribe to a smaller subset of data in the store using a callback function to modify the return
+public users$ = this.myStore.selectSome$(users => users.filter(user => user.age > 18)); // Will be type t[]
+
+/**
+ * Non-entity Stores
+ */
+// Subscribe to the store data without state
+public user$ = this.myStore.select$;`

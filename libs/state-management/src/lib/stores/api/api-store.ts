@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, distinctUntilChanged, map, share, tap, take, filter } from 'rxjs/operators';
+import { catchError, share, tap, take, filter } from 'rxjs/operators';
 import { NtsBaseStore } from '../base/base-store';
 import { ApiActions, ApiEvents, StoreTypes } from '../store.enums';
 import { NtsState } from '../../state.models';
@@ -19,20 +19,22 @@ const initialState = {
   modifying: false,
   error: false,
   errorModify: false,
-  entities: null,
   data: null,
 };
 
 /**
  * Automatically create an entity store to manage interaction between a local flux store and a remote api
  */
-export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
-  private state: NtsState.ApiState<t> = {
+export class NtsApiStoreCreator<t> extends NtsBaseStore {
+  protected state: NtsState.ApiState<t> = {
     ...initialState,
   };
 
   /** Returns both the api state and data */
   private _state$ = new BehaviorSubject(this.state);
+  /**
+   * Holds both the store data and api state in a single subscription
+   */
   public state$ = this._state$.pipe(
     // Autoload
     tap((s) => {
@@ -49,19 +51,12 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
   /** Events broadcast by this store */
   public events$ = NtsApiStoreCreator._events$.pipe(filter((a) => isActionApi(a) && a.storeId === this.config.storeId));
 
-  /** Returns just the data */
-  public data$ = this.state$.pipe(
-    map((s) => s.data),
-    distinctUntilChanged(),
-  );
-
   /** Store a shared reference to the http get request so it can be canceled and shared */
   private httpGet$: Observable<t>;
 
   /** Global store config config, contains mashup of all instances. Below is the default config */
-  private config: NtsState.Config | NtsState.ConfigEntity = {
+  protected config: NtsState.Config | NtsState.ConfigEntity = {
     autoLoad: true,
-    uniqueId: 'guid'
   };
 
   constructor(private http: HttpClient, config: NtsState.Config | NtsState.ConfigEntity, private isEntityStore = true) {
@@ -212,7 +207,7 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
    * @param optionsOverride
    * @returns
    */
-  public post(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
+  public post(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'post', null);
 
@@ -225,7 +220,7 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
    * @param optionsOverride
    * @returns
    */
-  public put(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
+  public put(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'put', data);
     return this.upsert(this.http.put(url, data), data, this.config.map?.put) as Observable<Partial<t>>;
@@ -237,7 +232,7 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
    * @param optionsOverride
    * @returns
    */
-  public patch(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
+  public patch(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'patch', data);
     return this.upsert(this.http.patch(url, data), data, this.config.map?.patch) as Observable<Partial<t>>;
@@ -249,7 +244,7 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
    * @param optionsOverride
    * @returns
    */
-  public delete(data: Partial<t2> | Partial<t2>[], optionsOverride: NtsState.Options = {}) {
+  public delete(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'delete', data);
     // Reset state
@@ -354,42 +349,3 @@ export class NtsApiStoreCreator<t, t2 = any> extends NtsBaseStore {
     this._state$.next(this.state);
   }
 }
-
-/**
- * Create a curried instance of the api store creator
- *
- * @example
- * private store = ntsApiStoreCreator(this.http, { apiUrlBase: '//jsonplaceholder.typicode.com' })
- * @param http A reference to Angular's http service
- * @param configBase Default configuration for all instances of this store. Will be overwritten by individual store properties
- * @returns
- */
-export const ntsApiStoreCreator = (http: HttpClient, configBase?: NtsState.Config | null) => {
-  const store: {
-    /**
-     * Create an instance of an entity based api store. Used for managing an array of objects
-     * @example
-     * public users = this.store<Models.User>({ apiUrl: '/users' });
-     * @param config Store configuration and options
-     * @param isEntityStore Should the store create and manage entities
-     * @returns
-     */
-    <t>(config: NtsState.ConfigEntity, isEntityStore?: true): NtsApiStoreCreator<t[]>;
-    /**
-     * Create an instance of a non-entity based api store. Used for managing all none entity types
-     * @example
-     * public users = this.store<Models.User>({ apiUrl: '/users' }, false);
-     * @param config Store configuration and options
-     * @param isEntityStore Should the store create and manage entities
-     * @returns
-     */
-    <t>(config: NtsState.Config, isEntityStore?: false): NtsApiStoreCreator<t>;
-  } = <t>(
-    config: NtsState.Config | NtsState.ConfigEntity,
-    isEntityStore = true,
-    ): NtsApiStoreCreator<t> | NtsApiStoreCreator<t[]> =>
-      isEntityStore
-        ? new NtsApiStoreCreator<t[], t>(http, mergeConfig(configBase || {}, config), isEntityStore)
-        : new NtsApiStoreCreator<t, t>(http, mergeConfig(configBase || {}, config), isEntityStore);
-  return store;
-};

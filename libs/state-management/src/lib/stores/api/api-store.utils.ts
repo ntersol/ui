@@ -2,12 +2,34 @@ import { NtsState } from '../../state.models';
 import { mergeDeepRight } from 'ramda';
 
 /**
+ * Merge api store configs
+ * @param c1
+ * @param c2
+ */
+export function mergeConfig(c1: NtsState.ConfigEntity, c2: NtsState.ConfigEntity): NtsState.ConfigEntity;
+export function mergeConfig(c1: NtsState.Config, c2: NtsState.Config): NtsState.Config;
+export function mergeConfig(c1: NtsState.Config | NtsState.ConfigEntity, c2: NtsState.Config | NtsState.ConfigEntity): NtsState.Config | NtsState.ConfigEntity {
+  return {
+    disableAppendId: {
+      ...c1.disableAppendId,
+      ...c2.disableAppendId,
+    },
+    map: {
+      ...c1.map,
+      ...c2.map,
+    },
+    ...c1,
+    ...c2,
+  }
+}
+
+/**
  * Deep merge config objects
  * @param c1
  * @param c2
  * @returns
- */
-export const mergeConfig = (c1: NtsState.Config, c2: NtsState.Config): NtsState.Config => ({
+
+export const mergeConfig = (c1: any, c2: any): any => ({
   disableAppendId: {
     ...c1.disableAppendId,
     ...c2.disableAppendId,
@@ -19,6 +41,7 @@ export const mergeConfig = (c1: NtsState.Config, c2: NtsState.Config): NtsState.
   ...c1,
   ...c2,
 });
+ */
 
 /**
  * Typeguards
