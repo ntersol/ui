@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { NtsState } from "../../state.models";
 import { NtsApiStoreCreator } from "./api-store-creator";
-import { mergeConfig } from './api-store.utils';
 
 const initialState: NtsState.EntityApiState<any> = {
     loading: false,
@@ -38,12 +37,6 @@ export class NtsEntityStore<t> extends NtsApiStoreCreator<t[]> {
 
     constructor(http: HttpClient, config: NtsState.ConfigEntity) {
         super(http, config, initialState, true);
-        // If a custom initial state was defined, merge into initial state
-        if (this.config.initialState) {
-            this.state = { ...this.state, ...this.config.initialState };
-        }
-        // Merge all configs into single entity
-        this.config = mergeConfig(this.config, config);
     }
 
 }

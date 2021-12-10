@@ -22,17 +22,26 @@
           <h3 *ngIf="!isEdit">Add a new user</h3>
           <hr />
           <form [formGroup]="userForm">
-            <p><nts-form-field formControlName="name" placeholder="Name"> </nts-form-field></p>
-            <p><nts-form-field formControlName="email" placeholder="Email"> </nts-form-field></p>
-            <p><nts-form-field formControlName="phone" placeholder="Phone Number"> </nts-form-field></p>
+            <p>
+              <nts-form-field formControlName="name" placeholder="Name"> </nts-form-field>
+            </p>
+            <p>
+              <nts-form-field formControlName="email" placeholder="Email"> </nts-form-field>
+            </p>
+            <p>
+              <nts-form-field formControlName="phone" placeholder="Phone Number"> </nts-form-field>
+            </p>
             <div class="float-right">
-              <button class="btn btn-primary" *ngIf="isEdit" (click)="save()"><i class="fa fa-cog" aria-hidden="true"></i> Save User</button>
-              <button class="btn btn-primary" *ngIf="!isEdit" (click)="save()"><i class="fa fa-plus" aria-hidden="true"></i> Create User</button>
+              <button class="btn btn-primary" *ngIf="isEdit" (click)="save()"><i class="fa fa-cog"
+                  aria-hidden="true"></i> Save User</button>
+              <button class="btn btn-primary" *ngIf="!isEdit" (click)="save()"><i class="fa fa-plus"
+                  aria-hidden="true"></i> Create User</button>
             </div>
           </form>
         </div>
       </div>
-      <button class="btn btn-primary w-100" (click)="refresh()"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh All Users</button>
+      <button class="btn btn-primary w-100" (click)="refresh()"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh
+        All Users</button>
     </div>
   </div>
 </div>

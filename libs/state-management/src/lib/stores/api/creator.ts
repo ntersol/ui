@@ -10,7 +10,7 @@ import { NtsApiStore } from "./api-store";
  * @example
  * private store = ntsApiStoreCreator(this.http, { apiUrlBase: '//jsonplaceholder.typicode.com' })
  * @param http A reference to Angular's http service
- * @param configBase Default configuration for all instances of this store. Will be overwritten by individual store properties
+ * @param configBase Default configuration for all store instances used by this creator. Will be overwritten by individual store properties
  * @returns
  */
 export const ntsApiStoreCreator = (http: HttpClient, configBase?: NtsState.ConfigEntity | NtsState.Config | null) => {
@@ -38,21 +38,9 @@ export const ntsApiStoreCreator = (http: HttpClient, configBase?: NtsState.Confi
         config: NtsState.Config | NtsState.ConfigEntity,
         isEntityStore = true,
         ) => {
-
             return !!isEntityStore
                 ? new NtsEntityStore<t>(http, mergeConfig(configBase as NtsState.ConfigEntity || {}, config as NtsState.ConfigEntity))
                 : new NtsApiStore<t>(http, mergeConfig(configBase || {}, config));
         }
     return store;
 };
-
-/**
-const store = ntsApiStoreCreator(temp, {});
-const entityStore = store<{ test: string }>({ uniqueId: 'test' })
-const apiStore = store<{ test: string }>({}, false)
-
-entityStore.selectSome$(e => e).subscribe()
-
-apiStore.select$.subscribe(x => x)
-
- */

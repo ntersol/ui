@@ -24,12 +24,13 @@ export class StateManagementService {
   // Create an instance of an entity based store
   public users = this.store<Models.User>({ uniqueId: 'id', storeId: StoreIds.USERS, apiUrl: '/users' });
   // Create an instance of a non-entity based store
-  public post = this.store<Models.Post>({ apiUrl: '/posts/1' }, false);
+  // public post = this.store<Models.Post>({ apiUrl: '/posts/1' }, false);
 
   public uiStore = ntsUIStoreCreator<UIStoreModel>({ name: null, user: { age: 12, nameFirst: 'NameFirst123' } }, { persistId: 'uiStore' });
 
   // List all store services here
   constructor(public http: HttpClient) {
+    this.users.state$.subscribe(x => console.log(3, JSON.parse(JSON.stringify(x))));
     /**
     this.uiStore.select$('isString').subscribe(x => console.log(x));
 

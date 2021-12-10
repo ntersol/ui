@@ -51,7 +51,7 @@ export class ExampleComponent implements OnInit {
   constructor(private api: StateManagementService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    // this.users$.subscribe(x => console.log(JSON.parse(JSON.stringify(x))));
+    this.api.users.state$.subscribe(x => console.log(4, JSON.parse(JSON.stringify(x))));
   }
 
   /**
