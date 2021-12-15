@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, share, tap, take, filter } from 'rxjs/operators';
+import { catchError, share, tap, take, filter, delay, switchMap, map } from 'rxjs/operators';
 import { NtsBaseStore } from '../base/base-store';
 import { ApiActions, ApiEvents, StoreTypes } from '../store.enums';
 import { NtsState } from '../../state.models';
@@ -14,23 +14,39 @@ import {
 } from './api-store.utils';
 import { isActionApi } from '../../utils/guards.util';
 
+// Default api store state
+const stateSrc: NtsState.ApiState<any> = {
+  loading: false,
+  modifying: false,
+  error: false,
+  errorModify: false,
+  data: null,
+};
+
+// Default entity store state
+const stateEntitySrc: NtsState.EntityApiState<any> = Object.assign(stateSrc, { entities: {} });
+
 /**
- * Automatically create an entity store to manage interaction between a local flux store and a remote api
+ * Automatically create an api store to manage interaction between a local flux store and a remote api
  */
 export class NtsApiStoreCreator<t> extends NtsBaseStore {
-  protected state: NtsState.ApiState<t> = { ...this.initialState, };
+
+  /** Store state object */
+  protected state: NtsState.ApiState<t> | NtsState.EntityApiState<t> = this.isEntityStore ? { ...stateEntitySrc } : { ...stateSrc };
 
   /** Returns both the api state and data */
   private _state$ = new BehaviorSubject(this.state);
+
   /**
    * Holds both the store data and api state in a single subscription
    */
   public state$ = this._state$.pipe(
-    // Autoload
-    tap((s) => {
-      if (this.config.autoLoad && s.data === null && !this.autoloaded) {
+    // If autoload is requested and data is null and an autoload has not already been requested
+    // This method ensures that the store only loads data when it has a subscriber
+    tap(s => {
+      if (this.config.autoLoad !== false && s.data === null && !this.autoloaded) {
         this.autoloaded = true;
-        this.get().subscribe();
+        new BehaviorSubject(null).pipe(take(1), delay(1), switchMap(() => this.get())).subscribe();
       }
     }),
   );
@@ -44,21 +60,9 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
   /** Store a shared reference to the http get request so it can be canceled and shared */
   private httpGet$: Observable<t>;
 
-  /** Global store config config, contains mashup of all instances. Below is the default config */
-  protected config: NtsState.Config | NtsState.ConfigEntity = {
-    autoLoad: true,
-  };
-
-  constructor(private http: HttpClient, config: NtsState.Config | NtsState.ConfigEntity, private initialState: any, private isEntityStore = true) {
+  constructor(private http: HttpClient, protected config: NtsState.Config | NtsState.ConfigEntity, private isEntityStore = true) {
     super();
-    this.state$.subscribe(s => console.info(s))
-    // Merge all configs into single entity
-    this.config = mergeConfig(this.config, config);
 
-    // If a custom initial state was defined, merge into initial state
-    if (this.config.initialState) {
-      this.state = { ...this.state, ...this.config.initialState };
-    }
     // If a store ID was supplied, listen for global actions
     // Only listen for actions that match this store ID OR all
     if (this.config.storeId) {
@@ -198,7 +202,6 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
   public post(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'post', null);
-
     return this.upsert(this.http.post(url, data), data, this.config.map?.post) as Observable<Partial<t>>;
   }
 
@@ -265,7 +268,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
   }
 
   /**
-   *
+   * Flatten all PUT/POST/PATCH requests into an upsert for simplicity
    * @param apiRequest
    * @param data
    * @returns
@@ -292,7 +295,8 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
           !!this.state?.data &&
           Array.isArray(this.state.data)
         ) {
-          const delta = mergeDedupeArrays(this.state.data, resMerged, this.config.uniqueId as keyof t);
+          // TODO: Fix any
+          const delta = mergeDedupeArrays(this.state.data as any, resMerged, this.config.uniqueId as keyof t);
           this.stateChange({ modifying: false, ...delta });
         } else {
           this.stateChange({ modifying: false, resMerged });
@@ -325,7 +329,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * Reset store to it's initial state
    */
   public reset() {
-    this.stateChange({ ...this.initialState });
+    this.stateChange(this.isEntityStore ? { ...stateEntitySrc } : { ...stateSrc });
   }
 
   /**
@@ -333,8 +337,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param state
    */
   private stateChange(state: Partial<NtsState.ApiState>) {
-    console.warn('stateChange', state)
-    this.state = { ...this.state, ...state };
+    this.state = Object.assign({}, this.state, state);
     this._state$.next(this.state);
   }
 }

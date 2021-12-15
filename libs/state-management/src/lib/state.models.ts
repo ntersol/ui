@@ -70,16 +70,16 @@ export namespace NtsState {
     };
 
     /** Define the initial state of the store */
-    initialState?: Record<string, any>;
+    // initialState?: Record<string, any>;
     /** A unique name or id for this store. Only necessary if communication between stores is required */
     storeId?: string;
     /** Options for managing offline mode */
-    offlineMode?: {
-      /** Store the last successful api response in local storage and in the event of an api error, return that instead */
-      saveLastSuccess?: boolean;
-      /** Use this model instead */
-      model: any;
-    };
+    // offlineMode?: {
+    /** Store the last successful api response in local storage and in the event of an api error, return that instead */
+    // saveLastSuccess?: boolean;
+    /** Use this model instead */
+    // model: any;
+    // };
     /**
      * TODO Features
      */
@@ -88,12 +88,6 @@ export namespace NtsState {
         ttl: number;
       };
        */
-    /** A stubbed model to mock api calls
-    offlineMode?: {
-      model: unknown;
-      count: number;
-    } | null;
-    */
   }
 
   export interface UIStoreOptions {
@@ -111,7 +105,7 @@ export namespace NtsState {
   export type Callback<t> = <R>(store: t) => R;
 
   /** A callback function that works on an array of entities and returns a subset of that information */
-  export type SelectEntities<t> = (entities: t[] | null | undefined) => t[] | null | undefined;
+  export type SelectEntities<t> = (entities: t[] | null) => t[] | null;
 
   /** Actions to perform against the store */
   export interface Action<t = unknown, y = unknown> {

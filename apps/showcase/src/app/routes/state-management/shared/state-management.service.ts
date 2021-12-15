@@ -30,7 +30,7 @@ export class StateManagementService {
 
   // List all store services here
   constructor(public http: HttpClient) {
-    this.users.state$.subscribe(x => console.log(3, JSON.parse(JSON.stringify(x))));
+
     /**
     this.uiStore.select$('isString').subscribe(x => console.log(x));
 

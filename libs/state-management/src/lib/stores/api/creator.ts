@@ -37,10 +37,8 @@ export const ntsApiStoreCreator = (http: HttpClient, configBase?: NtsState.Confi
     } = <t>(
         config: NtsState.Config | NtsState.ConfigEntity,
         isEntityStore = true,
-        ) => {
-            return !!isEntityStore
+        ) => !!isEntityStore
                 ? new NtsEntityStore<t>(http, mergeConfig(configBase as NtsState.ConfigEntity || {}, config as NtsState.ConfigEntity))
-                : new NtsApiStore<t>(http, mergeConfig(configBase || {}, config));
-        }
+                : new NtsApiStore<t>(http, mergeConfig(configBase || {}, config))
     return store;
 };

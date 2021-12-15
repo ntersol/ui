@@ -88,14 +88,20 @@ export const select = `
 /**
  * Entity Stores
  */
+// Subscribe to both state and data
+public usersState$ = this.myStore.state$; // Will be type EntityApiState<t>
+
+// Subscribe to both state and data, pass a callback function to modify the response from the store while still retaining state. Will modify both .data and .entities
+public usersStateSelect$ = this.myStore.stateSelect$(data => data?.filter(user => user.id > 5) || null) // Will be type EntityApiState<t>
+
 // Subscribe to all data in the store without state
 public usersAll$ = this.myStore.selectAll$; // Will be type t[]
 
 // Subscribe to a single record from the store without state. Uses the unique ID.
 public usersOne$ = this.myStore.selectOne$('12345'); // Will be type t
 
-// Subscribe to a smaller subset of data in the store using a callback function to modify the return
-public usersLess$ = this.myStore.selectSome$(users => users.filter(user => user.age > 18)); // Will be type t[]
+// Pass a callback statement to the select$ observable to modify the response from the store without state
+public usersLess$ = this.myStore.select$(data => data?.filter(user => user.id > 5) || null); // Will be type t[]
 
 /**
  * Non-entity Stores
