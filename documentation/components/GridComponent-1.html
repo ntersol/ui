@@ -1,0 +1,1095 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ntersol documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ntersol documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  GridComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>archive/src/app/routes/qa/routes/grid/grid.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-grid</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./grid.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./grid.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#columns" >columns</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#gridFilterTerm" >gridFilterTerm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#gridOptions" >gridOptions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#gridState" >gridState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#license" >license</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#rows" >rows</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#stateToggle" >stateToggle</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#users$" >users$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#gridStateChange" >gridStateChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#initalLoanSelected" >initalLoanSelected</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#rowsSelected" >rowsSelected</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#selectedRowDataDisplayed" >selectedRowDataDisplayed</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(domain: <a href="../injectables/DomainService.html" target="_self">DomainService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:41</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>domain</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DomainService.html" target="_self" >DomainService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="gridStateChange"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>gridStateChange</b></span>
+                        <a href="#gridStateChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>gridStateChange(gridState: <a href="../interfaces/State.html" target="_self">NtsGridState</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:83</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>gridState</td>
+                                    <td>
+                                                <code><a href="../interfaces/State.html" target="_self" >NtsGridState</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initalLoanSelected"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>initalLoanSelected</b></span>
+                        <a href="#initalLoanSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initalLoanSelected()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="96"
+                            class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:96</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:45</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rowsSelected"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>rowsSelected</b></span>
+                        <a href="#rowsSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>rowsSelected(_rows: any[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:88</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>_rows</td>
+                                    <td>
+                                            <code>any[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedRowDataDisplayed"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>selectedRowDataDisplayed</b></span>
+                        <a href="#selectedRowDataDisplayed"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>selectedRowDataDisplayed(_rows: any[])</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:92</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>_rows</td>
+                                    <td>
+                                            <code>any[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="columns"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>columns</b></span>
+                        <a href="#columns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ColDef[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { field: &#x27;name&#x27;, headerName: &#x27;Name&#x27; },
+    { field: &#x27;email&#x27;, headerName: &#x27;Email&#x27; },
+    { field: &#x27;phone&#x27;, headerName: &#x27;Phone&#x27; },
+    { field: &#x27;username&#x27;, headerName: &#x27;Username&#x27; },
+    { field: &#x27;website&#x27;, headerName: &#x27;Website&#x27; },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="gridFilterTerm"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>gridFilterTerm</b></span>
+                        <a href="#gridFilterTerm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="gridOptions"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>gridOptions</b></span>
+                        <a href="#gridOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>GridOptions</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="gridState"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>gridState</b></span>
+                        <a href="#gridState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/State.html" target="_self" >NtsGridState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    columnDefs: [],
+    columnsState: [],
+    sorts: [],
+    groupsColumns: [],
+    groupsRows: {},
+    filters: {},
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="license"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>license</b></span>
+                        <a href="#license"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>environment.licenses.agGrid</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rows"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>rows</b></span>
+                        <a href="#rows"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>cars</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stateToggle"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>stateToggle</b></span>
+                        <a href="#stateToggle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    gridState1: gridState1,
+    gridState2: gridState2,
+    gridState3: gridState3,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="users$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>users$</b></span>
+                        <a href="#users$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.domain.users.select$</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">archive/src/app/routes/qa/routes/grid/grid.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { cars } from &#x27;../tables/cars&#x27;;
+import { ColDef, GridOptions } from &#x27;ag-grid-community&#x27;;
+import { DomainService } from &#x27;$domain&#x27;;
+import { gridState1, gridState2, gridState3 } from &#x27;./gridStates&#x27;;
+import { environment } from &#x27;$env&#x27;;
+import { NtsGridState } from &#x27;src/app/components/general/grid/grid&#x27;;
+
+@Component({
+  selector: &#x27;app-grid&#x27;,
+  templateUrl: &#x27;./grid.component.html&#x27;,
+  styleUrls: [&#x27;./grid.component.css&#x27;],
+})
+export class GridComponent implements OnInit {
+  public license &#x3D; environment.licenses.agGrid;
+  public users$ &#x3D; this.domain.users.select$;
+  public rows: any[] &#x3D; cars;
+  public columns: ColDef[] &#x3D; [
+    { field: &#x27;name&#x27;, headerName: &#x27;Name&#x27; },
+    { field: &#x27;email&#x27;, headerName: &#x27;Email&#x27; },
+    { field: &#x27;phone&#x27;, headerName: &#x27;Phone&#x27; },
+    { field: &#x27;username&#x27;, headerName: &#x27;Username&#x27; },
+    { field: &#x27;website&#x27;, headerName: &#x27;Website&#x27; },
+  ];
+
+  public gridFilterTerm: string | null &#x3D; null;
+  public gridOptions: GridOptions &#x3D; {};
+  public gridState: NtsGridState &#x3D; {
+    columnDefs: [],
+    columnsState: [],
+    sorts: [],
+    groupsColumns: [],
+    groupsRows: {},
+    filters: {},
+  };
+
+  public stateToggle &#x3D; {
+    gridState1: gridState1,
+    gridState2: gridState2,
+    gridState3: gridState3,
+  };
+
+  constructor(private domain: DomainService) {}
+
+  ngOnInit() {
+    this.domain.users.get().subscribe();
+
+    const gridState &#x3D; window.localStorage.getItem(&#x27;qaGrid&#x27;);
+    if (gridState) {
+      this.gridState &#x3D; JSON.parse(gridState);
+    }
+
+    setTimeout(() &#x3D;&gt; {
+      /**
+    this.domain.users
+      .post({
+        // id: 8,
+        name: &#x27;Jerrol Krause&#x27;,
+        username: &#x27;Test&#x27;,
+        email: &#x27;Test&#x27;,
+        phone: &#x27;Testx140&#x27;,
+        website: &#x27;Test.com&#x27;,
+      })
+      .subscribe();
+
+      this.domain.users
+      .put({
+        id: 8,
+        name: &#x27;Some Dewd&#x27;,
+        username: &#x27;Dewd&#x27;,
+        email: &#x27;Dewd&#x27;,
+        phone: &#x27;Testx140&#x27;,
+        website: &#x27;Test.com&#x27;,
+      })
+      .subscribe();
+      */
+      this.domain.users.delete(5).subscribe();
+    }, 1000);
+
+    this.domain.users.select$.subscribe(x &#x3D;&gt; console.log(x));
+  }
+
+  public gridStateChange(gridState: NtsGridState) {
+    // console.warn(&#x27;gridStateChange&#x27;, JSON.stringify(gridState));
+    window.localStorage.setItem(&#x27;qaGrid&#x27;, JSON.stringify(gridState));
+  }
+
+  public rowsSelected(_rows: any[]) {
+    // console.warn(&#x27;rowsSelected&#x27;, rows);
+  }
+
+  public selectedRowDataDisplayed(_rows: any[]) {
+    // console.warn(&#x27;selectedRowDataDisplayed&#x27;, rows);
+  }
+
+  public initalLoanSelected() {
+    // console.log(&#x27;Grid Ready&#x27;);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;p-container-fluid&quot; *ngIf&#x3D;&quot;{ users: users$ | async } as comp&quot;&gt;
+  &lt;nts-api-state [state]&#x3D;&quot;comp.users&quot;&gt;
+    &lt;div class&#x3D;&quot;d-flex&quot;&gt;
+      &lt;div class&#x3D;&quot;p-inputgroup mb-3 w-100&quot;&gt;
+        &lt;span class&#x3D;&quot;p-inputgroup-addon&quot;&gt;&lt;i class&#x3D;&quot;fas fa-filter&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+        &lt;input type&#x3D;&quot;text&quot; pInputText placeholder&#x3D;&quot;Filter grid results...&quot; [(ngModel)]&#x3D;&quot;gridFilterTerm&quot; /&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;ml-auto text-right&quot; style&#x3D;&quot;width: 500px;&quot;&gt;
+        &lt;p-button class&#x3D;&quot;mr-2&quot; label&#x3D;&quot;Grid State 1&quot; (click)&#x3D;&quot;gridState &#x3D; stateToggle.gridState1&quot;&gt;&lt;/p-button&gt;
+        &lt;p-button class&#x3D;&quot;mr-2&quot; label&#x3D;&quot;Grid State 2&quot; (click)&#x3D;&quot;gridState &#x3D; stateToggle.gridState2&quot;&gt;&lt;/p-button&gt;
+        &lt;p-button label&#x3D;&quot;Grid State 3&quot; (click)&#x3D;&quot;gridState &#x3D; stateToggle.gridState3&quot;&gt;&lt;/p-button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;nts-grid
+      #grid
+      *ngIf&#x3D;&quot;comp?.users?.data?.length; else noData&quot;
+      style&#x3D;&quot;height: calc(100vh - 150px);&quot;
+      class&#x3D;&quot;ag-theme-balham&quot;
+      [license]&#x3D;&quot;license&quot;
+      [rowData]&#x3D;&quot;comp?.users?.data || []&quot;
+      [columnDefs]&#x3D;&quot;columns&quot;
+      [rowUniqueId]&#x3D;&quot;&#x27;id&#x27;&quot;
+      [parentRef]&#x3D;&quot;this&quot;
+      [gridOptions]&#x3D;&quot;gridOptions&quot;
+      [gridState]&#x3D;&quot;gridState&quot;
+      [gridFilterTerm]&#x3D;&quot;gridFilterTerm&quot;
+      [animateRows]&#x3D;&quot;true&quot;
+      [enableSorting]&#x3D;&quot;true&quot;
+      [enableFilter]&#x3D;&quot;true&quot;
+      [enableColResize]&#x3D;&quot;true&quot;
+      [enableRangeSelection]&#x3D;&quot;true&quot;
+      [rememberGroupStateWhenNewData]&#x3D;&quot;true&quot;
+      [groupUseEntireRow]&#x3D;&quot;true&quot;
+      rowGroupPanelShow&#x3D;&quot;onlyWhenGrouping&quot;
+      rowSelection&#x3D;&quot;multiple&quot;
+      (stateChange)&#x3D;&quot;gridStateChange($event)&quot;
+      (rowsSelected)&#x3D;&quot;rowsSelected($event)&quot;
+      (selectedRowDataDisplayed)&#x3D;&quot;selectedRowDataDisplayed($event)&quot;
+      (gridIsReady)&#x3D;&quot;initalLoanSelected()&quot;
+    &gt;
+      &lt;!--
+        [getMainMenuItems]&#x3D;&quot;gridCustomLinks&quot;
+        [getContextMenuItems]&#x3D;&quot;gridContextMenu&quot;
+      --&gt;
+      &lt;!-- Cell template --&gt;
+      &lt;grid-column field&#x3D;&quot;email&quot;&gt;
+        &lt;ng-template let-value&#x3D;&quot;value&quot; let-column&#x3D;&quot;column&quot; let-row&#x3D;&quot;row&quot; grid-cell-template&gt;
+          &lt;a&gt;{{ value }}&lt;/a&gt;
+        &lt;/ng-template&gt;
+      &lt;/grid-column&gt;
+    &lt;/nts-grid&gt;
+    &lt;ng-template #noData&gt;
+      No data
+    &lt;/ng-template&gt;
+  &lt;/nts-api-state&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./grid.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="p-container-fluid" *ngIf="{ users: users$ | async } as comp">  <nts-api-state [state]="comp.users">    <div class="d-flex">      <div class="p-inputgroup mb-3 w-100">        <span class="p-inputgroup-addon"><i class="fas fa-filter"></i></span>        <input type="text" pInputText placeholder="Filter grid results..." [(ngModel)]="gridFilterTerm" />      </div>      <div class="ml-auto text-right" style="width: 500px;">        <p-button class="mr-2" label="Grid State 1" (click)="gridState = stateToggle.gridState1"></p-button>        <p-button class="mr-2" label="Grid State 2" (click)="gridState = stateToggle.gridState2"></p-button>        <p-button label="Grid State 3" (click)="gridState = stateToggle.gridState3"></p-button>      </div>    </div>    <nts-grid      #grid      *ngIf="comp?.users?.data?.length; else noData"      style="height: calc(100vh - 150px);"      class="ag-theme-balham"      [license]="license"      [rowData]="comp?.users?.data || []"      [columnDefs]="columns"      [rowUniqueId]="\'id\'"      [parentRef]="this"      [gridOptions]="gridOptions"      [gridState]="gridState"      [gridFilterTerm]="gridFilterTerm"      [animateRows]="true"      [enableSorting]="true"      [enableFilter]="true"      [enableColResize]="true"      [enableRangeSelection]="true"      [rememberGroupStateWhenNewData]="true"      [groupUseEntireRow]="true"      rowGroupPanelShow="onlyWhenGrouping"      rowSelection="multiple"      (stateChange)="gridStateChange($event)"      (rowsSelected)="rowsSelected($event)"      (selectedRowDataDisplayed)="selectedRowDataDisplayed($event)"      (gridIsReady)="initalLoanSelected()"    >      <!--        [getMainMenuItems]="gridCustomLinks"        [getContextMenuItems]="gridContextMenu"      -->      <!-- Cell template -->      <grid-column field="email">        <ng-template let-value="value" let-column="column" let-row="row" grid-cell-template>          <a>{{ value }}</a>        </ng-template>      </grid-column>    </nts-grid>    <ng-template #noData>      No data    </ng-template>  </nts-api-state></div></div>'
+    var COMPONENTS = [{'name': 'ApiStoreCreatorComponent', 'selector': 'nts-api-store-creator'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'nts-calendar'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'ChartComponent', 'selector': 'nts-chart'},{'name': 'ChartsComponent', 'selector': 'app-charts'},{'name': 'ComponentsComponent', 'selector': 'app-components'},{'name': 'ContentComponent', 'selector': 'app-content'},{'name': 'DefaultComponent', 'selector': 'app-default'},{'name': 'DemoModalComponent', 'selector': 'app-demo-modal'},{'name': 'DisplayComponent', 'selector': 'app-display'},{'name': 'DocumentComponent', 'selector': 'app-document'},{'name': 'EditorComponent', 'selector': 'nts-document-editor'},{'name': 'EntityStoreComponent', 'selector': 'app-entity-store'},{'name': 'ExampleComponent', 'selector': 'nts-state-management-example'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'Formgroup2ApiComponent', 'selector': 'nts-formgroup2-api'},{'name': 'FormsComponent', 'selector': 'app-forms'},{'name': 'GridComponent', 'selector': 'nts-grid'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'GridStatusBarComponent', 'selector': 'app-grid-status-bar'},{'name': 'GridTemplateRendererComponent', 'selector': 'app-template-renderer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'MapComponent', 'selector': 'app-map-route'},{'name': 'MultiDocComponent', 'selector': 'app-multi-doc'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NtsAutocompleteComponent', 'selector': 'nts-autocomplete'},{'name': 'NtsDomainStateComponent', 'selector': 'nts-api-state'},{'name': 'NtsErrorComponent', 'selector': 'nts-error'},{'name': 'NtsFilterFieldComponent', 'selector': 'nts-filter-field'},{'name': 'NtsFormFieldComponent', 'selector': 'nts-form-field'},{'name': 'NtsTreeComponent', 'selector': 'nts-tree'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'QaComponent', 'selector': 'app-qa'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'ScriptLoaderComponent', 'selector': 'nts-script-loader'},{'name': 'SectionComponent', 'selector': 'app-section'},{'name': 'StateManagementComponent', 'selector': 'nts-state-management'},{'name': 'StoreCommunicationComponent', 'selector': 'nts-store-communication'},{'name': 'TableComponent', 'selector': 'nts-table'},{'name': 'TablesComponent', 'selector': 'app-tables'},{'name': 'TagBuilderComponent', 'selector': 'nts-tags-quick'},{'name': 'TagsComponent', 'selector': 'nts-tags'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UiStoreCreatorComponent', 'selector': 'nts-ui-store-creator'},{'name': 'UtilitiesComponent', 'selector': 'app-utilities'},{'name': 'ViewerComponent', 'selector': 'app-viewer'},{'name': 'ViewerToolbarComponent', 'selector': 'app-viewer-toolbar'},{'name': 'VisibleComponent', 'selector': '[visible]'},{'name': 'VisibleComponent', 'selector': 'nts-visible'},{'name': 'WizardComponent', 'selector': 'nts-wizard'},{'name': 'WizardComponent', 'selector': 'nts-wizard'},{'name': 'WizNavSidebarComponent', 'selector': 'nts-wizard-nav-sidebar'},{'name': 'WizNavTopComponent', 'selector': 'nts-wizard-nav-top'}];
+    var DIRECTIVES = [{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'GridColumnCellDirective', 'selector': '[grid-cell-template]'},{'name': 'GridColumnDirective', 'selector': 'grid-column'},{'name': 'GridColumnHeaderDirective', 'selector': '[grid-header-template]'},{'name': 'GridRowExpansionDirective', 'selector': '[grid-expansion-template]'},{'name': 'TableColumnCellDirective', 'selector': '[table-cell-template]'},{'name': 'TableColumnDirective', 'selector': 'table-column'},{'name': 'TableColumnHeaderDirective', 'selector': '[table-header-template]'},{'name': 'TableRowExpansionDirective', 'selector': '[table-expansion-template]'},{'name': 'TreeTemplateDirective', 'selector': 'tree-template'},{'name': 'TreeTemplateNodeDirective', 'selector': '[tree-template-node]'},{'name': 'WizardFeatureDirective', 'selector': 'feature'},{'name': 'WizardFeatureTemplateDirective', 'selector': '[feature-template]'}];
+    var ACTUAL_COMPONENT = {'name': 'GridComponent-1'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'GridComponent-1.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

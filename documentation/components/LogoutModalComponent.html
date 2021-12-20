@@ -3,25 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>angular-starter documentation</title>
+        <title>ntersol documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">angular-starter documentation</a>
+            <a href="../" class="navbar-brand">ntersol documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -38,7 +36,9 @@
 
 <ol class="breadcrumb">
   <li>Components</li>
-  <li>LogoutModalComponent</li>
+  <li
+  >
+  LogoutModalComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -61,8 +61,9 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/components/modals/logout/logout-modal.component.ts</code>
+    <code>archive/src/app/components/modals/logout/logout-modal.component.ts</code>
 </p>
+
 
 
 
@@ -70,8 +71,8 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
-                <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
 
@@ -104,6 +105,12 @@
             </tr>
 
 
+
+
+
+
+
+
         </tbody>
     </table>
 </section>
@@ -122,19 +129,19 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#counter">counter</a>
+                                <a href="#counter" >counter</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#data">data</a>
+                                <a href="#dialogService" >dialogService</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#dataAlt">dataAlt</a>
+                                <a href="#logoutTimer$" >logoutTimer$</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#logoutTimer$">logoutTimer$</a>
+                                <a href="#ref" >ref</a>
                             </li>
                         </ul>
                     </td>
@@ -150,10 +157,14 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                                <a href="#logout" >logout</a>
                             </li>
                             <li>
-                                <a href="#ngOnInit">ngOnInit</a>
+                                    <span class="modifier">Public</span>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                         </ul>
                     </td>
@@ -173,15 +184,57 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(dialogService: DialogService, ref: DynamicDialogRef)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/modals/logout/logout-modal.component.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">archive/src/app/components/modals/logout/logout-modal.component.ts:13</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>dialogService</td>
+                                                  
+                                                        <td>
+                                                                    <code>DialogService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>ref</td>
+                                                  
+                                                        <td>
+                                                                    <code>DynamicDialogRef</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -192,239 +245,240 @@
 
     <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnDestroy"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            ngOnDestroy
-                            </b>
-                            <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>ngOnDestroy()</code>
-                    </td>
-                </tr>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>logout()</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/modals/logout/logout-modal.component.ts:34</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">archive/src/app/components/modals/logout/logout-modal.component.ts:35</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Log the user out manually</p>
+</div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
-                            ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">archive/src/app/components/modals/logout/logout-modal.component.ts:39</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>ngOnInit()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/modals/logout/logout-modal.component.ts:18</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="17"
+                            class="link-to-prism">archive/src/app/components/modals/logout/logout-modal.component.ts:17</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
     <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="counter"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>counter</b></span>
+                        <a href="#counter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="counter"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            counter
-                            </b>
-                            <a href="#counter"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>counter:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                        <i>Type : </i>    <code>number | undefined</code>
 
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/components/modals/logout/logout-modal.component.ts:11</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="data"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            data
-                            </b>
-                            <a href="#data"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>data:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">archive/src/app/components/modals/logout/logout-modal.component.ts:13</a></div>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>120</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/modals/logout/logout-modal.component.ts:13</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialogService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>dialogService</b></span>
+                        <a href="#dialogService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="dataAlt"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            dataAlt
-                            </b>
-                            <a href="#dataAlt"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>dataAlt:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-</code>
+                        <i>Type : </i>    <code>DialogService</code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">archive/src/app/components/modals/logout/logout-modal.component.ts:15</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/modals/logout/logout-modal.component.ts:14</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logoutTimer$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>logoutTimer$</b></span>
+                        <a href="#logoutTimer$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="logoutTimer$"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            logoutTimer$
-                            </b>
-                            <a href="#logoutTimer$"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>logoutTimer$:     <code>Subscription</code>
-</code>
+                        <i>Type : </i>    <code>Subscription | undefined</code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>Subscription</code>
-
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">archive/src/app/components/modals/logout/logout-modal.component.ts:12</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/components/modals/logout/logout-modal.component.ts:10</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ref"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>ref</b></span>
+                        <a href="#ref"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>DynamicDialogRef</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">archive/src/app/components/modals/logout/logout-modal.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
 </section>
 
 </div>
@@ -432,69 +486,77 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
-//import { NgbActiveModal } from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
 import { Subscription, interval } from &#x27;rxjs&#x27;;
+import { UntilDestroy, untilDestroyed } from &#x27;@ngneat/until-destroy&#x27;;
+import { DialogService, DynamicDialogRef } from &#x27;primeng/dynamicdialog&#x27;;
 
+@UntilDestroy()
 @Component({
   selector: &#x27;app-logout-modal&#x27;,
   templateUrl: &#x27;./logout-modal.component.html&#x27;,
 })
 export class LogoutModalComponent implements OnInit, OnDestroy {
-  public logoutTimer$: Subscription; // Holds the countdown obserable
-  public counter: number; // Log out after this many seconds
-  // public modalDuration: number &#x3D; 120; // This number is passed in through the modal reference, will default to 120 if not specified
-  public data &#x3D; 120; // Data is actually passed through the modal service not here
-  public dataAlt: any; // Data is actually passed through the modal service not here
+  public logoutTimer$: Subscription | undefined; // Holds the countdown obserable
+  public counter: number | undefined; // Log out after this many seconds
 
-  constructor() {}
+  constructor(public dialogService: DialogService, public ref: DynamicDialogRef) {}
 
   ngOnInit() {
-    this.counter &#x3D; this.data; // How long to display the modal window
+    //  this.counter &#x3D; this.config.data; // How long to display the modal window
 
     // Create a timer obserable that counts down
-    this.logoutTimer$ &#x3D; interval(1000).subscribe(() &#x3D;&gt; {
-      // If timer is greater than 0, count down.
-      if (this.counter &gt; 1) {
-        this.counter--;
-      } else {
-        // If timer hits zero or below, CLOSE this modal which toggles the logout action in AuthService
-        this.logoutTimer$.unsubscribe();
-        //this.activeModal.close();
-      }
-    });
+    this.logoutTimer$ &#x3D; interval(1000)
+      .pipe(untilDestroyed(this))
+      .subscribe(() &#x3D;&gt; {
+        // If timer is greater than 0, count down.
+        if (this.counter &amp;&amp; this.counter &gt; 1) {
+          this.counter--;
+        } else {
+          // If timer hits zero or below, CLOSE this modal which toggles the logout action in AuthService
+          this.logout();
+        }
+      });
   }
 
-  public ngOnDestroy() {
-    this.logoutTimer$.unsubscribe(); // Unsub from timer on modal close
+  /** Log the user out manually */
+  public logout() {
+    this.ref.close(true);
   }
+
+  public ngOnDestroy() {}
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;modal-header&quot;&gt;
-  &lt;h3 class&#x3D;&quot;modal-title&quot;&gt;&lt;i class&#x3D;&quot;fa fa-thumbs-up&quot;&gt;&lt;/i&gt; Warning&lt;/h3&gt;
-  &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; aria-label&#x3D;&quot;Close&quot;&gt;
-    &lt;span aria-hidden&#x3D;&quot;true&quot;&gt;&amp;times;&lt;/span&gt;
-  &lt;/button&gt;
-&lt;/div&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;p&gt;
+  Your session is about to expire in
+  &lt;span id&#x3D;&quot;the_time&quot;&gt;{{ counter }}&lt;/span&gt; seconds, do you want to continue
+  working?
+&lt;/p&gt;
 
-&lt;div class&#x3D;&quot;modal-body&quot; id&#x3D;&quot;modal-body&quot;&gt;
-  &lt;p&gt;Your session is about to expire in &lt;span id&#x3D;&quot;the_time&quot;&gt;{{ counter }}&lt;/span&gt; seconds, do you want to continue working?&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;div class&#x3D;&quot;modal-footer&quot; style&#x3D;&quot;justify-content: space-between;&quot;&gt;
-  &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-danger float-left pull-left&quot; aria-label&#x3D;&quot;Close&quot;&gt;
-    &lt;i class&#x3D;&quot;fa fa-power-off&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
-    Log Out
-  &lt;/button&gt;
-  &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; qa&#x3D;&quot;continue&quot;&gt;
-    Continue Working
-    &lt;i class&#x3D;&quot;fa fa-angle-double-right&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;
-  &lt;/button&gt;
+&lt;div class&#x3D;&quot;p-dialog-footer p-widget-content ng-tns-c7-3 ng-star-inserted&quot;&gt;
+  &lt;button
+    type&#x3D;&quot;button&quot;
+    pButton
+    class&#x3D;&quot;float-left pull-left&quot;
+    aria-label&#x3D;&quot;Close&quot;
+    (click)&#x3D;&quot;logout()&quot;
+    icon&#x3D;&quot;fas fa-power-off&quot;
+    label&#x3D;&quot;Log Out&quot;
+  &gt;&lt;/button&gt;
+  &lt;button
+    type&#x3D;&quot;button&quot;
+    pButton
+    (click)&#x3D;&quot;ref.close()&quot;
+    icon&#x3D;&quot;fas fa-angle-double-right&quot;
+    iconPos&#x3D;&quot;right&quot;
+    label&#x3D;&quot;Continue Working&quot;
+  &gt;&lt;/button&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
+
 
     <div class="tab-pane fade " id="c-tree">
         <div id="tree-container"></div>
@@ -521,9 +583,9 @@ export class LogoutModalComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="modal-header">  <h3 class="modal-title"><i class="fa fa-thumbs-up"></i> Warning</h3>  <button type="button" class="close" aria-label="Close">    <span aria-hidden="true">&times;</span>  </button></div><div class="modal-body" id="modal-body">  <p>Your session is about to expire in <span id="the_time">{{ counter }}</span> seconds, do you want to continue working?</p></div><div class="modal-footer" style="justify-content: space-between;">  <button type="button" class="btn btn-danger float-left pull-left" aria-label="Close">    <i class="fa fa-power-off" aria-hidden="true"></i>    Log Out  </button>  <button type="button" class="btn btn-primary" qa="continue">    Continue Working    <i class="fa fa-angle-double-right" aria-hidden="true"></i>  </button></div></div>'
-    var COMPONENTS = [{'name': 'ApiStateComponent', 'selector': 'app-api-state'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartComponent', 'selector': 'app-chart'},{'name': 'ChartsComponent', 'selector': 'app-charts'},{'name': 'ConfirmationModalComponent', 'selector': 'app-confirmation-modal'},{'name': 'CounterComponent', 'selector': 'app-counter'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'GridStatusBarComponent', 'selector': 'app-grid-status-bar'},{'name': 'GridTemplateRendererComponent', 'selector': 'app-template-renderer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeContextMenuComponent', 'selector': 'app-context-menu'},{'name': 'LaunchModalComponent', 'selector': 'app-launch-modal'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'QaComponent', 'selector': 'app-qa'}];
-    var DIRECTIVES = [{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'}];
+        var COMPONENT_TEMPLATE = '<div><p>  Your session is about to expire in  <span id="the_time">{{ counter }}</span> seconds, do you want to continue  working?</p><div class="p-dialog-footer p-widget-content ng-tns-c7-3 ng-star-inserted">  <button    type="button"    pButton    class="float-left pull-left"    aria-label="Close"    (click)="logout()"    icon="fas fa-power-off"    label="Log Out"  ></button>  <button    type="button"    pButton    (click)="ref.close()"    icon="fas fa-angle-double-right"    iconPos="right"    label="Continue Working"  ></button></div></div>'
+    var COMPONENTS = [{'name': 'ApiStoreCreatorComponent', 'selector': 'nts-api-store-creator'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'nts-calendar'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'ChartComponent', 'selector': 'nts-chart'},{'name': 'ChartsComponent', 'selector': 'app-charts'},{'name': 'ComponentsComponent', 'selector': 'app-components'},{'name': 'ContentComponent', 'selector': 'app-content'},{'name': 'DefaultComponent', 'selector': 'app-default'},{'name': 'DemoModalComponent', 'selector': 'app-demo-modal'},{'name': 'DisplayComponent', 'selector': 'app-display'},{'name': 'DocumentComponent', 'selector': 'app-document'},{'name': 'EditorComponent', 'selector': 'nts-document-editor'},{'name': 'EntityStoreComponent', 'selector': 'app-entity-store'},{'name': 'ExampleComponent', 'selector': 'nts-state-management-example'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'Formgroup2ApiComponent', 'selector': 'nts-formgroup2-api'},{'name': 'FormsComponent', 'selector': 'app-forms'},{'name': 'GridComponent', 'selector': 'nts-grid'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'GridStatusBarComponent', 'selector': 'app-grid-status-bar'},{'name': 'GridTemplateRendererComponent', 'selector': 'app-template-renderer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'MapComponent', 'selector': 'app-map-route'},{'name': 'MultiDocComponent', 'selector': 'app-multi-doc'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NtsAutocompleteComponent', 'selector': 'nts-autocomplete'},{'name': 'NtsDomainStateComponent', 'selector': 'nts-api-state'},{'name': 'NtsErrorComponent', 'selector': 'nts-error'},{'name': 'NtsFilterFieldComponent', 'selector': 'nts-filter-field'},{'name': 'NtsFormFieldComponent', 'selector': 'nts-form-field'},{'name': 'NtsTreeComponent', 'selector': 'nts-tree'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'QaComponent', 'selector': 'app-qa'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'ScriptLoaderComponent', 'selector': 'nts-script-loader'},{'name': 'SectionComponent', 'selector': 'app-section'},{'name': 'StateManagementComponent', 'selector': 'nts-state-management'},{'name': 'StoreCommunicationComponent', 'selector': 'nts-store-communication'},{'name': 'TableComponent', 'selector': 'nts-table'},{'name': 'TablesComponent', 'selector': 'app-tables'},{'name': 'TagBuilderComponent', 'selector': 'nts-tags-quick'},{'name': 'TagsComponent', 'selector': 'nts-tags'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UiStoreCreatorComponent', 'selector': 'nts-ui-store-creator'},{'name': 'UtilitiesComponent', 'selector': 'app-utilities'},{'name': 'ViewerComponent', 'selector': 'app-viewer'},{'name': 'ViewerToolbarComponent', 'selector': 'app-viewer-toolbar'},{'name': 'VisibleComponent', 'selector': '[visible]'},{'name': 'VisibleComponent', 'selector': 'nts-visible'},{'name': 'WizardComponent', 'selector': 'nts-wizard'},{'name': 'WizardComponent', 'selector': 'nts-wizard'},{'name': 'WizNavSidebarComponent', 'selector': 'nts-wizard-nav-sidebar'},{'name': 'WizNavTopComponent', 'selector': 'nts-wizard-nav-top'}];
+    var DIRECTIVES = [{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'GridColumnCellDirective', 'selector': '[grid-cell-template]'},{'name': 'GridColumnDirective', 'selector': 'grid-column'},{'name': 'GridColumnHeaderDirective', 'selector': '[grid-header-template]'},{'name': 'GridRowExpansionDirective', 'selector': '[grid-expansion-template]'},{'name': 'TableColumnCellDirective', 'selector': '[table-cell-template]'},{'name': 'TableColumnDirective', 'selector': 'table-column'},{'name': 'TableColumnHeaderDirective', 'selector': '[table-header-template]'},{'name': 'TableRowExpansionDirective', 'selector': '[table-expansion-template]'},{'name': 'TreeTemplateDirective', 'selector': 'tree-template'},{'name': 'TreeTemplateNodeDirective', 'selector': '[tree-template-node]'},{'name': 'WizardFeatureDirective', 'selector': 'feature'},{'name': 'WizardFeatureTemplateDirective', 'selector': '[feature-template]'}];
     var ACTUAL_COMPONENT = {'name': 'LogoutModalComponent'};
 </script>
 <script src="../js/tree.js"></script>
@@ -541,9 +603,10 @@ export class LogoutModalComponent implements OnInit, OnDestroy {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -559,11 +622,14 @@ export class LogoutModalComponent implements OnInit, OnDestroy {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
             var COMPODOC_CURRENT_PAGE_URL = 'LogoutModalComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

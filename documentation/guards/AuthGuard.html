@@ -3,25 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>angular-starter documentation</title>
+        <title>ntersol documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">angular-starter documentation</a>
+            <a href="../" class="navbar-brand">ntersol documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -43,7 +41,7 @@
 
 <ol class="breadcrumb">
     <li>Guards</li>
-    <li>AuthGuard</li>
+    <li >AuthGuard</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -61,8 +59,9 @@
             <h3>File</h3>
             </p>
             <p class="comment">
-                <code>src/app/shared/guards/auth.guard.ts</code>
+                <code>archive/src/app/shared/guards/auth.guard.ts</code>
             </p>
+
 
 
 
@@ -82,7 +81,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#canActivate">canActivate</a>
+                                <a href="#canActivate" >canActivate</a>
                             </li>
                         </ul>
                     </td>
@@ -102,12 +101,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(settings: <a href="../injectables/AppSettings.html">AppSettings</a>, auth: <a href="../injectables/AuthService.html">AuthService</a>)</code>
+<code>constructor(settings: <a href="../injectables/SettingsService.html" target="_self">SettingsService</a>, auth: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/shared/guards/auth.guard.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">archive/src/app/shared/guards/auth.guard.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -128,7 +127,7 @@
                                                         <td>settings</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../injectables/AppSettings.html" target="_self" >AppSettings</a></code>
+                                                                        <code><a href="../injectables/SettingsService.html" target="_self" >SettingsService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -140,7 +139,7 @@
                                                         <td>auth</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -159,49 +158,47 @@
 
                 <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="canActivate"></a>
-                        <span class="name">
-                            <b>
-                            canActivate
-                            </b>
-                            <a href="#canActivate"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canActivate"></a>
+                    <span class="name">
+                        <span ><b>canActivate</b></span>
+                        <a href="#canActivate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>canActivate()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/shared/guards/auth.guard.ts:14</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="13"
+                            class="link-to-prism">archive/src/app/shared/guards/auth.guard.ts:13</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
         </div>
 
 
@@ -209,26 +206,21 @@
             <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { CanActivate } from &#x27;@angular/router&#x27;;
 
-import { environment } from &#x27;$env&#x27;;
-import { AppSettings } from &#x27;../app.settings&#x27;;
-import { AuthService } from &#x27;../services/auth.service&#x27;;
+import { AuthService, AuthState } from &#x27;../services/project/auth.service&#x27;;
+import { SettingsService } from &#x27;$settings&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class AuthGuard implements CanActivate {
-  constructor(private settings: AppSettings, private auth: AuthService) {}
+  constructor(private settings: SettingsService, private auth: AuthService) {}
 
   canActivate() {
-    if (
-      // If is on a dev domain and an auth endpoint is not yet available
-      !environment.settings.enableAuth || // Remove this line when out of dev/prototype phase for additional security
-      // OR a token and an api url are present
-      (this.settings.token &amp;&amp; this.settings.apiUrl)
-    ) {
+    // If a token
+    if (this.settings.token) {
       return true; // logged in and has apiUrl so set true
     }
-    this.auth.logOut();
+    this.auth.logOut(AuthState.sessionExpired);
     return false;
   }
 }
@@ -244,9 +236,10 @@ export class AuthGuard implements CanActivate {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -262,11 +255,14 @@ export class AuthGuard implements CanActivate {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'guard';
             var COMPODOC_CURRENT_PAGE_URL = 'AuthGuard.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

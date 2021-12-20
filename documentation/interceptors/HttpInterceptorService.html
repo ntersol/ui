@@ -3,25 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>angular-starter documentation</title>
+        <title>ntersol documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">angular-starter documentation</a>
+            <a href="../" class="navbar-brand">ntersol documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -42,7 +40,7 @@
 
 <ol class="breadcrumb">
   <li>Interceptors</li>
-  <li>HttpInterceptorService</li>
+  <li >HttpInterceptorService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,8 +58,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/shared/interceptors/http.interceptor.ts</code>
+            <code>archive/src/app/shared/interceptors/http.interceptor.ts</code>
         </p>
+
 
 
 
@@ -79,7 +78,11 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#intercept">intercept</a>
+                                <a href="#intercept" >intercept</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#sessionEnd" >sessionEnd</a>
                             </li>
                         </ul>
                     </td>
@@ -99,12 +102,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(settings: <a href="../injectables/AppSettings.html">AppSettings</a>)</code>
+<code>constructor(settings: <a href="../injectables/SettingsService.html" target="_self">SettingsService</a>, auth: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/shared/interceptors/http.interceptor.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">archive/src/app/shared/interceptors/http.interceptor.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -127,7 +130,19 @@
                                                         <td>settings</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../injectables/AppSettings.html" target="_self" >AppSettings</a></code>
+                                                                        <code><a href="../injectables/SettingsService.html" target="_self" >SettingsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>auth</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -146,101 +161,149 @@
 
             <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="intercept"></a>
-                        <span class="name">
-                            <b>
-                            intercept
-                            </b>
-                            <a href="#intercept"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="intercept"></a>
+                    <span class="name">
+                        <span ><b>intercept</b></span>
+                        <a href="#intercept"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>intercept(req: HttpRequest<any>, next: <a href="https://angular.io/api/common/http/HttpHandler" target="_blank">HttpHandler</a>)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/shared/interceptors/http.interceptor.ts:14</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="22"
+                            class="link-to-prism">archive/src/app/shared/interceptors/http.interceptor.ts:22</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>req</td>
-                                                        <td>
-                                                                    <code>HttpRequest&lt;any&gt;</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>req</td>
+                                    <td>
+                                            <code>HttpRequest&lt;any&gt;</code>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>next</td>
-                                                        <td>
-                                                                    <code><a href="https://angular.io/api/common/http/HttpHandler" target="_blank" >HttpHandler</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                                    <td>
+                                        No
+                                    </td>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code>Observable&lt;HttpEvent&lt;any&gt;&gt;</code>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                                </tr>
+                                <tr>
+                                    <td>next</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/common/http/HttpHandler" target="_blank" >HttpHandler</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Event.html" target="_self" >Observable&lt;HttpEvent&lt;any&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sessionEnd"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>sessionEnd</b></span>
+                        <a href="#sessionEnd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sessionEnd()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="50"
+                            class="link-to-prism">archive/src/app/shared/interceptors/http.interceptor.ts:50</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>End the user&#39;s session based on auth failure</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from &#x27;@angular/common/http&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
-import { AppSettings } from &#x27;../app.settings&#x27;;
+import {
+  HttpEvent,
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest,
+  HttpHeaders,
+} from &#x27;@angular/common/http&#x27;;
+import { Observable, throwError } from &#x27;rxjs&#x27;;
+import { catchError } from &#x27;rxjs/operators&#x27;;
+import { SettingsService } from &#x27;$settings&#x27;;
+import { AuthService, AuthState } from &#x27;../services/project/auth.service&#x27;;
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -248,13 +311,38 @@ export class HttpInterceptorService implements HttpInterceptor {
    * Append bearer token to auth settings
    * @param settings
    */
-  constructor(private settings: AppSettings) {}
+  constructor(private settings: SettingsService, private auth: AuthService) {}
 
-  intercept(req: HttpRequest&lt;any&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
-    const authReq &#x3D; req.clone({
-      headers: req.headers.set(&#x27;Authorization&#x27;, &#x27;Bearer &#x27; + this.settings.token),
-    });
-    return next.handle(authReq);
+  intercept(
+    req: HttpRequest&lt;any&gt;,
+    next: HttpHandler,
+  ): Observable&lt;HttpEvent&lt;any&gt;&gt; {
+    // Add any custom headers
+    const headersObj: { [keys: string]: string } &#x3D; {};
+    // If token present, add bearer token
+    if (this.settings.token) {
+      headersObj[&#x27;Authorization&#x27;] &#x3D; &#x27;Bearer &#x27; + this.settings.token;
+    }
+    // Create headers element
+    const headers &#x3D; new HttpHeaders(headersObj);
+    // Clone request, add headers
+    const cloneReq &#x3D; next.handle(req.clone({ headers }));
+    // Return request, handle errors globally here
+    return cloneReq.pipe(catchError(error &#x3D;&gt; {
+      // If forbidden error, end session
+      if (error.status &#x3D;&#x3D;&#x3D; 401 || error.status &#x3D;&#x3D;&#x3D; 403) {
+        this.sessionEnd();
+      }
+      // Catch and rethrow error
+      return throwError(error);
+    }) as any);
+  }
+
+  /**
+   * End the user&#x27;s session based on auth failure
+   */
+  private sessionEnd() {
+    this.auth.logOut(AuthState.sessionExpired);
   }
 }
 </code></pre>
@@ -270,9 +358,10 @@ export class HttpInterceptorService implements HttpInterceptor {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -288,11 +377,14 @@ export class HttpInterceptorService implements HttpInterceptor {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interceptor';
             var COMPODOC_CURRENT_PAGE_URL = 'HttpInterceptorService.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

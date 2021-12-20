@@ -1,0 +1,72 @@
+<div class="author"><strong>Author:</strong> Jerrol Krause</div>
+<h1>Api Store Creator</h1>
+<p>Easily create flux pattern stores to manage communication between an api and the application. Requests are made to
+  the store which manages the crud operations and then updates the store accordingly.</p>
+<p>There are 2 types of api stores. The first is an enitity store which is an array of object identical to what is
+  returned from a database. The second is a non-entity store which is for simple objects and other primitives. Entity
+  stores are the most common.</p>
+<hr />
+
+<p-tabView>
+  <p-tabPanel header="Documentation">
+
+    <h2>Install</h2>
+    <pre>
+      <code class="language-ts" [innerHtml]="install"></code>
+    </pre>
+
+    <h2>Setup</h2>
+    <p>1. Import into module</p>
+    <pre>
+      <code class="language-ts" [innerHtml]="importExample"></code>
+    </pre>
+    <p>2. Set up api calls in a service</p>
+    <pre>
+      <code class="language-ts" [innerHtml]="usage1"></code>
+    </pre>
+    <p>3. Set up store connections in the component</p>
+    <pre>
+      <code class="language-ts" [innerHtml]="usage2"></code>
+    </pre>
+    <p>4. Wire up to template</p>
+    <pre>
+      <code class="language-html" [innerHtml]="usage3"></code>
+    </pre>
+    <hr />
+
+    <h2>Basics</h2>
+    <p>The backbone of the store is the "state$" property which contains both the data in the store and the api state
+      inside a single subscription. This allows you to perform complex UI operations such as showing loading indicators
+      and errors without needing multiple subscriptions.</p>
+    <pre>
+      <code class="language-ts" [innerHtml]="state"></code>
+    </pre>
+    <p>Sometimes you want to extract just the data out of the store without state. Each store type has some additional
+      methods to do just that.</p>
+    <pre>
+        <code class="language-ts" [innerHtml]="select"></code>
+      </pre>
+
+  </p-tabPanel>
+
+  <p-tabPanel header="Configuration">
+  </p-tabPanel>
+
+  <p-tabPanel header="Example">
+    <nts-state-management-example></nts-state-management-example>
+  </p-tabPanel>
+  <!--
+  <p-tabPanel header="API"> Coming soon! </p-tabPanel>
+  -->
+</p-tabView>
+
+<!-- nts-api-state will automatically display loader and error messages
+  <nts-api-state [state]="users" *ngIf="users$ | async as users">
+    <ng-container *ngIf="users?.data?.length; else noData">
+      <ng-container *ngFor="let user of users.data">
+        <!-- Output User data here
+      </ng-container>
+    </ng-container>
+    <ng-template #noData> No users found </ng-template>
+  </nts-api-state>
+  -->

@@ -1,0 +1,33 @@
+{
+  "name": "@ntersol/calendar",
+  "version": "0.0.12",
+  "peerDependencies": {
+    "@angular/common": "11.2.7",
+    "@angular/core": "11.2.7",
+    "@fullcalendar/angular": "4.4.5-beta",
+    "@fullcalendar/core": "4.4.0",
+    "@fullcalendar/daygrid": "4.4.0",
+    "@fullcalendar/interaction": "4.4.0",
+    "@fullcalendar/list": "4.4.0",
+    "@fullcalendar/resource-timegrid": "4.4.0",
+    "@fullcalendar/resource-timeline": "4.4.0",
+    "@fullcalendar/timegrid": "4.4.0",
+    "bootstrap": "4.6.0",
+    "primeicons": "4.1.0",
+    "primeng": "11.2.3"
+  },
+  "dependencies": {
+    "tslib": "2.0.0",
+    "@fullcalendar/angular": "4.4.5-beta",
+    "@fullcalendar/core": "4.4.0",
+    "@fullcalendar/daygrid": "4.4.0",
+    "@fullcalendar/interaction": "4.4.0",
+    "@fullcalendar/list": "4.4.0",
+    "@fullcalendar/resource-timegrid": "4.4.0",
+    "@fullcalendar/resource-timeline": "4.4.0",
+    "@fullcalendar/timegrid": "4.4.0",
+    "bootstrap": "4.6.0",
+    "primeicons": "4.1.0",
+    "primeng": "11.2.3"
+  }
+}

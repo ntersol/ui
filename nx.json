@@ -1,0 +1,84 @@
+{
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "affected": {
+    "defaultBase": "dev/nx"
+  },
+  "npmScope": "@ntersol",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e", "compodoc"],
+        "accessToken": "NGEwNjNhMzQtYmM3MS00NDg5LWJiYzQtZGJiZmExODE0ZmNmfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
+  },
+  "defaultProject": "showcase",
+  "generators": {
+    "@nrwl/angular": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "unitTestRunner": "jest",
+        "e2eTestRunner": "none",
+        "strict": true,
+        "prefix": "nts"
+      },
+      "library": {
+        "buildable": true,
+        "publishable": true,
+        "style": "scss",
+        "linter": "eslint",
+        "unitTestRunner": "jest",
+        "strict": true,
+        "prefix": "nts",
+        "importPath": "@ntersol/{name}"
+      }
+    },
+    "@schematics/angular": {
+      "component": {
+        "style": "scss",
+        "changeDetection": "OnPush",
+        "export": true,
+        "flat": true
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  }
+}

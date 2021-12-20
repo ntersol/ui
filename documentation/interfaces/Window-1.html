@@ -1,0 +1,627 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ntersol documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ntersol documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li
+  >
+  Window</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>libs/document-editor/src/lib/shared/document-editor.service.ts</code>
+        </p>
+
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#pdfjsLib" 
+>
+                                            pdfjsLib
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="pdfjsLib"></a>
+                                        <span class="name "><b>pdfjsLib</b>
+                                            <a href="#pdfjsLib">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>pdfjsLib:     <code></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { BehaviorSubject, combineLatest, Subscription, fromEvent } from &#x27;rxjs&#x27;;
+import { distinctUntilChanged, map, filter, debounceTime } from &#x27;rxjs/operators&#x27;;
+import { documentModelCreate, documentMerge } from &#x27;./utils/models-create.util&#x27;;
+import { viewModelCreate } from &#x27;./utils/view-model-create.util&#x27;;
+import { insertAt } from &#x27;./utils/arrays.util&#x27;;
+import { isNotNil } from &#x27;./guards/guards.utils&#x27;;
+import { NtsDocumentEditor } from &#x27;../document-editor&#x27;;
+import { pdfjsDist } from &#x27;./models/pdf&#x27;;
+import { Injectable } from &quot;@angular/core&quot;;
+import { cloneDeep } from &#x27;lodash&#x27;;
+
+declare global {
+  interface Window {
+    pdfjsLib: typeof pdfjsDist;
+  }
+}
+
+const stateInitial: NtsDocumentEditor.State &#x3D; {
+  loadingScript: true,
+  loadingPdf: true,
+  resetting: false,
+  pdfSrcs: null,
+  pdfs: null,
+  pageActive: {
+    pdfIndex: 0,
+    pageIndex: 0,
+  },
+  tnSettings: {
+    width: 100,
+    height: 125,
+  },
+  multipleAction: &#x27;merge&#x27;,
+  settings: {
+    canRotate: true,
+    canRemove: true,
+    canSplit: true,
+    canReorder: true,
+    canSelect: true,
+    canViewFull: true,
+    canReset: false,
+  },
+  selection: [],
+  docActive: 0,
+  pdfInfo: [],
+  error: null,
+  scrollPosition: null,
+};
+
+@Injectable()
+export class DocumentEditorService {
+  private _state: NtsDocumentEditor.State &#x3D; cloneDeep(stateInitial);
+  public state$ &#x3D; new BehaviorSubject(this._state);
+
+  private _documentsModelSrc: NtsDocumentEditor.Document[] &#x3D; [];
+  private _documentsModel: NtsDocumentEditor.Document[] &#x3D; [];
+  public documentsModel$ &#x3D; new BehaviorSubject&lt;NtsDocumentEditor.Document[] | null&gt;(null);
+
+  private _viewModels: NtsDocumentEditor.Preview[][] &#x3D; [];
+  public viewModels$ &#x3D; new BehaviorSubject&lt;NtsDocumentEditor.Preview[][] | null&gt;(null);
+  /** The index of the page currently being dragged */
+  public dragIndex: NtsDocumentEditor.DragSource &#x3D; {
+    pdfIndex: 0,
+    pageIndex: 0,
+    pageSrc: null,
+  };
+
+  // private pdfs: pdfjsDist.PDFDocumentProxy[] | undefined;
+  public pdfJs: typeof pdfjsDist | undefined;
+
+  public subs: Subscription[] &#x3D; [];
+
+  constructor() {}
+
+  /**
+   * Manage state changes via observables
+   */
+  public stateChanges() {
+    // Add state change subs
+    this.subs &#x3D; [
+      combineLatest([
+        // When pdf sources are available
+        this.state$.pipe(
+          map(state &#x3D;&gt; state.pdfSrcs),
+          // filter(x &#x3D;&gt; x !&#x3D;&#x3D; null),
+          distinctUntilChanged(),
+        ),
+        // Get how to handle multiple documents
+        this.state$.pipe(
+          map(state &#x3D;&gt; state.multipleAction),
+          distinctUntilChanged(),
+        ),
+        // Wait till the script is finished loading
+        this.state$.pipe(
+          map(state &#x3D;&gt; state.loadingScript),
+          filter(x &#x3D;&gt; !x),
+          distinctUntilChanged(),
+        ),
+      ]).subscribe(([pdfSrcs, multipleAction]) &#x3D;&gt; {
+        if (pdfSrcs) {
+          this.getDocument(pdfSrcs, multipleAction);
+        }
+      }),
+      combineLatest([
+        this.state$.pipe(
+          map(state &#x3D;&gt; state.pdfs),
+          filter(x &#x3D;&gt; x !&#x3D;&#x3D; null),
+          distinctUntilChanged(),
+        ),
+        this.state$.pipe(
+          map(state &#x3D;&gt; state.tnSettings),
+          filter(x &#x3D;&gt; x !&#x3D;&#x3D; null),
+          distinctUntilChanged(),
+        ),
+      ]).subscribe(state &#x3D;&gt; {
+        if (!state[0] || !state[1].width || !state[1].height) {
+          return;
+        }
+        this._viewModels &#x3D; viewModelCreate(state[0], state[1].width, state[1].height);
+        this.viewModels$.next(this._viewModels);
+      }),
+    ];
+  }
+
+  /**
+   * Add a scrollbar for handy reasons
+   * TODO: Edge case, cancel previous scrollbar sub before adding new one
+   * @param scrollbarRef
+   */
+  public scrollBarAdd(scrollbarRef: HTMLDivElement) {
+    this.subs.push(
+      fromEvent(scrollbarRef, &#x27;scroll&#x27;)
+        .pipe(
+          debounceTime(100),
+          filter(x &#x3D;&gt; x.type &#x3D;&#x3D;&#x3D; &#x27;scroll&#x27;),
+          map(x &#x3D;&gt; (x &amp;&amp; x.target ? Math.floor((&lt;any&gt;x).target.scrollTop) : 0)),
+        )
+        .subscribe(x &#x3D;&gt; this.stateChange({ scrollPosition: x })),
+    );
+  }
+
+  /**
+   * Change component state
+   * @param state
+   */
+  public stateChange(state: Partial&lt;NtsDocumentEditor.State&gt;) {
+    this._state &#x3D; Object.assign({}, this._state, state);
+    this.state$.next(this._state);
+  }
+
+  /**
+   * Change the state of a page
+   * @param index
+   * @param stateNew
+   */
+  public pageStateChange(pageIndex: number, stateNew: Partial&lt;NtsDocumentEditor.Page&gt;) {
+    const documentsModel &#x3D; [...this._documentsModel];
+    documentsModel[this._state.docActive].pages[pageIndex] &#x3D; Object.assign(
+      {},
+      documentsModel[this._state.docActive].pages[pageIndex],
+      stateNew,
+    );
+    this._documentsModel &#x3D; documentsModel;
+    this.documentsModel$.next(this._documentsModel);
+  }
+
+  /**
+   * Change the state of all pages
+   * @param prop
+   * @param value
+   */
+  public pageStateChangeAll(prop: string, value: string | number | boolean | NtsDocumentEditor.Resolver) {
+    console.log(prop, value);
+    /**
+    this._pageModel &#x3D; this._pageModel.map(page &#x3D;&gt; {
+      const val &#x3D; typeof value &#x3D;&#x3D;&#x3D; &#x27;function&#x27; ? value(page[prop]) : value;
+      return Object.assign({}, page, { [prop]: val });
+    });
+    this.pageModels$.next(this._pageModel);
+     */
+  }
+
+  /**
+   * Change the selection status of a page
+   * @param pageIndex
+   */
+  public pageSelectionChange(docIndex: number, pageIndex: number, setSelection?: boolean) {
+    // console.log(docIndex, pageIndex)
+    const selection &#x3D; [...this._state.selection];
+    // If set selection is set to true and the index is not already
+    if (selection[docIndex].includes(pageIndex) &amp;&amp; setSelection !&#x3D;&#x3D; true) {
+      selection[docIndex] &#x3D; selection[docIndex].filter(i &#x3D;&gt; i !&#x3D;&#x3D; pageIndex).sort();
+    } else if (!selection[docIndex].includes(pageIndex)) {
+      selection[docIndex] &#x3D; [...selection[docIndex], pageIndex].sort();
+    }
+    this.stateChange({ selection: selection });
+  }
+
+  /**
+   * Reset selection
+   */
+  public pagegSelectionReset() {
+    this.stateChange({ selection: this._state.selection.map(() &#x3D;&gt; []) });
+  }
+
+  /**
+   * Return a page to it&#x27;s original document
+   * @param srcDoc
+   * @param page
+   */
+  public pageReset(srcDoc: number, page: NtsDocumentEditor.Page) {
+    // Remove the selected page from the source document
+    const documentsModel &#x3D; [...this._documentsModel];
+    const pagesDestination &#x3D; documentsModel[srcDoc].pages.filter(
+      pageDest &#x3D;&gt; pageDest.pdfSrcIndex !&#x3D;&#x3D; page.pdfSrcIndex || pageDest.pageSrcIndex !&#x3D;&#x3D; page.pageSrcIndex,
+    );
+    documentsModel[srcDoc] &#x3D; { ...documentsModel[srcDoc], pages: pagesDestination };
+
+    // Add the page back to it&#x27;s original document, resort to ensure its in the correct position
+    const pagesSource &#x3D; [...documentsModel[page.pdfSrcIndex].pages, page].sort(
+      (a, b) &#x3D;&gt; b.pageSrcIndex - a.pageSrcIndex,
+    );
+    documentsModel[page.pdfSrcIndex] &#x3D; { ...documentsModel[page.pdfSrcIndex], pages: pagesSource };
+    // Update doc model
+    this._documentsModel &#x3D; documentsModel;
+    this.documentsModel$.next(this._documentsModel);
+  }
+
+  /**
+   * Change the active visible page in the viewer
+   * @param pageActive
+   */
+  public pageActiveChange(pageActive: NtsDocumentEditor.PageActive) {
+    this.stateChange({ pageActive: pageActive });
+  }
+
+  /**
+   * Go to the next available page in the document
+   * @param pageActive
+   */
+  public pageActiveNext() {
+    if (!this._state.pdfs) {
+      return;
+    }
+    const max &#x3D; this._state.pdfs[this._state.pageActive.pdfIndex].numPages;
+    const pageActive: NtsDocumentEditor.PageActive &#x3D; {
+      pdfIndex: this._state.pageActive.pdfIndex,
+      pageIndex: this._state.pageActive.pageIndex + 1 &lt;&#x3D; max ? this._state.pageActive.pageIndex + 1 : max,
+    };
+    this.stateChange({ pageActive: pageActive });
+  }
+
+  /**
+   * Go to the previous page available in the document
+   */
+  public pageActivePrevious() {
+    if (!this._state.pdfs) {
+      return;
+    }
+    const pageActive: NtsDocumentEditor.PageActive &#x3D; {
+      pdfIndex: this._state.pageActive.pdfIndex,
+      pageIndex: this._state.pageActive.pageIndex - 1 &lt; 0 ? 0 : this._state.pageActive.pageIndex - 1,
+    };
+    this.stateChange({ pageActive: pageActive });
+  }
+
+  /**
+   * Reorder the pages
+   * @param from
+   * @param to
+   */
+  public pageReorder(docIndex: number, pageDestination: NtsDocumentEditor.Page | null, side: &#x27;left&#x27; | &#x27;right&#x27;) {
+    // console.log(&#x27;pageReorder&#x27;, docIndex, pageDestination, side, this._state.selection);
+    let documentsModel &#x3D; [...this._documentsModel];
+
+    // Get an array of pages that were selected
+    const pagesSelected &#x3D; documentsModel
+      .map((doc, j) &#x3D;&gt;
+        doc.pages.filter((_page, i) &#x3D;&gt;
+          this._state.selection[j] &amp;&amp; this._state.selection[j].includes(i) ? true : false,
+        ),
+      )
+      .reduce((a, b) &#x3D;&gt; [...a, ...b]);
+
+    // The current list of pages with all selected pages removed
+    const pagesWithSelectedRemoved &#x3D; documentsModel.map((doc, j) &#x3D;&gt;
+      doc.pages.filter((_page, i) &#x3D;&gt; (this._state.selection[j] &amp;&amp; this._state.selection[j].includes(i) ? false : true)),
+    );
+
+    // Determine where to insert the removed pages by finding the page that was dropped onto
+    let insertAtIndex &#x3D; 0;
+    if (pageDestination) {
+      for (let i &#x3D; 0; i &lt;&#x3D; pagesWithSelectedRemoved[docIndex].length; i++) {
+        const page &#x3D; pagesWithSelectedRemoved[docIndex][i];
+        if (page.pdfSrcIndex &#x3D;&#x3D;&#x3D; pageDestination.pdfSrcIndex &amp;&amp; page.pageSrcIndex &#x3D;&#x3D;&#x3D; pageDestination.pageSrcIndex) {
+          insertAtIndex &#x3D; side &#x3D;&#x3D;&#x3D; &#x27;left&#x27; ? i : i + 1;
+          break;
+        }
+      }
+    }
+
+    // Handle out of bounds for array items
+    if (insertAtIndex &lt; 0) {
+      insertAtIndex &#x3D; 0;
+    } else if (insertAtIndex &gt; documentsModel[docIndex].pages.length) {
+      insertAtIndex &#x3D; documentsModel[docIndex].pages.length - 1;
+    }
+
+    // Now inserted the selected pages at the appropriate index
+    const pages &#x3D; insertAt(pagesWithSelectedRemoved[docIndex], insertAtIndex, pagesSelected);
+
+    documentsModel &#x3D; documentsModel.map((doc, i) &#x3D;&gt; {
+      if (i &#x3D;&#x3D;&#x3D; docIndex) {
+        return Object.assign({}, doc, { pages: pages });
+      } else {
+        return Object.assign({}, doc, { pages: pagesWithSelectedRemoved[i] });
+      }
+    });
+
+    this.pagegSelectionReset();
+
+    // Update doc model
+    this._documentsModel &#x3D; documentsModel;
+    this.documentsModel$.next(this._documentsModel);
+  }
+
+  /**
+   * Reset pages to their original configuration
+   * TODO: Reset state too such as selection
+   */
+  public docReset() {
+    this._documentsModel &#x3D; cloneDeep(this._documentsModelSrc);
+    this.documentsModel$.next(this._documentsModel);
+  }
+
+  /**
+   * When the tab or visible document changes
+   * @param e
+   * @param resetSelection
+   */
+  public tabChange(e: { originalEvent: MouseEvent; index: number }, resetSelection &#x3D; true) {
+    const state: Partial&lt;NtsDocumentEditor.State&gt; &#x3D; {
+      docActive: e.index,
+      pageActive: {
+        pdfIndex: e.index,
+        pageIndex: 0,
+      },
+    };
+    // Reset selection on all documents
+    if (resetSelection) {
+      state.selection &#x3D; this._state.selection.map(() &#x3D;&gt; []);
+    }
+
+    this.stateChange(state);
+  }
+
+  /**
+   * Load pdfJs, set path to worker file
+   */
+  public scriptsLoad(pdfJsSrc: string, pdfJsWorkerSrc: string) {
+    if (window.pdfjsLib) {
+      (&lt;any&gt;window).pdfjsLib.GlobalWorkerOptions.workerSrc &#x3D; pdfJsWorkerSrc;
+      this.pdfJs &#x3D; window.pdfjsLib;
+      this.stateChange({ loadingScript: false });
+    } else {
+      this.stateChange({ loadingScript: true });
+      const script &#x3D; document.createElement(&#x27;script&#x27;);
+      script.type &#x3D; &#x27;text/javascript&#x27;;
+      script.src &#x3D; pdfJsSrc;
+      script.onload &#x3D; () &#x3D;&gt; {
+        (&lt;any&gt;window).pdfjsLib.GlobalWorkerOptions.workerSrc &#x3D; pdfJsWorkerSrc;
+        this.pdfJs &#x3D; window.pdfjsLib;
+        this.stateChange({ loadingScript: false });
+      }; // After load, init chart
+      document.head.appendChild(script);
+    }
+  }
+
+  /**
+   * Extract the documents from pdf JS, add to state
+   * @param srcs
+   * @param multipleAction
+   */
+  public getDocument(srcs: NtsDocumentEditor.InputTypes[] | null, multipleAction: NtsDocumentEditor.MultipleAction) {
+    // console.warn(&#x27;getDocument&#x27;, this._state.pdfSrcs, srcs, multipleAction);
+    if (!this.pdfJs || !srcs) {
+      return;
+    }
+    this.stateChange({ loadingPdf: true, pdfs: null });
+    // Since multiple pages are possible, get array of promises
+    const promises &#x3D; srcs
+      .map(src &#x3D;&gt; {
+        let inputType &#x3D; src;
+        // Convert blob type input to object url
+        if (src instanceof Blob) {
+          inputType &#x3D; URL.createObjectURL(src);
+        }
+        return this.pdfJs ? this.pdfJs.getDocument(inputType).promise : null;
+      })
+      .filter(isNotNil);
+    // Wait till all promises complete
+    Promise.all(promises)
+      .then(docs &#x3D;&gt; {
+        const model &#x3D; documentModelCreate(docs);
+        this._documentsModelSrc &#x3D; multipleAction &#x3D;&#x3D;&#x3D; &#x27;merge&#x27; ? documentMerge(model) : model;
+        this._documentsModel &#x3D; cloneDeep(this._documentsModelSrc);
+        // console.log(this._documentsModelSrc, this._documentsModel);
+        this.documentsModel$.next(this._documentsModel);
+        this.stateChange({
+          loadingPdf: false,
+          pdfs: docs,
+          selection: this._documentsModelSrc.map(() &#x3D;&gt; []),
+        });
+      })
+      .catch(err &#x3D;&gt; {
+        this.stateChange({ error: err.message, loadingPdf: false, loadingScript: false });
+      });
+  }
+
+  /**
+   * Reset editor state
+   */
+  public reset() {
+    this._documentsModelSrc &#x3D; [];
+    this._documentsModel &#x3D; [];
+    this.documentsModel$.next(this._documentsModel);
+    this._viewModels &#x3D; [];
+    this.viewModels$.next(this._viewModels);
+    this._state &#x3D; cloneDeep(stateInitial);
+    this.state$.next(this._state);
+    this._documentsModel &#x3D; [];
+    this.subs.forEach(sub &#x3D;&gt; sub.unsubscribe());
+    this.subs &#x3D; [];
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'Window-1.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

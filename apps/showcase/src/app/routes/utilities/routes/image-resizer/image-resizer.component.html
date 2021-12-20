@@ -1,0 +1,50 @@
+<div class="author"><strong>Author:</strong> John Edwards</div>
+<h1>Image Resizer</h1>
+<p>Resize and scale an image file in the browser</p>
+
+<hr />
+
+<p-tabView>
+    <p-tabPanel header="Documentation">
+        <div>
+            <h2>Setup</h2>
+            <pre>
+                <code class="language-ts" [innerHtml]="exampleTS"></code>
+            </pre>
+        </div>
+    </p-tabPanel>
+
+    <p-tabPanel header="Example">
+        <div>
+            <p>Add an image file to resize.</p>
+            <div style="max-width:400px;">
+                <table class="table table-sm">
+                    <tbody>
+                        <tr>
+                            <td style="width: 150px;">Add image file</td>
+                            <td><input type='file' class="form-control" (change)="resize($event)" /></td>
+                        </tr>
+                        <tr>
+                            <td>Select max size</td>
+                            <td>
+                                <input type='text' [(ngModel)]="maxSize" class="form-control" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-right">
+                    <button class="btn btn-primary" [disabled]="!file" (click)="display()">Resize!</button>
+                </div>
+            </div>
+
+            <hr />
+            <div *ngIf="imagePreview$ | async as src">
+                <h2>Preview</h2>
+                <img [src]="src | safeHtml: 'url'" />
+            </div>
+        </div>
+    </p-tabPanel>
+    <!--
+    <p-tabPanel header="API"> Coming soon! </p-tabPanel>
+-->
+</p-tabView>

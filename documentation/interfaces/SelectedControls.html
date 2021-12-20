@@ -1,0 +1,636 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ntersol documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ntersol documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li
+  >
+  SelectedControls</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>libs/utils/src/lib/formgroup-2-api/formGroup2Api.util.ts</code>
+        </p>
+
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#control" 
+>
+                                            control
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#model" 
+>
+                                            model
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="control"></a>
+                                        <span class="name "><b>control</b>
+                                            <a href="#control">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>control:     <code>AbstractControl | null</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>AbstractControl | null</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="model"></a>
+                                        <span class="name "><b>model</b>
+                                            <a href="#model">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>model:         <code><a href="../interfaces/FormGroup2ApiModel.html" target="_self" >FormGroup2ApiModel</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/FormGroup2ApiModel.html" target="_self" >FormGroup2ApiModel</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { AbstractControl, FormArray, FormControl, FormGroup } from &#x27;@angular/forms&#x27;;
+import { forkJoin, Observable } from &#x27;rxjs&#x27;;
+import { tap } from &#x27;rxjs/operators&#x27;;
+
+export interface FormGroup2ApiModel {
+    /** The path to this entity in the form group using reactive forms dot notation
+     * @example
+     * loanApplications.borrowers.0.assets
+     */
+    path: string;
+    /** The unique ID of this entity */
+    uniqueID: string | number;
+    /** Ignore these properties within this formgroup for the purposes of checking for changes (via the dirty flag). Otherwise changes within child or nested models will toggle the dirty flag for this model even though nothing within this model has changed. These properties will also be removed from any api calls. */
+    ignoreProps?: string[];
+    /** By default all nill values are stripped from the payload sent to the api. Set to true to keep nill values. Also removes empty arrays/objects/strings */
+    keepNils?: boolean;
+    /** Information about this entity&#x27;s parent */
+    parent?: {
+        /** The parent&#x27;s unique ID */
+        uniqueID?: string;
+        /** The object property in the current entity to store the parents unique ID */
+        parentID?: string;
+        /** OPTIONAL: The location of this entity&#x27;s parent if NOT in the parent property of the form group which is the default */
+        path?: string;
+    };
+    /** API url to make rest calls. Requires restful conventions. If using a callback function, the parent will be the argument */
+    apiUrl: string | ApiUrl;
+    /** Overide the apiURL on a per verb basis */
+    apiUrls?: {
+        get?: string | ApiUrl;
+        post?: string | ApiUrl;
+        put?: string | ApiUrl;
+        patch?: string | ApiUrl;
+        delete?: string | ApiUrl;
+    };
+    /** Disable appending the unique ID to the rest call */
+    disableAppendID?: {
+        get?: boolean;
+        post?: boolean;
+        put?: boolean;
+        patch?: boolean;
+        delete?: boolean;
+    };
+    /** If true, use PUT instead of PATCH with full models instead of just partials for updates */
+    replace?: boolean;
+    /** A property on the model that if set to true will trigger a deletion. Default is $$delete */
+    deleteProp?: string;
+}
+
+export interface SelectedControls {
+    control: AbstractControl | null;
+    model: FormGroup2ApiModel;
+}
+
+/** Is the input a form array  */
+const isFormArray &#x3D; (c: unknown): c is FormArray &#x3D;&gt; !!(c as FormArray)?.controls &amp;&amp; Array.isArray((c as FormArray).controls);
+
+/** Is the input a form group  */
+const isFormGroup &#x3D; (f: unknown): f is FormGroup &#x3D;&gt; !!(f as FormGroup)?.controls &amp;&amp; !Array.isArray((f as FormArray).controls);
+
+/** Callback function that adds this child&#x27;s parent and the form control of the active model */
+type ApiUrl &#x3D; (parent?: any, control?: AbstractControl) &#x3D;&gt; string;
+
+/**
+ * Manage relationships between a form group mega model and a REST endpoint. When this method is called, it will automatically determine which models in the form group need to be saved and where to save them. Includes POST/PUT/PATCH/DELETE.
+ *
+ * @example
+ * // Call to save changes within the model
+ * saveFormGroup$(this.http, formGroupModel, formGroup).subscribe()
+ * // Sample form group model
+ * export const formGroupModel: FormGroup2ApiModel[] &#x3D; [
+  {
+    path: &#x27;loanApplication&#x27;,
+    uniqueID: &#x27;guid&#x27;,
+    ignoreProps: [&#x27;borrowers&#x27;, &#x27;property&#x27;],
+    apiUrl: apiBase + &#x27;/loanapplications&#x27;,
+  },
+  {
+    path: &#x27;loanApplication.borrowers&#x27;,
+    uniqueID: &#x27;guid&#x27;,
+    parent: {
+      uniqueID: &#x27;guid&#x27;,
+      parentID: &#x27;loanApplicationGUID&#x27;,
+    },
+    apiUrl: (parent: any) &#x3D;&gt; apiBase + &#x27;/loanapplications/&#x27; + parent[0]?.loanApplicationGUID + &#x27;/borrowers&#x27;,
+    apiUrls: {
+      patch: apiBase + &#x27;/borrowers&#x27;,
+    },
+    ignoreProps: [
+      &#x27;borrowers&#x27;,
+      &#x27;assets&#x27;,
+      &#x27;currentAddress&#x27;,
+      &#x27;realEstateOwned&#x27;,
+      &#x27;liabilities&#x27;,
+      &#x27;gifts&#x27;,
+      &#x27;incomes&#x27;,
+      &#x27;employments&#x27;,
+      &#x27;demographics&#x27;,
+      &#x27;declarations&#x27;,
+    ],
+  },
+  {
+    path: &#x27;loanApplication.borrowers.assets&#x27;,
+    uniqueID: &#x27;guid&#x27;,
+    parent: {
+      uniqueID: &#x27;guid&#x27;,
+      parentID: &#x27;borrowerGUID&#x27;,
+    },
+    apiUrls: {
+      patch: apiBase + &#x27;/assets&#x27;,
+      delete: apiBase + &#x27;/assets&#x27;,
+    },
+    apiUrl: (parent: Models.Borrower) &#x3D;&gt; apiBase + &#x27;/borrowers/&#x27; + parent.guid + &#x27;/assets&#x27;,
+  },
+ ]
+ * @param models
+ * @param formGroup
+ * @returns
+ */
+export const saveFormGroup$ &#x3D; (http: HttpClient, models: FormGroup2ApiModel[], formGroup: AbstractControl) &#x3D;&gt; {
+    const changes &#x3D; models
+        // Extract just the requested abstract controls from the form group using the model
+        .map(m &#x3D;&gt; {
+            // Split the path to send to the nested model function
+            const path &#x3D; m.path.split(&#x27;.&#x27;);
+            return getNestedModels(http, path, m, formGroup);
+        })
+        .reduce((a, b) &#x3D;&gt; [...a, ...b], [])
+        .map(m &#x3D;&gt; {
+            // Check if any props have been changed
+            const props &#x3D; getChangedProps(m.control, m.model);
+            // If props have been changed and a form control is present, get http request
+            if (props &amp;&amp; m.control) {
+                return modelToHttpRequest(http, m.model, m.control);
+            }
+            return false;
+        })
+        // Remove any false items in the array, IE they have no changed props
+        .filter(m &#x3D;&gt; !!m);
+    // Remove all dirty flags
+    formGroup.markAsPristine();
+    return changes.length ? forkJoin(changes) : false;
+};
+
+/**
+ * Recurse through an abstract control and extract the nested abstract controls as requested by the model. Supports any combination of deeply nested objects and arrays.
+ * @param path
+ * @param http
+ * @param model
+ * @param formGroup
+ */
+export const getNestedModels &#x3D; (
+    http: HttpClient,
+    path: string[],
+    model: FormGroup2ApiModel,
+    formGroup: AbstractControl,
+): SelectedControls[] &#x3D;&gt; {
+    // Current path location
+    const pathCurrent &#x3D; path[0];
+    // Get next path in series
+    const pathNext &#x3D; [...path].slice(1);
+    // Get form control for current path
+    const control &#x3D; formGroup.get(pathCurrent);
+
+    // If current control is a form array
+    if (isFormArray(control)) {
+        // Loop through array
+        return control.controls
+            .map(c &#x3D;&gt; {
+                // Need to determine if next path is a form group or another nested array
+                const pathGoto &#x3D; pathNext.length ? pathNext : path;
+                return getNestedModels(http, pathGoto, model, c);
+            })
+            .reduce((a, b) &#x3D;&gt; [...a, ...b], []);
+        // If form group
+    } else if (isFormGroup(control)) {
+        return getNestedModels(http, pathNext, model, control);
+    } else {
+        // Destination path, return form group and model
+        return [
+            {
+                control: formGroup,
+                model: model,
+            },
+        ];
+    }
+};
+
+/**
+ * Takes a form group and returns the object with only the properties that have changed. Only returns shallow changes.
+ * @param fg
+ * @param options
+ * @returns If form control has changed properties, return only those changes. False if no changes
+ */
+export const getChangedProps &#x3D; &lt;t &#x3D; any&gt;(fg: AbstractControl | FormGroup | FormArray | null, model?: FormGroup2ApiModel): Partial&lt;t&gt; | false &#x3D;&gt; {
+    if (!fg?.dirty || isFormArray(fg) || !isFormGroup(fg)) {
+        return false;
+    }
+    let obj: any &#x3D; {};
+    // Loop through all the keys in the control
+    Object.keys(fg.controls)
+        // Remove any keys in the ignored props array
+        .filter(key &#x3D;&gt; !model?.ignoreProps?.includes(key))
+        .forEach(key &#x3D;&gt; {
+            // Get the nested control
+            const control &#x3D; fg.get(key);
+            // If the control is dirty, add this property to the object
+            if (control?.dirty) {
+                obj[key] &#x3D; control.value;
+            }
+        });
+
+    // If unique ID is specified, get it from the form group and attach
+    // Only attach if the object already has at least one changed prop
+    if (model?.uniqueID &amp;&amp; Object.keys(obj).length &amp;&amp; fg?.value[model.uniqueID]) {
+        obj[model.uniqueID] &#x3D; fg.value[model.uniqueID];
+    }
+
+    if (model?.parent?.uniqueID &amp;&amp; model?.parent?.parentID &amp;&amp; Object.keys(obj).length &amp;&amp; fg?.parent?.parent?.value) {
+        // Get parent model
+        const parent &#x3D; fg?.parent?.parent?.value;
+        // Get parent uniqueId
+        const parentID &#x3D; parent[model.parent.uniqueID];
+        // Attach parent ID to child
+        obj[model.parent.parentID] &#x3D; parentID;
+    }
+
+    // If keepNills is NOT set, remove all nil entries
+    if (!!obj &amp;&amp; Object.keys(obj).length &amp;&amp; !model?.keepNils) {
+        obj &#x3D; removeNils(obj);
+    }
+
+    // If object has at least one changed prop, return obj. Otherwise false
+    return Object.keys(obj).length ? obj : false;
+};
+
+/**
+ * Takes a mega model and a form control and returns an observable of the correct REST api interaction (POST/PUT/PATCH)
+ * @param http
+ * @param model
+ * @param control
+ * @param options
+ * @returns
+ */
+export const modelToHttpRequest &#x3D; (http: HttpClient, model: FormGroup2ApiModel, control: AbstractControl | FormControl | FormGroup) &#x3D;&gt; {
+    // Get default data from the form control
+    let data &#x3D; control.value;
+    // Get parent data
+    // If parent is form array, get parents parent
+    const parentData &#x3D; isFormArray(control?.parent) ? control?.parent?.parent?.value : control.parent?.value;
+    // Get unique ID or guid of this model
+    const uniqueId &#x3D; data[model.uniqueID] as string | number | undefined;
+    // console.log(&#x27;modelToHttpRequest&#x27;, model, control);
+
+    // Get api URL, determine if string or function. Pass parent to function for callback
+    let apiUrl &#x3D; typeof model.apiUrl &#x3D;&#x3D;&#x3D; &#x27;function&#x27; ? model.apiUrl(parentData, control) : model.apiUrl;
+    // Hold the http request
+    let httpReqest: Observable&lt;any&gt;;
+
+    /**
+     * Model contains the deleted flag, this request is a DELETE
+     */
+    if (data[model?.deleteProp || &#x27;$$deleted&#x27;]) {
+        // If PUT has an override url, use that instead of the default
+        if (model?.apiUrls?.delete) {
+            apiUrl &#x3D; typeof model.apiUrls.delete &#x3D;&#x3D;&#x3D; &#x27;function&#x27; ? model?.apiUrls?.delete(parentData, control) : model.apiUrls.delete;
+        }
+        // By default append the unique ID, skip if disabled
+        apiUrl &#x3D; !!model.disableAppendID?.delete ? apiUrl : apiUrl + &#x27;/&#x27; + data[model.uniqueID];
+        httpReqest &#x3D; http.delete(apiUrl).pipe(
+            // On a successful return response
+            tap(() &#x3D;&gt; deleteApiResponse(model, control)),
+        );
+        /**
+         * UniqueID exists and replace is requested, this request is a PUT
+         */
+    } else if (uniqueId &amp;&amp; model?.replace) {
+        // If PUT has an override url, use that instead of the default
+        if (model?.apiUrls?.put) {
+            apiUrl &#x3D; typeof model.apiUrls.put &#x3D;&#x3D;&#x3D; &#x27;function&#x27; ? model?.apiUrls?.put(parentData, control) : model.apiUrls.put;
+        }
+        // By default append the unique ID, skip if disabled
+        apiUrl &#x3D; !!model.disableAppendID?.put ? apiUrl : apiUrl + &#x27;/&#x27; + data[model.uniqueID];
+        httpReqest &#x3D; http.put(apiUrl, data);
+        /**
+         * UniqueID exists, this request is a PATCH
+         */
+    } else if (uniqueId) {
+        data &#x3D; getChangedProps(control, model);
+        // If PATCH has an override url, use that instead of the default
+        if (model?.apiUrls?.patch) {
+            apiUrl &#x3D; typeof model.apiUrls.patch &#x3D;&#x3D;&#x3D; &#x27;function&#x27; ? model?.apiUrls?.patch(parentData, control) : model.apiUrls.patch;
+        }
+        // By default append the unique ID, skip if disabled
+        apiUrl &#x3D; !!model.disableAppendID?.patch ? apiUrl : apiUrl + &#x27;/&#x27; + data[model.uniqueID];
+
+        httpReqest &#x3D; http.patch(apiUrl, data);
+        /**
+         * No uniqueID exists, this request is a POST
+         */
+    } else {
+        data &#x3D; getChangedProps(control, model);
+        // If POST has an override url, use that instead of the default
+        if (model?.apiUrls?.post) {
+            apiUrl &#x3D; typeof model.apiUrls.post &#x3D;&#x3D;&#x3D; &#x27;function&#x27; ? model?.apiUrls?.post(parentData, control) : model.apiUrls.post;
+        }
+        // By default append the unique ID, skip if disabled
+        httpReqest &#x3D; http.post(apiUrl, data);
+    }
+    // Return the completed request
+    return httpReqest.pipe(
+        // On a successful return response
+        tap(apiResponse &#x3D;&gt; syncApiResponse(model, control, apiResponse)),
+    );
+};
+
+/**
+ * Manage deletions
+ * @param model
+ * @param control
+ * @param parent
+ */
+const deleteApiResponse &#x3D; (model: FormGroup2ApiModel, control: AbstractControl) &#x3D;&gt; {
+    const parent &#x3D; control.parent;
+    const parentData &#x3D; parent?.value as any[];
+    if (!parent) {
+        console.warn(&#x27;Parent does not exist&#x27;, model, control);
+        return;
+    }
+    // If form array, delete the item out of the entry
+    if (isFormArray(parent)) {
+        parentData.forEach((v, i) &#x3D;&gt; {
+            // Check for a uniqueID match between the current model and the item in the array
+            if (v[model.uniqueID] &#x3D;&#x3D;&#x3D; control.value[model.uniqueID]) {
+                parent.removeAt(i);
+            }
+        });
+    } else {
+        console.warn(&#x27;Need a condition for a non-array deletion&#x27;);
+    }
+};
+
+/**
+ * Takes a form group and an api response and adds all the data from the api response to the form group
+ * @param model
+ * @param control
+ * @param apiResponse
+ */
+const syncApiResponse &#x3D; (model: FormGroup2ApiModel, control: AbstractControl, apiResponse: unknown | void) &#x3D;&gt; {
+    // console.warn(&#x27;syncApiResponse&#x27;, model, control, apiResponse);
+    if (apiResponse &amp;&amp; typeof apiResponse &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; model.uniqueID) {
+        control.get(String(model.uniqueID))?.patchValue(apiResponse);
+    } else if (apiResponse &amp;&amp; typeof apiResponse &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp; isFormArray(control.parent)) {
+        control.patchValue(apiResponse);
+        // @TODO: This is handled by the wizard, not sure if that should be the case
+        // control.parent.push(control);
+        // If any other type, patch back in response to control. IE like a guid so that subsequent responses are PUT/PATCH instead of POST
+    } else if (apiResponse &amp;&amp; typeof apiResponse &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp; !Array.isArray(apiResponse) &amp;&amp; isFormGroup(control)) {
+        // Loop through all the object properties in the api response
+        Object.keys(apiResponse).forEach(key &#x3D;&gt; {
+            // Try to get a form control for each
+            const c &#x3D; control.get(key);
+            // If no control or property exists, add it
+            // Patchvalue will not add new properties so items like a guid on an api response won&#x27;t get added
+            if (!c) {
+                control.addControl(key, new FormControl());
+            }
+        });
+        // After all controls have been created, patch in all data
+        control.patchValue(apiResponse);
+    }
+};
+
+/**
+ * Remove nils from a JS object. Includes empty strings arrays and objects
+ * @param o
+ * @returns
+ */
+const removeNils &#x3D; (o: Object) &#x3D;&gt;
+    JSON.parse(JSON.stringify(o), (_key, value) &#x3D;&gt; {
+        if (
+            value &#x3D;&#x3D;&#x3D; null ||
+            value &#x3D;&#x3D;&#x3D; undefined ||
+            value &#x3D;&#x3D;&#x3D; &#x27;&#x27; ||
+            value &#x3D;&#x3D;&#x3D; [] ||
+            value &#x3D;&#x3D;&#x3D; {} ||
+            (typeof value &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp; Array.isArray(value) &amp;&amp; value.length &#x3D;&#x3D;&#x3D; 0) ||
+            (typeof value &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp; !Array.isArray(value) &amp;&amp; Object.keys(value).length &#x3D;&#x3D;&#x3D; 0)
+        ) {
+            return undefined;
+        }
+        if (typeof value &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp; Array.isArray(value) &amp;&amp; value.length) {
+            const val &#x3D; value.filter(d &#x3D;&gt; !!d);
+            return val.length ? val : undefined;
+        }
+        return value;
+    });
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'SelectedControls.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -3,25 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>angular-starter documentation</title>
+        <title>ntersol documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">angular-starter documentation</a>
+            <a href="../" class="navbar-brand">ntersol documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -41,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>GlobalErrorHandler</li>
+  <li >GlobalErrorHandler</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -59,8 +57,10 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/shared/interceptors/error.interceptor.ts</code>
+            <code>archive/src/app/shared/interceptors/error.interceptor.ts</code>
         </p>
+
+
 
 
 
@@ -79,7 +79,15 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#handleError">handleError</a>
+                                <a href="#handleError" >handleError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#logError" >logError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#resetState" >resetState</a>
                             </li>
                         </ul>
                     </td>
@@ -99,12 +107,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(settings: <a href="../injectables/AppSettings.html">AppSettings</a>)</code>
+<code>constructor(settings: <a href="../injectables/SettingsService.html" target="_self">SettingsService</a>, sw: <a href="../injectables/NtsServiceWorkerService.html" target="_self">NtsServiceWorkerService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/app/shared/interceptors/error.interceptor.ts:5</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">archive/src/app/shared/interceptors/error.interceptor.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -125,7 +133,19 @@
                                                         <td>settings</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../injectables/AppSettings.html" target="_self" >AppSettings</a></code>
+                                                                        <code><a href="../injectables/SettingsService.html" target="_self" >SettingsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>sw</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/NtsServiceWorkerService.html" target="_self" >NtsServiceWorkerService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -144,125 +164,324 @@
 
             <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="handleError"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            handleError
-                            </b>
-                            <a href="#handleError"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>handleError(error: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                    </td>
-                </tr>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleError"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>handleError</b></span>
+                        <a href="#handleError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleError(error: <a href="../interfaces/AngularError.html" target="_self">AngularError</a>)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/shared/interceptors/error.interceptor.ts:12</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">archive/src/app/shared/interceptors/error.interceptor.ts:35</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>error</td>
-                                                        <td>
-                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>error</td>
+                                    <td>
+                                                <code><a href="../interfaces/AngularError.html" target="_self" >AngularError</a></code>
+                                    </td>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                    <td>
+                                        No
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logError"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>logError</b></span>
+                        <a href="#logError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>logError(error: <a href="../interfaces/AngularError.html" target="_self">AngularError</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">archive/src/app/shared/interceptors/error.interceptor.ts:75</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Log the error to an API
+Use XMLHttpRequest since httpClient may not be available</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>error</td>
+                                    <td>
+                                                <code><a href="../interfaces/AngularError.html" target="_self" >AngularError</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetState"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span ><b>resetState</b></span>
+                        <a href="#resetState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetState(error: <a href="../interfaces/AngularError.html" target="_self">AngularError</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">archive/src/app/shared/interceptors/error.interceptor.ts:60</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reset app state</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>error</td>
+                                    <td>
+                                                <code><a href="../interfaces/AngularError.html" target="_self" >AngularError</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ErrorHandler, Injectable } from &#x27;@angular/core&#x27;;
-import { AppSettings } from &#x27;../app.settings&#x27;;
+
+import { environment } from &#x27;$env&#x27;;
+import { SettingsService } from &#x27;$settings&#x27;;
+import { NtsServiceWorkerService } from &#x27;../services/general&#x27;;
+
+interface AngularError {
+  promise: any;
+  rejection: any;
+  task: any;
+  zone: any;
+  message: string;
+  stack: string;
+  errorMsg?: string;
+  status?: number;
+}
+
+interface LogError {
+  eventTime?: string;
+  level?: string;
+  class: string;
+  message: string;
+  exception: string;
+}
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
-  // private errorLogApi &#x3D; &#x27;/api/logerror&#x27;; // API to post errors too
-
-  constructor(private settings: AppSettings) {}
+  constructor(
+    private settings: SettingsService,
+    private sw: NtsServiceWorkerService,
+  ) {}
 
   // Custom error handler for application/angular errors
   // Uses plain JS to eliminate any dependencies that may not be available due to the error
-  public handleError(error: any) {
-    console.error(error);
-    // Only throw application errors to the dom. If the error has an errorMsg then it is an internal error
-    if (this.settings.isBrowser &amp;&amp; !error.errorMsg) {
+  public handleError(error: AngularError) {
+    // If is browser
+    // Does not have custom error message
+    // Does not have http status field (to ignore http errors)
+    if (
+      this.settings.isBrowser &amp;&amp;
+      !error.errorMsg &amp;&amp;
+      !error.hasOwnProperty(&#x27;status&#x27;) &amp;&amp;
+      environment.production
+    ) {
+      // If error endpoint specified, log errors
+      if (environment.endpoints.errorPath) {
+        this.logError(error);
+      }
+      // this.settings.error$.next(error.message);
+      this.resetState(error);
     }
     // Now throw the error to the console
     throw error;
   } // end handleError
 
   /**
-   * Log the error to an API
-  private logError(errorMsg: string) {
-    const http &#x3D; new XMLHttpRequest();
-    const params &#x3D; &#x27;NEEDKEY&#x3D;&#x27; + errorMsg;
-    http.open(&#x27;POST&#x27;, this.errorLogApi, true);
-
-    // Send the proper header information along with the request
-    http.setRequestHeader(&#x27;Content-type&#x27;, &#x27;application/x-www-form-urlencoded&#x27;);
-
-    http.onreadystatechange &#x3D; () &#x3D;&gt; { // Call a function when the state changes.
-      if (http.readyState &#x3D;&#x3D;&#x3D; 4 &amp;&amp; http.status &#x3D;&#x3D;&#x3D; 200) {
-        console.warn(&#x27;Successfully logged error&#x27;);
-      }
+   * Reset app state
+   * @param error
+   */
+  private resetState(error: AngularError) {
+    console.error({ error: error });
+    const resetAction &#x3D; () &#x3D;&gt; {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href &#x3D; &#x27;/#/login&#x27;;
     };
-    http.send(params);
+    // If serviceworker is enabled, remove it first befire executing reset action, otherwise just reset
+    this.sw.isEnabled ? this.sw.remove() : resetAction();
+  }
+
+  /**
+   * Log the error to an API
+   * Use XMLHttpRequest since httpClient may not be available
+   */
+  private logError(error: AngularError) {
+    if (!environment.endpoints.apiUrl || !environment.endpoints.errorPath) {
+      return;
+    }
+    const http &#x3D; new XMLHttpRequest();
+    const url &#x3D; environment.endpoints.apiUrl + environment.endpoints.errorPath;
+    const data: LogError &#x3D; {
+      level: &#x27;Error&#x27;,
+      class: &#x27;&#x27;,
+      message: error.message,
+      exception: error.stack,
+    };
+    http.open(&#x27;POST&#x27;, url, true);
+    // Send the proper header information along with the request
+    http.setRequestHeader(&#x27;Content-type&#x27;, &#x27;application/json;charset&#x3D;UTF-8&#x27;);
+    http.send(JSON.stringify(data));
   } // end logError
-  */
 }
 </code></pre>
     </div>
@@ -279,9 +498,10 @@ export class GlobalErrorHandler implements ErrorHandler {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -297,11 +517,14 @@ export class GlobalErrorHandler implements ErrorHandler {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
             var COMPODOC_CURRENT_PAGE_URL = 'GlobalErrorHandler.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

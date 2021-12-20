@@ -3,25 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>angular-starter documentation</title>
+        <title>ntersol documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">angular-starter documentation</a>
+            <a href="../" class="navbar-brand">ntersol documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -41,7 +39,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li>AppConfigService</li>
+  <li >AppConfigService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -59,8 +57,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/shared/services/app-config.service.ts</code>
+            <code>archive/src/app/shared/services/project/app-config.service.ts</code>
         </p>
+
 
             <p class="comment">
                 <h3>Description</h3>
@@ -69,6 +68,7 @@
                 <p>Manages receiving and setting initial environment settings</p>
 
             </p>
+
 
 
             <section>
@@ -86,11 +86,11 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#appSettingsUpdate">appSettingsUpdate</a>
+                                <a href="#appSettingsUpdate" >appSettingsUpdate</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#loadEnvSettings">loadEnvSettings</a>
+                                <a href="#loadEnvSettings" >loadEnvSettings</a>
                             </li>
                         </ul>
                     </td>
@@ -110,12 +110,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(settings: <a href="../injectables/AppSettings.html">AppSettings</a>, http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>)</code>
+<code>constructor(settings: <a href="../injectables/SettingsService.html" target="_self">SettingsService</a>, http: <a href="https://angular.io/api/common/http/HttpClient" target="_blank">HttpClient</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/shared/services/app-config.service.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">archive/src/app/shared/services/project/app-config.service.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -136,7 +136,7 @@
                                                         <td>settings</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../injectables/AppSettings.html" target="_self" >AppSettings</a></code>
+                                                                        <code><a href="../injectables/SettingsService.html" target="_self" >SettingsService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -148,7 +148,7 @@
                                                         <td>http</td>
                                                   
                                                         <td>
-                                                                    <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -167,126 +167,156 @@
 
             <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="appSettingsUpdate"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            appSettingsUpdate
-                            </b>
-                            <a href="#appSettingsUpdate"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>appSettingsUpdate(settings: <a href="../interfaces/Settings.html">Models.EnvSettings</a>)</code>
-                    </td>
-                </tr>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appSettingsUpdate"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>appSettingsUpdate</b></span>
+                        <a href="#appSettingsUpdate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>appSettingsUpdate(settings: <a href="../interfaces/EnvSettings.html" target="_self">EnvSettings</a>)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shared/services/app-config.service.ts:25</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">archive/src/app/shared/services/project/app-config.service.ts:29</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Set all env settings in app settings</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Set all env settings in app settings</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>settings</td>
-                                                        <td>
-                                                                    <code><a href="../interfaces/Settings.html" target="_self" >Models.EnvSettings</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>settings</td>
+                                    <td>
+                                                <code><a href="../interfaces/EnvSettings.html" target="_self" >EnvSettings</a></code>
+                                    </td>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="loadEnvSettings"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            loadEnvSettings
-                            </b>
-                            <a href="#loadEnvSettings"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>loadEnvSettings()</code>
-                    </td>
-                </tr>
+                                    <td>
+                                        No
+                                    </td>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/shared/services/app-config.service.ts:44</a></div>
-                            </td>
-                        </tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadEnvSettings"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>loadEnvSettings</b></span>
+                        <a href="#loadEnvSettings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadEnvSettings(envEndpoint: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Load environment settings</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">archive/src/app/shared/services/project/app-config.service.ts:48</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Load environment settings</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code>Promise&lt;any&gt;</code>
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>envEndpoint</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
 
     </div>
 
@@ -295,11 +325,15 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 
-import { AppSettings } from &#x27;../app.settings&#x27;;
-import { environment } from &#x27;$env&#x27;;
-import { Models } from &#x27;$models&#x27;;
+import { SettingsService } from &#x27;$settings&#x27;;
 
 const camelCase &#x3D; require(&#x27;lodash/camelCase&#x27;);
+
+interface EnvSettings {
+  ApiUrl: string;
+  ApiNamespace: string;
+  SignalRUrl: string;
+}
 
 interface Settings {
   [key: string]: any;
@@ -310,13 +344,13 @@ interface Settings {
  */
 @Injectable()
 export class AppConfigService {
-  constructor(private settings: AppSettings, private http: HttpClient) {}
+  constructor(private settings: SettingsService, private http: HttpClient) {}
 
   /**
    * Set all env settings in app settings
    * @param settings
    */
-  public appSettingsUpdate(settings: Models.EnvSettings) {
+  public appSettingsUpdate(settings: EnvSettings) {
     // Loop through all env properties passed by web api
     Object.keys(settings).forEach(key &#x3D;&gt; {
       // Check to make sure this prop has been declared in app.settings and is not undefined
@@ -335,14 +369,14 @@ export class AppConfigService {
   /**
    * Load environment settings
    */
-  public loadEnvSettings(): Promise&lt;any&gt; {
+  public loadEnvSettings(envEndpoint: string) {
     return this.http
-      .get(environment.endpoints.envConfig)
+      .get(envEndpoint)
       .toPromise()
       .then((data: any) &#x3D;&gt; this.appSettingsUpdate(data))
       .catch((err: any) &#x3D;&gt; {
         console.error(&#x27;Error getting environment settings&#x27;, err);
-        this.settings.sessionStorageClear();
+        this.settings.reset();
         return Promise.resolve();
       });
   }
@@ -362,9 +396,10 @@ export class AppConfigService {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -380,11 +415,14 @@ export class AppConfigService {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
             var COMPODOC_CURRENT_PAGE_URL = 'AppConfigService.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

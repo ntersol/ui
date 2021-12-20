@@ -1,0 +1,42 @@
+<div class="author"><strong>Author:</strong> Jerrol Krause</div>
+<h1>UI Store Creator</h1>
+<p>Easily create flux pattern stores to manage UI state across the front-end.</p>
+<hr />
+
+<p-tabView>
+  <p-tabPanel header="Documentation">
+    <h2>Install</h2>
+    <pre>
+      <code class="language-ts" [innerHtml]="install"></code>
+    </pre>
+
+    <h2>Setup</h2>
+    <p>1. Import into module</p>
+    <pre>
+      <code class="language-ts" [innerHtml]="importExample"></code>
+    </pre>
+    <p>2. Set up ui state slices in a service</p>
+    <pre>
+      <code class="language-ts" [innerHtml]="usage1"></code>
+    </pre>
+    <p>3. Set up store connections in the component</p>
+    <pre>
+      <code class="language-ts" [innerHtml]="usage2"></code>
+    </pre>
+    <p>4. Wire up to template</p>
+    <pre>
+      <code class="language-html" [innerHtml]="usage3"></code>
+    </pre>
+    <hr />
+  </p-tabPanel>
+
+  <p-tabPanel header="Example">
+    <p>
+      Your Name: <strong>{{ name$ | async }}</strong>
+    </p>
+    <input placeholder="Your Name" [(ngModel)]="name" /> <button (click)="nameSave(name)">Save Name</button>
+  </p-tabPanel>
+  <!--
+  <p-tabPanel header="API"> Coming soon! </p-tabPanel>
+  -->
+</p-tabView>

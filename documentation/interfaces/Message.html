@@ -3,25 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>angular-starter documentation</title>
+        <title>ntersol documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">angular-starter documentation</a>
+            <a href="../" class="navbar-brand">ntersol documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -46,7 +44,9 @@
 
 <ol class="breadcrumb">
   <li>Interfaces</li>
-  <li>Message</li>
+  <li
+  >
+  Message</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -64,8 +64,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/shared/services/post-message.service.ts</code>
+            <code>archive/src/app/shared/services/general/post-message.service.ts</code>
         </p>
+
 
 
 
@@ -83,11 +84,17 @@
                             <ul class="index-list">
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#event">event</a>
+                                        <a href="#event" 
+>
+                                            event
+                                        </a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#payload">payload</a>
+                                        <a href="#payload" 
+>
+                                            payload
+                                        </a>
                                 </li>
                             </ul>
                         </td>
@@ -105,12 +112,16 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <a name="event"></a>
-                                        <span class="name"><b>event</b><a href="#event"><span class="icon ion-ios-link"></span></a></span>
+                                        <span class="name "><b>event</b>
+                                            <a href="#event">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>event:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>event:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -118,7 +129,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -139,12 +150,16 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <a name="payload"></a>
-                                        <span class="name"><b>payload</b><a href="#payload"><span class="icon ion-ios-link"></span></a></span>
+                                        <span class="name "><b>payload</b>
+                                            <a href="#payload">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>payload:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                        <code>payload:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -152,7 +167,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                                         </td>
                                     </tr>
@@ -176,9 +191,6 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
 
-import { ObjectUtils } from &#x27;$utils&#x27;;
-import { AppSettings } from &#x27;../app.settings&#x27;;
-
 interface Message {
   event?: string;
   payload?: any;
@@ -192,17 +204,17 @@ interface MessageComplete extends Message {
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
-export class PostMessageService {
+export class NtsPostMessageService {
   /** Postmessage response */
   public postMessage$: Subject&lt;Message&gt; &#x3D; new Subject();
   /** Holds postmessage event listener */
   private postMessageListener: any;
   /** An array of domains to accept postmessage responses from, based on window.location.origin */
-  private allowedDomains: string[];
+  private allowedDomains!: string[];
   /** Generate a random number to identify this app. Used to drop same domain postmessages */
   private appId &#x3D; Math.floor(Math.random() * 10000000);
 
-  constructor(private settings: AppSettings) {}
+  constructor() {}
 
   /**
    * Activates the post message listener
@@ -214,14 +226,20 @@ export class PostMessageService {
       this.allowedDomains &#x3D; allowedDomains;
     }
 
-    if (this.settings.isBrowser) {
-      // If not IE
-      if (window.addEventListener) {
-        this.postMessageListener &#x3D; window.addEventListener(&#x27;message&#x27;, this.messageReceived.bind(this), false);
-      } else {
-        // If IE
-        this.postMessageListener &#x3D; (&lt;any&gt;window).attachEvent(&#x27;onmessage&#x27;, this.messageReceived.bind(this), false);
-      }
+    // If not IE
+    if (window.addEventListener) {
+      this.postMessageListener &#x3D; window.addEventListener(
+        &#x27;message&#x27;,
+        this.messageReceived.bind(this),
+        false,
+      );
+    } else {
+      // If IE
+      this.postMessageListener &#x3D; (&lt;any&gt;window).attachEvent(
+        &#x27;onmessage&#x27;,
+        this.messageReceived.bind(this),
+        false,
+      );
     }
 
     return this.postMessage$;
@@ -231,9 +249,7 @@ export class PostMessageService {
    * Stop listening for postmessage events
    */
   public stopListening() {
-    if (this.settings.isBrowser) {
-      window.removeEventListener(&#x27;message&#x27;, this.postMessageListener);
-    }
+    window.removeEventListener(&#x27;message&#x27;, this.postMessageListener);
   }
 
   /**
@@ -242,10 +258,8 @@ export class PostMessageService {
    * @param urlTarget - If the target url is known, only post to that domain. Otherwise its *
    */
   public postMessageToParent(message: Message, urlTarget: string &#x3D; &#x27;*&#x27;) {
-    if (this.settings.isBrowser) {
-      if (window.parent) {
-        window.parent.postMessage(this.addMetadata(message), urlTarget);
-      }
+    if (window.parent) {
+      window.parent.postMessage(this.addMetadata(message), urlTarget);
     }
   }
 
@@ -255,12 +269,19 @@ export class PostMessageService {
    * @param message - The message payload
    * @param urlTarget  - If the target url is known, only post to that domain. Otherwise its *
    */
-  public postMessageToIframe(id: string, message: Message, urlTarget: string &#x3D; &#x27;*&#x27;) {
-    if (this.settings.isBrowser) {
-      // Make sure the element is on the DOM
-      if ((&lt;any&gt;document).getElementById(id) &amp;&amp; (&lt;any&gt;document).getElementById(id).contentWindow) {
-        (&lt;any&gt;document).getElementById(id).contentWindow.postMessage(this.addMetadata(message), urlTarget);
-      }
+  public postMessageToIframe(
+    id: string,
+    message: Message,
+    urlTarget: string &#x3D; &#x27;*&#x27;,
+  ) {
+    // Make sure the element is on the DOM
+    if (
+      (&lt;any&gt;document).getElementById(id) &amp;&amp;
+      (&lt;any&gt;document).getElementById(id).contentWindow
+    ) {
+      (&lt;any&gt;document)
+        .getElementById(id)
+        .contentWindow.postMessage(this.addMetadata(message), urlTarget);
     }
   }
 
@@ -270,7 +291,11 @@ export class PostMessageService {
    * @param message - The message payload
    * @param urlTarget  - If the target url is known, only post to that domain. Otherwise its *
    */
-  public postMessageToWindow(reference: Window, message: Message, urlTarget: string &#x3D; &#x27;*&#x27;) {
+  public postMessageToWindow(
+    reference: Window,
+    message: Message,
+    urlTarget: string &#x3D; &#x27;*&#x27;,
+  ) {
     reference.postMessage(this.addMetadata(message), urlTarget);
   }
 
@@ -280,11 +305,19 @@ export class PostMessageService {
    */
   private messageReceived(event: MessageEvent) {
     // Scrub webpackOk events and same appId origination
-    if (event.data &amp;&amp; event.data.type !&#x3D;&#x3D; &#x27;webpackOk&#x27; &amp;&amp; event.data.appId !&#x3D;&#x3D; this.appId) {
+    if (
+      event.data &amp;&amp;
+      event.data.type !&#x3D;&#x3D; &#x27;webpackOk&#x27; &amp;&amp;
+      event.data.appId !&#x3D;&#x3D; this.appId
+    ) {
       // Sanitize incoming payload
-      const msg: MessageComplete &#x3D; ObjectUtils.sanitize(event.data);
+      const msg: MessageComplete &#x3D; event.data; // ObjectUtils.sanitize(event.data);
       // Check if allowable domains
-      if ((this.allowedDomains &amp;&amp; this.allowedDomains.indexOf(event.origin) !&#x3D;&#x3D; -1) || !this.allowedDomains) {
+      if (
+        (this.allowedDomains &amp;&amp;
+          this.allowedDomains.indexOf(event.origin) !&#x3D;&#x3D; -1) ||
+        !this.allowedDomains
+      ) {
         this.postMessage$.next(msg);
       } else {
         console.error(&#x27;Message from unauthorized source&#x27;);
@@ -298,9 +331,9 @@ export class PostMessageService {
    */
   private addMetadata(msg: Message): MessageComplete {
     return {
-      ...ObjectUtils.sanitize(msg),
+      ...msg,
       appId: this.appId,
-      token: this.settings.token,
+      // token: this.settings.token,
     };
   }
 }
@@ -313,9 +346,10 @@ export class PostMessageService {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -331,11 +365,14 @@ export class PostMessageService {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'Message.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

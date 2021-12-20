@@ -1,0 +1,1042 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ntersol documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ntersol documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  ExampleComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>apps/showcase/src/app/routes/home/routes/state-management/components/example.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>nts-state-management-example</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./example.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./example.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#columns" >columns</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#isEdit" >isEdit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#userForm" >userForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#users$" >users$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#delete" >delete</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#edit" >edit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#editUndo" >editUndo</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#refresh" >refresh</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#save" >save</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(api: <a href="../injectables/StateManagementService.html" target="_self">StateManagementService</a>, fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">apps/showcase/src/app/routes/home/routes/state-management/components/example.component.ts:49</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>api</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/StateManagementService.html" target="_self" >StateManagementService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>delete</b></span>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>delete(u: Models.User)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">apps/showcase/src/app/routes/home/routes/state-management/components/example.component.ts:94</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Delete existing user</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>u</td>
+                                    <td>
+                                            <code>Models.User</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="edit"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>edit</b></span>
+                        <a href="#edit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>edit(u: Models.User)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="77"
+                            class="link-to-prism">apps/showcase/src/app/routes/home/routes/state-management/components/example.component.ts:77</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Edit existing user</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>u</td>
+                                    <td>
+                                            <code>Models.User</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editUndo"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>editUndo</b></span>
+                        <a href="#editUndo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>editUndo()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="85"
+                            class="link-to-prism">apps/showcase/src/app/routes/home/routes/state-management/components/example.component.ts:85</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cancel edit mode</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">apps/showcase/src/app/routes/home/routes/state-management/components/example.component.ts:53</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refresh"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>refresh</b></span>
+                        <a href="#refresh"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>refresh()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="105"
+                            class="link-to-prism">apps/showcase/src/app/routes/home/routes/state-management/components/example.component.ts:105</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Refresh data in store</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="save"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>save</b></span>
+                        <a href="#save"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>save()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">apps/showcase/src/app/routes/home/routes/state-management/components/example.component.ts:60</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Save a new user or update existing</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="columns"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>columns</b></span>
+                        <a href="#columns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>NtsTable.Column&lt;Models.User&gt;[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      field: &#x27;name&#x27;,
+      header: &#x27;Name&#x27;,
+    },
+    {
+      field: &#x27;email&#x27;,
+      header: &#x27;Email&#x27;,
+    },
+    {
+      field: &#x27;phone&#x27;,
+      header: &#x27;Phone&#x27;,
+    },
+    {
+      field: &#x27;actions&#x27;,
+      header: &#x27;Actions&#x27;,
+    },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">apps/showcase/src/app/routes/home/routes/state-management/components/example.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Columns for table</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isEdit"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isEdit</b></span>
+                        <a href="#isEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">apps/showcase/src/app/routes/home/routes/state-management/components/example.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Create or edit a user</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userForm"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>userForm</b></span>
+                        <a href="#userForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    address: [],
+    company: [],
+    email: [],
+    id: [],
+    name: [],
+    phone: [],
+    username: [],
+    website: [],
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">apps/showcase/src/app/routes/home/routes/state-management/components/example.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Form used to create/edit user</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="users$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>users$</b></span>
+                        <a href="#users$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.api.users.state$</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">apps/showcase/src/app/routes/home/routes/state-management/components/example.component.ts:15</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Api state and data for users</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ChangeDetectionStrategy } from &#x27;@angular/core&#x27;;
+import { FormBuilder } from &#x27;@angular/forms&#x27;;
+import { NtsTable } from &#x27;@ntersol/table&#x27;;
+import { Models } from &#x27;../../../../../shared/models&#x27;;
+import { StateManagementService } from &#x27;../shared/state-management.service&#x27;;
+
+@Component({
+  selector: &#x27;nts-state-management-example&#x27;,
+  templateUrl: &#x27;./example.component.html&#x27;,
+  styleUrls: [&#x27;./example.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ExampleComponent implements OnInit {
+  /** Api state and data for users */
+  public users$ &#x3D; this.api.users.state$;
+  /** Columns for table  */
+  public columns: NtsTable.Column&lt;Models.User&gt;[] &#x3D; [
+    {
+      field: &#x27;name&#x27;,
+      header: &#x27;Name&#x27;,
+    },
+    {
+      field: &#x27;email&#x27;,
+      header: &#x27;Email&#x27;,
+    },
+    {
+      field: &#x27;phone&#x27;,
+      header: &#x27;Phone&#x27;,
+    },
+    {
+      field: &#x27;actions&#x27;,
+      header: &#x27;Actions&#x27;,
+    },
+  ];
+
+  /** Form used to create/edit user */
+  public userForm &#x3D; this.fb.group({
+    address: [],
+    company: [],
+    email: [],
+    id: [],
+    name: [],
+    phone: [],
+    username: [],
+    website: [],
+  });
+
+  /** Create or edit a user */
+  public isEdit &#x3D; false;
+
+  constructor(private api: StateManagementService, private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.users$.subscribe(x &#x3D;&gt; console.log(x));
+  }
+
+  /**
+   * Save a new user or update existing
+   */
+  public save() {
+    // Get the user out of the form
+    const user &#x3D; this.userForm.getRawValue() as Models.User;
+    // Determine if this is a create (POST) or an update (PUT)
+    const apiCall &#x3D; this.isEdit ? this.api.users.put(user) : this.api.users.post(user);
+    // Perform api call
+    apiCall.subscribe(() &#x3D;&gt; {
+      // Reset form and set edit to false
+      this.userForm.reset();
+      this.isEdit &#x3D; false;
+    });
+  }
+
+  /**
+   * Edit existing user
+   * @param u
+   */
+  public edit(u: Models.User) {
+    this.userForm.patchValue(u);
+    this.isEdit &#x3D; true;
+  }
+
+  /**
+   * Cancel edit mode
+   */
+  public editUndo() {
+    this.userForm.reset();
+    this.isEdit &#x3D; false;
+  }
+
+  /**
+   * Delete existing user
+   * @param u
+   */
+  public delete(u: Models.User) {
+    // Confirm before deleting
+    const c &#x3D; confirm(&#x27;Are you sure you want to delete this user?&#x27;);
+    if (c) {
+      this.api.users.delete(u).subscribe();
+    }
+  }
+
+  /**
+   * Refresh data in store
+   */
+  public refresh() {
+    this.api.users.refresh().subscribe();
+  }
+}
+
+/**
+export class SampleComponent implements OnInit {
+  // Get both users and api state
+  public users$ &#x3D; this.api.users.state$;
+  // Get just the data without state
+  public userData$ &#x3D; this.api.users.data$;
+  // Import service into component
+  constructor(private api: SampleService) {}
+
+  ngOnInit() {
+    // Load data into the store if autoload is disabled
+    this.api.users.get().subscribe();
+  }
+
+  // Create a new entity via POST
+  public create(e: Models.User) {
+    this.api.users.post(e).subscribe();
+  }
+
+  // Update an existing entity via PUT
+  public update(e: Models.User) {
+    this.api.users.put(e).subscribe();
+  }
+
+  // Remove a user via DELETE
+  public delete(e: Models.User) {
+    this.api.users.delete(e).subscribe();
+  }
+
+  // Refresh data manually
+  public refresh() {
+    this.api.users.refresh().subscribe();
+  }
+}
+ */
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container-fluid px-0&quot;&gt;
+  &lt;div class&#x3D;&quot;row px-0&quot;&gt;
+    &lt;div class&#x3D;&quot;col-12 col-md-9 pl-0&quot;&gt;
+      &lt;nts-api-state [state]&#x3D;&quot;state&quot; *ngIf&#x3D;&quot;users$ | async as state&quot;&gt;
+        &lt;nts-table [rows]&#x3D;&quot;state.data&quot; [columns]&#x3D;&quot;columns&quot;&gt;
+          &lt;table-column field&#x3D;&quot;actions&quot;&gt;
+            &lt;ng-template table-cell-template let-value&#x3D;&quot;value&quot; let-column&#x3D;&quot;column&quot; let-row&#x3D;&quot;row&quot;&gt;
+              &lt;div class&#x3D;&quot;text-right&quot;&gt;
+                &lt;a class&#x3D;&quot;mr-2&quot; (click)&#x3D;&quot;edit(row)&quot;&gt;&lt;i class&#x3D;&quot;fa fa-cog&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;&lt;/a&gt;
+                &lt;a (click)&#x3D;&quot;delete(row)&quot;&gt;&lt;i class&#x3D;&quot;fa fa-trash&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt;&lt;/a&gt;
+              &lt;/div&gt;
+            &lt;/ng-template&gt;
+          &lt;/table-column&gt;
+        &lt;/nts-table&gt;
+      &lt;/nts-api-state&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;col-12 col-md-3 pr-0&quot;&gt;
+      &lt;div class&#x3D;&quot;card mb-3&quot;&gt;
+        &lt;div class&#x3D;&quot;card-body&quot;&gt;
+          &lt;a class&#x3D;&quot;float-right&quot; (click)&#x3D;&quot;editUndo()&quot; *ngIf&#x3D;&quot;isEdit&quot;&gt;Undo&lt;/a&gt;
+          &lt;h3 *ngIf&#x3D;&quot;isEdit&quot;&gt;Edit existing user&lt;/h3&gt;
+          &lt;h3 *ngIf&#x3D;&quot;!isEdit&quot;&gt;Add a new user&lt;/h3&gt;
+          &lt;hr /&gt;
+          &lt;form [formGroup]&#x3D;&quot;userForm&quot;&gt;
+            &lt;p&gt;&lt;nts-form-field formControlName&#x3D;&quot;name&quot; placeholder&#x3D;&quot;Name&quot;&gt; &lt;/nts-form-field&gt;&lt;/p&gt;
+            &lt;p&gt;&lt;nts-form-field formControlName&#x3D;&quot;email&quot; placeholder&#x3D;&quot;Email&quot;&gt; &lt;/nts-form-field&gt;&lt;/p&gt;
+            &lt;p&gt;&lt;nts-form-field formControlName&#x3D;&quot;phone&quot; placeholder&#x3D;&quot;Phone Number&quot;&gt; &lt;/nts-form-field&gt;&lt;/p&gt;
+            &lt;div class&#x3D;&quot;float-right&quot;&gt;
+              &lt;button class&#x3D;&quot;btn btn-primary&quot; *ngIf&#x3D;&quot;isEdit&quot; (click)&#x3D;&quot;save()&quot;&gt;&lt;i class&#x3D;&quot;fa fa-cog&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt; Save User&lt;/button&gt;
+              &lt;button class&#x3D;&quot;btn btn-primary&quot; *ngIf&#x3D;&quot;!isEdit&quot; (click)&#x3D;&quot;save()&quot;&gt;&lt;i class&#x3D;&quot;fa fa-plus&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt; Create User&lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;button class&#x3D;&quot;btn btn-primary w-100&quot; (click)&#x3D;&quot;refresh()&quot;&gt;&lt;i class&#x3D;&quot;fa fa-refresh&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/i&gt; Refresh All Users&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./example.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container-fluid px-0">  <div class="row px-0">    <div class="col-12 col-md-9 pl-0">      <nts-api-state [state]="state" *ngIf="users$ | async as state">        <nts-table [rows]="state.data" [columns]="columns">          <table-column field="actions">            <ng-template table-cell-template let-value="value" let-column="column" let-row="row">              <div class="text-right">                <a class="mr-2" (click)="edit(row)"><i class="fa fa-cog" aria-hidden="true"></i></a>                <a (click)="delete(row)"><i class="fa fa-trash" aria-hidden="true"></i></a>              </div>            </ng-template>          </table-column>        </nts-table>      </nts-api-state>    </div>    <div class="col-12 col-md-3 pr-0">      <div class="card mb-3">        <div class="card-body">          <a class="float-right" (click)="editUndo()" *ngIf="isEdit">Undo</a>          <h3 *ngIf="isEdit">Edit existing user</h3>          <h3 *ngIf="!isEdit">Add a new user</h3>          <hr />          <form [formGroup]="userForm">            <p><nts-form-field formControlName="name" placeholder="Name"> </nts-form-field></p>            <p><nts-form-field formControlName="email" placeholder="Email"> </nts-form-field></p>            <p><nts-form-field formControlName="phone" placeholder="Phone Number"> </nts-form-field></p>            <div class="float-right">              <button class="btn btn-primary" *ngIf="isEdit" (click)="save()"><i class="fa fa-cog" aria-hidden="true"></i> Save User</button>              <button class="btn btn-primary" *ngIf="!isEdit" (click)="save()"><i class="fa fa-plus" aria-hidden="true"></i> Create User</button>            </div>          </form>        </div>      </div>      <button class="btn btn-primary w-100" (click)="refresh()"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh All Users</button>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'ApiStoreCreatorComponent', 'selector': 'nts-api-store-creator'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'nts-calendar'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'ChartComponent', 'selector': 'nts-chart'},{'name': 'ChartsComponent', 'selector': 'app-charts'},{'name': 'ComponentsComponent', 'selector': 'app-components'},{'name': 'ContentComponent', 'selector': 'app-content'},{'name': 'DefaultComponent', 'selector': 'app-default'},{'name': 'DemoModalComponent', 'selector': 'app-demo-modal'},{'name': 'DisplayComponent', 'selector': 'app-display'},{'name': 'DocumentComponent', 'selector': 'app-document'},{'name': 'EditorComponent', 'selector': 'nts-document-editor'},{'name': 'EntityStoreComponent', 'selector': 'app-entity-store'},{'name': 'ExampleComponent', 'selector': 'nts-state-management-example'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'Formgroup2ApiComponent', 'selector': 'nts-formgroup2-api'},{'name': 'FormsComponent', 'selector': 'app-forms'},{'name': 'GridComponent', 'selector': 'nts-grid'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'GridStatusBarComponent', 'selector': 'app-grid-status-bar'},{'name': 'GridTemplateRendererComponent', 'selector': 'app-template-renderer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'MapComponent', 'selector': 'app-map-route'},{'name': 'MultiDocComponent', 'selector': 'app-multi-doc'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NtsAutocompleteComponent', 'selector': 'nts-autocomplete'},{'name': 'NtsDomainStateComponent', 'selector': 'nts-api-state'},{'name': 'NtsErrorComponent', 'selector': 'nts-error'},{'name': 'NtsFilterFieldComponent', 'selector': 'nts-filter-field'},{'name': 'NtsFormFieldComponent', 'selector': 'nts-form-field'},{'name': 'NtsTreeComponent', 'selector': 'nts-tree'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'QaComponent', 'selector': 'app-qa'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'ScriptLoaderComponent', 'selector': 'nts-script-loader'},{'name': 'SectionComponent', 'selector': 'app-section'},{'name': 'StateManagementComponent', 'selector': 'nts-state-management'},{'name': 'StoreCommunicationComponent', 'selector': 'nts-store-communication'},{'name': 'TableComponent', 'selector': 'nts-table'},{'name': 'TablesComponent', 'selector': 'app-tables'},{'name': 'TagBuilderComponent', 'selector': 'nts-tags-quick'},{'name': 'TagsComponent', 'selector': 'nts-tags'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UiStoreCreatorComponent', 'selector': 'nts-ui-store-creator'},{'name': 'UtilitiesComponent', 'selector': 'app-utilities'},{'name': 'ViewerComponent', 'selector': 'app-viewer'},{'name': 'ViewerToolbarComponent', 'selector': 'app-viewer-toolbar'},{'name': 'VisibleComponent', 'selector': '[visible]'},{'name': 'VisibleComponent', 'selector': 'nts-visible'},{'name': 'WizardComponent', 'selector': 'nts-wizard'},{'name': 'WizardComponent', 'selector': 'nts-wizard'},{'name': 'WizNavSidebarComponent', 'selector': 'nts-wizard-nav-sidebar'},{'name': 'WizNavTopComponent', 'selector': 'nts-wizard-nav-top'}];
+    var DIRECTIVES = [{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'GridColumnCellDirective', 'selector': '[grid-cell-template]'},{'name': 'GridColumnDirective', 'selector': 'grid-column'},{'name': 'GridColumnHeaderDirective', 'selector': '[grid-header-template]'},{'name': 'GridRowExpansionDirective', 'selector': '[grid-expansion-template]'},{'name': 'TableColumnCellDirective', 'selector': '[table-cell-template]'},{'name': 'TableColumnDirective', 'selector': 'table-column'},{'name': 'TableColumnHeaderDirective', 'selector': '[table-header-template]'},{'name': 'TableRowExpansionDirective', 'selector': '[table-expansion-template]'},{'name': 'TreeTemplateDirective', 'selector': 'tree-template'},{'name': 'TreeTemplateNodeDirective', 'selector': '[tree-template-node]'},{'name': 'WizardFeatureDirective', 'selector': 'feature'},{'name': 'WizardFeatureTemplateDirective', 'selector': '[feature-template]'}];
+    var ACTUAL_COMPONENT = {'name': 'ExampleComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ExampleComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

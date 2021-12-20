@@ -1,0 +1,227 @@
+{
+  "$schema": "../../node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "angular-starter": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "outputPath": "dist/browser",
+            "index": "apps/angular-starter/src/index.html",
+            "main": "apps/angular-starter/src/main.ts",
+            "tsConfig": "apps/angular-starter/src/tsconfig.app.json",
+            "preserveSymlinks": true,
+            "showCircularDependencies": true,
+            "polyfills": "apps/angular-starter/src/polyfills.ts",
+            "assets": [
+              "apps/angular-starter/src/assets",
+              "apps/angular-starter/src/favicon.ico",
+              "apps/angular-starter/src/apple-touch-icon.png",
+              "apps/angular-starter/src/safari-pinned-tab.svg",
+              "apps/angular-starter/src/manifest.webmanifest"
+            ],
+            "styles": [
+              "apps/angular-starter/src/styles.scss"
+            ],
+            "scripts": [
+              {
+                "input": "node_modules/document-register-element/build/document-register-element.js",
+                "inject": true
+              },
+              {
+                "input": "node_modules/document-register-element/build/document-register-element.js",
+                "inject": true
+              }
+            ]
+          },
+          "configurations": {
+            "qa": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": true,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "fileReplacements": [
+                {
+                  "replace": "apps/angular-starter/src/environments/environment.ts",
+                  "with": "apps/angular-starter/src/environments/environment.qa.ts"
+                }
+              ]
+            },
+            "uat": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": true,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "fileReplacements": [
+                {
+                  "replace": "apps/angular-starter/src/environments/environment.ts",
+                  "with": "apps/angular-starter/src/environments/environment.uat.ts"
+                }
+              ]
+            },
+            "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": true,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "fileReplacements": [
+                {
+                  "replace": "apps/angular-starter/src/environments/environment.ts",
+                  "with": "apps/angular-starter/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "angular-starter:build",
+            "aot": true,
+            "port": 4200
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular-starter:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "angular-starter:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/angular-starter/src/test.ts",
+            "karmaConfig": "apps/angular-starter/src/karma.conf.js",
+            "polyfills": "apps/angular-starter/src/polyfills.ts",
+            "tsConfig": "apps/angular-starter/src/tsconfig.spec.json",
+            "scripts": [],
+            "styles": [
+              "apps/angular-starter/src/styles.scss"
+            ],
+            "assets": [
+              "apps/angular-starter/src/assets",
+              "apps/angular-starter/src/favicon.ico",
+              "apps/angular-starter/src/apple-touch-icon.png",
+              "apps/angular-starter/src/safari-pinned-tab.svg",
+              "apps/angular-starter/src/manifest.webmanifest"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/angular-starter/src/tsconfig.app.json",
+              "apps/angular-starter/src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/server",
+            "main": "apps/angular-starter/src/main.server.ts",
+            "tsConfig": "apps/angular-starter/src/tsconfig.server.json"
+          }
+        }
+      }
+    },
+    "angular-starter-e2e": {
+      "root": "",
+      "sourceRoot": "",
+      "projectType": "application",
+      "architect": {
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "src/tsconfig.server.json"
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "./protractor.conf.js",
+            "devServerTarget": "angular-starter:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "angular-starter",
+  "schematics": {
+    "@schematics/angular:component": {
+      "changeDetection": "OnPush",
+      "prefix": "app",
+      "style": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "app"
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}

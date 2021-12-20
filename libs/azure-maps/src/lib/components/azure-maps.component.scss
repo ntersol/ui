@@ -1,0 +1,109 @@
+.nts-azure-maps {
+  &.nts-azure-maps-fit,
+  .nts-azure-maps-fit {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .nts-azure-maps-map {
+    z-index: 1;
+    position: relative;
+    min-height: 100px;
+    &.nts-maps-loaded {
+      z-index: 5;
+    }
+
+    &.nts-azure-maps-map--disabled {
+      cursor: not-allowed;
+      * {
+        pointer-events: none;
+      }
+    }
+  }
+  .nts-maps-loader {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 2rem;
+    opacity: 1;
+    transition: 0.3s ease;
+    &.nts-maps-loaded {
+      opacity: 0;
+    }
+
+    .nts-maps-loading-label {
+      left: 0;
+      right: 0;
+      position: absolute;
+      top: 45%;
+      transform: translateY(-45%);
+    }
+  }
+  // Markers
+  .marker-container {
+    z-index: 1;
+    &:hover {
+      z-index: 15;
+    }
+    &.marker-active {
+      z-index: 15;
+    }
+  }
+
+  .nts-map-cluster {
+    display: flex;
+    border-radius: 50%;
+    justify-content: center;
+    text-align: center;
+    height: 25px;
+    width: 25px;
+    color: #fff;
+    align-items: center;
+    background: rgb(26, 115, 170);
+    font-size: 13px;
+    cursor: pointer;
+    &.nts-map-cluster-size-2 {
+      height: 30px;
+      width: 30px;
+    }
+    &.nts-map-cluster-size-3 {
+      height: 35px;
+      width: 35px;
+    }
+    &.nts-map-cluster-size-4 {
+      height: 40px;
+      width: 50px;
+    }
+  }
+
+  // Popups
+  .popup-collection-container {
+    z-index: 25;
+  }
+
+  // Controls
+  .azure-maps-control-container {
+    .azure-maps-control-button:disabled,
+    .azure-maps-control-button[disabled] {
+      background-color: #cdcdcd;
+      pointer-events: none;
+    }
+  }
+}
+
+.atlas-map {
+  position: ABSOLUTE;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}

@@ -1,0 +1,1793 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ntersol documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ntersol documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li >WizardStateService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>libs/wizard/src/lib/shared/store/wizard.state.service.ts</code>
+        </p>
+
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_sectionState" >_sectionState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_state$" >_state$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#baseUrl" >baseUrl</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#formGroup" >formGroup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#formGroupActive" >formGroupActive</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#location" >location</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#pageActive$" >pageActive$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#pages$" >pages$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#pagesSrc$" >pagesSrc$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#routes$" >routes$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#routesSrc$" >routesSrc$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#rulesEngine" >rulesEngine</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sectionActive$" >sectionActive$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sections$" >sections$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sectionsSrc$" >sectionsSrc$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sectionsState$" >sectionsState$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#settings$" >settings$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#state" >state</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#state$" >state$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#wizardId" >wizardId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#initialize" >initialize</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#routeChange" >routeChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#routeNext" >routeNext</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#routePrevious" >routePrevious</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sectionStateChange" >sectionStateChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#settingsChange" >settingsChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#stateChange" >stateChange</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: <a href="../undefineds/Route.html" target="_self">Router</a>, location: <a href="https://angular.io/api/common/Location" target="_blank">Location</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:103</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../miscellaneous/typealiases.html#Route" target="_self" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>location</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/Location" target="_blank" >Location</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialize"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>initialize</b></span>
+                        <a href="#initialize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initialize(undefined: <a href="../interfaces/Initial.html" target="_self">Wizard.Initial</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="110"
+                            class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:110</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Kick things off</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                                <code><a href="../interfaces/Initial.html" target="_self" >Wizard.Initial</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routeChange"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>routeChange</b></span>
+                        <a href="#routeChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>routeChange(routeParams: <a href="../interfaces/RouteParams.html" target="_self">Partial&lt;Wizard.RouteParams&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="232"
+                            class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:232</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Go to a specific route</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>routeParams</td>
+                                    <td>
+                                                <code><a href="../interfaces/RouteParams.html" target="_self" >Partial&lt;Wizard.RouteParams&gt;</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routeNext"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>routeNext</b></span>
+                        <a href="#routeNext"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>routeNext()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="287"
+                            class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:287</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Calculate next route</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routePrevious"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>routePrevious</b></span>
+                        <a href="#routePrevious"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>routePrevious()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="339"
+                            class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:339</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Calculate previous route
+TODO: Move to reducer</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sectionStateChange"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>sectionStateChange</b></span>
+                        <a href="#sectionStateChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sectionStateChange(action: <a href="../interfaces/Section.html" target="_self">SectionChangeType</a>, sectionNext?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="218"
+                            class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:218</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>action</td>
+                                    <td>
+                                                <code><a href="../interfaces/Section.html" target="_self" >SectionChangeType</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>sectionNext</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="settingsChange"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>settingsChange</b></span>
+                        <a href="#settingsChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>settingsChange(settings: Partial<Wizard.Settings>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="196"
+                            class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:196</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Change wizard settings</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>settings</td>
+                                    <td>
+                                            <code>Partial&lt;Wizard.Settings&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stateChange"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>stateChange</b></span>
+                        <a href="#stateChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>stateChange(state: <a href="../interfaces/State.html" target="_self">Partial&lt;Wizard.State&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="209"
+                            class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:209</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>state</td>
+                                    <td>
+                                                <code><a href="../interfaces/State.html" target="_self" >Partial&lt;Wizard.State&gt;</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_sectionState"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_sectionState</b></span>
+                        <a href="#_sectionState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Wizard.SectionState[] | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_state$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_state$</b></span>
+                        <a href="#_state$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;Wizard.State&gt;(this.state)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="baseUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>baseUrl</b></span>
+                        <a href="#baseUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formGroup"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>formGroup</b></span>
+                        <a href="#formGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:101</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Main Formgroup reference</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formGroupActive"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>formGroupActive</b></span>
+                        <a href="#formGroupActive"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:103</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Holds an active model from within an array</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="location"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>location</b></span>
+                        <a href="#location"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/common/Location" target="_blank" >Location</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pageActive$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>pageActive$</b></span>
+                        <a href="#pageActive$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>combineLatest([this.state$, this.routes$, this.pages$]).pipe(
+    filter(([state]) &#x3D;&gt; state.ready), // Only return page when ready
+    map(([state, routes, pages]) &#x3D;&gt; {
+      if (
+        !routes ||
+        !pages ||
+        !state.sectionUrl ||
+        !state.routeUrl ||
+        !routes[state.sectionUrl] ||
+        !routes[state.sectionUrl][state.routeUrl]
+      ) {
+        return null;
+      }
+      const pageId &#x3D; routes[state.sectionUrl][state.routeUrl].pageId;
+      return pages[state.sectionUrl][pageId];
+    }),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:81</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Active page</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pages$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>pages$</b></span>
+                        <a href="#pages$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.pagesSrc$.pipe(map((p) &#x3D;&gt; arrayToTree&lt;Wizard.PageControl&gt;(p, &#x27;sectionId&#x27;, &#x27;id&#x27;)))</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pagesSrc$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>pagesSrc$</b></span>
+                        <a href="#pagesSrc$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;Wizard.PageControl[] | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routes$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>routes$</b></span>
+                        <a href="#routes$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.routesSrc$.pipe(map((r) &#x3D;&gt; arrayToTree&lt;Wizard.RouteControl&gt;(r, &#x27;sectionId&#x27;, &#x27;urlSlug&#x27;)))</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routesSrc$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>routesSrc$</b></span>
+                        <a href="#routesSrc$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;Wizard.RouteControl[] | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rulesEngine"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>rulesEngine</b></span>
+                        <a href="#rulesEngine"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Rule.html" target="_self" >Wizard.RulesEngine</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sectionActive$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>sectionActive$</b></span>
+                        <a href="#sectionActive$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>combineLatest([this.state$, this.sections$]).pipe(
+    filter(([state]) &#x3D;&gt; state.ready), // Only return section when ready
+    map(([state, sections]) &#x3D;&gt; {
+      if (!sections) {
+        return null;
+      }
+      return sections[state.sectionUrl];
+    }),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sections$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>sections$</b></span>
+                        <a href="#sections$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.sectionsSrc$.pipe(
+    map((s) &#x3D;&gt; (!s ? null : arrayToRecord&lt;Wizard.SectionControl&gt;(s, &#x27;urlSlug&#x27;))),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sectionsSrc$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>sectionsSrc$</b></span>
+                        <a href="#sectionsSrc$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;Wizard.SectionControl[] | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sectionsState$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>sectionsState$</b></span>
+                        <a href="#sectionsState$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;Wizard.SectionState[] | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="settings$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>settings$</b></span>
+                        <a href="#settings$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;Wizard.Settings&gt;(settingsDefaults)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="state"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>state</b></span>
+                        <a href="#state"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/State.html" target="_self" >Wizard.State</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    ready: false,
+    sectionUrl: &#x27;&#x27;,
+    routeUrl: &#x27;&#x27;,
+    routeHistory: [],
+    errorTop: false,
+    errorBottom: false,
+    complete: false,
+    sectionState: [],
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="state$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>state$</b></span>
+                        <a href="#state$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this._state$.pipe(
+    debounceTime(10),
+    tap((state) &#x3D;&gt; {
+      if (state.ready) {
+        localStorage.setItem(this.wizardId, JSON.stringify(state.routeHistory));
+      }
+    }),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="wizardId"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>wizardId</b></span>
+                        <a href="#wizardId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;wiz-history&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">libs/wizard/src/lib/shared/store/wizard.state.service.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { Wizard } from &#x27;../../wizard.models&#x27;;
+import { BehaviorSubject, combineLatest } from &#x27;rxjs&#x27;;
+import { take, map, filter, debounceTime, tap } from &#x27;rxjs/operators&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { Location } from &#x27;@angular/common&#x27;;
+import { FormGroup } from &#x27;@angular/forms&#x27;;
+import {
+  arrayToRecord,
+  arrayToTree,
+  createActiveFormGroup,
+  rulesEngine,
+  expressionReplacer,
+  routeStart,
+  sectionStateCreate,
+  sectionStateChange,
+  syncActiveModels,
+  routeGetNext,
+} from &#x27;../../utils&#x27;;
+import { sectionControlCreate, routeControlCreate, pageControlCreate } from &#x27;../controls&#x27;;
+import { SectionChangeType } from &#x27;../../utils/section-state-change.util&#x27;;
+
+// Constants
+// const stateKey &#x3D; &#x27;wiz-history&#x27;;
+const settingsDefaults: Wizard.Settings &#x3D; {
+  stickyFooter: true,
+};
+
+@Injectable({ providedIn: &#x27;root&#x27; })
+export class WizardStateService {
+  private baseUrl?: string;
+  // private sections?: Wizard.Section[];
+  public sectionsSrc$ &#x3D; new BehaviorSubject&lt;Wizard.SectionControl[] | null&gt;(null);
+  public sections$ &#x3D; this.sectionsSrc$.pipe(
+    map((s) &#x3D;&gt; (!s ? null : arrayToRecord&lt;Wizard.SectionControl&gt;(s, &#x27;urlSlug&#x27;))),
+  );
+
+  public routesSrc$ &#x3D; new BehaviorSubject&lt;Wizard.RouteControl[] | null&gt;(null);
+  public routes$ &#x3D; this.routesSrc$.pipe(map((r) &#x3D;&gt; arrayToTree&lt;Wizard.RouteControl&gt;(r, &#x27;sectionId&#x27;, &#x27;urlSlug&#x27;)));
+
+  public pagesSrc$ &#x3D; new BehaviorSubject&lt;Wizard.PageControl[] | null&gt;(null);
+  public pages$ &#x3D; this.pagesSrc$.pipe(map((p) &#x3D;&gt; arrayToTree&lt;Wizard.PageControl&gt;(p, &#x27;sectionId&#x27;, &#x27;id&#x27;)));
+
+  private _sectionState: Wizard.SectionState[] | null &#x3D; null;
+  public sectionsState$ &#x3D; new BehaviorSubject&lt;Wizard.SectionState[] | null&gt;(null);
+
+  public settings$ &#x3D; new BehaviorSubject&lt;Wizard.Settings&gt;(settingsDefaults);
+
+  public wizardId &#x3D; &#x27;wiz-history&#x27;;
+
+  private state: Wizard.State &#x3D; {
+    ready: false,
+    sectionUrl: &#x27;&#x27;,
+    routeUrl: &#x27;&#x27;,
+    routeHistory: [],
+    errorTop: false,
+    errorBottom: false,
+    complete: false,
+    sectionState: [],
+  };
+  private _state$ &#x3D; new BehaviorSubject&lt;Wizard.State&gt;(this.state);
+  public state$ &#x3D; this._state$.pipe(
+    debounceTime(10),
+    tap((state) &#x3D;&gt; {
+      if (state.ready) {
+        localStorage.setItem(this.wizardId, JSON.stringify(state.routeHistory));
+      }
+    }),
+  );
+
+  public sectionActive$ &#x3D; combineLatest([this.state$, this.sections$]).pipe(
+    filter(([state]) &#x3D;&gt; state.ready), // Only return section when ready
+    map(([state, sections]) &#x3D;&gt; {
+      if (!sections) {
+        return null;
+      }
+      return sections[state.sectionUrl];
+    }),
+  );
+  /** Active page */
+  public pageActive$ &#x3D; combineLatest([this.state$, this.routes$, this.pages$]).pipe(
+    filter(([state]) &#x3D;&gt; state.ready), // Only return page when ready
+    map(([state, routes, pages]) &#x3D;&gt; {
+      if (
+        !routes ||
+        !pages ||
+        !state.sectionUrl ||
+        !state.routeUrl ||
+        !routes[state.sectionUrl] ||
+        !routes[state.sectionUrl][state.routeUrl]
+      ) {
+        return null;
+      }
+      const pageId &#x3D; routes[state.sectionUrl][state.routeUrl].pageId;
+      return pages[state.sectionUrl][pageId];
+    }),
+  );
+
+  private rulesEngine?: Wizard.RulesEngine;
+  /** Main Formgroup reference */
+  private formGroup?: FormGroup;
+  /** Holds an active model from within an array */
+  private formGroupActive?: FormGroup;
+
+  constructor(private router: Router, public location: Location) {}
+
+  /**
+   * Kick things off
+   */
+  public initialize({
+    sections,
+    pages,
+    routes,
+    form,
+    arrayIndexes,
+    routeParams,
+    baseUrl,
+    validators,
+    sectionsState,
+  }: Wizard.Initial) {
+    // console.log(&#x27;initialize&#x27;);
+    this.baseUrl &#x3D; baseUrl;
+    this.formGroup &#x3D; form;
+    // Create initial formgroup for active models
+    const formGroupActive &#x3D; createActiveFormGroup(form);
+    this.formGroupActive &#x3D; formGroupActive;
+    // Curry rules engine with refs to form and indexes
+    const rulesEngineSrc &#x3D; rulesEngine(form, arrayIndexes);
+    this.rulesEngine &#x3D; rulesEngineSrc;
+    const expressionReplacerSrc &#x3D; expressionReplacer(form, arrayIndexes);
+
+    const validatorRecord: Record&lt;string, Wizard.PageValidatorFn&gt; &#x3D; {};
+    if (validators &amp;&amp; validators.length) {
+      validators.forEach((v) &#x3D;&gt; (validatorRecord[v.id] &#x3D; v.fn));
+    }
+
+    // Create controls
+    this.sectionsSrc$.next(
+      sections.map((s, i) &#x3D;&gt; {
+        const routeCounts &#x3D; routes.reduce((a, route) &#x3D;&gt; (route.sectionId &#x3D;&#x3D;&#x3D; s.urlSlug ? a + 1 : a), 0);
+        return sectionControlCreate(s, i, expressionReplacerSrc, routeCounts);
+      }),
+    );
+    this.routesSrc$.next(routes.map((r) &#x3D;&gt; routeControlCreate(r)));
+    this.pagesSrc$.next(
+      pages.map((p) &#x3D;&gt;
+        pageControlCreate(
+          p,
+          rulesEngineSrc,
+          expressionReplacerSrc,
+          form,
+          formGroupActive,
+          p.validatorId ? validatorRecord[p.validatorId] : null,
+        ),
+      ),
+    );
+
+    // Get starting route params
+    const params &#x3D; routeStart(routeParams, sections);
+    // Get route history from local storage
+    const history: string[] &#x3D; JSON.parse(localStorage.getItem(this.wizardId) || &#x60;[]&#x60;) || [];
+    // If history is blank add first route in section
+    if (!history.length &amp;&amp; params.routeUrl) {
+      history.push(params.routeUrl);
+    }
+
+    // If section state not supplied, generate the initial one
+    if (!sectionsState) {
+      this._sectionState &#x3D; sectionStateCreate(sections);
+      this.sectionStateChange(&#x27;initial&#x27;, params.sectionUrl);
+    } else {
+      // TODO: Rehydrate section state
+      // this._sectionState &#x3D; [...sectionsState];
+      // this.sectionStateChange(&#x27;sectionChange&#x27;, );
+    }
+
+    this.router.navigate([&#x60;${this.baseUrl}/${params.sectionUrl}/${params.routeUrl}&#x60;]);
+    this.stateChange({ ready: true, sectionUrl: params.sectionUrl, routeUrl: params.routeUrl, routeHistory: history });
+
+    /**
+    console.log(this.formGroup.value);
+    console.log(this.formGroupActive.value);
+    this.pageActive$.subscribe(p &#x3D;&gt; console.log(&#x27;Page Active&#x27;, p));
+    this.routes$.subscribe(p &#x3D;&gt; console.log(&#x27;Routes&#x27;, p));
+    this.state$.subscribe(p &#x3D;&gt; console.log(&#x27;State&#x27;, p.routeHistory));
+    this.sectionsSrc$.subscribe(p &#x3D;&gt; console.log(&#x27;Sections&#x27;, p));
+     this.sectionsState$.subscribe(p &#x3D;&gt; console.log(&#x27;sectionsState&#x27;, p));
+    this.settings$.subscribe(p &#x3D;&gt; console.log(&#x27;settings&#x27;, p));
+    */
+  }
+
+  /**
+   * Change wizard settings
+   * @param settings
+   */
+  public settingsChange(settings: Partial&lt;Wizard.Settings&gt;) {
+    this.settings$.next({
+      // Defaults
+      ...settingsDefaults,
+      // Overrides
+      ...settings,
+    });
+  }
+
+  /**
+   *
+   * @param state
+   */
+  public stateChange(state: Partial&lt;Wizard.State&gt;) {
+    this.state &#x3D; { ...this.state, ...state };
+    this._state$.next(this.state);
+  }
+
+  /**
+   *
+   * @param action
+   */
+  public sectionStateChange(action: SectionChangeType, sectionNext?: string) {
+    // console.log(&#x27;sectionStateChange&#x27;, action, sectionNext);
+    if (!this._sectionState) {
+      return;
+    }
+
+    this._sectionState &#x3D; sectionStateChange(this._sectionState, action, sectionNext, this.state.routeHistory);
+    this.sectionsState$.next(this._sectionState);
+  }
+
+  /**
+   * Go to a specific route
+   * @param param0
+   */
+  public routeChange(routeParams: Partial&lt;Wizard.RouteParams&gt;) {
+    // console.log(&#x27;routeChange&#x27;, routeParams, { ...this.state });
+
+    let sectionUrl &#x3D; routeParams.sectionUrl;
+    let routeUrl &#x3D; routeParams.routeUrl;
+
+    // Get starting route params
+    if (!routeParams.sectionUrl || !routeParams.routeUrl) {
+      combineLatest([this.sectionsSrc$, this.sectionsState$])
+        .pipe(take(1))
+        .subscribe(([s, sectionsState]) &#x3D;&gt; {
+          if (!routeParams.sectionUrl &amp;&amp; s) {
+            sectionUrl &#x3D; s[0].urlSlug;
+          }
+          if (!routeParams.routeUrl &amp;&amp; s) {
+            // Check for section history
+            const matchingState &#x3D; (sectionsState || []).filter(
+              (state) &#x3D;&gt; state.sectionId &#x3D;&#x3D;&#x3D; routeParams.sectionUrl,
+            )[0];
+            if (matchingState &amp;&amp; matchingState.routeHistory &amp;&amp; matchingState.routeHistory.length) {
+              routeUrl &#x3D; matchingState.routeHistory[matchingState.routeHistory.length - 1];
+              this.stateChange({ routeHistory: matchingState.routeHistory });
+            } else {
+              // else use first section in route
+              const sectionCurrent &#x3D; s.filter((s2) &#x3D;&gt; s2.urlSlug &#x3D;&#x3D;&#x3D; routeParams.sectionUrl)[0];
+              routeUrl &#x3D; sectionCurrent.routeStart;
+              this.stateChange({ routeHistory: [routeUrl] });
+            }
+          }
+        });
+    }
+
+    // Update section statuses
+    if (sectionUrl !&#x3D;&#x3D; this.state.sectionUrl) {
+      this.sectionStateChange(&#x27;sectionChange&#x27;, sectionUrl);
+    }
+
+    if (routeUrl !&#x3D;&#x3D; this.state.routeUrl) {
+      this.sectionStateChange(&#x27;routeChange&#x27;, sectionUrl);
+    }
+
+    // If any changes in the active formgroup, patch back to main model
+    if (this.formGroup &amp;&amp; this.formGroupActive &amp;&amp; this.formGroupActive.dirty) {
+      syncActiveModels(this.formGroup, this.formGroupActive);
+    }
+
+    this.router.navigate([&#x60;${this.baseUrl}/${sectionUrl}/${routeUrl}&#x60;]);
+
+    this.stateChange({ sectionUrl: sectionUrl, routeUrl: routeUrl || &#x27;&#x27; });
+    window.scrollTo({ top: 0, behavior: &#x27;smooth&#x27; });
+  }
+
+  /**
+   * Calculate next route
+   */
+  public routeNext() {
+    // console.log(&#x27;routeNext&#x27;);
+    combineLatest([this.state$, this.routes$, this.sections$, this.pageActive$])
+      .pipe(take(1))
+      .subscribe(([state, routes, sections, pageActive]) &#x3D;&gt; {
+        if (!state || !routes || !sections || !this.rulesEngine || !pageActive) {
+          return;
+        }
+
+        // Mark page controls as touched to set validation states
+        pageActive.controlsMarkAsTouched();
+        pageActive.pageTouched &#x3D; true;
+        // If page is not valid, scroll to top &amp; stop routing
+        if (!pageActive.valid) {
+          window.scrollTo({ top: 0, behavior: &#x27;smooth&#x27; });
+          return;
+        }
+        // Get next route action
+        const routeAction &#x3D; routeGetNext(state, routes, sections, this.rulesEngine);
+        if (routeAction &amp;&amp; routeAction.event &#x3D;&#x3D;&#x3D; &#x27;wizardComplete&#x27;) {
+          this.stateChange({ complete: true });
+          return;
+        }
+
+        // If a route action is supplied and thi shas all params
+        if (routeAction &amp;&amp; routeAction.routeParams &amp;&amp; routeAction.routeParams.routeUrl) {
+          // Update route history
+          let routeHistory &#x3D; [...this.state.routeHistory, routeAction.routeParams.routeUrl];
+          // Determine what to do next
+          switch (routeAction.event) {
+            case &#x27;sectionComplete&#x27;:
+              routeHistory &#x3D; [routeAction.routeParams.routeUrl];
+              this.sectionStateChange(&#x27;sectionComplete&#x27;, routeAction.routeParams.sectionUrl);
+              break;
+          }
+          // Update history and error states
+          this.stateChange({ routeHistory: routeHistory, errorTop: false, errorBottom: false });
+          // Reset page control state
+          pageActive.controlsMarkAsUntouched();
+          pageActive.pageTouched &#x3D; false;
+
+          this.router.navigate([
+            &#x60;${this.baseUrl}/${routeAction.routeParams.sectionUrl}/${routeAction.routeParams.routeUrl}&#x60;,
+          ]);
+        }
+      });
+  }
+
+  /**
+   * Calculate previous route
+   * TODO: Move to reducer
+   */
+  public routePrevious() {
+    // console.log(&#x27;routePrevious&#x27;, this.state.routeHistory);
+    // Go back in current state
+    if (this.state.routeHistory.length &gt; 1) {
+      const history &#x3D; [...this.state.routeHistory];
+      history.length &#x3D; history.length - 1;
+      const routeUrl &#x3D; history[history.length - 1];
+      this.stateChange({ routeHistory: history, routeUrl: history[history.length - 1] });
+      this.sectionStateChange(&#x27;routePrev&#x27;);
+      this.router.navigate([&#x60;${this.baseUrl}/${this.state.sectionUrl}/${routeUrl}&#x60;]);
+    } else if (this.state.routeHistory.length &#x3D;&#x3D;&#x3D; 1 &amp;&amp; this._sectionState) {
+      // Going to previous section
+      for (let i &#x3D; 0; i &lt; this._sectionState.length; i++) {
+        if (this.state.sectionUrl &#x3D;&#x3D;&#x3D; this._sectionState[i].sectionId) {
+          const sectionPrev &#x3D; this._sectionState[i - 1];
+          let routeUrl &#x3D;
+            sectionPrev.routeHistory[sectionPrev.routeHistory.length - 1] ||
+            sectionPrev.routeHistory[sectionPrev.routeHistory.length - 0];
+          if (!routeUrl) {
+            routeUrl &#x3D; sectionPrev.routeStart;
+          }
+
+          this.stateChange({
+            sectionUrl: sectionPrev.sectionId,
+            routeHistory: sectionPrev.routeHistory,
+            routeUrl: routeUrl,
+          });
+          this.sectionStateChange(&#x27;sectionChange&#x27;, sectionPrev.sectionId);
+          this.router.navigate([&#x60;${this.baseUrl}/${sectionPrev.sectionId}/${routeUrl}&#x60;]);
+          break;
+        }
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'WizardStateService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

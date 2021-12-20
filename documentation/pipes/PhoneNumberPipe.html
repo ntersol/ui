@@ -3,25 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>angular-starter documentation</title>
+        <title>ntersol documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">angular-starter documentation</a>
+            <a href="../" class="navbar-brand">ntersol documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -44,7 +42,7 @@
 
 <ol class="breadcrumb">
   <li>Pipes</li>
-  <li>PhoneNumberPipe</li>
+  <li >PhoneNumberPipe</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -63,8 +61,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/shared/pipes/phone-number.pipe.ts</code>
+            <code>archive/src/app/shared/pipes/phone-number.pipe.ts</code>
         </p>
+
 
 
 
@@ -82,97 +81,96 @@
 
             <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="transform"></a>
-                        <span class="name">
-                            <b>
-                            transform
-                            </b>
-                            <a href="#transform"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>transform(val: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, makeClickable: )</code>
-                    </td>
-                </tr>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="transform"></a>
+                    <span class="name">
+                        <span ><b>transform</b></span>
+                        <a href="#transform"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>transform(val: string | undefined | null, makeClickable)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/shared/pipes/phone-number.pipe.ts:8</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="8"
+                            class="link-to-prism">archive/src/app/shared/pipes/phone-number.pipe.ts:8</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Default value</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>val</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                        </td>
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>val</td>
+                                    <td>
+                                            <code>string | undefined | null</code>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>makeClickable</td>
-                                                        <td>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code>false</code>
-                                                        </td>
+                                    <td>
+                                        No
+                                    </td>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    <td>
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                                </tr>
+                                <tr>
+                                    <td>makeClickable</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>false</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
 
     </div>
 
@@ -185,14 +183,20 @@
   name: &#x27;phoneNumber&#x27;,
 })
 export class PhoneNumberPipe implements PipeTransform {
-  transform(val: string, makeClickable &#x3D; false) {
+  transform(val: string | undefined | null, makeClickable &#x3D; false) {
     // If no value supplied or val is a blank value, return same value
     if (!val || val &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
       return val;
     }
-
-    let viewVal &#x3D; val.trim().replace(/^\+/, &#x27;&#x27;);
-    viewVal &#x3D; viewVal.replace(/[^0-9]/g, &#x27;&#x27;).slice(0, 10);
+    // Whitelist numbers only
+    let viewVal &#x3D; val.replace(/[^0-9]/g, &#x27;&#x27;);
+    // Keep track of leading ones
+    let hasLeadingOne &#x3D; false;
+    // Check for leading one
+    if (viewVal.charAt(0) &#x3D;&#x3D;&#x3D; &#x27;1&#x27; &amp;&amp; viewVal.length &#x3D;&#x3D;&#x3D; 11) {
+      hasLeadingOne &#x3D; true;
+      viewVal &#x3D; viewVal.slice(1);
+    }
 
     // If this is a clickable link, return the phone number with no spaces or special characters
     if (makeClickable) {
@@ -213,16 +217,19 @@ export class PhoneNumberPipe implements PipeTransform {
         number &#x3D; viewVal.slice(3);
     }
 
+    let result: string;
     if (number) {
       if (number.length &gt; 3) {
         number &#x3D; number.slice(0, 3) + &#x27;-&#x27; + number.slice(3, 7);
       } else {
         number &#x3D; number;
       }
-      return (&#x27;(&#x27; + area + &#x27;) &#x27; + number).trim().slice(0, 14);
+      result &#x3D; (&#x27;(&#x27; + area + &#x27;) &#x27; + number).trim().slice(0, 14);
     } else {
-      return &#x27;(&#x27; + area;
+      result &#x3D; &#x27;(&#x27; + area;
     }
+    // Return result, add back in leading one
+    return hasLeadingOne ? &#x27;1 &#x27; + result : result;
   }
 }
 </code></pre>
@@ -237,9 +244,10 @@ export class PhoneNumberPipe implements PipeTransform {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -255,11 +263,14 @@ export class PhoneNumberPipe implements PipeTransform {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'pipe';
             var COMPODOC_CURRENT_PAGE_URL = 'PhoneNumberPipe.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

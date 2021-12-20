@@ -1,0 +1,50 @@
+{
+  "compileOnSave": false,
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "baseUrl": ".",
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2017", "dom"],
+    "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "outDir": "./dist/out-tsc",
+    "paths": {
+      "$libs": ["./src/app/libs"],
+      "$site": ["./src/app/site.module"],
+      "$ui": ["./src/app/shared/stores/ui"],
+      "$domain": ["./src/app/shared/stores/domain"],
+      "$settings": ["./src/app/shared/stores/settings"],
+      "$utils": ["./src/app/shared/utils"],
+      "$env": ["./src/environments/environment.ts"],
+      "$models": ["./src/shared/models"],
+      "$modals": ["./src/compoments/global/modals"]
+    },
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "strictPropertyInitialization": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "target": "es5",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"]
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true,
+    "strictInputAccessModifiers": true,
+    "strictInjectionParameters": true,
+    "fullTemplateTypeCheck": true,
+    "preserveWhitespaces": false
+  },
+  "include": ["src/**/*"],
+  "exclude": ["e2e", "**/*.spec.ts", "node_modules"]
+}

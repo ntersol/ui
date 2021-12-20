@@ -3,25 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>angular-starter documentation</title>
+        <title>ntersol documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css" media="(prefers-color-scheme: dark)">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">angular-starter documentation</a>
+            <a href="../" class="navbar-brand">ntersol documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -38,7 +36,9 @@
 
 <ol class="breadcrumb">
   <li>Components</li>
-  <li>AppComponent</li>
+  <li
+  >
+  AppComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -61,8 +61,9 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/app.component.ts</code>
+    <code>archive/src/app/app.component.ts</code>
 </p>
+
 
 
 
@@ -70,7 +71,7 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
     </p>
 
 
@@ -103,6 +104,12 @@
             </tr>
 
 
+
+
+
+
+
+
         </tbody>
     </table>
 </section>
@@ -121,11 +128,11 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#ngOnInit">ngOnInit</a>
+                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#routeChange">routeChange</a>
+                                <a href="#routeChange" >routeChange</a>
                             </li>
                         </ul>
                     </td>
@@ -145,17 +152,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, activatedRoute: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, title: <a href="https://angular.io/api/platform-browser/Title" target="_blank">Title</a>, authService: <a href="../injectables/AuthService.html">AuthService</a>, sw: <a href="../injectables/ServiceWorkerService.html">ServiceWorkerService</a>, comms: <a href="../injectables/AppCommsService.html">AppCommsService</a>)</code>
+<code>constructor(router: <a href="../undefineds/Route.html" target="_self">Router</a>, activatedRoute: <a href="../undefineds/Route.html" target="_self">ActivatedRoute</a>, title: <a href="https://angular.io/api/platform-browser/Title" target="_blank">Title</a>, version: <a href="../injectables/NtsVersionManagementService.html" target="_self">NtsVersionManagementService</a>, sw: <a href="../injectables/NtsServiceWorkerService.html" target="_self">NtsServiceWorkerService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/app.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">archive/src/app/app.component.ts:13</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Global/app errors</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -171,7 +180,7 @@
                                                         <td>router</td>
                                                   
                                                         <td>
-                                                                    <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                                        <code><a href="../miscellaneous/typealiases.html#Route" target="_self" >Router</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -183,7 +192,7 @@
                                                         <td>activatedRoute</td>
                                                   
                                                         <td>
-                                                                    <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                                        <code><a href="../miscellaneous/typealiases.html#Route" target="_self" >ActivatedRoute</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -195,7 +204,7 @@
                                                         <td>title</td>
                                                   
                                                         <td>
-                                                                    <code><a href="https://angular.io/api/platform-browser/Title" target="_blank" >Title</a></code>
+                                                                        <code><a href="https://angular.io/api/platform-browser/Title" target="_blank" >Title</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -204,10 +213,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>authService</td>
+                                                        <td>version</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                                        <code><a href="../injectables/NtsVersionManagementService.html" target="_self" >NtsVersionManagementService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -219,19 +228,7 @@
                                                         <td>sw</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../injectables/ServiceWorkerService.html" target="_self" >ServiceWorkerService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>comms</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="../injectables/AppCommsService.html" target="_self" >AppCommsService</a></code>
+                                                                        <code><a href="../injectables/NtsServiceWorkerService.html" target="_self" >NtsServiceWorkerService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -254,92 +251,89 @@
 
     <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
-                            ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>ngOnInit()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/app.component.ts:23</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">archive/src/app/app.component.ts:24</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="routeChange"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            routeChange
-                            </b>
-                            <a href="#routeChange"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>routeChange()</code>
-                    </td>
-                </tr>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routeChange"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>routeChange</b></span>
+                        <a href="#routeChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>routeChange()</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/app.component.ts:40</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">archive/src/app/app.component.ts:49</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Actions to perform on route change
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Actions to perform on route change
 Page titles are in app.routes.ts</p>
 </div>
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
 
 </div>
 
@@ -351,33 +345,42 @@ import { Title } from &#x27;@angular/platform-browser&#x27;;
 import { map, filter, mergeMap } from &#x27;rxjs/operators&#x27;;
 
 import { environment } from &#x27;$env&#x27;;
-import { AuthService, ServiceWorkerService, AppCommsService } from &#x27;$shared&#x27;;
+import { NtsVersionManagementService, NtsServiceWorkerService } from &#x27;./shared/services/general&#x27;;
 
 @Component({
   selector: &#x27;app-root&#x27;,
   templateUrl: &#x27;./app.component.html&#x27;,
 })
 export class AppComponent implements OnInit {
+  /** Global/app errors */
+  // public error$ &#x3D; this.settings.error$;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private title: Title,
-    private authService: AuthService,
-    private sw: ServiceWorkerService,
-    private comms: AppCommsService,
+    private version: NtsVersionManagementService,
+    private sw: NtsServiceWorkerService,
   ) {}
 
   ngOnInit() {
     this.routeChange();
-    // Always refresh env settings after app load even if already present in localstorage
-    // This protects against env setting getting stale when bypassing the app initializer
 
+    // If service worker
     if (environment.settings.enableServiceWorker) {
-      this.sw.enable();
+      this.sw.pollforUpdates();
     }
+
+    // If version endpoint specified, poll for version changes
+    if (environment.endpoints.versionPath) {
+      this.version.start(environment.endpoints.versionPath);
+    }
+
+    /**
+    // If app comms
     if (environment.settings.enableAppComms) {
       this.comms.commsEnable();
     }
+    */
   }
 
   /**
@@ -399,22 +402,35 @@ export class AppComponent implements OnInit {
         mergeMap(route &#x3D;&gt; route.data),
       )
       .subscribe(event &#x3D;&gt; {
-        this.title.setTitle(event[&#x27;title&#x27;] + &#x27; | &#x27; + environment.properties.appName); // Change document title
-        // If auth endpoint is available and not on the login page
-        if (environment.settings.enableAuth &amp;&amp; this.router.url.toLowerCase().indexOf(&#x27;login&#x27;) &#x3D;&#x3D;&#x3D; -1) {
-          this.authService.refreshTokenUpdate(); // On Route change, refresh authentication token
-        }
+        // Change document title
+        this.title.setTitle(event[&#x27;title&#x27;] + &#x27; | &#x27; + environment.properties.appName);
       });
-  } // end routeChange
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;!-- Main Router --&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;!-- Display global/app errors
+&lt;div class&#x3D;&quot;container p-3&quot; *ngIf&#x3D;&quot;(error$ | async) as error&quot;&gt;
+    &lt;nts-error [error]&#x3D;&quot;error&quot; [canClose]&#x3D;&quot;false&quot;&gt;
+      &lt;p class&#x3D;&quot;d-inline-block&quot;&gt;
+        This app has just died a horrible death. Please try reloading it by pressing &lt;strong&gt;Control + F5.&lt;/strong&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+        If that doesn&#x27;t fix the issue then please copy+paste the contents of this page and email it to your supervisor or the code monkeys responsible for maintaining this app.
+      &lt;/p&gt;
+    &lt;/nts-error&gt;
+  &lt;/div&gt;
+--&gt;
+
+&lt;!-- Main Router --&gt;
 &lt;router-outlet&gt;&lt;/router-outlet&gt;
+
+&lt;p-confirmDialog [style]&#x3D;&quot;{ width: &#x27;50vw&#x27; }&quot;&gt;&lt;/p-confirmDialog&gt;
 </code></pre>
     </div>
+
 
     <div class="tab-pane fade " id="c-tree">
         <div id="tree-container"></div>
@@ -441,9 +457,9 @@ export class AppComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!-- Main Router --><router-outlet></router-outlet></div>'
-    var COMPONENTS = [{'name': 'ApiStateComponent', 'selector': 'app-api-state'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartComponent', 'selector': 'app-chart'},{'name': 'ChartsComponent', 'selector': 'app-charts'},{'name': 'ConfirmationModalComponent', 'selector': 'app-confirmation-modal'},{'name': 'CounterComponent', 'selector': 'app-counter'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'GridStatusBarComponent', 'selector': 'app-grid-status-bar'},{'name': 'GridTemplateRendererComponent', 'selector': 'app-template-renderer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeContextMenuComponent', 'selector': 'app-context-menu'},{'name': 'LaunchModalComponent', 'selector': 'app-launch-modal'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'QaComponent', 'selector': 'app-qa'}];
-    var DIRECTIVES = [{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'}];
+        var COMPONENT_TEMPLATE = '<div><!-- Display global/app errors<div class="container p-3" *ngIf="(error$ | async) as error">    <nts-error [error]="error" [canClose]="false">      <p class="d-inline-block">        This app has just died a horrible death. Please try reloading it by pressing <strong>Control + F5.</strong>      </p>      <p>        If that doesn\'t fix the issue then please copy+paste the contents of this page and email it to your supervisor or the code monkeys responsible for maintaining this app.      </p>    </nts-error>  </div>--><!-- Main Router --><router-outlet></router-outlet><p-confirmDialog [style]="{ width: \'50vw\' }"></p-confirmDialog></div>'
+    var COMPONENTS = [{'name': 'ApiStoreCreatorComponent', 'selector': 'nts-api-store-creator'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalendarComponent', 'selector': 'nts-calendar'},{'name': 'CalendarComponent', 'selector': 'app-calendar'},{'name': 'ChartComponent', 'selector': 'nts-chart'},{'name': 'ChartsComponent', 'selector': 'app-charts'},{'name': 'ComponentsComponent', 'selector': 'app-components'},{'name': 'ContentComponent', 'selector': 'app-content'},{'name': 'DefaultComponent', 'selector': 'app-default'},{'name': 'DemoModalComponent', 'selector': 'app-demo-modal'},{'name': 'DisplayComponent', 'selector': 'app-display'},{'name': 'DocumentComponent', 'selector': 'app-document'},{'name': 'EditorComponent', 'selector': 'nts-document-editor'},{'name': 'EntityStoreComponent', 'selector': 'app-entity-store'},{'name': 'ExampleComponent', 'selector': 'nts-state-management-example'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FeedbackModalComponent', 'selector': 'app-feedback'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'Formgroup2ApiComponent', 'selector': 'nts-formgroup2-api'},{'name': 'FormsComponent', 'selector': 'app-forms'},{'name': 'GridComponent', 'selector': 'nts-grid'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'GridStatusBarComponent', 'selector': 'app-grid-status-bar'},{'name': 'GridTemplateRendererComponent', 'selector': 'app-template-renderer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutMainComponent', 'selector': 'app-layout-main'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LayoutSingleComponent', 'selector': 'app-layout-single'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'LogoutModalComponent', 'selector': 'app-logout-modal'},{'name': 'MapComponent', 'selector': 'app-map-route'},{'name': 'MultiDocComponent', 'selector': 'app-multi-doc'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NoContentComponent', 'selector': 'app-no-content'},{'name': 'NtsAutocompleteComponent', 'selector': 'nts-autocomplete'},{'name': 'NtsDomainStateComponent', 'selector': 'nts-api-state'},{'name': 'NtsErrorComponent', 'selector': 'nts-error'},{'name': 'NtsFilterFieldComponent', 'selector': 'nts-filter-field'},{'name': 'NtsFormFieldComponent', 'selector': 'nts-form-field'},{'name': 'NtsTreeComponent', 'selector': 'nts-tree'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'PageComponent', 'selector': 'app-page'},{'name': 'QaComponent', 'selector': 'app-qa'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'RootComponent', 'selector': 'app-root'},{'name': 'ScriptLoaderComponent', 'selector': 'nts-script-loader'},{'name': 'SectionComponent', 'selector': 'app-section'},{'name': 'StateManagementComponent', 'selector': 'nts-state-management'},{'name': 'StoreCommunicationComponent', 'selector': 'nts-store-communication'},{'name': 'TableComponent', 'selector': 'nts-table'},{'name': 'TablesComponent', 'selector': 'app-tables'},{'name': 'TagBuilderComponent', 'selector': 'nts-tags-quick'},{'name': 'TagsComponent', 'selector': 'nts-tags'},{'name': 'ToolbarComponent', 'selector': 'app-toolbar'},{'name': 'UiStoreCreatorComponent', 'selector': 'nts-ui-store-creator'},{'name': 'UtilitiesComponent', 'selector': 'app-utilities'},{'name': 'ViewerComponent', 'selector': 'app-viewer'},{'name': 'ViewerToolbarComponent', 'selector': 'app-viewer-toolbar'},{'name': 'VisibleComponent', 'selector': '[visible]'},{'name': 'VisibleComponent', 'selector': 'nts-visible'},{'name': 'WizardComponent', 'selector': 'nts-wizard'},{'name': 'WizardComponent', 'selector': 'nts-wizard'},{'name': 'WizNavSidebarComponent', 'selector': 'nts-wizard-nav-sidebar'},{'name': 'WizNavTopComponent', 'selector': 'nts-wizard-nav-top'}];
+    var DIRECTIVES = [{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'DomObserverDirective', 'selector': '[appDomObserver]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FocusDirective', 'selector': '[appFocus]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'FullScreenDirective', 'selector': '[appFullScreen]'},{'name': 'GridColumnCellDirective', 'selector': '[grid-cell-template]'},{'name': 'GridColumnDirective', 'selector': 'grid-column'},{'name': 'GridColumnHeaderDirective', 'selector': '[grid-header-template]'},{'name': 'GridRowExpansionDirective', 'selector': '[grid-expansion-template]'},{'name': 'TableColumnCellDirective', 'selector': '[table-cell-template]'},{'name': 'TableColumnDirective', 'selector': 'table-column'},{'name': 'TableColumnHeaderDirective', 'selector': '[table-header-template]'},{'name': 'TableRowExpansionDirective', 'selector': '[table-expansion-template]'},{'name': 'TreeTemplateDirective', 'selector': 'tree-template'},{'name': 'TreeTemplateNodeDirective', 'selector': '[tree-template-node]'},{'name': 'WizardFeatureDirective', 'selector': 'feature'},{'name': 'WizardFeatureTemplateDirective', 'selector': '[feature-template]'}];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>
 <script src="../js/tree.js"></script>
@@ -461,9 +477,10 @@ export class AppComponent implements OnInit {
 
 
 
+
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -479,11 +496,14 @@ export class AppComponent implements OnInit {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
             var COMPODOC_CURRENT_PAGE_URL = 'AppComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

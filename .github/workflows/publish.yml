@@ -1,0 +1,33 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - 'dev/nx'
+
+jobs:
+  affected:
+    name: Run Affected Build and Publish Targets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install Dependencies
+        run: npm install
+      - name: Cache Modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Get Base
+        run: git fetch --no-tags --prune --depth=5 origin dev/nx
+      - name: Build
+        run: npx nx affected --target build --with-deps --base=origin/dev/nx~1
+      - name: Publish
+        run: npx nx affected --target publish --base=origin/dev/nx~1
