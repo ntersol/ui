@@ -10,12 +10,18 @@ import { ShowcaseTagsComponent } from './routes/tags/tags.component';
 import { MtgCalcComponent } from './routes/mtg-calc/mtg-calc.component';
 import { DocEditorComponent } from './routes/doc-editor/doc-editor.component';
 import { GooglePlacesAutocompleteComponent } from './routes/google-places-autocomplete/google-places-autocomplete.component';
+import { FormsComponent } from './routes/forms/forms.component';
 
 const routes: Routes = [
   {
     path: 'google-places-autocomplete',
     component: GooglePlacesAutocompleteComponent,
     data: { title: 'Google Places Autocomplete' },
+  },
+  {
+    path: 'forms',
+    component: FormsComponent,
+    data: { title: 'Forms' },
   },
   {
     path: 'wizard',

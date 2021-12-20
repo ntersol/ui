@@ -17,6 +17,7 @@ import { WizardComponent } from './routes/wizard/wizard.component';
 import { VisibleComponent } from './routes/visible/visible.component';
 import { ShowcaseTableComponent } from './routes/table/table.component';
 import { ShowcaseTagsComponent } from './routes/tags/tags.component';
+import { FormsComponent } from './routes/forms/forms.component';
 
 // Components
 import { ComponentsComponent } from './components.component';
@@ -28,7 +29,7 @@ import { NtsVisibleModule } from '@ntersol/visible';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, NtsStateManagementModule, TabViewModule, NtsFormsModule, NtsTableModule, NtsTagsModule, NtsGooglePlacesAutocompleteModule, NtsMtgCalcModule, NtsVisibleModule, NtsDocumentEditorModule],
-  declarations: [ComponentsComponent, WizardComponent, MtgCalcComponent, VisibleComponent, ShowcaseTableComponent, ShowcaseTagsComponent, GooglePlacesAutocompleteComponent, DocEditorComponent],
+  declarations: [ComponentsComponent, FormsComponent, WizardComponent, MtgCalcComponent, VisibleComponent, ShowcaseTableComponent, ShowcaseTagsComponent, GooglePlacesAutocompleteComponent, DocEditorComponent],
   providers: [],
   exports: [],
   entryComponents: [],
