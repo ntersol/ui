@@ -1,11 +1,9 @@
 <div class="nts-form-field">
     <span class="p-float-label">
-        <input [type]="type" [(ngModel)]="value" class="p-inputtext p-component p-element" name="fieldName"
-            ngDefaultControl [placeholder]="focused || !hover ? placeholder : ''" (focus)="focused = true"
-            (blur)="focused = false">
+        <input class="p-inputtext p-component p-element" name="fieldName" [type]="type" [(ngModel)]="value"
+            ngDefaultControl [placeholder]="focused || !hover ? placeholder : ''" (focus)="onFocus()" (blur)="onBlur()">
         <label for="float-input" [ngClass]="{
-            'float' : !hover
+            'float' : !hover || !!value
         }" [innerHtml]="label"></label>
     </span>
 </div>
-{{innerValue}}
