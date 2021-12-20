@@ -8,6 +8,8 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 })
 export class FormsComponent implements OnInit {
 
+  public model: any = null;
+
   public exampleimport2 = this.highlight.htmlEncode(``);
   public exampleTS: string = this.highlight.htmlEncode(``);
   public exampleHTML: string = this.highlight.htmlEncode(``);

@@ -1,0 +1,11 @@
+<div class="nts-form-field">
+    <span class="p-float-label">
+        <input [type]="type" [(ngModel)]="value" class="p-inputtext p-component p-element" name="fieldName"
+            ngDefaultControl [placeholder]="focused || !hover ? placeholder : ''" (focus)="focused = true"
+            (blur)="focused = false">
+        <label for="float-input" [ngClass]="{
+            'float' : !hover
+        }" [innerHtml]="label"></label>
+    </span>
+</div>
+{{innerValue}}

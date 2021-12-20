@@ -19,11 +19,22 @@ import { TooltipModule } from 'primeng/tooltip';
 import { NtsFormFieldComponent } from './components/form-field/form-field.component';
 import { NtsFilterFieldComponent } from './components/filter-field/filter-field.component';
 import { NtsAutocompleteComponent } from './components/autocomplete/autocomplete.component';
+import { NtsInputComponent } from './components/input/input.component';
+import { NtsStateComponent } from './components/state/state.component';
+import { NumberComponent } from './components/number/number.component';
+import { NtsTextComponent } from './components/text/text.component';
 
-const components = [NtsFormFieldComponent, NtsFilterFieldComponent, NtsAutocompleteComponent];
+const COMPONENTS = [
+  NtsFormFieldComponent, NtsFilterFieldComponent, NtsAutocompleteComponent,
+  //
+  NtsInputComponent,
+  NumberComponent,
+  NtsTextComponent,
+  NtsStateComponent
+];
 
 @NgModule({
-  declarations: [components],
+  declarations: [COMPONENTS],
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -43,6 +54,6 @@ const components = [NtsFormFieldComponent, NtsFilterFieldComponent, NtsAutocompl
     DropdownModule,
     TooltipModule,
   ],
-  exports: [components],
+  exports: [COMPONENTS],
 })
-export class NtsFormsModule {}
+export class NtsFormsModule { }
