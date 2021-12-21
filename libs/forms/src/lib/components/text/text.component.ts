@@ -9,7 +9,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-  selector: 'nts-text',
+  selector: 'nts-input-text',
   templateUrl: './text.component.html',
   styleUrls: ['../input/input.component.scss', './text.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
