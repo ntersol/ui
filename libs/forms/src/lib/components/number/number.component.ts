@@ -11,7 +11,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
 @Component({
   selector: 'nts-input-number',
   templateUrl: './number.component.html',
-  styleUrls: ['../input/input.component.scss', './number.component.scss'],
+  styleUrls: ['./number.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None

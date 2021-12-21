@@ -25,6 +25,7 @@ import { NtsInputComponent } from './components/input/input.component';
 import { NtsStateComponent } from './components/state/state.component';
 import { NtsNumberComponent } from './components/number/number.component';
 import { NtsTextComponent } from './components/text/text.component';
+import { NtsCurrencyComponent } from './components/currency/currency.component';
 
 const COMPONENTS = [
   NtsFormFieldComponent, NtsFilterFieldComponent, NtsAutocompleteComponent,
@@ -32,6 +33,7 @@ const COMPONENTS = [
   NtsInputComponent,
   NtsNumberComponent,
   NtsTextComponent,
+  NtsCurrencyComponent,
   NtsStateComponent
 ];
 

@@ -1,6 +1,6 @@
 <nts-input [label]="label" [hover]="hover" [focused]="focused" [value]="value" [prefix]="prefix" [suffix]="suffix">
     <p-inputNumber [(ngModel)]="value" [placeholder]="!!placeholder && (focused || !hover || !label) ? placeholder : ''"
-        [mode]="mode" [useGrouping]="useGrouping" [minFractionDigits]="minFractionDigits"
-        [maxFractionDigits]="maxFractionDigits" [disabled]="disabled" (onFocus)="onFocus()" (onBlur)="onBlur()">
+        [mode]="'currency'" [useGrouping]="true" mode="currency" currency="USD" locale="en-US" [minFractionDigits]="2"
+        [disabled]="disabled" (onFocus)="onFocus()" (onBlur)="onBlur()">
     </p-inputNumber>
 </nts-input>

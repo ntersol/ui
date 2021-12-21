@@ -11,6 +11,7 @@ export class FormsComponent implements OnInit {
   public modelText: any = null;
   public modelNumber: any = null;
   public modelNumber2: any = null;
+  public currency: any = null;
 
   public exampleimport2 = this.highlight.htmlEncode(``);
   public exampleTS: string = this.highlight.htmlEncode(``);
