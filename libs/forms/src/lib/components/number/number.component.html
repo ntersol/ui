@@ -1,3 +1,6 @@
-{{label}}
-<nts-input type="number"></nts-input>
-<ng-content></ng-content>
+<nts-input [label]="label" [hover]="hover" [focused]="focused" [value]="value">
+    <p-inputNumber [(ngModel)]="value" [placeholder]="!!placeholder && (focused || !hover) ? placeholder : ''"
+        [mode]="mode" [useGrouping]="useGrouping" [minFractionDigits]="minFractionDigits"
+        [maxFractionDigits]="maxFractionDigits" [disabled]="disabled" (onFocus)="onFocus()" (onBlur)="onBlur()">
+    </p-inputNumber>
+</nts-input>

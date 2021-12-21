@@ -19,7 +19,6 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
 })
 export class NtsInputComponent<t> implements OnInit, ControlValueAccessor {
 
-  @Input() type = 'text';
   @Input() placeholder: string | null = null;
   @Input() label: string | null = null;
   @Input() hover = true;

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NtsInputComponent } from '../input/input.component';
 
@@ -10,54 +10,26 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
 
 @Component({
   selector: 'nts-number',
-  templateUrl: '../input/input.component.html',
-  styleUrls: ['./number.component.scss', '../input/input.component.scss'],
+  templateUrl: './number.component.html',
+  styleUrls: ['../input/input.component.scss', './number.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
+  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
+  encapsulation: ViewEncapsulation.None
 })
 export class NtsNumberComponent extends NtsInputComponent<number> implements OnInit {
 
-  @Input() decimalPlaces: number | null = 2;
+  @Input() mode: 'decimal' | 'currency' = 'decimal';
+  @Input() useGrouping = true;
+  @Input() minFractionDigits = 0;
+  @Input() maxFractionDigits = 2;
+  @Input() min: number | null = null;
+  @Input() max: number | null = null;
+  @Input() disabled = false
 
-  public type = 'number';
 
   constructor() {
     super()
   }
 
   ngOnInit(): void { }
-
-  //Get accessor
-  get value(): number | null {
-    console.log(1, this.innerValue)
-    return this.innerValue;
-  };
-
-  //Set accessor including call the onchange callback
-  set value(v: number | null) {
-    if (v !== this.innerValue) {
-      this.innerValue = this.numberFormat(v);
-      this.onChangeCallback(this.innerValue);
-    }
-  }
-
-  /**
-   *
-   * @param v
-   * @returns
-   */
-  private numberFormat(v: number | null) {
-
-    if (v === null) {
-      return null;
-    }
-    let num = Number(v);
-
-    if (this.decimalPlaces !== null) {
-      num = Number(num.toFixed(this.decimalPlaces));
-    }
-    console.log(num)
-    return num;
-  }
-
 }

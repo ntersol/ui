@@ -22,7 +22,6 @@ export class NtsTextComponent extends NtsInputComponent<string> implements OnIni
   }
 
   ngOnInit(): void {
-    console.log(this)
   }
 
 }

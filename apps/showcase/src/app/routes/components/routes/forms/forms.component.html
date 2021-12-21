@@ -3,24 +3,22 @@
 <p>Coming soon!</p>
 
 
-
-<nts-text placeholder="Jerrol" label="First Name" [(ngModel)]="modelText"></nts-text>
-Value: {{modelText}}
-<!--
-<nts-number placeholder="18" label="Age" [(ngModel)]="modelNumber"></nts-number>
-Value: {{modelNumber}}
--->
-<!--
-
-<nts-input [(ngModel)]="model"></nts-input>
-  <nts-text placeholder="Jerrol" label="First Name" [(ngModel)]="model" [hover]="true"></nts-text>
-
-
-
+<p>
+  <nts-text placeholder="Jerrol" label="First Name" [(ngModel)]="modelText"></nts-text>
+  Value: {{modelText}}
+</p>
 <hr />
+<p>
+  <nts-number placeholder="18" label="Age" [(ngModel)]="modelNumber"></nts-number>
+  Value: {{modelNumber}}
+</p>
+<hr />
+<p>
+  <nts-number placeholder="100.00" label="Decimal Places" [(ngModel)]="modelNumber2" [minFractionDigits]="2">
+  </nts-number>
+  Value: {{modelNumber2}}
+</p>
 
-<nts-number label="12345"></nts-number>
--->
 <hr />
 
 <p-tabView>
