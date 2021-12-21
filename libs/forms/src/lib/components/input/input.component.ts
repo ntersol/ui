@@ -23,6 +23,9 @@ export class NtsInputComponent<t> implements OnInit, ControlValueAccessor {
   @Input() label: string | null = null;
   @Input() hover = true;
 
+  @Input() prefix: string | null = null;
+  @Input() suffix: string | null = null;
+
   @Input() focused = false;
 
   /** Manage value internally in the class */

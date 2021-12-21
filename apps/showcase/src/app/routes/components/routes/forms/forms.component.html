@@ -2,15 +2,12 @@
 <h1>Forms</h1>
 <p>Coming soon!</p>
 
-
 <p>
-  <nts-text placeholder="Jerrol" label="First Name" [(ngModel)]="modelText"></nts-text>
-  Value: {{modelText}}
+  <nts-text placeholder="Jerrol" label="First Name" [(ngModel)]="modelText"></nts-text> Value: {{modelText}}
 </p>
 <hr />
 <p>
-  <nts-number placeholder="18" label="Age" [(ngModel)]="modelNumber"></nts-number>
-  Value: {{modelNumber}}
+  <nts-number placeholder="18" label="Age" [(ngModel)]="modelNumber"></nts-number> Value: {{modelNumber}}
 </p>
 <hr />
 <p>
@@ -18,7 +15,10 @@
   </nts-number>
   Value: {{modelNumber2}}
 </p>
-
+<hr />
+<p>
+  <nts-number placeholder="100.00" label="Suffix/Prefix" prefix="<span class='red'>$</span>" suffix=".00"></nts-number>
+</p>
 <hr />
 
 <p-tabView>
