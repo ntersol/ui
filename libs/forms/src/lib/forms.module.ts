@@ -21,14 +21,14 @@ import { NtsFilterFieldComponent } from './components/filter-field/filter-field.
 import { NtsAutocompleteComponent } from './components/autocomplete/autocomplete.component';
 import { NtsInputComponent } from './components/input/input.component';
 import { NtsStateComponent } from './components/state/state.component';
-import { NumberComponent } from './components/number/number.component';
+import { NtsNumberComponent } from './components/number/number.component';
 import { NtsTextComponent } from './components/text/text.component';
 
 const COMPONENTS = [
   NtsFormFieldComponent, NtsFilterFieldComponent, NtsAutocompleteComponent,
   //
   NtsInputComponent,
-  NumberComponent,
+  NtsNumberComponent,
   NtsTextComponent,
   NtsStateComponent
 ];

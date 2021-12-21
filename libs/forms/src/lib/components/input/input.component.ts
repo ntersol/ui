@@ -3,12 +3,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const noop = () => { };
 
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
+export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => NtsInputComponent),
   multi: true
 };
-
+// ngModel pass thru
+// https://embed.plnkr.co/nqKUSPWb6w5QXr8a0wEu/?show=preview
 @Component({
   selector: 'nts-input',
   templateUrl: './input.component.html',
@@ -16,17 +17,17 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
 })
-export class NtsInputComponent<t> implements OnInit, ControlValueAccessor { //
+export class NtsInputComponent<t> implements OnInit, ControlValueAccessor {
 
   @Input() type = 'text';
   @Input() placeholder: string | null = null;
   @Input() label: string | null = null;
   @Input() hover = true;
 
-  public focused = false;
+  @Input() focused = false;
 
   /** Manage value internally in the class */
-  private innerValue: t | null = null;
+  protected innerValue: t | null = null;
 
   constructor() { }
 
@@ -34,19 +35,19 @@ export class NtsInputComponent<t> implements OnInit, ControlValueAccessor { //
 
   //Placeholders for the callbacks which are later provided
   //by the Control Value Accessor
-  private onTouchedCallback: () => void = noop;
-  private onChangeCallback: (_: t | null) => void = noop;
+  protected onTouchedCallback: () => void = noop;
+  protected onChangeCallback: (_: t | null) => void = noop;
 
-  //get accessor
-  get value(): t | null {
+  //Get accessor
+  @Input() get value(): t | null {
     return this.innerValue;
   };
 
-  //set accessor including call the onchange callback
+  //Set accessor including call the onchange callback
   set value(v: t | null) {
     if (v !== this.innerValue) {
       this.innerValue = v;
-      this.onChangeCallback(v);
+      this.onChangeCallback(this.innerValue);
     }
   }
 

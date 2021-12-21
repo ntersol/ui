@@ -1,1 +1,4 @@
-<p>text works!</p>
+<nts-input [placeholder]="placeholder" [label]="label" [hover]="hover" [focused]="focused" [value]="value">
+    <input class="p-inputtext p-component p-element" name="fieldName" [type]="type" [(ngModel)]="value" ngDefaultControl
+        [placeholder]="focused || !hover ? placeholder : ''" (focus)="onFocus()" (blur)="onBlur()">
+</nts-input>

@@ -8,7 +8,8 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 })
 export class FormsComponent implements OnInit {
 
-  public model: any = null;
+  public modelText: any = null;
+  public modelNumber: any = null;
 
   public exampleimport2 = this.highlight.htmlEncode(``);
   public exampleTS: string = this.highlight.htmlEncode(``);
@@ -16,7 +17,9 @@ export class FormsComponent implements OnInit {
 
   constructor(private highlight: HighlightService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    console.log(this)
+  }
 
   ngAfterViewInit() {
     this.highlight.highlightAll();

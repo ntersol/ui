@@ -10,7 +10,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 
 @Component({
   selector: 'nts-text',
-  templateUrl: '../input/input.component.html',
+  templateUrl: './text.component.html',
   styleUrls: ['../input/input.component.scss', './text.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
@@ -22,6 +22,7 @@ export class NtsTextComponent extends NtsInputComponent<string> implements OnIni
   }
 
   ngOnInit(): void {
+    console.log(this)
   }
 
 }
