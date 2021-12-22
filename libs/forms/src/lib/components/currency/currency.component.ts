@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NtsInputComponent } from '../input/input.component';
-import { NtsNumberComponent } from '../number/number.component';
 
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => NtsNumberComponent),
+  useExisting: forwardRef(() => NtsCurrencyComponent),
   multi: true
 };
 
