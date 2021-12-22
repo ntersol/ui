@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, forwardRef, OnInit } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, forwardRef, OnInit, Optional, Self } from '@angular/core';
+import { NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NtsInputComponent } from '../input/input.component';
 
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
@@ -17,7 +17,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 })
 export class NtsTextComponent extends NtsInputComponent<string> implements OnInit {
 
-  constructor() {
+  constructor(@Self() @Optional() public ngControl: NgControl) {
     super()
   }
 

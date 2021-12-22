@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit, Optional, Self } from '@angular/core';
+import { AbstractControl, ControlValueAccessor, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const noop = () => { };
 
@@ -28,12 +28,20 @@ export class NtsInputComponent<t> implements OnInit, ControlValueAccessor {
 
   @Input() focused = false;
 
+  // Can't use 'formControl', it's defined incorrectly in the Angular definitions and can't be overriden without a lot of hacky stuff
+  // See https://medium.com/youngers-consulting/angular-typed-reactive-forms-22842eb8a181
+  // @Input() formControl?: AbstractControl | null = null;
+  @Input() control?: AbstractControl | null = null;
+
   /** Manage value internally in the class */
   protected innerValue: t | null = null;
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+    console.log(this)
+  }
 
   //Placeholders for the callbacks which are later provided
   //by the Control Value Accessor

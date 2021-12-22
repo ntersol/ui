@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit, Optional, Self } from '@angular/core';
+import { NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NtsInputComponent } from '../input/input.component';
 
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
@@ -19,7 +19,7 @@ export class NtsCurrencyComponent extends NtsInputComponent<number> implements O
 
   @Input() disabled = false
 
-  constructor() {
+  constructor(@Self() @Optional() public ngControl: NgControl) {
     super()
   }
 

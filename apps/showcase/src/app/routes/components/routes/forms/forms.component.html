@@ -1,12 +1,20 @@
 <div class="author"><strong>Author:</strong> Jerrol Krause</div>
 <h1>Forms</h1>
 <p>Coming soon!</p>
-<form [formGroup]="form">
+<form>
   <p>
-    <nts-input-text placeholder="Jerrol" label="First Name"></nts-input-text> Value: {{modelText}}
+    <nts-input placeholder="Jerrol" label="First Name" [control]="form?.get('modelText')"
+      [control]="form?.get('modelText')"></nts-input>
+
+    <nts-form-field placeholder="Jerrol" label="First Name"></nts-form-field>
+    <!--
+    <nts-input-text placeholder="Jerrol" label="First Name" formControlName="modelText"></nts-input-text> Value:
+    {{modelText}}
+    -->
   </p>
 </form>
 <hr />
+<!--
 <p>
   <nts-input-number placeholder="18" label="Age" [(ngModel)]="modelNumber"></nts-input-number> Value: {{modelNumber}}
 </p>
@@ -24,13 +32,12 @@
   Value: {{modelNumber3}}
 </p>
 <hr />
-
 <p>
   <nts-input-currency placeholder="$100.00" [(ngModel)]="currency"> </nts-input-currency>
   Value: {{currency}}
 </p>
 <hr />
-
+-->
 <p-tabView>
   <p-tabPanel header="Documentation">
     <div>
