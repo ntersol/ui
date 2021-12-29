@@ -1,19 +1,5 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
-import { TabView } from 'primeng/tabview';
+import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
 import { NtsDocumentEditor } from '../../../document-editor';
 import { pdfjsDist } from '../../../shared/models/pdf';
 
@@ -25,35 +11,23 @@ import { pdfjsDist } from '../../../shared/models/pdf';
 })
 export class MultiDocComponent implements OnInit, OnChanges {
   // Documents
-  @Input() documents: Array<NtsDocumentEditor.Document> = [];
+  @Input() documents?: NtsDocumentEditor.Document[] | null;
+  @Input() viewModels?: NtsDocumentEditor.Preview[][] | null;
+  @Input() settings?: NtsDocumentEditor.Settings | null;
+  @Input() tnSettings?: NtsDocumentEditor.ThumbnailSize | null;
+  @Input() selection?: number[] = [];
   @Input() pageActive?: NtsDocumentEditor.PageActive;
-  @Input() pdfInfo?: Array<NtsDocumentEditor.PdfInfo> = [];
+  @Input() pdfInfo?: NtsDocumentEditor.PdfInfo[];
+
   // Viewer
-  @Input() pdfSrcs?: Array<pdfjsDist.PDFDocumentProxy> = [];
+  @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[] | null;
   @Input() rotation = 0;
-  @Input() selection: NtsDocumentEditor.Selection = [[]];
-  @Input() settings: NtsDocumentEditor.Settings = {
-    canRotate: false,
-    canRemove: false,
-    canSplit: false,
-    canReorder: false,
-    canSelect: false,
-    canViewFull: false,
-    canReset: false,
-  };
-  @Input() tnSettings: NtsDocumentEditor.ThumbnailSize = { width: 0, height: 0 };;
-  @Input() viewModels?: Array<Array<NtsDocumentEditor.Preview>>;
-  @Input() isAdd = false;
-  @Input() maxHeight = '100%';
-  @Output() pdfChange = new EventEmitter<boolean>();
 
-  @ViewChild('tabView') tabView?: TabView;
+  public docsSource?: NtsDocumentEditor.Document[];
+  public activeIndex = 0;
+  public activeIndexDest = 0;
 
-  docsSource?: Array<NtsDocumentEditor.Document>;
-  activeIndex = 0;
-  activeIndexDest = 0;
-
-  settingsSrc: NtsDocumentEditor.Settings = {
+  public settingsSrc: NtsDocumentEditor.Settings = {
     canRotate: false,
     canRemove: false,
     canSplit: false,
@@ -63,7 +37,7 @@ export class MultiDocComponent implements OnInit, OnChanges {
     canReset: false,
   };
 
-  settingsDest: NtsDocumentEditor.Settings = {
+  public settingsDest: NtsDocumentEditor.Settings = {
     canRotate: false,
     canRemove: false,
     canSplit: false,
@@ -73,10 +47,10 @@ export class MultiDocComponent implements OnInit, OnChanges {
     canReset: true,
   };
 
-  documentsLeft$ = new BehaviorSubject<Array<NtsDocumentEditor.Document> | null>(null);
+  public documentsLeft$ = new BehaviorSubject<NtsDocumentEditor.Document[] | null>(null);
+  constructor() {}
 
-  constructor(private _cdr: ChangeDetectorRef) { }
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnChanges(model: SimpleChanges) {
     if (model.documents && this.documents) {
@@ -84,42 +58,15 @@ export class MultiDocComponent implements OnInit, OnChanges {
     }
   }
 
-  indexChangeDest(event: any) {
+  public indexChange(event: any) {
+    this.activeIndex = event.index;
+  }
+
+  public indexChangeDest(event: any) {
     this.activeIndexDest = event.index;
   }
 
-  pdfChangeHandler() {
-    this.pdfChange.emit(true);
-  }
-  setActivePage() {
+  public setActivePage() {
     this.activeIndexDest = 1;
-  }
-  selectTab(e: any) {
-    this.activeIndex = e.index;
-    e.originalEvent.target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-  }
-
-  nextTab() {
-    if (this.activeIndex === (this.docsSource && this.docsSource.length - 1)) {
-      return;
-    }
-    this.activeIndex++;
-    const doc = this.tabView && this.tabView.navbar.nativeElement.children[this.activeIndex] as Document;
-    if (doc) {
-      doc.getElementsByTagName('a')[0].click();
-      this._cdr.detectChanges();
-    }
-
-  }
-  prevTab() {
-    if (this.activeIndex === 0) {
-      return;
-    }
-    this.activeIndex--;
-    const doc = this.tabView && this.tabView.navbar.nativeElement.children[this.activeIndex] as Document;
-    if (doc) {
-      doc.getElementsByTagName('a')[0].click();
-      this._cdr.detectChanges();
-    }
   }
 }

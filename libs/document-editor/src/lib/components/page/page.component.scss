@@ -16,14 +16,6 @@
   &:hover {
     border-color: #75a0db;
   }
-  .center-page {
-    display: flex;
-    justify-content: center;
-  }
-}
-
-.hide {
-  display: none;
 }
 
 .nts-docs-page-tn {
@@ -63,7 +55,7 @@
       width: 2em;
     }
     &.bottom{
-      bottom:5px;
+      bottom:5px; 
     }
   }
   .nts-docs-tn-dropzone {

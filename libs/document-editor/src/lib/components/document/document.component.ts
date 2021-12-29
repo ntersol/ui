@@ -1,6 +1,4 @@
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-
+import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { NtsDocumentEditor } from '../../document-editor';
 
 @Component({
@@ -10,38 +8,22 @@ import { NtsDocumentEditor } from '../../document-editor';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentComponent implements OnInit, OnChanges {
+  @Input() document?: NtsDocumentEditor.Document | null;
+  @Input() viewModels?: NtsDocumentEditor.Preview[][] | null;
+  @Input() settings?: NtsDocumentEditor.Settings | null;
+  @Input() tnSettings?: NtsDocumentEditor.ThumbnailSize | null;
+  @Input() selection: NtsDocumentEditor.Selection = [];
+  @Input() pageActive?: NtsDocumentEditor.PageActive;
+  @Input() pdfInfo?: NtsDocumentEditor.PdfInfo[];
+  @Input() docIndex = 0;
   /** Can this page have pages from other docs dropped. If false can only drop and reorder pages from same doc */
   @Input() canDropFromAny = true;
-  @Input() docIndex = 0;
-  @Input() document?: NtsDocumentEditor.Document;
-  @Input() pageActive?: NtsDocumentEditor.PageActive;
-  @Input() pageIndex?: number;
-  @Input() pdfInfo?: Array<NtsDocumentEditor.PdfInfo>;
-  @Input() selection: NtsDocumentEditor.Selection = [[]];
-  @Input() settings: NtsDocumentEditor.Settings = {
-    canRotate: false,
-    canRemove: false,
-    canSplit: false,
-    canReorder: false,
-    canSelect: false,
-    canViewFull: false,
-    canReset: false,
-  };
-  @Input() tnSettings: NtsDocumentEditor.ThumbnailSize = { width: 0, height: 0 };
-  @Input() viewModels?: Array<Array<NtsDocumentEditor.Preview>>;
-  @Input() splitView?= false;
-  @Input() leftBox = false;
-  @Input() isAdd = false;
-  @Input() isMerge = false;
-  @Input() maxHeight = '100%';
-  @Output() pdfChange = new EventEmitter<boolean>();
+
   @Output() setActivePage = new EventEmitter<NtsDocumentEditor.PageActive>();
 
-  ngOnInit() { }
+  constructor() {}
 
-  ngOnChanges() { }
+  ngOnInit() {}
 
-  pdfHasChange() {
-    this.pdfChange.emit(true);
-  }
+  ngOnChanges() {}
 }

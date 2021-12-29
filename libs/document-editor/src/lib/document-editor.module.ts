@@ -16,9 +16,6 @@ import { DefaultComponent } from './components/workflows/default/default.compone
 import { MultiDocComponent } from './components/workflows/multi-doc/multi-doc.component';
 import { DisplayComponent } from './components/workflows/display/display.component';
 import { ViewerToolbarComponent } from './components/viewer-toolbar/viewer-toolbar.component';
-import { SplitComponent } from './components/workflows/split/split.component';
-import { PageSplitComponent } from './components/workflows/split/page/page.component';
-import { DragDropModule } from 'primeng/dragdrop';
 
 @NgModule({
   declarations: [
@@ -29,13 +26,11 @@ import { DragDropModule } from 'primeng/dragdrop';
     DocumentComponent,
     DefaultComponent,
     MultiDocComponent,
-    SplitComponent,
-    PageSplitComponent,
     DisplayComponent,
     ViewerToolbarComponent,
   ],
-  imports: [CommonModule, TabViewModule, ButtonModule, ProgressBarModule, CardModule, DragDropModule],
+  imports: [CommonModule, TabViewModule, ButtonModule, ProgressBarModule, CardModule],
   providers: [DocumentEditorService],
   exports: [EditorComponent],
 })
-export class NtsDocumentEditorModule { }
+export class NtsDocumentEditorModule {}
