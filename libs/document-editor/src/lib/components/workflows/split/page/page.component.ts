@@ -12,7 +12,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { NtsDocumentEditor } from '../../../../document-editor';
+import { NtsDocumentEditor } from '../../../../shared/models/document-editor.model';
 import { DocumentEditorService } from '../../../../shared/document-editor.service';
 
 @Component({

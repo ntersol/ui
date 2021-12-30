@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { NtsDocumentEditor } from '../../../document-editor';
+import { NtsDocumentEditor } from '../../../shared/models/document-editor.model';
 import { pdfjsDist } from '../../../shared/models/pdf';
 
 @Component({

@@ -1,14 +1,16 @@
+import { pdfjsDist } from './pdf';
+
 export namespace NtsDocumentEditor {
-  interface Document {
+  export interface Document {
     label: string | null;
     pages: Page[];
   }
   /** How to handle the initial view if multiple documents are added */
-  type MultipleAction = 'merge' | 'separate';
-  type InputTypes = string | Blob;
-  type Workflow = 'default' | 'multiDoc' | 'display';
+  export type MultipleAction = 'merge' | 'separate';
+  export type InputTypes = string | Blob;
+  export type Workflow = 'default' | 'multiDoc' | 'display';
 
-  type Resolver = (val: t) => t;
+  export type Resolver = <t>(val: t) => t;
 
   export interface PdfReady {
     _pdfInfo: {
@@ -17,8 +19,7 @@ export namespace NtsDocumentEditor {
     };
   }
 
-  interface Page {
-    [key: string]
+  export interface Page {
     /** Source pdf of this page */
     pdfSrcIndex: number;
     /** Original non modified position of this page in the document */
@@ -28,22 +29,22 @@ export namespace NtsDocumentEditor {
     annotations?: any | null;
   }
 
-  interface PdfInfo {
+  export interface PdfInfo {
     label: string;
   }
 
-  interface Preview {
-    public canvas: HTMLCanvasElement;
+  export interface Preview {
+    canvas: HTMLCanvasElement;
     render(): void;
   }
 
-  interface ThumbnailSize {
+  export interface ThumbnailSize {
     width: number;
     /** Height is optional, if not supplied the correct ratio from width will be determined */
     height?: number;
   }
 
-  interface Settings {
+  export interface Settings {
     canRotate: boolean;
     canRemove: boolean;
     canSplit: boolean;
@@ -53,26 +54,26 @@ export namespace NtsDocumentEditor {
     canReset: boolean;
   }
 
-  interface PageActive {
+  export interface PageActive {
     pdfIndex: number;
     pageIndex: number;
   }
 
-  interface DragSource {
+  export interface DragSource {
     pdfIndex: number;
     pageIndex: number;
     pageSrc: Page | null;
   }
 
-  interface ViewerOptions {
+  export interface ViewerOptions {
     canZoom?: boolean;
     canChangePage?: boolean;
     showThumbnails?: boolean;
   }
 
-  type Selection = number[][];
+  export type Selection = number[][];
 
-  interface State {
+  export interface State {
     loadingScript: boolean;
     loadingPdf: boolean;
     resetting: boolean;

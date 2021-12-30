@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { NtsDocumentEditor } from '../../../document-editor';
+import { NtsDocumentEditor } from '../../../shared/models/document-editor.model';
 import { pdfjsDist } from '../../../shared/models/pdf';
 
 @Component({

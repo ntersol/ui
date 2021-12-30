@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { NtsDocumentEditor } from '../../document-editor';
+import { NtsDocumentEditor } from '../../shared/models/document-editor.model';
 
 @Component({
   selector: 'app-document',

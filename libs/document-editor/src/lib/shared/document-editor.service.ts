@@ -4,7 +4,7 @@ import { documentModelCreate, documentMerge } from './utils/models-create.util';
 import { viewModelCreate } from './utils/view-model-create.util';
 import { insertAt } from './utils/arrays.util';
 import { isNotNil } from './guards/guards.utils';
-import { NtsDocumentEditor } from '../document-editor';
+import { NtsDocumentEditor } from './models/document-editor.model';
 import { pdfjsDist } from './models/pdf';
 import { Injectable } from "@angular/core";
 import { cloneDeep } from 'lodash';

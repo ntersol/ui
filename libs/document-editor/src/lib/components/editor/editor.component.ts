@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, Input, OnChanges, OnDestroy, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { DocumentEditorService } from '../../shared/document-editor.service';
 import { filter, debounceTime, skip, tap } from 'rxjs/operators';
-import { NtsDocumentEditor } from '../../document-editor';
+import { NtsDocumentEditor } from '../../shared/models/document-editor.model';
 
 @Component({
   selector: 'nts-document-editor',
