@@ -1,5 +1,5 @@
-<nts-input [label]="label" [hover]="hover" [focused]="focused" [value]="value">
-    <input class="p-inputtext p-component p-element" name="fieldName" type="text" [(ngModel)]="value" ngDefaultControl
+<nts-input [label]="label" [hover]="hover" [focused]="focused" [prefix]="prefix" [suffix]="suffix" [control]="control">
+    <input class="p-inputtext p-component p-element" name="fieldName" type="text"
         [placeholder]="!!placeholder && (focused || !hover || !label) ? placeholder : ''" (focus)="onFocus()"
-        (blur)="onBlur()">
+        (blur)="onBlur()" [formControl]="formControl">
 </nts-input>

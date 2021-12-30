@@ -3,10 +3,12 @@
 <p>Coming soon!</p>
 <form>
   <p>
-    <nts-input placeholder="Jerrol" label="First Name" [control]="form?.get('modelText')"
-      [control]="form?.get('modelText')"></nts-input>
 
-    <nts-form-field placeholder="Jerrol" label="First Name"></nts-form-field>
+
+
+    <nts-input-text placeholder="Jerrol" label="First Name" [control]="form?.get('modelText')">
+    </nts-input-text>
+    {{form?.get('modelText')?.value}}
     <!--
     <nts-input-text placeholder="Jerrol" label="First Name" formControlName="modelText"></nts-input-text> Value:
     {{modelText}}

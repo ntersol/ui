@@ -5,7 +5,7 @@
         <span class="p-float-label">
             <ng-content></ng-content>
             <label for="float-input" [ngClass]="{
-                'float' : !hover || value !== null
+                'float' : !hover || control?.value !== null
             }" [innerHtml]="label"></label>
         </span>
         <span class="p-inputgroup-addon" *ngIf="suffix" [innerHtml]="suffix"></span>

@@ -1,20 +1,11 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit, Optional, Self, ViewEncapsulation } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { NtsInputComponent } from '../input/input.component';
-import { NgControl } from '@angular/forms';
-
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => NtsNumberComponent),
-  multi: true
-};
 
 @Component({
   selector: 'nts-input-number',
   templateUrl: './number.component.html',
   styleUrls: ['./number.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR],
   encapsulation: ViewEncapsulation.None
 })
 export class NtsNumberComponent extends NtsInputComponent<number> implements OnInit {
@@ -28,7 +19,7 @@ export class NtsNumberComponent extends NtsInputComponent<number> implements OnI
   @Input() disabled = false
 
 
-  constructor(@Self() @Optional() public ngControl: NgControl) {
+  constructor() {
     super()
   }
 

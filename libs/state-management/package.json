@@ -1,6 +1,6 @@
 {
   "name": "@ntersol/state-management",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "peerDependencies": {},
   "dependencies": {
     "tslib": "^2.0.0"
