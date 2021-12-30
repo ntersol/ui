@@ -6,4 +6,4 @@
 
 ### Classes
 
-- [NtsDocumentEditorModule](classes/ntsdocumenteditormodule.md)
+- [NtsDocumentEditorModule](classes/NtsDocumentEditorModule.md)

@@ -394,7 +394,6 @@
           "options": {
             "commands": [
               "ng run document-editor:patch",
-              "ng run document-editor:readme",
               "ng run document-editor:build:production",
               "ng run document-editor:pack"
             ],
