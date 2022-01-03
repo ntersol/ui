@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { DocumentEditorService } from '../../../..';
+import { DocumentEditorService } from '../../../shared/document-editor.service';
 import { NtsDocumentEditor } from '../../../shared/models/document-editor.model';
 import { pdfjsDist } from '../../../shared/models/pdf';
 
