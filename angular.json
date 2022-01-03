@@ -1347,7 +1347,6 @@
           "options": {
             "commands": [
               "ng run table:patch",
-              "ng run table:readme",
               "ng run table:build:production",
               "ng run table:pack"
             ],
