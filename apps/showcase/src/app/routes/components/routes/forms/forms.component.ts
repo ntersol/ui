@@ -1,6 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { AbstractControl, FormBuilder, ValidationErrors } from '@angular/forms';
 import { HighlightService } from '../../../../shared/services/highlight.service';
+
+const required = (control?: AbstractControl | null): ValidationErrors | null => {
+  if (!control) {
+    return null;
+  }
+  if (!control.value) {
+    return {
+      'requiredabc': 'This field is required loser'
+    }
+  }
+  return null;
+}
 
 @Component({
   selector: 'nts-forms',
@@ -10,8 +22,8 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 export class FormsComponent implements OnInit {
 
   public form = this.fb.group({
-    modelText: [''],
-    modelText2: [],
+    modelText: [null, [required]],
+    modelText2: [null, []],
     modelNumber: [],
     modelNumber2: [],
     currency: [],
@@ -31,6 +43,10 @@ export class FormsComponent implements OnInit {
   constructor(private highlight: HighlightService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    const c = this.form?.get('modelText');
+    c?.setErrors({ 'busted': true });
+    console.log(c?.getError('busted'));
+
   }
 
   ngAfterViewInit() {

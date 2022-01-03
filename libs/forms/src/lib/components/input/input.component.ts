@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, startWith } from 'rxjs/operators';
 
 
 @UntilDestroy()
@@ -9,6 +11,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class NtsInputComponent<t> implements OnInit, OnDestroy {
   /** Standard html placeholder text */
@@ -40,7 +43,7 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   @Input() suffix: string | null = null;
   /** Small text that appears beneath the control */
   @Input() hint: string | null = null;
-  /** Is this contorl focosued */
+  /** Is this contorl focused */
   @Input() focused = false;
 
   // Can't use 'formControl' directly, it's defined incorrectly in the Angular definitions and can't be overriden without a lot of hacky stuff
@@ -55,15 +58,41 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   @Output() onFocus = new EventEmitter();
   /** When the input is blurred */
   @Output() onBlur = new EventEmitter();
+  /** When data on the input is changed */
   @Output() onChange = new EventEmitter<t>();
   /** On keyup event on the input */
   @Output() onKeyup = new EventEmitter<KeyboardEvent>();
 
-  constructor() { }
+  public initialTouch = false;
+
+  public showErrors$!: Observable<boolean>;
+  public errors$!: Observable<[string, any][] | null>
+
+  constructor() {
+
+  }
 
   ngOnInit(): void {
+
     // Emit changes to onChange event emitter
-    this.control?.valueChanges.pipe(untilDestroyed(this)).subscribe(v => this.onChange.emit(v))
+    this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe(v => {
+      this.onChange.emit(v);
+      this.control?.markAsTouched();
+    });
+
+    this.showErrors$ = this.formControl.statusChanges.pipe(
+      startWith(this.control?.status),
+      debounceTime(1),
+      map(x => x === 'INVALID' && !!this.control?.touched),
+      distinctUntilChanged()
+    );
+
+    this.errors$ = this.formControl.statusChanges.pipe(
+      startWith(this.control?.errors),
+      debounceTime(1),
+      map(() => !this.control?.errors ? null : Object.entries(this.control?.errors))
+    );
+
   }
 
 

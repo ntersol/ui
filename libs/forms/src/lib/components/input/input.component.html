@@ -1,17 +1,54 @@
-<div class="nts-form-field">
+<div class="nts-form-field" [ngClass]="{
+   'nts-form-field-has-errors' : showErrors$ | async
+}">
+
     <div class="p-inputgroup">
         <!-- Prefix -->
         <span class="p-inputgroup-addon" *ngIf="prefix" [innerHtml]="prefix"></span>
         <span class="p-float-label">
+
             <!-- Projected content -->
             <ng-content></ng-content>
+
+
             <!-- Label-->
             <label [ngClass]="{
                 'float' : !hover || (control?.value !== null && control?.value !== '')
             }" [innerHtml]="label"></label>
         </span>
+
         <!-- Suffix -->
         <span class="p-inputgroup-addon" *ngIf="suffix" [innerHtml]="suffix"></span>
     </div>
+
+    <!-- Hint -->
     <div class="nts-form-field-hint" *ngIf="hint" [innerHtml]="hint"></div>
+
+    <!-- Errors -->
+    <div class="nts-form-field-errors pt-1 anim-fade-in" *ngIf="showErrors$ | async">
+        <div *ngIf="formControl?.errors?.required" class="nts-form-field-error">
+            {{ label || placeholder || 'This field' }} is
+            <strong>required</strong>
+        </div>
+        <div *ngIf="formControl?.errors?.minlength" class="nts-form-field-error">
+            Please enter at least
+            <strong>{{ formControl?.errors?.minlength?.requiredLength }}</strong>
+            characters
+        </div>
+        <div *ngIf="formControl?.errors?.maxlength" class="nts-form-field-error">
+            Please enter less than
+            <strong>{{ formControl?.errors?.maxlength?.requiredLength }}</strong>
+            characters
+        </div>
+        <div *ngIf="formControl?.errors?.min" class="nts-form-field-error">
+            Please enter a number that is greater than
+            <strong>{{ formControl?.errors?.min?.min }}</strong>
+        </div>
+        <div *ngIf="formControl?.errors?.max" class="nts-form-field-error">
+            Please enter a number that is less than
+            <strong>{{ formControl?.errors?.max?.max }}</strong>
+        </div>
+        <div *ngIf="formControl?.errors?.email" class="nts-form-field-error">Please enter a valid <strong>email
+                address</strong></div>
+    </div>
 </div>
