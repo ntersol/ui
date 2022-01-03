@@ -29,7 +29,7 @@ export class PageComponent implements OnInit, OnChanges {
 
   public loaded = false;
 
-  constructor(private docsSvc: DocumentEditorService) {}
+  constructor(private docsSvc: DocumentEditorService) { }
 
   ngOnInit() {
     this.setCanvas(this.pageRef.nativeElement);
@@ -37,7 +37,7 @@ export class PageComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(model: SimpleChanges) {
-    if (this.loaded && model.view) {
+    if (this.loaded && (model.view || model.tnSettings)) {
       this.setCanvas(this.pageRef.nativeElement);
     }
   }

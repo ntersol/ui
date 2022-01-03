@@ -1,18 +1,19 @@
-<div class="p-g">
-  <div class="p-col-12 p-lg-6">
-    <p-card>
-      <app-document
-        [document]="documents ? documents[0] : null"
-        [viewModels]="viewModels"
-        [settings]="settings"
-        [tnSettings]="tnSettings"
-        [selection]="selection[0]"
-        [pageActive]="pageActive"
-        [docIndex]="0"
-      ></app-document>
+<div class="row">
+  <div class="col-12 mb-3" style="overflow:auto;" [ngStyle]="{'max-height': maxHeight + 'px' }">
+    <p-card class="default-card">
+      <div class="docs-thumbnail-zoom">
+        <button class="nts-docs-tn-button" pButton [icon]="'fas fa-search-plus'" [disabled]="disableZoom"
+          (click)="zoomThumbnails(1.25)"></button>
+        <button class="nts-docs-tn-button" pButton [icon]="'fas fa-sync'" [disabled]="disableReset"
+          (click)="resetZoom()"></button>
+        <button class="nts-docs-tn-button" pButton [icon]="'fas fa-search-minus'" [disabled]="disableUnzoom"
+          (click)="zoomThumbnails(0.75)"></button>
+      </div>
+      <app-document [document]="documents ? documents[0] : null" [viewModels]="viewModels" [settings]="settings"
+        [tnSettings]="tnSettings" [selection]="selection[0]" [pageActive]="pageActive" [docIndex]="0"></app-document>
     </p-card>
   </div>
-  <div class="p-col-12 p-lg-6" style="overflow:auto;">
+  <div class="col-12" style="overflow:auto;" [ngStyle]="{'max-height': maxHeight + 'px' }">
     <!-- Full size viewer -->
     <app-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [rotation]="rotation"></app-viewer>
   </div>

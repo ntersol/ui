@@ -24,7 +24,7 @@
   background-color: #fff;
   position: relative;
   cursor: pointer;
-  transition: 0.2s ease-out;
+  transition: 0.2s ease-in-out;
   &:hover {
     .nts-docs-tn-controls {
       opacity: 1;
@@ -32,10 +32,10 @@
   }
   &.nts-docs-tn-excluded .nts-docs-tn-canvas {
     opacity: 0.1;
-    transition: 0.3s ease-out;
+    transition: 0.3s ease-in-out;
   }
   .nts-docs-tn-canvas {
-    transition: 0.3s ease-out;
+    transition: 0.3s ease-in-out;
     overflow: hidden;
     div {
       max-width: 100%;
@@ -48,14 +48,14 @@
     left: 5px;
     right: 5px;
     opacity: 0.3;
-    transition: 0.2s ease-out;
+    transition: 0.2s ease-in-out;
     z-index: 3;
     &.nts-docs-tn-controls-sm .nts-docs-tn-button {
       font-size: 10px;
       width: 2em;
     }
     &.bottom{
-      bottom:5px; 
+      bottom:5px;
     }
   }
   .nts-docs-tn-dropzone {

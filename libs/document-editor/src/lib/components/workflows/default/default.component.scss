@@ -1,0 +1,19 @@
+.docs-thumbnail-zoom {
+  display: flex;
+  justify-content: space-around;
+  max-width: 150px;
+}
+
+.default-card {
+  height: 100%;
+  overflow-y: auto;
+  display: block;
+}
+
+::ng-deep .default-card {
+  height: 100%;
+  display: block;
+  & > .p-card.p-component {
+    overflow-y: auto;
+  }
+}

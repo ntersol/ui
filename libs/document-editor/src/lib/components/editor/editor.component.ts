@@ -45,6 +45,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() canSelect = true;
   @Input() canViewFull = true;
   @Input() canReset = true;
+  @Input() maxHeight = 860;
 
   @Input() selection: NtsDocumentEditor.Selection = [];
   /** Configure options that appear in the doc viewer. False means no configuration */
@@ -93,7 +94,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
 
   private loaded = false;
 
-  constructor(public docSvc: DocumentEditorService) {}
+  constructor(public docSvc: DocumentEditorService) { }
 
   ngOnInit() {
     this.docSvc.scriptsLoad(this.pdfJsSrc, this.pdfJsWorkerSrc);
