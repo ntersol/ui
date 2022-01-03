@@ -1446,7 +1446,7 @@
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["ng run tags:patch", "ng run tags:readme", "ng run tags:build:production", "ng run tags:pack"],
+            "commands": ["ng run tags:patch", "ng run tags:build:production", "ng run tags:pack"],
             "parallel": false
           }
         },
