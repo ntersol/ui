@@ -6,12 +6,13 @@
             <!-- Projected content -->
             <ng-content></ng-content>
             <!-- Label-->
-            <label for="float-input" [ngClass]="{
+            <label [ngClass]="{
                 'float' : !hover || (control?.value !== null && control?.value !== '')
             }" [innerHtml]="label"></label>
         </span>
         <!-- Suffix -->
         <span class="p-inputgroup-addon" *ngIf="suffix" [innerHtml]="suffix"></span>
+        <span class="nts-form-field-tooltip">Test</span>
     </div>
     <div class="nts-form-field-hint" *ngIf="hint" [innerHtml]="hint"></div>
 </div>

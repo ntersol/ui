@@ -10,11 +10,21 @@ import { AbstractControl, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NtsInputComponent<t> implements OnInit {
-
+  /** Standard html placeholder text */
   @Input() placeholder: string | null = null;
+  /** Floating label that appears in front of the content and moves above it when focused */
   @Input() label: string | null = null;
+  /** Allow hover functionality */
   @Input() hover = true;
 
+  /** Text to use for ID attribute */
+  @Input() id = '';
+  /** Text to use for name attribute */
+  @Input() name = '';
+  /** Any css classes */
+  @Input() styleClass = '';
+  /** Is disabled */
+  @Input() disabled = false;
 
 
   @Input() prefix: string | null = null;
