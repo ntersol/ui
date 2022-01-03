@@ -3,8 +3,8 @@
     <div class="p-grid">
       <div class="p-col p-lg-6">
         <p-card class="d-block mb-3">
-          <div class="float-right">
-            <button type="submit" p-button class="mr-2" (click)="patchData()">
+          <div class="float-end">
+            <button type="submit" p-button class="me-2" (click)="patchData()">
               Patch Data
             </button>
             <button type="submit" p-button>Test Error State</button>
@@ -15,7 +15,8 @@
               Text
             </div>
             <div class="p-col p-lg-8 align-self-center align-content-center">
-              <nts-form-field placeholder="First Name" formControlName="text" hint="Your name must be between 5 and 10 characters long"></nts-form-field>
+              <nts-form-field placeholder="First Name" formControlName="text"
+                hint="Your name must be between 5 and 10 characters long"></nts-form-field>
             </div>
           </div>
           <div class="p-grid align-self-center align-content-center">
@@ -31,7 +32,8 @@
               Number
             </div>
             <div class="p-col p-lg-8 align-self-center align-content-center">
-              <nts-form-field placeholder="Your age" type="number" formControlName="number" hint="Please enter a number between 10 and 30"></nts-form-field>
+              <nts-form-field placeholder="Your age" type="number" formControlName="number"
+                hint="Please enter a number between 10 and 30"></nts-form-field>
             </div>
           </div>
           <div class="p-grid align-self-center align-content-center">
@@ -50,7 +52,8 @@
               Phone Number
             </div>
             <div class="p-col p-lg-8 align-self-center align-content-center">
-              <nts-form-field type="phoneNumber" placeholder="Home Phone" formControlName="phoneNumber"></nts-form-field>
+              <nts-form-field type="phoneNumber" placeholder="Home Phone" formControlName="phoneNumber">
+              </nts-form-field>
             </div>
           </div>
           <div class="p-grid align-self-center align-content-center">
@@ -58,7 +61,8 @@
               Currency
             </div>
             <div class="p-col p-lg-8 align-self-center align-content-center">
-              <nts-form-field type="currency" placeholder="Annual Income" prefix="$" formControlName="currency"></nts-form-field>
+              <nts-form-field type="currency" placeholder="Annual Income" prefix="$" formControlName="currency">
+              </nts-form-field>
             </div>
           </div>
           <div class="p-grid align-self-center align-content-center">
@@ -110,7 +114,8 @@
               Kitchen Sink
             </div>
             <div class="p-col p-lg-8 align-self-center align-content-center">
-              <nts-form-field placeholder="Monthly Amount" prefix="$" suffix=".com" hint="This is a hint" tooltip="This is a tooltip"></nts-form-field>
+              <nts-form-field placeholder="Monthly Amount" prefix="$" suffix=".com" hint="This is a hint"
+                tooltip="This is a tooltip"></nts-form-field>
             </div>
           </div>
           <div class="p-grid align-self-center align-content-center">
@@ -159,7 +164,8 @@
               Min/Max Character Length
             </div>
             <div class="p-col p-lg-8 align-self-center align-content-center">
-              <nts-form-field placeholder="Age" [minlength]="2" [maxlength]="5" hint="Between 2 and 5 characters"></nts-form-field>
+              <nts-form-field placeholder="Age" [minlength]="2" [maxlength]="5" hint="Between 2 and 5 characters">
+              </nts-form-field>
             </div>
           </div>
 
@@ -169,7 +175,8 @@
               <small><em>type="number" only</em></small>
             </div>
             <div class="p-col p-lg-8 align-self-center align-content-center">
-              <nts-form-field placeholder="Age" type="number" [min]="10" [max]="20" [maxlength]="2" hint="Between 2 and 5 characters"></nts-form-field>
+              <nts-form-field placeholder="Age" type="number" [min]="10" [max]="20" [maxlength]="2"
+                hint="Between 2 and 5 characters"></nts-form-field>
             </div>
           </div>
 
@@ -207,17 +214,20 @@
           <h3>Select</h3>
           <p>
             Object Array <br />
-            <nts-form-field placeholder="Fav Fruit" type="select" [options]="options" formControlName="select"></nts-form-field>
+            <nts-form-field placeholder="Fav Fruit" type="select" [options]="options" formControlName="select">
+            </nts-form-field>
           </p>
           <p>
             String Array <br />
-            <nts-form-field placeholder="Fav Fruit" type="select" [options]="optionsStr" formControlName="select2"></nts-form-field>
+            <nts-form-field placeholder="Fav Fruit" type="select" [options]="optionsStr" formControlName="select2">
+            </nts-form-field>
           </p>
         </p-card>
         <p-card class="d-block mb-3">
           <h3>Dropdown</h3>
           <p>
-            <nts-form-field placeholder="Fav Fruit" type="dropdown" [options]="options" formControlName="dropdown"></nts-form-field>
+            <nts-form-field placeholder="Fav Fruit" type="dropdown" [options]="options" formControlName="dropdown">
+            </nts-form-field>
           </p>
         </p-card>
         <p-card class="d-block mb-3">

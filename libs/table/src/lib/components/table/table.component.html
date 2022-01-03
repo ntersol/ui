@@ -1,32 +1,15 @@
 <div class="nts-table" [ngClass]="{ 'nts-table-compact': compact }">
-  <p-table
-    #tt
-    [value]="rows || []"
-    [columns]="columns"
-    sortMode="single"
-    (onSort)="onSort($event)"
-    [paginator]="paginator"
-    [rowsPerPageOptions]="rowsPerPageOptions"
-    [rows]="paginateRows"
-    [autoLayout]="false"
-    [rowTrackBy]="rowTrackBy"
-    [dataKey]="dataKey"
-  >
+  <p-table #tt [value]="rows || []" [columns]="columns" sortMode="single" (onSort)="onSort($event)"
+    [paginator]="paginator" [rowsPerPageOptions]="rowsPerPageOptions" [rows]="paginateRows" [autoLayout]="false"
+    [rowTrackBy]="rowTrackBy" [dataKey]="dataKey">
     <!-- Global filter-->
     <ng-template pTemplate="caption" *ngIf="showFilter || headerText">
       <div class="d-flex">
         <div *ngIf="headerText" [innerHTML]="headerText"></div>
-        <div class="p-filter ml-auto" *ngIf="showFilter">
-          <i class="fas fa-search mr-2" style="margin: 4px 4px 0 0"></i>
-          <input
-            #filter
-            type="text"
-            pInputText
-            size="50"
-            placeholder="Global Filter"
-            (input)="filterGlobalUpdate($event)"
-            style="width: auto"
-          />
+        <div class="p-filter ms-auto" *ngIf="showFilter">
+          <i class="fas fa-search me-2" style="margin: 4px 4px 0 0"></i>
+          <input #filter type="text" pInputText size="50" placeholder="Global Filter"
+            (input)="filterGlobalUpdate($event)" style="width: auto" />
           <a class="filter-clear" (click)="filterGlobalUpdate($event); filter.value = ''" *ngIf="filter.value">
             <i class="fas fa-times"></i>
           </a>
@@ -41,25 +24,19 @@
             <!-- Empty Header for Row Expand -->
           </th>
         </ng-container>
-        <th
-          *ngFor="let col of columns; let i = index"
-          [pSortableColumn]="col.field"
-          [pSortableColumnDisabled]="col.sortable === false"
-          #th
+        <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field"
+          [pSortableColumnDisabled]="col.sortable === false" #th
           [ngStyle]="{ width: columnWidthsPercent && columnWidthsPercent[i] ? columnWidthsPercent[i] + '%' : null }"
-          class="nts-table-th-{{ col.field | slug }} nts-table-th-type-{{ col.type | slug }}"
-        >
+          class="nts-table-th-{{ col.field | slug }} nts-table-th-type-{{ col.type | slug }}">
           <ng-container *ngIf="templates[col.field] && templates[col.field].templateHeader; else headerDefault">
-            <ng-container
-              *ngTemplateOutlet="
+            <ng-container *ngTemplateOutlet="
                 templates[col.field].templateHeader;
                 context: {
                   $$implicit: col.header,
                   value: col.header,
                   column: col
                 }
-              "
-            ></ng-container>
+              "></ng-container>
           </ng-container>
           <ng-template #headerDefault>
             <span [innerHtml]="col.header"></span>
@@ -83,18 +60,14 @@
           </td>
         </ng-container>
         <!-- Loop through columns -->
-        <td
-          *ngFor="let col of columns"
-          [ngClass]="[
+        <td *ngFor="let col of columns" [ngClass]="[
             'nts-table-td-' + (col.field | slug),
             'nts-table-td-type-' + (col.type | slug),
             col.type === 'limited' ? 'nts-limited' : ''
-          ]"
-        >
+          ]">
           <!-- Custom cell templates -->
           <ng-container *ngIf="templates[col.field] && templates[col.field].templateCell">
-            <ng-container
-              *ngTemplateOutlet="
+            <ng-container *ngTemplateOutlet="
                 templates[col.field].templateCell;
                 context: {
                   $$implicit: rowData[col.field],
@@ -102,8 +75,7 @@
                   column: col,
                   row: rowData
                 }
-              "
-            ></ng-container>
+              "></ng-container>
           </ng-container>
 
           <ng-container *ngIf="!templates[col.field] || (templates[col.field] && !templates[col.field].templateCell)">
@@ -153,8 +125,7 @@
         <tr>
           <td [attr.colspan]="columns.length + 1">
             <!-- Custom Row Expansion Template -->
-            <ng-container
-              *ngTemplateOutlet="
+            <ng-container *ngTemplateOutlet="
                 templates['expansion'].templateExpansion;
                 context: {
                   $$implicit: rowData['expansion'],
@@ -162,8 +133,7 @@
                   column: null,
                   row: rowData
                 }
-              "
-            >
+              ">
             </ng-container>
           </td>
         </tr>

@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="row mtg-calc-btns">
-    <div class="col-12 text-right">
+    <div class="col-12 text-end">
         <button type="button" class="btn btn-primary" *ngIf="config.showAmortization" (click)="toggleSchedule()">View
             Amortization Schedule</button>
     </div>
@@ -53,17 +53,17 @@
         <thead>
             <tr>
                 <th scope="col" class="text-center">Payment #</th>
-                <th scope="col" class="text-right">Principle</th>
-                <th scope="col" class="text-right">Interest</th>
-                <th scope="col" class="text-right">Principle Balance</th>
+                <th scope="col" class="text-end">Principle</th>
+                <th scope="col" class="text-end">Interest</th>
+                <th scope="col" class="text-end">Principle Balance</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let payment of amortization; let i = index">
                 <th scope="row" class="text-center">{{i + 1}}</th>
-                <td class="text-right">{{payment.principle | currency}}</td>
-                <td class="text-right">{{payment.interest | currency}}</td>
-                <td class="text-right">{{payment.balance | currency}}</td>
+                <td class="text-end">{{payment.principle | currency}}</td>
+                <td class="text-end">{{payment.interest | currency}}</td>
+                <td class="text-end">{{payment.balance | currency}}</td>
             </tr>
         </tbody>
     </table>

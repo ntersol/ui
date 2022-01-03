@@ -6,16 +6,16 @@
     </ng-container>
     <p-slideMenu #menu [model]="utilityMenu" [popup]="true" [viewportHeight]="utilityMenu.length * 65"></p-slideMenu>
     <a label="Show" (click)="menu.toggle($event)">
-      <i class="fas fa-user mr-2"></i> <span class="mr-2">{{ userName }}</span>
-      <i class="fas fa-caret-down mr-1"></i>
+      <i class="fas fa-user me-2"></i> <span class="me-2">{{ userName }}</span>
+      <i class="fas fa-caret-down me-1"></i>
     </a>
   </div>
 </p-menubar>
 
 <ng-template #mobileTemplate>
-  <div class="pt-2 float-right">
+  <div class="pt-2 float-end">
     <a (click)="sidebarVisible = true" class="p-2">
-      <i class="fas fa-bars fa-lg mr-2"></i>
+      <i class="fas fa-bars fa-lg me-2"></i>
     </a>
   </div>
 </ng-template>
