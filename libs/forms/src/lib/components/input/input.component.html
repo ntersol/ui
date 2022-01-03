@@ -1,15 +1,16 @@
 <div class="nts-form-field">
-
     <div class="p-inputgroup">
+        <!-- Prefix -->
         <span class="p-inputgroup-addon" *ngIf="prefix" [innerHtml]="prefix"></span>
         <span class="p-float-label">
+            <!-- Projected content -->
             <ng-content></ng-content>
+            <!-- Label-->
             <label for="float-input" [ngClass]="{
-                'float' : !hover || control?.value !== null
+                'float' : !hover || (control?.value !== null && control?.value !== '')
             }" [innerHtml]="label"></label>
         </span>
+        <!-- Suffix -->
         <span class="p-inputgroup-addon" *ngIf="suffix" [innerHtml]="suffix"></span>
     </div>
-
-
 </div>
