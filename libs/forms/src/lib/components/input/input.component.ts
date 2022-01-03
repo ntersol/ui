@@ -15,8 +15,11 @@ export class NtsInputComponent<t> implements OnInit {
   @Input() label: string | null = null;
   @Input() hover = true;
 
+
+
   @Input() prefix: string | null = null;
   @Input() suffix: string | null = null;
+  @Input() hint: string | null = null;
 
   @Input() focused = false;
 

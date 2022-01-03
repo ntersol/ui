@@ -11,6 +11,7 @@ export class FormsComponent implements OnInit {
 
   public form = this.fb.group({
     modelText: [],
+    modelText2: [],
     modelNumber: [],
     modelNumber2: [],
     currency: [],

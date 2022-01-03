@@ -1,4 +1,5 @@
-<nts-input [label]="label" [hover]="hover" [focused]="focused" [prefix]="prefix" [suffix]="suffix" [control]="control">
+<nts-input [label]="label" [hover]="hover" [focused]="focused" [prefix]="prefix" [suffix]="suffix" [hint]="hint"
+    [control]="control">
     <input class="p-inputtext p-component p-element" name="fieldName" type="text"
         [placeholder]="!!placeholder && (focused || !hover || !label) ? placeholder : ''" (focus)="onFocus()"
         (blur)="onBlur()" [formControl]="formControl">

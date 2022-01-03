@@ -6,7 +6,10 @@
 
 
 
-    <nts-input-text placeholder="Jerrol" label="First Name" [control]="form?.get('modelText')">
+    <nts-input-text placeholder="Jerrol" label="First Name" hint="Hello world!!!!" [control]="form?.get('modelText')">
+    </nts-input-text>
+
+    <nts-input-text placeholder="Jerrol" label="First Name" [control]="form?.get('modelText2')">
     </nts-input-text>
     {{form?.get('modelText')?.value}}
     <!--
