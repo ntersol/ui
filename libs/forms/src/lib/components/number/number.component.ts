@@ -16,8 +16,6 @@ export class NtsNumberComponent extends NtsInputComponent<number> implements OnI
   @Input() maxFractionDigits = 2;
   @Input() min: number | null = null;
   @Input() max: number | null = null;
-  @Input() disabled = false
-
 
   constructor() {
     super()

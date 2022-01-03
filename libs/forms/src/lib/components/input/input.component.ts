@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 // ngModel pass thru
@@ -23,14 +23,24 @@ export class NtsInputComponent<t> implements OnInit {
   @Input() name = '';
   /** Any css classes */
   @Input() styleClass = '';
-  /** Is disabled */
-  @Input() disabled = false;
+  /** Enable/disable this control, uses the form controls status */
+  @Input() set disabled(v: boolean | null) {
+    console.log('disabled', v, this.control)
+    if (!!this.control && v !== null) {
+      !v ? this.control.enable() : this.control.disable();
+    }
+  }
+  get disabled(): boolean {
+    return !!this.control?.enabled ?? false;
+  }
 
-
+  /** An icon of text that will appear BEFORE the input */
   @Input() prefix: string | null = null;
+  /** An icon of text that will appear AFTER the input */
   @Input() suffix: string | null = null;
+  /** Small text that appears beneath the control */
   @Input() hint: string | null = null;
-
+  /** Is this contorl focosued */
   @Input() focused = false;
 
   // Can't use 'formControl' directly, it's defined incorrectly in the Angular definitions and can't be overriden without a lot of hacky stuff
@@ -44,13 +54,9 @@ export class NtsInputComponent<t> implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
-    console.log(this)
   }
 
-  ///////////////
-  // OVERRIDES //
-  ///////////////
+
   onBlur() {
     this.focused = false;
   }

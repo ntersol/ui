@@ -10,7 +10,7 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 export class FormsComponent implements OnInit {
 
   public form = this.fb.group({
-    modelText: [],
+    modelText: [''],
     modelText2: [],
     modelNumber: [],
     modelNumber2: [],

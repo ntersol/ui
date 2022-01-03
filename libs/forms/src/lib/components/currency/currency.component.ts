@@ -10,8 +10,6 @@ import { NtsInputComponent } from '../input/input.component';
 })
 export class NtsCurrencyComponent extends NtsInputComponent<number> implements OnInit {
 
-  @Input() disabled = false
-
   constructor() {
     super()
   }
