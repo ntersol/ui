@@ -1,6 +1,6 @@
 <nts-input [label]="label" [hover]="hover" [focused]="focused" [prefix]="prefix" [suffix]="suffix" [control]="control">
     <p-inputNumber [placeholder]="!!placeholder && (focused || !hover || !label) ? placeholder : ''" [mode]="'currency'"
-        [useGrouping]="true" mode="currency" currency="USD" locale="en-US" [minFractionDigits]="2" (onFocus)="onFocus()"
-        (onBlur)="onBlur()">
+        [useGrouping]="true" mode="currency" currency="USD" locale="en-US" [minFractionDigits]="2" (onFocus)="focus()"
+        (onBlur)="blur()">
     </p-inputNumber>
 </nts-input>
