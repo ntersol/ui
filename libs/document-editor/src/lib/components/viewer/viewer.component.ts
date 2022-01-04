@@ -23,6 +23,11 @@ import { pdfjsDist } from '../../shared/models/pdf';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
+  disableZoom: boolean = false;
+  disableUnzoom: boolean = false;
+  disableReset: boolean = false;
+  _zoom: number = 1;
+  currentZoom: number = 1;
   @ViewChild('viewer', { static: true }) viewer!: ElementRef;
   @ViewChild('container', { static: true }) container!: ElementRef;
   @Input() pdfSrcs?: Array<pdfjsDist.PDFDocumentProxy>;
@@ -39,10 +44,11 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   constructor(public docSvc: DocumentEditorService, private _cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.disableReset = true;
     if (!this.pdfSrcs || this.pageActive === (null || undefined)) {
       return;
     }
-    this.pageGet(this.pdfSrcs, this.pageActive);
+    this.pageGet(this.pdfSrcs, this.pageActive, this._zoom);
     this._loaded = true;
   }
 
@@ -50,7 +56,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
     // console.warn('Viewer', model);
 
     if (this._loaded && model.pageActive && this.pdfSrcs && this.pageActive !== (null || undefined)) {
-      this.pageGet(this.pdfSrcs, this.pageActive);
+      this.pageGet(this.pdfSrcs, this.pageActive, this._zoom);
     }
   }
 
@@ -59,22 +65,18 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
    * @param pdfSrcs
    * @param pageActive
    */
-  pageGet(pdfSrcs: Array<pdfjsDist.PDFDocumentProxy>, pageActive: NtsDocumentEditor.PageActive) {
+  pageGet(pdfSrcs: Array<pdfjsDist.PDFDocumentProxy>, pageActive: NtsDocumentEditor.PageActive, scale: number) {
     if (!this.pdfSrcs) {
       return;
     }
-    pdfSrcs[pageActive.pdfIndex].getPage(pageActive.pageIndex + 1).then(page => this.pageRender(page));
+    pdfSrcs[pageActive.pdfIndex].getPage(pageActive.pageIndex + 1).then(page => this.pageRender(page, scale));
   }
 
   /**
    * Render a pdf page to the DOM
    * @param page
    */
-  pageRender(page: pdfjsDist.PDFPageProxy) {
-    let scale = 1.2;
-    if (this.isSignature) {
-      scale = 1;
-    }
+  pageRender(page: pdfjsDist.PDFPageProxy, scale: number) {
 
     const viewport = page.getViewport({ scale });
     this._origRotation = page.rotate;
@@ -120,5 +122,29 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
 
   get origRotation() {
     return this._origRotation;
+  }
+
+  zoom(value: number): void {
+    this.currentZoom = value > 1 ? this.currentZoom * 1.25 : this.currentZoom * .75;
+    this.disableReset = false;
+    if (this.currentZoom >= 1.6) {
+      this.disableZoom = true;
+    }
+    if (this.currentZoom <= 0.5) {
+      this.disableUnzoom = true;
+    }
+    if (this.pdfSrcs && this.pageActive) {
+      this.pageGet(this.pdfSrcs, this.pageActive, this.currentZoom);
+    }
+  }
+
+  resetZoom(): void {
+    if (this.pdfSrcs && this.pageActive) {
+      this.pageGet(this.pdfSrcs, this.pageActive, this._zoom);
+    }
+    this.currentZoom = this._zoom;
+    this.disableReset = true;
+    this.disableUnzoom = false;
+    this.disableZoom = false;
   }
 }
