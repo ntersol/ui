@@ -11,3 +11,15 @@ export const required = (control: AbstractControl): ValidationErrors | null => {
     }
     return null;
 };
+
+// Email form control validator function
+export const email = (control: AbstractControl) => {
+    const value = control.value;
+    const reg = /^([a-z0-9_\-\.]+)@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
+    if (value && !reg.test(value)) {
+        return {
+            email: 'Please enter a valid email address'
+        };
+    }
+    return null;
+};

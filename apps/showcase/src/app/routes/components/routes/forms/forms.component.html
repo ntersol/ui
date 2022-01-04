@@ -8,7 +8,8 @@
       [control]="form?.get('modelText')" [disabled]="false">
     </nts-input-text>
 
-    <nts-input-number placeholder="90630" label="Zipcode" [useGrouping]="false" [control]="form?.get('modelNumber')">
+    <nts-input-number placeholder="90630" label="Zipcode" [maxlength]="5" [useGrouping]="false"
+      [control]="form?.get('modelNumber')">
     </nts-input-number>
 
     <nts-input-number placeholder="100,000" label="Population" [control]="form?.get('modelNumber2')">
