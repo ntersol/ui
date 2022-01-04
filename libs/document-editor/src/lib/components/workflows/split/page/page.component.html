@@ -3,7 +3,7 @@
     'selected': isSelected
   }" pDraggable="page" (onDragStart)="dragStart()" [draggable]="true" (click)="setActive()">
   <div class="nts-docs-page-tn" [ngClass]="{ 'nts-docs-tn-excluded': page?.excluded }"
-    [ngStyle]="{ 'min-width': tnSettings && tnSettings.width + 12 + 'px', 'min-height': tnSettings && tnSettings.height + 15 + 'px' }">
+    [ngStyle]="{ 'min-width': tnSettings && tnSettings.width + 12 + 'px', 'min-height': (tnSettings.height || 0) + 15 + 'px' }">
 
     <div class="nts-docs-tn-canvas" [ngStyle]="{ height: tnSettings?.height + 'px' }">
       <div #pageRef [ngStyle]="{ transform: 'rotate(' + page?.rotation + 'deg)' }"></div>

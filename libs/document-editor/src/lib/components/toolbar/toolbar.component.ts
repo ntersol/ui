@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { DocumentEditorService } from '../../shared/document-editor.service';
+import { DocumentEditorService } from '../../shared/services/document-editor.service';
 import { NtsDocumentEditor } from '../../shared/models/document-editor.model';
 
 @Component({
@@ -28,8 +28,8 @@ export class ToolbarComponent implements OnInit {
     this.docsSvc.pageStateChangeAll('excluded', val);
   }
 
-  public rotateAll(rot: number) {
-    this.docsSvc.pageStateChangeAll('rotation', rot);
+  public rotateAll(val: number) {
+    this.docsSvc.pageStateChangeAll('rotation', val);
   }
 
   public docReset() {

@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NtsDocumentEditor } from '../../../../shared/models/document-editor.model';
-import { DocumentEditorService } from '../../../../shared/document-editor.service';
+import { DocumentEditorService } from '../../../../shared/services/document-editor.service';
 
 @Component({
   selector: 'docs-split-page',

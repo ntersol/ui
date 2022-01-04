@@ -1,6 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, ViewChild, ElementRef } from '@angular/core';
-import { DocumentEditorService } from '../../../shared/document-editor.service';
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+
 import { NtsDocumentEditor } from '../../../shared/models/document-editor.model';
+import { DocumentEditorService } from '../../../shared/services/document-editor.service';
 import { pdfjsDist } from '../../../shared/models/pdf';
 
 @Component({
@@ -15,28 +26,35 @@ export class DisplayComponent implements OnInit {
   disableReset: boolean = false;
   _zoom!: NtsDocumentEditor.ThumbnailSize;
   // Documents
-  @Input() document?: NtsDocumentEditor.Document | null;
-  @Input() viewModels?: NtsDocumentEditor.Preview[][] | null;
-  @Input() viewerOptions?: NtsDocumentEditor.ViewerOptions | false;
-  @Input() settings?: NtsDocumentEditor.Settings | null;
-  @Input() tnSettings?: NtsDocumentEditor.ThumbnailSize | null;
-  @Input() selection: NtsDocumentEditor.Selection = [];
+  @Input() document?: NtsDocumentEditor.Document;
   @Input() pageActive?: NtsDocumentEditor.PageActive;
-  @Input() pdfInfo?: NtsDocumentEditor.PdfInfo[];
-
+  @Input() pdfInfo?: Array<NtsDocumentEditor.PdfInfo>;
   // Viewer
-  @Input() pdfSrcs?: pdfjsDist.PDFDocumentProxy[] | null;
+  @Input() pdfSrcs?: Array<pdfjsDist.PDFDocumentProxy>;
   @Input() rotation = 0;
-  @Input() maxHeight!: number;
-
+  @Input() selection: NtsDocumentEditor.Selection = [[]];
+  @Input() settings: NtsDocumentEditor.Settings = {
+    canRotate: false,
+    canRemove: false,
+    canSplit: false,
+    canReorder: false,
+    canSelect: false,
+    canViewFull: false,
+    canReset: false,
+  };
+  @Input() tnSettings: NtsDocumentEditor.ThumbnailSize = { width: 0, height: 0 };
+  @Input() viewerOptions?: NtsDocumentEditor.ViewerOptions | false;
+  @Input() viewModels?: Array<Array<NtsDocumentEditor.Preview>>;
+  @Input() isSignature = false;
+  @Output() pdfChange = new EventEmitter<boolean>();
   @ViewChild('scrollbar', { static: true }) scrollbar!: ElementRef;
 
   constructor(public docSvc: DocumentEditorService) { }
 
   ngOnInit() {
     this._zoom = {
-      width: this.tnSettings?.width || 100,
-      height: this.tnSettings?.height
+      width: this.tnSettings?.width || 55,
+      height: this.tnSettings?.height || 138
     };
     this.disableReset = true;
     // Add scrollbar
@@ -66,5 +84,11 @@ export class DisplayComponent implements OnInit {
   resetZoom(): void {
     this.docSvc.stateChange({ tnSettings: this._zoom });
     this.disableReset = true;
+    this.disableUnzoom = false;
+    this.disableZoom = false;
+  }
+
+  pdfChangeHandler() {
+    this.pdfChange.emit(true);
   }
 }

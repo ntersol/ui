@@ -1,13 +1,15 @@
-import { BehaviorSubject, combineLatest, Subscription, fromEvent } from 'rxjs';
-import { distinctUntilChanged, map, filter, debounceTime } from 'rxjs/operators';
-import { documentModelCreate, documentMerge } from './utils/models-create.util';
-import { viewModelCreate } from './utils/view-model-create.util';
-import { insertAt } from './utils/arrays.util';
-import { isNotNil } from './guards/guards.utils';
-import { NtsDocumentEditor } from './models/document-editor.model';
-import { pdfjsDist } from './models/pdf';
-import { Injectable } from "@angular/core";
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+import { Injectable } from '@angular/core';
 import { cloneDeep } from 'lodash';
+import { BehaviorSubject, combineLatest, fromEvent, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+
+import { NtsDocumentEditor } from '../models/document-editor.model';
+import { isNotNil } from '../guards/guards.utils';
+import { pdfjsDist } from '../models/pdf';
+import { insertAt } from '../utils/arrays.util';
+import { documentMerge, documentModelCreate } from '../utils/models-create.util';
+import { viewModelCreate } from '../utils/view-model-create.util';
 
 declare global {
   interface Window {
@@ -46,20 +48,22 @@ const stateInitial: NtsDocumentEditor.State = {
   scrollPosition: null,
 };
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class DocumentEditorService {
   private _state: NtsDocumentEditor.State = cloneDeep(stateInitial);
   state$ = new BehaviorSubject(this._state);
 
   private _documentsModelSrc: Array<NtsDocumentEditor.Document> = [];
   private _documentsModel: Array<NtsDocumentEditor.Document> = [];
-  documentsModel$ = new BehaviorSubject<Array<NtsDocumentEditor.Document> | null>(null);
+  documentsModel$ = new BehaviorSubject<Array<NtsDocumentEditor.Document>>([]);
 
   assignPages$ = new BehaviorSubject<number[]>([]);
   assignedPages$ = this.assignPages$.asObservable();
 
   private _viewModels: Array<Array<NtsDocumentEditor.Preview>> = [];
-  viewModels$ = new BehaviorSubject<Array<Array<NtsDocumentEditor.Preview>> | null>(null);
+  viewModels$ = new BehaviorSubject<Array<Array<NtsDocumentEditor.Preview>>>([]);
   /** The index of the page currently being dragged */
   dragIndex: NtsDocumentEditor.DragSource = {
     pdfIndex: 0,
@@ -184,6 +188,7 @@ export class DocumentEditorService {
    * @param pageIndex
    */
   pageSelectionChange(docIndex: number, pageIndex: number, setSelection?: boolean) {
+    // console.log(docIndex, pageIndex)
     const selection = [...this._state.selection];
     // If set selection is set to true and the index is not already
     if (selection[docIndex].includes(pageIndex) && !setSelection) {
@@ -215,9 +220,15 @@ export class DocumentEditorService {
     documentsModel[srcDoc] = { ...documentsModel[srcDoc], pages: pagesDestination };
 
     // Add the page back to it's original document, resort to ensure its in the correct position
-    const pagesSource = [...documentsModel[page.pdfSrcIndex].pages, page].sort(
-      (a, b) => b.pageSrcIndex - a.pageSrcIndex,
-    );
+    const pagesSource = [...documentsModel[page.pdfSrcIndex].pages]; //.sort(
+    //(a, b) => b.pageSrcIndex - a.pageSrcIndex,
+    //);
+    if (pagesSource.length - 1 < page.pageSrcIndex) {
+      pagesSource.push(page);
+    } else {
+      pagesSource.splice(page.pageSrcIndex, 0, page);
+    }
+
     documentsModel[page.pdfSrcIndex] = { ...documentsModel[page.pdfSrcIndex], pages: pagesSource };
     // Update doc model
     this._documentsModel = documentsModel;
@@ -268,6 +279,7 @@ export class DocumentEditorService {
    * @param to
    */
   pageReorder(docIndex: number, pageDestination: NtsDocumentEditor.Page | null, side: 'left' | 'right') {
+    // console.log('pageReorder', docIndex, pageDestination, side, this._state.selection);
     let documentsModel = [...this._documentsModel];
 
     // Get an array of pages that were selected
@@ -402,6 +414,7 @@ export class DocumentEditorService {
         const model = documentModelCreate(docs);
         this._documentsModelSrc = multipleAction === 'merge' ? documentMerge(model) : model;
         this._documentsModel = cloneDeep(this._documentsModelSrc);
+        // console.log(this._documentsModelSrc, this._documentsModel);
         this.documentsModel$.next(this._documentsModel);
         this.stateChange({
           loadingPdf: false,

@@ -8,7 +8,7 @@ export namespace NtsDocumentEditor {
   /** How to handle the initial view if multiple documents are added */
   export type MultipleAction = 'merge' | 'separate';
   export type InputTypes = string | Blob;
-  export type Workflow = 'default' | 'multiDoc' | 'display';
+  export type Workflow = 'default' | 'multiDoc' | 'display' | 'split';
 
   export type Resolver = <t>(val: t) => t;
 

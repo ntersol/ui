@@ -1,26 +1,47 @@
-<div class="p-g">
-  <div class="p-col-12 p-lg-6">
-    <p-tabView [activeIndex]="activeIndex" (onChange)="indexChange($event)" *ngIf="docsSource?.length; noDocsSource">
+<div class="row">
+  <div class="col-4">
+    <p-tabView
+      #tabView
+      [activeIndex]="activeIndex"
+      (onChange)="selectTab($event)"
+      *ngIf="docsSource?.length; noDocsSource"
+    >
+      <div class="col-12 nav-container">
+
+          <div class="tab-button-left" *ngIf="docsSource && docsSource.length > 1">
+            <p-button styleClass="nav-btn" (click)="prevTab()" [disabled]="activeIndex === 0" icon="fas fa-arrow-left">
+            </p-button>
+          </div>
+          <div class="tab-button-right" *ngIf="docsSource && docsSource.length > 1">
+            <p-button
+              styleClass="nav-btn"
+              (click)="nextTab()"
+              [disabled]="activeIndex === docsSource.length - 1"
+              icon="fas fa-arrow-right"
+            ></p-button>
+          </div>
+      </div>
       <p-tabPanel
         *ngFor="let document of docsSource; let i = index"
         [selected]="i === activeIndex"
-        [header]="pdfInfo && pdfInfo[i + 1]?.label ? pdfInfo[i + 1].label : 'Document #' + (i + 1)"
+        [header]="(pdfInfo && pdfInfo[i + 1] + ' (Source)') || ''"
       >
         <ng-template pTemplate="content">
-          <!--
-            TODO:
-            [selection]="selection[i + 1]"
-          -->
           <app-document
+            [maxHeight]="maxHeight"
+            [isAdd]="isAdd"
+            [leftBox]="true"
             [document]="document"
             [viewModels]="viewModels"
             [settings]="settingsSrc"
             [tnSettings]="tnSettings"
+            [selection]="selection && [selection[i + 1]]"
             [pageActive]="pageActive"
             [docIndex]="i + 1"
             [canDropFromAny]="false"
             (setActivePage)="setActivePage()"
-          ></app-document>
+          >
+          </app-document>
         </ng-template>
       </p-tabPanel>
     </p-tabView>
@@ -30,16 +51,14 @@
       </div>
     </ng-template>
   </div>
-  <div class="p-col-12 p-lg-6 multi-doc" style="overflow: auto;">
+  <div class="col-8 multi-doc" style="overflow: auto">
     <p-tabView [activeIndex]="activeIndexDest" (onChange)="indexChangeDest($event)">
       <p-tabPanel [header]="pdfInfo && pdfInfo[0]?.label ? pdfInfo[0].label : 'Source Document'">
         <ng-template pTemplate="content">
-          <!--
-            TODO:
-             [selection]="selection[0]"
-          -->
           <app-document
-            [document]="!!documents && documents?.length && documents[0] ? documents[0] : null"
+            [maxHeight]="maxHeight"
+            [isAdd]="isAdd"
+            [document]="documents && documents[0]"
             [viewModels]="viewModels"
             [settings]="settingsDest"
             [tnSettings]="tnSettings"
@@ -52,7 +71,7 @@
       <p-tabPanel header="Viewer">
         <ng-template pTemplate="content">
           <!-- Full size viewer -->
-          <app-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [rotation]="rotation"></app-viewer>
+          <app-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [rotation]="rotation" [maxHeight]="maxHeight"></app-viewer>
         </ng-template>
       </p-tabPanel>
     </p-tabView>
