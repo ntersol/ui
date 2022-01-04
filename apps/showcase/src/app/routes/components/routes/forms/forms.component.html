@@ -4,20 +4,16 @@
 <form>
   <p>
 
-
-
     <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="First Name"
       [control]="form?.get('modelText')" [disabled]="false">
     </nts-input-text>
-    {{form?.get('modelText')?.value}}
 
-    <nts-input-text placeholder="Krause" label="Last Name" [disabled]="true" [control]="form?.get('modelText2')">
-    </nts-input-text>
-    {{form?.get('modelText2')?.value}}
-    <!--
-    <nts-input-text placeholder="Jerrol" label="First Name" formControlName="modelText"></nts-input-text> Value:
-    {{modelText}}
-    -->
+    <nts-input-number placeholder="90630" label="Zipcode" [useGrouping]="false" [control]="form?.get('modelNumber')">
+    </nts-input-number>
+
+    <nts-input-number placeholder="100,000" label="Population" [control]="form?.get('modelNumber2')">
+    </nts-input-number>
+
   </p>
 </form>
 <hr />

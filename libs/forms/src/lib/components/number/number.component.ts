@@ -10,16 +10,28 @@ import { NtsInputComponent } from '../input/input.component';
 })
 export class NtsNumberComponent extends NtsInputComponent<number> implements OnInit {
 
-  @Input() mode: 'decimal' | 'currency' = 'decimal';
-  @Input() useGrouping = true;
-  @Input() minFractionDigits = 0;
-  @Input() maxFractionDigits = 2;
+  /** The MAXIMUM number of characters allowed by this input, NOT max number */
+  @Input() maxlength: number | null = null;
+  /** Show or hide spinner buttons */
+  @Input() showButtons = false;
+  /** Min number to allow, NOT min characters */
   @Input() min: number | null = null;
+  /** Max number to allow, NOT max characters */
   @Input() max: number | null = null;
+
+  @Input() mode: 'decimal' | 'currency' = 'decimal';
+  /** Use a comma to separate thousands/millions/etc */
+  @Input() useGrouping = true;
+  /** */
+  @Input() minFractionDigits = 0;
+  /** */
+  @Input() maxFractionDigits = 2;
+
 
   constructor() {
     super()
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 }

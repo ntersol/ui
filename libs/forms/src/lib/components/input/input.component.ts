@@ -55,13 +55,16 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   @Input() control?: AbstractControl | null = null;
 
   /** When the input is focused */
-  @Output() onFocus = new EventEmitter();
+  @Output() onFocus = new EventEmitter<FocusEvent>();
   /** When the input is blurred */
-  @Output() onBlur = new EventEmitter();
+  @Output() onBlur = new EventEmitter<FocusEvent>();
+  /** When the input is focused */
+  @Output() onClick = new EventEmitter<MouseEvent>();
   /** When data on the input is changed */
   @Output() onChange = new EventEmitter<t>();
   /** On keyup event on the input */
   @Output() onKeyup = new EventEmitter<KeyboardEvent>();
+
 
   public initialTouch = false;
 
@@ -98,17 +101,19 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   /**
    *  On control blur
    */
-  blur() {
+  blur(e: FocusEvent) {
     this.focused = false;
-    this.onBlur.emit();
+    this.onBlur.emit(e);
+    // Run validation on blur to account for a field that has a value on load and is also invalid
+    this.control?.updateValueAndValidity();
   }
 
   /**
    * On control focus
    */
-  focus() {
+  focus(e: FocusEvent) {
     this.focused = true;
-    this.onFocus.emit();
+    this.onFocus.emit(e);
   }
 
   ngOnDestroy(): void { }

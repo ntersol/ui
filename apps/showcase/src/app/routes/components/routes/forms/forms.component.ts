@@ -23,7 +23,8 @@ export class FormsComponent implements OnInit {
   public form = this.fb.group({
     modelText: [null, [NtsValidators.required]],
     modelText2: [null, []],
-    modelNumber: [],
+
+    modelNumber: [2, [NtsValidators.Number.isGreaterThan(5)]],
     modelNumber2: [],
     currency: [],
   });

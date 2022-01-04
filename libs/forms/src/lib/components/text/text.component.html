@@ -1,9 +1,10 @@
-<div class="nts-input-text" [id]="id" [ngClass]="styleClass">
+<div class="nts-input-text">
     <nts-input [label]="label" [placeholder]="placeholder" [hover]="hover" [focused]="focused" [prefix]="prefix"
         [suffix]="suffix" [hint]="hint" [control]="control">
-        <input class="p-inputtext p-component p-element" name="fieldName" type="text" [name]="name"
+        <input [id]="id" [ngClass]="styleClass" class="p-inputtext p-component p-element" type="text" [name]="name"
             [minlength]="minlength" [maxlength]="maxlength"
-            [placeholder]="!!placeholder && (focused || !hover || !label) ? placeholder : ''" (focus)="focus()"
-            (blur)="blur()" (keyup)="onKeyup.emit($event)" [formControl]="formControl">
+            [placeholder]="!!placeholder && (focused || !hover || !label) ? placeholder : ''" (focus)="focus($event)"
+            (blur)="blur($event)" (keyup)="onKeyup.emit($event)" (click)="onClick.emit($event)"
+            [formControl]="formControl">
     </nts-input>
 </div>

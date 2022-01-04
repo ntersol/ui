@@ -1,6 +1,14 @@
-<nts-input [label]="label" [hover]="hover" [focused]="focused" [prefix]="prefix" [suffix]="suffix" [control]="control">
-    <p-inputNumber [placeholder]="!!placeholder && (focused || !hover || !label) ? placeholder : ''" [mode]="mode"
-        [useGrouping]="useGrouping" [minFractionDigits]="minFractionDigits" [maxFractionDigits]="maxFractionDigits"
-        (onFocus)="focus()" (onBlur)="blur()">
-    </p-inputNumber>
-</nts-input>
+<div class="nts-input-text">
+    <nts-input [label]="label" [placeholder]="placeholder" [hover]="hover" [focused]="focused" [prefix]="prefix"
+        [suffix]="suffix" [hint]="hint" [control]="control">
+
+        <p-inputNumber [formControl]="formControl"
+            [placeholder]="!!placeholder && (focused || !hover || !label) ? placeholder : ''" [mode]="mode"
+            [useGrouping]="useGrouping" [minFractionDigits]="minFractionDigits" [maxFractionDigits]="maxFractionDigits"
+            [id]="id" [ngClass]="styleClass" [name]="name" [min]="min || 0" [max]="max || 9999999999999999999999999999"
+            [maxlength]="maxlength || 9999999999999999999999999999" [showButtons]="showButtons"
+            [placeholder]="!!placeholder && (focused || !hover || !label) ? placeholder : ''" (onFocus)="focus($event)"
+            (onBlur)="blur($event)" (keyup)="onKeyup.emit($event)" (click)="onClick.emit($event)">
+        </p-inputNumber>
+    </nts-input>
+</div>
