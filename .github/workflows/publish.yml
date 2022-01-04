@@ -1,33 +1,44 @@
-name: Publish
+name: CI
 
 on:
   push:
     branches:
-      - 'master'
+      - master
+  pull_request:
 
 jobs:
-  affected:
-    name: Run Affected Build and Publish Targets
+  main:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        name: Checkout [master]
         with:
           fetch-depth: 0
-      - name: Use Node
-        uses: actions/setup-node@v1
+      - name: Derive SHAs for base and head flags in `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+      - uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
-      - name: Install Dependencies
-        run: npm install
-      - name: Cache Modules
-        uses: actions/cache@v2
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Get Base
-        run: git fetch --no-tags --prune --depth=5 origin master
-      - name: Build
-        run: npx nx affected --target build --with-deps --base=origin/master~1
+          node-version: '14'
+      - run: npm install
+        run: npx nx affected --target build --with-deps --parallel --max-parallel=3
       - name: Publish
-        run: npx nx affected --target publish --base=origin/master~1
+        run: npx nx affected --target publish --parallel --max-parallel=2
+  pr:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Derive SHAs for base and head flags in `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - run: npm install
+      - name: Build
+        run: npx nx affected --target build --with-deps --parallel --max-parallel=3
+      - name: Publish
+        run: npx nx affected --target publish --parallel --max-parallel=2
