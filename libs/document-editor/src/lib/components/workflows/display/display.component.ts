@@ -46,6 +46,7 @@ export class DisplayComponent implements OnInit {
   @Input() viewerOptions?: NtsDocumentEditor.ViewerOptions | false;
   @Input() viewModels?: Array<Array<NtsDocumentEditor.Preview>>;
   @Input() isSignature = false;
+  @Input() maxHeight = '100%';
   @Output() pdfChange = new EventEmitter<boolean>();
   @ViewChild('scrollbar', { static: true }) scrollbar!: ElementRef;
 

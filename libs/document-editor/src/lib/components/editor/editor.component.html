@@ -43,7 +43,7 @@
           [pdfSrcs]="editor.state.pdfs || []" [pdfInfo]="editor.state.pdfInfo" [rotation]="
           ((editor.documentsModel)[editor.state.pageActive.pdfIndex].pages)[editor.state.pageActive.pageIndex]
             .rotation
-        " (pdfChange)="pdfEventHandler()" [isSignature]="isSignature"></app-display>
+        " (pdfChange)="pdfEventHandler()" [isSignature]="isSignature" [maxHeight]="maxHeight"></app-display>
         <!--
       <docs-viewer
         [pdfSrcs]="editor.state?.pdfs"

@@ -1,7 +1,7 @@
 <app-viewer-toolbar [pageActive]="pageActive" [viewerOptions]="viewerOptions" [document]="document"
   [rotation]="rotation"> </app-viewer-toolbar>
 <div class="d-flex">
-  <div class="tn-viewer me-3 default-card" #scrollbar>
+  <div class="tn-viewer me-3 default-card" #scrollbar [ngStyle]="{'overflow': 'auto', 'max-height': maxHeight }">
     <p-card *ngIf="document?.pages">
       <div class="docs-thumbnail-zoom">
         <button class="nts-docs-tn-button" pButton [icon]="'fas fa-search-plus'" [disabled]="disableZoom"
@@ -21,6 +21,6 @@
   </div>
   <div class="viewer-container flex-grow-1">
     <app-viewer [pdfSrcs]="pdfSrcs" [isSignature]="isSignature" [pageActive]="pageActive"
-      [viewerOptions]="viewerOptions" [document]="document" [rotation]="rotation"></app-viewer>
+      [viewerOptions]="viewerOptions" [document]="document" [rotation]="rotation" [maxHeight]="maxHeight"></app-viewer>
   </div>
 </div>
