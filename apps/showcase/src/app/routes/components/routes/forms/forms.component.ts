@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, ValidationErrors } from '@angular/forms';
 import { HighlightService } from '../../../../shared/services/highlight.service';
 
-const required = (control?: AbstractControl | null): ValidationErrors | null => {
-  if (!control) {
-    return null;
-  }
+// https://dev.to/vishesh/custom-error-handling-in-angular-reactive-forms-5f05
+const required = (control: AbstractControl): ValidationErrors | null => {
   if (!control.value) {
     return {
-      'requiredabc': 'This field is required loser'
+      'required123': 'This field is required loser'
     }
   }
   return null;
@@ -43,10 +41,6 @@ export class FormsComponent implements OnInit {
   constructor(private highlight: HighlightService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    const c = this.form?.get('modelText');
-    c?.setErrors({ 'busted': true });
-    console.log(c?.getError('busted'));
-
   }
 
   ngAfterViewInit() {

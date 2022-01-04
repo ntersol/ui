@@ -6,11 +6,8 @@
         <!-- Prefix -->
         <span class="p-inputgroup-addon" *ngIf="prefix" [innerHtml]="prefix"></span>
         <span class="p-float-label">
-
             <!-- Projected content -->
             <ng-content></ng-content>
-
-
             <!-- Label-->
             <label [ngClass]="{
                 'float' : !hover || (control?.value !== null && control?.value !== '')
@@ -26,29 +23,44 @@
 
     <!-- Errors -->
     <div class="nts-form-field-errors pt-1 anim-fade-in" *ngIf="showErrors$ | async">
-        <div *ngIf="formControl?.errors?.required" class="nts-form-field-error">
-            {{ label || placeholder || 'This field' }} is
-            <strong>required</strong>
-        </div>
-        <div *ngIf="formControl?.errors?.minlength" class="nts-form-field-error">
-            Please enter at least
-            <strong>{{ formControl?.errors?.minlength?.requiredLength }}</strong>
-            characters
-        </div>
-        <div *ngIf="formControl?.errors?.maxlength" class="nts-form-field-error">
-            Please enter less than
-            <strong>{{ formControl?.errors?.maxlength?.requiredLength }}</strong>
-            characters
-        </div>
-        <div *ngIf="formControl?.errors?.min" class="nts-form-field-error">
-            Please enter a number that is greater than
-            <strong>{{ formControl?.errors?.min?.min }}</strong>
-        </div>
-        <div *ngIf="formControl?.errors?.max" class="nts-form-field-error">
-            Please enter a number that is less than
-            <strong>{{ formControl?.errors?.max?.max }}</strong>
-        </div>
-        <div *ngIf="formControl?.errors?.email" class="nts-form-field-error">Please enter a valid <strong>email
-                address</strong></div>
+        <ng-container *ngIf="errors$ | async as errors">
+            <div class="nts-form-field-error" *ngFor="let error of errors">
+                <ng-container [ngSwitch]="error[0]">
+                    <!--
+                        Add support for default Angular validators
+                    -->
+                    <ng-container *ngSwitchCase="'required'">
+                        {{ label || placeholder || 'This field' }} is <strong>required</strong>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'email'">
+                        Email address is <strong>required</strong>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'minlength'">
+                        Please enter at least
+                        <strong>{{ formControl?.errors?.minlength?.requiredLength }}</strong>
+                        characters
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'maxlength'">
+                        Please enter less than
+                        <strong>{{ formControl?.errors?.maxlength?.requiredLength }}</strong>
+                        characters
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'min'">
+                        Please enter a number that is greater than
+                        <strong>{{ formControl?.errors?.min?.min }}</strong>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'max'">
+                        Please enter a number that is less than
+                        <strong>{{ formControl?.errors?.max?.max }}</strong>
+                    </ng-container>
+                    <!--
+                        Add support for custom validators
+                    -->
+                    <ng-container *ngSwitchDefault>
+                        <span [innerHtml]="error[1]"></span>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </ng-container>
     </div>
 </div>
