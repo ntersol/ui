@@ -1,6 +1,7 @@
 .docs-thumbnail-zoom {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  max-width: 200px;
 }
 
 .default-card {
