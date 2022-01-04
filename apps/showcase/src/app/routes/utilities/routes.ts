@@ -1,5 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FocusTrapComponent } from './routes/focus-trap/focus-trap.component';
 import { Formgroup2ApiComponent } from './routes/formgroup2-api/formgroup2-api.component';
 import { ImageResizerComponent } from './routes/image-resizer/image-resizer.component';
 import { LibLoaderComponent } from './routes/lib-loader/lib-loader.component';
@@ -33,6 +34,11 @@ const routes: Routes = [
     path: 'image-resizer',
     component: ImageResizerComponent,
     data: { title: 'Image Resizer' },
+  },
+  {
+    path: 'focus-trap',
+    component: FocusTrapComponent,
+    data: { title: 'Focus Trap' },
   },
   {
     path: '',
