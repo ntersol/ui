@@ -68,18 +68,17 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   public showErrors$!: Observable<boolean>;
   public errors$!: Observable<[string, any][] | null>
 
-  constructor() {
-
-  }
+  constructor() { }
 
   ngOnInit(): void {
-
     // Emit changes to onChange event emitter
     this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe(v => {
       this.onChange.emit(v);
       this.control?.markAsTouched();
     });
 
+    // When to show errors
+    // Control is invalid and has been touched
     this.showErrors$ = this.formControl.statusChanges.pipe(
       startWith(this.control?.status),
       debounceTime(1),
@@ -87,20 +86,26 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
       distinctUntilChanged()
     );
 
+    // Convert errors into iterable collection
     this.errors$ = this.formControl.statusChanges.pipe(
       startWith(this.control?.errors),
       debounceTime(1),
       map(() => !this.control?.errors ? null : Object.entries(this.control?.errors))
     );
-
   }
 
 
+  /**
+   *  On control blur
+   */
   blur() {
     this.focused = false;
     this.onBlur.emit();
   }
 
+  /**
+   * On control focus
+   */
   focus() {
     this.focused = true;
     this.onFocus.emit();

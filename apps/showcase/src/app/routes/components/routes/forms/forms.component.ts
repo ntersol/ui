@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, ValidationErrors } from '@angular/forms';
+import { NtsValidators } from '../../../../../../../../libs/forms/src';
 import { HighlightService } from '../../../../shared/services/highlight.service';
 
 // https://dev.to/vishesh/custom-error-handling-in-angular-reactive-forms-5f05
@@ -20,7 +21,7 @@ const required = (control: AbstractControl): ValidationErrors | null => {
 export class FormsComponent implements OnInit {
 
   public form = this.fb.group({
-    modelText: [null, [required]],
+    modelText: [null, [NtsValidators.required]],
     modelText2: [null, []],
     modelNumber: [],
     modelNumber2: [],
