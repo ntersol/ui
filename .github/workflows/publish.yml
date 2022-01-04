@@ -3,7 +3,7 @@ name: Publish
 on:
   push:
     branches:
-      - 'dev/nx'
+      - 'master'
 
 jobs:
   affected:
@@ -26,8 +26,8 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Get Base
-        run: git fetch --no-tags --prune --depth=5 origin dev/nx
+        run: git fetch --no-tags --prune --depth=5 origin master
       - name: Build
-        run: npx nx affected --target build --with-deps --base=origin/dev/nx~1
+        run: npx nx affected --target build --with-deps --base=origin/master~1
       - name: Publish
-        run: npx nx affected --target publish --base=origin/dev/nx~1
+        run: npx nx affected --target publish --base=origin/master~1
