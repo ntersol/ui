@@ -21,6 +21,7 @@ jobs:
         with:
           node-version: '14'
       - run: npm install
+      - name: Build
         run: npx nx affected --target build --with-deps --parallel --max-parallel=3
       - name: Publish
         run: npx nx affected --target publish --parallel --max-parallel=2
