@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, ValidationErrors } from '@angular/forms';
-import { NtsValidators } from '../../../../../../../../libs/forms/src';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { HighlightService } from '../../../../shared/services/highlight.service';
 
 // https://dev.to/vishesh/custom-error-handling-in-angular-reactive-forms-5f05
@@ -20,16 +19,6 @@ const required = (control: AbstractControl): ValidationErrors | null => {
 })
 export class FormsComponent implements OnInit {
 
-  public form = this.fb.group({
-    modelText: [null, [NtsValidators.required]],
-    modelText2: [null, []],
-
-    modelNumber: [null, [NtsValidators.Chars.isEqualTo(5, {
-      errorMessage: 'Please enter a valid 5 digit zip code'
-    })]],
-    modelNumber2: [],
-    currency: [],
-  });
 
   public modelText: any = null;
   public modelNumber: any = null;
@@ -42,7 +31,7 @@ export class FormsComponent implements OnInit {
   public exampleTS: string = this.highlight.htmlEncode(``);
   public exampleHTML: string = this.highlight.htmlEncode(``);
 
-  constructor(private highlight: HighlightService, private fb: FormBuilder) { }
+  constructor(private highlight: HighlightService) { }
 
   ngOnInit(): void {
   }

@@ -1,0 +1,18 @@
+<form>
+    <p>
+
+        <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="First Name"
+            [control]="form?.get('modelText')" [disabled]="false">
+        </nts-input-text>
+
+        <nts-input-number placeholder="90630" label="Zipcode" [maxlength]="5" [useGrouping]="false"
+            [control]="form?.get('zipcode')">
+        </nts-input-number>
+
+        <nts-input-number placeholder="100,000" label="Population" [control]="form?.get('population')">
+        </nts-input-number>
+
+        <nts-input-number placeholder="$100.00" label="Dollar Amount" mode="currency" [control]="form?.get('currency')">
+        </nts-input-number>
+    </p>
+</form>

@@ -2,7 +2,7 @@
     <nts-input [label]="label" [placeholder]="placeholder" [hover]="hover" [focused]="focused" [prefix]="prefix"
         [suffix]="suffix" [hint]="hint" [control]="control">
 
-        <p-inputNumber [formControl]="formControl"
+        <p-inputNumber currency="USD" locale="en-US" [formControl]="formControl"
             [placeholder]="!!placeholder && (focused || !hover || !label) ? placeholder : ''" [mode]="mode"
             [useGrouping]="useGrouping" [minFractionDigits]="minFractionDigits" [maxFractionDigits]="maxFractionDigits"
             [id]="id" [ngClass]="styleClass" [name]="name" [min]="min || 0" [max]="max || 9999999999999999999999999999"

@@ -33,5 +33,9 @@ export class NtsNumberComponent extends NtsInputComponent<number> implements OnI
   }
 
   ngOnInit(): void {
+    // If mode is currency, allow cents
+    if (this.mode === 'currency') {
+      this.minFractionDigits = 2;
+    }
   }
 }

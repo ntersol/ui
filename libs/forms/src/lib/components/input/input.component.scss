@@ -8,6 +8,9 @@ $smallText: 80%;
 .nts-form-field {
   padding-top: 1rem;
   padding-bottom: 1rem;
+  ::placeholder {
+    opacity: 0.6;
+  }
   .float {
     top: -0.75rem;
     font-size: 12px;
