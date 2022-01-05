@@ -24,7 +24,9 @@ export class FormsComponent implements OnInit {
     modelText: [null, [NtsValidators.required]],
     modelText2: [null, []],
 
-    modelNumber: [null, [NtsValidators.Chars.isEqualTo(5, 'Please enter a valid 5 digit zip code')]],
+    modelNumber: [null, [NtsValidators.Chars.isEqualTo(5, {
+      errorMessage: 'Please enter a valid 5 digit zip code'
+    })]],
     modelNumber2: [],
     currency: [],
   });

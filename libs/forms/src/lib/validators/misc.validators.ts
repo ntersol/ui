@@ -1,7 +1,7 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 
 /**
- * Mark a field as required: not null/undefined/empty string
+ * Mark a field as required: IE not null/undefined/empty string
  * @param control
  * @returns
  */
@@ -12,7 +12,11 @@ export const required = (control: AbstractControl): ValidationErrors | null => {
     return null;
 };
 
-// Email form control validator function
+/**
+ * Require a valid email address
+ * @param control
+ * @returns
+ */
 export const email = (control: AbstractControl) => {
     const value = control.value;
     const reg = /^([a-z0-9_\-\.]+)@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;

@@ -5,7 +5,9 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
  * @param control
  * @returns
  */
-export const isEqualTo = (charCount: number, errorMessage?: string | null) => {
+export const isEqualTo = (charCount: number, options?: {
+    errorMessage?: string | null
+}) => {
     return (control: AbstractControl): ValidationErrors | null => {
         const value = control.value;
         // Do not fail validation for nill values. This allows separation from the required validator
@@ -18,6 +20,6 @@ export const isEqualTo = (charCount: number, errorMessage?: string | null) => {
             return null;
         }
 
-        return { 'isEqualTo': errorMessage ?? `Please enter <strong>${charCount} characters</strong>` };
+        return { 'isEqualTo': options?.errorMessage ?? `Please enter exactly <strong>${charCount} characters</strong>` };
     }
 };
