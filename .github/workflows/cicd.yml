@@ -47,9 +47,7 @@ jobs:
       - name: Install
         run: npm install
       - name: Build
-        run: npx nx affected --target build --parallel --max-parallel=3 --exclude=starter,storybook
-      - name: Publish
-        run: npx nx affected --target publish --parallel --max-parallel=2 --exclude=starter,storybook
+        run: npx nx affected --target build --parallel --exclude=starter,storybook
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
