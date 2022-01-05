@@ -45,14 +45,18 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   @Input() hint: string | null = null;
   /** Is this contorl focused */
   @Input() focused = false;
+  /** Form control  */
+  @Input() formControl = new FormControl();
 
-  // Can't use 'formControl' directly, it's defined incorrectly in the Angular definitions and can't be overriden without a lot of hacky stuff
-  // See https://medium.com/youngers-consulting/angular-typed-reactive-forms-22842eb8a181
-  // @Input() formControl?: AbstractControl | null = null;
-  get formControl(): FormControl {
-    return !!this.control ? this.control as FormControl : new FormControl();
-  }
-  @Input() control?: AbstractControl | null = null;
+  /**
+   * Using an @Input() of "formControl" has a lot of problems with strict templates
+   * Attempting to use the following syntax fails the compiler test: [formControl]="form?.get('zipcode')" because
+   * the formControl directive does not support the return type of that get request (AbstractControl | null | undefined)
+   * This is a workaround for that limitation
+   */
+  @Input() set control(c: AbstractControl | null | undefined) {
+    !!c ? this.formControl = c as FormControl : console.warn('Unable to find that abstract control');
+  };
 
   /** When the input is focused */
   @Output() onFocus = new EventEmitter<FocusEvent>();
@@ -71,7 +75,8 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   public showErrors$!: Observable<boolean>;
   public errors$!: Observable<[string, any][] | null>
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
     // Emit changes to onChange event emitter

@@ -1,7 +1,6 @@
 <div class="nts-form-field" [ngClass]="{
    'nts-form-field-has-errors' : showErrors$ | async
 }">
-
     <div class="p-inputgroup">
         <!-- Prefix -->
         <span class="p-inputgroup-addon" *ngIf="prefix" [innerHtml]="prefix"></span>
@@ -10,7 +9,7 @@
             <ng-content></ng-content>
             <!-- Label-->
             <label [ngClass]="{
-                'float' : !hover || (control?.value !== null && control?.value !== '')
+                'float' : !hover || (formControl?.value !== null && formControl?.value !== '')
             }" [innerHtml]="label"></label>
         </span>
 

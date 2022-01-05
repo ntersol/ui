@@ -1,7 +1,6 @@
 <div class="nts-input-text">
     <nts-input [label]="label" [placeholder]="placeholder" [hover]="hover" [focused]="focused" [prefix]="prefix"
-        [suffix]="suffix" [hint]="hint" [control]="control">
-
+        [suffix]="suffix" [hint]="hint" [control]="formControl">
         <p-inputNumber currency="USD" locale="en-US" [formControl]="formControl"
             [placeholder]="!!placeholder && (focused || !hover || !label) ? placeholder : ''" [mode]="mode"
             [useGrouping]="useGrouping" [minFractionDigits]="minFractionDigits" [maxFractionDigits]="maxFractionDigits"
