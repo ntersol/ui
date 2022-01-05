@@ -47,10 +47,7 @@ jobs:
           echo "Log level: ${{ github.event.inputs.target }}"
           echo "Tags: ${{ github.event.inputs.projects }}"
       - name: Run Manually
-        run: npx nx run-many
-        with:
-          target: ${{ github.event.inputs.target }}
-          projects: ${{ github.event.inputs.projects }}
+        run: npx nx run-many --target="${{ github.event.inputs.target }}" --projects="${{ github.event.inputs.projects }}"
       - name: Save
         uses: EndBug/add-and-commit@v7
         with:
