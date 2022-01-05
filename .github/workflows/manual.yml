@@ -51,6 +51,9 @@ jobs:
           echo "Projects(s): ${{ github.event.inputs.projects }}"
       - name: Run Request
         run: npx nx run-many --target="${{ github.event.inputs.target }}" --projects="${{ github.event.inputs.projects }}"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Save
         uses: EndBug/add-and-commit@v7
         with:

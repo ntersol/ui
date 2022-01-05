@@ -48,9 +48,6 @@ jobs:
         run: npm install
       - name: Build
         run: npx nx affected --target build --parallel --exclude=starter,storybook
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Save
         uses: EndBug/add-and-commit@v7
         with:
