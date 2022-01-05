@@ -36,7 +36,7 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install
-        run: npm ci
+        run: npm install
       - name: Build
         run: npx nx affected --target build --parallel --max-parallel=3
       - name: Publish
@@ -76,7 +76,7 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install
-        run: npm ci
+        run: npm install
       - name: Build
         run: npx nx affected --target build --with-deps --parallel --max-parallel=3
       - name: Publish
