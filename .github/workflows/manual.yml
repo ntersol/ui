@@ -8,7 +8,7 @@ on:
         required: true
         default: 'build'
       projects:
-        description: 'Projects'
+        description: 'Projects (comma delimited, no space)'
         required: true
         default: ''
 
@@ -29,6 +29,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14'
+          always-auth: true
+          registry-url: 'https://registry.npmjs.org/'
+          scope: '@ntersol'
       - name: Cache Configuration
         uses: actions/cache@v2
         env:
@@ -42,11 +45,11 @@ jobs:
             ${{ runner.os }}-
       - name: Install
         run: npm install
-      - name: Print Inputs
+      - name: Request Details
         run: |
-          echo "Log level: ${{ github.event.inputs.target }}"
-          echo "Tags: ${{ github.event.inputs.projects }}"
-      - name: Run Manually
+          echo "Target: ${{ github.event.inputs.target }}"
+          echo "Projects(s): ${{ github.event.inputs.projects }}"
+      - name: Run Request
         run: npx nx run-many --target="${{ github.event.inputs.target }}" --projects="${{ github.event.inputs.projects }}"
       - name: Save
         uses: EndBug/add-and-commit@v7
