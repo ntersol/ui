@@ -122,6 +122,44 @@
             "project": "libs/azure-maps/ng-package.json"
           }
         },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/azure-maps/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/azure-maps/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/azure-maps.component.ts --tsconfig ./tsconfig.json",
+              "cp libs/azure-maps/docs/README.md libs/azure-maps/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd dist/libs/azure-maps/ && npm pack",
+              "cd dist/libs/azure-maps/ && npm publish --access public"
+            ],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run azure-maps:patch",
+              "ng run azure-maps:readme",
+              "ng run azure-maps:build:production",
+              "ng run azure-maps:pack"
+            ],
+            "parallel": false
+          }
+        },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
