@@ -1125,7 +1125,8 @@
           "builder": "angular-cli-ghpages:deploy",
           "options": {
             "cname": "",
-            "baseHref": "/angular-starter/"
+            "baseHref": "/angular-starter/",
+            "noSilent": true
           }
         }
       },
