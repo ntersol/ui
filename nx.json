@@ -31,14 +31,6 @@
       }
     }
   },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
-  },
   "cli": {
     "defaultCollection": "@nrwl/angular",
     "analytics": false

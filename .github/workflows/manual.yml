@@ -1,0 +1,59 @@
+name: Manual
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Target'
+        required: true
+        default: 'build'
+      projects:
+        description: 'Projects'
+        required: true
+        default: ''
+
+jobs:
+  trigger:
+    name: Trigger
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout [master]
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set SHAs [master]
+        uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: master
+      - name: Setup Node [14]
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Cache Configuration
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install
+        run: npm install
+      - name: Print Inputs
+        run: |
+          echo "Log level: ${{ github.event.inputs.target }}"
+          echo "Tags: ${{ github.event.inputs.projects }}"
+      - name: Run Manually
+        run: npx nx run-many
+        with:
+          target: ${{ github.event.inputs.target }}
+          projects: ${{ github.event.inputs.projects }}
+      - name: Save
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: Auto-generated commit [ci skip]
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
