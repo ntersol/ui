@@ -1197,7 +1197,7 @@
               ]
             }
           },
-          "defaultConfiguration": "ci"
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
