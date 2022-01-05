@@ -1126,7 +1126,10 @@
           "options": {
             "cname": "",
             "baseHref": "/angular-starter/",
-            "noSilent": true
+            "noSilent": true,
+            "name": "Github Actions",
+            "email": "actions@github.com",
+            "message": "Auto-generated commit [ci skip]"
           }
         }
       },

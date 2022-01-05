@@ -47,6 +47,12 @@ jobs:
         run: npx nx affected --target publish --parallel --max-parallel=2 --exclude=starter,wizard,storybook
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: Save
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: Automated version bump
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
   pr:
     name: Pull Request
     runs-on: ubuntu-latest
@@ -88,3 +94,9 @@ jobs:
         run: npx nx affected --target publish --parallel --max-parallel=2 --exclude=starter,wizard,storybook
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: Save
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: Auto-generated commit [ci skip]
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
