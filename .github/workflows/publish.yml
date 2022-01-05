@@ -7,62 +7,21 @@ on:
   pull_request:
 
 jobs:
-  master:
-    name: Master
+  affected:
+    name: Affected Automation
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' }}
     steps:
-      - name: Checkout [master]
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Set SHAs [master]
-        uses: nrwl/nx-set-shas@v2
-        with:
-          main-branch-name: master
-      - name: Setup Node [14]
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14'
-      - name: Cache Configuration
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Install
-        run: npm install
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      - name: Build
-        run: npx nx affected --target build --parallel --max-parallel=3 --exclude=starter,wizard,storybook
-      - name: Deploy
-        run: npx nx affected --target deploy --parallel --max-parallel=2 --exclude=starter,wizard,storybook
-      - name: Publish
-        run: npx nx affected --target publish --parallel --max-parallel=2 --exclude=starter,wizard,storybook
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      - name: Save
-        uses: EndBug/add-and-commit@v7
-        with:
-          message: Automated version bump
-          committer_name: GitHub Actions
-          committer_email: actions@github.com
-  pr:
-    name: Pull Request
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' }}
-    steps:
-      - name: Checkout
+      - name: Checkout [pr]
+        if: ${{ github.event_name == 'pull_request' }}
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
+      - name: Checkout [master]
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Set SHAs [master]
         uses: nrwl/nx-set-shas@v2
         with:
@@ -90,6 +49,8 @@ jobs:
         run: npx nx affected --target build --parallel --max-parallel=3 --exclude=starter,wizard,storybook
       - name: Deploy
         run: npx nx affected --target deploy --parallel --max-parallel=2 --exclude=starter,wizard,storybook
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish
         run: npx nx affected --target publish --parallel --max-parallel=2 --exclude=starter,wizard,storybook
         env:
