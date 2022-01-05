@@ -12,39 +12,71 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'pull_request' }}
     steps:
-      - uses: actions/checkout@v2
-        name: Checkout [master]
+      - name: Checkout [master]
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Derive SHAs for base and head flags in `nx affected` commands
+      - name: Set SHAs [master]
         uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: master
-      - uses: actions/setup-node@v1
+      - name: Setup Node [14]
+        uses: actions/setup-node@v1
         with:
           node-version: '14'
-      - run: npm install
+      - name: Cache Configuration
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install
+        run: npm install
       - name: Build
         run: npx nx affected --target build --with-deps --parallel --max-parallel=3
       - name: Publish
         run: npx nx affected --target publish --parallel --max-parallel=2
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
   pr:
-    name: Pull Requests
+    name: Pull Request
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
-      - name: Derive SHAs for base and head flags in `nx affected` commands
+      - name: Set SHAs [master]
         uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: master
-      - uses: actions/setup-node@v1
+      - name: Setup Node [14]
+        uses: actions/setup-node@v1
         with:
           node-version: '14'
-      - run: npm install
+      - name: Cache Configuration
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install
+        run: npm install
       - name: Build
         run: npx nx affected --target build --with-deps --parallel --max-parallel=3
       - name: Publish
