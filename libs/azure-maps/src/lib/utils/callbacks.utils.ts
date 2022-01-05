@@ -1,6 +1,7 @@
 import { EventEmitter } from '@angular/core';
 import { Action } from '../store/azure-maps.actions';
 import { AzureMapsStore } from '../store/azure-maps.store';
+import * as mapboxgl from 'mapbox-gl';
 
 /**
  * Load event, named function is required to clean up listeners

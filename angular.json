@@ -1101,7 +1101,6 @@
             "main": "archive/src/main.ts",
             "tsConfig": "archive/src/tsconfig.app.json",
             "preserveSymlinks": true,
-            "showCircularDependencies": true,
             "polyfills": "archive/src/polyfills.ts",
             "assets": [
               "archive/src/assets",
@@ -1198,7 +1197,7 @@
               ]
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "ci"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",

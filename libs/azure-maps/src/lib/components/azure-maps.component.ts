@@ -103,9 +103,9 @@ export class NtsAzureMapsComponent implements OnInit, AfterViewInit, OnChanges, 
   @ViewChild('mapContainer', { static: true, read: ElementRef }) mapContainer?: ElementRef<HTMLDivElement>;
   public mapRef?: NtsAzureMaps.MapRef | null;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, public svc: NtsAzureMapsService) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, public svc: NtsAzureMapsService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges(model: SimpleChanges) {
     // SSR check
@@ -221,7 +221,7 @@ export class NtsAzureMapsComponent implements OnInit, AfterViewInit, OnChanges, 
     }
 
     this.mapRef = this.svc.create(this.uniqueId, this.apiKey, this.settings?.options);
-    
+
     if (!this.mapRef || !this.mapContainer) {
       console.error('Error loading map');
       return;
@@ -247,7 +247,7 @@ export class NtsAzureMapsComponent implements OnInit, AfterViewInit, OnChanges, 
       zoom: 9,
       ...(this.settings?.options ?? {}),
     });
-     
+
 
     // Construct a compass control and add it to the map.
     if (this.settings?.controls?.compass) {

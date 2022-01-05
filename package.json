@@ -68,6 +68,7 @@
     "helpful-decorators": "^2.1.0",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
+    "mapbox-gl": "^2.6.1",
     "primeicons": "^4.1.0",
     "primeng": "^11.2.3",
     "ramda": "^0.27.1",

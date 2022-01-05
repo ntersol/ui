@@ -38,9 +38,9 @@ jobs:
       - name: Install
         run: npm install
       - name: Build
-        run: npx nx affected --target build --parallel --max-parallel=3
+        run: npx nx affected --target build --parallel --max-parallel=3 --exclude=starter
       - name: Publish
-        run: npx nx affected --target publish --parallel --max-parallel=2
+        run: npx nx affected --target publish --parallel --max-parallel=2 --exclude=starter
       - name: Cache
         uses: actions/cache@v2
         with:
@@ -78,6 +78,6 @@ jobs:
       - name: Install
         run: npm install
       - name: Build
-        run: npx nx affected --target build --with-deps --parallel --max-parallel=3
+        run: npx nx affected --target build --with-deps --parallel --max-parallel=3 --exclude=starter
       - name: Publish
-        run: npx nx affected --target publish --parallel --max-parallel=2
+        run: npx nx affected --target publish --parallel --max-parallel=2 --exclude=starter

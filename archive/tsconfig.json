@@ -1,6 +1,6 @@
 {
   "compileOnSave": false,
-  "extends": "../../tsconfig.json",
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
