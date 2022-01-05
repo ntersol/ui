@@ -182,19 +182,19 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   public get rowsVisible() {
     return this.gridApi
       ? this.gridApi
-          .getRenderedNodes()
-          .map((x) => x.data)
-          .filter((x) => x)
+        .getRenderedNodes()
+        .map((x) => x.data)
+        .filter((x) => x)
       : [];
   }
   /** Get the currently selected rows that are visible  */
   public get rowsVisibleSelected() {
     return this.gridApi
       ? this.gridApi
-          .getRenderedNodes()
-          .filter((x) => x.isSelected())
-          .map((x) => x.data)
-          .filter((x) => x)
+        .getRenderedNodes()
+        .filter((x) => x.isSelected())
+        .map((x) => x.data)
+        .filter((x) => x)
       : [];
   }
   /** Dictionary of keys being pressed */
@@ -220,7 +220,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   @HostListener('document:keydown', ['$event']) keyPressed = (event: KeyboardEvent) => this.keyboardEvent(event);
   @HostListener('document:keyup', ['$event']) keyUp = (event: KeyboardEvent) => this.keyboardEvent(event);
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     // Set license
@@ -457,7 +457,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
     const groupsRows: Record<string, boolean> = {};
     this.grid.api.forEachNode((node) => {
       if (node.expanded) {
-        groupsRows[node.key] = true;
+        groupsRows[node.key as string] = true;
       }
     });
     // Create grid state
@@ -517,7 +517,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
       // Reload row groups (open/close)
       if (gridState.groupsRows && Object.keys(gridState.groupsRows).length) {
         this.grid.api.forEachNode((node) => {
-          if (gridState.groupsRows[node.key]) {
+          if (gridState.groupsRows[node.key as string]) {
             node.setExpanded(true);
           }
         });
