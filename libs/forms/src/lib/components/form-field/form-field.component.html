@@ -10,22 +10,17 @@
         <!-- Autocomplete -->
         <ng-container *ngSwitchCase="'autoComplete'">
           <div class="autocomplete">
-            <p-autoComplete
-              [field]="optionIsObjectsArray ? optionLabel : ''"
-              [(ngModel)]="model"
-              [suggestions]="autoCompleteSuggestions"
-              (completeMethod)="autoCompleteFilterTerms($event)"
-              (ngModelChange)="autoCompleteSelection($event)"
-            ></p-autoComplete>
-            <a class="cancel" (click)="model = null; formControl.patchValue(null)" *ngIf="formControl.value !== null" title="Remove selection"
-              ><i class="fas fa-times"></i
-            ></a>
+            <p-autoComplete [field]="optionIsObjectsArray ? optionLabel : ''" [(ngModel)]="model"
+              [suggestions]="autoCompleteSuggestions" (completeMethod)="autoCompleteFilterTerms($event)"
+              (ngModelChange)="autoCompleteSelection($event)"></p-autoComplete>
+            <a class="cancel" (click)="model = null; formControl.patchValue(null)" *ngIf="formControl.value !== null"
+              title="Remove selection"><i class="fas fa-times"></i></a>
           </div>
         </ng-container>
 
         <!-- Button group -->
         <ng-container *ngSwitchCase="'buttonGroup'">
-          <p-selectButton [options]="options" [formControl]="formControl"></p-selectButton>
+          <p-selectButton [attr.options]="options" [formControl]="formControl"></p-selectButton>
         </ng-container>
 
         <!-- Toggle -->
@@ -35,14 +30,11 @@
 
         <!-- Textarea -->
         <ng-container *ngSwitchCase="'textarea'">
-          <span
-            class="p-input-float d-flex align-items-stretch m-0"
-            [ngClass]="{
+          <span class="p-input-float d-flex align-items-stretch m-0" [ngClass]="{
               'p-float-label': placeholderFloat,
               'mt-3': placeholderFloat && placeholder,
               'p-focus': !!formControl.value || focused
-            }"
-          >
+            }">
             <textarea pInputTextarea [name]="name" [id]="id" [rows]="rows" [formControl]="formControl"></textarea>
             <label for="float-input" *ngIf="placeholderFloat">{{ placeholder }}</label>
           </span>
@@ -56,8 +48,7 @@
               <ng-container *ngFor="let option of options">
                 <option
                   *ngIf="is.selectItem(option) && option[optionValue] !== undefined && option[optionLabel] !== undefined; else optionsSelectStringArray"
-                  [ngValue]="option[optionValue]"
-                >
+                  [ngValue]="option[optionValue]">
                   {{ option[optionLabel] }}
                 </option>
                 <ng-template #optionsSelectStringArray>
@@ -74,47 +65,36 @@
             [dataKey]="optionValue"
         -->
         <ng-container *ngSwitchCase="'dropdown'">
-          <p-dropdown
-            [options]="optionsOutput"
-            [name]="name"
-            [id]="id"
-            [formControl]="formControl"
-            [showTransitionOptions]="'100ms'"
-            [hideTransitionOptions]="'50ms'"
-          ></p-dropdown>
+          <p-dropdown [options]="optionsOutput" [name]="name" [id]="id" [formControl]="formControl"
+            [showTransitionOptions]="'100ms'" [hideTransitionOptions]="'50ms'"></p-dropdown>
         </ng-container>
 
         <!-- Checkboxes -->
         <ng-container *ngSwitchCase="'checkbox'">
           <ng-container *ngIf="is.selectItemArray(options) && options?.length">
             <div *ngFor="let option of options">
-              <p-checkbox
-                [name]="name"
-                [id]="id"
-                [formControl]="formControl"
+              <p-checkbox [name]="name" [id]="id" [formControl]="formControl"
                 [label]="is.selectItem(option) && option[optionLabel] !== undefined ? option[optionLabel] : option"
-                [value]="is.selectItem(option) && option[optionValue] !== undefined ? option[optionValue] : option"
-              ></p-checkbox>
+                [value]="is.selectItem(option) && option[optionValue] !== undefined ? option[optionValue] : option">
+              </p-checkbox>
             </div>
           </ng-container>
         </ng-container>
 
         <!-- Single checkbox that returns a boolean value -->
         <ng-container *ngSwitchCase="'checkboxBoolean'">
-          <p-checkbox class="nts-checkbox-boolean" [binary]="true" [name]="name" [id]="id" [formControl]="formControl" [label]="placeholder"></p-checkbox>
+          <p-checkbox class="nts-checkbox-boolean" [binary]="true" [name]="name" [id]="id" [formControl]="formControl"
+            [label]="placeholder || ''"></p-checkbox>
         </ng-container>
 
         <!-- Radio -->
         <ng-container *ngSwitchCase="'radio'">
           <ng-container *ngIf="is.selectItemArray(options) && options?.length">
             <div *ngFor="let option of options">
-              <p-radioButton
-                [name]="name"
-                [id]="id"
-                [formControl]="formControl"
-                [label]="is.selectItem(option) && option[optionLabel] !== undefined ? option[optionLabel] : option"
-                [value]="is.selectItem(option) && option[optionValue] !== undefined ? option[optionValue] : option"
-              ></p-radioButton>
+              <p-radioButton [name]="name" [id]="id" [formControl]="formControl"
+                [label]="is.selectItem(option) && option[optionLabel] !== undefined ? option[optionLabel] || '' : option"
+                [value]="is.selectItem(option) && option[optionValue] !== undefined ? option[optionValue] || '' : option">
+              </p-radioButton>
             </div>
           </ng-container>
         </ng-container>
@@ -131,9 +111,12 @@
   <div class="nts-form-field-hint" [innerHtml]="hint" *ngIf="hint"></div>
 
   <!-- Errors -->
-  <div *ngIf="formControl?.invalid && formControl?.touched && formControl?.errors && showError" class="red pt-1 anim-fade-in">
+  <div *ngIf="formControl?.invalid && formControl?.touched && formControl?.errors && showError"
+    class="red pt-1 anim-fade-in">
     <div *ngIf="errorCustom && formControl?.errors?.required" [innerHtml]="errorCustom"></div>
-    <div *ngIf="!errorCustom && formControl?.errors?.required" class="small">{{ placeholder || 'This field' }} is <strong>required</strong></div>
+    <div *ngIf="!errorCustom && formControl?.errors?.required" class="small">{{ placeholder || 'This field' }} is
+      <strong>required</strong>
+    </div>
 
     <div *ngIf="formControl?.errors?.minlength" class="small">
       Please enter at least
@@ -161,36 +144,22 @@
     Generic field types
   -->
 <ng-template #generic>
-  <div
-    class="p-inputgroup"
-    [ngClass]="{
+  <div class="p-inputgroup" [ngClass]="{
       'p-inputgroup': prefix || suffix,
       'mt-3': placeholderFloat && placeholder
-    }"
-  >
+    }">
     <span class="p-inputgroup-addon" *ngIf="prefix" [innerHtml]="prefix"></span>
-    <span
-      class="p-input-float d-flex align-items-stretch"
-      [ngClass]="{
+    <span class="p-input-float d-flex align-items-stretch" [ngClass]="{
         'p-float-label': placeholderFloat,
         'p-focus': !!formControl.value || focused
-      }"
-    >
+      }">
       <ng-container [ngSwitch]="type">
         <!-- Color picker-->
         <ng-container *ngSwitchCase="'colorpicker'">
           <div class="p-inputgroup w-100">
-            <input
-              [name]="name"
-              [id]="id"
-              id="float-input"
-              [type]="type"
-              pInputText
-              [placeholder]="!placeholderFloat ? placeholder : ''"
-              [formControl]="formControl"
-              (focus)="focused = true"
-              (blur)="focused = false"
-            />
+            <input [name]="name" [id]="id" id="float-input" [type]="type" pInputText
+              [placeholder]="!placeholderFloat ? placeholder : ''" [formControl]="formControl" (focus)="focused = true"
+              (blur)="focused = false" />
             <span class="p-inputgroup-addon p-0">
               <!-- Colorpicker errors out if ngModel isn't present -->
               <p-colorPicker [(ngModel)]="model" (onChange)="formControl.patchValue($event.value)"></p-colorPicker>
@@ -200,93 +169,49 @@
 
         <!-- Phone Number -->
         <ng-container *ngSwitchCase="'phoneNumber'">
-          <p-inputMask
-            #field
-            [name]="name"
-            [id]="id"
-            class="w-100"
-            mask="(999) 999-9999"
-            [unmask]="unmask"
+          <p-inputMask #field [name]="name" [id]="id" class="w-100" mask="(999) 999-9999" [unmask]="unmask"
             [formControl]="formControl"
             [placeholder]="!placeholder ? '(___) ___-____' : placeholderFloat ? '' : placeholder"
-            (onFocus)="focused = true; cursorPositionSet(field, 1)"
-            (onBlur)="focused = false"
-          ></p-inputMask>
+            (onFocus)="focused = true; cursorPositionSet(field, 1)" (onBlur)="focused = false"></p-inputMask>
         </ng-container>
 
         <!-- Currency -->
         <ng-container *ngSwitchCase="'currency'">
-          <p-spinner
-            [name]="name"
-            [id]="id"
-            class="w-100"
-            [formatInput]="true"
-            thosandSeparator=","
-            decimalSeparator="."
-            [attr.maxlength]="maxlength ? maxlength : null"
-            [placeholder]="!placeholderFloat ? placeholder : ''"
-            #currency
-            [step]="0.01"
-            [(ngModel)]="model"
-            (onFocus)="focused = true"
-            (onBlur)="focused = false"
-            (ngModelChange)="currencyChange(currency)"
-          ></p-spinner>
+          <p-spinner [name]="name" [id]="id" class="w-100" [formatInput]="true" thosandSeparator=","
+            decimalSeparator="." [attr.maxlength]="maxlength ? maxlength : null"
+            [placeholder]="!placeholderFloat ? placeholder || '' : ''" #currency [step]="0.01" [(ngModel)]="model"
+            (onFocus)="focused = true" (onBlur)="focused = false" (ngModelChange)="currencyChange(currency)">
+          </p-spinner>
         </ng-container>
 
         <!-- SSN -->
         <ng-container *ngSwitchCase="'ssn'">
-          <p-inputMask
-            #field
-            [name]="name"
-            [id]="id"
-            class="w-100"
-            [unmask]="unmask"
-            mask="999-99-9999"
+          <p-inputMask #field [name]="name" [id]="id" class="w-100" [unmask]="unmask" mask="999-99-9999"
             [placeholder]="!placeholder ? '___-__-____' : placeholderFloat ? '' : placeholder"
-            [formControl]="formControl"
-            (onFocus)="focused = true; cursorPositionSet(field, 0)"
-            (onBlur)="focused = false"
-          ></p-inputMask>
+            [formControl]="formControl" (onFocus)="focused = true; cursorPositionSet(field, 0)"
+            (onBlur)="focused = false"></p-inputMask>
         </ng-container>
 
         <!-- Date -->
         <ng-container *ngSwitchCase="'date'">
           <div class="p-inputgroup w-100" style="position: relative;">
-            <p-inputMask
-              #field
-              [name]="name"
-              [id]="id"
-              class="w-100"
-              mask="99/99/9999"
-              placeholder="mm/dd/yyyy"
-              slotChar="mm/dd/yyyy"
-              [placeholder]="!placeholder ? '' : placeholderFloat ? '' : placeholder"
-              [formControl]="formControl"
-              (onFocus)="focused = true; cursorPositionSet(field, 0)"
-              (onBlur)="focused = false"
-            ></p-inputMask>
+            <p-inputMask #field [name]="name" [id]="id" class="w-100" mask="99/99/9999" placeholder="mm/dd/yyyy"
+              slotChar="mm/dd/yyyy" [placeholder]="!placeholder ? '' : placeholderFloat ? '' : placeholder"
+              [formControl]="formControl" (onFocus)="focused = true; cursorPositionSet(field, 0)"
+              (onBlur)="focused = false"></p-inputMask>
             <span class="p-inputgroup-addon">
-              <p-calendar #date dateFormat="mm/dd/yy" [showIcon]="true" (onSelect)="dateChange(date)" [appendTo]="field"></p-calendar>
+              <p-calendar #date dateFormat="mm/dd/yy" [showIcon]="true" (onSelect)="dateChange(date)"
+                [appendTo]="field"></p-calendar>
             </span>
           </div>
         </ng-container>
 
         <!-- Native input types, IE text, email, number-->
         <ng-container *ngSwitchDefault>
-          <input
-            [name]="name"
-            [id]="id"
-            id="float-input"
-            [type]="type"
-            pInputText
-            [placeholder]="!placeholderFloat ? placeholder : ''"
-            [formControl]="formControl"
-            [attr.max]="max ? max : null"
-            [attr.min]="min ? min : null"
-            [attr.maxlength]="maxlength ? maxlength : null"
-            [attr.minlength]="minlength ? minlength : null"
-          />
+          <input [name]="name" [id]="id" id="float-input" [type]="type" pInputText
+            [placeholder]="!placeholderFloat ? placeholder || '' : ''" [formControl]="formControl"
+            [attr.max]="max ? max : null" [attr.min]="min ? min : null" [attr.maxlength]="maxlength ? maxlength : null"
+            [attr.minlength]="minlength ? minlength : null" />
         </ng-container>
       </ng-container>
 

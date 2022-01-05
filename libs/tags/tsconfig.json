@@ -24,8 +24,6 @@
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
-    "strictTemplates": true,
-    "enableIvy": false,
-    "compilationMode": "partial"
+    "strictTemplates": true
   }
 }

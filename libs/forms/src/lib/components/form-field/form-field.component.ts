@@ -72,7 +72,7 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   @Input() disabled = false;
 
   /** If form field type is select, supply list of options */
-  @Input() options: SelectItem[] | string[] | { label: string; value: string }[] | null = [];
+  @Input() options: SelectItem[] | string[] | { label: string; value: string }[] | null | any[] = [];
   /** The human readable label for an option */
   @Input() optionLabel: keyof SelectItem = 'label';
   /** The value for the option to supply to the form control */
