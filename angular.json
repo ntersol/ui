@@ -120,7 +120,13 @@
           "options": {
             "tsConfig": "libs/azure-maps/tsconfig.lib.json",
             "project": "libs/azure-maps/ng-package.json"
-          }
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/azure-maps/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
         },
         "patch": {
           "builder": "@nrwl/workspace:run-commands",

@@ -54,11 +54,11 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   /** Some ui controls need an ngModel to store data if a form control is not supplied */
   public model: any;
 
-  @Input() type: FormFieldType = 'text';
+  @Input() type: FormFieldType | string = 'text';
   /** Determine if this is a generic fieldtype */
   public fieldType = '';
   /** Placeholder text */
-  @Input() placeholder = '';
+  @Input() placeholder: string | undefined = '';
   /** Should the placeholder be a traditional inline one or a float version */
   @Input() placeholderFloat = true;
 
@@ -72,20 +72,20 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   @Input() disabled = false;
 
   /** If form field type is select, supply list of options */
-  @Input() options: SelectItem[] | string[] = [];
+  @Input() options: SelectItem[] | string[] | { label: string; value: string }[] | null = [];
   /** The human readable label for an option */
   @Input() optionLabel: keyof SelectItem = 'label';
   /** The value for the option to supply to the form control */
   @Input() optionValue: keyof SelectItem = 'value';
 
   /** Tooltip text */
-  @Input() tooltip: string | null = null;
+  @Input() tooltip: string | null | undefined = null;
   /** Hint text */
-  @Input() hint: string | null = null;
+  @Input() hint: string | null | undefined = null;
   /** HTML code to place in the prefix position in FRONT of the form field */
-  @Input() prefix: string | null = null;
+  @Input() prefix: string | null | undefined = null;
   /** HTML code to place in the suffix position in BACK of the form field */
-  @Input() suffix: string | null = null;
+  @Input() suffix: string | null | undefined = null;
 
   /** Show success icon when valid */
   @Input() showSuccess = false;
@@ -97,13 +97,13 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
   /** If field type is text area, use this many columns */
   @Input() rows = 4;
   /** If NUMBER, the max value allowed */
-  @Input() max: number | null = null;
+  @Input() max: number | null | undefined = null;
   /** If NUMBER, the min value allowed */
-  @Input() min: number | null = null;
+  @Input() min: number | null | undefined = null;
   /** The MAXIMUM number of characters allowed by this input */
-  @Input() maxlength: number | null = null;
+  @Input() maxlength: number | null | undefined = null;
   /** The MINIMUM number of characters allowed by this input */
-  @Input() minlength: number | null = null;
+  @Input() minlength: number | null | undefined = null;
 
   /** Should form controls with input masks return the raw data or the masksed/formatted data? */
   @Input() unmask = true;
@@ -289,9 +289,9 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
 
   // These are required for implementing ControlValueAccessor, but they are not used
   // since the FormControl is being passed directly to the  directive in the template
-  writeValue(): void {}
-  registerOnChange(): void {}
-  registerOnTouched(): void {}
+  writeValue(): void { }
+  registerOnChange(): void { }
+  registerOnTouched(): void { }
 
-  ngOnDestroy() {}
+  ngOnDestroy() { }
 }

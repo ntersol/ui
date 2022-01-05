@@ -14,8 +14,8 @@
             </a>
           </div>
           <div>
-            <nts-form-field (onChange)="store.routeChange({ sectionUrl: $event.value })"
-              [formControl]="selector.get('active')" [options]="sectionsSelector$ | async" type="dropdown">
+            <nts-form-field (onChange)="store.routeChange({ sectionUrl: eventValue($event) })" [formControl]="active"
+              [attr.options]="sectionsSelector$ | async" type="dropdown">
             </nts-form-field>
           </div>
         </div>
@@ -41,25 +41,25 @@
         <div class="nts-progress">
           <ng-container *ngFor="let section of nav.sections; let i = index">
             <a class="nts-wizard-loc" (click)="store.routeChange({ sectionUrl: section.urlSlug })"
-              [ngClass]="{ completed: nav.sectionsState[i].completed, active: nav.sectionsState[i].active }">
-              <span *ngIf="!nav.sectionsState[i].completed">{{ i + 1 }}</span>
-              <span *ngIf="nav.sectionsState[i].completed"><i class="fa fa-check" aria-hidden="true"></i></span>
+              [ngClass]="{ completed: nav?.sectionsState?.[i]?.completed, active: nav?.sectionsState?.[i]?.active }">
+              <span *ngIf="!nav?.sectionsState?.[i]?.completed">{{ i + 1 }}</span>
+              <span *ngIf="nav?.sectionsState?.[i]?.completed"><i class="fa fa-check" aria-hidden="true"></i></span>
               <span class="nts-wizard-loc-anim"></span>
               <span class="nts-wizard-section-name"
-                [ngClass]="section.urlSlug === nav.sectionsState[i].active ? 'active' : null">
+                [ngClass]="section?.urlSlug === nav?.sectionsState?.[i]?.active ? 'active' : ''">
                 {{ section.title }}
               </span>
             </a>
             <div class="nts-wizard-progress-bar" [ngClass]="
-                nav.sectionsState[i].completed && !nav.sectionsState[i].active
+                nav?.sectionsState?.[i]?.completed && !nav?.sectionsState?.[i]?.active
                   ? 'nts-wizard-progress-bar-complete'
-                  : null
-              " *ngIf="i !== nav.sections.length - 1">
+                  : ''
+              " *ngIf="nav.sections && i !== nav.sections.length - 1">
               <div class="nts-wizard-progress-box">
                 <p-progressBar [value]="
-                    nav.sectionsState[i].completed && !nav.sectionsState[i].active
+                    nav?.sectionsState?.[i]?.completed && !nav?.sectionsState?.[i]?.active
                       ? 100
-                      : (nav.sectionsState[i].routeHistory.length / section.routeCount) * 100
+                      : ((nav?.sectionsState?.[i]?.routeHistory?.length || 1) / (section?.routeCount || 1)) * 100
                   " [style]="{ height: '5px' }" [showValue]="false"></p-progressBar>
               </div>
             </div>

@@ -9,11 +9,11 @@ import { WizardFeatureDirective } from '../../shared/directives/feature.directiv
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageComponent implements OnInit {
-  @Input() page?: Wizard.PageControl;
+  @Input() page?: Wizard.PageControl | null;
   @Input() dataFields: Record<string, Wizard.Option[]> = {};
   @Input() templates: Record<string, WizardFeatureDirective> = {};
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

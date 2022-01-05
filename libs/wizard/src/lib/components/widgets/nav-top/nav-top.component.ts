@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, Input, OnChanges } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { WizardStore } from '../../../shared/store/wizard.store';
@@ -28,9 +28,9 @@ export class WizNavTopComponent implements OnInit, OnChanges {
     }[]
   >;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngOnChanges() {
     this.initialize();
@@ -67,5 +67,13 @@ export class WizNavTopComponent implements OnInit, OnChanges {
     this.sectionsSelector$ = this.store.sectionsSrc$.pipe(
       map((sections) => (sections ? sections.map((s) => Object.assign({}, { label: s.title, value: s.urlSlug })) : [])),
     );
+  }
+
+  eventValue(event: any) {
+    return event.value;
+  }
+
+  get active() {
+    return this.selector.get('active') as FormControl;
   }
 }
