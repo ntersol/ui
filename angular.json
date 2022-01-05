@@ -163,7 +163,8 @@
             "production": {
               "tsConfig": "libs/calendar/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -277,7 +278,8 @@
             "production": {
               "tsConfig": "libs/chart/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -391,7 +393,8 @@
             "production": {
               "tsConfig": "libs/document-editor/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -504,7 +507,8 @@
             "production": {
               "tsConfig": "libs/forms/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -691,7 +695,8 @@
             "production": {
               "tsConfig": "libs/grid/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -808,7 +813,8 @@
             "production": {
               "tsConfig": "libs/mtg-calc/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1268,7 +1274,8 @@
             "production": {
               "tsConfig": "libs/state-management/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1381,7 +1388,8 @@
             "production": {
               "tsConfig": "libs/storybook/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1457,7 +1465,8 @@
             "production": {
               "tsConfig": "libs/table/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1570,7 +1579,8 @@
             "production": {
               "tsConfig": "libs/tags/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1683,7 +1693,8 @@
             "production": {
               "tsConfig": "libs/tree/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1870,7 +1881,8 @@
             "production": {
               "tsConfig": "libs/visible/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1984,7 +1996,8 @@
             "production": {
               "tsConfig": "libs/wizard/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
