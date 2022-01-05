@@ -6,4 +6,4 @@
 
 ### Classes
 
-- [NtsTreeModule](classes/ntstreemodule.md)
+- [NtsTreeModule](classes/NtsTreeModule.md)

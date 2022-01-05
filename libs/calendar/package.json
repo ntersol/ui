@@ -1,6 +1,6 @@
 {
   "name": "@ntersol/calendar",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "peerDependencies": {
     "@angular/common": "11.2.7",
     "@angular/core": "11.2.7",

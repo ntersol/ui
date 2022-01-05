@@ -6,12 +6,10 @@
 
 ### Constructors
 
-- [constructor](ntschartmodule.md#constructor)
+- [constructor](NtsChartModule.md#constructor)
 
 ## Constructors
 
 ### constructor
 
-\+ **new NtsChartModule**(): [*NtsChartModule*](ntschartmodule.md)
-
-**Returns:** [*NtsChartModule*](ntschartmodule.md)
+• **new NtsChartModule**()

@@ -6,4 +6,4 @@
 
 ### Classes
 
-- [NtsGridModule](classes/ntsgridmodule.md)
+- [NtsGridModule](classes/NtsGridModule.md)

@@ -6,12 +6,10 @@
 
 ### Constructors
 
-- [constructor](ntsvisiblemodule.md#constructor)
+- [constructor](NtsVisibleModule.md#constructor)
 
 ## Constructors
 
 ### constructor
 
-\+ **new NtsVisibleModule**(): [*NtsVisibleModule*](ntsvisiblemodule.md)
-
-**Returns:** [*NtsVisibleModule*](ntsvisiblemodule.md)
+• **new NtsVisibleModule**()

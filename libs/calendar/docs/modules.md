@@ -6,4 +6,4 @@
 
 ### Classes
 
-- [CalendarComponent](classes/calendarcomponent.md)
+- [CalendarComponent](classes/CalendarComponent.md)

@@ -6,12 +6,10 @@
 
 ### Constructors
 
-- [constructor](ntsgridmodule.md#constructor)
+- [constructor](NtsGridModule.md#constructor)
 
 ## Constructors
 
 ### constructor
 
-\+ **new NtsGridModule**(): [*NtsGridModule*](ntsgridmodule.md)
-
-**Returns:** [*NtsGridModule*](ntsgridmodule.md)
+• **new NtsGridModule**()

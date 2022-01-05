@@ -6,4 +6,4 @@
 
 ### Classes
 
-- [NtsFormsModule](classes/ntsformsmodule.md)
+- [NtsFormsModule](classes/NtsFormsModule.md)
