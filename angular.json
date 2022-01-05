@@ -143,7 +143,7 @@
           "options": {
             "commands": [
               "cd dist/libs/azure-maps/ && npm pack",
-              "cd dist/libs/azure-maps/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/azure-maps/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -247,7 +247,7 @@
           "options": {
             "commands": [
               "cd dist/libs/calendar/ && npm pack",
-              "cd dist/libs/calendar/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/calendar/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -362,7 +362,7 @@
           "options": {
             "commands": [
               "cd dist/libs/chart/ && npm pack",
-              "cd dist/libs/chart/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/chart/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -477,7 +477,7 @@
           "options": {
             "commands": [
               "cd dist/libs/document-editor/ && npm pack",
-              "cd dist/libs/document-editor/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/document-editor/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -591,7 +591,7 @@
           "options": {
             "commands": [
               "cd dist/libs/forms/ && npm pack",
-              "cd dist/libs/forms/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/forms/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -698,7 +698,7 @@
           "options": {
             "commands": [
               "cd dist/libs/google-places-autocomplete/ && npm pack",
-              "cd dist/libs/google-places-autocomplete/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/google-places-autocomplete/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -779,7 +779,7 @@
           "options": {
             "commands": [
               "cd dist/libs/grid/ && npm pack",
-              "cd dist/libs/grid/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/grid/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -897,7 +897,7 @@
           "options": {
             "commands": [
               "cd dist/libs/mtg-calc/ && npm pack",
-              "cd dist/libs/mtg-calc/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/mtg-calc/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -1003,7 +1003,7 @@
           "options": {
             "commands": [
               "cd dist/libs/services/ && npm pack",
-              "cd dist/libs/services/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/services/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -1361,7 +1361,7 @@
           "options": {
             "commands": [
               "cd dist/libs/state-management/ && npm pack",
-              "cd dist/libs/state-management/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/state-management/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -1552,7 +1552,7 @@
           "options": {
             "commands": [
               "cd dist/libs/table/ && npm pack",
-              "cd dist/libs/table/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/table/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -1666,7 +1666,7 @@
           "options": {
             "commands": [
               "cd dist/libs/tags/ && npm pack",
-              "cd dist/libs/tags/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/tags/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -1780,7 +1780,7 @@
           "options": {
             "commands": [
               "cd dist/libs/tree/ && npm pack",
-              "cd dist/libs/tree/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/tree/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -1887,7 +1887,7 @@
           "options": {
             "commands": [
               "cd dist/libs/utils/ && npm pack",
-              "cd dist/libs/utils/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/utils/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -1968,7 +1968,7 @@
           "options": {
             "commands": [
               "cd dist/libs/visible/ && npm pack",
-              "cd dist/libs/visible/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/visible/ && npm publish --access public"
             ],
             "parallel": false
           }
@@ -2073,7 +2073,7 @@
           "options": {
             "commands": [
               "cd dist/libs/wizard/ && npm pack",
-              "cd dist/libs/wizard/ && npm publish --access public {args.GITHUB_TOKEN}"
+              "cd dist/libs/wizard/ && npm publish --access public"
             ],
             "parallel": false
           }
