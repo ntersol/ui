@@ -1,8 +1,8 @@
-<form>
+<form [formGroup]="form">
     <p>
 
         <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="First Name"
-            [control]="form?.get('modelText')" [disabled]="false">
+            formControlName="modelText" [disabled]="false">
         </nts-input-text>
         {{form?.get('modelText')?.value}}
 

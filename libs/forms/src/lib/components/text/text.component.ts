@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NtsInputComponent } from '../input/input.component';
 
 @Component({
@@ -6,6 +7,13 @@ import { NtsInputComponent } from '../input/input.component';
   templateUrl: './text.component.html',
   styleUrls: ['./text.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: forwardRef(() => NtsTextComponent),
+    }
+  ]
 })
 export class NtsTextComponent extends NtsInputComponent<string> implements OnInit {
 
@@ -20,5 +28,7 @@ export class NtsTextComponent extends NtsInputComponent<string> implements OnIni
 
   ngOnInit(): void {
   }
+
+
 
 }
