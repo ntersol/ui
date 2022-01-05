@@ -29,14 +29,14 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: ~/.npm
+          path: node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install
-        run: npm install
+        run: npm ci
       - name: Build
         run: npx nx affected --target build --parallel --max-parallel=3
       - name: Publish
@@ -69,14 +69,14 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: ~/.npm
+          path: node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install
-        run: npm install
+        run: npm ci
       - name: Build
         run: npx nx affected --target build --with-deps --parallel --max-parallel=3
       - name: Publish
