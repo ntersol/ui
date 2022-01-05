@@ -18,7 +18,7 @@ jobs:
       - name: Derive SHAs for base and head flags in `nx affected` commands
         uses: nrwl/nx-set-shas@v2
         with:
-          main-branch-name: 'master'
+          main-branch-name: master
       - uses: actions/setup-node@v1
         with:
           node-version: '14'
@@ -37,6 +37,8 @@ jobs:
           fetch-depth: 0
       - name: Derive SHAs for base and head flags in `nx affected` commands
         uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: master
       - uses: actions/setup-node@v1
         with:
           node-version: '14'
