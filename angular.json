@@ -1123,7 +1123,10 @@
         },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
-          "options": {}
+          "options": {
+            "cname": "",
+            "baseHref": "/angular-starter/"
+          }
         }
       },
       "tags": []
