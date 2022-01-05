@@ -41,8 +41,12 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Build
         run: npx nx affected --target build --parallel --max-parallel=3 --exclude=starter,wizard,storybook
+      - name: Deploy
+        run: npx nx affected --target deploy --parallel --max-parallel=2 --exclude=starter,wizard,storybook
       - name: Publish
         run: npx nx affected --target publish --parallel --max-parallel=2 --exclude=starter,wizard,storybook
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
   pr:
     name: Pull Request
     runs-on: ubuntu-latest
@@ -78,5 +82,9 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Build
         run: npx nx affected --target build --parallel --max-parallel=3 --exclude=starter,wizard,storybook
+      - name: Deploy
+        run: npx nx affected --target deploy --parallel --max-parallel=2 --exclude=starter,wizard,storybook
       - name: Publish
         run: npx nx affected --target publish --parallel --max-parallel=2 --exclude=starter,wizard,storybook
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
