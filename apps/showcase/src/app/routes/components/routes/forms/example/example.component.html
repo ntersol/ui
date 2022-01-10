@@ -1,11 +1,23 @@
 <form [formGroup]="form">
+
+    <!--
+    <p><strong>The Kitchen Sink</strong><br />
+        <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="First Name"
+            placeholder="John" suffix="Suffix" prefix="Prefix" hint="This is a hint" formControlName="modelText"
+            [disabled]="false"></nts-input-text>
+    </p>
+    -->
+    <p><strong>Disabled</strong><br />
+        <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="Middle Name"
+            placeholder="John" formControlName="disabled" [disabled]="true"></nts-input-text>
+    </p>
+
+
+
     <p>
 
-        <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="First Name"
-            formControlName="modelText" [disabled]="false">
-        </nts-input-text>
-        {{form?.get('modelText')?.value}}
 
+        <!--
         <nts-input-number placeholder="90630" label="Zipcode" [maxlength]="5" [useGrouping]="false"
             [control]="form?.get('zipcode')">
         </nts-input-number>
@@ -15,5 +27,6 @@
 
         <nts-input-number placeholder="$100.00" label="Dollar Amount" mode="currency" [control]="form?.get('currency')">
         </nts-input-number>
+        -->
     </p>
 </form>

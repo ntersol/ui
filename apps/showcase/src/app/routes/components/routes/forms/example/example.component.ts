@@ -12,7 +12,7 @@ export class ExampleComponent implements OnInit {
   public form = this.fb.group({
     modelText: [null, [NtsValidators.required]],
     modelText2: [null, []],
-
+    disabled: ['James', []],
     zipcode: [null, [NtsValidators.Chars.isEqualTo(5, {
       errorMessage: 'Please enter a valid 5 digit zip code'
     })]],

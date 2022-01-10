@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnI
 import { AbstractControl, FormControl, } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, startWith } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
 
 
 @UntilDestroy()
@@ -27,14 +27,19 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   @Input() name = '';
   /** Any css classes */
   @Input() styleClass = '';
-  /** Enable/disable this control, uses the form controls status */
+  /**
+   * Enable/disable this control, uses the form controls status.
+   * Setting the disabled property should be done in the formgroup itself but sometimes this method is useful
+   */
   @Input() set disabled(v: boolean | null) {
-    if (!!this.control && v !== null) {
-      !v ? this.control.enable() : this.control.disable();
-    }
+    setTimeout(() => { // A delay is necessary for the child classes to set the formControl
+      if (!!this.formControl) {
+        !v ? this.formControl.enable() : this.formControl.disable();
+      }
+    });
   }
   get disabled(): boolean {
-    return !!this.control?.enabled ?? false;
+    return !!this.formControl?.enabled ?? false;
   }
 
   /** An icon of text that will appear BEFORE the input */
@@ -69,14 +74,12 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   /** On keyup event on the input */
   @Output() onKeyup = new EventEmitter<KeyboardEvent>();
 
-
   public initialTouch = false;
 
   public showErrors$!: Observable<boolean>;
   public errors$!: Observable<[string, any][] | null>
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit(): void {
     // Emit changes to onChange event emitter
@@ -101,7 +104,6 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
       map(() => !this.control?.errors ? null : Object.entries(this.control?.errors))
     );
   }
-
 
   /**
    *  On control blur
