@@ -21,6 +21,7 @@
       "@ntersol/chart": ["libs/chart/src/index.ts"],
       "@ntersol/document-editor": ["libs/document-editor/src/index.ts"],
       "@ntersol/forms": ["libs/forms/src/index.ts"],
+      "@ntersol/google-places-autocomplete": ["libs/google-places-autocomplete/src/index.ts"],
       "@ntersol/grid": ["libs/grid/src/index.ts"],
       "@ntersol/mtg-calc": ["libs/mtg-calc/src/index.ts"],
       "@ntersol/services": ["libs/services/src/index.ts"],
@@ -33,8 +34,7 @@
       "@ntersol/utils": ["libs/utils/src/index.ts"],
       "@ntersol/visible": ["libs/visible/src/index.ts"],
       "@ntersol/wizard": ["libs/wizard/src/index.ts"],
-      "@ntersol/wizard-old": ["dist/libs/wizard/index.ts"],
-      "@ntersol/google-places-autocomplete": ["libs/google-places-autocomplete/src/index.ts"]
+      "@ntersol/wizard-old": ["dist/libs/wizard/index.ts"]
     },
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,

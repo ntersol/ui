@@ -15,11 +15,12 @@ import { ImageResizerComponent } from './routes/image-resizer/image-resizer.comp
 import { RemoveNilsComponent } from './routes/remove-nils/remove-nils.component';
 import { LibLoaderComponent } from './routes/lib-loader/lib-loader.component';
 import { FocusTrapComponent } from './routes/focus-trap/focus-trap.component';
-import { FocusTrapDirective } from '@ntersol/utils';
+import { DialogModule, FocusTrapDirective } from '@ntersol/utils';
+import { DialogPage } from './routes/dialog/dialog.page';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, TabViewModule],
-  declarations: [UtilitiesComponent, ScriptLoaderComponent, Formgroup2ApiComponent, ImageResizerComponent, RemoveNilsComponent, LibLoaderComponent, FocusTrapComponent, FocusTrapDirective],
+  imports: [CommonModule, SiteModule, routing, TabViewModule, DialogModule],
+  declarations: [UtilitiesComponent, ScriptLoaderComponent, Formgroup2ApiComponent, ImageResizerComponent, RemoveNilsComponent, LibLoaderComponent, FocusTrapComponent, FocusTrapDirective, DialogPage],
   providers: [
     RouteUiStateService,
     RouteUiStateStore,

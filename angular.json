@@ -1,7 +1,4 @@
 {
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
   "projects": {
     "angular-starter": {
@@ -1131,7 +1128,7 @@
           "builder": "angular-cli-ghpages:deploy",
           "options": {
             "cname": "",
-            "baseHref": "/angular-starter/",
+            "baseHref": "https://ntersol.github.io/angular-starter/",
             "noSilent": true,
             "name": "Github Actions",
             "email": "actions@github.com",

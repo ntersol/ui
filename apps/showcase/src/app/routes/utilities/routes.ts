@@ -1,5 +1,7 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DialogComponent } from '@ntersol/utils';
+import { DialogPage } from './routes/dialog/dialog.page';
 import { FocusTrapComponent } from './routes/focus-trap/focus-trap.component';
 import { Formgroup2ApiComponent } from './routes/formgroup2-api/formgroup2-api.component';
 import { ImageResizerComponent } from './routes/image-resizer/image-resizer.component';
@@ -39,6 +41,11 @@ const routes: Routes = [
     path: 'focus-trap',
     component: FocusTrapComponent,
     data: { title: 'Focus Trap' },
+  },
+  {
+    path: 'dialog',
+    component: DialogPage,
+    data: { title: 'Dialog' },
   },
   {
     path: '',

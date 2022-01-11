@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { DialogComponent } from '@ntersol/utils';
 import { LayoutMainComponent } from './components/masterpage';
 import { NoContentComponent } from './routes/no-content/no-content.component';
 // import { AuthGuard } from './shared/guards/auth.guard';
@@ -11,6 +12,11 @@ export const ROUTES: Routes = [
     pathMatch: 'full',
     loadChildren: () => import('./routes/login/login.module').then(m => m.LoginModule),
     data: { title: 'Please Log In' },
+  },
+  {
+    path: 'open',
+    outlet: 'dialog',
+    component: DialogComponent
   },
 
   // Example route param

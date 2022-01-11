@@ -6,3 +6,5 @@ export * from './lib/image-resizer/image-resizer.util';
 export * from './lib/remove-nils/remove-nils.util';
 export * from './lib/lib-loader/lib-loader.util';
 export * from './lib/focus-trap/focus-trap.directive';
+export * from './lib/dialog/dialog.module';
+export * from './lib/dialog/dialog.component';
