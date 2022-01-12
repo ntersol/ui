@@ -18,8 +18,16 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   @Input() placeholder: string | null = null;
   /** Floating label that appears in front of the content and moves above it when focused */
   @Input() label: string | null = null;
-  /** Allow hover functionality */
+  /** Allow hover functionality. If false the label will stay in the hovered position and not cover the control */
   @Input() hover = true;
+  /** Is this control focused */
+  @Input() focused = false;
+  /** An icon of text that will appear BEFORE the input */
+  @Input() prefix: string | null = null;
+  /** An icon of text that will appear AFTER the input */
+  @Input() suffix: string | null = null;
+  /** Small text that appears beneath the control */
+  @Input() hint: string | null = null;
 
   /** Text to use for ID attribute */
   @Input() id = '';
@@ -42,14 +50,7 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
     return !!this.formControl?.enabled ?? false;
   }
 
-  /** An icon of text that will appear BEFORE the input */
-  @Input() prefix: string | null = null;
-  /** An icon of text that will appear AFTER the input */
-  @Input() suffix: string | null = null;
-  /** Small text that appears beneath the control */
-  @Input() hint: string | null = null;
-  /** Is this contorl focused */
-  @Input() focused = false;
+
   /** Form control  */
   @Input() formControl = new FormControl();
 

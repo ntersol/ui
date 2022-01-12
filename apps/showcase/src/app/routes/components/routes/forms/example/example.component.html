@@ -9,10 +9,13 @@
             [disabled]="false"></nts-input-text>
     </p>
 
-    <!--
     <div class="example">
         <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="Disabled"
             placeholder="John" formControlName="disabled" [disabled]="true"></nts-input-text>
+    </div>
+    <div class="example">
+        <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="Hovered Label"
+            [hover]="false" placeholder="John" formControlName="focused"></nts-input-text>
     </div>
     <hr />
     <h2>Number/Currency Input Examples</h2>
@@ -27,5 +30,5 @@
         <nts-input-number placeholder="$100.00" label="Currency" mode="currency" [control]="form?.get('currency')">
         </nts-input-number>
     </div>
--->
+
 </form>
