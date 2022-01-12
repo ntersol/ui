@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
@@ -91,17 +91,17 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
     // When to show errors
     // Control is invalid and has been touched
     this.showErrors$ = this.formControl.statusChanges.pipe(
-      startWith(this.control?.status),
+      startWith(this.formControl?.status),
       debounceTime(1),
-      map(x => x === 'INVALID' && !!this.control?.touched),
+      map(x => x === 'INVALID' && !!this.formControl?.touched),
       distinctUntilChanged()
     );
 
     // Convert errors into iterable collection
     this.errors$ = this.formControl.statusChanges.pipe(
-      startWith(this.control?.errors),
+      startWith(this.formControl?.errors),
       debounceTime(1),
-      map(() => !this.control?.errors ? null : Object.entries(this.control?.errors))
+      map(() => !this.formControl?.errors ? null : Object.entries(this.formControl?.errors))
     );
   }
 

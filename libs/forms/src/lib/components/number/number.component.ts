@@ -27,7 +27,6 @@ export class NtsNumberComponent extends NtsInputComponent<number> implements OnI
   /** */
   @Input() maxFractionDigits = 2;
 
-
   constructor() {
     super()
   }
@@ -38,4 +37,5 @@ export class NtsNumberComponent extends NtsInputComponent<number> implements OnI
       this.minFractionDigits = 2;
     }
   }
+
 }

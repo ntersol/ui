@@ -1,32 +1,31 @@
 <form [formGroup]="form">
-
-    <!--
-    <p><strong>The Kitchen Sink</strong><br />
-        <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="First Name"
+    <div class="float-right">
+        <button class="btn btn-primary btn-sm" (click)="test()">Test Errors</button>
+    </div>
+    <h2>Text Input Examples</h2>
+    <p class="example">
+        <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="The Kitchen Sink"
             placeholder="John" suffix="Suffix" prefix="Prefix" hint="This is a hint" formControlName="modelText"
             [disabled]="false"></nts-input-text>
     </p>
-    -->
-    <p><strong>Disabled</strong><br />
-        <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="Middle Name"
+
+    <!--
+    <div class="example">
+        <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="Disabled"
             placeholder="John" formControlName="disabled" [disabled]="true"></nts-input-text>
-    </p>
-
-
-
-    <p>
-
-
-        <!--
+    </div>
+    <hr />
+    <h2>Number/Currency Input Examples</h2>
+    <div class="example">
+        <nts-input-number placeholder="100,000" label="Number" [control]="form?.get('population')"> </nts-input-number>
+    </div>
+    <div class="example">
         <nts-input-number placeholder="90630" label="Zipcode" [maxlength]="5" [useGrouping]="false"
-            [control]="form?.get('zipcode')">
+            [control]="form?.get('zipcode')"> </nts-input-number>
+    </div>
+    <div class="example">
+        <nts-input-number placeholder="$100.00" label="Currency" mode="currency" [control]="form?.get('currency')">
         </nts-input-number>
-
-        <nts-input-number placeholder="100,000" label="Population" [control]="form?.get('population')">
-        </nts-input-number>
-
-        <nts-input-number placeholder="$100.00" label="Dollar Amount" mode="currency" [control]="form?.get('currency')">
-        </nts-input-number>
-        -->
-    </p>
+    </div>
+-->
 </form>

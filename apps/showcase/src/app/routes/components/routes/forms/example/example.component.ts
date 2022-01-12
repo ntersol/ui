@@ -21,7 +21,13 @@ export class ExampleComponent implements OnInit {
   });
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  public test() {
+    this.form.markAllAsTouched();
+    this.form.patchValue(this.form.value);
+    // this.form.updateValueAndValidity({onlySelf: false});
+
   }
 
 }
