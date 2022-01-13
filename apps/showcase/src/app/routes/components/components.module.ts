@@ -26,11 +26,18 @@ import { DocEditorComponent } from './routes/doc-editor/doc-editor.component';
 import { GooglePlacesAutocompleteComponent } from './routes/google-places-autocomplete/google-places-autocomplete.component';
 import { NtsVisibleModule } from '@ntersol/visible';
 import { ExampleComponent } from './routes/forms/example/example.component';
+import { BasicsComponent } from './routes/forms/basics/basics.component';
+import { TextComponent } from './routes/forms/text/text.component';
+import { NumbersComponent } from './routes/forms/numbers/numbers.component';
+import { SelectComponent } from './routes/forms/select/select.component';
+import { ValidatorsComponent } from './routes/forms/validators/validators.component';
+import { CheckboxesComponent } from './routes/forms/checkboxes/checkboxes.component';
+import { RadioComponent } from './routes/forms/radio/radio.component';
 
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, NtsStateManagementModule, TabViewModule, NtsFormsModule, NtsTableModule, NtsTagsModule, NtsGooglePlacesAutocompleteModule, NtsMtgCalcModule, NtsVisibleModule, NtsDocumentEditorModule],
-  declarations: [ComponentsComponent, FormsComponent, WizardComponent, MtgCalcComponent, VisibleComponent, ShowcaseTableComponent, ShowcaseTagsComponent, GooglePlacesAutocompleteComponent, DocEditorComponent, ExampleComponent],
+  declarations: [ComponentsComponent, FormsComponent, WizardComponent, MtgCalcComponent, VisibleComponent, ShowcaseTableComponent, ShowcaseTagsComponent, GooglePlacesAutocompleteComponent, DocEditorComponent, ExampleComponent, BasicsComponent, TextComponent, NumbersComponent, SelectComponent, ValidatorsComponent, CheckboxesComponent, RadioComponent],
   providers: [],
   exports: [],
   entryComponents: [],
