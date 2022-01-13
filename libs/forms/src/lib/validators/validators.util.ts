@@ -1,4 +1,4 @@
-import { isEqualTo } from "./chars.validators";
+import { isEqualTo as isEqualToChars, isGreaterThan as isGreaterThanChars, isLessThan as isLessThanChars } from "./chars.validators";
 import { email, required } from "./misc.validators";
 import { isGreaterThan, isLessThan } from "./number.validators";
 
@@ -10,11 +10,15 @@ export const NtsValidators = {
     /** Validations based on the characters  */
     Chars: {
         /**  Characters must be equal to */
-        isEqualTo: isEqualTo
+        isEqualTo: isEqualToChars,
+        /** Must have characters greater than */
+        isGreaterThan: isGreaterThanChars,
+        /** Must have characters less than */
+        isLessThan: isLessThanChars,
     },
     Date: {},
     Number: {
         isGreaterThan: isGreaterThan,
-        isLessThan: isLessThan
+        isLessThan: isLessThan,
     }
 };

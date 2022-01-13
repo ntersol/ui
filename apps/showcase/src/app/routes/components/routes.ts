@@ -11,6 +11,13 @@ import { MtgCalcComponent } from './routes/mtg-calc/mtg-calc.component';
 import { DocEditorComponent } from './routes/doc-editor/doc-editor.component';
 import { GooglePlacesAutocompleteComponent } from './routes/google-places-autocomplete/google-places-autocomplete.component';
 import { FormsComponent } from './routes/forms/forms.component';
+import { ValidatorsComponent } from './routes/forms/validators/validators.component';
+import { TextComponent } from './routes/forms/text/text.component';
+import { NumbersComponent } from './routes/forms/numbers/numbers.component';
+import { BasicsComponent } from './routes/forms/basics/basics.component';
+import { CheckboxesComponent } from './routes/forms/checkboxes/checkboxes.component';
+import { RadioComponent } from './routes/forms/radio/radio.component';
+import { SelectComponent } from './routes/forms/select/select.component';
 
 const routes: Routes = [
   {
@@ -18,11 +25,49 @@ const routes: Routes = [
     component: GooglePlacesAutocompleteComponent,
     data: { title: 'Google Places Autocomplete' },
   },
+
+  // Start forms
   {
     path: 'forms',
     component: FormsComponent,
     data: { title: 'Forms' },
   },
+  {
+    path: 'forms/basics',
+    component: BasicsComponent,
+    data: { title: 'Basics' },
+  },
+  {
+    path: 'forms/checkboxes',
+    component: CheckboxesComponent,
+    data: { title: 'Checkboxes' },
+  },
+  {
+    path: 'forms/numbers',
+    component: NumbersComponent,
+    data: { title: 'Numbers' },
+  },
+  {
+    path: 'forms/radio',
+    component: RadioComponent,
+    data: { title: 'Radio' },
+  },
+  {
+    path: 'forms/select',
+    component: SelectComponent,
+    data: { title: 'Select' },
+  },
+  {
+    path: 'forms/text',
+    component: TextComponent,
+    data: { title: 'Text' },
+  },
+  {
+    path: 'forms/validators',
+    component: ValidatorsComponent,
+    data: { title: 'Validators' },
+  },
+  // End forms
   {
     path: 'wizard',
     component: WizardComponent,

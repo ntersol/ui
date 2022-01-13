@@ -30,8 +30,6 @@ export class ExampleComponent implements OnInit {
   public test() {
     this.form.markAllAsTouched();
     this.form.patchValue(this.form.value);
-    // this.form.updateValueAndValidity({onlySelf: false});
-
   }
 
 }
