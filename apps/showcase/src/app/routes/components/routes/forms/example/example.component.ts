@@ -14,10 +14,13 @@ export class ExampleComponent implements OnInit {
     modelText2: [null, []],
     focused: [null, []],
     disabled: ['James', []],
+    // Numbers
+    sink2: [null, []],
     zipcode: [null, [NtsValidators.required, NtsValidators.Chars.isEqualTo(5, {
       errorMessage: 'Please enter a valid 5 digit zip code'
     })]],
     population: [],
+    decimal: [],
     currency: [],
   });
   constructor(private fb: FormBuilder) { }

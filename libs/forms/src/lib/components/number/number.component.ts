@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, Optional, Self, ViewEncapsulation } from '@angular/core';
-import { EmailValidator, NgControl } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 import { NtsInputComponent } from '../input/input.component';
 
 @Component({

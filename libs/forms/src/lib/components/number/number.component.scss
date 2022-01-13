@@ -1,6 +1,11 @@
-p-inputNumber {
-  width: 100%;
-  .p-inputnumber {
+.nts-input-text {
+  p-inputNumber {
     width: 100%;
+    .p-inputnumber {
+      width: 100%;
+    }
+  }
+  .ng-touched.ng-invalid .p-inputnumber-input {
+    border-color: red;
   }
 }
