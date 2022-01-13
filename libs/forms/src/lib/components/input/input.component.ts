@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, tap, startWith } from 'rxjs/operators';
 
 
 @UntilDestroy()
@@ -75,18 +75,19 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   /** On keyup event on the input */
   @Output() onKeyup = new EventEmitter<KeyboardEvent>();
 
-  public initialTouch = false;
-
+  /** When to show or hide errors */
   public showErrors$!: Observable<boolean>;
+  /** Convert the errors in the form control error record to something iterable */
   public errors$!: Observable<[string, any][] | null>
 
   constructor() { }
 
   ngOnInit(): void {
-    // Emit changes to onChange event emitter
+
+    // When value changes, either programmatically OR via the user input
     this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe(v => {
+      // Emit changes to onChange event emitter
       this.onChange.emit(v);
-      this.control?.markAsTouched();
     });
 
     // When to show errors
@@ -113,7 +114,8 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
     this.focused = false;
     this.onBlur.emit(e);
     // Run validation on blur to account for a field that has a value on load and is also invalid
-    this.control?.updateValueAndValidity();
+    // Also fixes issues with prime controls that only update on blur
+    this.formControl?.updateValueAndValidity();
   }
 
   /**
