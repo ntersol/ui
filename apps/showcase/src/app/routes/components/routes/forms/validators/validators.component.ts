@@ -10,9 +10,14 @@ import { NtsValidators } from '@ntersol/forms';
 export class ValidatorsComponent implements OnInit {
 
   public form = this.fb.group({
-    isEqualTo: [null, [NtsValidators.Chars.isEqualTo(5)]],
-    isGreaterThan: [null, [NtsValidators.Chars.isGreaterThan(5)]],
-    isLessThan: [null, [NtsValidators.Chars.isLessThan(5)]]
+    // Characters
+    charsIsEqualTo: [null, [NtsValidators.Chars.isEqualTo(5)]],
+    charsIsGreaterThan: [null, [NtsValidators.Chars.isGreaterThan(5)]],
+    charsIsLessThan: [null, [NtsValidators.Chars.isLessThan(5)]],
+
+    // Numbers
+    numIsGreaterThan: [null, [NtsValidators.Number.isGreaterThan(99)]],
+    numIsLessThan: [null, [NtsValidators.Number.isLessThan(10)]],
   })
 
   constructor(private fb: FormBuilder) { }

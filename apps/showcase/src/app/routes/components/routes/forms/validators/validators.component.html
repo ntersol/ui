@@ -8,13 +8,19 @@
 </div>
 <h2>Character Validators</h2>
 <p>
-    <nts-input-text label="isEqualTo" [control]="form.get('isEqualTo')"></nts-input-text>
+    <nts-input-text label="isEqualTo" [control]="form.get('charsIsEqualTo')"></nts-input-text>
 </p>
 <p>
-    <nts-input-text label="isGreaterThan" [control]="form.get('isGreaterThan')"></nts-input-text>
+    <nts-input-text label="isGreaterThan" [control]="form.get('charsIsGreaterThan')"></nts-input-text>
 </p>
 <p>
-    <nts-input-text label="isLessThan" [control]="form.get('isLessThan')"></nts-input-text>
+    <nts-input-text label="isLessThan" [control]="form.get('charsIsLessThan')"></nts-input-text>
 </p>
 <hr />
 <h2>Number Validators</h2>
+<p>
+    <nts-input-text label="isGreaterThan" [control]="form.get('numIsGreaterThan')"></nts-input-text>
+</p>
+<p>
+    <nts-input-text label="isLessThan" [control]="form.get('numIsLessThan')"></nts-input-text>
+</p>
