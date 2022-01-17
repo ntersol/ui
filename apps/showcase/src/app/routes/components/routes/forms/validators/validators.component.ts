@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NtsValidators } from '@ntersol/forms';
+import { map } from 'rxjs/internal/operators/map';
 
 @Component({
   selector: 'nts-validators',
@@ -18,9 +20,17 @@ export class ValidatorsComponent implements OnInit {
     // Numbers
     numIsGreaterThan: [null, [NtsValidators.Number.isGreaterThan(99)]],
     numIsLessThan: [null, [NtsValidators.Number.isLessThan(10)]],
-  })
 
-  constructor(private fb: FormBuilder) { }
+    // Async
+    async: [null, [NtsValidators.async({
+      apiUrl: '',
+      request: 'get',
+      httpClient: this.http,
+    })
+    ]]
+  });
+
+  constructor(private fb: FormBuilder, private http: HttpClient) { }
 
 
   ngOnInit() {
