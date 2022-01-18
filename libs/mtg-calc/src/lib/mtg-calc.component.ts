@@ -10,7 +10,7 @@ import { DEFAULT } from './mtg-calc.constants';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MtgCalcComponent implements OnInit {
-  _config: MtgCalcConfig = DEFAULT;
+  _config = DEFAULT;
   showAmortization = false;
   amortization: Array<PAndI> = [];
   monthlyAmount = 0;
@@ -20,7 +20,7 @@ export class MtgCalcComponent implements OnInit {
   }
 
   @Input() set config(value: MtgCalcConfig) {
-    this._config = mergeDeepRight(DEFAULT, value);
+    this._config = mergeDeepRight(DEFAULT, value) as MtgCalcConfig;
     this.calculatePayments();
   }
 

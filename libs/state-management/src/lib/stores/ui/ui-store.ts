@@ -1,4 +1,4 @@
-import { BehaviorSubject, identity, Observable } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, identity, Observable } from 'rxjs';
 import { distinctUntilChanged, map, take } from 'rxjs/operators';
 import { NtsBaseStore } from '../base/base-store';
 import { NtsState } from '../../state.models';
@@ -59,7 +59,7 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
       localStorage.setItem(this.options?.persistId, JSON.stringify(this.state));
     }
 
-    return this.state$.pipe(take(1)).toPromise();
+    return firstValueFrom(this.state$);
   }
 
   /**
