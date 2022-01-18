@@ -13,5 +13,7 @@ export module NtsForms {
 
     export interface ValidatorOptions {
         errorMessage?: string | null;
+        /** By default all custom validators are required. To decouple required from the validator set this to false */
+        notRequired?: boolean | null;
     }
 }

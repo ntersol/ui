@@ -1,15 +1,21 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
+import { NtsForms } from "../../forms.models";
+import { isRequired } from "./misc.validators";
 
 /**
  * Characters must be equal to
  * @param control
  * @returns
  */
-export const isEqualTo = (charCount: number, options?: {
-    errorMessage?: string | null
-}) => {
+export const isEqualTo = (charCount: number, options?: NtsForms.ValidatorOptions) => {
     return (control: AbstractControl): ValidationErrors | null => {
         const value = control.value;
+
+        // Disable additional required validator. Default is all validators are required
+        if (!options?.notRequired && !!isRequired(value)) {
+            return isRequired(value);
+        }
+
         // Do not fail validation for nill values. This allows separation from the required validator
         if ([null, undefined].includes(value)) {
             return null;
@@ -29,9 +35,7 @@ export const isEqualTo = (charCount: number, options?: {
 * @param control
 * @returns
 */
-export const isGreaterThan = (charCount: number, options?: {
-    errorMessage?: string | null
-}) => (control: AbstractControl): ValidationErrors | null => {
+export const isGreaterThan = (charCount: number, options?: NtsForms.ValidatorOptions) => (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
     // Do not fail validation for nill values. This allows separation from the required validator
     if ([null, undefined].includes(value)) {

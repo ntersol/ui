@@ -1,11 +1,12 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
+import { NtsForms } from "../../forms.models";
 
 /**
  * Value must be greater than
  * @param control
  * @returns
  */
-export const isGreaterThan = (n: number) => {
+export const isGreaterThan = (n: number, options?: NtsForms.ValidatorOptions) => {
     return (control: AbstractControl): ValidationErrors | null => {
         const value = control.value;
         if (
@@ -18,7 +19,7 @@ export const isGreaterThan = (n: number) => {
             return null;
         }
 
-        return { 'isGreaterThan': `Please enter a number <strong>greater than ${n}</strong>` };
+        return { 'isGreaterThan': options?.errorMessage ?? `Please enter a number <strong>greater than ${n}</strong>` };
     }
 };
 
@@ -27,7 +28,7 @@ export const isGreaterThan = (n: number) => {
  * @param control
  * @returns
  */
-export const isLessThan = (n: number) => {
+export const isLessThan = (n: number, options?: NtsForms.ValidatorOptions) => {
     return (control: AbstractControl): ValidationErrors | null => {
         const value = control.value;
         if (
@@ -40,6 +41,6 @@ export const isLessThan = (n: number) => {
             return null;
         }
 
-        return { 'isGreaterThan': `Please enter a number <strong>less than ${n}</strong>` };
+        return { 'isGreaterThan': options?.errorMessage ?? `Please enter a number <strong>less than ${n}</strong>` };
     }
 };
