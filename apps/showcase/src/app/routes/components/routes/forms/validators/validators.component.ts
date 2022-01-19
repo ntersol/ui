@@ -22,12 +22,13 @@ export class ValidatorsComponent implements OnInit {
     numIsLessThan: [null, [NtsValidators.Number.isLessThan(10)]],
 
     // Async
-    async: [null, [NtsValidators.async({
-      apiUrl: '',
+    async: [null, [
+    ], [NtsValidators.async({
+      apiUrl: '/assets/mock-data/async.validator.json',
+      errorMessage: 'That username already exists',
       request: 'get',
       httpClient: this.http,
-    })
-    ]]
+    })]]
   });
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }

@@ -8,7 +8,7 @@ export const NtsValidators = {
     required: required,
     /** Require a valid email address */
     email: email,
-
+    /** Create an async validator */
     async: async,
     /** Validations based on the characters  */
     Chars: {

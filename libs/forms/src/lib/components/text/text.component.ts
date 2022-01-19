@@ -32,6 +32,7 @@ export class NtsTextComponent extends NtsInputComponent<string> implements OnIni
     if (this.ngControl?.control) {
       this.control = this.ngControl?.control;
     }
+    console.log(this)
   }
 
 }
