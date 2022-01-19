@@ -16,21 +16,33 @@ export const async = <apiResponse = any>(options: NtsForms.ValidatorAsyncOptions
     const request = options.request === 'post' ? options.httpClient.post<apiResponse>(apiUrl, control.value) : options.httpClient.get<apiResponse>(apiUrl);
 
     // Form request
-    return of(control.value).pipe(
+    return of(null).pipe(
         // Debounce input to avoid avoid hammering the api
-        delay(options?.debounceTime ?? 400),
+        delay(options?.debounceTime ?? 500),
         mergeMap(() => request),
-        map(r => !!options?.map ? options.map(r, control) : r),
         map(r => {
-            const error = { 'async': options?.errorMessage ?? 'This field is required' };
-            if (typeof r === 'boolean') {
-                return !r ? error : null;
-            } else if (r === null) {
+            // Get error messages
+            const errorMessage = typeof options?.errorMessage === 'function' ?
+                // If function, pass api response and form control
+                options?.errorMessage(r, control) :
+                // Use custom error message, otherwise default required message
+                options?.errorMessage ?? 'This field is required'
+            // Create error object
+            const error = { [options?.customID ?? 'async']: errorMessage };
+            // If map function supplied in options, map api response
+            const response = !!options?.map ? options.map(r, control) : r;
+            // If boolean, treat true as valid and false as invalid
+            if (typeof response === 'boolean') {
+                return !response ? error : null;
+                // If null treat as valid
+            } else if (response === null) {
                 return null;
-            } else if (typeof r === 'object' && !Array.isArray(r)) {
-                return r;
+                // If response is object treat as error object
+            } else if (typeof response === 'object' && !Array.isArray(response)) {
+                return response;
             }
             return error;
+
         }),
         // If api error, allow to proceed
         catchError(() => of(null))

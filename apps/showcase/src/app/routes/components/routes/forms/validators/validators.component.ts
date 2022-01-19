@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NtsValidators } from '@ntersol/forms';
-import R from 'ramda';
-import { map } from 'rxjs/internal/operators/map';
 import { Models } from '../../../../../shared/models';
 
 @Component({
@@ -37,12 +35,18 @@ export class ValidatorsComponent implements OnInit {
       errorMessage: 'That username already exists',
       map: (users: Models.User[], control) => {
         const userNames = users.map(u => u.username.toLowerCase());
-        console.log(userNames, control?.value?.toLowerCase())
-        if (userNames.includes(control?.value?.toLowerCase())) {
-          return false;
-        }
-
-        return true;
+        return !userNames.includes(control?.value?.toLowerCase())
+      },
+      request: 'get',
+      httpClient: this.http,
+    })]],
+    async3: [null, [
+    ], [NtsValidators.async({
+      apiUrl: '//jsonplaceholder.typicode.com/users',
+      errorMessage: (apiResponse: Models.User[], control) => `A username of <strong>${control.value}</strong> already exists in the list of <strong>${apiResponse.length}</strong> available users`,
+      map: (users: Models.User[], control) => {
+        const userNames = users.map(u => u.username.toLowerCase());
+        return !userNames.includes(control?.value?.toLowerCase())
       },
       request: 'get',
       httpClient: this.http,
