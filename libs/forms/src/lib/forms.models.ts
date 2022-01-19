@@ -7,7 +7,7 @@ export module NtsForms {
         apiUrl: string | ((control: AbstractControl) => string),
         httpClient: HttpClient,
         request: 'get' | 'post',
-        map?: ((response: any) => ValidationErrors | null | boolean),
+        map?: ((response: any, control: AbstractControl) => ValidationErrors | null | boolean),
         debounceTime?: number | null
     }
 

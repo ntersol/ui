@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NtsValidators } from '@ntersol/forms';
+import R from 'ramda';
 import { map } from 'rxjs/internal/operators/map';
+import { Models } from '../../../../../shared/models';
 
 @Component({
   selector: 'nts-validators',
@@ -28,7 +30,23 @@ export class ValidatorsComponent implements OnInit {
       errorMessage: 'That username already exists',
       request: 'get',
       httpClient: this.http,
-    })]]
+    })]],
+    async2: [null, [
+    ], [NtsValidators.async({
+      apiUrl: '//jsonplaceholder.typicode.com/users',
+      errorMessage: 'That username already exists',
+      map: (users: Models.User[], control) => {
+        const userNames = users.map(u => u.username.toLowerCase());
+        console.log(userNames, control?.value?.toLowerCase())
+        if (userNames.includes(control?.value?.toLowerCase())) {
+          return false;
+        }
+
+        return true;
+      },
+      request: 'get',
+      httpClient: this.http,
+    })]],
   });
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }

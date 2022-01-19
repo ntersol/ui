@@ -20,10 +20,9 @@ export const async = <apiResponse = any>(options: NtsForms.ValidatorAsyncOptions
         // Debounce input to avoid avoid hammering the api
         delay(options?.debounceTime ?? 400),
         mergeMap(() => request),
-        map(r => !!options?.map ? options.map(r) : r),
+        map(r => !!options?.map ? options.map(r, control) : r),
         map(r => {
             const error = { 'async': options?.errorMessage ?? 'This field is required' };
-
             if (typeof r === 'boolean') {
                 return !r ? error : null;
             } else if (r === null) {
@@ -31,7 +30,6 @@ export const async = <apiResponse = any>(options: NtsForms.ValidatorAsyncOptions
             } else if (typeof r === 'object' && !Array.isArray(r)) {
                 return r;
             }
-
             return error;
         }),
         // If api error, allow to proceed
