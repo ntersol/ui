@@ -16,17 +16,19 @@ export const isEqualTo = (charCount: number, options?: NtsForms.ValidatorOptions
             return isRequired(value);
         }
 
-        // Do not fail validation for nill values. This allows separation from the required validator
-        if ([null, undefined].includes(value)) {
-            return null;
-        }
-
         // If the string or number has the correct number of characters
         if ((typeof value === 'string' || typeof value === 'number') && String(value).length === charCount) {
             return null;
         }
 
-        return { 'isEqualTo': options?.errorMessage ?? `Please enter exactly <strong>${charCount} characters</strong>` };
+        // Get error messages
+        const errorMessage = typeof options?.errorMessage === 'function' ?
+            // If function, pass api response and form control
+            options?.errorMessage(control) :
+            // Use custom error message, otherwise default required message
+            options?.errorMessage ?? `Please enter exactly <strong>${charCount} characters</strong>`;
+        // Create error object
+        return { [options?.customID ?? 'isEqualTo']: errorMessage };
     }
 };
 
@@ -37,9 +39,10 @@ export const isEqualTo = (charCount: number, options?: NtsForms.ValidatorOptions
 */
 export const isGreaterThan = (charCount: number, options?: NtsForms.ValidatorOptions) => (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
-    // Do not fail validation for nill values. This allows separation from the required validator
-    if ([null, undefined].includes(value)) {
-        return null;
+
+    // Disable additional required validator. Default is all validators are required
+    if (!options?.notRequired && !!isRequired(value)) {
+        return isRequired(value);
     }
 
     // If the string or number has the correct number of characters
@@ -47,8 +50,14 @@ export const isGreaterThan = (charCount: number, options?: NtsForms.ValidatorOpt
         return null;
     }
 
-    return { 'isEqualTo': options?.errorMessage ?? `Please enter more than <strong>${charCount} characters</strong>` };
-
+    // Get error messages
+    const errorMessage = typeof options?.errorMessage === 'function' ?
+        // If function, pass api response and form control
+        options?.errorMessage(control) :
+        // Use custom error message, otherwise default required message
+        options?.errorMessage ?? `Please enter more than <strong>${charCount} characters</strong>`;
+    // Create error object
+    return { [options?.customID ?? 'isGreaterThan']: errorMessage };
 };
 
 /**
@@ -56,13 +65,12 @@ export const isGreaterThan = (charCount: number, options?: NtsForms.ValidatorOpt
 * @param control
 * @returns
 */
-export const isLessThan = (charCount: number, options?: {
-    errorMessage?: string | null
-}) => (control: AbstractControl): ValidationErrors | null => {
+export const isLessThan = (charCount: number, options?: NtsForms.ValidatorOptions) => (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
-    // Do not fail validation for nill values. This allows separation from the required validator
-    if ([null, undefined].includes(value)) {
-        return null;
+
+    // Disable additional required validator. Default is all validators are required
+    if (!options?.notRequired && !!isRequired(value)) {
+        return isRequired(value);
     }
 
     // If the string or number has the correct number of characters
@@ -70,6 +78,12 @@ export const isLessThan = (charCount: number, options?: {
         return null;
     }
 
-    return { 'isEqualTo': options?.errorMessage ?? `Please enter less than <strong>${charCount} characters</strong>` };
-
+    // Get error messages
+    const errorMessage = typeof options?.errorMessage === 'function' ?
+        // If function, pass api response and form control
+        options?.errorMessage(control) :
+        // Use custom error message, otherwise default required message
+        options?.errorMessage ?? `Please enter less than <strong>${charCount} characters</strong>`;
+    // Create error object
+    return { [options?.customID ?? 'isLessThan']: errorMessage };
 };

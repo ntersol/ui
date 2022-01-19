@@ -2,6 +2,7 @@ import { AbstractControl, AsyncValidatorFn, ValidationErrors } from "@angular/fo
 import { Observable, of } from "rxjs";
 import { catchError, debounceTime, delay, map, mergeMap } from "rxjs/operators";
 import { NtsForms } from "../../forms.models";
+import { isRequired } from "./misc.validators";
 
 
 /**
@@ -21,14 +22,20 @@ export const async = <apiResponse = any>(options: NtsForms.ValidatorAsyncOptions
         delay(options?.debounceTime ?? 500),
         mergeMap(() => request),
         map(r => {
+            // Disable additional required validator. Default is all validators are required
+            if (!options?.notRequired && !!isRequired(control.value)) {
+                return isRequired(control.value);
+            }
+
             // Get error messages
             const errorMessage = typeof options?.errorMessage === 'function' ?
                 // If function, pass api response and form control
                 options?.errorMessage(r, control) :
                 // Use custom error message, otherwise default required message
-                options?.errorMessage ?? 'This field is required'
+                options?.errorMessage ?? 'This field is required';
             // Create error object
             const error = { [options?.customID ?? 'async']: errorMessage };
+
             // If map function supplied in options, map api response
             const response = !!options?.map ? options.map(r, control) : r;
             // If boolean, treat true as valid and false as invalid
@@ -42,7 +49,6 @@ export const async = <apiResponse = any>(options: NtsForms.ValidatorAsyncOptions
                 return response;
             }
             return error;
-
         }),
         // If api error, allow to proceed
         catchError(() => of(null))
