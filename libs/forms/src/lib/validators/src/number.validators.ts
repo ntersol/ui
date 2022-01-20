@@ -19,10 +19,7 @@ export const isGreaterThan = (n: number, options?: NtsForms.ValidatorOptions) =>
         // If number is greater than
         if (
             (typeof value === 'number' && value > n) ||
-            (typeof value === 'string' && parseInt(value) > n) ||
-            // Nill values should be set by the required validator
-            value === null ||
-            value === undefined
+            (typeof value === 'string' && parseInt(value) > n)
         ) {
             return null;
         }
@@ -55,10 +52,7 @@ export const isLessThan = (n: number, options?: NtsForms.ValidatorOptions) => {
         // If number is less than
         if (
             (typeof value === 'number' && value < n) ||
-            (typeof value === 'string' && parseInt(value) < n) ||
-            // Nill values should be set by the required validator
-            value === null ||
-            value === undefined
+            (typeof value === 'string' && parseInt(value) < n)
         ) {
             return null;
         }
