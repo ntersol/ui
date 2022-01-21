@@ -29,4 +29,16 @@ export module NtsForms {
         /** Specify a custom ID for this validator. This is only necessary of using multiple validators of the same type on the same control */
         customID?: string | null;
     }
+
+    /**
+     * Test
+     */
+    export interface Config {
+        /** Another form control in the form group to compare against instead of a fixed value.
+         * Uses Angular dot notation. The value should be from the root of the form group.
+         * @example
+         * 'loanApplication.borrowers.0.age'
+         * */
+        compareToField: string;
+    }
 }

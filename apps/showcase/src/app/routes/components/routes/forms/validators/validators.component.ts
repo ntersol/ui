@@ -21,6 +21,9 @@ export class ValidatorsComponent implements OnInit {
     numIsGreaterThan: [null, [NtsValidators.Number.isGreaterThan(99)]],
     numIsLessThan: [null, [NtsValidators.Number.isLessThan(10)]],
 
+    numCompare: [50],
+    numIsGreaterThan2: [null, [NtsValidators.Number.isGreaterThan({ compareToField: 'numCompare' })]],
+
     // Async
     async: [null, [
     ], [NtsValidators.async({

@@ -7,9 +7,18 @@ import { isRequired } from "./misc.validators";
  * @param control
  * @returns
  */
-export const isEqualTo = (charCount: number, options?: NtsForms.ValidatorOptions) => {
+export const isEqualTo = (charCount: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => {
     return (control: AbstractControl): ValidationErrors | null => {
         const value = control.value;
+        let compareValue = charCount;
+        if (typeof charCount === 'object' && !!charCount.compareToField) {
+            const c = control.root.get(charCount.compareToField);
+            if (!c) {
+                console.warn(`Unable to find a field of ${charCount.compareToField}`);
+                return null;
+            }
+            compareValue = c.value;
+        }
 
         // Disable additional required validator. Default is all validators are required
         if (!options?.notRequired && !!isRequired(value)) {
@@ -17,7 +26,7 @@ export const isEqualTo = (charCount: number, options?: NtsForms.ValidatorOptions
         }
 
         // If the string or number has the correct number of characters
-        if ((typeof value === 'string' || typeof value === 'number') && String(value).length === charCount) {
+        if ((typeof value === 'string' || typeof value === 'number') && String(value).length === compareValue) {
             return null;
         }
 
@@ -26,7 +35,7 @@ export const isEqualTo = (charCount: number, options?: NtsForms.ValidatorOptions
             // If function, pass api response and form control
             options?.errorMessage(control) :
             // Use custom error message, otherwise default required message
-            options?.errorMessage ?? `Please enter exactly <strong>${charCount} characters</strong>`;
+            options?.errorMessage ?? `Please enter exactly <strong>${compareValue} characters</strong>`;
         // Create error object
         return { [options?.customID ?? 'isEqualTo']: errorMessage };
     }
@@ -37,8 +46,17 @@ export const isEqualTo = (charCount: number, options?: NtsForms.ValidatorOptions
 * @param control
 * @returns
 */
-export const isGreaterThan = (charCount: number, options?: NtsForms.ValidatorOptions) => (control: AbstractControl): ValidationErrors | null => {
+export const isGreaterThan = (charCount: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
+    let compareValue = charCount;
+    if (typeof charCount === 'object' && !!charCount.compareToField) {
+        const c = control.root.get(charCount.compareToField);
+        if (!c) {
+            console.warn(`Unable to find a field of ${charCount.compareToField}`);
+            return null;
+        }
+        compareValue = c.value;
+    }
 
     // Disable additional required validator. Default is all validators are required
     if (!options?.notRequired && !!isRequired(value)) {
@@ -46,7 +64,7 @@ export const isGreaterThan = (charCount: number, options?: NtsForms.ValidatorOpt
     }
 
     // If the string or number has the correct number of characters
-    if ((typeof value === 'string' || typeof value === 'number') && String(value).length > charCount) {
+    if ((typeof value === 'string' || typeof value === 'number') && String(value).length > compareValue) {
         return null;
     }
 
@@ -55,7 +73,7 @@ export const isGreaterThan = (charCount: number, options?: NtsForms.ValidatorOpt
         // If function, pass api response and form control
         options?.errorMessage(control) :
         // Use custom error message, otherwise default required message
-        options?.errorMessage ?? `Please enter more than <strong>${charCount} characters</strong>`;
+        options?.errorMessage ?? `Please enter more than <strong>${compareValue} characters</strong>`;
     // Create error object
     return { [options?.customID ?? 'isGreaterThan']: errorMessage };
 };
@@ -65,8 +83,17 @@ export const isGreaterThan = (charCount: number, options?: NtsForms.ValidatorOpt
 * @param control
 * @returns
 */
-export const isLessThan = (charCount: number, options?: NtsForms.ValidatorOptions) => (control: AbstractControl): ValidationErrors | null => {
+export const isLessThan = (charCount: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
+    let compareValue = charCount;
+    if (typeof charCount === 'object' && !!charCount.compareToField) {
+        const c = control.root.get(charCount.compareToField);
+        if (!c) {
+            console.warn(`Unable to find a field of ${charCount.compareToField}`);
+            return null;
+        }
+        compareValue = c.value;
+    }
 
     // Disable additional required validator. Default is all validators are required
     if (!options?.notRequired && !!isRequired(value)) {
@@ -74,7 +101,7 @@ export const isLessThan = (charCount: number, options?: NtsForms.ValidatorOption
     }
 
     // If the string or number has the correct number of characters
-    if ((typeof value === 'string' || typeof value === 'number') && String(value).length < charCount) {
+    if ((typeof value === 'string' || typeof value === 'number') && String(value).length < compareValue) {
         return null;
     }
 
@@ -83,7 +110,7 @@ export const isLessThan = (charCount: number, options?: NtsForms.ValidatorOption
         // If function, pass api response and form control
         options?.errorMessage(control) :
         // Use custom error message, otherwise default required message
-        options?.errorMessage ?? `Please enter less than <strong>${charCount} characters</strong>`;
+        options?.errorMessage ?? `Please enter less than <strong>${compareValue} characters</strong>`;
     // Create error object
     return { [options?.customID ?? 'isLessThan']: errorMessage };
 };
