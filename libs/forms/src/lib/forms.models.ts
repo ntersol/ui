@@ -30,6 +30,16 @@ export module NtsForms {
         customID?: string | null;
     }
 
+    /** Options for the validator generator */
+    export interface ValidatorBaseOptions {
+        /** The desired value or location of where to get the value that will be supplied to the evaluatorFn  */
+        value: string | number | boolean | NtsForms.Config;
+        /** Default error message. Can be a string or a callback function  */
+        errorMessageDefault: string | ((value: any) => string);
+        /** A function that looks at the desired value and the actual value and returns a boolean if the control is valid or not */
+        evaluatorFn: ((value: any, compareValue: any) => boolean)
+    }
+
     /**
      * Test
      */

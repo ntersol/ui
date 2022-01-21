@@ -1,12 +1,20 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { NtsForms } from "../../forms.models";
 import { isRequired } from "./misc.validators";
+import { baseValidator } from "./_base.validators";
+
+
+export const isEqualTo = (charCount: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => baseValidator({
+    value: charCount,
+    evaluatorFn: (value, compareValue) => (typeof value === 'string' || typeof value === 'number') && String(value).length === compareValue,
+    errorMessageDefault: (compareValue) => `Please enter exactly <strong>${compareValue} characters</strong>`
+}, options);
 
 /**
  * Characters must be equal to
  * @param control
  * @returns
- */
+
 export const isEqualTo = (charCount: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => {
     return (control: AbstractControl): ValidationErrors | null => {
         const value = control.value;
@@ -26,7 +34,8 @@ export const isEqualTo = (charCount: number | NtsForms.Config, options?: NtsForm
         }
 
         // If the string or number has the correct number of characters
-        if ((typeof value === 'string' || typeof value === 'number') && String(value).length === compareValue) {
+        if (((typeof value === 'string' || typeof value === 'number') && String(value).length === compareValue) ||
+            typeof value === 'undefined' || value === null) {
             return null;
         }
 
@@ -40,6 +49,7 @@ export const isEqualTo = (charCount: number | NtsForms.Config, options?: NtsForm
         return { [options?.customID ?? 'isEqualTo']: errorMessage };
     }
 };
+ */
 
 /**
 * Characters must be greater than
@@ -64,7 +74,8 @@ export const isGreaterThan = (charCount: number | NtsForms.Config, options?: Nts
     }
 
     // If the string or number has the correct number of characters
-    if ((typeof value === 'string' || typeof value === 'number') && String(value).length > compareValue) {
+    if (((typeof value === 'string' || typeof value === 'number') && String(value).length > compareValue)
+        || typeof value === 'undefined' || value === null) {
         return null;
     }
 
@@ -101,7 +112,8 @@ export const isLessThan = (charCount: number | NtsForms.Config, options?: NtsFor
     }
 
     // If the string or number has the correct number of characters
-    if ((typeof value === 'string' || typeof value === 'number') && String(value).length < compareValue) {
+    if (((typeof value === 'string' || typeof value === 'number') && String(value).length < compareValue)
+        || typeof value === 'undefined' || value === null) {
         return null;
     }
 
