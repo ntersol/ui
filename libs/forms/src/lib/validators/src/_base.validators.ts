@@ -12,8 +12,8 @@ const isConfig = (config: any): config is NtsForms.Config => typeof config.value
  * @param options
  * @returns
  */
-export const baseValidator = (config: NtsForms.ValidatorBaseOptions, options?: NtsForms.ValidatorOptions) => {
-    return (control: AbstractControl): ValidationErrors | null => {
+export const baseValidator = (config: NtsForms.ValidatorBaseOptions, options?: NtsForms.ValidatorOptions) =>
+    (control: AbstractControl): ValidationErrors | null => {
         const value = control.value;
 
         // Get the value to compare against. Either fixed or from elsewhere in the form group
@@ -38,12 +38,11 @@ export const baseValidator = (config: NtsForms.ValidatorBaseOptions, options?: N
 
         // Create the error message
         const err = options?.errorMessage || config?.errorMessageDefault;
-        const errorMessage = typeof err === 'function' ? err?.(compareValue, control) : err;
+        const errorMessage = typeof err === 'function' ? err?.(compareValue as any, control) : err;
 
         // Create error object
         return { [options?.customID ?? config.id]: errorMessage };
-    }
-};
+    };
 
 /**
  * Determine the value to evaluate the desired expression against. Can either be a fixed value or another value extracted from the form group
