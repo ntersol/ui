@@ -19,8 +19,10 @@ export module NtsForms {
     }
 
     export interface ValidatorOptions extends ValidatorOptionsSrc {
-        /** Custom error message, supports a string or a callback function that receives the form control */
-        errorMessage?: string | null | ((control: AbstractControl) => string);
+        /** Custom error message, supports a string or a callback function that receives the form control.
+         * The compare value will be the expected value, either fixed or dynamic from elsewhere in the form
+         */
+        errorMessage?: string | null | ((compareValue: string | number | boolean | null, control: AbstractControl) => string);
     }
 
     export interface ValidatorOptionsSrc {
@@ -32,13 +34,21 @@ export module NtsForms {
 
     /** Options for the validator generator */
     export interface ValidatorBaseOptions {
+        /** An id unique to this validator. Is used in the form control's error object  */
+        id: string;
         /** The desired value or location of where to get the value that will be supplied to the evaluatorFn  */
         value: string | number | boolean | NtsForms.Config;
         /** Default error message. Can be a string or a callback function  */
         errorMessageDefault: string | ((value: any) => string);
         /** A function that looks at the desired value and the actual value and returns a boolean if the control is valid or not */
-        evaluatorFn: ((value: any, compareValue: any) => boolean)
+        evaluatorFn: ((
+            /** The actual value in the form */
+            formValue: any,
+            /** The desired value to compare the form value against */
+            compareValue: any
+        ) => boolean)
     }
+
 
     /**
      * Test

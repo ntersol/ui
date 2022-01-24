@@ -2,6 +2,10 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { NtsForms } from "../../forms.models";
 import { isRequired } from "./misc.validators";
 
+
+/** Is this a config type */
+const isConfig = (config: any): config is NtsForms.Config => typeof config.value === 'object' && !!config.value.compareToField;
+
 /**
  *
  * @param config
@@ -12,14 +16,13 @@ export const baseValidator = (config: NtsForms.ValidatorBaseOptions, options?: N
     return (control: AbstractControl): ValidationErrors | null => {
         const value = control.value;
 
-        let compareValue = config.value;
-        if (typeof config.value === 'object' && !!config.value.compareToField) {
-            const c = control.root.get(config.value.compareToField);
-            if (!c) {
-                console.warn(`Unable to find a field of ${config.value.compareToField}`);
-                return null;
-            }
-            compareValue = c.value;
+        // Get the value to compare against. Either fixed or from elsewhere in the form group
+        const compareValue = extractValue(config, control);
+
+        // If compare value is null then the extractValue config could not find the requested form control
+        if (compareValue === null && isConfig(config.value)) {
+            // Return an error in the browser with info about the missing control
+            return { ['missing-control']: `Unable to find a field of ${config.value.compareToField}` };
         }
 
         // Disable additional required validator. Default is all validators are required
@@ -27,27 +30,38 @@ export const baseValidator = (config: NtsForms.ValidatorBaseOptions, options?: N
             return isRequired(value);
         }
 
-        //
+        // Evaluate the supplied fn to see it it passes. Also allow through nill values because those are checked above
         if (config.evaluatorFn(value, compareValue) ||
-            typeof value === 'undefined' || value === null) {
+            typeof value === 'undefined' || value === null || value === '') {
             return null;
         }
 
-        /**
-        // If the string or number has the correct number of characters
-        if (((typeof value === 'string' || typeof value === 'number') && String(value).length === compareValue) ||
-            typeof value === 'undefined' || value === null) {
-            return null;
-        }
-         */
+        // Create the error message
+        const err = options?.errorMessage || config?.errorMessageDefault;
+        const errorMessage = typeof err === 'function' ? err?.(compareValue, control) : err;
 
-        // Get error messages
-        const errorMessage = typeof options?.errorMessage === 'function' ?
-            // If function, pass api response and form control
-            options?.errorMessage(control) :
-            // Use custom error message, otherwise default required message
-            options?.errorMessage ?? `Please enter exactly <strong>${compareValue} characters</strong>`;
         // Create error object
-        return { [options?.customID ?? 'isEqualTo']: errorMessage };
+        return { [options?.customID ?? config.id]: errorMessage };
     }
 };
+
+/**
+ * Determine the value to evaluate the desired expression against. Can either be a fixed value or another value extracted from the form group
+ * @param config
+ * @param control
+ * @returns
+ */
+const extractValue = (config: NtsForms.ValidatorBaseOptions, control: AbstractControl): string | number | boolean | null => {
+    // If this is a config type with a compare value, get the dynamic field and then its value
+    if (isConfig(config.value)) {
+        const c = control.root.get(config.value.compareToField);
+        // Can't find the control
+        if (!c) {
+            return null;
+        }
+        // Return the control's value
+        return c.value;
+    }
+    // Not a config type, return the value
+    return config.value;
+}

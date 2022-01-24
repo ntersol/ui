@@ -1,13 +1,27 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { NtsForms } from "../../forms.models";
 import { isRequired } from "./misc.validators";
+import { baseValidator } from "./_base.validators";
+
+/**
+ * Form value must have characters equal to
+ * @param charCount
+ * @param options
+ * @returns
+ */
+export const numberIsGreaterThan = (n: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => baseValidator({
+    id: 'numberIsGreaterThan',
+    value: n,
+    evaluatorFn: (formValue, compareValue) => (typeof formValue === 'number' && formValue > compareValue) || (typeof formValue === 'string' && parseInt(formValue) > compareValue),
+    errorMessageDefault: compareValue => `Please enter a number <strong>greater than ${compareValue}</strong>`
+}, options);
 
 /**
  * Value must be greater than
  * @param control
  * @returns
- */
-export const isGreaterThan = (n: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => {
+
+export const numberIsGreaterThan = (n: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => {
     return (control: AbstractControl): ValidationErrors | null => {
         const value = control.value;
         let compareValue = n;
@@ -36,20 +50,20 @@ export const isGreaterThan = (n: number | NtsForms.Config, options?: NtsForms.Va
         // Get error messages
         const errorMessage = typeof options?.errorMessage === 'function' ?
             // If function, pass api response and form control
-            options?.errorMessage(control) :
+            options?.errorMessage('', control) :
             // Use custom error message, otherwise default required message
             options?.errorMessage ?? `Please enter a number <strong>greater than ${compareValue}</strong>`;
         // Create error object
         return { [options?.customID ?? 'isGreaterThan']: errorMessage };
     }
 };
-
+ */
 /**
  * Value must be greater than
  * @param control
  * @returns
  */
-export const isLessThan = (n: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => {
+export const numberIsLessThan = (n: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => {
     return (control: AbstractControl): ValidationErrors | null => {
         const value = control.value;
         let compareValue = n;
@@ -78,7 +92,7 @@ export const isLessThan = (n: number | NtsForms.Config, options?: NtsForms.Valid
         // Get error messages
         const errorMessage = typeof options?.errorMessage === 'function' ?
             // If function, pass form control
-            options?.errorMessage(control) :
+            options?.errorMessage('', control) :
             // Use custom error message, otherwise default required message
             options?.errorMessage ?? `Please enter a number <strong>less than ${compareValue}</strong>`;
         // Create error object
