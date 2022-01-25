@@ -4,7 +4,7 @@ import { isRequired } from "./misc.validators";
 
 
 /** Is this a config type */
-const isConfig = (config: any): config is NtsForms.Config => typeof config.value === 'object' && !!config.value.compareToField;
+const isConfig = (config: any): config is NtsForms.Config => typeof config === 'object' && !!config?.compareToField;
 
 /**
  *
