@@ -59,7 +59,7 @@ export class ValidatorsComponent implements OnInit {
     })]],
 
     // Date
-    date1: ['10/10/2018', [dateIsGreaterThan({ years: 2 })]]
+    date1: ['10/10/2021', [dateIsGreaterThan({ years: 2 })]]
   });
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }

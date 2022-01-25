@@ -10,21 +10,6 @@ import * as dayjs from 'dayjs'
 const isValidDate = (date: any): date is Date => date && Object.prototype.toString.call(date) === "[object Date]" && !isNaN(date)
 
 /**
- * Handle date conversion
- * @param value
- * @returns
-
-const dateConvert = (value: any) => {
-    if (typeof value === 'string' && isValidDate(new Date(value))) {
-        return new Date(value);
-    } else if (isValidDate(value)) {
-        return value as Date;
-    }
-    return null;
-}
- */
-
-/**
  * Form value must have characters greater than
  * @param charCount
  * @param options
@@ -35,19 +20,38 @@ export const dateIsGreaterThan = (compareValueSrc: NtsForms.DateOption | Date | 
     {
         id: 'dateIsGreaterThan',
         evaluatorFn: (compareValue, formValue) => {
-            const compareDate = isValidDate(compareValue) ? dayjs(compareValue) : dayjs().add(7, 'year');
+            // Get date to compare against and apply the date transforms
+            let today = dayjs();
+            // Get date in form entered by user
             const formDate = dayjs(formValue);
-            console.log(compareDate, formDate)
+            if (!isValidDate(compareValue) && compareValue.years) {
+                today = today.subtract(compareValue.years, 'year');
+            }
+            if (!isValidDate(compareValue) && compareValue.months) {
+                today = today.subtract(compareValue.months, 'month');
+            }
+            if (!isValidDate(compareValue) && compareValue.days) {
+                today = today.subtract(compareValue.days, 'day');
+            }
+            // Get date if dynamically supplied, today otherwise
+            const compareDate = isValidDate(compareValue) ? dayjs(compareValue) : today;
+
+            // Make sure the date is valid, if not throw error
             if (!formDate.isValid() || !compareDate.isValid()) {
-                return { 'dateIsGreaterThan': 'Date is invalid' };
+                return { 'dateIsGreaterThan': 'Date is <strong>invalid</strong>' };
             }
-
-            if (!isValidDate(compareValue)) {
-                compareValue
-            }
-
-            return true;
+            // If date is greater than duration
+            return !!compareDate.isAfter(formDate);
         },
-        errorMessageDefault: compareValue => `Please enter less than <strong>${compareValue} characters</strong>`
-    }, options);
+        errorMessageDefault: compareValue => {
+            if (!isValidDate(compareValue) && !!compareValue.years) {
+                return `Please enter a date that is over <strong>${compareValue.years}</strong> years old`;
+            } else if (!isValidDate(compareValue) && !!compareValue.months) {
+                return `Please enter a date that is over <strong>${compareValue.months}</strong> months old`;
+            } else if (!isValidDate(compareValue) && !!compareValue.days) {
+                return `Please enter a date that is over <strong>${compareValue.days}</strong> days old`;
+            }
 
+            return `Please enter a valid date`;
+        }
+    }, options);
