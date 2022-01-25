@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { NtsValidators } from '@ntersol/forms';
 import { charsIsEqualTo, charsIsGreaterThan, charsIsLessThan } from 'libs/forms/src/lib/validators/src/chars.validators';
 import { numberIsGreaterThan, numberIsLessThan } from 'libs/forms/src/lib/validators/src/number.validators';
+import { dateIsGreaterThan } from 'libs/forms/src/lib/validators/src/date.validators';
 import { Models } from '../../../../../shared/models';
 
 @Component({
@@ -56,6 +57,9 @@ export class ValidatorsComponent implements OnInit {
       request: 'get',
       httpClient: this.http,
     })]],
+
+    // Date
+    date1: ['10/10/2018', [dateIsGreaterThan({ years: 2 })]]
   });
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
@@ -70,3 +74,4 @@ export class ValidatorsComponent implements OnInit {
   }
 
 }
+

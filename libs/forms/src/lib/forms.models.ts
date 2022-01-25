@@ -48,10 +48,22 @@ export module NtsForms {
             formValue: any,
             /** The form control */
             control: AbstractControl
-        ) => boolean);
+        ) => boolean | ValidationErrors);
     }
 
-    export type DateOption = {}
+    /**
+    type RequireAtLeastOne<T, Keys extends keyof T = keyof T> =
+    Pick<T, Exclude<keyof T, Keys>>
+    & {
+        [K in Keys]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<Keys, K>>>
+    }[Keys]
+    */
+
+    export type DateOption = {
+        years?: number;
+        months?: number;
+        days?: number;
+    };
 
 
     /**

@@ -6,6 +6,13 @@
 <div class="float-right">
     <button class="btn btn-primary btn-sm" (click)="test()">Test Errors</button>
 </div>
+<hr />
+<h2>Date Validators</h2>
+<p>
+    <nts-input-text label="Date entered is at least 2 years old" [control]="form.get('date1')"></nts-input-text>
+</p>
+<hr />
+
 <h2>Character Validators</h2>
 <p>
     <nts-input-text label="isEqualTo 5" [control]="form.get('charsIsEqualTo')"></nts-input-text>

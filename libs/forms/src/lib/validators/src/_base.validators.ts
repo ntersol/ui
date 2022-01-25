@@ -6,6 +6,8 @@ import { isRequired } from "./misc.validators";
 /** Is this a config type */
 const isConfig = (config: any): config is NtsForms.Config => typeof config === 'object' && !!config?.compareToField;
 
+/** Is this a validation errors type: Record<string, any> */
+const isValidationErrors = (value: any): value is ValidationErrors => typeof value === 'object' && !Array.isArray(value) && !!Object.keys(value).length
 /**
  *
  * @param config
@@ -30,10 +32,13 @@ export const baseValidator = <t>(compareValueSrc: t | NtsForms.Config, config: N
             return isRequired(value);
         }
 
+        const evalResult = config.evaluatorFn(compareValue, value, control);
         // Evaluate the supplied fn to see it it passes. Also allow through nill values because those are checked above
-        if (config.evaluatorFn(compareValue, value, control) ||
+        if (evalResult === true ||
             typeof value === 'undefined' || value === null || value === '') {
             return null;
+        } else if (isValidationErrors(evalResult)) {
+            return evalResult;
         }
 
         // Create the error message
