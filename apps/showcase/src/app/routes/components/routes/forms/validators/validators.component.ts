@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NtsValidators } from '@ntersol/forms';
-import { charsIsEqualTo } from 'libs/forms/src/lib/validators/src/chars.validators';
+import { charsIsEqualTo, charsIsGreaterThan, charsIsLessThan } from 'libs/forms/src/lib/validators/src/chars.validators';
+import { numberIsGreaterThan, numberIsLessThan } from 'libs/forms/src/lib/validators/src/number.validators';
 import { Models } from '../../../../../shared/models';
 
 @Component({
@@ -14,13 +15,13 @@ export class ValidatorsComponent implements OnInit {
 
   public form = this.fb.group({
     // Characters
-    charsIsEqualTo: [null, charsIsEqualTo(5)],// [NtsValidators.Chars.isEqualTo(5)]],
-    charsIsGreaterThan: [null,],// [NtsValidators.Chars.isGreaterThan(5)]],
-    charsIsLessThan: [null,],// [NtsValidators.Chars.isLessThan(5)]],
+    charsIsEqualTo: [null, charsIsEqualTo(5)],
+    charsIsGreaterThan: [null, charsIsGreaterThan(5)],
+    charsIsLessThan: [null, charsIsLessThan(5)],
 
     // Numbers
-    numIsGreaterThan: [null],//, [NtsValidators.Number.isGreaterThan(99)]],
-    numIsLessThan: [null,],// [NtsValidators.Number.isLessThan(10)]],
+    numIsGreaterThan: [null, numberIsGreaterThan(99)],
+    numIsLessThan: [null, numberIsLessThan(10)],
 
     numCompare: [50],
     numIsGreaterThan2: [null],//, [NtsValidators.Number.isGreaterThan({ compareToField: 'numCompare' })]],

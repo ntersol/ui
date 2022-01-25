@@ -31,7 +31,7 @@ export const baseValidator = <t>(compareValueSrc: t | NtsForms.Config, config: N
         }
 
         // Evaluate the supplied fn to see it it passes. Also allow through nill values because those are checked above
-        if (config.evaluatorFn(value, compareValue, control) ||
+        if (config.evaluatorFn(compareValue, value, control) ||
             typeof value === 'undefined' || value === null || value === '') {
             return null;
         }
