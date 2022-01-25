@@ -9,7 +9,7 @@ import * as dayjs from 'dayjs'
  * @param charCount
  * @param options
  * @returns
- */
+
 export const dateIsGreaterThan = (date: NtsForms.DateOption | NtsForms.Config, options?: NtsForms.ValidatorOptions) => baseValidator({
     id: 'dateIsGreaterThan',
     value: date as any,
@@ -21,3 +21,4 @@ export const dateIsGreaterThan = (date: NtsForms.DateOption | NtsForms.Config, o
     },
     errorMessageDefault: desiredValue => `Please enter more than <strong>${desiredValue} characters</strong>`
 }, options);
+ */

@@ -1,7 +1,7 @@
 import { async } from "./src/async.validators";
 import { email, required } from "./src/misc.validators";
-import { charsIsEqualTo, charsIsGreaterThan, charsIsLessThan } from "./src/chars.validators";
-import { numberIsGreaterThan, numberIsLessThan } from "./src/number.validators";
+import { charsIsEqualTo } from "./src/chars.validators";
+import { numberIsLessThan } from "./src/number.validators";
 
 export const NtsValidators = {
     /** Set a control as required */
@@ -15,13 +15,13 @@ export const NtsValidators = {
         /**  Characters must be equal to */
         isEqualTo: charsIsEqualTo,
         /** Must have characters greater than */
-        isGreaterThan: charsIsGreaterThan,
+        // isGreaterThan: charsIsGreaterThan,
         /** Must have characters less than */
-        isLessThan: charsIsLessThan,
+        //  isLessThan: charsIsLessThan,
     },
     Date: {},
     Number: {
-        isGreaterThan: numberIsGreaterThan,
+        //   isGreaterThan: numberIsGreaterThan,
         isLessThan: numberIsLessThan,
     }
 };

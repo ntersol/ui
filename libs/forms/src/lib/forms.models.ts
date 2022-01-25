@@ -35,20 +35,20 @@ export module NtsForms {
     /** Options for the validator generator
      * @param {T} t test
      */
-    export interface ValidatorBaseOptions</** @param {T} test */t = string | number | boolean, y = t> {
+    export interface ValidatorBaseOptions<t> {
         /** An id unique to this validator. Is used in the form control's error object  */
         id: string;
-        /** The desired value or location of where to get the value that will be supplied to the evaluatorFn  */
-        value: t | NtsForms.Config;
         /** Default error message. Can be a string or a callback function  */
-        errorMessageDefault: string | ((value: y) => string);
+        errorMessageDefault: string | ((compareValue: t, control: AbstractControl) => string);
         /** A function that looks at the desired value and the actual value and returns a boolean if the control is valid or not */
         evaluatorFn: ((
-            /** The actual value in the form */
-            formValue: y,
             /** The desired value to compare the form value against */
-            compareValue: any
-        ) => boolean)
+            compareValue: t,
+            /** The actual value in the form */
+            formValue: any,
+            /** The form control */
+            control: AbstractControl
+        ) => boolean);
     }
 
     export type DateOption = {}
