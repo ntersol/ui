@@ -9,7 +9,10 @@
 <hr />
 <h2>Date Validators</h2>
 <p>
-    <nts-input-text label="Date entered is at least 2 years old" [control]="form.get('date1')"></nts-input-text>
+    <nts-input-text label="Date is over 2 years old" [control]="form.get('dateGreater')"></nts-input-text>
+</p>
+<p>
+    <nts-input-text label="Date is less than 2 years old" [control]="form.get('dateLess')"></nts-input-text>
 </p>
 <hr />
 
