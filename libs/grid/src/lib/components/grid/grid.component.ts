@@ -111,10 +111,10 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   @Input() rowData: any[] | undefined;
   @Input() getMainMenuItems: any;
   @Input() columnDefs: ColDef[] | undefined;
-  @Input() animateRows: boolean | undefined;
-  @Input() enableRangeSelection: boolean | undefined;
+  @Input() animateRows!: boolean;
+  @Input() enableRangeSelection!: boolean;
   @Input() rememberGroupStateWhenNewData: any;
-  @Input() groupUseEntireRow: boolean | undefined;
+  @Input() groupUseEntireRow!: boolean;
   @Input() groupRemoveSingleChildren = false;
   @Input() getContextMenuItems: any;
   @Input() frameworkComponents: any;
@@ -173,7 +173,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   public gridStatusComponent: GridStatusBarComponent | undefined;
   /** Watch all grid state changes */
   public gridEvent$ = new Subject<
-    'sortChanged' | 'filterChanged' | 'columnRowGroupChanged' | 'columnPinned' | 'columnMoved' | 'columnResized'
+    string | 'sortChanged' | 'filterChanged' | 'columnRowGroupChanged' | 'columnPinned' | 'columnMoved' | 'columnResized'
   >();
   /** Hold latest gridstate */
   public gridState$ = new BehaviorSubject<any>(this.gridState);
