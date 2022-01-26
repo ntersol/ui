@@ -48,6 +48,8 @@ jobs:
         run: npm install
       - name: Build
         run: npx nx affected --target build --parallel --exclude=starter,storybook --with-deps
+      - name: Deploy
+        run: npx nx affected --target deploy --parallel
       - name: Save
         uses: EndBug/add-and-commit@v7
         with:
