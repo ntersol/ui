@@ -50,6 +50,8 @@ jobs:
         run: npx nx affected --target build --parallel --exclude=starter,storybook --with-deps
       - name: Deploy
         run: npx nx affected --target deploy --parallel
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Save
         uses: EndBug/add-and-commit@v7
         with:
