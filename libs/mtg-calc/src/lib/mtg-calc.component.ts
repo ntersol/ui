@@ -25,6 +25,10 @@ export class MtgCalcComponent implements OnInit {
   }
 
   @ViewChild('termDropdownRef') termDropdownRef: any;
+  @ViewChild('pieChart') pieChart: any;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
     this.calculatePayments();
@@ -44,11 +48,13 @@ export class MtgCalcComponent implements OnInit {
       let q = 1;
       let h = 1;
       let c = 1;
+      let interestTotal = 0;
       while (p >= 0) {
         h = p * j;
         c = m - h;
         q = p - c;
         if (this.amortization.length < n) {
+          interestTotal += h;
           this.amortization.push({
             principle: c,
             interest: h,
@@ -56,6 +62,12 @@ export class MtgCalcComponent implements OnInit {
           });
         }
         p = q;
+      }
+      if (this.config.showChart && this.config.chartOptions) {
+        this.config.chartOptions.data.datasets[0].data = [this.config.loanAmount || 0, parseFloat(interestTotal.toFixed(2))];
+        if (this.pieChart) {
+          this.pieChart.refresh();
+        }
       }
     }
   }

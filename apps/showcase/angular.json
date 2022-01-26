@@ -26,10 +26,9 @@
               "apps/angular-starter/src/safari-pinned-tab.svg",
               "apps/angular-starter/src/manifest.webmanifest"
             ],
-            "styles": [
-              "apps/angular-starter/src/styles.scss"
-            ],
+            "styles": ["apps/angular-starter/src/styles.scss"],
             "scripts": [
+              "../node_modules/chart.js/dist/Chart.js",
               {
                 "input": "node_modules/document-register-element/build/document-register-element.js",
                 "inject": true
@@ -142,9 +141,7 @@
             "polyfills": "apps/angular-starter/src/polyfills.ts",
             "tsConfig": "apps/angular-starter/src/tsconfig.spec.json",
             "scripts": [],
-            "styles": [
-              "apps/angular-starter/src/styles.scss"
-            ],
+            "styles": ["apps/angular-starter/src/styles.scss"],
             "assets": [
               "apps/angular-starter/src/assets",
               "apps/angular-starter/src/favicon.ico",
@@ -157,13 +154,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/angular-starter/src/tsconfig.app.json",
-              "apps/angular-starter/src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["apps/angular-starter/src/tsconfig.app.json", "apps/angular-starter/src/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
           }
         },
         "server": {
@@ -199,12 +191,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
