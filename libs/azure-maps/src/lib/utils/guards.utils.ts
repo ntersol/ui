@@ -61,6 +61,7 @@ export type markRequired<T extends Record<any, any>, RS extends keyof T> = Requi
  * Check if an object has a property
  * @param key
  */
-export const hasField = <T extends Record<any, any>, K extends keyof T>(key: K) => (
-  obj: T,
-): obj is T & markRequired<T, K> => isNotNil(obj) && isNotNil(obj[key]);
+export const hasField =
+  <T extends Record<any, any>, K extends keyof T>(key: K) =>
+  (obj: T): obj is T & markRequired<T, K> =>
+    isNotNil(obj) && isNotNil(obj[key]);

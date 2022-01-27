@@ -5,7 +5,7 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
   selector: 'nts-dialog',
   templateUrl: './dialog.page.html',
   styleUrls: ['./dialog.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogPage implements AfterViewInit {
   public enabled = false;
@@ -29,8 +29,7 @@ export class DialogPage implements AfterViewInit {
     <a class="p-link" [routerLink]="['', { outlets: { dialog: 'open' } }]">Open Dialog Route</a>
   `;
 
-  constructor(public highlight: HighlightService) { }
-
+  constructor(public highlight: HighlightService) {}
 
   ngAfterViewInit(): void {
     this.highlight.highlightAll();

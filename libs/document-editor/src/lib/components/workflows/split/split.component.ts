@@ -32,7 +32,7 @@ export class SplitComponent implements OnInit {
 
   @Output() pdfChange = new EventEmitter<boolean>();
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   pdfChangeHandler() {
     this.pdfChange.emit(true);

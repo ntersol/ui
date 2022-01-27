@@ -18,7 +18,7 @@ export class AzureMapsStore {
     clear: () => this.state?.map?.popups.clear(),
     getPopups: () => this.state?.map?.popups.getPopups(),
     remove: (popup: atlas.Popup | atlas.Popup[]) => this.state?.map?.popups.remove(popup),
-    closeAll: () => this.state?.map?.popups.getPopups().forEach(p => p.close()),
+    closeAll: () => this.state?.map?.popups.getPopups().forEach((p) => p.close()),
   };
 
   private state: NtsAzureMaps.State = {};

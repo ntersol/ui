@@ -4,20 +4,20 @@
 <hr />
 
 <p-tabView>
-    <p-tabPanel header="Documentation">
-        <div>
-            <h2>Setup</h2>
-            <pre>
+  <p-tabPanel header="Documentation">
+    <div>
+      <h2>Setup</h2>
+      <pre>
                 <code class="language-ts" [innerHtml]="rootRouterTS"></code>
                 <code class="language-html" [innerHtml]="highlight.htmlEncode(namedOutletHTML)"></code>
             </pre>
-        </div>
-    </p-tabPanel>
+    </div>
+  </p-tabPanel>
 
-    <p-tabPanel header="Example">
-        <pre>
+  <p-tabPanel header="Example">
+    <pre>
             <code class="language-html" [innerHtml]="highlight.htmlEncode(usageHTML)"></code>
         </pre>
-        <a class="p-link" [routerLink]="['', { outlets: { dialog: 'open' } }]">Open Dialog Route</a>
-    </p-tabPanel>
+    <a class="p-link" [routerLink]="['', { outlets: { dialog: 'open' } }]">Open Dialog Route</a>
+  </p-tabPanel>
 </p-tabView>

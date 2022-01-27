@@ -49,7 +49,12 @@ export class NtsSignalRService {
    * @param retryTime - If signalR is unavailable, retry in this many milliseconds
    * @param isReconnecting - Indicates signalR connection closed and needs to reconnect
    */
-  public connectionStart(signalRUrl: string, token: string | tokenFn, retryTime = 10000, isReconnecting: boolean = false) {
+  public connectionStart(
+    signalRUrl: string,
+    token: string | tokenFn,
+    retryTime = 10000,
+    isReconnecting: boolean = false,
+  ) {
     // Set/update token
     this._token = token;
 
@@ -59,31 +64,27 @@ export class NtsSignalRService {
     }
 
     // If connection already exists, return that. No need to reinitialize
-      if (this.hubConnection && !isReconnecting) {
-        return this.hubConnection;
-      }
+    if (this.hubConnection && !isReconnecting) {
+      return this.hubConnection;
+    }
 
-      if(!this.hubConnection) {
-        this.hubConnection = new signalR.HubConnectionBuilder()
-          .withUrl(signalRUrl, <signalR.IHttpConnectionOptions>{ accessTokenFactory: () => this.token })
-          .build();
+    if (!this.hubConnection) {
+      this.hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl(signalRUrl, <signalR.IHttpConnectionOptions>{ accessTokenFactory: () => this.token })
+        .build();
 
-        // increase default timeout from 30s
-        this.hubConnection.serverTimeoutInMilliseconds = 60000;
+      // increase default timeout from 30s
+      this.hubConnection.serverTimeoutInMilliseconds = 60000;
 
-        // restart connection if timeout
-        this.hubConnection.onclose((err: any) => {
-          if (
-            String(err)
-              .toLowerCase()
-              .includes('timeout')
-          ) {
-            console.error("SignalR Connection Timeout:", err);
-            console.log('Restarting SignalR Connection');
-            setTimeout(() => this.connectionStart(signalRUrl, <string | tokenFn>this.token, 5000, true), 5000);
-          }
-        });
-      }
+      // restart connection if timeout
+      this.hubConnection.onclose((err: any) => {
+        if (String(err).toLowerCase().includes('timeout')) {
+          console.error('SignalR Connection Timeout:', err);
+          console.log('Restarting SignalR Connection');
+          setTimeout(() => this.connectionStart(signalRUrl, <string | tokenFn>this.token, 5000, true), 5000);
+        }
+      });
+    }
 
     // Start signalR
     const hubConnection = this.hubConnection.start();
@@ -96,18 +97,14 @@ export class NtsSignalRService {
         this.isActive$.next(true);
         // If any ID's are queued, start the listener for them
         if (this.queuedIDs.length) {
-          this.queuedIDs.forEach(key => this.listenStart(key));
+          this.queuedIDs.forEach((key) => this.listenStart(key));
           this.queuedIDs = []; // Reset queue
         }
       })
       // If error on start, retry
       .catch((err: any) => {
         // If error is "unauthorized", end connection and do not retry. Otherwise keep trying
-        if (
-          String(err)
-            .toLowerCase()
-            .includes('unauthorized')
-        ) {
+        if (String(err).toLowerCase().includes('unauthorized')) {
           this.connectionEnd();
         } else {
           setTimeout(() => this.connectionStart(signalRUrl, <string | tokenFn>this.token, retryTime), retryTime);
@@ -130,7 +127,7 @@ export class NtsSignalRService {
     this._token = null;
 
     // Complete and end all open subscriptions
-    Object.keys(this.connections).forEach(key => {
+    Object.keys(this.connections).forEach((key) => {
       this.connections[key].complete();
       delete this.connections[key];
     });

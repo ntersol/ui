@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreComsService } from './store-communication.service'
+import { StoreComsService } from './store-communication.service';
 import { ntsStore } from '@ntersol/state-management';
 import { tokenChangedAction } from './store.actions';
 import { HighlightService } from '../../../../shared/services/highlight.service';
@@ -7,10 +7,9 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 @Component({
   selector: 'nts-store-communication',
   templateUrl: './store-communication.component.html',
-  styleUrls: ['./store-communication.component.scss']
+  styleUrls: ['./store-communication.component.scss'],
 })
 export class StoreCommunicationComponent implements OnInit {
-
   public install = `
 npm i @ntersol/state-management --save`;
 
@@ -84,9 +83,9 @@ export class StoreComsService {
   public token: string | null = null;
   public token$ = this.svc.uiStore.select$('token');
 
-  constructor(public svc: StoreComsService, private highlight: HighlightService) { }
+  constructor(public svc: StoreComsService, private highlight: HighlightService) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   /**
    * Update the token in the UI store
@@ -100,9 +99,9 @@ export class StoreComsService {
   }
 
   /**
- * Update the token in the UI store
- * @param token
- */
+   * Update the token in the UI store
+   * @param token
+   */
   public tokenUpdated2(token: string | null) {
     // Create an action with the appropriate payload
     const tokenAction = tokenChangedAction(token);
@@ -113,5 +112,4 @@ export class StoreComsService {
   ngAfterViewInit() {
     this.highlight.highlightAll();
   }
-
 }

@@ -11,8 +11,8 @@ export const rowsReselect = (rowUniqueId: string, rowsToSelect: any[], gridApi: 
   if (rowsToSelect && rowsToSelect.length) {
     setTimeout(() => {
       const rowSelectedDictionary: Record<string, boolean> = {};
-      rowsToSelect.forEach(row => (rowSelectedDictionary[row[rowUniqueId]] = true));
-      gridApi.forEachNode(node => {
+      rowsToSelect.forEach((row) => (rowSelectedDictionary[row[rowUniqueId]] = true));
+      gridApi.forEachNode((node) => {
         const key = node.data[rowUniqueId];
         // Model.entry prop is KEY
         if (rowSelectedDictionary[key]) {

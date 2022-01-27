@@ -5,7 +5,7 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
   selector: 'nts-focus-trap',
   templateUrl: './focus-trap.component.html',
   styleUrls: ['./focus-trap.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FocusTrapComponent implements AfterViewInit {
   public enabled = false;
@@ -31,8 +31,7 @@ export class FocusTrapComponent implements AfterViewInit {
     </div>
   `;
 
-  constructor(public highlight: HighlightService) { }
-
+  constructor(public highlight: HighlightService) {}
 
   ngAfterViewInit(): void {
     this.highlight.highlightAll();

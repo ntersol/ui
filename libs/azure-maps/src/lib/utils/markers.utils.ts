@@ -8,7 +8,11 @@ import { HtmlMarkerLayer } from '../layers/htmlMarkerLayer.layer';
  * @param map
  * @param markers
  */
-export const markersAdd = (map?: atlas.Map | null, markers?: NtsAzureMaps.HtmlMarker[] | null, settings?: NtsAzureMaps.Settings | null) => {
+export const markersAdd = (
+  map?: atlas.Map | null,
+  markers?: NtsAzureMaps.HtmlMarker[] | null,
+  settings?: NtsAzureMaps.Settings | null,
+) => {
   if (!map || !markers?.length) {
     return;
   }
@@ -37,7 +41,7 @@ export const markersAdd = (map?: atlas.Map | null, markers?: NtsAzureMaps.HtmlMa
     });
   }
 
-  markers.forEach(m => {
+  markers.forEach((m) => {
     // Create marker class
     const marker = new HtmlMarker(m.options);
     // Add a custom ID if specified
@@ -57,7 +61,9 @@ export const markersAdd = (map?: atlas.Map | null, markers?: NtsAzureMaps.HtmlMa
       popup = new Popup(options);
       // popup.containerDiv is private
       // Accessing the element is necessary to add a pin click event
-      const container = ((popup as any).containerDiv as HTMLDivElement).querySelectorAll('.popup-content-container-main');
+      const container = ((popup as any).containerDiv as HTMLDivElement).querySelectorAll(
+        '.popup-content-container-main',
+      );
       if (container.length) {
         container[0].addEventListener('click', () => m.events?.popup?.click?.emit(m));
       }
@@ -92,7 +98,7 @@ export const markerEvents = (
     return;
   }
   // Emit double click event for popup
-  map.events.add('dblclick', marker, e =>
+  map.events.add('dblclick', marker, (e) =>
     settings?.events?.popup?.dblclick?.emit({
       properties: model,
       type: 'dblclick',
@@ -102,7 +108,7 @@ export const markerEvents = (
   );
 
   // Emit mouse enter event to parent
-  map.events.add('mouseenter', marker, e =>
+  map.events.add('mouseenter', marker, (e) =>
     settings?.events?.marker?.mouseenter?.emit({
       properties: model,
       type: 'mouseenter',
@@ -113,7 +119,7 @@ export const markerEvents = (
 
   // If popup exists, emit popup close event to parent
   if (popup) {
-    map.events.add('close', popup, e => {
+    map.events.add('close', popup, (e) => {
       settings?.events?.popup?.close?.emit({
         properties: model,
         type: 'mouseenter',
@@ -149,7 +155,7 @@ export const markerClick = (
   // If popup, remove the active state on the marker when the popup is closed
   if (popup) {
     map.events.add('close', popup, () => {
-      map.markers.getMarkers().forEach(m2 => {
+      map.markers.getMarkers().forEach((m2) => {
         const elem = (m2 as any).element as HTMLDivElement;
         elem.classList.remove('marker-active');
       });
@@ -164,12 +170,12 @@ export const markerClick = (
     setTimeout(() => elemCurrent.classList.add('marker-active'));
   }
   // Add click event
-  map.events.add('click', marker, e => {
+  map.events.add('click', marker, (e) => {
     // marker.element is private
     // Accessing the element is necessary to add a pin active state
     // Remove active state from other markers
     if (settings?.popup?.singleInstance) {
-      map.markers.getMarkers().forEach(m2 => {
+      map.markers.getMarkers().forEach((m2) => {
         // Nil check for badly formed popups
         if (m2.getOptions()?.popup?.close) {
           // Close any open popups
@@ -197,9 +203,11 @@ export const markerClick = (
         content: `<div class="popup-content-container-main">${content}</div>`,
       });
       // Add click event emitter to pass popup click to parent component
-      const container = ((popup as any).containerDiv as HTMLDivElement).querySelectorAll('.popup-content-container-main');
+      const container = ((popup as any).containerDiv as HTMLDivElement).querySelectorAll(
+        '.popup-content-container-main',
+      );
       if (container.length) {
-        container[0].addEventListener('click', e2 =>
+        container[0].addEventListener('click', (e2) =>
           settings.events?.popup?.click?.emit({
             properties: model,
             type: 'click',
@@ -240,7 +248,7 @@ export const markersActiveUpdate = (map?: atlas.Map | null, markersActive?: stri
   const layers = map?.layers.getLayers().filter((l: any) => l.markerLayer) as HtmlMarkerLayer[];
   // Pass the marker layers any active markers
   if (layers?.length) {
-    layers.forEach(l => l.markersActiveChange(markersActive));
+    layers.forEach((l) => l.markersActiveChange(markersActive));
   }
 
   // Remove all active
@@ -277,7 +285,7 @@ export const markersCleanup = (map?: atlas.Map | null) => {
   if (!markers.length) {
     return;
   }
-  markers.forEach(m => {
+  markers.forEach((m) => {
     // Remove any event listeners from the marker, also removes on children
     // This is a dirty way to do it but the simpliest with anonymous functions
     // Acceptable in this case because they are being removed prior to the marker element being destroyed

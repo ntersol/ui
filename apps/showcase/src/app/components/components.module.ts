@@ -20,7 +20,15 @@ import { NavSearchComponent } from './masterpage/nav/search/nav-search.component
 const APP_MODALS = [LogoutModalComponent, FeedbackModalComponent];
 
 // Components to include
-export const APP_COMPONENTS = [...APP_MODALS, FooterComponent, HeaderComponent, LayoutMainComponent, LayoutSingleComponent, NavComponent, NavSearchComponent];
+export const APP_COMPONENTS = [
+  ...APP_MODALS,
+  FooterComponent,
+  HeaderComponent,
+  LayoutMainComponent,
+  LayoutSingleComponent,
+  NavComponent,
+  NavSearchComponent,
+];
 
 @NgModule({
   imports: [

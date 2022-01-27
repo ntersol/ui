@@ -39,18 +39,21 @@ export class DefaultComponent implements OnInit {
   @Input() maxHeight = '100%';
   @Output() pdfChange = new EventEmitter<boolean>();
 
-  constructor(private docSvc: DocumentEditorService) { }
+  constructor(private docSvc: DocumentEditorService) {}
 
   ngOnInit() {
     this._zoom = {
       width: this.tnSettings?.width || 55,
-      height: this.tnSettings?.height || 138
+      height: this.tnSettings?.height || 138,
     };
     this.disableReset = true;
   }
 
   zoomThumbnails(value: number): void {
-    if (value > 1 && (this.tnSettings?.width && this.tnSettings.width >= 590) || (value < 1 && (this.tnSettings?.width && this.tnSettings.width <= 60))) {
+    if (
+      (value > 1 && this.tnSettings?.width && this.tnSettings.width >= 590) ||
+      (value < 1 && this.tnSettings?.width && this.tnSettings.width <= 60)
+    ) {
       return;
     }
     if (this.tnSettings?.height && this.tnSettings?.width) {
@@ -58,7 +61,7 @@ export class DefaultComponent implements OnInit {
         tnSettings: {
           height: Math.floor(this.tnSettings?.height * value),
           width: Math.floor(this.tnSettings?.width * value),
-        }
+        },
       };
       this.disableZoom = newSize.tnSettings.width >= 590;
       this.disableUnzoom = newSize.tnSettings.width <= 60;

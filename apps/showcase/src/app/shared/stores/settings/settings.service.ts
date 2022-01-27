@@ -23,7 +23,7 @@ export class SettingsService {
   public isBrowser = isPlatformBrowser(this.platformId);
 
   /** Token for interacting with webapi */
-  public token$ = this.query.select(state => state.token);
+  public token$ = this.query.select((state) => state.token);
   /** Token for interacting with webapi */
   get token() {
     return this.settings.token;
@@ -33,7 +33,7 @@ export class SettingsService {
   }
 
   /** Username of current/last logged in user */
-  public userName$ = this.query.select(state => state.userName);
+  public userName$ = this.query.select((state) => state.userName);
   /** Username of current/last logged in user */
   get userName() {
     return this.settings.userName;
@@ -43,7 +43,7 @@ export class SettingsService {
   }
 
   /** Token for interacting with webapi */
-  public version$ = this.query.select(state => state.token);
+  public version$ = this.query.select((state) => state.token);
   /** Token for interacting with webapi */
   get version() {
     return this.settings.version;
@@ -61,7 +61,7 @@ export class SettingsService {
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {
     // On settings changes, update synchronous properties
-    this.query.select().subscribe(state => (this.settings = { ...state }));
+    this.query.select().subscribe((state) => (this.settings = { ...state }));
   }
 
   /**

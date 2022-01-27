@@ -25,18 +25,18 @@ export class UiStateService {
   /** Return the active tab of the specified tab instance */
   public tabActive$ = (tabInstanceId: string) =>
     this.query
-      .select(state => state.tabsActive)
+      .select((state) => state.tabsActive)
       .pipe(
-        map(val => (val && val[tabInstanceId] ? val[tabInstanceId] : 0)),
+        map((val) => (val && val[tabInstanceId] ? val[tabInstanceId] : 0)),
         distinctUntilChanged(),
       );
   /** Return the toggle state of the specificed prop */
   public toggles$ = (toggleProp: string) =>
     this.query
-      .select(state => state.toggles)
+      .select((state) => state.toggles)
       .pipe(
-        map(val => (val && val[toggleProp] !== null ? val[toggleProp] : null)),
-        filter(val => typeof val !== 'undefined'),
+        map((val) => (val && val[toggleProp] !== null ? val[toggleProp] : null)),
+        filter((val) => typeof val !== 'undefined'),
         distinctUntilChanged(),
       );
 
@@ -49,7 +49,7 @@ export class UiStateService {
     private ntsVersion: NtsVersionManagementService,
   ) {
     // this.query.uiState$.subscribe(state => console.log('UI STATE', state));
-    this.updateAvailable$.pipe(filter(val => val)).subscribe(() => this.updateAppModal());
+    this.updateAvailable$.pipe(filter((val) => val)).subscribe(() => this.updateAppModal());
   }
 
   /**
@@ -80,7 +80,7 @@ export class UiStateService {
    * @param toggleValue
    */
   public toggles(toggleProp: string, toggleValue: any) {
-    this.store.update(store => {
+    this.store.update((store) => {
       const toggles = { ...store.toggles };
       toggles[toggleProp] = toggleValue;
       return <UIState>{
@@ -94,7 +94,10 @@ export class UiStateService {
     this.confirmationService.confirm({
       message: 'An update for this application is available, would you like to update?',
       header: 'Confirmation',
-      accept: () => (this.sw.isEnabled ? this.sw.activateUpdate().then(() => document.location.reload()) : document.location.reload()),
+      accept: () =>
+        this.sw.isEnabled
+          ? this.sw.activateUpdate().then(() => document.location.reload())
+          : document.location.reload(),
       // reject: () => console.log('Nope!!!'),
     });
   }

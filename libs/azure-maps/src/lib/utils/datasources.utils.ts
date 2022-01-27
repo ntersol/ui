@@ -12,7 +12,7 @@ export const dataSourcesChange = (map?: atlas.Map | null, dataSources?: NtsAzure
     return;
   }
 
-  dataSources.forEach(ds => {
+  dataSources.forEach((ds) => {
     if (!ds.id) {
       console.error('This datasource is missing an ID ', ds);
       return;
@@ -51,12 +51,15 @@ export const dataSourcesChange = (map?: atlas.Map | null, dataSources?: NtsAzure
  * @param src
  * @param latest
  */
-export const dataSourcesMerge = (src?: NtsAzureMaps.DataSource[], latest?: NtsAzureMaps.DataSource[]): NtsAzureMaps.DataSource[] => {
+export const dataSourcesMerge = (
+  src?: NtsAzureMaps.DataSource[],
+  latest?: NtsAzureMaps.DataSource[],
+): NtsAzureMaps.DataSource[] => {
   const existing = src ? [...src] : []; // Null check
   const updated = latest ? [...latest] : []; // Null check
 
   // Convert array to record
   const existingRecord: Record<string, NtsAzureMaps.DataSource> = existing.reduce((a, b) => ({ ...a, [b.id]: b }), {});
-  updated.forEach(ds => (existingRecord[ds.id] = { ...ds })); // Overwrite any existing
-  return Object.keys(existingRecord).map(key => existingRecord[key]);
+  updated.forEach((ds) => (existingRecord[ds.id] = { ...ds })); // Overwrite any existing
+  return Object.keys(existingRecord).map((key) => existingRecord[key]);
 };

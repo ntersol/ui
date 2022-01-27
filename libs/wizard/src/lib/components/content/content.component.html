@@ -4,12 +4,16 @@
     <ng-container [ngSwitch]="content.formFieldType">
       <ng-container *ngSwitchCase="'checkboxSingle'">
         <ng-container *ngIf="content.options && content.options[0] && content.options.length === 1">
-          <p-checkbox *ngIf="isType.option(content.options[0])" [formControl]="content.formControl"
-            [value]="content.options[0]?.value" [label]="content.options[0]?.label || ''">
+          <p-checkbox
+            *ngIf="isType.option(content.options[0])"
+            [formControl]="content.formControl"
+            [value]="content.options[0]?.value"
+            [label]="content.options[0]?.label || ''"
+          >
           </p-checkbox>
         </ng-container>
         <ng-container *ngIf="content.options && content.options[0] && content.options.length > 1">
-          <ng-container *ngFor="let option in content.options">
+          <ng-container *ngFor="let option; in: content.options">
             <div class="checkbox-single">
               <p-checkbox [formControl]="content.formControl" [value]="option?.value" [label]="option.label">
               </p-checkbox>
@@ -19,11 +23,20 @@
       </ng-container>
 
       <ng-container *ngSwitchDefault>
-        <nts-form-field [formControl]="content.formControl" [options]="dataField || content.options || []"
-          [attr.type]="content.formFieldType" [attr.placeholder]="content.placeholder" [attr.tooltip]="content.tooltip"
-          [attr.hint]="content.hint" [attr.prefix]="content.prefix" [attr.suffix]="content.suffix"
-          [attr.min]="content.min" [attr.max]="content.max" [attr.maxlength]="content.maxlength"
-          [attr.minlength]="content.minlength">
+        <nts-form-field
+          [formControl]="content.formControl"
+          [options]="dataField || content.options || []"
+          [attr.type]="content.formFieldType"
+          [attr.placeholder]="content.placeholder"
+          [attr.tooltip]="content.tooltip"
+          [attr.hint]="content.hint"
+          [attr.prefix]="content.prefix"
+          [attr.suffix]="content.suffix"
+          [attr.min]="content.min"
+          [attr.max]="content.max"
+          [attr.maxlength]="content.maxlength"
+          [attr.minlength]="content.minlength"
+        >
         </nts-form-field>
       </ng-container>
     </ng-container>

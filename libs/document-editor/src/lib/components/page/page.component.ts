@@ -39,7 +39,7 @@ export class PageComponent implements OnInit, OnChanges {
     canSelect: false,
     canViewFull: false,
     canReset: false,
-  };;
+  };
   @Input() tnSettings: NtsDocumentEditor.ThumbnailSize = { width: 0, height: 0 };
   @Input() viewModels?: Array<Array<NtsDocumentEditor.Preview>>;
   @Input() leftBox = false;
@@ -53,9 +53,9 @@ export class PageComponent implements OnInit, OnChanges {
 
   loaded = false;
   isAssigned = false;
-  constructor(private _docsSvc: DocumentEditorService, private _cdr: ChangeDetectorRef) { }
+  constructor(private _docsSvc: DocumentEditorService, private _cdr: ChangeDetectorRef) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
   ngAfterViewInit() {
     this.setCanvas(this.pageRef.nativeElement);
     this.loaded = true;

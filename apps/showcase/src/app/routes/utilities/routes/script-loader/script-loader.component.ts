@@ -6,12 +6,10 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 @Component({
   selector: 'nts-script-loader',
   templateUrl: './script-loader.component.html',
-  styleUrls: ['./script-loader.component.css']
+  styleUrls: ['./script-loader.component.css'],
 })
 export class ScriptLoaderComponent implements OnInit {
-
-  public exampleTS: string =
-    `
+  public exampleTS: string = `
     // Import util
     import { scriptLoad$ } from '@ntersol/utils';
 
@@ -42,21 +40,22 @@ export class ScriptLoaderComponent implements OnInit {
       error => console.error(error)
     );`;
 
-  constructor(private highlight: HighlightService) { }
+  constructor(private highlight: HighlightService) {}
 
   ngOnInit(): void {
     scriptLoad$('https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js').subscribe(() => {
-      console.log('Script loaded successfully')
+      console.log('Script loaded successfully');
     });
 
-    scriptLoad$('https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.BAD.js').pipe(debounceTime(100)).subscribe(
-      () => console.log('Script loaded successfully 2'),
-      error => console.error(error)
-    );
+    scriptLoad$('https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.BAD.js')
+      .pipe(debounceTime(100))
+      .subscribe(
+        () => console.log('Script loaded successfully 2'),
+        (error) => console.error(error),
+      );
   }
 
   ngAfterViewInit() {
     this.highlight.highlightAll();
   }
-
 }

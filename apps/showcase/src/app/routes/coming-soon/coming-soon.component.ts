@@ -1,8 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
-// import { DomainService } from '$domain';
-// import { UiStateService } from '$ui';
-
 @Component({
   selector: 'app-coming-soon',
   templateUrl: './coming-soon.component.html',
@@ -10,13 +7,10 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComingSoonComponent implements OnInit, OnDestroy {
+  constructor() // public uiState: UiStateService, // Global UI state // private domainState: DomainService, // Global domain state
+  {}
 
-  constructor(
-    // private domainState: DomainService, // Global domain state
-    // public uiState: UiStateService, // Global UI state
-  ) { }
+  ngOnInit() {}
 
-  ngOnInit() { }
-
-  ngOnDestroy() { }
+  ngOnDestroy() {}
 }

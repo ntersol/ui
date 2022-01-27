@@ -12,4 +12,4 @@ import { ChartModule } from 'primeng/chart';
   declarations: [MtgCalcComponent],
   exports: [MtgCalcComponent],
 })
-export class NtsMtgCalcModule { }
+export class NtsMtgCalcModule {}

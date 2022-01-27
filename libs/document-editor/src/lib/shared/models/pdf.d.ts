@@ -1,9 +1,7 @@
-
 /**
  * @module pdfjs-dist
  */
 export module pdfjsDist {
-
   export interface GlobalWorkerOptions {
     workerPort: null | string;
     workerSrc: null | string;

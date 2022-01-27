@@ -12,6 +12,6 @@
 
 ### constructor
 
-\+ **new NtsTagsModule**(): [*NtsTagsModule*](ntstagsmodule.md)
+\+ **new NtsTagsModule**(): [_NtsTagsModule_](ntstagsmodule.md)
 
-**Returns:** [*NtsTagsModule*](ntstagsmodule.md)
+**Returns:** [_NtsTagsModule_](ntstagsmodule.md)

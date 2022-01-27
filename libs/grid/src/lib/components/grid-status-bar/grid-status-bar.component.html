@@ -18,8 +18,12 @@
   <ng-container *ngIf="gridGroups?.length">
     <div class="d-inline-block me-2">
       <span class="me-1">Grouped By:</span>
-      <button class="btn btn-xs btn-outline-primary btn-grid-sort me-2" title="Remove this group"
-        *ngFor="let group of gridGroups" (click)="removeGroup(group.colId)">
+      <button
+        class="btn btn-xs btn-outline-primary btn-grid-sort me-2"
+        title="Remove this group"
+        *ngFor="let group of gridGroups"
+        (click)="removeGroup(group.colId)"
+      >
         <span class="me-1">{{ group.colId | textCase }}</span>
         <i class="fas fa-times"></i>
       </button>
@@ -30,14 +34,16 @@
   <ng-container *ngIf="gridFilters?.length">
     <div class="d-inline-block me-2">
       <span class="me-1">Filtered By:</span>
-      <button class="btn btn-xs btn-outline-primary btn-grid-sort me-2" title="Remove this filter"
-        *ngFor="let filter of gridFilters" (click)="removeFilter(filter.field)">
+      <button
+        class="btn btn-xs btn-outline-primary btn-grid-sort me-2"
+        title="Remove this filter"
+        *ngFor="let filter of gridFilters"
+        (click)="removeFilter(filter.field)"
+      >
         <span class="me-1">
           {{ filter.field | textCase }}
 
-          <ng-container *ngIf="!filter?.values?.length; else filterValues">
-            excluding all fields
-          </ng-container>
+          <ng-container *ngIf="!filter?.values?.length; else filterValues"> excluding all fields </ng-container>
           <ng-template #filterValues>
             <em>includes </em>
 

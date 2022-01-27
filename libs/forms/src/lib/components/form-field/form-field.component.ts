@@ -289,9 +289,9 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
 
   // These are required for implementing ControlValueAccessor, but they are not used
   // since the FormControl is being passed directly to the  directive in the template
-  writeValue(): void { }
-  registerOnChange(): void { }
-  registerOnTouched(): void { }
+  writeValue(): void {}
+  registerOnChange(): void {}
+  registerOnTouched(): void {}
 
-  ngOnDestroy() { }
+  ngOnDestroy() {}
 }

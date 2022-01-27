@@ -1,37 +1,33 @@
 <div class="author"><strong>Authors:</strong> Jerrol Krause / John Edwards / Justin McLellan</div>
 <h1>Document Editor</h1>
-<p>
-    A configurable document editor. More documentation needs to be added!
-</p>
+<p>A configurable document editor. More documentation needs to be added!</p>
 <hr />
 
 <p-tabView>
-    <p-tabPanel header="Documentation">
-        <div>
-
-            <h2>Installation</h2>
-            <pre class="mb-3">
+  <p-tabPanel header="Documentation">
+    <div>
+      <h2>Installation</h2>
+      <pre class="mb-3">
                 <code class="language-ts" [innerHtml]="exampleTSInstall"></code>
             </pre>
 
-            <h2>HTML</h2>
-            <pre class="mb-3">
+      <h2>HTML</h2>
+      <pre class="mb-3">
                 <code class="language-ts" [innerHtml]="html"></code>
             </pre>
+    </div>
+  </p-tabPanel>
 
-        </div>
-    </p-tabPanel>
+  <p-tabPanel header="Example">
+    <div class="row">
+      <div class="col-12">
+        <nts-document-editor workflow="display" maxHeight="500px" pdfSrcs="/assets/pdf/doc-editor-example.pdf">
+        </nts-document-editor>
+      </div>
+    </div>
+  </p-tabPanel>
 
-    <p-tabPanel header="Example">
-        <div class="row">
-            <div class="col-12">
-                <nts-document-editor workflow="display" maxHeight="500px" pdfSrcs="/assets/pdf/doc-editor-example.pdf">
-                </nts-document-editor>
-            </div>
-        </div>
-    </p-tabPanel>
-
-    <!--
+  <!--
     <p-tabPanel header="API"> Coming soon! </p-tabPanel>
 -->
 </p-tabView>

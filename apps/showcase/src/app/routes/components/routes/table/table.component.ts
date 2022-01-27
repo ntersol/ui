@@ -98,8 +98,7 @@ export class ShowcaseTableComponent {
         </div>
       </ng-template>
     </table-column>
-  </nts-table>`
-  );
+  </nts-table>`);
 
   public customColumnHTML: string = this.htmlEncode(`
   <nts-table #expandExample [rows]="rows" [columns]="columns" [headerText]="headerText" dataKey="name">
@@ -110,8 +109,7 @@ export class ShowcaseTableComponent {
         </div>
       </ng-template>
     </table-column>
-  </nts-table>`
-  );
+  </nts-table>`);
 
   public filterTS: string = `
   // Enable filter search box on table header
@@ -144,27 +142,27 @@ export class ShowcaseTableComponent {
   }
   `;
 
-  public rows: any[] | null = [] = [
+  public rows: any[] | null = ([] = [
     { name: 'Bob', skill: 'cooking burgers', favoritePhrase: 'omg.' },
     { name: 'Linda', skill: 'singing', favoritePhrase: 'Ow! My face!' },
     { name: 'Gene', skill: 'keyboard', favoritePhrase: '??' },
     { name: 'Tina', skill: 'running without moving arms', favoritePhrase: 'uhhhhhhh' },
     { name: 'Louise', skill: 'guilty conscience', favoritePhrase: 'No' },
-  ];
+  ]);
 
   public columns: NtsTable.Column[] = [
     { header: 'Name', field: 'name' },
-    { header: 'Skill', field: 'skill', sortable: false }
+    { header: 'Skill', field: 'skill', sortable: false },
   ];
 
-  public headerText?: string | null = 'Bob\'s Burgers Characters';
+  public headerText?: string | null = "Bob's Burgers Characters";
 
   public showFilter = true;
 
   public paginateRows = 2;
   public rowsPerPageOptions = [1, 2, 3];
 
-  constructor(private highlight: HighlightService) { }
+  constructor(private highlight: HighlightService) {}
 
   ngAfterViewInit() {
     this.highlight.highlightAll();

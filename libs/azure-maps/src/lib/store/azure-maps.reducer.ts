@@ -19,7 +19,10 @@ import { cloneDeep } from 'lodash';
  * @param state
  * @param action
  */
-export const azureMapsReducer = (state: NtsAzureMaps.State, action: { type: NtsAzureMaps.Actions; payload: any }): NtsAzureMaps.State => {
+export const azureMapsReducer = (
+  state: NtsAzureMaps.State,
+  action: { type: NtsAzureMaps.Actions; payload: any },
+): NtsAzureMaps.State => {
   // console.log('azureMapsReducer', action, cloneDeep(state));
 
   /**
@@ -141,9 +144,9 @@ export const azureMapsReducer = (state: NtsAzureMaps.State, action: { type: NtsA
   if (isAction.markersAdd(action)) {
     // Remove any pre-existing markers but only ones from the previously supplied payload
     if (state.map && state.markers) {
-      const existingMarkerIds = state.markers.map(m => m.id).filter(isNotNil);
+      const existingMarkerIds = state.markers.map((m) => m.id).filter(isNotNil);
       const existingMarkers = state.map.markers.getMarkers().filter((m: any) => existingMarkerIds.includes(m.id));
-      existingMarkers.forEach(m => state?.map?.markers.remove(m));
+      existingMarkers.forEach((m) => state?.map?.markers.remove(m));
     }
 
     // If markers are added, update any active ones
@@ -175,7 +178,7 @@ export const azureMapsReducer = (state: NtsAzureMaps.State, action: { type: NtsA
   if (isAction.zoomChange(action)) {
     if (state.map) {
       // Close all open popups on zoom
-      state.map.markers.getMarkers().forEach(m => m.getOptions().popup?.close());
+      state.map.markers.getMarkers().forEach((m) => m.getOptions().popup?.close());
     }
     return { ...state, zoom: action.payload };
   }

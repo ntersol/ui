@@ -17,7 +17,6 @@ type DashType =
 
 export module CanvasJS {
   export interface Chart {
-
     /**
      * The current options of the chart.
      */
@@ -79,7 +78,12 @@ export module CanvasJS {
      * @param index Index of the array where the new element is to be added. Defaults to the length (end) of array.
      * @param updateChart When true, Updates the chart automatically after setting the value. Defaults to true.
      */
-    addTo(propertyName: string, options: ChartAxisXOptions | ChartAxisYOptions | ChartDataSeriesOptions, index?: number, updateChart?: boolean): void;
+    addTo(
+      propertyName: string,
+      options: ChartAxisXOptions | ChartAxisYOptions | ChartDataSeriesOptions,
+      index?: number,
+      updateChart?: boolean,
+    ): void;
     /**
      * Export the chart as image (jpg / png).
      * @param options Setting when export
@@ -603,7 +607,12 @@ export module CanvasJS {
     /**
      * A custom formatter function that returns text to be displayed inside individual legend items.
      */
-    itemTextFormatter?(e?: { chart: Chart; legend: ChartLegendOptions; dataSeries: ChartDataSeriesOptions; dataPoint: ChartDataPoint }): string;
+    itemTextFormatter?(e?: {
+      chart: Chart;
+      legend: ChartLegendOptions;
+      dataSeries: ChartDataSeriesOptions;
+      dataPoint: ChartDataPoint;
+    }): string;
     /**
      * When dockInsidePlotArea is set to true, legend renders inside the plot area there by giving more space to plot area.
      * Default: false

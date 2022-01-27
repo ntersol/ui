@@ -7,6 +7,6 @@ const components = [NtsGooglePlacesAutocompleteComponent];
 @NgModule({
   imports: [CommonModule],
   declarations: [components],
-  exports: [components]
+  exports: [components],
 })
-export class NtsGooglePlacesAutocompleteModule { }
+export class NtsGooglePlacesAutocompleteModule {}

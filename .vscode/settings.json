@@ -6,11 +6,5 @@
   "editor.formatOnSave": true,
   "files.trimTrailingWhitespace": true,
   "typescript.preferences.importModuleSpecifier": "project-relative",
-  "workbench.settings.editor": "json",
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  }
+  "workbench.settings.editor": "json"
 }

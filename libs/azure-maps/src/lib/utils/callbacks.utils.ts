@@ -29,7 +29,9 @@ export function zoomend(store: AzureMapsStore) {
 }
 
 export function zoomendEmit(
-  zoomEmitter: EventEmitter<mapboxgl.MapboxEvent<MouseEvent | TouchEvent | WheelEvent | undefined> & mapboxgl.EventData>,
+  zoomEmitter: EventEmitter<
+    mapboxgl.MapboxEvent<MouseEvent | TouchEvent | WheelEvent | undefined> & mapboxgl.EventData
+  >,
 ) {
   return function (e: mapboxgl.MapboxEvent<undefined> & mapboxgl.EventData) {
     zoomEmitter.emit(e);
@@ -37,7 +39,9 @@ export function zoomendEmit(
 }
 
 export function dragend(
-  dragEmitter: EventEmitter<mapboxgl.MapboxEvent<MouseEvent | TouchEvent | WheelEvent | undefined> & mapboxgl.EventData>,
+  dragEmitter: EventEmitter<
+    mapboxgl.MapboxEvent<MouseEvent | TouchEvent | WheelEvent | undefined> & mapboxgl.EventData
+  >,
 ) {
   return function (e: mapboxgl.MapboxEvent<undefined> & mapboxgl.EventData) {
     dragEmitter.emit(e);

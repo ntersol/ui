@@ -17,7 +17,7 @@ declare var Prism: any;
   providedIn: 'root',
 })
 export class HighlightService {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   /**
    * Perform code syntax highlighting on the page

@@ -61,18 +61,20 @@ export class NtsServiceWorkerService {
   /** Handle click events on notifications */
   public notificationClicks$ = this.swPush.notificationClicks;
   /** Does this app have permission to send push notifications? */
-  private permission: NotificationPermission = ('Notification' in window) ? Notification.permission : 'denied';
+  private permission: NotificationPermission = 'Notification' in window ? Notification.permission : 'denied';
   /** Service worker instance */
   public worker$: Observable<ServiceWorkerRegistration | undefined | null> = new BehaviorSubject(null);
   /** Get the current active push notification. Null if it does not exist */
   public pushSubscription$: Observable<PushSubscription | null> = new BehaviorSubject(null);
-  public isPushActive$ = this.pushSubscription$.pipe(map(x => !!x));
+  public isPushActive$ = this.pushSubscription$.pipe(map((x) => !!x));
 
   constructor(private sw: SwUpdate, private swPush: SwPush, private http: HttpClient) {
     // Add legacy support to browsers without a service worker
     if (navigator && navigator.serviceWorker) {
       this.worker$ = from(navigator.serviceWorker.getRegistration());
-      this.pushSubscription$ = this.worker$.pipe(switchMap(registration => (registration ? from(registration.pushManager.getSubscription()) : of(null))));
+      this.pushSubscription$ = this.worker$.pipe(
+        switchMap((registration) => (registration ? from(registration.pushManager.getSubscription()) : of(null))),
+      );
     }
   }
 
@@ -81,7 +83,7 @@ export class NtsServiceWorkerService {
    */
   public requestPermission() {
     if ('Notification' in window) {
-      Notification.requestPermission(status => (this.permission = status));
+      Notification.requestPermission((status) => (this.permission = status));
     }
   }
 
@@ -91,7 +93,7 @@ export class NtsServiceWorkerService {
    * @param options
    */
   public sendNotification(title: string, options?: NotificationOptions): Observable<PushResponse> {
-    return new Observable<PushResponse>(obs => {
+    return new Observable<PushResponse>((obs) => {
       // Check if notification api is available
       if (!('Notification' in window)) {
         obs.error('Notifications are not available in this environment');
@@ -108,9 +110,9 @@ export class NtsServiceWorkerService {
       // Create new notification
       const n = new Notification(title, options);
       // Handle responses to notification popup
-      n.onshow = e => obs.next({ notification: n, event: e, type: <'show'>e.type });
-      n.onclick = e => obs.next({ notification: n, event: e, type: <'click'>e.type });
-      n.onerror = e => obs.error({ notification: n, event: e, type: e.type });
+      n.onshow = (e) => obs.next({ notification: n, event: e, type: <'show'>e.type });
+      n.onclick = (e) => obs.next({ notification: n, event: e, type: <'click'>e.type });
+      n.onerror = (e) => obs.error({ notification: n, event: e, type: e.type });
       n.onclose = () => obs.complete();
     });
   }
@@ -149,16 +151,16 @@ export class NtsServiceWorkerService {
     this.pushSubscription$
       .pipe(
         take(1), // Only get once
-        filter(subCurrent => !subCurrent || forceSend), // If no existing sub or force send is set
+        filter((subCurrent) => !subCurrent || forceSend), // If no existing sub or force send is set
         switchMap(() => this.worker$), // Get service worker
-        filter(w => !!w), // Null check for service worker
-        map(s => (s ? s.pushManager : undefined)), // Map to push manager
+        filter((w) => !!w), // Null check for service worker
+        map((s) => (s ? s.pushManager : undefined)), // Map to push manager
       )
-      .subscribe(pm => {
+      .subscribe((pm) => {
         if (pm) {
           pm.subscribe({ applicationServerKey: publicKey, userVisibleOnly: true })
-            .then(sub => this.http.post(pathToApi, sub).subscribe())
-            .catch(err => console.error('Error getting push subscription: ', err));
+            .then((sub) => this.http.post(pathToApi, sub).subscribe())
+            .catch((err) => console.error('Error getting push subscription: ', err));
         } else {
           console.error('Push manager not defined');
         }
@@ -175,7 +177,7 @@ export class NtsServiceWorkerService {
       console.error('Service Worker not enabled');
       return;
     }
-    this.pushSubscription$.pipe(take(1)).subscribe(s => {
+    this.pushSubscription$.pipe(take(1)).subscribe((s) => {
       if (s) {
         s.unsubscribe().then(() => {
           if (pathToApi) {
@@ -191,6 +193,8 @@ export class NtsServiceWorkerService {
    * @param callback Function to execute after sw has been unregistered
    */
   public remove() {
-    navigator.serviceWorker.getRegistrations().then(registrations => registrations.forEach(reg => reg.unregister()));
+    navigator.serviceWorker
+      .getRegistrations()
+      .then((registrations) => registrations.forEach((reg) => reg.unregister()));
   }
 }

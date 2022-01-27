@@ -13,9 +13,9 @@ export const columnsTemplateAttach = (columns: ColDef[], templates?: QueryList<G
   }
   // Create a dictionary of the templates by field ID
   const templatesDictionary: { [key: string]: GridColumnDirective } = {};
-  templates.forEach(template => (templatesDictionary[template.field] = template));
+  templates.forEach((template) => (templatesDictionary[template.field] = template));
   // Loop through the columns, if a template match is found add it to the column
-  return columns.map(column => {
+  return columns.map((column) => {
     const col = { ...column };
     // If match found, add template
     if (templatesDictionary[<string>column.field]) {

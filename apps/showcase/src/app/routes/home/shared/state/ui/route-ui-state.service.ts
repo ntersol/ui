@@ -19,7 +19,7 @@ export function createInitialState(): RouteUIState {
  */
 @Injectable()
 export class RouteUiStateService {
-  public someProp$ = this.query.select(state => state.someProp);
+  public someProp$ = this.query.select((state) => state.someProp);
 
   constructor(private store: RouteUiStateStore, private query: RouteUiStateQuery) {}
 

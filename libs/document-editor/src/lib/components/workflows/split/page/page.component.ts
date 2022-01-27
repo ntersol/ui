@@ -44,16 +44,18 @@ export class PageSplitComponent implements OnInit, OnChanges {
 
   private _assignedPages: number[] = [];
   private _subs: Array<Subscription> = [];
-  constructor(private _docsSvc: DocumentEditorService, private _cdr: ChangeDetectorRef) { }
+  constructor(private _docsSvc: DocumentEditorService, private _cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.setCanvas(this.pageRef.nativeElement);
     this.loaded = true;
 
-    this._subs.push(this._docsSvc.assignedPages$.subscribe(pages => {
-      this._assignedPages = pages;
-      this._cdr.detectChanges();
-    }));
+    this._subs.push(
+      this._docsSvc.assignedPages$.subscribe((pages) => {
+        this._assignedPages = pages;
+        this._cdr.detectChanges();
+      }),
+    );
   }
 
   ngOnChanges(model: SimpleChanges) {
@@ -62,7 +64,9 @@ export class PageSplitComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnDestroy() { this._subs.forEach(sub => sub.unsubscribe()) }
+  ngOnDestroy() {
+    this._subs.forEach((sub) => sub.unsubscribe());
+  }
 
   dragStart() {
     if (this.page) {
@@ -74,7 +78,6 @@ export class PageSplitComponent implements OnInit, OnChanges {
       this.toggleSelected(true);
       this._docsSvc.pageActiveChange(page);
     }
-
   }
 
   setActive(notifyParent = false) {

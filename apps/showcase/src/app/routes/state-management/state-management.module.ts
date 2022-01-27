@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SiteModule } from '$site'; // Site modules
 import { TabViewModule } from 'primeng/tabview';
 import { NtsTableModule } from '@ntersol/table';
 import { NtsFormsModule } from '@ntersol/forms';
@@ -15,17 +14,19 @@ import { ApiStoreCreatorComponent } from './routes/api-store-creator/api-store-c
 import { UiStoreCreatorComponent } from './routes/ui-store-creator/ui-store-creator.component';
 import { StoreCommunicationComponent } from './routes/store-communication/store-communication.component';
 import { RouteUiStateService, RouteUiStateStore, RouteUiStateQuery } from './shared/state/ui/route-ui-state.service';
-
+import { SiteModule } from '../../site.module';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, TabViewModule, NtsTableModule, NtsFormsModule, NtsStateManagementModule],
-  declarations: [StateManagementComponent, ApiStoreCreatorComponent, UiStoreCreatorComponent, ExampleComponent, StoreCommunicationComponent],
-  providers: [
-    RouteUiStateService,
-    RouteUiStateStore,
-    RouteUiStateQuery,
+  declarations: [
+    StateManagementComponent,
+    ApiStoreCreatorComponent,
+    UiStoreCreatorComponent,
+    ExampleComponent,
+    StoreCommunicationComponent,
   ],
+  providers: [RouteUiStateService, RouteUiStateStore, RouteUiStateQuery],
   exports: [],
   entryComponents: [],
 })
-export class StateManagementModule { }
+export class StateManagementModule {}

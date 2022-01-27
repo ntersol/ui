@@ -16,9 +16,9 @@ export class ApiStoreCreatorComponent implements OnInit {
   public state = this.highlight.htmlEncode(state);
   public select = this.highlight.htmlEncode(select);
 
-  constructor(private highlight: HighlightService) { }
+  constructor(private highlight: HighlightService) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.highlight.highlightAll();

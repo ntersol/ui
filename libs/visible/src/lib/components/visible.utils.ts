@@ -14,7 +14,7 @@ export const getVisibilityRange = (bp: string, mediaQueries: MediaQueryRecord): 
     max: null,
   };
   // Loop through the breakpoints
-  all.forEach(v => {
+  all.forEach((v) => {
     // If max is null or the media query has a max greater than the current max, update
     if (
       (val?.max === null && mediaQueries[v]?.max !== null) ||
@@ -65,7 +65,10 @@ export const isVisible = (bp: string, mediaQueries: MediaQueryRecord): boolean =
  * Convert the requested breakpoints into bootstrap classes
  * @param bp
  */
-export const breakpointsToBootStrapClasses = (bp?: string | null, range: MediaBreakpoints[] = ['xs', 'sm', 'md', 'lg', 'xl']) => {
+export const breakpointsToBootStrapClasses = (
+  bp?: string | null,
+  range: MediaBreakpoints[] = ['xs', 'sm', 'md', 'lg', 'xl'],
+) => {
   // If nothing returned or bp is all, show everything
   if (!bp || bp === 'all') {
     return '';
@@ -73,8 +76,10 @@ export const breakpointsToBootStrapClasses = (bp?: string | null, range: MediaBr
   const all = bp.split(' ') as MediaBreakpoints[];
   const classes: string[] = [];
   // Loop through the ranges and set display block for selected and display none for unselected
-  range.forEach(str => {
-    all.includes(str) ? classes.push(str === 'xs' ? '' : `d-${str}-block`) : classes.push(str === 'xs' ? 'd-none' : `d-${str}-none`);
+  range.forEach((str) => {
+    all.includes(str)
+      ? classes.push(str === 'xs' ? '' : `d-${str}-block`)
+      : classes.push(str === 'xs' ? 'd-none' : `d-${str}-none`);
   });
 
   return classes.join(' ');

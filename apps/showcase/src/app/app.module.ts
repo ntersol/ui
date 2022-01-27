@@ -7,7 +7,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { enableAkitaProdMode, persistState } from '@datorama/akita';
 
-import { SiteModule } from '$site';
 import { NoContentComponent } from './routes/no-content/no-content.component';
 import { GlobalErrorHandler } from './shared/interceptors/error.interceptor';
 import { HttpInterceptorService } from './shared/interceptors/http.interceptor';
@@ -15,8 +14,9 @@ import { HttpInterceptorService } from './shared/interceptors/http.interceptor';
 // Main entrypoint component
 import { AppComponent } from './app.component';
 import { ROUTES } from './app.routes';
-import { environment } from '$env';
-import { StringUtils } from '$utils';
+import { environment } from '../environments/environment';
+import { StringUtils } from './shared/utils';
+import { SiteModule } from './site.module';
 
 // Set Akita to work in prod mode in prod
 if (environment.production) {
@@ -87,6 +87,12 @@ export let InjectorInstance: Injector;
     }),
 
     SiteModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
   providers: [
     // AppConfigService, // App config/env settings
