@@ -17,14 +17,14 @@ jobs:
     name: Trigger
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout [master]
+      - name: Checkout [main]
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Set SHAs [master]
+      - name: Set SHAs [main]
         uses: nrwl/nx-set-shas@v2
         with:
-          main-branch-name: master
+          main-branch-name: main
       - name: Setup Node [14]
         uses: actions/setup-node@v1
         with:

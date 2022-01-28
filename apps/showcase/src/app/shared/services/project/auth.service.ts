@@ -82,8 +82,8 @@ export class AuthService {
 
     // If a token was passed in via query param
     this.route.queryParams.pipe(take(1)).subscribe((params) => {
-      if (params.token) {
-        this.settings.token = params.token;
+      if (params['token']) {
+        this.settings.token = params['token'];
       }
     });
 

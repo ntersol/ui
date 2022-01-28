@@ -7,8 +7,7 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComingSoonComponent implements OnInit, OnDestroy {
-  constructor() // public uiState: UiStateService, // Global UI state // private domainState: DomainService, // Global domain state
-  {}
+  constructor() {} // public uiState: UiStateService, // Global UI state // private domainState: DomainService, // Global domain state
 
   ngOnInit() {}
 

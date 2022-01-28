@@ -95,7 +95,7 @@ export class SettingsStore extends Store<Settings> {
 // tslint:disable-next-line:max-classes-per-file
 @Injectable({ providedIn: 'root' })
 export class SettingsQuery extends Query<Settings> {
-  constructor(protected store: SettingsStore) {
+  constructor(protected override store: SettingsStore) {
     super(store);
   }
 }
