@@ -1,12 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, debounceTime, map, startWith, distinctUntilChanged } from 'rxjs/operators';
-import { SettingsService } from '$settings';
 
 import { MenuItem } from 'primeng/api';
 import { fromEvent } from 'rxjs';
-import { UiStateService } from '$ui';
 import { AuthService, AuthState } from '../../../shared/services/project/auth.service';
+import { SettingsService } from '../../../shared/stores/settings';
+import { UiStateService } from '../../../shared/stores/ui';
 
 @Component({
   selector: 'app-nav',
@@ -60,15 +60,22 @@ export class NavComponent {
   /** Contains a boolean is the current screensize is above or below the mobile breakpoint */
   public isDesktop$ = fromEvent(window, 'resize').pipe(
     debounceTime(100),
-    map(e => (e && e.target ? (<any>e).target.innerWidth : null)), // Extract window width
+    map((e) => (e && e.target ? (<any>e).target.innerWidth : null)), // Extract window width
     startWith(window.innerWidth), // Start with window width
-    map(width => (width >= 998 ? true : false)), // If window width is less than mobileBreakpoint return true
+    map((width) => (width >= 998 ? true : false)), // If window width is less than mobileBreakpoint return true
     distinctUntilChanged(), // Only update on changes
   );
 
-  constructor(private auth: AuthService, private settings: SettingsService, private ui: UiStateService, private router: Router) {
+  constructor(
+    private auth: AuthService,
+    private settings: SettingsService,
+    private ui: UiStateService,
+    private router: Router,
+  ) {
     // On route change, if mobile nav is open close it
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => (this.sidebarVisible = false));
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => (this.sidebarVisible = false));
   }
 
   /**

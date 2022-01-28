@@ -4,11 +4,7 @@ import { TimeAgoPipe } from './time-ago/time-ago.pipe';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [
-    TimeAgoPipe
-  ],
-  exports: [
-    TimeAgoPipe
-  ],
+  declarations: [TimeAgoPipe],
+  exports: [TimeAgoPipe],
 })
 export class UtilsModule {}

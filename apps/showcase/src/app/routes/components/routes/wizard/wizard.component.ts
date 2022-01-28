@@ -35,9 +35,9 @@ export class WizardComponent implements OnInit, AfterViewInit {
   public settings = {};
   public formGroup = this.fb.group({});
 
-  constructor(private highlight: HighlightService, private fb: FormBuilder) { }
+  constructor(private highlight: HighlightService, private fb: FormBuilder) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.highlight.highlightAll();

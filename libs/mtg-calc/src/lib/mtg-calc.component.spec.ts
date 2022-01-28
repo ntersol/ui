@@ -8,9 +8,8 @@ describe('MtgCalcComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MtgCalcComponent ]
-    })
-    .compileComponents();
+      declarations: [MtgCalcComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

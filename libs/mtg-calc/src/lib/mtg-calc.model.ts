@@ -1,4 +1,4 @@
-import { ChartConfiguration } from "chart.js";
+import { ChartConfiguration } from 'chart.js';
 
 /** This is the config for the Mortgage Calculator */
 export interface MtgCalcConfig {
@@ -16,15 +16,15 @@ export interface MtgCalcConfig {
   showChart?: boolean;
   /** Chart options from chart.js */
   chartOptions?: ChartConfiguration;
-};
+}
 
 export interface PAndI {
   principle: number;
   interest: number;
   balance: number;
-};
+}
 
 export interface TermOptions {
   name: string;
   value: number;
-};
+}

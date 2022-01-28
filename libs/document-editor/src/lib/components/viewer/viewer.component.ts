@@ -41,7 +41,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
   // @Input() renderType
   private _loaded = false;
   private _origRotation = 0;
-  constructor(public docSvc: DocumentEditorService, private _cdr: ChangeDetectorRef) { }
+  constructor(public docSvc: DocumentEditorService, private _cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.disableReset = true;
@@ -69,7 +69,7 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
     if (!this.pdfSrcs) {
       return;
     }
-    pdfSrcs[pageActive.pdfIndex].getPage(pageActive.pageIndex + 1).then(page => this.pageRender(page, scale));
+    pdfSrcs[pageActive.pdfIndex].getPage(pageActive.pageIndex + 1).then((page) => this.pageRender(page, scale));
   }
 
   /**
@@ -77,7 +77,6 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
    * @param page
    */
   pageRender(page: pdfjsDist.PDFPageProxy, scale: number) {
-
     const viewport = page.getViewport({ scale });
     this._origRotation = page.rotate;
     this._cdr.detectChanges();
@@ -118,14 +117,14 @@ export class ViewerComponent implements OnInit, OnChanges, OnDestroy {
      */
   }
 
-  ngOnDestroy() { }
+  ngOnDestroy() {}
 
   get origRotation() {
     return this._origRotation;
   }
 
   zoom(value: number): void {
-    this.currentZoom = value > 1 ? this.currentZoom * 1.25 : this.currentZoom * .75;
+    this.currentZoom = value > 1 ? this.currentZoom * 1.25 : this.currentZoom * 0.75;
     this.disableReset = false;
     if (this.currentZoom >= 1.6) {
       this.disableZoom = true;

@@ -13,7 +13,7 @@ export class PageComponent implements OnInit {
   @Input() dataFields: Record<string, Wizard.Option[]> = {};
   @Input() templates: Record<string, WizardFeatureDirective> = {};
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

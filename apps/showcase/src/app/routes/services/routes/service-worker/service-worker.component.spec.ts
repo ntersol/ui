@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ServiceWorkerComponent } from './service-worker.component';
+import { TabViewModule } from 'primeng/tabview';
 import { of } from 'rxjs';
 import { NtsServiceWorkerService } from '../../../../shared/services/general';
 import { HighlightService } from '../../../../shared/services/highlight.service';
-import { TabViewModule } from 'primeng/tabview';
+import { ServiceWorkerComponent } from './service-worker.component';
 
 describe('ServiceWorkerComponent', () => {
   let component: ServiceWorkerComponent;
@@ -30,9 +30,8 @@ describe('ServiceWorkerComponent', () => {
       providers: [
         { provide: NtsServiceWorkerService, useValue: ntsServiceWorkerServiceMock },
         { provide: HighlightService, useValue: highlightServiceMock },
-      ]
-    })
-      .compileComponents();
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

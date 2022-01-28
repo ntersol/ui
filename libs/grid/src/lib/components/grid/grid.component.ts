@@ -173,7 +173,13 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   public gridStatusComponent: GridStatusBarComponent | undefined;
   /** Watch all grid state changes */
   public gridEvent$ = new Subject<
-    string | 'sortChanged' | 'filterChanged' | 'columnRowGroupChanged' | 'columnPinned' | 'columnMoved' | 'columnResized'
+    | string
+    | 'sortChanged'
+    | 'filterChanged'
+    | 'columnRowGroupChanged'
+    | 'columnPinned'
+    | 'columnMoved'
+    | 'columnResized'
   >();
   /** Hold latest gridstate */
   public gridState$ = new BehaviorSubject<any>(this.gridState);
@@ -182,19 +188,19 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   public get rowsVisible() {
     return this.gridApi
       ? this.gridApi
-        .getRenderedNodes()
-        .map((x) => x.data)
-        .filter((x) => x)
+          .getRenderedNodes()
+          .map((x) => x.data)
+          .filter((x) => x)
       : [];
   }
   /** Get the currently selected rows that are visible  */
   public get rowsVisibleSelected() {
     return this.gridApi
       ? this.gridApi
-        .getRenderedNodes()
-        .filter((x) => x.isSelected())
-        .map((x) => x.data)
-        .filter((x) => x)
+          .getRenderedNodes()
+          .filter((x) => x.isSelected())
+          .map((x) => x.data)
+          .filter((x) => x)
       : [];
   }
   /** Dictionary of keys being pressed */
@@ -220,7 +226,7 @@ export class GridComponent implements OnInit, OnChanges, OnDestroy {
   @HostListener('document:keydown', ['$event']) keyPressed = (event: KeyboardEvent) => this.keyboardEvent(event);
   @HostListener('document:keyup', ['$event']) keyUp = (event: KeyboardEvent) => this.keyboardEvent(event);
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     // Set license

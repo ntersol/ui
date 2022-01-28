@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TabViewModule } from 'primeng/tabview';
-import { LibLoaderComponent } from './lib-loader.component';
 import { HighlightService } from '../../../../shared/services/highlight.service';
+import { LibLoaderComponent } from './lib-loader.component';
 
 describe('LibLoaderComponent', () => {
   let component: LibLoaderComponent;
@@ -15,11 +15,8 @@ describe('LibLoaderComponent', () => {
     await TestBed.configureTestingModule({
       imports: [TabViewModule],
       declarations: [LibLoaderComponent],
-      providers: [
-        { provide: HighlightService, useValue: highlightServiceMock },
-      ]
-    })
-      .compileComponents();
+      providers: [{ provide: HighlightService, useValue: highlightServiceMock }],
+    }).compileComponents();
   });
 
   beforeEach(() => {

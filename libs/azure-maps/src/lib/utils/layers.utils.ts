@@ -7,12 +7,16 @@ import { HtmlMarkerLayer } from '../layers/htmlMarkerLayer.layer';
  * @param map
  * @param layers
  */
-export const layersChange = (map?: atlas.Map | null, layers?: NtsAzureMaps.Layer[], settings?: NtsAzureMaps.Settings | null) => {
+export const layersChange = (
+  map?: atlas.Map | null,
+  layers?: NtsAzureMaps.Layer[],
+  settings?: NtsAzureMaps.Settings | null,
+) => {
   if (!map || !layers) {
     return;
   }
 
-  layers.forEach(l => {
+  layers.forEach((l) => {
     const layerExisting = map.layers.getLayerById(l.id) as layer.Layer<layer.LayerEvents> | undefined;
     // If datasource hasn't loaded yet, create it using that id
     // Some layers do not need sources
@@ -58,8 +62,8 @@ export const layersChange = (map?: atlas.Map | null, layers?: NtsAzureMaps.Layer
 
     // Emit layer events to parent
     if (l.events && l.emitter) {
-      l.events.forEach(e => {
-        map.events.add(e, layerSrc as any, event => {
+      l.events.forEach((e) => {
+        map.events.add(e, layerSrc as any, (event) => {
           const shapes = (event as any).shapes;
           const shape = shapes?.length && shapes[0]?.getProperties ? shapes[0] : null;
           l?.emitter?.emit({ event: event as any, eventType: e, layerId: l.id, shape: shape });
@@ -83,7 +87,7 @@ const bubbleLayerZoom = (e: atlas.MapMouseEvent) => {
     // If both source and layer are returned
     if (cluster && datasource) {
       // Get the next cluster expansion
-      datasource.getClusterExpansionZoom(cluster.properties.cluster_id).then(zoom => {
+      datasource.getClusterExpansionZoom(cluster.properties.cluster_id).then((zoom) => {
         // Update the map camera to be centered over the cluster.
         e.map.setCamera({
           center: cluster.geometry.coordinates,

@@ -5,17 +5,14 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 @Component({
   selector: 'nts-service-worker',
   templateUrl: './service-worker.component.html',
-  styleUrls: ['./service-worker.component.scss']
+  styleUrls: ['./service-worker.component.scss'],
 })
 export class ServiceWorkerComponent implements OnInit {
-
-  public exampleTSInstall: string =
-    `
+  public exampleTSInstall: string = `
   // Install this library
   npm i @ntersol/services --save`;
 
-  public exampleTS: string =
-    `
+  public exampleTS: string = `
     // Import into a service or component
     import { NtsServiceWorkerService } from '@ntersol/services';
 
@@ -46,7 +43,7 @@ export class ServiceWorkerComponent implements OnInit {
     // End signalR connection
     this.signalR.connectionEnd();`;
 
-  constructor(private highlight: HighlightService, private sw: NtsServiceWorkerService) { }
+  constructor(private highlight: HighlightService, private sw: NtsServiceWorkerService) {}
 
   ngOnInit(): void {
     // Start polling for updates to the service worker. Default is 5 minutes. When an update is found updateAvailable$ will be fired
@@ -66,7 +63,7 @@ export class ServiceWorkerComponent implements OnInit {
     this.sw.pushSubscriptionCreate('/api/pushsubscriptions', '12345678');
 
     // Listen for push notifications received from the backend
-    this.sw.pushSubscription$.subscribe(pushSubscription => {
+    this.sw.pushSubscription$.subscribe((pushSubscription) => {
       // Do somehting with a push response
       console.log(pushSubscription);
     });
@@ -78,12 +75,7 @@ export class ServiceWorkerComponent implements OnInit {
     this.sw.remove();
   }
 
-
-
-
-
   ngAfterViewInit() {
     this.highlight.highlightAll();
   }
-
 }

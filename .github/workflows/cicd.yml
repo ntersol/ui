@@ -3,7 +3,7 @@ name: CICD
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
 
 jobs:
@@ -17,15 +17,15 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
-      - name: Checkout [master]
+      - name: Checkout [main]
         if: ${{ github.event_name != 'pull_request' }}
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Set SHAs [master]
+      - name: Set SHAs [main]
         uses: nrwl/nx-set-shas@v2
         with:
-          main-branch-name: master
+          main-branch-name: main
       - name: Setup Node [14]
         uses: actions/setup-node@v1
         with:

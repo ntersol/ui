@@ -1,22 +1,21 @@
 // @angular modules
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorHandler, Injector, NgModule } from '@angular/core'; // APP_INITIALIZER,
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, ErrorHandler, Injector } from '@angular/core'; // APP_INITIALIZER,
-import { RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NoPreloading, PreloadAllModules, RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { enableAkitaProdMode, persistState } from '@datorama/akita';
-
-import { SiteModule } from '$site';
-import { NoContentComponent } from './routes/no-content/no-content.component';
-import { GlobalErrorHandler } from './shared/interceptors/error.interceptor';
-import { HttpInterceptorService } from './shared/interceptors/http.interceptor';
-
+import { ConfirmDialog } from 'primeng/confirmdialog';
+import { environment } from '../environments/environment';
 // Main entrypoint component
 import { AppComponent } from './app.component';
 import { ROUTES } from './app.routes';
-import { environment } from '$env';
-import { StringUtils } from '$utils';
+import { NoContentComponent } from './routes/no-content/no-content.component';
+import { GlobalErrorHandler } from './shared/interceptors/error.interceptor';
+import { HttpInterceptorService } from './shared/interceptors/http.interceptor';
+import { StringUtils } from './shared/utils';
+import { SiteModule } from './site.module';
 
 // Set Akita to work in prod mode in prod
 if (environment.production) {
@@ -72,7 +71,7 @@ export let InjectorInstance: Injector;
 @NgModule({
   declarations: [APP_COMPONENTS],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'angular-starter' }),
+    BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, {
@@ -81,12 +80,13 @@ export let InjectorInstance: Injector;
       relativeLinkResolution: 'legacy',
     }),
 
+    SiteModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.settings.enableServiceWorker,
-      registrationStrategy: 'registerImmediately',
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000',
     }),
-
-    SiteModule,
   ],
   providers: [
     // AppConfigService, // App config/env settings
@@ -112,7 +112,7 @@ export let InjectorInstance: Injector;
     // },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [],
+  entryComponents: [ConfirmDialog],
 })
 export class AppModule {
   constructor(private injector: Injector) {

@@ -67,7 +67,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   /** Display information for pdfs */
   @Input() set pdfInfo(info: Array<NtsDocumentEditor.PdfInfo> | null | undefined) {
     if (this.docSvc && info) {
-      const hasNils = info.some(x => x === null || x === undefined); // Ensure no nils in the editor, all docs must be present
+      const hasNils = info.some((x) => x === null || x === undefined); // Ensure no nils in the editor, all docs must be present
       if (!hasNils) {
         this.docSvc.stateChange({ pdfInfo: info });
       }
@@ -79,14 +79,14 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
   @Output() stateChange = new EventEmitter<NtsDocumentEditor.State>();
   state$ = this.docSvc.state$.pipe(
     debounceTime(10),
-    tap(state => this.stateChange.emit(state)),
+    tap((state) => this.stateChange.emit(state)),
   );
   documentsModel$ = this.docSvc.documentsModel$.pipe(
-    filter(x => !!x),
+    filter((x) => !!x),
     debounceTime(10),
   );
   viewModels$ = this.docSvc.viewModels$.pipe(
-    filter(x => !!x),
+    filter((x) => !!x),
     debounceTime(10),
   );
 
@@ -97,10 +97,10 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
         skip(1), // Don't take initial hydration of observable
         debounceTime(250),
       )
-      .subscribe(docs => (docs ? this.pdfModelChange.emit(docs) : null)),
+      .subscribe((docs) => (docs ? this.pdfModelChange.emit(docs) : null)),
   ];
   private _loaded = false;
-  constructor(public docSvc: DocumentEditorService) { }
+  constructor(public docSvc: DocumentEditorService) {}
   ngOnInit() {
     this.docSvc.scriptsLoad(this.pdfJsSrc, this.pdfJsWorkerSrc);
 
@@ -138,14 +138,14 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
     // If pdf input changes
     if (model.pdfSrcs && this.pdfSrcs) {
       const sources = Array.isArray(this.pdfSrcs) ? this.pdfSrcs : [this.pdfSrcs];
-      const hasNils = sources.some(x => x === null || x === undefined); // Ensure no nils in the editor, all docs must be present
+      const hasNils = sources.some((x) => x === null || x === undefined); // Ensure no nils in the editor, all docs must be present
       if (!hasNils) {
         this.docSvc.stateChange({ pdfSrcs: sources });
       }
     }
   }
   ngOnDestroy() {
-    this._subs.forEach(sub => sub.unsubscribe());
+    this._subs.forEach((sub) => sub.unsubscribe());
     this.docSvc.reset();
   }
   /**

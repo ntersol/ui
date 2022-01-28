@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { Formgroup2ApiComponent } from './formgroup2-api.component';
-
 import { TabViewModule } from 'primeng/tabview';
+import { Formgroup2ApiComponent } from './formgroup2-api.component';
 
 describe('Formgroup2ApiComponent', () => {
   let component: Formgroup2ApiComponent;
@@ -11,9 +9,8 @@ describe('Formgroup2ApiComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [Formgroup2ApiComponent],
-      imports: [TabViewModule]
-    })
-      .compileComponents();
+      imports: [TabViewModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

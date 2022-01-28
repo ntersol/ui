@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TabViewModule } from 'primeng/tabview';
-
 import { WizardComponent } from './wizard.component';
 
 describe('WizardComponent', () => {
@@ -13,9 +12,8 @@ describe('WizardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [WizardComponent],
       imports: [FormsModule, RouterTestingModule, TabViewModule],
-      providers: [FormBuilder]
-    })
-      .compileComponents();
+      providers: [FormBuilder],
+    }).compileComponents();
   });
 
   beforeEach(() => {

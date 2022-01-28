@@ -1,5 +1,4 @@
 export namespace NtsState {
-
   export interface EntityApiState<t = any, e = any> extends ApiState<t[], e> {
     /** If api response type is an array of objects, create record here. Will be null otherwise */
     entities: Record<string | number, t>;

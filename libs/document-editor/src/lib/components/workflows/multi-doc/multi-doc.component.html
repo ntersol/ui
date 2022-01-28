@@ -7,19 +7,18 @@
       *ngIf="docsSource?.length; noDocsSource"
     >
       <div class="col-12 nav-container">
-
-          <div class="tab-button-left" *ngIf="docsSource && docsSource.length > 1">
-            <p-button styleClass="nav-btn" (click)="prevTab()" [disabled]="activeIndex === 0" icon="fas fa-arrow-left">
-            </p-button>
-          </div>
-          <div class="tab-button-right" *ngIf="docsSource && docsSource.length > 1">
-            <p-button
-              styleClass="nav-btn"
-              (click)="nextTab()"
-              [disabled]="activeIndex === docsSource.length - 1"
-              icon="fas fa-arrow-right"
-            ></p-button>
-          </div>
+        <div class="tab-button-left" *ngIf="docsSource && docsSource.length > 1">
+          <p-button styleClass="nav-btn" (click)="prevTab()" [disabled]="activeIndex === 0" icon="fas fa-arrow-left">
+          </p-button>
+        </div>
+        <div class="tab-button-right" *ngIf="docsSource && docsSource.length > 1">
+          <p-button
+            styleClass="nav-btn"
+            (click)="nextTab()"
+            [disabled]="activeIndex === docsSource.length - 1"
+            icon="fas fa-arrow-right"
+          ></p-button>
+        </div>
       </div>
       <p-tabPanel
         *ngFor="let document of docsSource; let i = index"
@@ -71,7 +70,12 @@
       <p-tabPanel header="Viewer">
         <ng-template pTemplate="content">
           <!-- Full size viewer -->
-          <app-viewer [pdfSrcs]="pdfSrcs" [pageActive]="pageActive" [rotation]="rotation" [maxHeight]="maxHeight"></app-viewer>
+          <app-viewer
+            [pdfSrcs]="pdfSrcs"
+            [pageActive]="pageActive"
+            [rotation]="rotation"
+            [maxHeight]="maxHeight"
+          ></app-viewer>
         </ng-template>
       </p-tabPanel>
     </p-tabView>

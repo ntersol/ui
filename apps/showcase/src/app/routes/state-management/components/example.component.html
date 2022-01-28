@@ -1,7 +1,6 @@
 <div class="container-fluid px-0">
   <div class="row px-0">
     <div class="col-12 col-md-9 pl-0">
-
       <nts-api-state [state]="state" *ngIf="users$ | async as state">
         <nts-table [rows]="state.data" [columns]="columns">
           <table-column field="actions">
@@ -14,7 +13,6 @@
           </table-column>
         </nts-table>
       </nts-api-state>
-
     </div>
     <div class="col-12 col-md-3 pr-0">
       <div class="card mb-3">
@@ -34,16 +32,19 @@
               <nts-form-field formControlName="phone" placeholder="Phone Number"> </nts-form-field>
             </p>
             <div class="float-end">
-              <button class="btn btn-primary" *ngIf="isEdit" (click)="save()"><i class="fa fa-cog"
-                  aria-hidden="true"></i> Save User</button>
-              <button class="btn btn-primary" *ngIf="!isEdit" (click)="save()"><i class="fa fa-plus"
-                  aria-hidden="true"></i> Create User</button>
+              <button class="btn btn-primary" *ngIf="isEdit" (click)="save()">
+                <i class="fa fa-cog" aria-hidden="true"></i> Save User
+              </button>
+              <button class="btn btn-primary" *ngIf="!isEdit" (click)="save()">
+                <i class="fa fa-plus" aria-hidden="true"></i> Create User
+              </button>
             </div>
           </form>
         </div>
       </div>
-      <button class="btn btn-primary w-100" (click)="refresh()"><i class="fa fa-refresh" aria-hidden="true"></i> Refresh
-        All Users</button>
+      <button class="btn btn-primary w-100" (click)="refresh()">
+        <i class="fa fa-refresh" aria-hidden="true"></i> Refresh All Users
+      </button>
     </div>
   </div>
 </div>

@@ -9,9 +9,8 @@ describe('RemoveNilsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TabViewModule],
-      declarations: [RemoveNilsComponent]
-    })
-      .compileComponents();
+      declarations: [RemoveNilsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

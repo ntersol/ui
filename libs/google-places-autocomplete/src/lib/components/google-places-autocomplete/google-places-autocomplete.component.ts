@@ -3,7 +3,10 @@ import { FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { GooglePlaceData } from '../../../google-autocomplete.model';
 
-import { NtsAddressAutocompleteOptions, NtsGooglePlacesAutocompleteService } from '../../services/google-places-autocomplete.service';
+import {
+  NtsAddressAutocompleteOptions,
+  NtsGooglePlacesAutocompleteService,
+} from '../../services/google-places-autocomplete.service';
 
 /**
  * Integrate with the google places api for location searches
@@ -15,11 +18,11 @@ import { NtsAddressAutocompleteOptions, NtsGooglePlacesAutocompleteService } fro
 @Component({
   selector: 'nts-google-places-autocomplete',
   templateUrl: './google-places-autocomplete.component.html',
-  styleUrls: ['./google-places-autocomplete.component.scss']
+  styleUrls: ['./google-places-autocomplete.component.scss'],
 })
 export class NtsGooglePlacesAutocompleteComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() apiKey?: string | null = null;
-  @Input() id = 'nts-autocomplete-' + Math.floor(Math.random() * 1000000000)
+  @Input() id = 'nts-autocomplete-' + Math.floor(Math.random() * 1000000000);
   @Input() classes = 'form-control';
   @Input() formGroup: FormGroup | null = null;
   //
@@ -32,9 +35,9 @@ export class NtsGooglePlacesAutocompleteComponent implements OnInit, OnDestroy, 
 
   @Output() placeSelected = new EventEmitter<GooglePlaceData>();
 
-  constructor(private places: NtsGooglePlacesAutocompleteService) { }
+  constructor(private places: NtsGooglePlacesAutocompleteService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     if (!this.apiKey) {
@@ -43,8 +46,8 @@ export class NtsGooglePlacesAutocompleteComponent implements OnInit, OnDestroy, 
     }
     const options: NtsAddressAutocompleteOptions = {
       apiKey: this.apiKey,
-      inputId: this.id
-    }
+      inputId: this.id,
+    };
 
     if (this.formGroup) {
       options.formGroup = {
@@ -55,15 +58,15 @@ export class NtsGooglePlacesAutocompleteComponent implements OnInit, OnDestroy, 
         state: this.state,
         state_long: this.state_long,
         zip: this.zip,
-      }
+      };
     }
-    this.places.autocomplete(options).pipe(untilDestroyed(this)).subscribe(place => this.placeSelected.emit(place));
+    this.places
+      .autocomplete(options)
+      .pipe(untilDestroyed(this))
+      .subscribe((place) => this.placeSelected.emit(place));
   }
 
   ngOnDestroy() {
     this.places.destroy(this.id);
   }
-
-
-
 }

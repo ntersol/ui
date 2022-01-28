@@ -1,10 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ShowcaseTableComponent } from './table.component';
-
 import { NtsTableModule } from '@ntersol/table';
 import { TabViewModule } from 'primeng/tabview';
 import { HighlightService } from '../../../../shared/services/highlight.service';
+import { ShowcaseTableComponent } from './table.component';
 
 describe('ShowcaseTableComponent', () => {
   let component: ShowcaseTableComponent;
@@ -14,7 +12,7 @@ describe('ShowcaseTableComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ShowcaseTableComponent],
       imports: [TabViewModule, NtsTableModule],
-      providers: [HighlightService]
+      providers: [HighlightService],
     }).compileComponents();
   });
 

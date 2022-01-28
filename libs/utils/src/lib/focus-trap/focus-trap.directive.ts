@@ -10,9 +10,7 @@ export class FocusTrapDirective implements AfterViewInit, OnDestroy, OnChanges {
   private listeners: any[] = [];
 
   private get focus(): Node[] {
-    return Array.from(this.$.querySelectorAll(this.selectors.join(', ')) as NodeList).filter(
-      (el: any) => !el.disabled,
-    );
+    return Array.from(this.$.querySelectorAll(this.selectors.join(', ')) as NodeList).filter((el: any) => !el.disabled);
   }
 
   private get first(): HTMLInputElement {
@@ -23,7 +21,7 @@ export class FocusTrapDirective implements AfterViewInit, OnDestroy, OnChanges {
     return this.focus[this.focus.length - 1] as HTMLInputElement;
   }
 
-  constructor(private el: ElementRef, private renderer: Renderer2) { }
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngAfterViewInit() {
     this.run();
@@ -37,25 +35,27 @@ export class FocusTrapDirective implements AfterViewInit, OnDestroy, OnChanges {
   run() {
     if (this.first && this.ntsFocusTrap) {
       this.first.focus();
-      this.listeners.push(this.renderer.listen(this.$, 'keydown', (e) => {
-        if (e.keyCode !== 9) return;
+      this.listeners.push(
+        this.renderer.listen(this.$, 'keydown', (e) => {
+          if (e.keyCode !== 9) return;
 
-        if (e.shiftKey) {
-          if (document.activeElement === this.first) {
-            this.last.focus();
-            e.preventDefault();
+          if (e.shiftKey) {
+            if (document.activeElement === this.first) {
+              this.last.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (document.activeElement === this.last) {
+              this.first.focus();
+              e.preventDefault();
+            }
           }
-        } else {
-          if (document.activeElement === this.last) {
-            this.first.focus();
-            e.preventDefault();
-          }
-        }
-      }));
+        }),
+      );
     }
   }
 
   ngOnDestroy() {
-    this.listeners.forEach((destroy: any) => destroy())
+    this.listeners.forEach((destroy: any) => destroy());
   }
 }

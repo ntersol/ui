@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AngularStarterComponent } from './angular-starter.component';
 
 describe('AngularStarterComponent', () => {
@@ -8,9 +7,8 @@ describe('AngularStarterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AngularStarterComponent ]
-    })
-    .compileComponents();
+      declarations: [AngularStarterComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

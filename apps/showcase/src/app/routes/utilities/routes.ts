@@ -7,7 +7,7 @@ import { Formgroup2ApiComponent } from './routes/formgroup2-api/formgroup2-api.c
 import { ImageResizerComponent } from './routes/image-resizer/image-resizer.component';
 import { LibLoaderComponent } from './routes/lib-loader/lib-loader.component';
 import { RemoveNilsComponent } from './routes/remove-nils/remove-nils.component';
-import { ScriptLoaderComponent } from './routes/script-loader/script-loader.component'
+import { ScriptLoaderComponent } from './routes/script-loader/script-loader.component';
 import { UtilitiesComponent } from './utilities.component';
 import { UtilitiesModule } from './utilities.module';
 

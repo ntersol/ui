@@ -17,7 +17,7 @@ export class DomainService {
    * Reset all stores
    */
   public resetAll() {
-    Object.keys(this).forEach(key => {
+    Object.keys(this).forEach((key) => {
       const dependency = (<any>this)[key];
       if (dependency && dependency.store && dependency.store.reset) {
         dependency.store.reset();

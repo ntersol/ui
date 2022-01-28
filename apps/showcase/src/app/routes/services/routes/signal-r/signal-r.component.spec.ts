@@ -9,9 +9,8 @@ describe('SignalRComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [TabViewModule],
-      declarations: [SignalRComponent]
-    })
-      .compileComponents();
+      declarations: [SignalRComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -8,9 +8,8 @@ describe('ViewerToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewerToolbarComponent ]
-    })
-    .compileComponents();
+      declarations: [ViewerToolbarComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

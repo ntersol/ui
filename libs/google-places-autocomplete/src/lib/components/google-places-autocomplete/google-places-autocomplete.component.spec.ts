@@ -8,9 +8,8 @@ describe('GooglePlacesAutocompleteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GooglePlacesAutocompleteComponent ]
-    })
-    .compileComponents();
+      declarations: [GooglePlacesAutocompleteComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

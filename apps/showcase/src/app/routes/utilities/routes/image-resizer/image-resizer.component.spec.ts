@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ImageResizerComponent } from './image-resizer.component';
-
-import { TabViewModule } from 'primeng/tabview';
 import { FormsModule } from '@angular/forms';
+import { TabViewModule } from 'primeng/tabview';
+import { ImageResizerComponent } from './image-resizer.component';
 
 describe('ImageResizerComponent', () => {
   let component: ImageResizerComponent;
@@ -12,9 +10,8 @@ describe('ImageResizerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ImageResizerComponent],
-      imports: [TabViewModule, FormsModule]
-    })
-      .compileComponents();
+      imports: [TabViewModule, FormsModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

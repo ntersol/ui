@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { VisibleComponent } from './visible.component';
-
 import { TabViewModule } from 'primeng/tabview';
+import { VisibleComponent } from './visible.component';
 
 describe('VisibleComponent', () => {
   let component: VisibleComponent;
@@ -11,9 +9,8 @@ describe('VisibleComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VisibleComponent],
-      imports: [TabViewModule]
-    })
-      .compileComponents();
+      imports: [TabViewModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

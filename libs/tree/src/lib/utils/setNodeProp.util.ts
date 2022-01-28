@@ -15,7 +15,7 @@ export const setNodeProp = (
   depth: number[] = [],
   depthCurrent = 0,
 ): NtsTree.TreeNode[] => {
-  return nodes.map(nodeSrc => {
+  return nodes.map((nodeSrc) => {
     // Create new reference
     const node: NtsTree.TreeNode = Object.assign({}, nodeSrc);
     // Check depth rules, only update value if no depth or current depth is in the depth array

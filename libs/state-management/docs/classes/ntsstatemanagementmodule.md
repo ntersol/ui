@@ -14,6 +14,6 @@ State management tools intended to work with Akita
 
 ### constructor
 
-\+ **new NtsStateManagementModule**(): [*NtsStateManagementModule*](ntsstatemanagementmodule.md)
+\+ **new NtsStateManagementModule**(): [_NtsStateManagementModule_](ntsstatemanagementmodule.md)
 
-**Returns:** [*NtsStateManagementModule*](ntsstatemanagementmodule.md)
+**Returns:** [_NtsStateManagementModule_](ntsstatemanagementmodule.md)

@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GooglePlacesAutocompleteComponent } from './google-places-autocomplete.component';
 
 describe('GooglePlacesAutocompleteComponent', () => {
@@ -8,9 +7,8 @@ describe('GooglePlacesAutocompleteComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GooglePlacesAutocompleteComponent ]
-    })
-    .compileComponents();
+      declarations: [GooglePlacesAutocompleteComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -85,19 +85,19 @@ export class DocumentEditorService {
       combineLatest([
         // When pdf sources are available
         this.state$.pipe(
-          map(state => state.pdfSrcs),
+          map((state) => state.pdfSrcs),
           // filter(x => x !== null),
           distinctUntilChanged(),
         ),
         // Get how to handle multiple documents
         this.state$.pipe(
-          map(state => state.multipleAction),
+          map((state) => state.multipleAction),
           distinctUntilChanged(),
         ),
         // Wait till the script is finished loading
         this.state$.pipe(
-          map(state => state.loadingScript),
-          filter(x => !x),
+          map((state) => state.loadingScript),
+          filter((x) => !x),
           distinctUntilChanged(),
         ),
       ]).subscribe(([pdfSrcs, multipleAction]) => {
@@ -107,16 +107,16 @@ export class DocumentEditorService {
       }),
       combineLatest([
         this.state$.pipe(
-          map(state => state.pdfs),
-          filter(x => x !== null),
+          map((state) => state.pdfs),
+          filter((x) => x !== null),
           distinctUntilChanged(),
         ),
         this.state$.pipe(
-          map(state => state.tnSettings),
-          filter(x => x !== null),
+          map((state) => state.tnSettings),
+          filter((x) => x !== null),
           distinctUntilChanged(),
         ),
-      ]).subscribe(state => {
+      ]).subscribe((state) => {
         if (!state[0] || !state[1].width || !state[1].height) {
           return;
         }
@@ -136,10 +136,10 @@ export class DocumentEditorService {
       fromEvent(scrollbarRef, 'scroll')
         .pipe(
           debounceTime(100),
-          filter(x => x.type === 'scroll'),
-          map(x => (x && x.target ? Math.floor((x as any).target.scrollTop) : 0)),
+          filter((x) => x.type === 'scroll'),
+          map((x) => (x && x.target ? Math.floor((x as any).target.scrollTop) : 0)),
         )
-        .subscribe(x => this.stateChange({ scrollPosition: x })),
+        .subscribe((x) => this.stateChange({ scrollPosition: x })),
     );
   }
 
@@ -192,7 +192,7 @@ export class DocumentEditorService {
     const selection = [...this._state.selection];
     // If set selection is set to true and the index is not already
     if (selection[docIndex].includes(pageIndex) && !setSelection) {
-      selection[docIndex] = selection[docIndex].filter(i => i !== pageIndex).sort();
+      selection[docIndex] = selection[docIndex].filter((i) => i !== pageIndex).sort();
     } else if (!selection[docIndex].includes(pageIndex)) {
       selection[docIndex] = [...selection[docIndex], pageIndex].sort();
     }
@@ -215,7 +215,7 @@ export class DocumentEditorService {
     // Remove the selected page from the source document
     const documentsModel = [...this._documentsModel];
     const pagesDestination = documentsModel[srcDoc].pages.filter(
-      pageDest => pageDest.pdfSrcIndex !== page.pdfSrcIndex || pageDest.pageSrcIndex !== page.pageSrcIndex,
+      (pageDest) => pageDest.pdfSrcIndex !== page.pdfSrcIndex || pageDest.pageSrcIndex !== page.pageSrcIndex,
     );
     documentsModel[srcDoc] = { ...documentsModel[srcDoc], pages: pagesDestination };
 
@@ -398,7 +398,7 @@ export class DocumentEditorService {
     this.stateChange({ loadingPdf: true, pdfs: null });
     // Since multiple pages are possible, get array of promises
     const promises = srcs
-      .map(src => {
+      .map((src) => {
         let inputType = src;
         // Convert blob type input to object url
         if (src instanceof Blob) {
@@ -410,7 +410,7 @@ export class DocumentEditorService {
       .filter(isNotNil);
     // Wait till all promises complete
     Promise.all(promises)
-      .then(docs => {
+      .then((docs) => {
         const model = documentModelCreate(docs);
         this._documentsModelSrc = multipleAction === 'merge' ? documentMerge(model) : model;
         this._documentsModel = cloneDeep(this._documentsModelSrc);
@@ -422,7 +422,7 @@ export class DocumentEditorService {
           selection: this._documentsModelSrc.map(() => []),
         });
       })
-      .catch(err => {
+      .catch((err) => {
         this.stateChange({ error: err.message, loadingPdf: false, loadingScript: false });
       });
   }
@@ -439,7 +439,7 @@ export class DocumentEditorService {
     this._state = cloneDeep(stateInitial);
     this.state$.next(this._state);
     this._documentsModel = [];
-    this.subs.forEach(sub => sub.unsubscribe());
+    this.subs.forEach((sub) => sub.unsubscribe());
     this.subs = [];
   }
 }

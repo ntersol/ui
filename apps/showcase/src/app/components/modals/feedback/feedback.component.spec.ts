@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-
 import { FeedbackModalComponent } from './feedback.component';
 
 describe('FeedbackModalComponent', () => {
@@ -10,7 +9,7 @@ describe('FeedbackModalComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FeedbackModalComponent],
-      providers: [DynamicDialogRef]
+      providers: [DynamicDialogRef],
     }).compileComponents();
   }));
 

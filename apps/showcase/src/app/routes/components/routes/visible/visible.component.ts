@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HighlightService } from '../../../../shared/services/highlight.service';
-import { MediaBreakpoints } from '@ntersol/visible'
+import { MediaBreakpoints } from '@ntersol/visible';
 
 @Component({
   selector: 'nts-visible',
   templateUrl: './visible.component.html',
-  styleUrls: ['./visible.component.scss']
+  styleUrls: ['./visible.component.scss'],
 })
 export class VisibleComponent implements OnInit {
-
   public exampleimport2 = this.highlight.htmlEncode(`
   // Import module
   import { NtsVisibleModule } from '@ntersol/visible';
@@ -23,8 +22,7 @@ export class VisibleComponent implements OnInit {
   })
   export class ComponentsModule { }`);
 
-  public exampleTS: string =
-    `
+  public exampleTS: string = `
   // Import available sizes
   import { MediaBreakpoints } from '@ntersol/visible'
 
@@ -40,10 +38,9 @@ export class VisibleComponent implements OnInit {
   <!-- Or configurable -->
   <div [visible]=visibleSize" (isVisible)="showVisibilityStatus($event)"></div>`);
 
+  constructor(private highlight: HighlightService) {}
 
-  constructor(private highlight: HighlightService) { }
-
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   showVisibilityStatus(visibility: any, size: MediaBreakpoints): void {
     console.log(`Content ${size} is visible: ${visibility}`);
@@ -52,5 +49,4 @@ export class VisibleComponent implements OnInit {
   ngAfterViewInit() {
     this.highlight.highlightAll();
   }
-
 }

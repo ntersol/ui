@@ -11,7 +11,7 @@ import { Wizard } from '../../wizard.models';
 export class SectionComponent implements OnInit {
   @Input() section?: Wizard.SectionControl | null;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.section;

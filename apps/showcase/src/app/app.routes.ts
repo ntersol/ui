@@ -10,13 +10,13 @@ export const ROUTES: Routes = [
   {
     path: 'login',
     pathMatch: 'full',
-    loadChildren: () => import('./routes/login/login.module').then(m => m.LoginModule),
+    loadChildren: () => import('./routes/login/login.module').then((m) => m.LoginModule),
     data: { title: 'Please Log In' },
   },
   {
     path: 'open',
     outlet: 'dialog',
-    component: DialogComponent
+    component: DialogComponent,
   },
 
   // Example route param
@@ -49,43 +49,44 @@ export const ROUTES: Routes = [
       {
         path: 'route',
         pathMatch: 'full',
-        loadChildren: () => import('./routes/_route/route.module').then(m => m.RouteModule),
+        loadChildren: () => import('./routes/_route/route.module').then((m) => m.RouteModule),
       },
       {
         path: 'coming-soon',
-        loadChildren: () => import('./routes/coming-soon/coming-soon.module').then(m => m.ComingSoonModule),
+        loadChildren: () => import('./routes/coming-soon/coming-soon.module').then((m) => m.ComingSoonModule),
       },
 
       {
         path: 'state-management',
-        loadChildren: () => import('./routes/state-management/state-management.module').then(m => m.StateManagementModule),
+        loadChildren: () =>
+          import('./routes/state-management/state-management.module').then((m) => m.StateManagementModule),
       },
 
       {
         path: 'apps',
-        loadChildren: () => import('./routes/apps/apps.module').then(m => m.AppsModule),
+        loadChildren: () => import('./routes/apps/apps.module').then((m) => m.AppsModule),
       },
 
       {
         path: 'components',
-        loadChildren: () => import('./routes/components/components.module').then(m => m.ComponentsModule),
+        loadChildren: () => import('./routes/components/components.module').then((m) => m.ComponentsModule),
       },
 
       {
         path: 'services',
-        loadChildren: () => import('./routes/services/services.module').then(m => m.ServicesModule),
+        loadChildren: () => import('./routes/services/services.module').then((m) => m.ServicesModule),
       },
 
       {
         path: 'utilities',
-        loadChildren: () => import('./routes/utilities/utilities.module').then(m => m.UtilitiesModule),
+        loadChildren: () => import('./routes/utilities/utilities.module').then((m) => m.UtilitiesModule),
       },
 
       // Empty path string for homepage ('') needs to be LAST otherwise it catches all other routes
       {
         path: '',
         // pathMatch: 'full',
-        loadChildren: () => import('./routes/home/home.module').then(m => m.HomeModule),
+        loadChildren: () => import('./routes/home/home.module').then((m) => m.HomeModule),
         // canActivate: [AuthGuard],
       },
 

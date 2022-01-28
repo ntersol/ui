@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'nts-error',

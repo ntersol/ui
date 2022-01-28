@@ -78,7 +78,7 @@ export module NtsAzureMaps {
   }
 
   export interface MapRef {
-    elem: HTMLDivElement; 
+    elem: HTMLDivElement;
     map: Map;
   }
 

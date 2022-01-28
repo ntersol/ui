@@ -11,7 +11,7 @@ export const cloneAbstractControl = (control: AbstractControl) => {
     const formGroup = new FormGroup({}, control.validator, control.asyncValidator);
     const controls = control.controls;
 
-    Object.keys(controls).forEach(key => {
+    Object.keys(controls).forEach((key) => {
       formGroup.addControl(key, cloneAbstractControl(controls[key]));
     });
 
@@ -19,7 +19,7 @@ export const cloneAbstractControl = (control: AbstractControl) => {
   } else if (control instanceof FormArray) {
     const formArray = new FormArray([], control.validator, control.asyncValidator);
 
-    control.controls.forEach(formControl => formArray.push(cloneAbstractControl(formControl)));
+    control.controls.forEach((formControl) => formArray.push(cloneAbstractControl(formControl)));
 
     newControl = formArray;
   } else if (control instanceof FormControl) {

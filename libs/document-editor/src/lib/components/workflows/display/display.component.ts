@@ -50,12 +50,12 @@ export class DisplayComponent implements OnInit {
   @Output() pdfChange = new EventEmitter<boolean>();
   @ViewChild('scrollbar', { static: true }) scrollbar!: ElementRef;
 
-  constructor(public docSvc: DocumentEditorService) { }
+  constructor(public docSvc: DocumentEditorService) {}
 
   ngOnInit() {
     this._zoom = {
       width: this.tnSettings?.width || 55,
-      height: this.tnSettings?.height || 138
+      height: this.tnSettings?.height || 138,
     };
     this.disableReset = true;
     // Add scrollbar
@@ -65,7 +65,10 @@ export class DisplayComponent implements OnInit {
   }
 
   zoomThumbnails(value: number): void {
-    if (value > 1 && (this.tnSettings?.width && this.tnSettings.width >= 590) || (value < 1 && (this.tnSettings?.width && this.tnSettings.width <= 60))) {
+    if (
+      (value > 1 && this.tnSettings?.width && this.tnSettings.width >= 590) ||
+      (value < 1 && this.tnSettings?.width && this.tnSettings.width <= 60)
+    ) {
       return;
     }
     if (this.tnSettings?.height && this.tnSettings?.width) {
@@ -73,7 +76,7 @@ export class DisplayComponent implements OnInit {
         tnSettings: {
           height: Math.floor(this.tnSettings?.height * value),
           width: Math.floor(this.tnSettings?.width * value),
-        }
+        },
       };
       this.disableZoom = newSize.tnSettings.width >= 590;
       this.disableUnzoom = newSize.tnSettings.width <= 60;

@@ -8,7 +8,7 @@ import { NtsAzureMaps } from './azure-maps.models';
 export class NtsAzureMapsService {
   private maps: Record<string, NtsAzureMaps.MapRef> = {};
 
-  constructor() { }
+  constructor() {}
 
   /**
    * Get a map reference

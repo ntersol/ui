@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SiteModule } from '$site'; // Site modules
 import { TabViewModule } from 'primeng/tabview';
 import { NtsFormsModule } from '@ntersol/forms';
 import { NtsStateManagementModule } from '@ntersol/state-management';
@@ -24,13 +23,35 @@ import { MtgCalcComponent } from './routes/mtg-calc/mtg-calc.component';
 import { DocEditorComponent } from './routes/doc-editor/doc-editor.component';
 import { GooglePlacesAutocompleteComponent } from './routes/google-places-autocomplete/google-places-autocomplete.component';
 import { NtsVisibleModule } from '@ntersol/visible';
-
+import { SiteModule } from '../../site.module';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, NtsStateManagementModule, TabViewModule, NtsFormsModule, NtsTableModule, NtsTagsModule, NtsGooglePlacesAutocompleteModule, NtsMtgCalcModule, NtsVisibleModule, NtsDocumentEditorModule],
-  declarations: [ComponentsComponent, WizardComponent, MtgCalcComponent, VisibleComponent, ShowcaseTableComponent, ShowcaseTagsComponent, GooglePlacesAutocompleteComponent, DocEditorComponent],
+  imports: [
+    CommonModule,
+    SiteModule,
+    routing,
+    NtsStateManagementModule,
+    TabViewModule,
+    NtsFormsModule,
+    NtsTableModule,
+    NtsTagsModule,
+    NtsGooglePlacesAutocompleteModule,
+    NtsMtgCalcModule,
+    NtsVisibleModule,
+    NtsDocumentEditorModule,
+  ],
+  declarations: [
+    ComponentsComponent,
+    WizardComponent,
+    MtgCalcComponent,
+    VisibleComponent,
+    ShowcaseTableComponent,
+    ShowcaseTagsComponent,
+    GooglePlacesAutocompleteComponent,
+    DocEditorComponent,
+  ],
   providers: [],
   exports: [],
   entryComponents: [],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

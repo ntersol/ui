@@ -8,7 +8,10 @@ import { mergeDeepRight } from 'ramda';
  */
 export function mergeConfig(c1: NtsState.ConfigEntity, c2: NtsState.ConfigEntity): NtsState.ConfigEntity;
 export function mergeConfig(c1: NtsState.Config, c2: NtsState.Config): NtsState.Config;
-export function mergeConfig(c1: NtsState.Config | NtsState.ConfigEntity, c2: NtsState.Config | NtsState.ConfigEntity): NtsState.Config | NtsState.ConfigEntity {
+export function mergeConfig(
+  c1: NtsState.Config | NtsState.ConfigEntity,
+  c2: NtsState.Config | NtsState.ConfigEntity,
+): NtsState.Config | NtsState.ConfigEntity {
   return {
     disableAppendId: {
       ...c1.disableAppendId,
@@ -20,7 +23,7 @@ export function mergeConfig(c1: NtsState.Config | NtsState.ConfigEntity, c2: Nts
     },
     ...c1,
     ...c2,
-  }
+  };
 }
 
 /**

@@ -3,11 +3,10 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 
 @Component({
   templateUrl: './tags.component.html',
-  styleUrls: ['./tags.component.scss']
+  styleUrls: ['./tags.component.scss'],
 })
 export class ShowcaseTagsComponent implements AfterViewInit {
-
-  constructor(private highlight: HighlightService) { }
+  constructor(private highlight: HighlightService) {}
 
   ngAfterViewInit() {
     this.highlight.highlightAll();
@@ -60,7 +59,6 @@ export class ShowcaseTagsComponent implements AfterViewInit {
     (tagDeleted)="onDelete($event)">
   </nts-tags>`);
 
-
   public testTags: any[] = [
     {
       guid: '1',
@@ -83,12 +81,12 @@ export class ShowcaseTagsComponent implements AfterViewInit {
   }
 
   public onUpdate(event: any) {
-    const tagIndex = this.testTags.findIndex(value => value.guid === event.guid);
+    const tagIndex = this.testTags.findIndex((value) => value.guid === event.guid);
     this.testTags[tagIndex] = event;
   }
 
   public onDelete(event: any) {
-    const tagIndex = this.testTags.findIndex(value => value.guid === event.guid);
+    const tagIndex = this.testTags.findIndex((value) => value.guid === event.guid);
     this.testTags.splice(tagIndex, 1);
   }
 

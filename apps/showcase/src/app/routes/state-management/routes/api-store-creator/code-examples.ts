@@ -62,7 +62,6 @@ export const usage3 = `
   &lt;ng-template #noData&gt; No users found &lt;/ng-template&gt;
 &lt;/nts-api-state&gt;`;
 
-
 export const state = `
 // Subscribe to the state property on the store
 public users$ = this.myStore.state$; // state$ is an instance of ApiState
@@ -107,4 +106,4 @@ public usersLess$ = this.myStore.select$(data => data?.filter(user => user.id > 
  * Non-entity Stores
  */
 // Subscribe to the store data without state
-public user$ = this.myStore.select$;`
+public user$ = this.myStore.select$;`;

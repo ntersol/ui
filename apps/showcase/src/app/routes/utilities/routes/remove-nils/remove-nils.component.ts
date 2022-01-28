@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { HighlightService } from '../../../../shared/services/highlight.service';
-import { removeNils } from '@ntersol/utils'
+import { removeNils } from '@ntersol/utils';
 
 @Component({
   selector: 'nts-remove-nils',
   templateUrl: './remove-nils.component.html',
-  styleUrls: ['./remove-nils.component.css']
+  styleUrls: ['./remove-nils.component.css'],
 })
 export class RemoveNilsComponent implements OnInit {
-
   public object = {
     nameFirst: 'John',
     nameLast: '',
     id: 0,
     data: {
       isActive: false,
-      isInactive: null
+      isInactive: null,
     },
     preferences: {
       favoriteColors: ['Red'],
@@ -23,12 +22,12 @@ export class RemoveNilsComponent implements OnInit {
       favoriteBoardGames: [
         {
           label: 'Arkham Asylum',
-          id: undefined
-        }
+          id: undefined,
+        },
       ],
-      favoriteBooks: {}
+      favoriteBooks: {},
     },
-  }
+  };
 
   public nilFree = removeNils(this.object);
 
@@ -86,16 +85,13 @@ export class RemoveNilsComponent implements OnInit {
   }
   `;
 
-  constructor(private highlight: HighlightService) { }
+  constructor(private highlight: HighlightService) {}
 
   ngOnInit(): void {
-    console.log(this.nilFree)
+    console.log(this.nilFree);
   }
-
-
 
   ngAfterViewInit() {
     this.highlight.highlightAll();
   }
-
 }

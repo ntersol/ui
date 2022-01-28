@@ -7,7 +7,7 @@ import { DEFAULT } from './mtg-calc.constants';
   selector: 'nts-mtg-calc',
   templateUrl: './mtg-calc.component.html',
   styleUrls: ['./mtg-calc.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtgCalcComponent implements OnInit {
   _config = DEFAULT;
@@ -27,8 +27,7 @@ export class MtgCalcComponent implements OnInit {
   @ViewChild('termDropdownRef') termDropdownRef: any;
   @ViewChild('pieChart') pieChart: any;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.calculatePayments();
@@ -42,7 +41,7 @@ export class MtgCalcComponent implements OnInit {
     if (!!p && !!l && !!i && !isNaN(p) && !isNaN(l) && !isNaN(i)) {
       const j = i / 12 / 100;
       const n = l * 12;
-      const m = p * j / (1 - Math.pow(1 + j, -n));
+      const m = (p * j) / (1 - Math.pow(1 + j, -n));
       this.monthlyAmount = m;
       this.amortization = [];
       let q = 1;
@@ -58,13 +57,16 @@ export class MtgCalcComponent implements OnInit {
           this.amortization.push({
             principle: c,
             interest: h,
-            balance: p
+            balance: p,
           });
         }
         p = q;
       }
       if (this.config.showChart && this.config.chartOptions) {
-        this.config.chartOptions.data.datasets[0].data = [this.config.loanAmount || 0, parseFloat(interestTotal.toFixed(2))];
+        this.config.chartOptions.data.datasets[0].data = [
+          this.config.loanAmount || 0,
+          parseFloat(interestTotal.toFixed(2)),
+        ];
         if (this.pieChart) {
           this.pieChart.refresh();
         }
@@ -82,5 +84,4 @@ export class MtgCalcComponent implements OnInit {
   toggleSchedule(): void {
     this.showAmortization = !this.showAmortization;
   }
-
 }

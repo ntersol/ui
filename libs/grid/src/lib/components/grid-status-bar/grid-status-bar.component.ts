@@ -42,7 +42,7 @@ export class GridStatusBarComponent implements OnInit {
       // Get grid filters
       if (this.gridState && this.gridState.filters) {
         const filterTermsMax = 3;
-        this.gridFilters = Object.keys(this.gridState.filters).map(key => {
+        this.gridFilters = Object.keys(this.gridState.filters).map((key) => {
           const filterTerms: any = { ...this.gridState.filters[key] };
           // Cap terms to 3 since the 'set' parameter will have most of the terms
           if (filterTerms.values.length > filterTermsMax) {
@@ -83,7 +83,7 @@ export class GridStatusBarComponent implements OnInit {
   public removeGroup(colId: string) {
     if (this.gridState && this.gridState.columnsState) {
       // Loop through columns and set rowGroupIndex to null for the matched group
-      this.gridState.columnsState.forEach(col => {
+      this.gridState.columnsState.forEach((col) => {
         if (col.colId === colId) {
           col.rowGroupIndex = null;
         }

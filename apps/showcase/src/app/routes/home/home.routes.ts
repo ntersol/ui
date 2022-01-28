@@ -16,7 +16,6 @@ const routes: Routes = [
         data: { title: 'Angular Starter' },
       },
 
-
       {
         path: 'tags',
         component: undefined,

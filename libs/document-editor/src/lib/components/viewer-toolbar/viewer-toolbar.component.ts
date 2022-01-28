@@ -14,7 +14,7 @@ export class ViewerToolbarComponent implements OnInit {
   @Input() pageActive?: NtsDocumentEditor.PageActive;
   @Input() rotation = 0;
 
-  constructor(public docSvc: DocumentEditorService) { }
+  constructor(public docSvc: DocumentEditorService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

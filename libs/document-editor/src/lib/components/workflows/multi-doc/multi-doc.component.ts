@@ -41,7 +41,7 @@ export class MultiDocComponent implements OnInit, OnChanges {
     canViewFull: false,
     canReset: false,
   };
-  @Input() tnSettings: NtsDocumentEditor.ThumbnailSize = { width: 0, height: 0 };;
+  @Input() tnSettings: NtsDocumentEditor.ThumbnailSize = { width: 0, height: 0 };
   @Input() viewModels?: Array<Array<NtsDocumentEditor.Preview>>;
   @Input() isAdd = false;
   @Input() maxHeight = '100%';
@@ -75,8 +75,8 @@ export class MultiDocComponent implements OnInit, OnChanges {
 
   documentsLeft$ = new BehaviorSubject<Array<NtsDocumentEditor.Document> | null>(null);
 
-  constructor(private _cdr: ChangeDetectorRef) { }
-  ngOnInit() { }
+  constructor(private _cdr: ChangeDetectorRef) {}
+  ngOnInit() {}
 
   ngOnChanges(model: SimpleChanges) {
     if (model.documents && this.documents) {
@@ -104,19 +104,18 @@ export class MultiDocComponent implements OnInit, OnChanges {
       return;
     }
     this.activeIndex++;
-    const doc = this.tabView && this.tabView.navbar.nativeElement.children[this.activeIndex] as Document;
+    const doc = this.tabView && (this.tabView.navbar.nativeElement.children[this.activeIndex] as Document);
     if (doc) {
       doc.getElementsByTagName('a')[0].click();
       this._cdr.detectChanges();
     }
-
   }
   prevTab() {
     if (this.activeIndex === 0) {
       return;
     }
     this.activeIndex--;
-    const doc = this.tabView && this.tabView.navbar.nativeElement.children[this.activeIndex] as Document;
+    const doc = this.tabView && (this.tabView.navbar.nativeElement.children[this.activeIndex] as Document);
     if (doc) {
       doc.getElementsByTagName('a')[0].click();
       this._cdr.detectChanges();

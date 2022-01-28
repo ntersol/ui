@@ -8,29 +8,29 @@ import { ruleSet } from './rule-set.util';
  * @param model
  * @param arrayIndexs
  */
-export const rulesEngine = (model: FormGroup, arrayIndexes: FormGroup) => (
-  ruleGroups: Wizard.RuleGroup[],
-): false | Wizard.RuleGroup => {
-  // Get model and array index values
-  const modelSrc = model.getRawValue();
-  const arrayIndexesSrc = arrayIndexes.getRawValue();
+export const rulesEngine =
+  (model: FormGroup, arrayIndexes: FormGroup) =>
+  (ruleGroups: Wizard.RuleGroup[]): false | Wizard.RuleGroup => {
+    // Get model and array index values
+    const modelSrc = model.getRawValue();
+    const arrayIndexesSrc = arrayIndexes.getRawValue();
 
-  for (let i = 0; i < ruleGroups.length; i++) {
-    // Get current group
-    const groupCurrent = ruleGroups[i];
-    let rulesMatch = false;
+    for (let i = 0; i < ruleGroups.length; i++) {
+      // Get current group
+      const groupCurrent = ruleGroups[i];
+      let rulesMatch = false;
 
-    // Check for rules
-    if (groupCurrent.rules) {
-      // Handle ruleset
-      rulesMatch = ruleSet(groupCurrent.rules, modelSrc, arrayIndexesSrc);
+      // Check for rules
+      if (groupCurrent.rules) {
+        // Handle ruleset
+        rulesMatch = ruleSet(groupCurrent.rules, modelSrc, arrayIndexesSrc);
+      }
+
+      // Return match of rulegroup
+      if (rulesMatch) {
+        return groupCurrent;
+      }
     }
-
-    // Return match of rulegroup
-    if (rulesMatch) {
-      return groupCurrent;
-    }
-  }
-  // No rulegroup matched
-  return false;
-};
+    // No rulegroup matched
+    return false;
+  };

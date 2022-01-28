@@ -36,19 +36,23 @@ export const Action = {
 };
 
 export const isAction = {
-  mapLoaded: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<atlas.Map> => p.type === NtsAzureMaps.Actions.mapLoaded,
+  mapLoaded: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<atlas.Map> =>
+    p.type === NtsAzureMaps.Actions.mapLoaded,
   dataSourcesChange: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<NtsAzureMaps.DataSource[]> =>
     p.type === NtsAzureMaps.Actions.dataSourcesChange,
-  layersAdd: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<NtsAzureMaps.Layer[]> => p.type === NtsAzureMaps.Actions.layersAdd,
+  layersAdd: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<NtsAzureMaps.Layer[]> =>
+    p.type === NtsAzureMaps.Actions.layersAdd,
   markersAdd: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<NtsAzureMaps.HtmlMarker[]> =>
     p.type === NtsAzureMaps.Actions.markersAdd,
   markersActiveAdd: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<string[] | null> =>
     p.type === NtsAzureMaps.Actions.markersActiveAdd,
-  zoomChange: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<number> => p.type === NtsAzureMaps.Actions.zoomChange,
+  zoomChange: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<number> =>
+    p.type === NtsAzureMaps.Actions.zoomChange,
   settingsChange: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<NtsAzureMaps.Settings> =>
     p.type === NtsAzureMaps.Actions.settingsChange,
   cameraOptions: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<NtsAzureMaps.CameraOptions> =>
     p.type === NtsAzureMaps.Actions.cameraOptions,
   destroy: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<null> => p.type === NtsAzureMaps.Actions.destroy,
-  resize: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<null | boolean> => p.type === NtsAzureMaps.Actions.resize,
+  resize: (p: NtsAzureMaps.Action<any>): p is NtsAzureMaps.Action<null | boolean> =>
+    p.type === NtsAzureMaps.Actions.resize,
 };

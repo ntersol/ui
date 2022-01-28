@@ -7,25 +7,39 @@
         <label for="loanAmount">Loan Amount</label>
         <span class="mtg-calc-input p-input-icon-left">
           <i class="pi pi-dollar"></i>
-          <input class="p-inputtext" id="loanAmount" type="number" [(ngModel)]="config.loanAmount" pInputText>
+          <input class="p-inputtext" id="loanAmount" type="number" [(ngModel)]="config.loanAmount" pInputText />
         </span>
       </div>
       <div class="col-12 col-md-4">
         <label for="terms" (click)="showDropdown()">Term (years)</label>
-        <p-dropdown #termDropdownRef inputId="terms" [style]="{'width':'100%'}" class="mtg-calc-input"
-          [options]="config.termOptions || []" [(ngModel)]="config.terms" optionLabel="name" optionValue="value">
+        <p-dropdown
+          #termDropdownRef
+          inputId="terms"
+          [style]="{ width: '100%' }"
+          class="mtg-calc-input"
+          [options]="config.termOptions || []"
+          [(ngModel)]="config.terms"
+          optionLabel="name"
+          optionValue="value"
+        >
         </p-dropdown>
       </div>
       <div class="col-12 col-md-4">
         <label for="interestRate">Interest Rate</label>
         <span class="mtg-calc-input p-input-icon-right">
           <i class="pi pi-percentage"></i>
-          <input class="p-inputtext" id="interestRate" [(ngModel)]="config.interestRate" type="number" pInputText>
+          <input class="p-inputtext" id="interestRate" [(ngModel)]="config.interestRate" type="number" pInputText />
         </span>
       </div>
     </div>
-    <p-chart class="mtg-calc-pie" #pieChart *ngIf="config.showChart" type="pie" [data]="config.chartOptions?.data"
-      [options]="config.chartOptions">
+    <p-chart
+      class="mtg-calc-pie"
+      #pieChart
+      *ngIf="config.showChart"
+      type="pie"
+      [data]="config.chartOptions?.data"
+      [options]="config.chartOptions"
+    >
     </p-chart>
   </div>
   <p-divider class="d-none d-xl-block col-1" layout="vertical"></p-divider>
@@ -36,22 +50,30 @@
     <div class="row">
       <div class="col-6">
         <h4>Principle</h4>
-        <span>{{ (amortization.length ? amortization[0].principle : 0) | currency}}</span>
+        <span>{{ (amortization.length ? amortization[0].principle : 0) | currency }}</span>
       </div>
       <div class="col-6">
         <h4>Interest</h4>
-        <span>{{ (amortization.length ? amortization[0].interest : 0) | currency}}</span>
+        <span>{{ (amortization.length ? amortization[0].interest : 0) | currency }}</span>
       </div>
     </div>
     <div class="mtg-calc-btns">
       <button type="button" class="btn btn-primary me-2" (click)="calculatePayments()">Calculate</button>
-      <button type="button" class="btn btn-secondary" *ngIf="config.showAmortization" (click)="toggleSchedule()">View
-        Amortization Schedule</button>
+      <button type="button" class="btn btn-secondary" *ngIf="config.showAmortization" (click)="toggleSchedule()">
+        View Amortization Schedule
+      </button>
     </div>
   </div>
 </div>
-<p-dialog header="Amortization Schedule" position="top" [(visible)]="showAmortization" [modal]="true"
-  [style]="{width: '80vw'}" [draggable]="false" [resizable]="false">
+<p-dialog
+  header="Amortization Schedule"
+  position="top"
+  [(visible)]="showAmortization"
+  [modal]="true"
+  [style]="{ width: '80vw' }"
+  [draggable]="false"
+  [resizable]="false"
+>
   <table class="table">
     <thead>
       <tr>
@@ -63,10 +85,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let payment of amortization; let i = index">
-        <th scope="row" class="text-center">{{i + 1}}</th>
-        <td class="text-end">{{payment.principle | currency}}</td>
-        <td class="text-end">{{payment.interest | currency}}</td>
-        <td class="text-end">{{payment.balance | currency}}</td>
+        <th scope="row" class="text-center">{{ i + 1 }}</th>
+        <td class="text-end">{{ payment.principle | currency }}</td>
+        <td class="text-end">{{ payment.interest | currency }}</td>
+        <td class="text-end">{{ payment.balance | currency }}</td>
       </tr>
     </tbody>
   </table>

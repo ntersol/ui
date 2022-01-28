@@ -179,36 +179,36 @@ export namespace Wizard {
 
   interface FormFieldSingle extends FormFieldSrc {
     readonly formFieldType:
-    | 'text'
-    | 'number'
-    | 'currency'
-    | 'phoneNumber'
-    | 'email'
-    | 'ssn'
-    | 'password'
-    | 'colorpicker'
-    | 'textarea'
-    | 'autoComplete'
-    | 'date'
-    | 'file'
-    | 'dropdown'
-    | 'button'
-    | 'buttons'
-    | 'checkbox'
-    | 'checkboxSingle'
-    | 'multiSelect';
+      | 'text'
+      | 'number'
+      | 'currency'
+      | 'phoneNumber'
+      | 'email'
+      | 'ssn'
+      | 'password'
+      | 'colorpicker'
+      | 'textarea'
+      | 'autoComplete'
+      | 'date'
+      | 'file'
+      | 'dropdown'
+      | 'button'
+      | 'buttons'
+      | 'checkbox'
+      | 'checkboxSingle'
+      | 'multiSelect';
   }
 
   interface FormFieldMulti extends FormFieldSrc {
     readonly formFieldType:
-    | 'select'
-    | 'dropdown'
-    | 'checkbox'
-    | 'checkboxBoolean'
-    | 'radio'
-    | 'toggle'
-    | 'buttonToggle'
-    | 'checkboxButtons';
+      | 'select'
+      | 'dropdown'
+      | 'checkbox'
+      | 'checkboxBoolean'
+      | 'radio'
+      | 'toggle'
+      | 'buttonToggle'
+      | 'checkboxButtons';
     readonly options?: Option[] | string[]; // TODO | Union type either options or datafield
   }
 
@@ -255,7 +255,7 @@ export namespace Wizard {
     label: string;
     value: string | number | boolean;
   }
-  export interface RowControl extends Row<ContentControl> { }
+  export interface RowControl extends Row<ContentControl> {}
 
   export type ContentControl = ContentTypeControl & { src: Content };
 

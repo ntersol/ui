@@ -1,38 +1,36 @@
 <div class="author"><strong>Author:</strong> Justin McLellan</div>
 <h1>Mortgage Calculator</h1>
 <p>
-    A configurable mortgage calculator. Currently only a very basic input and amortization schedule output. As features
-    are added make sure everything is configurable to be enabled / disabled.
+  A configurable mortgage calculator. Currently only a very basic input and amortization schedule output. As features
+  are added make sure everything is configurable to be enabled / disabled.
 </p>
 <hr />
 
 <p-tabView>
-    <p-tabPanel header="Documentation">
-        <div>
-
-            <h2>Installation</h2>
-            <pre class="mb-3">
+  <p-tabPanel header="Documentation">
+    <div>
+      <h2>Installation</h2>
+      <pre class="mb-3">
                 <code class="language-ts" [innerHtml]="exampleTSInstall"></code>
             </pre>
 
-            <h2>HTML</h2>
-            <pre class="mb-3">
+      <h2>HTML</h2>
+      <pre class="mb-3">
                 <code class="language-ts" [innerHtml]="html"></code>
             </pre>
 
-            <h2>Typescript Config Example: Setting up the mortgage calculator</h2>
-            <pre class="mb-3">
+      <h2>Typescript Config Example: Setting up the mortgage calculator</h2>
+      <pre class="mb-3">
                 <code class="language-ts" [innerHtml]="exampleTS"></code>
             </pre>
+    </div>
+  </p-tabPanel>
 
-        </div>
-    </p-tabPanel>
-
-    <p-tabPanel header="Example">
-        <div class="row">
-            <div class="col-12">
-                <nts-mtg-calc [config]="config"></nts-mtg-calc>
-            </div>
-        </div>
-    </p-tabPanel>
+  <p-tabPanel header="Example">
+    <div class="row">
+      <div class="col-12">
+        <nts-mtg-calc [config]="config"></nts-mtg-calc>
+      </div>
+    </div>
+  </p-tabPanel>
 </p-tabView>

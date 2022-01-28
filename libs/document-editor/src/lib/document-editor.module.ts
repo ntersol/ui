@@ -38,4 +38,4 @@ import { DragDropModule } from 'primeng/dragdrop';
   providers: [DocumentEditorService],
   exports: [EditorComponent],
 })
-export class NtsDocumentEditorModule { }
+export class NtsDocumentEditorModule {}

@@ -6,11 +6,10 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
   selector: 'app-mtg-calc',
   templateUrl: './mtg-calc.component.html',
   styleUrls: ['./mtg-calc.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtgCalcComponent implements AfterViewInit {
-  public exampleTSInstall =
-    `
+  public exampleTSInstall = `
   // You must have the chart.js npm package
   npm i chart.js
   // Install the mtg-calc library
@@ -59,16 +58,16 @@ export class MtgCalcComponent implements AfterViewInit {
       }
     }
 
-    `);
+    `,
+  );
   config: MtgCalcConfig = {
     loanAmount: 350000,
     terms: 30,
     interestRate: 3.5,
   };
-  constructor(private highlight: HighlightService) { }
+  constructor(private highlight: HighlightService) {}
 
   ngAfterViewInit() {
     this.highlight.highlightAll();
   }
-
 }

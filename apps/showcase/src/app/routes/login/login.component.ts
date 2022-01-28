@@ -1,10 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-
-import { SettingsService } from '$settings';
 import { AuthService, AuthState } from '../../shared/services/project/auth.service';
-import { IErrorApi } from '../../../typings';
+import { SettingsService } from '../../shared/stores/settings';
+
+export interface IErrorApi {
+  errorMsg?: string;
+  headers?: object;
+  message?: string;
+  ok?: boolean;
+  status?: number;
+  _body?: string;
+  statusText?: string;
+  type?: number;
+  url?: string;
+}
 
 @Component({
   selector: 'app-login',
@@ -74,7 +84,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate([returnUrl]);
         this.waiting = false;
       },
-      error => {
+      (error) => {
         error.errorMsg = 'Error logging in.';
         if ((error.statusText = 'Unauthorized')) {
           error.errorMsg = 'Invalid username or password, please try again.';

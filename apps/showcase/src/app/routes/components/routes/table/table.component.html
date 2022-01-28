@@ -32,8 +32,7 @@
       </p-tabPanel>
       <p-tabPanel header="Filter">
         <div>
-          <nts-table [rows]="rows" [columns]="columns" [headerText]="headerText" [showFilter]="showFilter">
-          </nts-table>
+          <nts-table [rows]="rows" [columns]="columns" [headerText]="headerText" [showFilter]="showFilter"> </nts-table>
           <p>typescript></p>
           <pre>
             <code class="language-ts" [innerHtml]="filterTS"></code>
@@ -46,8 +45,13 @@
       </p-tabPanel>
       <p-tabPanel header="Pagination">
         <div>
-          <nts-table [rows]="rows" [columns]="columns" [headerText]="headerText" [paginateRows]="paginateRows"
-            [rowsPerPageOptions]="rowsPerPageOptions"></nts-table>
+          <nts-table
+            [rows]="rows"
+            [columns]="columns"
+            [headerText]="headerText"
+            [paginateRows]="paginateRows"
+            [rowsPerPageOptions]="rowsPerPageOptions"
+          ></nts-table>
           <p>typescript></p>
           <pre>
             <code class="language-ts" [innerHtml]="paginationTS"></code>
@@ -81,9 +85,7 @@
           <nts-table #expandExample [rows]="rows" [columns]="columns" [headerText]="headerText" dataKey="name">
             <table-column field="expansion">
               <ng-template table-expansion-template let-column="column" let-row="row">
-                <div>
-                  Favorite Phrase: {{row.favoritePhrase}}
-                </div>
+                <div>Favorite Phrase: {{ row.favoritePhrase }}</div>
               </ng-template>
             </table-column>
           </nts-table>
@@ -102,9 +104,7 @@
           <nts-table #expandExample [rows]="rows" [columns]="columns" [headerText]="headerText" dataKey="name">
             <table-column field="name">
               <ng-template table-cell-template let-value="value" let-column="column" let-row="row">
-                <div>
-                  <b>Name: </b>{{value}}
-                </div>
+                <div><b>Name: </b>{{ value }}</div>
               </ng-template>
             </table-column>
           </nts-table>
