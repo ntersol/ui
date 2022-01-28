@@ -1,4 +1,4 @@
-import { CommonModule, PathLocationStrategy } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -33,7 +33,7 @@ import { DocumentEditorService } from './shared/services/document-editor.service
     ViewerToolbarComponent,
   ],
   imports: [CommonModule, TabViewModule, ButtonModule, ProgressBarModule, CardModule, DragDropModule],
-  providers: [DocumentEditorService, PathLocationStrategy],
+  providers: [DocumentEditorService],
   exports: [EditorComponent],
 })
 export class NtsDocumentEditorModule {}

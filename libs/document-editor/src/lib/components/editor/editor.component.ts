@@ -1,7 +1,6 @@
 /* eslint-disable @angular-eslint/component-selector */
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 /* eslint-disable accessor-pairs */
-import { PathLocationStrategy } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -101,12 +100,7 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe((docs) => (docs ? this.pdfModelChange.emit(docs) : null)),
   ];
   private _loaded = false;
-  constructor(public docSvc: DocumentEditorService, private pls: PathLocationStrategy) {
-    if (this.pls.getBaseHref()) {
-      this.pdfSrcs = this.pls.getBaseHref() + this.pdfSrcs;
-    }
-  }
-
+  constructor(public docSvc: DocumentEditorService) {}
   ngOnInit() {
     this.docSvc.scriptsLoad(this.pdfJsSrc, this.pdfJsWorkerSrc);
 
