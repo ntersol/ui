@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, share, tap, take, filter, delay, switchMap, map } from 'rxjs/operators';
+import { catchError, delay, filter, share, switchMap, take, tap } from 'rxjs/operators';
+import { NtsState } from '../../state.models';
+import { isActionApi } from '../../utils/guards.util';
 import { NtsBaseStore } from '../base/base-store';
 import { ApiActions, ApiEvents, StoreTypes } from '../store.enums';
-import { NtsState } from '../../state.models';
 import {
   apiUrlGet,
   deleteEntities,
@@ -12,7 +13,6 @@ import {
   mergeDedupeArrays,
   mergePayloadWithApiResponse,
 } from './api-store.utils';
-import { isActionApi } from '../../utils/guards.util';
 
 // Default api store state
 const stateSrc: NtsState.ApiState<any> = {
@@ -62,7 +62,9 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
   private autoloaded = false;
 
   /** Events broadcast by this store */
-  public events$ = NtsApiStoreCreator._events$.pipe(filter((a) => isActionApi(a) && a.storeId === this.config.storeId));
+  public override events$ = NtsApiStoreCreator._events$.pipe(
+    filter((a) => isActionApi(a) && a.storeId === this.config.storeId),
+  );
 
   /** Store a shared reference to the http get request so it can be canceled and shared */
   private httpGet$: Observable<t>;

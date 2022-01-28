@@ -5,7 +5,7 @@ import { NtsState } from '../../state.models';
 import { NtsApiStoreCreator } from './api-store-creator';
 
 export class NtsApiStore<t> extends NtsApiStoreCreator<t> {
-  public state$!: Observable<NtsState.ApiState<t>>;
+  public override state$!: Observable<NtsState.ApiState<t>>;
   /**
    * Select a smaller subset of data from the store
    */

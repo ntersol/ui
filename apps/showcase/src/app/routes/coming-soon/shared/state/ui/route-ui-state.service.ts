@@ -1,5 +1,5 @@
-import { StoreConfig, Store, Query } from '@datorama/akita';
 import { Injectable } from '@angular/core';
+import { Query, Store, StoreConfig } from '@datorama/akita';
 
 const storeName = 'route-UIState'; // Change this property to be unique & route specific, IE 'route-UIState' => 'dashboard-UIState'
 
@@ -55,7 +55,7 @@ export class RouteUiStateStore extends Store<RouteUIState> {
 // tslint:disable-next-line:max-classes-per-file
 @Injectable()
 export class RouteUiStateQuery extends Query<RouteUIState> {
-  constructor(protected store: RouteUiStateStore) {
+  constructor(protected override store: RouteUiStateStore) {
     super(store);
   }
 }

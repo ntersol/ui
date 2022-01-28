@@ -12,7 +12,7 @@ const configSrc: NtsState.ConfigEntity = {
  * Create an instance of an entity store
  */
 export class NtsEntityStore<t> extends NtsApiStoreCreator<t[]> {
-  public state$!: Observable<NtsState.EntityApiState<t>>;
+  public override state$!: Observable<NtsState.EntityApiState<t>>;
 
   /** Modify the store data with the supplied callback function while preserving state information.
    *
@@ -51,7 +51,7 @@ export class NtsEntityStore<t> extends NtsApiStoreCreator<t[]> {
       distinctUntilChanged(),
     );
 
-  constructor(http: HttpClient, protected config: NtsState.ConfigEntity) {
+  constructor(http: HttpClient, protected override config: NtsState.ConfigEntity) {
     super(http, Object.assign(configSrc, config), true);
   }
 }

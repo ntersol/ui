@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { map, distinctUntilChanged, filter } from 'rxjs/operators';
-import { merge } from 'rxjs';
-import { ConfirmationService } from 'primeng/api';
 import { SwUpdate } from '@angular/service-worker';
+import { Query, Store, StoreConfig } from '@datorama/akita';
+import { ConfirmationService } from 'primeng/api';
+import { merge } from 'rxjs';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { NtsServiceWorkerService, NtsVersionManagementService } from '../../services/general';
-import { StoreConfig, Store, Query } from '@datorama/akita';
 import { UIState } from './ui-state';
 
 export function createInitialState(): UIState {
@@ -122,7 +122,7 @@ export class UiStateStore extends Store<UIState> {
 // tslint:disable-next-line:max-classes-per-file
 @Injectable({ providedIn: 'root' })
 export class UiStateQuery extends Query<UIState> {
-  constructor(protected store: UiStateStore) {
+  constructor(protected override store: UiStateStore) {
     super(store);
   }
 }
