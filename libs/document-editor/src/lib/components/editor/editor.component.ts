@@ -1,6 +1,7 @@
 /* eslint-disable @angular-eslint/component-selector */
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 /* eslint-disable accessor-pairs */
+import { PathLocationStrategy } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,9 +15,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { debounceTime, filter, skip, tap } from 'rxjs/operators';
-
 import { NtsDocumentEditor } from '../../shared/models/document-editor.model';
 import { DocumentEditorService } from '../../shared/services/document-editor.service';
+
 @Component({
   selector: 'nts-document-editor',
   templateUrl: './editor.component.html',
@@ -100,7 +101,12 @@ export class EditorComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe((docs) => (docs ? this.pdfModelChange.emit(docs) : null)),
   ];
   private _loaded = false;
-  constructor(public docSvc: DocumentEditorService) {}
+  constructor(public docSvc: DocumentEditorService, private pls: PathLocationStrategy) {
+    if (this.pls.getBaseHref()) {
+      this.pdfSrcs = this.pls.getBaseHref() + this.pdfSrcs;
+    }
+  }
+
   ngOnInit() {
     this.docSvc.scriptsLoad(this.pdfJsSrc, this.pdfJsWorkerSrc);
 
