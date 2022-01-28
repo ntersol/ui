@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { <%= className %>Component } from './<%= fileName%>.component';
-import { RouteUiStateService, RouteUiStateStore, RouteUiStateQuery } from '../../shared/state/ui/route-ui-state.service';
 import { SiteModule } from '../../site.module';
 import { <%= className%>RoutingModule } from './<%= fileName%>-routing.module';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, ],
-  declarations: [RootComponent],
-  providers: [RouteUiStateService, RouteUiStateStore, RouteUiStateQuery],
-  exports: [],
-  entryComponents: [],
+  imports: [CommonModule, SiteModule, <%= className%>RoutingModule],
+  declarations: [<%= className %>Component],
 })
 export class <%= className%>Module {}

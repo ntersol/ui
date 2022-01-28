@@ -18,8 +18,8 @@ export function updateAppRoutingModule(tree: Tree, options: NormalizedSchema) {
       if ((declarations.name as Identifier).escapedText === 'ROUTES') {
         const pageNames = names(options.name);
         const importPath = options.directory
-          ? `./${options.directory}/${pageNames.fileName}/${pageNames.fileName}.module`
-          : `./${pageNames.fileName}/${pageNames.fileName}.module`;
+          ? `./routes/${options.directory}/${pageNames.fileName}/${pageNames.fileName}.module`
+          : `./routes/${pageNames.fileName}/${pageNames.fileName}.module`;
 
         const toInsert = `,{
               path: '${pageNames.fileName}',

@@ -5,7 +5,7 @@ import { <%= className%>Component } from './<%= fileName%>.component';
 const routes: Routes = [
     {
         path: '',
-        component: <% className%>Component
+        component: <%= className%>Component
     }
 ];
 
