@@ -14,25 +14,24 @@ export function updateAppRoutingModule(tree: Tree, options: NormalizedSchema) {
     const newContent = tsquery.replace(appRoutingModule, 'VariableStatement', (node) => {
       const vsNode = node as VariableStatement;
       const declarations = vsNode.declarationList.declarations[0];
-
-      if ((declarations.name as Identifier).escapedText === 'children') {
+      // if ((declarations.name as Identifier).)
+      if ((declarations.name as Identifier).escapedText === 'ROUTES') {
         const pageNames = names(options.name);
         const importPath = options.directory
           ? `./${options.directory}/${pageNames.fileName}/${pageNames.fileName}.module`
           : `./${pageNames.fileName}/${pageNames.fileName}.module`;
 
-        const toInsert = `{
-                    path: '${pageNames.fileName}',
-                    loadChildren: () => import('${importPath}').then((m) => m.${pageNames.className}Module,
-                },`;
+        const toInsert = `,{
+              path: '${pageNames.fileName}',
+              loadChildren: () => import('${importPath}').then((m) => m.${pageNames.className}Module),
+          }`;
 
         const arrLiteral = declarations.initializer as ArrayLiteralExpression;
 
         if (arrLiteral.elements.length > 0) {
           const nodeArray = arrLiteral.elements;
 
-          const insertPosition = nodeArray[0].getStart(arrLiteral.getSourceFile(), true);
-
+          const insertPosition = nodeArray[nodeArray.length - 1].getStart();
           const previousRoutes = vsNode.getFullText();
           const prefix = previousRoutes.substring(0, insertPosition);
           const suffix = previousRoutes.substring(insertPosition);
