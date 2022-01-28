@@ -49,6 +49,7 @@ jobs:
       - name: Build
         run: npx nx affected --target build --parallel --exclude=starter,storybook --with-deps
       - name: Deploy
+        if: ${{ github.event_name != 'pull_request' }}
         run: npx nx affected --target deploy --parallel
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
