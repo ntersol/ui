@@ -401,7 +401,16 @@
             "main": "libs/generators/src/index.ts",
             "tsConfig": "libs/generators/tsconfig.lib.json",
             "assets": ["libs/generators/*.md"]
-          }
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/generators/tsconfig.lib.json"
+            },
+            "development": {
+              "tsConfig": "libs/generators/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
