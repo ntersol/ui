@@ -409,6 +409,29 @@
           "options": {
             "lintFilePatterns": ["libs/generators/**/*.ts"]
           }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/generators/ && npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd dist/libs/generators/ && npm pack",
+              "cd dist/libs/generators/ && npm publish --access public"
+            ],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run generators:patch", "ng run generators:build:production", "ng run generators:pack"],
+            "parallel": false
+          }
         }
       },
       "tags": []
