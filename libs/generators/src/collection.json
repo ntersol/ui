@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "route": {
+      "description": "NTS Route Generator",
+      "factory": "./route/index#pageGenerator",
+      "schema": "./route/schema.json"
+    },
+    "ng-add": {
+      "factory": "./ng-add/index",
+      "description": "Add schematic",
+      "schema": "./route/schema.json"
+    }
+  }
+}
