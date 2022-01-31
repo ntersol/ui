@@ -388,6 +388,31 @@
       },
       "tags": []
     },
+    "generators": {
+      "root": "libs/generators",
+      "sourceRoot": "libs/generators/src",
+      "projectType": "library",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/js:tsc",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/generators",
+            "main": "libs/generators/src/index.ts",
+            "tsConfig": "libs/generators/tsconfig.lib.json",
+            "assets": ["libs/generators/*.md"]
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/generators/**/*.ts"]
+          }
+        }
+      },
+      "tags": []
+    },
     "google-places-autocomplete": {
       "projectType": "library",
       "root": "libs/google-places-autocomplete",

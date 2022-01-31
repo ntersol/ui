@@ -18,6 +18,7 @@
       "@ntersol/chart": ["libs/chart/src/index.ts"],
       "@ntersol/document-editor": ["libs/document-editor/src/index.ts"],
       "@ntersol/forms": ["libs/forms/src/index.ts"],
+      "@ntersol/generators": ["libs/generators/src/index.ts"],
       "@ntersol/google-places-autocomplete": ["libs/google-places-autocomplete/src/index.ts"],
       "@ntersol/grid": ["libs/grid/src/index.ts"],
       "@ntersol/mtg-calc": ["libs/mtg-calc/src/index.ts"],
