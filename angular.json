@@ -439,7 +439,8 @@
         "move": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "command": "npx copyfiles src/*/schema.json schematics/*/files/** src/collection.json ../../dist/generators/"
+            "cwd": "libs/generators",
+            "command": "npx copyfiles src/*/schema.json schematics/*/files/** src/collection.json ../../dist/libs/generators/"
           }
         },
         "publish": {
