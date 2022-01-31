@@ -397,9 +397,10 @@
           "builder": "@nrwl/js:tsc",
           "outputs": ["{options.outputPath}"],
           "options": {
+            "project": "libs/generators/ng-package.json",
+            "tsConfig": "libs/generators/tsconfig.lib.json",
             "outputPath": "dist/libs/generators",
             "main": "libs/generators/src/index.ts",
-            "tsConfig": "libs/generators/tsconfig.lib.json",
             "assets": ["libs/generators/*.md"]
           },
           "configurations": {
@@ -435,10 +436,21 @@
             "parallel": false
           }
         },
+        "move": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "npx copyfiles src/*/schema.json schematics/*/files/** src/collection.json ../../dist/generators/"
+          }
+        },
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["ng run generators:patch", "ng run generators:build:production", "ng run generators:pack"],
+            "commands": [
+              "ng run generators:patch",
+              "ng run generators:build:production",
+              "ng run generators:move",
+              "ng run generators:pack"
+            ],
             "parallel": false
           }
         }
