@@ -1,1 +1,1 @@
-export * from './src/ng-g/route';
+export * from './schematics/ng-generate/route';

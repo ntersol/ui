@@ -727,7 +727,7 @@
     "schematics": {
       "projectType": "library",
       "root": "libs/schematics",
-      "sourceRoot": "libs/schematics/src",
+      "sourceRoot": "libs/schematics/schematics",
       "architect": {
         "build": {
           "builder": "@nrwl/js:tsc",
@@ -769,7 +769,7 @@
             "cwd": "libs/schematics",
             "commands": [
               "npx copyfiles package.json ../../dist/out-tsc/schematics/",
-              "npx copyfiles src/** ../../dist/out-tsc/schematics/"
+              "npx copyfiles schematics/** ../../dist/out-tsc/schematics/"
             ],
             "parallel": false
           }
