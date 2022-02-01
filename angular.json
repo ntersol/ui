@@ -777,7 +777,12 @@
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["ng run schematics:patch", "ng run schematics:build:production", "ng run schematics:pack"],
+            "commands": [
+              "ng run schematics:patch",
+              "ng run schematics:build:production",
+              "ng run schematics:move",
+              "ng run schematics:pack"
+            ],
             "parallel": false
           }
         }
