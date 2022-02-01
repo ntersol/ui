@@ -135,7 +135,7 @@ function addModuleToImports(options: Schema): Rule {
     if (provideEntityServiceConfig && project.architect) {
       const modulePath = getAppModulePath(host, project.architect.build.options.main);
       const module = getModuleFile(host, modulePath);
-      const providerChanges = addProviderToModule(module, modulePath, provideEntityServiceConfig, null);
+      const providerChanges = addProviderToModule(module, modulePath, provideEntityServiceConfig, '');
       applyChanges(host, modulePath, providerChanges as InsertChange[]);
     }
 

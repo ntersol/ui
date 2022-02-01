@@ -13,13 +13,13 @@ declare const define: any;
     });
   } else {
     // Browser global.
-    root.pluralize = pluralize();
+    (root as any).pluralize = pluralize();
   }
 })(this, function () {
   // Rule storage - pluralize and singularize need to be run sequentially,
   // while other rules can be optimized using an object for instant lookups.
-  var pluralRules = [];
-  var singularRules = [];
+  var pluralRules: any = [];
+  var singularRules: any = [];
   var uncountables = {};
   var irregularPlurals = {};
   var irregularSingles = {};
@@ -30,7 +30,7 @@ declare const define: any;
    * @param  {(RegExp|string)} rule
    * @return {RegExp}
    */
-  function sanitizeRule(rule) {
+  function sanitizeRule(rule: any) {
     if (typeof rule === 'string') {
       return new RegExp('^' + rule + '$', 'i');
     }
@@ -46,7 +46,7 @@ declare const define: any;
    * @param  {string}   token
    * @return {Function}
    */
-  function restoreCase(word, token) {
+  function restoreCase(word: any, token: any) {
     // Tokens are an exact match.
     if (word === token) return token;
 
@@ -69,8 +69,8 @@ declare const define: any;
    * @param  {Array}  args
    * @return {string}
    */
-  function interpolate(str, args) {
-    return str.replace(/\$(\d{1,2})/g, function (match, index) {
+  function interpolate(str: any, args: any) {
+    return str.replace(/\$(\d{1,2})/g, function (match: any, index: any) {
       return args[index] || '';
     });
   }
@@ -82,8 +82,8 @@ declare const define: any;
    * @param  {Array}  rule
    * @return {string}
    */
-  function replace(word, rule) {
-    return word.replace(rule[0], function (match, index) {
+  function replace(word: any, rule: any) {
+    return word.replace(rule[0], function (match: any, index: any) {
       var result = interpolate(rule[1], arguments);
 
       if (match === '') {
@@ -102,7 +102,7 @@ declare const define: any;
    * @param  {Array}    rules
    * @return {string}
    */
-  function sanitizeWord(token, word, rules) {
+  function sanitizeWord(token: any, word: any, rules: any) {
     // Empty string or doesn't need fixing.
     if (!token.length || uncountables.hasOwnProperty(token)) {
       return word;
@@ -128,8 +128,8 @@ declare const define: any;
    * @param  {Array}    rules
    * @return {Function}
    */
-  function replaceWord(replaceMap, keepMap, rules) {
-    return function (word) {
+  function replaceWord(replaceMap: any, keepMap: any, rules: any) {
+    return function (word: any) {
       // Get the correct token and case restoration functions.
       var token = word.toLowerCase();
 
@@ -151,8 +151,8 @@ declare const define: any;
   /**
    * Check if a word is part of the map.
    */
-  function checkWord(replaceMap, keepMap, rules) {
-    return function (word) {
+  function checkWord(replaceMap: any, keepMap: any, rules: any) {
+    return function (word: any) {
       var token = word.toLowerCase();
 
       if (keepMap.hasOwnProperty(token)) return true;
@@ -170,7 +170,7 @@ declare const define: any;
    * @param  {boolean} inclusive
    * @return {string}
    */
-  function pluralize(word, count, inclusive) {
+  function pluralize(word: any, count: any, inclusive: any) {
     var pluralized = count === 1 ? pluralize.singular(word) : pluralize.plural(word);
 
     return (inclusive ? count + ' ' : '') + pluralized;
@@ -210,7 +210,7 @@ declare const define: any;
    * @param {(string|RegExp)} rule
    * @param {string}          replacement
    */
-  pluralize.addPluralRule = function (rule, replacement) {
+  pluralize.addPluralRule = function (rule: any, replacement: any) {
     pluralRules.push([sanitizeRule(rule), replacement]);
   };
 
@@ -220,7 +220,7 @@ declare const define: any;
    * @param {(string|RegExp)} rule
    * @param {string}          replacement
    */
-  pluralize.addSingularRule = function (rule, replacement) {
+  pluralize.addSingularRule = function (rule: any, replacement: any) {
     singularRules.push([sanitizeRule(rule), replacement]);
   };
 
@@ -229,9 +229,9 @@ declare const define: any;
    *
    * @param {(string|RegExp)} word
    */
-  pluralize.addUncountableRule = function (word) {
+  pluralize.addUncountableRule = function (word: any) {
     if (typeof word === 'string') {
-      uncountables[word.toLowerCase()] = true;
+      (uncountables as any)[word.toLowerCase()] = true;
       return;
     }
 
@@ -246,12 +246,12 @@ declare const define: any;
    * @param {string} single
    * @param {string} plural
    */
-  pluralize.addIrregularRule = function (single, plural) {
+  pluralize.addIrregularRule = function (single: any, plural: any) {
     plural = plural.toLowerCase();
     single = single.toLowerCase();
 
-    irregularSingles[single] = plural;
-    irregularPlurals[plural] = single;
+    (irregularSingles as any)[single] = plural;
+    (irregularPlurals as any)[plural] = single;
   };
 
   /**
