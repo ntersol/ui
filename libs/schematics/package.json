@@ -8,7 +8,6 @@
   "scripts": {},
   "dependencies": {
     "schematics-utilities": "^2.0.3",
-    "bluebird": "^3.7.2",
     "@angular-devkit/schematics": "^13.2.1"
   }
 }
