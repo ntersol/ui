@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "ntersol-ng-add",
+  "title": "Ntersol's ng-add schematic",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "documentEditor": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to include Ntersol's Document Editor",
+      "x-prompt": "💎 Set up Ntersol's document editor?"
+    }
+  },
+  "required": []
+}

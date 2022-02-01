@@ -1,5 +1,5 @@
 {
-  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "$schema": "http://json-schema.org/schema",
   "schematics": {
     "route": {
       "description": "NTS Route Generator",

@@ -4,7 +4,7 @@ import { NormalizedSchema, PageGeneratorSchema } from './schema';
 import { updateAppRoutingModule } from './update-routing-file';
 
 function normalizeOptions(tree: Tree, options: PageGeneratorSchema): NormalizedSchema {
-  const projectRoot = `${getWorkspaceLayout(tree).appsDir}/${options.project}`;
+  const projectRoot = `${getWorkspaceLayout(tree).appsDir}`;
 
   return {
     ...options,

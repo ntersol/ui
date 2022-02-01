@@ -1,20 +1,22 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
-  "$id": "route",
+  "$id": "SchematicsNtersolRoute",
+  "title": "Ntersol Route Options Schema",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "Route Name",
+      "description": "Route name",
       "$default": {
         "$source": "argv",
         "index": 0
       }
     },
-    "directory": {
+    "path": {
       "type": "string",
-      "description": "Directory to add the route to"
+      "format": "path",
+      "description": "The path to create the route",
+      "visible": false
     }
   },
   "required": ["name"]

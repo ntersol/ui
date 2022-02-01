@@ -1,0 +1,14 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Ntersol's Add Schematic",
+      "factory": "./ng-add/index#ntersolNgAdd"
+    },
+    "route": {
+      "factory": "./ng-g/route",
+      "schema": "./ng-g/route/schema.json",
+      "description": "Add new route"
+    }
+  }
+}
