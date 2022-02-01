@@ -53,6 +53,11 @@ jobs:
       #   run: npx nx affected --target deploy --parallel
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish
+        run: npx nx publish schematics
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Save
         uses: EndBug/add-and-commit@v7
         with:

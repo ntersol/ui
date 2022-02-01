@@ -4,7 +4,7 @@
     "ng-add": {
       "description": "Ntersol's Add Schematic",
       "schema": "./ng-add/schema.json",
-      "factory": "./ng-add/index#ntersolNgAdd"
+      "factory": "./ng-add"
     },
     "route": {
       "factory": "./ng-g/route",
