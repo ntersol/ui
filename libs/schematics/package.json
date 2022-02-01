@@ -1,13 +1,14 @@
 {
   "name": "@ntersol/schematics",
-  "version": "0.0.21",
+  "version": "0.0.24",
   "private": false,
   "license": "MIT",
   "type": "commonjs",
   "schematics": "./schematics/collection.json",
   "scripts": {},
-  "peerDependencies": {
+  "dependencies": {
     "schematics-utilities": "^2.0.3",
+    "bluebird": "^3.7.2",
     "@angular-devkit/schematics": "^13.2.1"
   }
 }
