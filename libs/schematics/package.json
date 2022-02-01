@@ -1,8 +1,12 @@
 {
   "name": "@ntersol/schematics",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "private": false,
   "license": "MIT",
   "type": "commonjs",
-  "scripts": {}
+  "scripts": {},
+  "peerDependencies": {
+    "schematics-utilities": "^2.0.3",
+    "@angular-devkit/schematics": "^13.2.1"
+  }
 }
