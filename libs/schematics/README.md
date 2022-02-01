@@ -1,3 +1,5 @@
 # Ntersol Schematics
 
-Ntersol schematics are included in [@ntersol/schematics](https://github.com/ntersol/ui/tree/main/libs/schematics)
+Run `ng add @ntersol/schematics` to get started
+
+Once installed run `ng g route --name home` to create your first route

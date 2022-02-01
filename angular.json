@@ -769,6 +769,7 @@
             "cwd": "libs/schematics",
             "commands": [
               "npx copyfiles package.json ../../dist/out-tsc/schematics/",
+              "npx copyfiles README.md ../../dist/out-tsc/schematics/",
               "npx copyfiles schematics/** ../../dist/out-tsc/schematics/"
             ],
             "parallel": false
