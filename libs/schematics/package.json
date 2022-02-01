@@ -8,6 +8,7 @@
   "scripts": {},
   "dependencies": {
     "schematics-utilities": "^2.0.3",
-    "@angular-devkit/schematics": "^13.2.1"
+    "@angular-devkit/schematics": "^13.2.1",
+    "@angular-devkit/core": "^13.2.1"
   }
 }
