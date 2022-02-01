@@ -2,9 +2,9 @@
   "extends": "@schematics/angular",
   "schematics": {
     "ng-add": {
-      "description": "Ntersol's Add Schematic",
+      "factory": "./ng-add/index",
       "schema": "./ng-add/schema.json",
-      "factory": "./ng-add"
+      "description": "Ntersol's Add Schematic"
     },
     "route": {
       "factory": "./ng-g/route",

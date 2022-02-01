@@ -27,7 +27,7 @@ function addPackageJsonDependencies(options: Schema): Rule {
     if (options.documentEditor) {
       dependencies.push({
         type: NodeDependencyType.Default,
-        version: '^0.0.20',
+        version: '^0.0.1',
         name: '@ntersol/document-editor',
       });
     }
@@ -105,8 +105,8 @@ function setSchematicsAsDefault(): Rule {
   return (host: Tree, context: SchematicContext) => {
     const exec = require('child_process').exec;
 
-    exec('ng config cli.defaultCollection @ntersol/akita', () => {
-      context.logger.log('info', `✅️ Setting Akita schematics as default`);
+    exec('ng config cli.defaultCollection @ntersol/schematics', () => {
+      context.logger.log('info', `✅️ Setting Ntersol schematics as default`);
     });
     return host;
   };
