@@ -1,15 +1,15 @@
 {
   "name": "@ntersol/schematics",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "license": "Apache-2.0",
   "scripts": {
     "prebuild": "npm run clean",
     "build": "npx tsc -p tsconfig.schematics.json",
     "postbuild": "npm run copy:build && npm run copy:json && npm run copy:files",
-    "clean": "rm -rf ../../dist/libs/ntersol/schematics",
-    "copy:build": "npx copyfiles -u 5 \"../../dist/out-tsc/schematics/**/*\"  ../../dist/out-tsc/ntersol/schematics",
-    "copy:files": "npx copyfiles -u 1 \"src/**/files/**/*\" ../../dist/out-tsc/ntersol/schematics",
-    "copy:json": "npx copyfiles -u 1 \"src/**/*.json\" ../../dist/out-tsc/ntersol/schematics"
+    "clean": "rm -rf ../../dist/out-tsc/schematics",
+    "copy:build": "npx copyfiles -u 5 \"../../dist/out-tsc/schematics/**/*\"  ../../dist/out-tsc/schematics",
+    "copy:files": "npx copyfiles -u 1 \"src/**/files/**/*\" ../../dist/out-tsc/schematics",
+    "copy:json": "npx copyfiles -u 1 \"src/**/*.json\" ../../dist/out-tsc/schematics"
   }
 }
