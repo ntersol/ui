@@ -1,9 +1,10 @@
 {
   "name": "@ntersol/schematics",
-  "version": "0.0.17",
+  "version": "0.0.21",
   "private": false,
   "license": "MIT",
   "type": "commonjs",
+  "schematics": "./schematics/collection.json",
   "scripts": {},
   "peerDependencies": {
     "schematics-utilities": "^2.0.3",

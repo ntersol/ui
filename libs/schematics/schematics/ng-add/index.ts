@@ -1,6 +1,7 @@
 import { chain, noop, Rule, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import {
+  addModuleImportToRootModule,
   addPackageJsonDependency,
   getAppModulePath,
   getProjectFromWorkspace,
@@ -18,7 +19,7 @@ function addPackageJsonDependencies(options: Schema): Rule {
     const dependencies: NodeDependency[] = [
       {
         type: NodeDependencyType.Default,
-        version: '^0.0.1',
+        version: '~0.0.20',
         name: '@ntersol/schematics',
       },
     ];
@@ -26,7 +27,7 @@ function addPackageJsonDependencies(options: Schema): Rule {
     if (options.documentEditor) {
       dependencies.push({
         type: NodeDependencyType.Default,
-        version: '^0.0.1',
+        version: '~0.0.20',
         name: '@ntersol/document-editor',
       });
     }
@@ -154,7 +155,7 @@ function log(): Rule {
   };
 }
 
-export default function ntersolNgAdd(options: Schema): Rule {
+export default function ngAdd(options: Schema): Rule {
   return chain([
     options && options.skipPackageJson ? noop() : addPackageJsonDependencies(options),
     options && options.skipPackageJson ? noop() : installPackageJsonDependencies(),
@@ -163,7 +164,4 @@ export default function ntersolNgAdd(options: Schema): Rule {
     setSchematicsAsDefault(),
     log(),
   ]);
-}
-function addModuleImportToRootModule(host: Tree, importDocumentEditor: string, arg2: any, arg3: any) {
-  throw new Error('Function not implemented.');
 }
