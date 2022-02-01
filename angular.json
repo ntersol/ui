@@ -730,13 +730,19 @@
       "sourceRoot": "libs/schematics/src",
       "architect": {
         "build": {
-          "builder": "@nrwl/workspace:run-commands",
+          "builder": "@nrwl/js:tsc",
+          "outputs": ["{options.outputPath}"],
           "options": {
-            "cwd": "libs/schematics",
-            "commands": ["npm run build"]
+            "project": "libs/schematics/ng-package.json",
+            "tsConfig": "libs/schematics/tsconfig.lib.json",
+            "outputPath": "dist/out-tsc/schematics",
+            "main": "libs/schematics/index.ts"
           },
           "configurations": {
             "production": {
+              "tsConfig": "libs/schematics/tsconfig.schematics.json"
+            },
+            "development": {
               "tsConfig": "libs/schematics/tsconfig.schematics.json"
             }
           },
@@ -752,8 +758,19 @@
         "pack": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "cwd": "libs/schematics",
+            "cwd": "dist/out-tsc/schematics",
             "commands": ["npm pack", "npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "move": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "libs/schematics",
+            "commands": [
+              "npx copyfiles package.json ../../dist/out-tsc/schematics/",
+              "npx copyfiles src/** ../../dist/out-tsc/schematics/"
+            ],
             "parallel": false
           }
         },
