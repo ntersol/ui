@@ -27,9 +27,87 @@
   </p-tabPanel>
 
   <p-tabPanel header="Example">
-    <div class="row">
-      <div class="col-12">
-        <nts-mtg-calc [config]="config"></nts-mtg-calc>
+    <div class="card mb-3">
+      <div class="card-header">Settings - play around and configure your mortgage calculator!</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <h4><strong>autoCalculate</strong> <small class="ms-3">false</small></h4>
+            <p-inputSwitch [(ngModel)]="config.autoCalculate"></p-inputSwitch>
+            <p>
+              When true, sets the calculations to auto calculate to update the amortization schedule and pie chart. Also
+              hides the "Calculate" button.
+            </p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <h4><strong>chartOptions</strong> - backgroundColor <small class="ms-3">#6c757d, #ff6600</small></h4>
+            <p-colorPicker [(ngModel)]="background1"></p-colorPicker>
+            <p-colorPicker class="ms-3" [(ngModel)]="background2"></p-colorPicker>
+            <p>Set the background color for the pie chart</p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <h4><strong>chartOptions</strong> - hoverBackgroundColor <small class="ms-3">#b4babe, #ffb27f</small></h4>
+            <p-colorPicker [(ngModel)]="background3"></p-colorPicker>
+            <p-colorPicker class="ms-3" [(ngModel)]="background4"></p-colorPicker>
+            <p>Set the background hover color for the pie chart</p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <h4><strong>interestRate</strong> <small class="ms-3">3.5</small></h4>
+            <p-inputNumber
+              inputId="settingsInterestRate"
+              mode="decimal"
+              [(ngModel)]="config.interestRate"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="2"
+            ></p-inputNumber>
+            <p>Sets the default interest rate for the calculator</p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <h4><strong>loanAmount</strong> <small class="ms-3">350000</small></h4>
+            <p-inputNumber
+              [(ngModel)]="config.loanAmount"
+              inputId="settingsLoanAmount"
+              mode="currency"
+              currency="USD"
+              locale="en-US"
+            >
+            </p-inputNumber>
+            <p>Sets the default loan amount for the calculator</p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <h4><strong>termOptions</strong> <small class="ms-3">15 and 30 years</small></h4>
+            <p-dropdown
+              [options]="loanOptions"
+              [(ngModel)]="selectedLoanOptions"
+              optionValue="value"
+              optionLabel="name"
+            ></p-dropdown>
+            <p>Changes the dropdown options for the terms</p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <h4><strong>terms</strong> <small class="ms-3">30</small></h4>
+            <p-inputNumber inputId="terms" [(ngModel)]="config.terms"></p-inputNumber>
+            <p>Sets the default selected term</p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <h4><strong>showChart</strong> <small class="ms-3">true</small></h4>
+            <p-inputSwitch [(ngModel)]="config.showChart"></p-inputSwitch>
+            <p>Shows the pie chart with the breakdown of principle to interest</p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <h4><strong>showAmortization</strong> <small class="ms-3">true</small></h4>
+            <p-inputSwitch [(ngModel)]="config.showAmortization"></p-inputSwitch>
+            <p>Shows the amortization schedule button</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-end">
+        <button (click)="onUpdateSettings()" class="btn btn-primary">Update Settings</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <nts-mtg-calc [config]="config" *ngIf="ready$ | async"></nts-mtg-calc>
       </div>
     </div>
   </p-tabPanel>

@@ -2,6 +2,10 @@
   &-input {
     width: 100%;
     margin-bottom: 1rem;
+
+    & ::ng-deep .p-inputnumber-input {
+      width: 100%;
+    }
   }
   &-amt {
     font-size: 1.5rem;
@@ -15,7 +19,4 @@
     display: block;
     margin: 0 auto;
   }
-}
-.p-inputtext {
-  width: 100%;
 }

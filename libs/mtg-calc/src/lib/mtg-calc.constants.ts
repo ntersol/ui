@@ -1,21 +1,7 @@
 import { MtgCalcConfig } from '..';
 
 export const DEFAULT: MtgCalcConfig = {
-  interestRate: 5,
-  loanAmount: 350000,
-  showAmortization: true,
-  termOptions: [
-    {
-      name: '15 Years',
-      value: 15,
-    },
-    {
-      name: '30 Years',
-      value: 30,
-    },
-  ],
-  terms: 30,
-  showChart: true,
+  autoCalculate: false,
   chartOptions: {
     type: 'pie',
     data: {
@@ -29,4 +15,19 @@ export const DEFAULT: MtgCalcConfig = {
       ],
     },
   },
+  interestRate: 5,
+  loanAmount: 350000,
+  termOptions: [
+    {
+      name: '15 Years',
+      value: 15,
+    },
+    {
+      name: '30 Years',
+      value: 30,
+    },
+  ],
+  terms: 30,
+  showAmortization: true,
+  showChart: true,
 };

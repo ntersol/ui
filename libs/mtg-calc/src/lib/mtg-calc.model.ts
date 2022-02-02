@@ -2,6 +2,10 @@ import { ChartConfiguration } from 'chart.js';
 
 /** This is the config for the Mortgage Calculator */
 export interface MtgCalcConfig {
+  /** Auto calculate on input change */
+  autoCalculate?: boolean,
+  /** Chart options from chart.js */
+  chartOptions?: ChartConfiguration;
   /** interest rate as a yearly percent */
   interestRate?: number | null;
   /** Loan Amount Input */
@@ -14,8 +18,6 @@ export interface MtgCalcConfig {
   terms?: number | null;
   /** Show pie chart or not */
   showChart?: boolean;
-  /** Chart options from chart.js */
-  chartOptions?: ChartConfiguration;
 }
 
 export interface PAndI {

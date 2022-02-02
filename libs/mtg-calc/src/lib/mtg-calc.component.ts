@@ -74,6 +74,12 @@ export class MtgCalcComponent implements OnInit {
     }
   }
 
+  onInputChange(): void {
+    if (this.config.autoCalculate) {
+      this.calculatePayments();
+    }
+  }
+
   showDropdown(): void {
     if (!this.termDropdownRef) {
       return;

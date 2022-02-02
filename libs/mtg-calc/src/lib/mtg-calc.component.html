@@ -5,10 +5,16 @@
     <div class="row">
       <div class="col-12 col-md-4">
         <label for="loanAmount">Loan Amount</label>
-        <span class="mtg-calc-input p-input-icon-left">
-          <i class="pi pi-dollar"></i>
-          <input class="p-inputtext" id="loanAmount" type="number" [(ngModel)]="config.loanAmount" pInputText />
-        </span>
+        <p-inputNumber
+          class="mtg-calc-input"
+          [(ngModel)]="config.loanAmount"
+          (ngModelChange)="onInputChange()"
+          inputId="loanAmount"
+          mode="currency"
+          currency="USD"
+          locale="en-US"
+        >
+        </p-inputNumber>
       </div>
       <div class="col-12 col-md-4">
         <label for="terms" (click)="showDropdown()">Term (years)</label>
@@ -21,15 +27,23 @@
           [(ngModel)]="config.terms"
           optionLabel="name"
           optionValue="value"
+          (ngModelChange)="onInputChange()"
         >
         </p-dropdown>
       </div>
       <div class="col-12 col-md-4">
         <label for="interestRate">Interest Rate</label>
-        <span class="mtg-calc-input p-input-icon-right">
-          <i class="pi pi-percentage"></i>
-          <input class="p-inputtext" id="interestRate" [(ngModel)]="config.interestRate" type="number" pInputText />
-        </span>
+        <p-inputNumber
+          class="mtg-calc-input"
+          mode="decimal"
+          [maxFractionDigits]="2"
+          [minFractionDigits]="2"
+          [(ngModel)]="config.interestRate"
+          (ngModelChange)="onInputChange()"
+          inputId="interestRate"
+          suffix="%"
+        >
+        </p-inputNumber>
       </div>
     </div>
     <p-chart
@@ -58,8 +72,16 @@
       </div>
     </div>
     <div class="mtg-calc-btns">
-      <button type="button" class="btn btn-primary me-2" (click)="calculatePayments()">Calculate</button>
-      <button type="button" class="btn btn-secondary" *ngIf="config.showAmortization" (click)="toggleSchedule()">
+      <button type="button" class="btn btn-primary me-2" *ngIf="!config.autoCalculate" (click)="calculatePayments()">
+        Calculate
+      </button>
+      <button
+        type="button"
+        class="btn"
+        [ngClass]="config.autoCalculate ? 'btn-primary' : 'btn-secondary'"
+        *ngIf="config.showAmortization"
+        (click)="toggleSchedule()"
+      >
         View Amortization Schedule
       </button>
     </div>
@@ -70,6 +92,7 @@
   position="top"
   [(visible)]="showAmortization"
   [modal]="true"
+  styleClass="nts-amortization-schedule"
   [style]="{ width: '80vw' }"
   [draggable]="false"
   [resizable]="false"
