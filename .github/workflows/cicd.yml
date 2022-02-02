@@ -48,13 +48,8 @@ jobs:
         run: npm install
       - name: Build
         run: npx nx affected --target build --parallel --exclude=starter,storybook --with-deps
-      # - name: Deploy
-      #   if: ${{ github.event_name != 'pull_request' }}
-      #   run: npx nx affected --target deploy --parallel
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish
-        run: npx nx publish schematics
+        run: npx nx affected --target auto-publish --parallel
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -64,3 +59,8 @@ jobs:
           message: Auto-generated commit [ci skip]
           committer_name: GitHub Actions
           committer_email: actions@github.com
+      - name: Deploy
+        if: ${{ github.event_name != 'pull_request' }}
+        run: npx nx affected --target deploy --parallel
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

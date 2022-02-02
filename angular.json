@@ -251,6 +251,12 @@
             "parallel": false
           }
         },
+        "auto-publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "ng run document-editor:publish"
+          }
+        },
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
           "options": {
@@ -690,6 +696,12 @@
             "parallel": false
           }
         },
+        "auto-publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "ng run mtg-calc:publish"
+          }
+        },
         "storybook": {
           "builder": "@nrwl/storybook:storybook",
           "options": {
@@ -784,6 +796,12 @@
               "ng run schematics:pack"
             ],
             "parallel": false
+          }
+        },
+        "auto-publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "ng run schematics:publish"
           }
         }
       }
