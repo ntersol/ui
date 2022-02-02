@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild, SimpleChanges, OnChanges } from '@angular/core';
 import { mergeDeepRight } from 'ramda';
 import { MtgCalcConfig, PAndI } from './mtg-calc.model';
 import { DEFAULT } from './mtg-calc.constants';
@@ -9,7 +9,7 @@ import { DEFAULT } from './mtg-calc.constants';
   styleUrls: ['./mtg-calc.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtgCalcComponent implements OnInit {
+export class MtgCalcComponent implements OnInit, OnChanges {
   _config = DEFAULT;
   showAmortization = false;
   amortization: Array<PAndI> = [];
@@ -20,6 +20,7 @@ export class MtgCalcComponent implements OnInit {
   }
 
   @Input() set config(value: MtgCalcConfig) {
+    console.log(value);
     this._config = mergeDeepRight(DEFAULT, value) as MtgCalcConfig;
     this.calculatePayments();
   }
@@ -28,6 +29,10 @@ export class MtgCalcComponent implements OnInit {
   @ViewChild('pieChart') pieChart: any;
 
   constructor() {}
+
+  ngOnChanges(value: SimpleChanges): void {
+    console.log(value);
+  }
 
   ngOnInit(): void {
     this.calculatePayments();
@@ -71,6 +76,12 @@ export class MtgCalcComponent implements OnInit {
           this.pieChart.refresh();
         }
       }
+    }
+  }
+
+  onInputChange(): void {
+    if (this.config.autoCalculate) {
+      this.calculatePayments();
     }
   }
 

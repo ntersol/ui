@@ -11,6 +11,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmationService } from 'primeng/api';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 const modules = [
   // Prime NG UI Lib
@@ -21,6 +22,7 @@ const modules = [
   DialogModule,
   ConfirmDialogModule,
   DynamicDialogModule,
+  InputSwitchModule,
 ];
 
 @NgModule({

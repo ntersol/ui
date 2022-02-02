@@ -1,6 +1,20 @@
 import { MtgCalcConfig } from '..';
 
 export const DEFAULT: MtgCalcConfig = {
+  autoCalculate: false,
+  chartOptions: {
+    type: 'pie',
+    data: {
+      labels: ['Principle', 'Interest'],
+      datasets: [
+        {
+          data: [350000, 215796.31],
+          backgroundColor: ['#6c757d', '#ff6600'],
+          hoverBackgroundColor: ['#b4babe', '#ffb27f'],
+        },
+      ],
+    },
+  },
   interestRate: 5,
   loanAmount: 350000,
   showAmortization: true,
@@ -16,17 +30,4 @@ export const DEFAULT: MtgCalcConfig = {
   ],
   terms: 30,
   showChart: true,
-  chartOptions: {
-    type: 'pie',
-    data: {
-      labels: ['Principle', 'Interest'],
-      datasets: [
-        {
-          data: [350000, 215796.31],
-          backgroundColor: ['#6c757d', '#ff6600'],
-          hoverBackgroundColor: ['#b4babe', '#ffb27f'],
-        },
-      ],
-    },
-  },
 };

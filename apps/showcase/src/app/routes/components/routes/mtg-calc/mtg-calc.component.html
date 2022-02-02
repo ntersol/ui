@@ -27,9 +27,23 @@
   </p-tabPanel>
 
   <p-tabPanel header="Example">
-    <div class="row">
-      <div class="col-12">
-        <nts-mtg-calc [config]="config"></nts-mtg-calc>
+    <div class="card mb-3">
+      <div class="card-header">Settings</div>
+      <div class="card-body">
+        <h4><strong>autoCalculate</strong> <small class="ms-3">false</small></h4>
+        <p-inputSwitch [(ngModel)]="config.autoCalculate"></p-inputSwitch>
+        <p>
+          When true, sets the calculations to auto calculate to update the amortization schedule and pie chart. Also
+          hides the "Calculate" button.
+        </p>
+      </div>
+      <div class="card-footer text-end">
+        <button (click)="onUpdateSettings()" class="btn btn-primary">Update Settings</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <nts-mtg-calc [config]="config" *ngIf="ready$ | async"></nts-mtg-calc>
       </div>
     </div>
   </p-tabPanel>

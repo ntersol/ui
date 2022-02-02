@@ -7,7 +7,14 @@
         <label for="loanAmount">Loan Amount</label>
         <span class="mtg-calc-input p-input-icon-left">
           <i class="pi pi-dollar"></i>
-          <input class="p-inputtext" id="loanAmount" type="number" [(ngModel)]="config.loanAmount" pInputText />
+          <input
+            class="p-inputtext"
+            id="loanAmount"
+            type="number"
+            [(ngModel)]="config.loanAmount"
+            (ngModelChange)="onInputChange()"
+            pInputText
+          />
         </span>
       </div>
       <div class="col-12 col-md-4">
@@ -21,6 +28,7 @@
           [(ngModel)]="config.terms"
           optionLabel="name"
           optionValue="value"
+          (ngModelChange)="onInputChange()"
         >
         </p-dropdown>
       </div>
@@ -28,7 +36,14 @@
         <label for="interestRate">Interest Rate</label>
         <span class="mtg-calc-input p-input-icon-right">
           <i class="pi pi-percentage"></i>
-          <input class="p-inputtext" id="interestRate" [(ngModel)]="config.interestRate" type="number" pInputText />
+          <input
+            class="p-inputtext"
+            id="interestRate"
+            [(ngModel)]="config.interestRate"
+            type="number"
+            (ngModelChange)="onInputChange()"
+            pInputText
+          />
         </span>
       </div>
     </div>
@@ -58,8 +73,16 @@
       </div>
     </div>
     <div class="mtg-calc-btns">
-      <button type="button" class="btn btn-primary me-2" (click)="calculatePayments()">Calculate</button>
-      <button type="button" class="btn btn-secondary" *ngIf="config.showAmortization" (click)="toggleSchedule()">
+      <button type="button" class="btn btn-primary me-2" *ngIf="!config.autoCalculate" (click)="calculatePayments()">
+        Calculate
+      </button>
+      <button
+        type="button"
+        class="btn"
+        [ngClass]="config.autoCalculate ? 'btn-primary' : 'btn-secondary'"
+        *ngIf="config.showAmortization"
+        (click)="toggleSchedule()"
+      >
         View Amortization Schedule
       </button>
     </div>
@@ -70,6 +93,7 @@
   position="top"
   [(visible)]="showAmortization"
   [modal]="true"
+  styleClass="nts-amortization-schedule"
   [style]="{ width: '80vw' }"
   [draggable]="false"
   [resizable]="false"

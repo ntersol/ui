@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterViewInit, OnInit } from '@angular/core';
 import { MtgCalcConfig } from '@ntersol/mtg-calc';
+import { BehaviorSubject } from 'rxjs';
 import { HighlightService } from '../../../../shared/services/highlight.service';
 
 @Component({
@@ -8,7 +9,9 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
   styleUrls: ['./mtg-calc.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtgCalcComponent implements AfterViewInit {
+export class MtgCalcComponent implements OnInit, AfterViewInit {
+  ready$ = new BehaviorSubject<boolean>(false);
+  config!: MtgCalcConfig;
   public exampleTSInstall = `
   // You must have the chart.js npm package
   npm i chart.js
@@ -60,14 +63,25 @@ export class MtgCalcComponent implements AfterViewInit {
 
     `,
   );
-  config: MtgCalcConfig = {
-    loanAmount: 350000,
-    terms: 30,
-    interestRate: 3.5,
-  };
   constructor(private highlight: HighlightService) {}
+
+  ngOnInit(): void {
+    this.config = {
+      loanAmount: 350000,
+      terms: 30,
+      interestRate: 3.5,
+    };
+    this.ready$.next(true);
+  }
 
   ngAfterViewInit() {
     this.highlight.highlightAll();
+  }
+
+  onUpdateSettings() {
+    this.ready$.next(false);
+    setTimeout(() => {
+      this.ready$.next(true);
+    }, 50);
   }
 }
