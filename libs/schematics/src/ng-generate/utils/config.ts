@@ -1,5 +1,5 @@
+import { workspaces } from '@angular-devkit/core';
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
-import { WorkspaceSchema } from 'schematics-utilities';
 
 // The interfaces below are generated from the Angular CLI configuration schema
 // https://github.com/angular/angular-cli/blob/master/packages/@angular/cli/lib/config/schema.json
@@ -136,7 +136,7 @@ export function getWorkspacePath(host: Tree): string {
   return path;
 }
 
-export function getWorkspace(host: Tree): WorkspaceSchema {
+export function getWorkspace(host: Tree): workspaces.WorkspaceDefinition {
   const path = getWorkspacePath(host);
   const configBuffer = host.read(path);
   if (configBuffer === null) {

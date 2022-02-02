@@ -1,26 +1,26 @@
 import { Tree } from '@angular-devkit/schematics';
-import { getWorkspace } from 'schematics-utilities';
+import { getWorkspace } from '@schematics/angular/utility/workspace';
 
 export function getProjectPath(host: Tree, options: { project?: string | undefined; path?: string | undefined }) {
-  const workspace = getWorkspace(host);
+  return getWorkspace(host).then((workspace) => {
+    if (!options.project) {
+      options.project = Object.keys(workspace.projects)[0];
+    }
 
-  if (!options.project) {
-    options.project = Object.keys(workspace.projects)[0];
-  }
+    const project = (workspace.projects as any)[options.project];
 
-  const project = workspace.projects[options.project];
+    if (project.root.substr(-1) === '/') {
+      project.root = project.root.substr(0, project.root.length - 1);
+    }
 
-  if (project.root.substr(-1) === '/') {
-    project.root = project.root.substr(0, project.root.length - 1);
-  }
+    if (options.path === undefined) {
+      const projectDirName = project.projectType === 'application' ? 'app' : 'lib';
+      const root = project.sourceRoot ? `/${project.sourceRoot}/` : `/${project.root}/src/`;
+      return `${root}${projectDirName}`;
+    }
 
-  if (options.path === undefined) {
-    const projectDirName = project.projectType === 'application' ? 'app' : 'lib';
-    const root = project.sourceRoot ? `/${project.sourceRoot}/` : `/${project.root}/src/`;
-    return `${root}${projectDirName}`;
-  }
-
-  return options.path;
+    return options.path;
+  });
 }
 
 export function getProject(workspaceOrHost: any, projectName: string) {
