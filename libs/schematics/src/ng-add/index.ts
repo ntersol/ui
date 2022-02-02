@@ -11,10 +11,9 @@ import {
   NodeDependencyType,
 } from 'schematics-utilities';
 import * as ts from 'typescript';
-import { Schema } from './schema.d';
 import { addProviderToModule, applyChanges, getModuleFile, insertImport, isImported } from './utils';
 
-function addPackageJsonDependencies(options: Schema): Rule {
+function addPackageJsonDependencies(options: { documentEditor: boolean }): Rule {
   return (host: Tree, context: SchematicContext) => {
     const dependencies: NodeDependency[] = [
       {
