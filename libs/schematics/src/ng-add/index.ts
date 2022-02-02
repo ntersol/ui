@@ -7,7 +7,7 @@ import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
 import { getWorkspace } from '@schematics/angular/utility/workspace';
 import * as ts from 'typescript';
 import { Schema } from './schema';
-import { insertImport, isImported } from './utils';
+import { insertImport } from './utils';
 
 function addPackageJsonDependencies(options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {
@@ -57,7 +57,7 @@ function getTsSourceFile(host: Tree, path: string): ts.SourceFile {
 }
 
 function injectImports(options: Schema) {
-  return async (host: Tree, context: SchematicContext) => {
+  return async (host: Tree, _context: SchematicContext) => {
     if (!options.documentEditor) {
       return;
     }
@@ -65,27 +65,13 @@ function injectImports(options: Schema) {
     const workspace = await getWorkspace(host);
     const project = getProjectFromWorkspace(
       workspace,
-      // Takes the first project in case it's not provided by CLI
       options.project ? options.project : Object.keys(workspace['projects'])[0],
     );
     const modulePath = getAppModulePath(host, getProjectMainFile(project));
-
     const moduleSource = getTsSourceFile(host, modulePath);
-    const importModule = 'environment';
-    const importPath = '../environments/environment';
-
-    if (!isImported(moduleSource, importModule, importPath)) {
-      const change = insertImport(moduleSource, modulePath, importModule, importPath);
-
-      if (change) {
-        const recorder = host.beginUpdate(modulePath);
-        recorder.insertLeft((change as InsertChange).pos, (change as InsertChange).toAdd);
-        host.commitUpdate(recorder);
-      }
-    }
 
     if (options.documentEditor) {
-      const docsChange = insertImport(moduleSource, modulePath, 'DocumentEditor', '@ntersol/document-editor');
+      const docsChange = insertImport(moduleSource, modulePath, 'NtsDocumentEditorModule', '@ntersol/document-editor');
       if (docsChange) {
         const recorder = host.beginUpdate(modulePath);
         recorder.insertLeft((docsChange as InsertChange).pos, (docsChange as InsertChange).toAdd);
@@ -111,18 +97,17 @@ function addModuleToImports(options: Schema) {
     const workspace = await getWorkspace(host);
     const project = getProjectFromWorkspace(
       workspace,
-      // Takes the first project in case it's not provided by CLI
       options.project ? options.project : Object.keys(workspace['projects'])[0],
     );
 
     let importDocumentEditor = '';
 
     if (options.documentEditor) {
-      importDocumentEditor = `DocumentEditor`;
+      importDocumentEditor = `NtsDocumentEditorModule`;
     }
 
     if (importDocumentEditor) {
-      addModuleImportToRootModule(host, importDocumentEditor, null as any, project as any);
+      addModuleImportToRootModule(host, importDocumentEditor, project.sourceRoot || '', project);
     }
 
     if (options.documentEditor) {
