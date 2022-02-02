@@ -17,7 +17,6 @@ export const DEFAULT: MtgCalcConfig = {
   },
   interestRate: 5,
   loanAmount: 350000,
-  showAmortization: true,
   termOptions: [
     {
       name: '15 Years',
@@ -29,5 +28,6 @@ export const DEFAULT: MtgCalcConfig = {
     },
   ],
   terms: 30,
+  showAmortization: true,
   showChart: true,
 };

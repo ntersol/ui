@@ -5,7 +5,17 @@
     <div class="row">
       <div class="col-12 col-md-4">
         <label for="loanAmount">Loan Amount</label>
-        <span class="mtg-calc-input p-input-icon-left">
+        <p-inputNumber
+          class="mtg-calc-input"
+          [(ngModel)]="config.loanAmount"
+          (ngModelChange)="onInputChange()"
+          inputId="loanAmount"
+          mode="currency"
+          currency="USD"
+          locale="en-US"
+        >
+        </p-inputNumber>
+        <!-- <span class="mtg-calc-input p-input-icon-left">
           <i class="pi pi-dollar"></i>
           <input
             class="p-inputtext"
@@ -15,7 +25,7 @@
             (ngModelChange)="onInputChange()"
             pInputText
           />
-        </span>
+        </span> -->
       </div>
       <div class="col-12 col-md-4">
         <label for="terms" (click)="showDropdown()">Term (years)</label>
@@ -34,7 +44,18 @@
       </div>
       <div class="col-12 col-md-4">
         <label for="interestRate">Interest Rate</label>
-        <span class="mtg-calc-input p-input-icon-right">
+        <p-inputNumber
+          class="mtg-calc-input"
+          mode="decimal"
+          [maxFractionDigits]="2"
+          [minFractionDigits]="2"
+          [(ngModel)]="config.interestRate"
+          (ngModelChange)="onInputChange()"
+          inputId="interestRate"
+          suffix="%"
+        >
+        </p-inputNumber>
+        <!-- <span class="mtg-calc-input p-input-icon-right">
           <i class="pi pi-percentage"></i>
           <input
             class="p-inputtext"
@@ -44,7 +65,7 @@
             (ngModelChange)="onInputChange()"
             pInputText
           />
-        </span>
+        </span> -->
       </div>
     </div>
     <p-chart
