@@ -440,7 +440,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "cwd": "libs/generators",
-            "command": "npx copyfiles src/*/schema.json schematics/*/files/** src/collection.json ../../dist/libs/generators/"
+            "command": "npx copyfiles src/*/schema.json src/*/files/** src/collection.json ../../dist/libs/generators/"
           }
         },
         "publish": {
@@ -727,7 +727,7 @@
     "schematics": {
       "projectType": "library",
       "root": "libs/schematics",
-      "sourceRoot": "libs/schematics/schematics",
+      "sourceRoot": "libs/schematics/src",
       "architect": {
         "build": {
           "builder": "@nrwl/js:tsc",
@@ -770,8 +770,8 @@
             "commands": [
               "npx copyfiles package.json ../../dist/out-tsc/schematics/",
               "npx copyfiles README.md ../../dist/out-tsc/schematics/",
-              "npx copyfiles schematics/** ../../dist/out-tsc/schematics/",
-              "npx copyfiles schematics/**/*.json ../../dist/out-tsc/schematics/"
+              "npx copyfiles src/** ../../dist/out-tsc/schematics/",
+              "npx copyfiles src/**/*.json ../../dist/out-tsc/schematics/"
             ],
             "parallel": false
           }

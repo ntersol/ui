@@ -4,7 +4,7 @@
   "private": false,
   "license": "MIT",
   "type": "commonjs",
-  "schematics": "./schematics/collection.json",
+  "schematics": "./src/collection.json",
   "scripts": {},
   "dependencies": {
     "schematics-utilities": "^2.0.3",
