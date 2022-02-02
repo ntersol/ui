@@ -36,6 +36,51 @@
           When true, sets the calculations to auto calculate to update the amortization schedule and pie chart. Also
           hides the "Calculate" button.
         </p>
+        <hr />
+        <h4><strong>chartOptions</strong> - backgroundColor <small class="ms-3">#6c757d, #ff6600</small></h4>
+        <p-colorPicker [(ngModel)]="background1"></p-colorPicker>
+        <p-colorPicker class="ms-3" [(ngModel)]="background2"></p-colorPicker>
+        <p>This will allow you to set the background color for the pie chart</p>
+        <hr />
+        <h4><strong>chartOptions</strong> - hoverBackgroundColor <small class="ms-3">#b4babe, #ffb27f</small></h4>
+        <p-colorPicker [(ngModel)]="background3"></p-colorPicker>
+        <p-colorPicker class="ms-3" [(ngModel)]="background4"></p-colorPicker>
+        <p>This will allow you to set the background hover color for the pie chart</p>
+        <hr />
+        <h4><strong>interestRate</strong> <small class="ms-3">3.5</small></h4>
+        <p-inputNumber
+          inputId="interestRate"
+          mode="decimal"
+          [(ngModel)]="config.interestRate"
+          [minFractionDigits]="2"
+          [maxFractionDigits]="2"
+        ></p-inputNumber>
+        <p>Sets the default interest rate for the calculator</p>
+        <hr />
+        <h4><strong>loanAmount</strong> <small class="ms-3">350000</small></h4>
+        <p-inputNumber
+          [(ngModel)]="config.loanAmount"
+          inputId="loanAmount"
+          mode="currency"
+          currency="USD"
+          locale="en-US"
+        >
+        </p-inputNumber>
+        <p>Sets the default loan amount for the calculator</p>
+        <hr />
+        <h4><strong>termOptions</strong> <small class="ms-3">15 and 30 years</small></h4>
+        <p-dropdown
+          [options]="loanOptions"
+          [(ngModel)]="selectedLoanOptions"
+          optionValue="value"
+          optionLabel="name"
+        ></p-dropdown>
+        <p>Changes the dropdown options for the terms</p>
+        <hr />
+        <h4><strong>terms</strong> <small class="ms-3">30</small></h4>
+        <p-inputNumber inputId="terms" [(ngModel)]="config.terms"></p-inputNumber>
+        <p>Changes the default selected term</p>
+        <hr />
       </div>
       <div class="card-footer text-end">
         <button (click)="onUpdateSettings()" class="btn btn-primary">Update Settings</button>
