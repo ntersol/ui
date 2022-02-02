@@ -733,7 +733,6 @@
           "builder": "@nrwl/js:tsc",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "project": "libs/schematics/ng-package.json",
             "tsConfig": "libs/schematics/tsconfig.lib.json",
             "outputPath": "dist/out-tsc/schematics",
             "main": "libs/schematics/index.ts"

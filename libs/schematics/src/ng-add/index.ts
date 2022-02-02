@@ -1,6 +1,6 @@
 import { chain, noop, Rule, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { addModuleImportToRootModule, getProjectFromWorkspace } from '@angular/cdk/schematics';
+import { addModuleImportToRootModule, getProjectFromWorkspace, getProjectMainFile } from '@angular/cdk/schematics';
 import { InsertChange } from '@schematics/angular/utility/change';
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
@@ -68,7 +68,7 @@ function injectImports(options: Schema) {
       // Takes the first project in case it's not provided by CLI
       options.project ? options.project : Object.keys(workspace['projects'])[0],
     );
-    const modulePath = getAppModulePath(host, (project as any).architect.build.options.main);
+    const modulePath = getAppModulePath(host, getProjectMainFile(project));
 
     const moduleSource = getTsSourceFile(host, modulePath);
     const importModule = 'environment';
