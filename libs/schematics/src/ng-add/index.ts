@@ -11,7 +11,7 @@ import {
   NodeDependencyType,
 } from 'schematics-utilities';
 import * as ts from 'typescript';
-import { Schema } from './schema';
+import { Schema } from './schema.d';
 import { addProviderToModule, applyChanges, getModuleFile, insertImport, isImported } from './utils';
 
 function addPackageJsonDependencies(options: Schema): Rule {

@@ -7,7 +7,7 @@
       "description": "Ntersol's Add Schematic"
     },
     "route": {
-      "factory": "./ng-generate/route",
+      "factory": "./ng-generate/route/index",
       "schema": "./ng-generate/route/schema.json",
       "description": "Add new route"
     }

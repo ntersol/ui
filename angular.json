@@ -771,7 +771,8 @@
               "npx copyfiles package.json ../../dist/out-tsc/schematics/",
               "npx copyfiles README.md ../../dist/out-tsc/schematics/",
               "npx copyfiles src/** ../../dist/out-tsc/schematics/",
-              "npx copyfiles src/**/*.json ../../dist/out-tsc/schematics/"
+              "npx copyfiles src/**/*.json ../../dist/out-tsc/schematics/",
+              "npx copyfiles src/**/*.d.ts ../../dist/out-tsc/schematics/"
             ],
             "parallel": false
           }

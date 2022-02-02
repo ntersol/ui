@@ -13,6 +13,7 @@
   backdrop-filter: blur(14px) brightness(90%) grayscale(1);
   overflow: auto auto;
   transition: backdrop-filter 300ms ease;
+  flex-wrap: wrap;
 
   &:after {
     backdrop-filter: inherit;
