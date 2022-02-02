@@ -7,7 +7,7 @@ import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
 import { getWorkspace } from '@schematics/angular/utility/workspace';
 import * as ts from 'typescript';
 import { Schema } from './schema';
-import { addProviderToModule, applyChanges, getModuleFile, insertImport, isImported } from './utils';
+import { insertImport, isImported } from './utils';
 
 function addPackageJsonDependencies(options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {
@@ -57,44 +57,41 @@ function getTsSourceFile(host: Tree, path: string): ts.SourceFile {
 }
 
 function injectImports(options: Schema) {
-  return (host: Tree, context: SchematicContext) => {
+  return async (host: Tree, context: SchematicContext) => {
     if (!options.documentEditor) {
       return;
     }
 
-    return getWorkspace(host).then((workspace) => {
-      const project = getProjectFromWorkspace(
-        workspace,
-        // Takes the first project in case it's not provided by CLI
-        options.project ? options.project : Object.keys(workspace['projects'])[0],
-      );
-      const modulePath = getAppModulePath(host, (project as any).architect.build.options.main);
+    const workspace = await getWorkspace(host);
+    const project = getProjectFromWorkspace(
+      workspace,
+      // Takes the first project in case it's not provided by CLI
+      options.project ? options.project : Object.keys(workspace['projects'])[0],
+    );
+    const modulePath = getAppModulePath(host, (project as any).architect.build.options.main);
 
-      const moduleSource = getTsSourceFile(host, modulePath);
-      const importModule = 'environment';
-      const importPath = '../environments/environment';
+    const moduleSource = getTsSourceFile(host, modulePath);
+    const importModule = 'environment';
+    const importPath = '../environments/environment';
 
-      if (!isImported(moduleSource, importModule, importPath)) {
-        const change = insertImport(moduleSource, modulePath, importModule, importPath);
+    if (!isImported(moduleSource, importModule, importPath)) {
+      const change = insertImport(moduleSource, modulePath, importModule, importPath);
 
-        if (change) {
-          const recorder = host.beginUpdate(modulePath);
-          recorder.insertLeft((change as InsertChange).pos, (change as InsertChange).toAdd);
-          host.commitUpdate(recorder);
-        }
+      if (change) {
+        const recorder = host.beginUpdate(modulePath);
+        recorder.insertLeft((change as InsertChange).pos, (change as InsertChange).toAdd);
+        host.commitUpdate(recorder);
       }
+    }
 
-      if (options.documentEditor) {
-        const docsChange = insertImport(moduleSource, modulePath, 'DocumentEditor', '@ntersol/document-editor');
-        if (docsChange) {
-          const recorder = host.beginUpdate(modulePath);
-          recorder.insertLeft((docsChange as InsertChange).pos, (docsChange as InsertChange).toAdd);
-          host.commitUpdate(recorder);
-        }
+    if (options.documentEditor) {
+      const docsChange = insertImport(moduleSource, modulePath, 'DocumentEditor', '@ntersol/document-editor');
+      if (docsChange) {
+        const recorder = host.beginUpdate(modulePath);
+        recorder.insertLeft((docsChange as InsertChange).pos, (docsChange as InsertChange).toAdd);
+        host.commitUpdate(recorder);
       }
-
-      return host;
-    });
+    }
   };
 }
 
@@ -110,38 +107,27 @@ function setSchematicsAsDefault(): Rule {
 }
 
 function addModuleToImports(options: Schema) {
-  return (host: Tree, context: SchematicContext) => {
-    return getWorkspace(host).then((workspace) => {
-      const project = getProjectFromWorkspace(
-        workspace,
-        // Takes the first project in case it's not provided by CLI
-        options.project ? options.project : Object.keys(workspace['projects'])[0],
-      );
+  return async (host: Tree, context: SchematicContext) => {
+    const workspace = await getWorkspace(host);
+    const project = getProjectFromWorkspace(
+      workspace,
+      // Takes the first project in case it's not provided by CLI
+      options.project ? options.project : Object.keys(workspace['projects'])[0],
+    );
 
-      let importDocumentEditor = '';
-      let provideEntityServiceConfig = '';
+    let importDocumentEditor = '';
 
-      if (options.documentEditor) {
-        importDocumentEditor = `DocumentEditor`;
-      }
+    if (options.documentEditor) {
+      importDocumentEditor = `DocumentEditor`;
+    }
 
-      if (importDocumentEditor) {
-        addModuleImportToRootModule(host, importDocumentEditor, null as any, project as any);
-      }
+    if (importDocumentEditor) {
+      addModuleImportToRootModule(host, importDocumentEditor, null as any, project as any);
+    }
 
-      if (provideEntityServiceConfig && project.architect) {
-        const modulePath = getAppModulePath(host, project.architect.build.options.main);
-        const module = getModuleFile(host, modulePath);
-        const providerChanges = addProviderToModule(module, modulePath, provideEntityServiceConfig, '');
-        applyChanges(host, modulePath, providerChanges as InsertChange[]);
-      }
-
-      if (options.documentEditor) {
-        context.logger.log('info', `🦄 NtersolDocumentEditor is imported`);
-      }
-
-      return host;
-    });
+    if (options.documentEditor) {
+      context.logger.log('info', `🦄 NtersolDocumentEditor is imported`);
+    }
   };
 }
 
@@ -153,7 +139,7 @@ function log(): Rule {
   };
 }
 
-export default function ngAdd(options: Schema) {
+export default function ngAdd(options: Schema): Rule {
   return chain([
     options && options.skipPackageJson ? noop() : addPackageJsonDependencies(options),
     options && options.skipPackageJson ? noop() : installPackageJsonDependencies(),
