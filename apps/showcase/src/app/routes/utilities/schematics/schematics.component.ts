@@ -27,7 +27,9 @@ export class SchematicsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(public highlight: HighlightService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('hello world');
+  }
 
   ngAfterViewInit(): void {
     this.highlight.highlightAll();

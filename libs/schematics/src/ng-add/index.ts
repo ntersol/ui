@@ -14,7 +14,7 @@ import * as ts from 'typescript';
 import { Schema } from './schema';
 import { addProviderToModule, applyChanges, getModuleFile, insertImport, isImported } from './utils';
 
-function addPackageJsonDependencies(options: { documentEditor: boolean }): Rule {
+function addPackageJsonDependencies(options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {
     const dependencies: NodeDependency[] = [
       {
