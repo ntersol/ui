@@ -29,10 +29,7 @@ function buildSelector(options: any, projectPrefix: string) {
 function addFiles(options: any) {
   return async (host: Tree) => {
     const workspace = await getWorkspace(host);
-    const project = getProjectFromWorkspace(
-      workspace,
-      options.project ? options.project : Object.keys(workspace['projects'])[0],
-    );
+    const project = getProjectFromWorkspace(workspace);
     options.path = getProjectPath(host, options);
 
     const parsedPath = parseName(options);
