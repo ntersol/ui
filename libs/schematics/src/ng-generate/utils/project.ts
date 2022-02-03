@@ -9,8 +9,8 @@ export function getProjectPath(host: Tree, options: { project?: string | undefin
 
     const project = (workspace.projects as any)[options.project];
 
-    if (project.root.substr(-1) === '/') {
-      project.root = project.root.substr(0, project.root.length - 1);
+    if (project.root?.substr(-1) === '/') {
+      project.root = project.root?.substr(0, project.root.length - 1);
     }
 
     if (options.path === undefined) {
