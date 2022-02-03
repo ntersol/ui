@@ -20,7 +20,6 @@ interface Options {
 function addFiles(options: Options) {
   return async (host: Tree) => {
     options.path = await getProjectPath(host, options);
-
     const parsedPath = parseName(options);
 
     (parsedPath as any).path = parsedPath.path;
