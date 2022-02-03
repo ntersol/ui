@@ -95,10 +95,7 @@ function setSchematicsAsDefault(): Rule {
 function addModuleToImports(options: Schema) {
   return async (host: Tree, context: SchematicContext) => {
     const workspace = await getWorkspace(host);
-    const project = getProjectFromWorkspace(
-      workspace,
-      options.project ? options.project : Object.keys(workspace['projects'])[0],
-    );
+    const project = getProjectFromWorkspace(workspace, Object.keys(workspace['projects'])[0]);
 
     let importDocumentEditor = '';
 
