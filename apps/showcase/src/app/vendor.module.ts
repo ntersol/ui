@@ -15,6 +15,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { AccordionModule } from 'primeng/accordion';
 
 const modules = [
   // Prime NG UI Lib
@@ -29,6 +30,7 @@ const modules = [
   ColorPickerModule,
   DropdownModule,
   InputNumberModule,
+  AccordionModule,
 ];
 
 @NgModule({
