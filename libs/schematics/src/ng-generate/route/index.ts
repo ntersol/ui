@@ -24,7 +24,6 @@ function addFiles(options: Options) {
     const parsedPath = parseName(options);
 
     (parsedPath as any).path = parsedPath.path;
-
     options.name = parsedPath.name;
     options.path = parsedPath.path;
 
