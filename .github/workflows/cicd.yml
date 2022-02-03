@@ -22,10 +22,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Set SHAs [main]
+      - name: Set SHAs [pr]
+        if: ${{ github.event_name == 'pull_request' }}
         uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: main
+      - name: Set SHAs [main]
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: main~1
       - name: Setup Node [14]
         uses: actions/setup-node@v1
         with:
