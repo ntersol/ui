@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "page",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Route Name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "project": {
+      "type": "string",
+      "description": "Project to add the page to"
+    },
+    "directory": {
+      "type": "string",
+      "description": "Directory to add the page to"
+    }
+  },
+  "required": ["name", "project"]
+}

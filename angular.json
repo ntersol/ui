@@ -781,7 +781,8 @@
             "commands": [
               "npx copyfiles -e tsconfig.json -e tsconfig.**.json *.md **/*.md *.json **/*.json *.d.ts **/*.d.ts ../../dist/out-tsc/schematics/",
               "npx copyfiles src/ng-add/schema.json ../../dist/out-tsc/schematics/",
-              "npx copyfiles src/ng-generate/route/schema.json ../../dist/out-tsc/schematics/"
+              "npx copyfiles src/ng-generate/route/schema.json ../../dist/out-tsc/schematics/",
+              "npx copyfiles src/ng-generate/page/schema.json ../../dist/out-tsc/schematics/"
             ],
             "parallel": false
           }
