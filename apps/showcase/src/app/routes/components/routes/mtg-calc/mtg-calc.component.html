@@ -33,7 +33,7 @@
         <div class="row">
           <div class="col-12 col-md-6 col-lg-4 mb-3">
             <h4><strong>autoCalculate</strong> <small class="ms-3">false</small></h4>
-            <p-inputSwitch [(ngModel)]="config.autoCalculate"></p-inputSwitch>
+            <p-inputSwitch [(ngModel)]="config.autoCalculate" (ngModelChange)="onChange()"></p-inputSwitch>
             <p>
               When true, sets the calculations to auto calculate to update the amortization schedule and pie chart. Also
               hides the "Calculate" button.
@@ -41,14 +41,22 @@
           </div>
           <div class="col-12 col-md-6 col-lg-4 mb-3">
             <h4><strong>chartOptions</strong> - backgroundColor <small class="ms-3">#6c757d, #ff6600</small></h4>
-            <p-colorPicker [(ngModel)]="background1"></p-colorPicker>
-            <p-colorPicker class="ms-3" [(ngModel)]="background2"></p-colorPicker>
+            <p-colorPicker [(ngModel)]="background1" (ngModelChange)="onChartOptionsChange()"></p-colorPicker>
+            <p-colorPicker
+              class="ms-3"
+              [(ngModel)]="background2"
+              (ngModelChange)="onChartOptionsChange()"
+            ></p-colorPicker>
             <p>Set the background color for the pie chart</p>
           </div>
           <div class="col-12 col-md-6 col-lg-4 mb-3">
             <h4><strong>chartOptions</strong> - hoverBackgroundColor <small class="ms-3">#b4babe, #ffb27f</small></h4>
-            <p-colorPicker [(ngModel)]="background3"></p-colorPicker>
-            <p-colorPicker class="ms-3" [(ngModel)]="background4"></p-colorPicker>
+            <p-colorPicker [(ngModel)]="background3" (ngModelChange)="onChartOptionsChange()"></p-colorPicker>
+            <p-colorPicker
+              class="ms-3"
+              [(ngModel)]="background4"
+              (ngModelChange)="onChartOptionsChange()"
+            ></p-colorPicker>
             <p>Set the background hover color for the pie chart</p>
           </div>
           <div class="col-12 col-md-6 col-lg-4 mb-3">
@@ -57,6 +65,7 @@
               inputId="settingsInterestRate"
               mode="decimal"
               [(ngModel)]="config.interestRate"
+              (ngModelChange)="onChange()"
               [minFractionDigits]="2"
               [maxFractionDigits]="2"
             ></p-inputNumber>
@@ -66,6 +75,7 @@
             <h4><strong>loanAmount</strong> <small class="ms-3">350000</small></h4>
             <p-inputNumber
               [(ngModel)]="config.loanAmount"
+              (ngModelChange)="onChange()"
               inputId="settingsLoanAmount"
               mode="currency"
               currency="USD"
@@ -79,6 +89,7 @@
             <p-dropdown
               [options]="loanOptions"
               [(ngModel)]="selectedLoanOptions"
+              (ngModelChange)="onLoanOptionsChange()"
               optionValue="value"
               optionLabel="name"
             ></p-dropdown>
@@ -86,28 +97,32 @@
           </div>
           <div class="col-12 col-md-6 col-lg-4 mb-3">
             <h4><strong>terms</strong> <small class="ms-3">30</small></h4>
-            <p-inputNumber inputId="terms" [(ngModel)]="config.terms"></p-inputNumber>
+            <p-inputNumber inputId="terms" [(ngModel)]="config.terms" (ngModelChange)="onChange()"></p-inputNumber>
             <p>Sets the default selected term</p>
           </div>
           <div class="col-12 col-md-6 col-lg-4 mb-3">
             <h4><strong>showChart</strong> <small class="ms-3">true</small></h4>
-            <p-inputSwitch [(ngModel)]="config.showChart"></p-inputSwitch>
+            <p-inputSwitch [(ngModel)]="config.showChart" (ngModelChange)="onChange()"></p-inputSwitch>
             <p>Shows the pie chart with the breakdown of principle to interest</p>
           </div>
           <div class="col-12 col-md-6 col-lg-4 mb-3">
             <h4><strong>showAmortization</strong> <small class="ms-3">true</small></h4>
-            <p-inputSwitch [(ngModel)]="config.showAmortization"></p-inputSwitch>
+            <p-inputSwitch [(ngModel)]="config.showAmortization" (ngModelChange)="onChange()"></p-inputSwitch>
             <p>Shows the amortization schedule button</p>
           </div>
         </div>
-      </div>
-      <div class="card-footer text-end">
-        <button (click)="onUpdateSettings()" class="btn btn-primary">Update Settings</button>
+        <p-accordion>
+          <p-accordionTab header="Get my json config!">
+            <pre>
+              <code class="language-ts" [innerHtml]="config | json"></code>
+            </pre>
+          </p-accordionTab>
+        </p-accordion>
       </div>
     </div>
     <div class="card">
       <div class="card-body">
-        <nts-mtg-calc [config]="config" *ngIf="ready$ | async"></nts-mtg-calc>
+        <nts-mtg-calc [config]="config"></nts-mtg-calc>
       </div>
     </div>
   </p-tabPanel>

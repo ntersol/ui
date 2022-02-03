@@ -14,7 +14,6 @@ interface LoanOptions {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtgCalcComponent implements OnInit, AfterViewInit {
-  ready$ = new BehaviorSubject<boolean>(false);
   config!: MtgCalcConfig;
   background1: string = '#6c757d';
   background2: string = '#ff6600';
@@ -114,20 +113,36 @@ export class MtgCalcComponent implements OnInit, AfterViewInit {
       showAmortization: true,
       showChart: true,
     };
-    this.ready$.next(true);
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
+    this.doHighlight();
+  }
+
+  doHighlight(): void {
     this.highlight.highlightAll();
   }
 
-  onUpdateSettings() {
-    if (this.config && this.config.chartOptions && this.config.chartOptions.data.datasets.length == 1) {
-      this.config.chartOptions.data.datasets[0].backgroundColor = [this.background1, this.background2];
-      this.config.chartOptions.data.datasets[0].hoverBackgroundColor = [this.background3, this.background4];
+  onChange(): void {
+    const config = { ...this.config };
+    this.config = config;
+    this.doHighlight();
+  }
+
+  onChartOptionsChange() {
+    const config = { ...this.config };
+    if (config && config.chartOptions && config.chartOptions.data.datasets.length == 1) {
+      config.chartOptions.data.datasets[0].backgroundColor = [this.background1, this.background2];
+      config.chartOptions.data.datasets[0].hoverBackgroundColor = [this.background3, this.background4];
     }
+    this.config = config;
+    this.doHighlight();
+  }
+
+  onLoanOptionsChange() {
+    const config = { ...this.config };
     if (this.selectedLoanOptions == 1) {
-      this.config.termOptions = [
+      config.termOptions = [
         {
           name: '15 Years',
           value: 15,
@@ -138,7 +153,7 @@ export class MtgCalcComponent implements OnInit, AfterViewInit {
         },
       ];
     } else {
-      this.config.termOptions = [
+      config.termOptions = [
         {
           name: '1 year',
           value: 1,
@@ -261,9 +276,7 @@ export class MtgCalcComponent implements OnInit, AfterViewInit {
         },
       ];
     }
-    this.ready$.next(false);
-    setTimeout(() => {
-      this.ready$.next(true);
-    }, 50);
+    this.config = config;
+    this.doHighlight();
   }
 }
