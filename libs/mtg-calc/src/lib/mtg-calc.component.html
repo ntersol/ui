@@ -1,4 +1,4 @@
-<h2>Mortgage Payment Calculator</h2>
+<h2><strong>Mortgage Payment Calculator</strong></h2>
 <p>Calculate how much your monthly mortgage payment could be.</p>
 <div class="row">
   <div class="col-12 col-xl-6">
@@ -45,48 +45,73 @@
         >
         </p-inputNumber>
       </div>
+      <div class="mtg-calc-btns">
+        <button type="button" class="btn btn-primary me-2" *ngIf="!config.autoCalculate" (click)="calculatePayments()">
+          Calculate
+        </button>
+        <button
+          type="button"
+          class="btn"
+          [ngClass]="config.autoCalculate ? 'btn-primary' : 'btn-secondary'"
+          *ngIf="config.showAmortization"
+          (click)="toggleSchedule()"
+        >
+          View Amortization Schedule
+        </button>
+      </div>
     </div>
-    <p-chart
-      class="mtg-calc-pie"
-      #pieChart
-      *ngIf="config.showChart"
-      type="pie"
-      [data]="config.chartOptions?.data"
-      [options]="config.chartOptions"
-    >
-    </p-chart>
+    <ng-template [ngTemplateOutlet]="paymentBreakdown" *ngIf="config.showChart"> </ng-template>
   </div>
   <p-divider class="d-none d-xl-block col-1" layout="vertical"></p-divider>
   <div class="col-12 col-xl-5">
-    <h3>Monthly Payment</h3>
-    <span class="mtg-calc-amt">{{ monthlyAmount | currency }}</span>
-    <p-divider></p-divider>
-    <div class="row">
-      <div class="col-6">
-        <h4>Principle</h4>
-        <span>{{ (amortization.length ? amortization[0].principle : 0) | currency }}</span>
-      </div>
-      <div class="col-6">
-        <h4>Interest</h4>
-        <span>{{ (amortization.length ? amortization[0].interest : 0) | currency }}</span>
-      </div>
-    </div>
-    <div class="mtg-calc-btns">
-      <button type="button" class="btn btn-primary me-2" *ngIf="!config.autoCalculate" (click)="calculatePayments()">
-        Calculate
-      </button>
-      <button
-        type="button"
-        class="btn"
-        [ngClass]="config.autoCalculate ? 'btn-primary' : 'btn-secondary'"
-        *ngIf="config.showAmortization"
-        (click)="toggleSchedule()"
-      >
-        View Amortization Schedule
-      </button>
-    </div>
+    <ng-template [ngTemplateOutlet]="paymentBreakdown" *ngIf="!config.showChart"> </ng-template>
+    <p-tabView class="mtg-calc-tabs" *ngIf="config.showChart" (onChange)="onTabChange($event)">
+      <p-tabPanel header="Total">
+        <p-chart
+          class="mtg-calc-pie"
+          #pieChart
+          [type]="config.chartOptions?.type || 'doughnut'"
+          [data]="config.chartOptions?.data"
+          [options]="config.chartOptions"
+        >
+        </p-chart>
+      </p-tabPanel>
+      <p-tabPanel header="First Month">
+        <p-chart
+          class="mtg-calc-pie"
+          #monthlyPieChart
+          [type]="config.chartOptions?.type || 'doughnut'"
+          [data]="monthlyChart.data"
+          [options]="monthlyChart"
+        >
+        </p-chart>
+      </p-tabPanel>
+    </p-tabView>
   </div>
 </div>
+<ng-template #paymentBreakdown>
+  <div class="row">
+    <div class="col">
+      <h3><strong>Monthly Payment</strong></h3>
+      <strong class="mtg-calc-amt">{{ monthlyAmount | currency }}</strong>
+    </div>
+    <div class="col" *ngIf="config.showTotal">
+      <h3><strong>Total Payments</strong></h3>
+      <strong class="mtg-calc-amt">{{ totalPayment | currency }}</strong>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <div class="row">
+    <div class="col">
+      <h4>Principle</h4>
+      <span>{{ (amortization.length ? amortization[0].principle : 0) | currency }}</span>
+    </div>
+    <div class="col">
+      <h4>Interest</h4>
+      <span>{{ (amortization.length ? amortization[0].interest : 0) | currency }}</span>
+    </div>
+  </div>
+</ng-template>
 <p-dialog
   header="Amortization Schedule"
   position="top"

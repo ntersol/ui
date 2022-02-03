@@ -3,7 +3,7 @@ import { MtgCalcConfig } from '..';
 export const DEFAULT: MtgCalcConfig = {
   autoCalculate: false,
   chartOptions: {
-    type: 'pie',
+    type: 'doughnut',
     data: {
       labels: ['Principle', 'Interest'],
       datasets: [
@@ -30,4 +30,5 @@ export const DEFAULT: MtgCalcConfig = {
   terms: 30,
   showAmortization: true,
   showChart: true,
+  showTotal: false,
 };

@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy, AfterViewInit, OnInit } from '@angular/core';
 import { MtgCalcConfig } from '@ntersol/mtg-calc';
-import { BehaviorSubject } from 'rxjs';
+import { ChartTypeRegistry } from 'chart.js';
 import { HighlightService } from '../../../../shared/services/highlight.service';
 interface LoanOptions {
   name: string;
-  value: number;
+  value: number | string;
 }
 
 @Component({
@@ -19,6 +19,17 @@ export class MtgCalcComponent implements OnInit, AfterViewInit {
   background2: string = '#ff6600';
   background3: string = '#b4babe';
   background4: string = '#ffb27f';
+  chartTypes: LoanOptions[] = [
+    {
+      name: 'Doughnut',
+      value: 'doughnut',
+    },
+    {
+      name: 'Pie',
+      value: 'pie',
+    },
+  ];
+  selectedChartType: string = 'doughnut';
   loanOptions: LoanOptions[] = [
     {
       name: '15 and 30 years',
@@ -48,7 +59,7 @@ export class MtgCalcComponent implements OnInit, AfterViewInit {
     export const DEFAULT: MtgCalcConfig = {
       autoCalculate: false,
       chartOptions: {
-        type: 'pie',
+        type: 'doughnut',
         data: {
           labels: ['Principle', 'Interest'],
           datasets: [
@@ -75,6 +86,7 @@ export class MtgCalcComponent implements OnInit, AfterViewInit {
       terms: 30,
       showAmortization: true,
       showChart: true,
+      showTotal: false,
     };
 
     `,
@@ -85,7 +97,7 @@ export class MtgCalcComponent implements OnInit, AfterViewInit {
     this.config = {
       autoCalculate: false,
       chartOptions: {
-        type: 'pie',
+        type: 'doughnut',
         data: {
           labels: ['Principle', 'Interest'],
           datasets: [
@@ -112,6 +124,7 @@ export class MtgCalcComponent implements OnInit, AfterViewInit {
       terms: 30,
       showAmortization: true,
       showChart: true,
+      showTotal: false,
     };
   }
 
@@ -134,6 +147,15 @@ export class MtgCalcComponent implements OnInit, AfterViewInit {
     if (config && config.chartOptions && config.chartOptions.data.datasets.length == 1) {
       config.chartOptions.data.datasets[0].backgroundColor = [this.background1, this.background2];
       config.chartOptions.data.datasets[0].hoverBackgroundColor = [this.background3, this.background4];
+    }
+    this.config = config;
+    this.doHighlight();
+  }
+
+  onChartTypesChange(): void {
+    const config = { ...this.config };
+    if (config && config.chartOptions) {
+      config.chartOptions.type = this.selectedChartType as keyof ChartTypeRegistry;
     }
     this.config = config;
     this.doHighlight();

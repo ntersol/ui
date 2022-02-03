@@ -40,6 +40,17 @@
             </p>
           </div>
           <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <h4><strong>chartOptions</strong> - type <small class="ms-3">doughnut</small></h4>
+            <p-dropdown
+              [options]="chartTypes"
+              [(ngModel)]="selectedChartType"
+              (ngModelChange)="onChartTypesChange()"
+              optionValue="value"
+              optionLabel="name"
+            ></p-dropdown>
+            <p>Changes the chart type</p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 mb-3">
             <h4><strong>chartOptions</strong> - backgroundColor <small class="ms-3">#6c757d, #ff6600</small></h4>
             <p-colorPicker [(ngModel)]="background1" (ngModelChange)="onChartOptionsChange()"></p-colorPicker>
             <p-colorPicker
@@ -97,7 +108,11 @@
           </div>
           <div class="col-12 col-md-6 col-lg-4 mb-3">
             <h4><strong>terms</strong> <small class="ms-3">30</small></h4>
-            <p-inputNumber inputId="terms" [(ngModel)]="config.terms" (ngModelChange)="onChange()"></p-inputNumber>
+            <p-inputNumber
+              inputId="settingsTerms"
+              [(ngModel)]="config.terms"
+              (ngModelChange)="onChange()"
+            ></p-inputNumber>
             <p>Sets the default selected term</p>
           </div>
           <div class="col-12 col-md-6 col-lg-4 mb-3">
@@ -109,6 +124,11 @@
             <h4><strong>showAmortization</strong> <small class="ms-3">true</small></h4>
             <p-inputSwitch [(ngModel)]="config.showAmortization" (ngModelChange)="onChange()"></p-inputSwitch>
             <p>Shows the amortization schedule button</p>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <h4><strong>showTotal</strong> <small class="ms-3">false</small></h4>
+            <p-inputSwitch [(ngModel)]="config.showTotal" (ngModelChange)="onChange()"></p-inputSwitch>
+            <p>Shows the total payment for the life of the loan</p>
           </div>
         </div>
         <p-accordion>

@@ -7,9 +7,10 @@ import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
 import { ChartModule } from 'primeng/chart';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, DialogModule, DividerModule, DropdownModule, ChartModule, InputNumberModule],
+  imports: [CommonModule, FormsModule, DialogModule, DividerModule, DropdownModule, ChartModule, InputNumberModule, TabViewModule],
   declarations: [MtgCalcComponent],
   exports: [MtgCalcComponent],
 })

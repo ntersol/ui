@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ViewChild } from '@angular/core';
 import { mergeDeepRight } from 'ramda';
 import { MtgCalcConfig, PAndI } from './mtg-calc.model';
 import { DEFAULT } from './mtg-calc.constants';
+import { ChartConfiguration } from 'chart.js';
 
 @Component({
   selector: 'nts-mtg-calc',
@@ -9,8 +10,10 @@ import { DEFAULT } from './mtg-calc.constants';
   styleUrls: ['./mtg-calc.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtgCalcComponent implements OnInit {
+export class MtgCalcComponent {
   _config = DEFAULT;
+  monthlyChart!: ChartConfiguration;
+  totalPayment: number = 0;
   showAmortization = false;
   amortization: Array<PAndI> = [];
   monthlyAmount = 0;
@@ -21,17 +24,17 @@ export class MtgCalcComponent implements OnInit {
 
   @Input() set config(value: MtgCalcConfig) {
     this._config = mergeDeepRight(DEFAULT, value) as MtgCalcConfig;
+    if (this._config.chartOptions) {
+      this.monthlyChart = mergeDeepRight({}, this._config.chartOptions);
+    }
     this.calculatePayments();
   }
 
   @ViewChild('termDropdownRef') termDropdownRef: any;
   @ViewChild('pieChart') pieChart: any;
+  @ViewChild('monthlyPieChart') monthlyPieChart: any;
 
   constructor() {}
-
-  ngOnInit(): void {
-    this.calculatePayments();
-  }
 
   calculatePayments(): void {
     let p = this.config.loanAmount;
@@ -48,10 +51,17 @@ export class MtgCalcComponent implements OnInit {
       let h = 1;
       let c = 1;
       let interestTotal = 0;
+      let index = 1;
       while (p >= 0) {
         h = p * j;
         c = m - h;
         q = p - c;
+        if (this.config.showChart && index === 1) {
+          this.monthlyChart.data.datasets[0].data = [parseFloat(c.toFixed(2)), parseFloat(h.toFixed(2))];
+          if (this.monthlyPieChart) {
+            this.monthlyPieChart.refresh();
+          }
+        }
         if (this.amortization.length < n) {
           interestTotal += h;
           this.amortization.push({
@@ -61,7 +71,9 @@ export class MtgCalcComponent implements OnInit {
           });
         }
         p = q;
+        index++;
       }
+      this.totalPayment = (this.config.loanAmount || 0) + parseFloat(interestTotal.toFixed(2));
       if (this.config.showChart && this.config.chartOptions) {
         this.config.chartOptions.data.datasets[0].data = [
           this.config.loanAmount || 0,
@@ -78,6 +90,12 @@ export class MtgCalcComponent implements OnInit {
     if (this.config.autoCalculate) {
       this.calculatePayments();
     }
+  }
+
+  onTabChange(e: any): void {
+    setTimeout(() => {
+      this.calculatePayments();
+    }, 100);
   }
 
   showDropdown(): void {
