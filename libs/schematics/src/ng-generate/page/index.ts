@@ -20,7 +20,6 @@ function addFiles(tree: Tree, options: NormalizedSchema) {
     offsetFromRoot: offsetFromRoot(options.projectRoot),
     template: '',
   };
-
   const pageDir = options.directory
     ? path.join(options.projectRoot, `/src/app/routes/${options.directory}/${names(options.name).fileName}`)
     : path.join(options.projectRoot, `/src/app/routes/${names(options.name).fileName}`);
