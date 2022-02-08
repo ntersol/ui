@@ -1,13 +1,17 @@
 import { chain, noop, Rule, SchematicContext, SchematicsException, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { addModuleImportToRootModule, getProjectFromWorkspace, getProjectMainFile } from '@angular/cdk/schematics';
+import {
+  addModuleImportToRootModule,
+  getProjectFromWorkspace,
+  getProjectMainFile,
+  insertImport,
+} from '@angular/cdk/schematics';
 import { InsertChange } from '@schematics/angular/utility/change';
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
 import { getWorkspace } from '@schematics/angular/utility/workspace';
 import * as ts from 'typescript';
 import { Schema } from './schema';
-import { insertImport } from './utils';
 
 function addPackageJsonDependencies(options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {

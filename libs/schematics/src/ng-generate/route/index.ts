@@ -1,3 +1,4 @@
+import { strings } from '@angular-devkit/core';
 import {
   apply,
   branchAndMerge,
@@ -10,7 +11,8 @@ import {
   Tree,
   url,
 } from '@angular-devkit/schematics';
-import { getProjectPath, parseName, stringUtils } from '../utils';
+import { parseName } from '@schematics/angular/utility/parse-name';
+import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/workspace';
 
 interface Options {
   name: string;
@@ -19,18 +21,23 @@ interface Options {
 
 function addFiles(options: Options) {
   return async (host: Tree) => {
-    options.path = await getProjectPath(host, options);
-    const parsedPath = parseName(options);
+    const workspace = await getWorkspace(host);
+    const projectName = workspace.projects.keys().next().value;
+    const project = workspace.projects.get(projectName);
 
-    (parsedPath as any).path = parsedPath.path;
+    if (options.path === undefined && project) {
+      options.path = buildDefaultPath(project);
+    }
+
+    const parsedPath = parseName(options.path as string, options.name);
     options.name = parsedPath.name;
     options.path = parsedPath.path;
 
     const templateSource = apply(url('./files'), [
       template({
-        ...stringUtils,
-        ...(options as object),
-      } as any),
+        ...strings,
+        ...options,
+      }),
       move(parsedPath.path),
     ]);
 
