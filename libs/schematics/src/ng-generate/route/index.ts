@@ -25,10 +25,7 @@ function addFiles(options: Options) {
     const projectName = workspace.projects.keys().next().value;
     const project = workspace.projects.get(projectName);
 
-    if (options.path === undefined && project) {
-      options.path = buildDefaultPath(project);
-    }
-
+    if (options.path === undefined && project) options.path = buildDefaultPath(project);
     const parsedPath = parseName(options.path as string, options.name);
     options.name = parsedPath.name;
     options.path = parsedPath.path;
