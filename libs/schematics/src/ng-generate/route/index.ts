@@ -37,7 +37,6 @@ function addFiles(options: Options) {
       }),
       move(parsedPath.path),
     ]);
-
     return chain([mergeWith(templateSource)]);
   };
 }
