@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { <%= className %>Component } from './<%= fileName%>.component';
+import { <%= classify(name) %>Component } from './<%= dasherize(name)%>.component';
 import { SiteModule } from '../../site.module';
-import { <%= className%>RoutingModule } from './<%= fileName%>-routing.module';
+import { <%= classify(name)%>RoutingModule } from './<%= dasherize(name)%>-routing.module';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, <%= className%>RoutingModule],
-  declarations: [<%= className %>Component],
+  imports: [CommonModule, SiteModule, <%= classify(name)%>RoutingModule],
+  declarations: [<%= classify(name) %>Component],
 })
-export class <%= className%>Module {}
+export class <%= classify(name)%>Module {}

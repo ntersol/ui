@@ -1,14 +1,14 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { <%= className%>Component } from './<%= fileName%>.component';
+import { <%= classify(name)%>Component } from './<%= dasherize(name)%>.component';
 
-describe('<%= className%>Component', () => {
-  let component: <%= className%>Component;
-  let fixture: ComponentFixture<<%= className%>Component>;
+describe('<%= classify(name)%>Component', () => {
+  let component: <%= classify(name)%>Component;
+  let fixture: ComponentFixture<<%= classify(name)%>Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [<%= className%>Component],
+      declarations: [<%= classify(name)%>Component],
       imports: [
         HttpClientTestingModule,
       ],
@@ -16,7 +16,7 @@ describe('<%= className%>Component', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(<%= className%>Component);
+    fixture = TestBed.createComponent(<%= classify(name)%>Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

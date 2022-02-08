@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes,  RouterModule } from '@angular/router';
-import { <%= className%>Component } from './<%= fileName%>.component';
+import { <%= classify(name)%>Component } from './<%= dasherize(name)%>.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: <%= className%>Component
+        component: <%= classify(name)%>Component
     }
 ];
 
@@ -13,5 +13,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class <%= className%>RoutingModule {}
+export class <%= classify(name)%>RoutingModule {}
 
