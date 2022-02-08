@@ -15,6 +15,6 @@
     "@angular-devkit/core": "^13.2.1",
     "@schematics/angular": "^13.2.1",
     "@angular/cdk": "^13.1.2",
-    "@nrwl/devkit": "13.4.5"
+    "@ntersol/state-management": "^1.0.6"
   }
 }

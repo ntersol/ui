@@ -15,8 +15,17 @@
     "path": {
       "type": "string",
       "format": "path",
-      "description": "The path to create the route",
-      "visible": false
+      "description": "The path to create the route"
+    },
+    "apiStore": {
+      "type": "boolean",
+      "default": false,
+      "description": "Does this route need an API store?"
+    },
+    "uiStore": {
+      "type": "boolean",
+      "default": false,
+      "description": "Does this route need a UI store?"
     }
   },
   "required": ["name"]

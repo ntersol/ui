@@ -3,8 +3,10 @@ import {
   apply,
   branchAndMerge,
   chain,
+  filter,
   mergeWith,
   move,
+  noop,
   Rule,
   SchematicContext,
   template,
@@ -17,6 +19,8 @@ import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/work
 interface Options {
   name: string;
   path?: string;
+  apiStore?: boolean;
+  uiStore?: boolean;
 }
 
 function addFiles(options: Options) {
@@ -31,6 +35,8 @@ function addFiles(options: Options) {
     options.path = parsedPath.path;
 
     const templateSource = apply(url('./files'), [
+      options.apiStore ? filter((path) => !path.includes('-api-store.service')) : noop(),
+      options.uiStore ? filter((path) => !path.includes('-ui-store.service')) : noop(),
       template({
         ...strings,
         ...options,
