@@ -17,12 +17,12 @@
       "format": "path",
       "description": "The path to create the route"
     },
-    "apiStore": {
+    "api-store": {
       "type": "boolean",
       "default": false,
       "description": "Does this route need an API store?"
     },
-    "uiStore": {
+    "ui-store": {
       "type": "boolean",
       "default": false,
       "description": "Does this route need a UI store?"
