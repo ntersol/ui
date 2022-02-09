@@ -15,18 +15,12 @@ import { Schema } from './schema';
 
 function addPackageJsonDependencies(options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {
-    const dependencies: NodeDependency[] = [
-      {
-        type: NodeDependencyType.Default,
-        version: '~0.0.20',
-        name: '@ntersol/schematics',
-      },
-    ];
+    const dependencies: NodeDependency[] = [];
 
     if (options.documentEditor) {
       dependencies.push({
         type: NodeDependencyType.Default,
-        version: '~0.0.20',
+        version: '^0.0.27',
         name: '@ntersol/document-editor',
       });
     }

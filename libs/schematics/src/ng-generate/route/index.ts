@@ -39,8 +39,8 @@ function addFiles(options: Options) {
         ...strings,
         ...options,
       }),
-      options.apiStore ? filter((path) => !path.endsWith('-api-store.service.ts')) : noop(),
-      options.uiStore ? filter((path) => !path.endsWith('-ui-store.service.ts')) : noop(),
+      !options.apiStore ? filter((path) => !path.endsWith('-api-store.service.ts')) : noop(),
+      !options.uiStore ? filter((path) => !path.endsWith('-ui-store.service.ts')) : noop(),
       move(parsedPath.path),
     ]);
     return chain([mergeWith(templateSource)]);
