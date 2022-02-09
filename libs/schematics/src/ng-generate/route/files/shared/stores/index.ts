@@ -1,2 +1,2 @@
-export * from './<%= classify(name) %>-api-store.service';
-export * from './<%= classify(name) %>-ui-store.service';
+export * from './<%= dasherize(name) %>-api-store.service';
+export * from './<%= dasherize(name) %>-ui-store.service';
