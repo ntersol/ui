@@ -17,6 +17,15 @@
       "format": "path",
       "description": "The path to create the route"
     },
+    "module": {
+      "type": "string",
+      "description": "The module to add the route to"
+    },
+    "route": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to use for the route"
+    },
     "apiStore": {
       "type": "boolean",
       "default": false,
