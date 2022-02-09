@@ -19,8 +19,8 @@ import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/work
 interface Options {
   name: string;
   path?: string;
-  'api-store'?: boolean;
-  'ui-store'?: boolean;
+  apiStore?: boolean;
+  uiStore?: boolean;
 }
 
 function addFiles(options: Options) {
@@ -35,8 +35,8 @@ function addFiles(options: Options) {
     options.path = parsedPath.path;
 
     const templateSource = apply(url('./files'), [
-      !options['api-store'] ? filter((path) => path.includes('-api-store.service')) : noop(),
-      !options['ui-store'] ? filter((path) => path.includes('-ui-store.service')) : noop(),
+      !options.apiStore ? filter((path) => path.includes('-api-store.service')) : noop(),
+      !options.uiStore ? filter((path) => path.includes('-ui-store.service')) : noop(),
       template({
         ...strings,
         ...options,
