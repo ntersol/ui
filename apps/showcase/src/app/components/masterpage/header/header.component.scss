@@ -16,4 +16,16 @@ header {
   .nav {
     flex-grow: 1;
   }
+
+  .github {
+    padding: 0 1ch;
+
+    a {
+      vertical-align: -webkit-baseline-middle;
+    }
+
+    i {
+      font-size: 24px;
+    }
+  }
 }
