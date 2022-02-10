@@ -35,9 +35,7 @@ interface Options {
 }
 
 function buildRelativeModulePath(options: Options, modulePath: string): string {
-  const importModulePath = normalize(
-    `/${options.path}/` + strings.dasherize(options.name) + '/' + strings.dasherize(options.name) + '.module',
-  );
+  const importModulePath = normalize(`/${options.path}/` + strings.dasherize(options.name) + '.module');
 
   return buildRelativePath(modulePath, importModulePath);
 }
