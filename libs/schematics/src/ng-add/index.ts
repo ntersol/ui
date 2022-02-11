@@ -49,7 +49,7 @@ function setSchematicsAsDefault(): Rule {
 
 function log(): Rule {
   return (host: Tree, context: SchematicContext) => {
-    context.logger.log('info', `👏 Create your first route by running: ng g route --name home`);
+    context.logger.log('info', `👏 Create your first route by running: ng g r src/app/routes/feature`);
 
     return host;
   };

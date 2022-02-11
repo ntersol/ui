@@ -6,7 +6,7 @@ Install `npm install @ntersol/schematics` or
 <br>
 Run `ng add @ntersol/schematics` to get started
 
-Once configured run `ng g route --name home` to create your first route
+Once configured run `ng g r src/app/routes/feature` to create your first route named feature in the routes directory
 
 **Note: using ng add will automatically configure schematics. If installing manually be sure to configure manually as well... `ng config cli.defaultCollection @ntersol/schematics`**
 

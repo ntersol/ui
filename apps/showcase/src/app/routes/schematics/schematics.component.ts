@@ -8,19 +8,24 @@ import { HighlightService } from '../../shared/services/highlight.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SchematicsComponent implements OnInit, AfterViewInit {
-  public addTS: string = `
+  public add: string = `
     ng add @ntersol/schematics
     `;
-  public configTS = `
+  public config = `
     ng config cli.defaultCollection @ntersol/schematics
   `;
-  public generateTS = `
-    ng g route src/app/routes/<feature-folder>/<feature-name>
-    ng g route src/app/routes/feature/feature
-    `;
-  public generateWithStoresTS = `
-    ng g r --name home --path src/app/routes --apiStore --uiStore
-    `;
+  public generate = `
+    ng g route src/app/routes/<name>
+  `;
+  public alias = `
+    ng g r src/app/routes/feature
+  `;
+  public routing = `
+    ng g r src/app/routes/feature --module app.routes --route path-of-feature
+  `;
+  public stores = `
+    ng g r src/app/routes/feature --module app.routes --route path-of-feature --uiStore
+  `;
   constructor(public highlight: HighlightService) {}
 
   ngOnInit() {}
