@@ -7,6 +7,7 @@
       "description": "Ntersol's Add Schematic"
     },
     "route": {
+      "aliases": ["r"],
       "factory": "./ng-generate/route/index",
       "schema": "./ng-generate/route/schema.json",
       "description": "Add new route"
