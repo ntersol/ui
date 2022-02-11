@@ -106,6 +106,7 @@ function addFiles(options: Options) {
     if (options.path === undefined) {
       options.path = buildDefaultPath(project);
     }
+
     const parsedPath = parseName(options.path, options.name);
     options.name = parsedPath.name;
     options.path = parsedPath.path;
