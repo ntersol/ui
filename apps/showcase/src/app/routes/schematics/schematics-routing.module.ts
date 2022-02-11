@@ -6,6 +6,9 @@ const routes: Routes = [
   {
     path: 'generators',
     component: SchematicsComponent,
+    data: {
+      title: 'Schematics - Generators',
+    },
   },
 ];
 

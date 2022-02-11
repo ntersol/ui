@@ -9,6 +9,7 @@ import {
   noop,
   Rule,
   SchematicContext,
+  SchematicsException,
   template,
   Tree,
   url,
@@ -27,6 +28,7 @@ import * as ts from 'typescript';
 
 interface Options {
   name: string;
+  project: string;
   path?: string;
   module?: string;
   route?: string;
@@ -95,11 +97,14 @@ function buildRoute(options: Options, modulePath: string) {
 function addFiles(options: Options) {
   return async (host: Tree) => {
     const workspace = await getWorkspace(host);
-    const projectName = workspace.projects.keys().next().value;
-    const project = workspace.projects.get(projectName);
+    const project = workspace.projects.get(options.project as string);
+
+    if (!project) {
+      throw new SchematicsException(`Project "${project}" does not exist.`);
+    }
 
     if (options.path === undefined && project) options.path = buildDefaultPath(project);
-    const parsedPath = parseName(`${options.path}/${options.name}`, options.name);
+    const parsedPath = parseName(`${options.path}`, options.name);
     options.name = parsedPath.name;
     options.path = parsedPath.path;
 
