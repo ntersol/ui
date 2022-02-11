@@ -7,7 +7,6 @@ import { ImageResizerComponent } from './routes/image-resizer/image-resizer.comp
 import { LibLoaderComponent } from './routes/lib-loader/lib-loader.component';
 import { RemoveNilsComponent } from './routes/remove-nils/remove-nils.component';
 import { ScriptLoaderComponent } from './routes/script-loader/script-loader.component';
-import { SchematicsComponent } from './schematics/schematics.component';
 import { UtilitiesComponent } from './utilities.component';
 import { UtilitiesModule } from './utilities.module';
 
@@ -46,11 +45,6 @@ const routes: Routes = [
     path: 'dialog',
     component: DialogPage,
     data: { title: 'Dialog' },
-  },
-  {
-    path: 'schematics',
-    component: SchematicsComponent,
-    data: { title: 'Schematics' },
   },
   {
     path: '',

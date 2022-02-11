@@ -1,0 +1,37 @@
+<div class="author"><strong>Author:</strong>Warren Dugan</div>
+<h1>Generators</h1>
+<p>Using Ntersol's schematics and generators</p>
+<hr />
+
+<p-tabView>
+  <p-tabPanel header="Ng Add">
+    <div>
+      <h2>Setup</h2>
+      <pre>
+          <code class="language-ts" [innerHtml]="addTS"></code>
+        </pre>
+      <pre>
+          <code class="language-ts" [innerHtml]="configTS"></code>
+        </pre>
+      <div class="footnote">
+        <small>&uparrow; Note: done automatically by ng-add</small>
+      </div>
+    </div>
+    <img src="assets/img/ntersol-schematics.png" alt="Ntersol Schematics Screenshot" width="500" />
+  </p-tabPanel>
+
+  <p-tabPanel header="Ng Generate">
+    <div>
+      <h2>Generate</h2>
+      <pre>
+        <code class="language-ts" [innerHtml]="generateTS"></code>
+      </pre>
+      <pre>
+        <code class="language-ts" [innerHtml]="generateWithStoresTS"></code>
+      </pre>
+      <div class="footnote">
+        <small>&uparrow; We can also generate optional UI and API stores for our route</small>
+      </div>
+    </div>
+  </p-tabPanel>
+</p-tabView>

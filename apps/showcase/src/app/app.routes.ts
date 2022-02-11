@@ -6,6 +6,10 @@ import { NoContentComponent } from './routes/no-content/no-content.component';
 
 // import { AuthGuard } from './shared/guards/auth.guard';
 
+// import { AuthGuard } from './shared/guards/auth.guard';
+
+// import { AuthGuard } from './shared/guards/auth.guard';
+
 export const ROUTES: Routes = [
   // Routes without masterpage or that do not need to be authenticated need to go first
 
@@ -52,6 +56,10 @@ export const ROUTES: Routes = [
         path: 'route',
         pathMatch: 'full',
         loadChildren: () => import('./routes/_route/route.module').then((m) => m.RouteModule),
+      },
+      {
+        path: 'schematics',
+        loadChildren: () => import('./routes/schematics/schematics.module').then((m) => m.SchematicsModule),
       },
       {
         path: 'coming-soon',

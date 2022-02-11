@@ -12,7 +12,6 @@ import { ImageResizerComponent } from './routes/image-resizer/image-resizer.comp
 import { LibLoaderComponent } from './routes/lib-loader/lib-loader.component';
 import { RemoveNilsComponent } from './routes/remove-nils/remove-nils.component';
 import { ScriptLoaderComponent } from './routes/script-loader/script-loader.component';
-import { SchematicsComponent } from './schematics/schematics.component';
 import { RouteUiStateQuery, RouteUiStateService, RouteUiStateStore } from './shared/state/ui/route-ui-state.service';
 // Components
 import { UtilitiesComponent } from './utilities.component';
@@ -29,7 +28,6 @@ import { UtilitiesComponent } from './utilities.component';
     FocusTrapComponent,
     FocusTrapDirective,
     DialogPage,
-    SchematicsComponent,
   ],
   providers: [RouteUiStateService, RouteUiStateStore, RouteUiStateQuery],
   entryComponents: [],
