@@ -1,21 +1,13 @@
 import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { addModuleImportToRootModule, getProjectFromWorkspace } from '@angular/cdk/schematics';
-import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
+import { getProjectFromWorkspace } from '@angular/cdk/schematics';
+import { addPackageJsonDependency, NodeDependency } from '@schematics/angular/utility/dependencies';
 import { getWorkspace } from '@schematics/angular/utility/workspace';
 import { Schema } from './schema';
 
 function addPackageJsonDependencies(options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {
     const dependencies: NodeDependency[] = [];
-
-    if (options.documentEditor) {
-      dependencies.push({
-        type: NodeDependencyType.Default,
-        version: '^0.0.27',
-        name: '@ntersol/document-editor',
-      });
-    }
 
     if (dependencies.length) {
       dependencies.forEach((dependency) => {
@@ -41,10 +33,6 @@ function injectImports(options: Schema) {
   return async (host: Tree, _context: SchematicContext) => {
     const workspace = await getWorkspace(host);
     const project = getProjectFromWorkspace(workspace);
-
-    if (options.documentEditor) {
-      addModuleImportToRootModule(host, 'NtsDocumentEditorModule', '@ntersol/document-editor', project);
-    }
   };
 }
 
