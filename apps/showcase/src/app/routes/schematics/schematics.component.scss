@@ -1,3 +1,20 @@
+::ng-deep {
+  .code-toolbar {
+    width: auto;
+    display: table;
+
+    pre {
+      padding: initial;
+      padding-right: 4ch;
+      overflow: initial;
+
+      code {
+        line-height: 1;
+      }
+    }
+  }
+}
+
 .footnote {
   margin-left: 1rem;
   margin-bottom: 2rem;

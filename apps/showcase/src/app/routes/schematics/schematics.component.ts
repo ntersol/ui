@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { HighlightService } from '../../shared/services/highlight.service';
 
 @Component({
@@ -7,10 +7,7 @@ import { HighlightService } from '../../shared/services/highlight.service';
   styleUrls: ['./schematics.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SchematicsComponent implements OnInit, OnDestroy {
-  name = 'schematics';
-  public enabled = false;
-  public opened = false;
+export class SchematicsComponent implements OnInit, AfterViewInit {
   public addTS: string = `
     ng add @ntersol/schematics
     `;
@@ -18,10 +15,11 @@ export class SchematicsComponent implements OnInit, OnDestroy {
     ng config cli.defaultCollection @ntersol/schematics
   `;
   public generateTS = `
-    ng g route --name home --path src/app/routes
+    ng g route src/app/routes/<feature-folder>/<feature-name>
+    ng g route src/app/routes/feature/feature
     `;
   public generateWithStoresTS = `
-    ng g route --name home --path src/app/routes --apiStore --uiStore
+    ng g r --name home --path src/app/routes --apiStore --uiStore
     `;
   constructor(public highlight: HighlightService) {}
 
@@ -30,6 +28,4 @@ export class SchematicsComponent implements OnInit, OnDestroy {
   ngAfterViewInit(): void {
     this.highlight.highlightAll();
   }
-
-  ngOnDestroy() {}
 }

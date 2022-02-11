@@ -1,4 +1,5 @@
 <div class="author"><strong>Author:</strong>Warren Dugan</div>
+<small class="npm"><a href="https://www.npmjs.com/package/@ntersol/schematics" target="_blank">NPM</a></small>
 <h1>Generators</h1>
 <p>Using Ntersol's schematics and generators</p>
 <hr />
@@ -8,26 +9,33 @@
     <div>
       <h2>Setup</h2>
       <pre>
-          <code class="language-ts" [innerHtml]="addTS"></code>
-        </pre>
+          <code class="language-bash" [innerHtml]="addTS"></code>
+      </pre>
+      <img src="assets/img/ntersol-schematics.png" alt="Ntersol Schematics Screenshot" width="500" />
+    </div>
+
+    <div>
+      <p class="mt-5">
+        Already installed the schematics? Don't worry, you can still use ng-add or you can configure default schematics
+        manually like so
+      </p>
       <pre>
-          <code class="language-ts" [innerHtml]="configTS"></code>
-        </pre>
+          <code class="language-bash" [innerHtml]="configTS"></code>
+      </pre>
       <div class="footnote">
         <small>&uparrow; Note: done automatically by ng-add</small>
       </div>
     </div>
-    <img src="assets/img/ntersol-schematics.png" alt="Ntersol Schematics Screenshot" width="500" />
   </p-tabPanel>
 
   <p-tabPanel header="Ng Generate">
     <div>
       <h2>Generate</h2>
       <pre>
-        <code class="language-ts" [innerHtml]="generateTS"></code>
+        <code class="language-bash" [innerHtml]="generateTS"></code>
       </pre>
       <pre>
-        <code class="language-ts" [innerHtml]="generateWithStoresTS"></code>
+        <code class="language-bash" [innerHtml]="generateWithStoresTS"></code>
       </pre>
       <div class="footnote">
         <small>&uparrow; We can also generate optional UI and API stores for our route</small>

@@ -100,11 +100,13 @@ function addFiles(options: Options) {
     const project = workspace.projects.get(options.project as string);
 
     if (!project) {
-      throw new SchematicsException(`Project "${project}" does not exist.`);
+      throw new SchematicsException(`Project "${options.project}" does not exist.`);
     }
 
-    if (options.path === undefined && project) options.path = buildDefaultPath(project);
-    const parsedPath = parseName(`${options.path}`, options.name);
+    if (options.path === undefined) {
+      options.path = buildDefaultPath(project);
+    }
+    const parsedPath = parseName(options.path, options.name);
     options.name = parsedPath.name;
     options.path = parsedPath.path;
 
