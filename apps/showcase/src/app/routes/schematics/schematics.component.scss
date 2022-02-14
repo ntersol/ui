@@ -1,16 +1,19 @@
-::ng-deep {
-  .code-toolbar {
-    width: auto;
-    display: table;
+:host {
+  &::ng-deep {
+    .code-toolbar {
+      width: auto;
+      display: table;
+      margin-bottom: 0;
 
-    pre {
-      padding: initial;
-      padding-right: 4ch;
-      overflow: initial;
-      height: 70px;
+      pre {
+        padding: initial;
+        padding-right: 4ch;
+        overflow: initial;
+        height: 70px;
 
-      code {
-        line-height: 1;
+        code {
+          line-height: 1;
+        }
       }
     }
   }
