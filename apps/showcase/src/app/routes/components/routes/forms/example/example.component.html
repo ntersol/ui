@@ -2,6 +2,10 @@
     <div class="float-right">
         <button class="btn btn-primary btn-sm" (click)="test()">Test Errors</button>
     </div>
+    <h2>Dropdown Examples</h2>
+    <p>
+        <nts-dropdown label="Test" [options]="dropdownOptions" [control]="form.get('dropdown')"></nts-dropdown>
+    </p>
     <h2>Text Input Examples</h2>
     <p class="example">
         <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="The Kitchen Sink"
@@ -39,5 +43,6 @@
         <nts-input-number placeholder="$100.00" label="Currency" mode="currency" [control]="form?.get('currency')">
         </nts-input-number>
     </div>
+    <hr />
 
 </form>

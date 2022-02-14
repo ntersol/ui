@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NtsValidators } from '@ntersol/forms';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'nts-example',
@@ -22,7 +23,18 @@ export class ExampleComponent implements OnInit {
     population: [],
     decimal: [],
     currency: [],
+    //
+    dropdown: []
   });
+
+
+  public dropdownOptions: SelectItem[] = [
+    {
+      label: 'Hello',
+      value: 'World'
+    }
+  ]
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() { }
