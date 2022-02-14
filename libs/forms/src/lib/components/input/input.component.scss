@@ -29,6 +29,14 @@ $smallText: 80%;
   .p-inputtext.ng-dirty.ng-invalid {
     border-color: initial;
   }
+  .p-float-label > label {
+    color: #949494;
+  }
+  .p-float-label .p-inputwrapper-filled ~ label,
+  .p-float-label .p-inputwrapper-focus ~ label,
+  .p-float-label > label.float {
+    color: #000;
+  }
   .p-float-label > .ng-invalid.ng-dirty + label {
     color: initial;
   }

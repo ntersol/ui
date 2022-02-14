@@ -13,6 +13,15 @@ import { NtsInputComponent } from '../input/input.component';
 export class NtsDropdownComponent extends NtsInputComponent<any[]> implements OnInit {
 
   @Input() options: SelectItem[] = [];
+  @Input() optionLabel = 'label';
+  @Input() optionValue = 'value';
+  @Input() scrollHeight = '200px';
+
+  /** Style of the dropdown panel */
+  @Input() panelStyle = '';
+  /** Css class */
+  @Input() panelStyleClass = '';
+
 
   public get optionsMapped() {
     return [{ label: '-- Please Select --', value: null, styleClass: 'color:#666666', style: 'color:#666666', disabled: true }, ...this.options];

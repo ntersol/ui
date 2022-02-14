@@ -35,6 +35,8 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   @Input() name = '';
   /** Any css classes */
   @Input() styleClass = '';
+  /** Any inline style */
+  @Input() style = '';
   /**
    * Enable/disable this control, uses the form controls status.
    * Setting the disabled property should be done in the formgroup itself but sometimes this method is useful
