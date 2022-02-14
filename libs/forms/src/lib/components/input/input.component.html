@@ -1,5 +1,6 @@
 <div class="nts-form-field" [ngClass]="{
-   'nts-form-field-has-errors' : showErrors$ | async
+   'nts-form-field-has-errors' : showErrors$ | async,
+   'nts-form-field-required': required
 }">
     <div class="p-inputgroup">
         <!-- Prefix -->
@@ -10,7 +11,7 @@
             <!-- Label-->
             <label [ngClass]="{
                 'float' : !hover || (formControl?.value !== null && formControl?.value !== '')
-            }" [innerHtml]="label"></label>
+            }" [innerHtml]="!!required ? label + requiredTag : label"></label>
         </span>
 
         <!-- Suffix -->

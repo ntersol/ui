@@ -3,6 +3,7 @@ import { AbstractControl, FormControl, } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { combineLatest, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, tap, startWith } from 'rxjs/operators';
+import { isRequired } from '../../utils';
 
 
 @UntilDestroy()
@@ -82,9 +83,20 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   /** Convert the errors in the form control error record to something iterable */
   public errors$!: Observable<[string, any][] | null>
 
+  /** Is this field required */
+  public required = false;
+
+  /** DOM element for showing required status */
+  public requiredTag = `<sup class="required">*</sup>`
+
   constructor() { }
 
   ngOnInit(): void {
+
+    // Check if control is required
+    if (this.formControl) {
+      this.required = isRequired(this.formControl);
+    }
 
     // When value changes, either programmatically OR via the user input
     this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe(v => {

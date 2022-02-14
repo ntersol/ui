@@ -36,9 +36,15 @@ $smallText: 80%;
   .p-float-label .p-inputwrapper-focus ~ label,
   .p-float-label > label.float {
     color: #000;
+    font-weight: bold;
   }
   .p-float-label > .ng-invalid.ng-dirty + label {
     color: initial;
+  }
+
+  .required {
+    color: red;
+    font-weight: 800;
   }
 
   /* Error handling */
