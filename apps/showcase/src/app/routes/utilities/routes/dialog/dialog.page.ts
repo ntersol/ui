@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component } from '@angular/core';
 import { HighlightService } from '../../../../shared/services/highlight.service';
 
 @Component({
@@ -22,7 +22,6 @@ export class DialogPage implements AfterViewInit {
     <router-outlet></router-outlet>
     <!-- Add named outlet to app root HTML -->
     <router-outlet name="dialog"></router-outlet>
-    <p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
   `;
   public usageHTML: string = `
     <!-- Link to your dialog like so -->
