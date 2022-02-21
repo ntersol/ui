@@ -1,5 +1,6 @@
 export * from './lib/dialog/dialog.component';
 export * from './lib/dialog/dialog.module';
+export * from './lib/focus-trap/focus-trap.directive';
 export * from './lib/focus-trap/focus-trap.module';
 export * from './lib/formgroup-2-api/formGroup2Api.util';
 export * from './lib/image-resizer/image-resizer.util';
