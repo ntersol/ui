@@ -913,7 +913,7 @@
         "deploy": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["ng run showcase:curate", "ng run showcase:gh"]
+            "commands": ["ng run showcase:build", "ng run showcase:curate", "ng run showcase:gh"]
           }
         }
       },
