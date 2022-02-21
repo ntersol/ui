@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { DialogModule, FocusTrapDirective } from '@ntersol/utils';
+import { DialogModule, FocusTrapModule } from '@ntersol/utils';
 import { TabViewModule } from 'primeng/tabview';
 import { SiteModule } from '../../site.module';
 // Routing
@@ -17,7 +17,7 @@ import { RouteUiStateQuery, RouteUiStateService, RouteUiStateStore } from './sha
 import { UtilitiesComponent } from './utilities.component';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, TabViewModule, DialogModule],
+  imports: [CommonModule, SiteModule, routing, TabViewModule, DialogModule, FocusTrapModule],
   declarations: [
     UtilitiesComponent,
     ScriptLoaderComponent,
@@ -26,7 +26,6 @@ import { UtilitiesComponent } from './utilities.component';
     RemoveNilsComponent,
     LibLoaderComponent,
     FocusTrapComponent,
-    FocusTrapDirective,
     DialogPage,
   ],
   providers: [RouteUiStateService, RouteUiStateStore, RouteUiStateQuery],
