@@ -897,7 +897,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "cwd": "dist/apps/showcase/",
-            "command": "npx pwa-asset-generator ./n-colored.svg -i ./index.html -m ./site.webmanifest --path https://ntersol.github.io/ui --path-override https://ntersol.github.io/ui"
+            "command": "npx pwa-asset-generator ./n-colored.svg -i ./index.html -m ./manifest.webmanifest --path https://ntersol.github.io/ui --path-override https://ntersol.github.io/ui"
           }
         },
         "gh": {
@@ -905,7 +905,6 @@
           "options": {
             "cname": "",
             "noBuild": true,
-            "baseHref": "https://ntersol.github.io/ui/",
             "name": "Github Actions",
             "email": "actions@github.com",
             "message": "Auto-generated commit [ci skip]"
@@ -914,7 +913,11 @@
         "deploy": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["ng run showcase:build", "ng run showcase:curate", "ng run showcase:gh"],
+            "commands": [
+              "ng run showcase:build:production --baseHref=https://ntersol.github.io/ui/",
+              "ng run showcase:curate",
+              "ng run showcase:gh"
+            ],
             "parallel": false
           }
         }
