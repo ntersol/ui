@@ -3,8 +3,10 @@
 
 <p-timeline [value]="steps" [align]="'opposite-content'">
   <ng-template pTemplate="opposite" let-event>
-    <div class="opposite ms-auto text-right">
-      <small class="p-text-secondary">{{ event.alt }}</small>
+    <div id="{{ event.slug }}" class="opposite ms-auto text-right">
+      <a class="text-decoration-none" [routerLink]="['./']" [fragment]="event.slug">
+        <small class="p-text-secondary">{{ event.alt }}</small>
+      </a>
     </div>
   </ng-template>
 

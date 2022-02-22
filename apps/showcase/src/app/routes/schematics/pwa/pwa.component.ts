@@ -10,6 +10,7 @@ export class PwaComponent implements AfterViewInit {
   steps = [
     {
       alt: 'Ready SVG',
+      slug: 'ready-svg',
       description: 'Have an SVG icon ready to convert',
       path: 'n-colored.svg',
       width: 100,
@@ -18,6 +19,7 @@ export class PwaComponent implements AfterViewInit {
     },
     {
       alt: 'Add NGSW Config to Root test',
+      slug: 'add-ngsw-config',
       description: 'Add an `ngsw-config.json` file to the root of your project (where `index.html` is)',
       type: 'json',
       code: `
@@ -55,6 +57,7 @@ export class PwaComponent implements AfterViewInit {
     },
     {
       alt: 'Add Service Worker to App Module',
+      slug: 'add-service-worker',
       description: 'Add Service Worker to App Module',
       type: 'typescript',
       code: `
@@ -68,6 +71,7 @@ export class PwaComponent implements AfterViewInit {
     },
     {
       alt: 'Update Build Config',
+      slug: 'update-build-config',
       description: 'Update the build configuration to output root assets at the root and add service worker options',
       type: 'json',
       code: `
@@ -94,6 +98,7 @@ export class PwaComponent implements AfterViewInit {
     },
     {
       alt: 'Add RealFavicon Icons',
+      slug: 'add-rfg-icons',
       type: 'markup',
       code: this.hs.htmlEncode(`
         <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
@@ -111,6 +116,7 @@ export class PwaComponent implements AfterViewInit {
     },
     {
       alt: 'Add Manifest WebManifest',
+      slug: 'add-manifest',
       type: 'json',
       code: `
         {
@@ -129,6 +135,7 @@ export class PwaComponent implements AfterViewInit {
     },
     {
       alt: 'Add Curate Target',
+      slug: 'add-curate-target',
       description:
         'Add curate target to project. Changes directory into the project specificed and applies the icon `n-colored.svg` to the generator.`',
       type: 'json',
@@ -144,6 +151,7 @@ export class PwaComponent implements AfterViewInit {
     },
     {
       alt: 'Add GH Target',
+      slug: 'add-gh-target',
       description: 'Add target to run github pages deploy.`',
       type: 'json',
       code: `
@@ -160,9 +168,10 @@ export class PwaComponent implements AfterViewInit {
       `,
     },
     {
-      alt: 'Modify Deploy Target',
+      alt: 'Update Deploy Target',
+      slug: 'update-deploy-target',
       description:
-        'Modify deploy target (so its still picked up by CICD) to run a build pointed at the GH href., then curate the PWA assets, then deploy to GH Pages',
+        'Update deploy target (so its still picked up by CICD) to run a build pointed at the GH href., then curate the PWA assets, then deploy to GH Pages',
       type: 'json',
       code: `
         "deploy": {

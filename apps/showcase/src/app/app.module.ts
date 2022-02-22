@@ -78,6 +78,7 @@ export let InjectorInstance: Injector;
       preloadingStrategy: environment.settings.preloadRoutes ? PreloadAllModules : NoPreloading,
       scrollPositionRestoration: 'enabled',
       relativeLinkResolution: 'legacy',
+      anchorScrolling: 'enabled',
     }),
 
     SiteModule,
