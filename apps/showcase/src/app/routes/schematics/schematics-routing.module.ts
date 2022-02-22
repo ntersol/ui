@@ -10,6 +10,7 @@ const routes: Routes = [
       title: 'Schematics - Generators',
     },
   },
+  { path: 'pwa', loadChildren: () => import('./pwa/pwa.module').then(m => m.PwaModule) },
 ];
 
 @NgModule({
