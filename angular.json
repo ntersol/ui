@@ -738,6 +738,47 @@
         }
       }
     },
+    "scss": {
+      "projectType": "library",
+      "root": "libs/scss",
+      "sourceRoot": "libs/scss/src",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cp -avr libs/scss/ dist/libs/scss/"]
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "libs/scss",
+            "command": "npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "dist/libs/scss",
+            "commands": ["npm pack", "npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run scss:patch", "ng run scss:build", "ng run scss:pack"],
+            "parallel": false
+          }
+        },
+        "auto-publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "ng run scss:publish"
+          }
+        }
+      }
+    },
     "services": {
       "projectType": "library",
       "root": "libs/services",

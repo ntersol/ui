@@ -1,0 +1,19 @@
+@import '../globals/variables';
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: #484f59;
+  background-color: $grey;
+}
+.p-container {
+  max-width: 1280px;
+  margin: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.p-container-fluid {
+  margin: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+}
