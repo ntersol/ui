@@ -22,6 +22,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Set SHAs [main]
+        id: setSHAs
         uses: nrwl/nx-set-shas@v2
       - name: Setup Node [14]
         uses: actions/setup-node@v1

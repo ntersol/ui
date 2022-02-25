@@ -24,9 +24,11 @@ jobs:
           fetch-depth: 0
       - name: Set SHAs [pr]
         if: ${{ github.event_name == 'pull_request' }}
+        id: setSHAs
         uses: nrwl/nx-set-shas@v2
       - name: Set SHAs [main]
         if: ${{ github.event_name != 'pull_request' }}
+        id: setSHAs
         uses: nrwl/nx-set-shas@v2
       - name: Setup Node [14]
         uses: actions/setup-node@v1
