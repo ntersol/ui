@@ -11,6 +11,11 @@
       "factory": "./ng-generate/route/index",
       "schema": "./ng-generate/route/schema.json",
       "description": "Add new route"
+    },
+    "curate": {
+      "implementation": "./ng-generate/curate/index",
+      "schema": "./ng-generate/curate/schema.json",
+      "description": "Curate PWA Assets"
     }
   }
 }
