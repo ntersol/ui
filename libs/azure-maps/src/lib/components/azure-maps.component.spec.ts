@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MapMapboxComponent } from './map-mapbox.component';
+import { NtsAzureMapsComponent } from './azure-maps.component';
 
-describe('MapMapboxComponent', () => {
-  let component: MapMapboxComponent;
-  let fixture: ComponentFixture<MapMapboxComponent>;
+describe('NtsAzureMapsComponent', () => {
+  let component: NtsAzureMapsComponent;
+  let fixture: ComponentFixture<NtsAzureMapsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MapMapboxComponent],
+      declarations: [NtsAzureMapsComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MapMapboxComponent);
+    fixture = TestBed.createComponent(NtsAzureMapsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

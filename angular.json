@@ -153,7 +153,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/chart/.storybook"
-            }
+            },
+            "projectBuildConfig": "chart:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -169,7 +170,8 @@
             "outputPath": "dist/storybook/chart",
             "config": {
               "configFolder": "libs/chart/.storybook"
-            }
+            },
+            "projectBuildConfig": "chart:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -264,7 +266,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/document-editor/.storybook"
-            }
+            },
+            "projectBuildConfig": "document-editor:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -280,7 +283,8 @@
             "outputPath": "dist/storybook/document-editor",
             "config": {
               "configFolder": "libs/document-editor/.storybook"
-            }
+            },
+            "projectBuildConfig": "document-editor:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -367,7 +371,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/forms/.storybook"
-            }
+            },
+            "projectBuildConfig": "forms:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -383,7 +388,8 @@
             "outputPath": "dist/storybook/forms",
             "config": {
               "configFolder": "libs/forms/.storybook"
-            }
+            },
+            "projectBuildConfig": "forms:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -534,7 +540,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/grid/.storybook"
-            }
+            },
+            "projectBuildConfig": "grid:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -550,7 +557,8 @@
             "outputPath": "dist/storybook/grid",
             "config": {
               "configFolder": "libs/grid/.storybook"
-            }
+            },
+            "projectBuildConfig": "grid:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -639,7 +647,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/mtg-calc/.storybook"
-            }
+            },
+            "projectBuildConfig": "mtg-calc:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -655,7 +664,8 @@
             "outputPath": "dist/storybook/mtg-calc",
             "config": {
               "configFolder": "libs/mtg-calc/.storybook"
-            }
+            },
+            "projectBuildConfig": "mtg-calc:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1043,7 +1053,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/state-management/.storybook"
-            }
+            },
+            "projectBuildConfig": "state-management:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1059,7 +1070,8 @@
             "outputPath": "dist/storybook/state-management",
             "config": {
               "configFolder": "libs/state-management/.storybook"
-            }
+            },
+            "projectBuildConfig": "state-management:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1111,7 +1123,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/storybook/.storybook"
-            }
+            },
+            "projectBuildConfig": "storybook:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1127,7 +1140,8 @@
             "outputPath": "dist/storybook/storybook",
             "config": {
               "configFolder": "libs/storybook/.storybook"
-            }
+            },
+            "projectBuildConfig": "storybook:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1209,7 +1223,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/table/.storybook"
-            }
+            },
+            "projectBuildConfig": "table:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1225,7 +1240,8 @@
             "outputPath": "dist/storybook/table",
             "config": {
               "configFolder": "libs/table/.storybook"
-            }
+            },
+            "projectBuildConfig": "table:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1307,7 +1323,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/tags/.storybook"
-            }
+            },
+            "projectBuildConfig": "tags:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1323,7 +1340,8 @@
             "outputPath": "dist/storybook/tags",
             "config": {
               "configFolder": "libs/tags/.storybook"
-            }
+            },
+            "projectBuildConfig": "tags:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1405,7 +1423,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/tree/.storybook"
-            }
+            },
+            "projectBuildConfig": "tree:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1421,7 +1440,8 @@
             "outputPath": "dist/storybook/tree",
             "config": {
               "configFolder": "libs/tree/.storybook"
-            }
+            },
+            "projectBuildConfig": "tree:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1567,7 +1587,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/visible/.storybook"
-            }
+            },
+            "projectBuildConfig": "visible:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1583,7 +1604,8 @@
             "outputPath": "dist/storybook/visible",
             "config": {
               "configFolder": "libs/visible/.storybook"
-            }
+            },
+            "projectBuildConfig": "visible:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1665,7 +1687,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/wizard/.storybook"
-            }
+            },
+            "projectBuildConfig": "wizard:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1681,7 +1704,8 @@
             "outputPath": "dist/storybook/wizard",
             "config": {
               "configFolder": "libs/wizard/.storybook"
-            }
+            },
+            "projectBuildConfig": "wizard:build-storybook"
           },
           "configurations": {
             "ci": {

@@ -31,7 +31,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         uses: nrwl/nx-set-shas@v2
         with:
-          main-branch-name: main~1
+          main-branch-name: main
       - name: Setup Node [14]
         uses: actions/setup-node@v1
         with:

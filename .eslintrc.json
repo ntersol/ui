@@ -2,7 +2,6 @@
   "root": true,
   "ignorePatterns": ["**/*"],
   "plugins": ["@nrwl/nx"],
-  "extends": ["tslint-angular"],
   "rules": {},
   "overrides": [
     {
