@@ -1,6 +1,6 @@
 {
   "name": "@ntersol/document-editor",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "peerDependencies": {},
   "dependencies": {
     "tslib": "^2.0.0"
