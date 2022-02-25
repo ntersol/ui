@@ -1,5 +1,5 @@
 {
-  "id": "curate",
+  "$id": "curate",
   "title": "curate",
   "description": "Favicon Generator",
   "properties": {
