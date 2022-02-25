@@ -25,13 +25,9 @@ jobs:
       - name: Set SHAs [pr]
         if: ${{ github.event_name == 'pull_request' }}
         uses: nrwl/nx-set-shas@v2
-        with:
-          main-branch-name: main
       - name: Set SHAs [main]
         if: ${{ github.event_name != 'pull_request' }}
         uses: nrwl/nx-set-shas@v2
-        with:
-          main-branch-name: main
       - name: Setup Node [14]
         uses: actions/setup-node@v1
         with:
