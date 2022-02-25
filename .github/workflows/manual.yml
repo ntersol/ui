@@ -46,7 +46,7 @@ jobs:
       - name: Install
         run: npm install
       - name: Run Request
-        run: npx nx run-many --target="${{ github.event.inputs.target }}" --projects="${{ github.event.inputs.projects }}" --skip-nx-cache
+        run: nx run-many --target="${{ github.event.inputs.target }}" --projects="${{ github.event.inputs.projects }}" --skip-nx-cache
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
