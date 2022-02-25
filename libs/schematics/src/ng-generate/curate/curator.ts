@@ -1,6 +1,6 @@
 import * as pwaAssetGenerator from 'pwa-asset-generator';
+import { Options } from 'pwa-asset-generator/dist/models/options';
 import { Schema } from './schema';
-
 export class Curator {
   private _outputDirectory: string;
   private _source: string;
