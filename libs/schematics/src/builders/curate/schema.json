@@ -7,6 +7,10 @@
       "type": "path",
       "description": "Path to source image to use for asset curation"
     },
+    "project": {
+      "type": "string",
+      "description": "Project to add asset to"
+    },
     "background": {
       "type": "string",
       "description": "Page background to use when image source is provided: css value  [default: transparent]"

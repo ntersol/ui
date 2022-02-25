@@ -12,8 +12,9 @@ const getFiles = (filesPath: string) => {
   });
 };
 
-export default createBuilder(async (builderConfig: Schema, context: BuilderContext): Promise<BuilderOutput> => {
+export const addFiles = async (builderConfig: Schema, context: BuilderContext): Promise<BuilderOutput> => {
   context.reportStatus('Executing PWA Asset Generation');
+
   if (!context.target) {
     throw new Error('Cannot curate assets for an empty target');
   }
@@ -44,13 +45,15 @@ export default createBuilder(async (builderConfig: Schema, context: BuilderConte
       throw new Error('Target did not produce any files, or the path is incorrect.');
     }
 
-    const options = curateConfig.options as Omit<Schema, 'source'>;
+    const options = curateConfig.options as Omit<Schema, 'source' & 'project'>;
 
     context.logger.info('Start curating assets...');
     const curator = new Curator(source, filesPath, options);
     const success = await curator.curate();
     if (success) {
       context.logger.info('✔ Finished curating assets...');
+      context.logger.info('Check your output folder.');
+      context.reportStatus('Done.');
       return { success: true };
     } else {
       return {
@@ -64,4 +67,6 @@ export default createBuilder(async (builderConfig: Schema, context: BuilderConte
       success: false,
     };
   }
-});
+};
+
+export default createBuilder(addFiles);

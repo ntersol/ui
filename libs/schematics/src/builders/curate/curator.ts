@@ -1,12 +1,11 @@
 import * as pwaAssetGenerator from 'pwa-asset-generator';
 import { Options } from 'pwa-asset-generator/dist/models/options';
-import { Schema } from './schema';
 export class Curator {
   private _outputDirectory: string;
   private _source: string;
-  private _options?: Partial<Schema> | undefined;
+  private _options?: Partial<Options> | undefined;
 
-  constructor(source: string, outputDirectory: string, options?: Partial<Schema> | undefined) {
+  constructor(source: string, outputDirectory: string, options?: Partial<Options> | undefined) {
     this._source = source;
     this._outputDirectory = outputDirectory;
     this._options = options;

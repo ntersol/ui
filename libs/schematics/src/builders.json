@@ -1,0 +1,9 @@
+{
+  "builders": {
+    "curate": {
+      "implementation": "./builders/curate/index",
+      "schema": "./builders/curate/schema.json",
+      "description": "Curate PWA Assets"
+    }
+  }
+}
