@@ -31,7 +31,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/azure-maps/ && typedoc --plugin typedoc-plugin-markdown src/lib/azure-maps.module.ts --tsconfig ./tsconfig.json",
+              "cd libs/azure-maps/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/azure-maps.module.ts --tsconfig ./tsconfig.json",
               "cp libs/azure-maps/docs/README.md libs/azure-maps/README.md"
             ],
             "parallel": false
@@ -121,7 +121,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/chart/ && typedoc --plugin typedoc-plugin-markdown src/lib/chart.module.ts --tsconfig ./tsconfig.json",
+              "cd libs/chart/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/chart.module.ts --tsconfig ./tsconfig.json",
               "cp libs/chart/docs/README.md libs/chart/README.md"
             ],
             "parallel": false
@@ -226,7 +226,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/document-editor/ && typedoc --plugin typedoc-plugin-markdown src/lib/document-editor.module.ts --tsconfig ./tsconfig.json",
+              "cd libs/document-editor/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/document-editor.module.ts --tsconfig ./tsconfig.json",
               "cp libs/document-editor/docs/README.md libs/document-editor/README.md"
             ],
             "parallel": false
@@ -339,7 +339,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/forms/ && typedoc --plugin typedoc-plugin-markdown src/lib/forms.module.ts --tsconfig ./tsconfig.json",
+              "cd libs/forms/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/forms.module.ts --tsconfig ./tsconfig.json",
               "cp libs/forms/docs/README.md libs/forms/README.md"
             ],
             "parallel": false
@@ -513,7 +513,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/grid/ && typedoc --plugin typedoc-plugin-markdown src/lib/grid.module.ts --tsconfig ./tsconfig.json",
+              "cd libs/grid/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/grid.module.ts --tsconfig ./tsconfig.json",
               "cp libs/grid/docs/README.md libs/grid/README.md"
             ],
             "parallel": false
@@ -614,7 +614,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/mtg-calc/ && typedoc --plugin typedoc-plugin-markdown src/lib/mtg-calc.module.ts --tsconfig ./tsconfig.json",
+              "cd libs/mtg-calc/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/mtg-calc.module.ts --tsconfig ./tsconfig.json",
               "cp libs/mtg-calc/docs/README.md libs/mtg-calc/README.md"
             ],
             "parallel": false
@@ -1013,7 +1013,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "typedoc --plugin typedoc-plugin-markdown libs/state-management/src/lib/state-management.module.ts --tsconfig libs/state-management/tsconfig.json --out libs/state-management/docs",
+              "npx typedoc --plugin typedoc-plugin-markdown libs/state-management/src/lib/state-management.module.ts --tsconfig libs/state-management/tsconfig.json --out libs/state-management/docs",
               "cp libs/state-management/docs/README.md libs/state-management/README.md"
             ],
             "parallel": false
@@ -1190,7 +1190,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/table/ && typedoc --plugin typedoc-plugin-markdown src/lib/table.module.ts --tsconfig ./tsconfig.json",
+              "cd libs/table/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/table.module.ts --tsconfig ./tsconfig.json",
               "cp libs/table/docs/README.md libs/table/README.md"
             ],
             "parallel": false
@@ -1290,7 +1290,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/tags/ && typedoc --plugin typedoc-plugin-markdown src/lib/tags.module.ts --tsconfig ./tsconfig.json",
+              "cd libs/tags/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/tags.module.ts --tsconfig ./tsconfig.json",
               "cp libs/tags/docs/README.md libs/tags/README.md"
             ],
             "parallel": false
@@ -1390,7 +1390,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/tree/ && typedoc --plugin typedoc-plugin-markdown src/lib/tree.module.ts --tsconfig ./tsconfig.json",
+              "cd libs/tree/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/tree.module.ts --tsconfig ./tsconfig.json",
               "cp libs/tree/docs/README.md libs/tree/README.md"
             ],
             "parallel": false
@@ -1549,7 +1549,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/visible/ && typedoc --plugin typedoc-plugin-markdown src/lib/visible.module.ts --tsconfig ./tsconfig.json",
+              "cd libs/visible/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/visible.module.ts --tsconfig ./tsconfig.json",
               "cp libs/visible/docs/README.md libs/visible/README.md"
             ],
             "parallel": false
@@ -1668,7 +1668,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/wizard/ && typedoc --plugin typedoc-plugin-markdown src/lib/wizard.component.ts --tsconfig ./tsconfig.json",
+              "cd libs/wizard/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/wizard.component.ts --tsconfig ./tsconfig.json",
               "cp libs/wizard/docs/README.md libs/wizard/README.md"
             ],
             "parallel": false
