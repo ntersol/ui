@@ -3,9 +3,9 @@ import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { getProjectFromWorkspace } from '@angular/cdk/schematics';
 import { addPackageJsonDependency, NodeDependency } from '@schematics/angular/utility/dependencies';
 import { getWorkspace } from '@schematics/angular/utility/workspace';
-import { Schema } from './schema';
+import { AddSchema } from './schema';
 
-function addPackageJsonDependencies(options: Schema): Rule {
+function addPackageJsonDependencies(options: AddSchema): Rule {
   return (host: Tree, context: SchematicContext) => {
     const dependencies: NodeDependency[] = [];
 
@@ -29,7 +29,7 @@ function installPackageJsonDependencies(): Rule {
   };
 }
 
-function injectImports(options: Schema) {
+function injectImports(options: AddSchema) {
   return async (host: Tree, _context: SchematicContext) => {
     const workspace = await getWorkspace(host);
     const project = getProjectFromWorkspace(workspace);
@@ -38,6 +38,7 @@ function injectImports(options: Schema) {
 
 function setSchematicsAsDefault(): Rule {
   return (host: Tree, context: SchematicContext) => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const exec = require('child_process').exec;
 
     exec('ng config cli.defaultCollection @ntersol/schematics', () => {
@@ -55,7 +56,7 @@ function log(): Rule {
   };
 }
 
-export default function ngAdd(options: Schema): Rule {
+export default function ngAdd(options: AddSchema): Rule {
   return chain([
     options && options.skipPackageJson ? noop() : addPackageJsonDependencies(options),
     options && options.skipPackageJson ? noop() : installPackageJsonDependencies(),
@@ -64,3 +65,5 @@ export default function ngAdd(options: Schema): Rule {
     log(),
   ]);
 }
+
+export * from './schema';

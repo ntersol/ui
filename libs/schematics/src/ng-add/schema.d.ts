@@ -1,4 +1,4 @@
-export interface Schema {
+export interface AddSchema {
   /**
    * Skip adding dependencies and installing them
    */

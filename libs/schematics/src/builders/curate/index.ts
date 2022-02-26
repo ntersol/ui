@@ -1,7 +1,7 @@
 import { BuilderContext, BuilderOutput, createBuilder, targetFromTargetString } from '@angular-devkit/architect';
 import * as glob from 'glob';
 import { Curator } from './curator';
-import { Schema } from './schema';
+import { CurateSchema } from './schema';
 
 const getFiles = (filesPath: string) => {
   return glob.sync(`**`, {
@@ -12,7 +12,7 @@ const getFiles = (filesPath: string) => {
   });
 };
 
-export const addFiles = async (builderConfig: Schema, context: BuilderContext): Promise<BuilderOutput> => {
+export const addFiles = async (builderConfig: CurateSchema, context: BuilderContext): Promise<BuilderOutput> => {
   context.reportStatus('Executing PWA Asset Generation');
 
   if (!context.target) {
@@ -45,7 +45,7 @@ export const addFiles = async (builderConfig: Schema, context: BuilderContext): 
       throw new Error('Target did not produce any files, or the path is incorrect.');
     }
 
-    const options = curateConfig.options as Omit<Schema, 'source' & 'project'>;
+    const options = curateConfig.options as Omit<CurateSchema, 'source' & 'project'>;
 
     context.logger.info('Start curating assets...');
     const curator = new Curator(source, filesPath, options);
@@ -70,3 +70,5 @@ export const addFiles = async (builderConfig: Schema, context: BuilderContext): 
 };
 
 export default createBuilder(addFiles);
+export * from './curator';
+export * from './schema';

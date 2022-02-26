@@ -1,7 +1,14 @@
 {
   "builders": {
     "curate": {
-      "implementation": "./builders/curate/index",
+      "implementation": "./builders/curate/index.ts",
+      "schema": "./builders/curate/schema.json",
+      "description": "Curate PWA Assets"
+    }
+  },
+  "executors": {
+    "curate": {
+      "implementation": "./builders/curate/index.ts",
       "schema": "./builders/curate/schema.json",
       "description": "Curate PWA Assets"
     }
