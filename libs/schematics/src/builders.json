@@ -1,4 +1,5 @@
 {
+  "$schema": "@angular-devkit/architect/src/builders-schema.json",
   "builders": {
     "curate": {
       "implementation": "./builders/curate/index.ts",

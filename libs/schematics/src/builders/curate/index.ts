@@ -68,7 +68,7 @@ export const addFiles = async (builderConfig: CurateSchema, context: BuilderCont
     };
   }
 };
-
-export default createBuilder(addFiles);
 export * from './curator';
 export * from './schema';
+
+export default createBuilder(addFiles);
