@@ -32,3 +32,14 @@ export interface TermOptions {
   name: string;
   value: number;
 }
+
+export interface Calculation {
+  loanAmount: number;
+  terms: number;
+  interestRate: number;
+  amortization: PAndI[];
+  firstMonthPrinciple: number;
+  firstMonthInterest: number;
+  totalPayment: number;
+  interestTotal: number;
+}

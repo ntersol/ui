@@ -3,6 +3,9 @@ import { mergeDeepRight } from 'ramda';
 import { MtgCalcConfig, PAndI } from './mtg-calc.model';
 import { DEFAULT } from './mtg-calc.constants';
 import { ChartConfiguration } from 'chart.js';
+import { MtgCalcService } from './mtg-calc.service';
+import { UIChart } from 'primeng/chart';
+import { Dropdown } from 'primeng/dropdown';
 
 @Component({
   selector: 'nts-mtg-calc',
@@ -13,7 +16,7 @@ import { ChartConfiguration } from 'chart.js';
 export class MtgCalcComponent {
   _config = DEFAULT;
   monthlyChart!: ChartConfiguration;
-  totalPayment: number = 0;
+  totalPayment = 0;
   showAmortization = false;
   amortization: Array<PAndI> = [];
   monthlyAmount = 0;
@@ -25,60 +28,42 @@ export class MtgCalcComponent {
   @Input() set config(value: MtgCalcConfig) {
     this._config = mergeDeepRight(DEFAULT, value) as MtgCalcConfig;
     if (this._config.chartOptions) {
-      this.monthlyChart = mergeDeepRight({}, this._config.chartOptions);
+      this.monthlyChart = JSON.parse(JSON.stringify(this._config.chartOptions));
     }
     this.calculatePayments();
   }
 
-  @ViewChild('termDropdownRef') termDropdownRef: any;
-  @ViewChild('pieChart') pieChart: any;
-  @ViewChild('monthlyPieChart') monthlyPieChart: any;
+  @ViewChild('termDropdownRef') termDropdownRef!: Dropdown;
+  @ViewChild('pieChart') pieChart!: UIChart;
+  @ViewChild('monthlyPieChart') monthlyPieChart!: UIChart;
 
-  constructor() {}
+  constructor(private mtgSvc: MtgCalcService) {}
 
   calculatePayments(): void {
-    let p = this.config.loanAmount;
-    const l = this.config.terms;
-    const i = this.config.interestRate;
-    // M = P[r(1+r)^n/((1+r)^n)-1)]
-    if (!!p && !!l && !!i && !isNaN(p) && !isNaN(l) && !isNaN(i)) {
-      const j = i / 12 / 100;
-      const n = l * 12;
-      const m = (p * j) / (1 - Math.pow(1 + j, -n));
-      this.monthlyAmount = m;
-      this.amortization = [];
-      let q = 1;
-      let h = 1;
-      let c = 1;
-      let interestTotal = 0;
-      let index = 1;
-      while (p >= 0) {
-        h = p * j;
-        c = m - h;
-        q = p - c;
-        if (this.config.showChart && index === 1) {
-          this.monthlyChart.data.datasets[0].data = [parseFloat(c.toFixed(2)), parseFloat(h.toFixed(2))];
-          if (this.monthlyPieChart) {
-            this.monthlyPieChart.refresh();
-          }
+    if (
+      !!this.config.loanAmount &&
+      !!this.config.terms &&
+      !!this.config.interestRate &&
+      !isNaN(this.config.loanAmount) &&
+      !isNaN(this.config.terms) &&
+      !isNaN(this.config.interestRate)
+    ) {
+      const finalData = this.mtgSvc.calculatePayments(
+        this.config.loanAmount,
+        this.config.terms,
+        this.config.interestRate,
+      );
+      this.amortization = finalData.amortization;
+      this.totalPayment = finalData.totalPayment;
+      this.monthlyAmount = finalData.firstMonthInterest + finalData.firstMonthPrinciple;
+      if (this.config.showChart) {
+        if (this.config.chartOptions) {
+          this.config.chartOptions.data.datasets[0].data = [finalData.loanAmount, finalData.interestTotal];
         }
-        if (this.amortization.length < n) {
-          interestTotal += h;
-          this.amortization.push({
-            principle: c,
-            interest: h,
-            balance: p,
-          });
+        this.monthlyChart.data.datasets[0].data = [finalData.firstMonthPrinciple, finalData.firstMonthInterest];
+        if (this.monthlyPieChart) {
+          this.monthlyPieChart.refresh();
         }
-        p = q;
-        index++;
-      }
-      this.totalPayment = (this.config.loanAmount || 0) + parseFloat(interestTotal.toFixed(2));
-      if (this.config.showChart && this.config.chartOptions) {
-        this.config.chartOptions.data.datasets[0].data = [
-          this.config.loanAmount || 0,
-          parseFloat(interestTotal.toFixed(2)),
-        ];
         if (this.pieChart) {
           this.pieChart.refresh();
         }
@@ -92,7 +77,7 @@ export class MtgCalcComponent {
     }
   }
 
-  onTabChange(e: any): void {
+  onTabChange(): void {
     setTimeout(() => {
       this.calculatePayments();
     }, 100);

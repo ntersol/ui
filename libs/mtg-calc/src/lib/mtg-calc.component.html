@@ -65,7 +65,7 @@
   <p-divider class="d-none d-xl-block col-1" layout="vertical"></p-divider>
   <div class="col-12 col-xl-5">
     <ng-template [ngTemplateOutlet]="paymentBreakdown" *ngIf="!config.showChart"> </ng-template>
-    <p-tabView class="mtg-calc-tabs" *ngIf="config.showChart" (onChange)="onTabChange($event)">
+    <p-tabView class="mtg-calc-tabs" *ngIf="config.showChart" (onChange)="onTabChange()">
       <p-tabPanel header="Total">
         <p-chart
           class="mtg-calc-pie"
@@ -80,8 +80,8 @@
         <p-chart
           class="mtg-calc-pie"
           #monthlyPieChart
-          [type]="config.chartOptions?.type || 'doughnut'"
-          [data]="monthlyChart.data"
+          [type]="monthlyChart?.type || 'doughnut'"
+          [data]="monthlyChart?.data"
           [options]="monthlyChart"
         >
         </p-chart>
