@@ -7,31 +7,23 @@ on:
   pull_request:
 
 jobs:
-  affected:
+  main:
     name: Affected Automation
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout [pr]
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
-      - name: Checkout [main]
-        if: ${{ github.event_name != 'pull_request' }}
+      - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Set SHAs
-        id: setSHAs
-        uses: nrwl/nx-set-shas@v2
-      - name: Setup Node [14]
+
+      - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: '14'
           always-auth: true
           registry-url: 'https://registry.npmjs.org/'
           scope: '@ntersol'
+
       - name: Cache Configuration
         uses: actions/cache@v2
         env:
@@ -43,27 +35,68 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+
       - name: Install
         run: npm install
+
       - name: Build
-        run: npx nx affected --target build --parallel
+        run: npx nx affected --target build --base=HEAD~1 --parallel=3
+
       - name: Test
-        run: npx nx affected --target test --code-coverage --parallel --exclude test,google-places-autocomplete,document-editor,azure-maps,wizard,forms,table,grid,tags
+        run: npx nx affected --target test --base=HEAD~1 --code-coverage --parallel=2 --exclude google-places-autocomplete,document-editor,azure-maps,wizard,forms,table,grid,tags
 
       - name: Publish
-        if: ${{ github.event_name != 'pull_request' }}
-        run: npx nx affected --target auto-publish --parallel
+        run: npx nx affected --target auto-publish --base=HEAD~1 --parallel=2
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy
-        if: ${{ github.event_name != 'pull_request' }}
-        run: npx nx affected --target deploy --parallel
+        run: npx nx affected --target deploy --base=HEAD~1 --parallel=2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Save
         uses: EndBug/add-and-commit@v7
         with:
           message: Auto-generated commit [ci skip]
           committer_name: GitHub Actions
           committer_email: actions@github.com
+  pr:
+    name: Affected Automation [PR]
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+          always-auth: true
+          registry-url: 'https://registry.npmjs.org/'
+          scope: '@ntersol'
+
+      - name: Cache Configuration
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npx nx affected --target build --base="origin/main" --parallel=3
+
+      - name: Test
+        run: npx nx affected --target test --base="origin/main" --code-coverage --parallel=2 --exclude google-places-autocomplete,document-editor,azure-maps,wizard,forms,table,grid,tags
