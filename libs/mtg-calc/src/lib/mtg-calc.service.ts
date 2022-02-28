@@ -47,7 +47,7 @@ export class MtgCalcService {
       p = q;
       index++;
     }
-    finalData.totalPayment = (finalData.loanAmount || 0) + parseFloat(interestTotal.toFixed(2));
+    finalData.totalPayment = finalData.loanAmount + parseFloat(interestTotal.toFixed(2));
     finalData.interestTotal = parseFloat(interestTotal.toFixed(2));
     return finalData;
   }
