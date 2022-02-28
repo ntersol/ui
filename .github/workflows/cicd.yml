@@ -48,7 +48,8 @@ jobs:
       - name: Build
         run: npx nx affected --target build --parallel
       - name: Test
-        run: npx nx affected --target test --parallel
+        run: npx nx affected --target test --parallel --exclude test,google-places-autocomplete,document-editor,azure-maps,wizard,forms,table,grid,tags
+
       - name: Publish
         if: ${{ github.event_name != 'pull_request' }}
         run: npx nx affected --target auto-publish --parallel
