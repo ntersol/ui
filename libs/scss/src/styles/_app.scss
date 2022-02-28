@@ -25,6 +25,7 @@
 @import 'globals/variables';
 @import 'globals/mixins';
 
+// CSS Variables
 :root {
   @include convert($breakpoints);
   @include convert($colors);
