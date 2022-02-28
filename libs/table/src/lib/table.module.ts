@@ -8,6 +8,7 @@ import { TableColumnHeaderDirective } from './directives/cell-header.directive';
 import { SlugPipe } from './pipes/slug.pipe';
 import { PhoneNumberPipe } from './pipes/phone-number.pipe';
 import { TableRowExpansionDirective } from './directives/row-expansion.directive';
+import { HeaderStylesPipe } from './pipes/header-styles.pipe';
 const DEPS = [
   TableComponent,
   TableColumnDirective,
@@ -17,8 +18,8 @@ const DEPS = [
 ];
 
 @NgModule({
-  declarations: [DEPS, SlugPipe, PhoneNumberPipe],
+  declarations: [DEPS, SlugPipe, PhoneNumberPipe, HeaderStylesPipe],
   imports: [CommonModule, TableModule],
   exports: [DEPS],
 })
-export class NtsTableModule {}
+export class NtsTableModule { }

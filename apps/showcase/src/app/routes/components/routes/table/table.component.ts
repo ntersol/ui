@@ -14,7 +14,7 @@ export class ShowcaseTableComponent {
 
   public basicTS: string = `
   public rows: any[] | null = [] = [
-    { name: 'Bob', skill: 'cooking burgers', favoritePhrase: 'omg.' },
+    { name: 'Bob', skill: 'cooking burgers', favoritePhrase: 'omg.', 'width': '200px' },
     { name: 'Linda', skill: 'singing', favoritePhrase: 'Ow! My face!' },
     { name: 'Gene', skill: 'fart piano', favoritePhrase: '??' },
     { name: 'Tina', skill: 'saying uhhhhhhhh', favoritePhrase: 'uhhhhhhh' },
@@ -151,7 +151,7 @@ export class ShowcaseTableComponent {
   ]);
 
   public columns: NtsTable.Column[] = [
-    { header: 'Name', field: 'name' },
+    { header: 'Name', field: 'name', width: '200px' },
     { header: 'Skill', field: 'skill', sortable: false },
   ];
 

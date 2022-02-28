@@ -7,5 +7,7 @@ export namespace NtsTable {
     /** Arguments to pass to the formatting pipes */
     typeArgs?: string;
     sortable?: boolean;
+    width?: string;
+    style?: Record<string, string>;
   }
 }

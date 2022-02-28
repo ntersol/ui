@@ -46,7 +46,7 @@
           [pSortableColumn]="col.field"
           [pSortableColumnDisabled]="col.sortable === false"
           #th
-          [ngStyle]="{ width: columnWidthsPercent && columnWidthsPercent[i] ? columnWidthsPercent[i] + '%' : null }"
+          [ngStyle]="col | headerStyles"
           class="nts-table-th-{{ col.field | slug }} nts-table-th-type-{{ col.type | slug }}"
         >
           <ng-container *ngIf="templates[col.field] && templates[col.field].templateHeader; else headerDefault">
