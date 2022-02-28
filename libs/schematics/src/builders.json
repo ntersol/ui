@@ -1,8 +1,11 @@
 {
-  "$schema": "@angular-devkit/architect/src/builders-schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "BuildersSchema",
+  "title": "Builders schema for validating a list of builders.",
+  "type": "object",
   "builders": {
     "curate": {
-      "implementation": "./builders/curate/index.ts",
+      "implementation": "./builders/curate",
       "schema": "./builders/curate/schema.json",
       "description": "Curate PWA Assets"
     }
