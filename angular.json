@@ -723,7 +723,7 @@
               "npx copyfiles src/ng-add/schema.json ../../dist/out-tsc/schematics/",
               "npx copyfiles src/ng-generate/route/schema.json ../../dist/out-tsc/schematics/",
               "npx copyfiles src/ng-generate/page/schema.json ../../dist/out-tsc/schematics/",
-              "npx cp -R src/ng-generate/route/files ../../dist/out-tsc/schematics/src/ng-generate/route/"
+              "npx cp -iprv src/ng-generate/route/files ../../dist/out-tsc/schematics/src/ng-generate/route/"
             ],
             "parallel": false
           }
@@ -756,7 +756,7 @@
         "build": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["cp -avr libs/scss/ dist/libs/scss/"]
+            "commands": ["cp -iprv libs/scss/ dist/libs/scss/"]
           }
         },
         "patch": {
@@ -938,6 +938,12 @@
             "passWithNoTests": true
           }
         },
+        "move-coverage": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cp -iprv coverage dist/apps/showcase/"]
+          }
+        },
         "curate": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
@@ -960,6 +966,7 @@
           "options": {
             "commands": [
               "ng run showcase:build:production --baseHref=https://ntersol.github.io/ui/",
+              "ng run showcase:move-coverage",
               "ng run showcase:curate",
               "ng run showcase:gh"
             ],
