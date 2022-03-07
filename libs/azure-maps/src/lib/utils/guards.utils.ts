@@ -1,7 +1,8 @@
 /**
  * Node JS check for SSR
  */
-export const isBrowser = typeof window !== 'undefined' ? true : false;
+export const isNode = typeof process !== 'undefined' && process.versions != null && process.versions.node != null;
+export const isBrowser = !isNode;
 
 /**
  * Returns true if the input is null or undefined
