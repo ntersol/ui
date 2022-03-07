@@ -1,7 +1,8 @@
 import { BehaviorSubject, firstValueFrom, identity, Observable } from 'rxjs';
-import { distinctUntilChanged, map, take } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { NtsBaseStore } from '../base/base-store';
 import { NtsState } from '../../state.models';
+import { isBrowser } from '../../utils/guards.util';
 
 /**
  * Create an instance of a UI store
@@ -15,7 +16,7 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
   constructor(private initialState: t, private options?: NtsState.UIStoreOptions) {
     super();
     // If persistID specified, rehydrate store state from localStorage
-    if (this.options?.persistId) {
+    if (isBrowser && this.options?.persistId) {
       const state = localStorage.getItem(this.options.persistId);
       if (state) {
         this.update(JSON.parse(state));
@@ -55,7 +56,7 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
       this.stateChange(value as t);
     }
     // If persistId is specified, save all state changes to localStorage
-    if (this.options?.persistId) {
+    if (isBrowser && this.options?.persistId) {
       localStorage.setItem(this.options?.persistId, JSON.stringify(this.state));
     }
 
