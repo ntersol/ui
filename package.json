@@ -32,7 +32,9 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "scully": "npx scully --",
+    "scully:serve": "npx scully serve --"
   },
   "private": true,
   "devDependencies": {
@@ -136,6 +138,10 @@
     "@angular/forms": "^13.2.2",
     "@angular/router": "^13.2.2",
     "@nrwl/angular": "13.8.3",
+    "@scullyio/init": "^2.1.21",
+    "@scullyio/ng-lib": "^2.1.0",
+    "@scullyio/scully": "^2.1.0",
+    "@scullyio/scully-plugin-puppeteer": "^2.1.0",
     "rxjs": "^7.5.4",
     "tslib": "^2.3.1",
     "zone.js": "~0.11.4"

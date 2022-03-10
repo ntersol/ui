@@ -972,6 +972,40 @@
             ],
             "parallel": false
           }
+        },
+
+        "scully-deploy": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run showcase:scully-build",
+              "ng run showcase:move-coverage",
+              "ng run showcase:curate",
+              "ng run showcase:gh"
+            ],
+            "parallel": false
+          }
+        },
+        "scully-build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run showcase:build:production --baseHref=https://ntersol.github.io/ui/",
+              "npx scully --scanRoutes --project showcase"
+            ],
+            "parallel": false
+          }
+        },
+        "scully": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run showcase:build:production",
+              "npx scully --scanRoutes --project showcase",
+              "npx scully serve --project showcase"
+            ],
+            "parallel": false
+          }
         }
       },
       "tags": []
