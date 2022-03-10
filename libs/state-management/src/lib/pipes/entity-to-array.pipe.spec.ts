@@ -1,8 +1,8 @@
-import { EntityToArray } from './entity-to-array.pipe';
+import { EntityData } from './entity-data.pipe';
 
-describe('EntityToArray', () => {
+describe('EntityData', () => {
   it('create an instance', () => {
-    const pipe = new EntityToArray();
+    const pipe = new EntityData();
 
     expect(pipe).toBeTruthy();
   });
