@@ -7,6 +7,7 @@ exports.config = {
     projectRoot: './apps/showcase/src',
     projectName: 'showcase',
     outDir: './dist/static',
+    defaultPostRenderers: [],
     routes: {
         '/assets': {
             type: 'skip',
