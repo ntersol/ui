@@ -961,7 +961,7 @@
             "message": "Auto-generated commit [ci skip]"
           }
         },
-        "deploy": {
+        "spa-deploy": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
@@ -974,7 +974,7 @@
           }
         },
 
-        "scully-deploy": {
+        "deploy": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
