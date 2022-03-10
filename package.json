@@ -141,6 +141,7 @@
     "@scullyio/init": "^2.1.21",
     "@scullyio/ng-lib": "^2.1.0",
     "@scullyio/scully": "^2.1.0",
+    "@scullyio/scully-plugin-base-href-rewrite": "^2.1.21",
     "@scullyio/scully-plugin-puppeteer": "^2.1.0",
     "rxjs": "^7.5.4",
     "tslib": "^2.3.1",
