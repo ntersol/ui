@@ -16,7 +16,6 @@ import { GlobalErrorHandler } from './shared/interceptors/error.interceptor';
 import { HttpInterceptorService } from './shared/interceptors/http.interceptor';
 import { StringUtils } from './shared/utils';
 import { SiteModule } from './site.module';
-import { ScullyLibModule } from '@scullyio/ng-lib';
 
 // Set Akita to work in prod mode in prod
 if (environment.production) {
@@ -89,7 +88,6 @@ export let InjectorInstance: Injector;
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
-    ScullyLibModule,
   ],
   providers: [
     // AppConfigService, // App config/env settings

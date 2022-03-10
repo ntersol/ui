@@ -961,18 +961,6 @@
             "message": "Auto-generated commit [ci skip]"
           }
         },
-        "spa-deploy": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "ng run showcase:build:production --baseHref=https://ntersol.github.io/ui/",
-              "ng run showcase:move-coverage",
-              "ng run showcase:curate",
-              "ng run showcase:gh"
-            ],
-            "parallel": false
-          }
-        },
 
         "deploy": {
           "builder": "@nrwl/workspace:run-commands",
@@ -991,7 +979,8 @@
           "options": {
             "commands": [
               "ng run showcase:build:production --baseHref=https://ntersol.github.io/ui/",
-              "npx scully --scanRoutes --project showcase"
+              "npx scully --scanRoutes --project showcase",
+              "cp -a dist/static/. dist/apps/showcase/"
             ],
             "parallel": false
           }

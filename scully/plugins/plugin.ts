@@ -1,12 +1,9 @@
+import { log, registerPlugin, yellow } from '@scullyio/scully';
 
-import { registerPlugin, getPluginConfig } from '@scullyio/scully';
+function skipPlugin(route, config = {}) {
+  log(`Skip Route "${yellow(route)}"`);
+  return Promise.resolve([]);
+}
 
-export const myPlugin = 'myPlugin';
-
-const myFunctionPlugin = async (html: string): Promise<string> => {
-  return html;
-};
-
-const validator = async () => [];
-
-registerPlugin('postProcessByHtml', myPlugin, myFunctionPlugin, validator);
+const validator = async (conf) => [];
+registerPlugin('router', 'skip', skipPlugin, validator);
