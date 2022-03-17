@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'nts-numbers',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NumbersComponent implements OnInit {
 
-  constructor() { }
+  public formGroup = this.fb.group({
+    modelText: [],
+    disabled: [],
+    focused: [],
+  })
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
   }

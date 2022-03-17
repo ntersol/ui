@@ -1,1 +1,24 @@
-<p>numbers works!</p>
+<h2>Number/Currency Input Examples</h2>
+<form [formGroup]="formGroup">
+    <div class="example">
+        <nts-input-number placeholder="100,000" label="Kitchen Sink" prefix="$" suffix=".00" hint="This is a hint"
+            [control]="formGroup?.get('sink2')"> </nts-input-number>
+    </div>
+    <div class="example">
+        <nts-input-number placeholder="100,000" label="Number" [control]="formGroup?.get('population')">
+        </nts-input-number>
+    </div>
+    <div class="example">
+        <nts-input-number placeholder="12.25" label="Decimal" [minFractionDigits]="2"
+            [control]="formGroup?.get('decimal')">
+        </nts-input-number>
+    </div>
+    <div class="example">
+        <nts-input-number placeholder="90630" label="Zipcode" [maxlength]="5" [useGrouping]="false"
+            [control]="formGroup?.get('zipcode')"> </nts-input-number>
+    </div>
+    <div class="example">
+        <nts-input-number placeholder="$100.00" label="Currency" mode="currency" [control]="formGroup?.get('currency')">
+        </nts-input-number>
+    </div>
+</form>

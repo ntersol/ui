@@ -8,28 +8,5 @@
         </nts-dropdown>
     </p>
 
-    <hr />
-    <h2>Number/Currency Input Examples</h2>
-
-    <div class="example">
-        <nts-input-number placeholder="100,000" label="Kitchen Sink" prefix="$" suffix=".00" hint="This is a hint"
-            [control]="form?.get('sink2')"> </nts-input-number>
-    </div>
-    <div class="example">
-        <nts-input-number placeholder="100,000" label="Number" [control]="form?.get('population')"> </nts-input-number>
-    </div>
-    <div class="example">
-        <nts-input-number placeholder="12.25" label="Decimal" [minFractionDigits]="2" [control]="form?.get('decimal')">
-        </nts-input-number>
-    </div>
-    <div class="example">
-        <nts-input-number placeholder="90630" label="Zipcode" [maxlength]="5" [useGrouping]="false"
-            [control]="form?.get('zipcode')"> </nts-input-number>
-    </div>
-    <div class="example">
-        <nts-input-number placeholder="$100.00" label="Currency" mode="currency" [control]="form?.get('currency')">
-        </nts-input-number>
-    </div>
-    <hr />
 
 </form>
