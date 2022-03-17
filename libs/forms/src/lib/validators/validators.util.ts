@@ -3,6 +3,9 @@ import { email, required } from "./src/misc.validators";
 import { charsIsEqualTo } from "./src/chars.validators";
 import { numberIsLessThan } from "./src/number.validators";
 
+/**
+ * TODO: Not tree shakable
+ */
 export const NtsValidators = {
     /** Set a control as required */
     required: required,

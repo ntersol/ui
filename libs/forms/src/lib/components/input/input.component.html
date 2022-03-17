@@ -1,7 +1,7 @@
 <div class="nts-form-field" [ngClass]="{
    'nts-form-field-has-errors' : showErrors$ | async,
    'nts-form-field-required': required
-}">
+}" [attr.automation-id]="(automationId || label || placeholder) | ntsSlug">
     <div class="p-inputgroup">
         <!-- Prefix -->
         <span class="p-inputgroup-addon" *ngIf="prefix" [innerHtml]="prefix"></span>

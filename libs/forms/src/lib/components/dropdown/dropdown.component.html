@@ -1,9 +1,10 @@
 <div class="nts-dropdown">
     <nts-input [label]="label" [placeholder]="placeholder" [hover]="false" [focused]="focused" [prefix]="prefix"
-        [suffix]="suffix" [hint]="hint" [control]="formControl">
-        <p-dropdown [options]="options" [optionLabel]="optionLabel" [optionValue]="optionValue" [name]="name"
-            [scrollHeight]="scrollHeight" [style]="style" [styleClass]="styleClass" [panelStyle]="panelStyle"
-            [panelStyleClass]="panelStyleClass" placeholder="So much winning" [appendTo]="appendTo"
+        [suffix]="suffix" [hint]="hint" [control]="formControl" [automationId]="automationId">
+        <p-dropdown [options]="options" [optionLabel]="optionLabel" [optionValue]="optionValue"
+            [optionDisabled]="optionDisabled" [name]="name" [scrollHeight]="scrollHeight" [style]="style"
+            [styleClass]="styleClass" [panelStyle]="panelStyle" [panelStyleClass]="panelStyleClass"
+            [placeholder]="placeholder" [appendTo]="appendTo" [virtualScroll]="virtualScroll" [showClear]="showClear"
             [formControl]="formControl">
         </p-dropdown>
     </nts-input>

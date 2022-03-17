@@ -58,7 +58,7 @@ export const baseValidator = <t>(compareValueSrc: t | NtsForms.Config, config: N
 const extractValue = <t>(compareValue: t | NtsForms.Config, control: AbstractControl) => {
     // If this is a config type with a compare value, get the dynamic field and then its value
     if (isConfig(compareValue)) {
-        const c = control.root.get(compareValue.compareToField);
+        const c = control?.root?.get(compareValue.compareToField);
         // Can't find the control
         if (!c) {
             return null;

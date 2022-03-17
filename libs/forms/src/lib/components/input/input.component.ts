@@ -29,6 +29,8 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   @Input() suffix: string | null = null;
   /** Small text that appears beneath the control */
   @Input() hint: string | null = null;
+  /** A unique ID to use to help facilitate automated testing. Can be different than ID if ID is fixed */
+  @Input() automationId: string | null = null;
 
   /** Text to use for ID attribute */
   @Input() id = '';
@@ -39,8 +41,9 @@ export class NtsInputComponent<t> implements OnInit, OnDestroy {
   /** Any inline style */
   @Input() style = '';
   /**
-   * Enable/disable this control, uses the form controls status.
-   * Setting the disabled property should be done in the formgroup itself but sometimes this method is useful
+   * Enable/disable this control, uses the form control method instead of template property.
+   * Setting the disabled property should be done in the formgroup itself but this
+   * allows a parent component to set it via an input which makes it easier to model drive
    */
   @Input() set disabled(v: boolean | null) {
     setTimeout(() => { // A delay is necessary for the child classes to set the formControl

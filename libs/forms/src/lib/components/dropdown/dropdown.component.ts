@@ -15,8 +15,15 @@ export class NtsDropdownComponent extends NtsInputComponent<any[]> implements On
   @Input() options: SelectItem[] = [];
   @Input() optionLabel = 'label';
   @Input() optionValue = 'value';
+  @Input() optionDisabled = 'disabled';
   @Input() scrollHeight = '200px';
+  /** Append popup to this DOM element, can use "body" or another template variable */
   @Input() appendTo: any = null;
+  /** Use virtual scroll to handle a large list */
+  @Input() virtualScroll = false;
+  /** Show an "X" which lets the user clear this value */
+  @Input() showClear = false;
+
   @Input() placeholder = '-- Please Select --';
 
   /** Style of the dropdown panel */

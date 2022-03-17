@@ -4,13 +4,14 @@
     </div>
     <h2>Dropdown Examples</h2>
     <p>
-        <nts-dropdown label="Test" [options]="dropdownOptions" [control]="form.get('dropdown')"></nts-dropdown>
+        <nts-dropdown label="Test" automationId="12345" [options]="dropdownOptions" [control]="form.get('dropdown')">
+        </nts-dropdown>
     </p>
     <h2>Text Input Examples</h2>
     <p class="example">
         <nts-input-text placeholder="Jerrol" id="id" name="name" styleClass="classes" label="The Kitchen Sink"
             placeholder="John" suffix="Suffix" prefix="Prefix" hint="This is a hint" formControlName="modelText"
-            [disabled]="false"></nts-input-text>
+            [disabled]="false" automationId="kitchen-sink"></nts-input-text>
     </p>
 
     <div class="example">
