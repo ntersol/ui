@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -8,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TextComponent implements OnInit {
 
-  constructor() { }
+  public formGroup = this.fb.group({
+    modelText: [],
+    disabled: [],
+    focused: [],
+  })
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
   }
