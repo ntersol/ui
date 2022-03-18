@@ -979,7 +979,7 @@
           "options": {
             "commands": [
               "ng run showcase:build:production",
-              "npx scully --project showcase",
+              "npx scully --project showcase --scanRoutes",
               "cp -a dist/static/. dist/apps/showcase/"
             ],
             "parallel": false
