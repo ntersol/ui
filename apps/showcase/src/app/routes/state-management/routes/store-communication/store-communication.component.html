@@ -1,0 +1,66 @@
+<div class="author"><strong>Author:</strong> Jerrol Krause</div>
+<h1>Store Communication</h1>
+<p>
+  The Ntersol state management tools support an optional NGRX style dispatch system for passing state between stores
+  without having to use dependency injection. This is useful to avoid circular dependency issues or to avoid breaking
+  encapsulation.
+</p>
+<hr />
+
+<p-tabView>
+  <p-tabPanel header="Documentation">
+    <h2>Install</h2>
+    <pre>
+            <code class="language-ts" [innerHtml]="install"></code>
+        </pre>
+    <h2>Set Up Actions</h2>
+    <p>1. Create a file to hold the actions that will be easily importable by the stores that need to consume it.</p>
+    <pre>
+            <code class="language-ts" [innerHtml]="inner"></code>
+        </pre>
+    <p>2. Set up action creators in the actions file.</p>
+    <pre>
+            <code class="language-ts" [innerHtml]="usage1"></code>
+        </pre>
+    <h2>Configure Store To Consume Actions</h2>
+    <p>
+      1. In the service or file where your store exists, subscribe to events. Because all actions flow through all
+      stores, set up an IF statement to only react to events that this store cares about. The action creator has a
+      property called 'match' that will check for typesafety. The 'payload' property contains the data.
+    </p>
+    <pre>
+            <code class="language-ts" [innerHtml]="usage2"></code>
+        </pre>
+    <p>
+      2. Send actions to the store with the dispatch action. Import the action creator, add the appropriate payload and
+      use the dispatch action on any store to send the action to the events observable which will be consumed by the
+      store in #3.
+    </p>
+    <pre>
+            <code class="language-ts" [innerHtml]="usage3"></code>
+        </pre>
+    <p>2b. If a store reference is not easily available, import and use the base store reference.</p>
+    <pre>
+            <code class="language-ts" [innerHtml]="usage4"></code>
+        </pre>
+  </p-tabPanel>
+
+  <p-tabPanel header="Example">
+    <p>Update a property in a UI store with the dispatch method.</p>
+    <div class="row">
+      <div class="col col-4">
+        <p>
+          <strong>Current Token</strong><br />
+          {{ token$ | async }}
+        </p>
+      </div>
+      <div class="col col-4">
+        <input class="form-control" [(ngModel)]="token" placeholder="New Token" /><br />
+        <a class="btn btn-primary" (click)="tokenUpdate(token)">Update Token</a>
+      </div>
+    </div>
+  </p-tabPanel>
+  <!--
+  <p-tabPanel header="API"> Coming soon! </p-tabPanel>
+  -->
+</p-tabView>

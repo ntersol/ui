@@ -1,0 +1,31 @@
+<div class="author"><strong>Author:</strong>Warren Dugan</div>
+<h1>Focus Trap</h1>
+<p>Trap focus inside a DOM node</p>
+
+<hr />
+
+<p-tabView>
+  <p-tabPanel header="Documentation">
+    <div>
+      <h2>Setup</h2>
+      <pre>
+                <code class="language-ts" [innerHtml]="exampleTS"></code>
+                <code class="language-html" [innerHtml]="highlight.htmlEncode(exampleHTML)"></code>
+            </pre>
+    </div>
+  </p-tabPanel>
+
+  <p-tabPanel header="Example">
+    <p-button (click)="enabled = !enabled">{{ enabled ? 'Disable' : 'Enable' }} Trap</p-button>
+
+    <div [ntsFocusTrap]="enabled">
+      <div class="content">
+        <p><small>When enabled user focus will remain within this box</small></p>
+        <input p-input type="color" name="color" id="color" />
+        <input p-input type="date" name="date" id="date" />
+        <input p-input type="text" name="name" id="name" />
+        <input p-input type="button" value="Submit" />
+      </div>
+    </div>
+  </p-tabPanel>
+</p-tabView>

@@ -1,0 +1,16 @@
+{
+  "extends": "@schematics/angular",
+  "schematics": {
+    "ng-add": {
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json",
+      "description": "Ntersol's Add Schematic"
+    },
+    "route": {
+      "aliases": ["r"],
+      "factory": "./ng-generate/route/index",
+      "schema": "./ng-generate/route/schema.json",
+      "description": "Add new route"
+    }
+  }
+}

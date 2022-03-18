@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-4">
+    <p-tabView
+      #tabView
+      [activeIndex]="activeIndex"
+      (onChange)="selectTab($event)"
+      *ngIf="docsSource?.length; noDocsSource"
+    >
+      <div class="col-12 nav-container">
+        <div class="tab-button-left" *ngIf="docsSource && docsSource.length > 1">
+          <p-button styleClass="nav-btn" (click)="prevTab()" [disabled]="activeIndex === 0" icon="fas fa-arrow-left">
+          </p-button>
+        </div>
+        <div class="tab-button-right" *ngIf="docsSource && docsSource.length > 1">
+          <p-button
+            styleClass="nav-btn"
+            (click)="nextTab()"
+            [disabled]="activeIndex === docsSource.length - 1"
+            icon="fas fa-arrow-right"
+          ></p-button>
+        </div>
+      </div>
+      <p-tabPanel
+        *ngFor="let document of docsSource; let i = index"
+        [selected]="i === activeIndex"
+        [header]="(pdfInfo && pdfInfo[i + 1] + ' (Source)') || ''"
+      >
+        <ng-template pTemplate="content">
+          <app-document
+            [maxHeight]="maxHeight"
+            [isAdd]="isAdd"
+            [leftBox]="true"
+            [document]="document"
+            [viewModels]="viewModels"
+            [settings]="settingsSrc"
+            [tnSettings]="tnSettings"
+            [selection]="selection && [selection[i + 1]]"
+            [pageActive]="pageActive"
+            [docIndex]="i + 1"
+            [canDropFromAny]="false"
+            (setActivePage)="setActivePage()"
+          >
+          </app-document>
+        </ng-template>
+      </p-tabPanel>
+    </p-tabView>
+    <ng-template #noDocsSource>
+      <div class="alert alert-info" *ngIf="!docsSource || !docsSource?.length">
+        Please add another document to begin
+      </div>
+    </ng-template>
+  </div>
+  <div class="col-8 multi-doc" style="overflow: auto">
+    <p-tabView [activeIndex]="activeIndexDest" (onChange)="indexChangeDest($event)">
+      <p-tabPanel [header]="pdfInfo && pdfInfo[0]?.label ? pdfInfo[0].label : 'Source Document'">
+        <ng-template pTemplate="content">
+          <app-document
+            [maxHeight]="maxHeight"
+            [isAdd]="isAdd"
+            [document]="documents && documents[0]"
+            [viewModels]="viewModels"
+            [settings]="settingsDest"
+            [tnSettings]="tnSettings"
+            [pageActive]="pageActive"
+            [docIndex]="0"
+            (setActivePage)="setActivePage()"
+          ></app-document>
+        </ng-template>
+      </p-tabPanel>
+      <p-tabPanel header="Viewer">
+        <ng-template pTemplate="content">
+          <!-- Full size viewer -->
+          <app-viewer
+            [pdfSrcs]="pdfSrcs"
+            [pageActive]="pageActive"
+            [rotation]="rotation"
+            [maxHeight]="maxHeight"
+          ></app-viewer>
+        </ng-template>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div
+  id="nts-wizard"
+  class="nts-wizard-section-{{ wiz?.sectionActive?.urlSlug }} nts-wizard-page-{{ wiz?.pageActive?.id }}"
+  *ngIf="{
+    state: state$ | async,
+    pageActive: pageActive$ | async,
+    settings: settings$ | async,
+    sectionActive: svc.sectionActive$ | async
+  } as wiz"
+>
+  <ng-container *ngIf="wiz?.state?.ready; else loading">
+    <app-section [section]="wiz.sectionActive">
+      <app-page [page]="wiz.pageActive" [templates]="templates" [dataFields]="dataFields"></app-page>
+    </app-section>
+    <div
+      class="nts-wizard-footer d-flex justify-content-between"
+      [ngClass]="{ 'nts-wizard-footer-sticky': wiz?.settings?.stickyFooter }"
+    >
+      <div class="nts-wizard-btn-prev">
+        <button
+          class="btn btn-outline-primary btn-main btn-main-prev"
+          (click)="svc.routePrevious()"
+          *ngIf="previousButtonVisible$ | async"
+          aria-label="Back"
+        >
+          <i class="fa fa-arrow-left me-2" aria-hidden="true"></i> Back
+        </button>
+      </div>
+      <div class="nts-wizard-btn-next">
+        <button class="btn btn-primary btn-main btn-main-next" (click)="svc.routeNext()" aria-label="Next">
+          Next <i class="fa fa-arrow-right ms-2" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #loading> Loading... </ng-template>
+</div>

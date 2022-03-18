@@ -1,0 +1,6 @@
+<h3>Navigation</h3>
+<ul>
+  <li *ngFor="let section of state.sectionsSrc$ | async">
+    <a (click)="state.routeChange({ sectionUrl: section.urlSlug })">{{ section.title }}</a>
+  </li>
+</ul>

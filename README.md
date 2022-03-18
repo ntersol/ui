@@ -1,168 +1,123 @@
-# Angular Starter
+# AngularStarter
 
-A rapid starter project for creating Angular single page apps. Contains Angular, ngPrime, Akita and more. Built with Angular CLI.
+## Handy Commands
 
-Available online @ https://jerrolkrause.github.io/angular-starter/#/
+Generate a new library. Make sure to immediately commit the stub after creation to avoid conflicts in git.
+`ng generate library {libname}`
+Replace '{name}' with '{libname}' in both tsconfig.base.json and the generated package.json within the library you created.
 
-## Quick Start
+Run storybook documentation
+`ng run {libname}:storybook`
 
-```bash
-# Clone the repo
-git clone https://github.com/JerrolKrause/angular-starter.git
+Build a package, append `:production` for a prod build
+`ng build {libname}`
+`nx run {libname}:build`
 
-# Rename directory from `angular-starter` to `your-app`
+Deploy update to NPM
+`nx run {libname}:publish`
 
-# Change directory to the repo
-cd your-app
+## Documentation Quick Links
 
-# Install the repo with npm
-npm i
-```
+Generating package documentation with storybook
+https://ntersol.atlassian.net/wiki/spaces/NTER/pages/1527939105/Generating+Package+Documentation
 
-## Usage
+## Stub Documentation
 
-See Angular CLI github page for full usage: https://github.com/angular/angular-cli
+This project was generated using [Nx](https://nx.dev).
 
-```bash
-# Serve dev on http://localhost:4200/
-ng serve
+<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 
-# Prod Build for targeted environment. Files will appear in the dist folder
-npm run build:qa # Uses settings from environment.qa.ts
-npm run build:uat # Uses settings from environment.uat.ts
-npm run build:prod # Uses settings from environment.prod.ts
+🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
 
-# Serve prod build from dist folder at http://127.0.0.1:8080/#/.
-# Requires http server which can be installed with `npm install http-server -g`
-npm run prod
+## Quick Start & Documentation
 
-# Run prettier which will format the code in the entire project
-npm run format
+[Nx Documentation](https://nx.dev/angular)
 
-# Run prod build and then use webpack bundle analyzer to check bundle sizes and composition
-# Documentation located in /documentation/
-npm run stats
+[10-minute video showing all Nx features](https://nx.dev/angular/getting-started/what-is-nx)
 
-# Automatically generate documentation
-npm run docs
+[Interactive Tutorial](https://nx.dev/angular/tutorial/01-create-application)
 
-# Run e2e protractor tests
-ng e2e
+## Adding capabilities to your workspace
 
-# Run e2e protractor tests without rebuilding every time (faster)
-ng e2e --s false
+Nx supports many plugins which add capabilities for developing different types of applications and different tools.
 
-# Update NPM dependencies via Angular CLI
-ng update
+These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
 
-# Deploy dist folder to git pages. Be sure to update deploy script in package.json
-npm run deploy
+Below are our core plugins:
 
-# Run a dev server with server side rendering (SSR) enabled
-npm run serve:ssr
-```
+- [Angular](https://angular.io)
+  - `ng add @nrwl/angular`
+- [React](https://reactjs.org)
+  - `ng add @nrwl/react`
+- Web (no framework frontends)
+  - `ng add @nrwl/web`
+- [Nest](https://nestjs.com)
+  - `ng add @nrwl/nest`
+- [Express](https://expressjs.com)
+  - `ng add @nrwl/express`
+- [Node](https://nodejs.org)
+  - `ng add @nrwl/node`
 
-## Localizing Your App
+There are also many [community plugins](https://nx.dev/nx-community) you could add.
 
-`package.json`
+## Generate an application
 
-- If using github pages, update the `npm run deploy` command in this file to include the correct slug. IE replace `/angular-starter/` with your url
+Run `ng g @nrwl/angular:app my-app` to generate an application.
 
-`src > environments > defaults.ts` +
-`src > environments > environment.prod.ts`
+> You can use any of the plugins above to generate applications as well.
 
-- Localize environment settings and properties in these files. Enable/disable app functionality as needed
+When using Nx, you can create multiple applications and libraries in the same workspace.
 
-`src > app > shared > app.settings.ts`
+## Generate a library
 
-- Add/change global app & environment variables
+Run `ng g @nrwl/angular:lib my-lib` to generate a library.
 
-`src > index.html`
+Replace '{name}' with 'my-app' in both tsconfig.base.json and the generated package.json within the library you created.
 
-- Update any header changes to the html in this file. IE logo, navigation, etc
+> You can also use any of the plugins above to generate libraries as well.
 
-`src > manifest.json`
+Libraries are shareable across libraries and applications. They can be imported from `@ntersol/{lib-name}`.
 
-- Change the site info in this file to be specific to your app. Make sure the start Url property matches your production URL
+## Development server
 
-`src > assets > icons`
+Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-- Change these icons to ones for your app
+## Code scaffolding
 
-`src >` `apple-touch-icon` + `favicon.ico` + `safari-pinned-tab.svg`
+Run `ng g component my-component --project=my-app` to generate a new component.
 
-- Change these icons to ones for your app
+## Build
 
-`src > ngsw-config.json`
+Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-- Update any dependencies needed for the service worker. Use asset groups for site resources & use dataGroups for API calls
+## Running unit tests
 
-## Useful Tools
+Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
 
-### VSCode Tools
+Run `nx affected:test` to execute the unit tests affected by a change.
 
-- Prettier: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
-- TS Lint: https://marketplace.visualstudio.com/items?itemName=eg2.tslint
+## Running end-to-end tests
 
-### Visual Studio Tools
+Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
 
-- Prettier: https://marketplace.visualstudio.com/items?itemName=MadsKristensen.JavaScriptPrettier
-- TS Lint (Note that this requires the project to be in a solution to work): https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebAnalyzer
+Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
 
-## Bit Usage
-Review bit documentation here: https://docs.bit.dev/docs/quick-start. Ntersol bit library is here: https://bit.dev/nts/angular
+## Understand your workspace
 
-One line wonders:
-- Get and update to latest everything: `npm run bit:pull`
-- Tag and push everything: `npm run bit:push`
+Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 
-Additional Info:
-- Install/update bit cli `npm install bit-bin -g`
-- See list of outdated components `bit list --outdated`
-- To get the latest version of everything, run `bit import && bit checkout latest --all`. Import downloads the latest version from the remote server and checkout switches to that version
-- Check status of local component environment, IE which components have been updated and are ready for tagging/uploading `bit status`
-- When components are ready to have their changes exported, first run `bit tag --all` or `bit tag --all 1.0.0` to set a new semver version and then export with `bit export nts.angular`
-- Add a new component to a namespaced project with `bit add src/app/components/general/new-component --namespace components/general`. See https://bit.dev/nts/angular for the locations and namespaces of components.
+## Further help
 
+Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
 
-When bit goes wrong:
-- Bit likes to add extra namespaced lines to the root package.json even if you aren't using the npm package. It can cause issues so remove that extra line
-- When adding a bit lib to a new project, but likes to add a node_modules directory into the lib directory. This should be deleted
-- Sometimes when getting the latest component, bit adds lots of extra carriage returns. To fix this run checkout with the reset command `npm run bit:reset`
+## ☁ Nx Cloud
 
-Add bit to a new project
-1. In the root directory, run `bit init`
-2. Add `.bit/` to your root .gitignore file
-3. In the root package.json directory, change the bit entry to the following. Update the componentsDefaultDirectory if necessary
-```
-"bit": {
-    "env": {},
-    "componentsDefaultDirectory": "src/app/{name}",
-    "saveDependenciesAsComponents": true,
-    "packageManager": "npm",
-    "resolveModules": {
-      "modulesDirectories": [
-        "./"
-      ]
-    }
-  }
-```
-4. Navigate to the newly created component folder, IE src/app/components/general and delete the node_modules folder and package.json files
+### Computation Memoization in the Cloud
 
-## Useful Info
+<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
 
-Lazy load libraries. Normally libraries that are shared between lazy loaded routes are all bundled into a single master bundle. This approach will bundle them separately.
+Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
 
-- Add a module in `app > components > libs > *` that imports the library and then exports it
-- Export the module in the barrel file in `app > components > libs > index.ts`
-- In angular.json, add the path to the module in `projects > architect > build > options > lazyModules`
-- In the module where the library is needed, import the lazy loaded module from the barrel like `import { DatagridModule } from '$features';` and then add to the ngModule imports array
+Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
 
-When working with Yarn/NPM Link and your local NPM package src folders (uncompiled .ts), use the following boilerplate in your root tsconfig so that Angular CLI will compile and build on save and not throw an Angular package error
-
-```bash
-"include": [
-	"src/**/*",
-	"node_modules/libName/**/*",
-]
-```
+Visit [Nx Cloud](https://nx.app/) to learn more.

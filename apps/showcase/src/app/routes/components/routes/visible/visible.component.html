@@ -1,0 +1,81 @@
+<div class="author"><strong>Author:</strong> Jerrol Krause</div>
+<h1>Visible</h1>
+<p>
+  Adds or removes elements in the DOM based on responsive breakpoints. This method uses ngIf so that the elements are
+  not actually present in the DOM when hidden as opposed to merely hiding them with CSS.
+</p>
+
+<hr />
+
+<p-tabView>
+  <p-tabPanel header="Documentation">
+    <div>
+      <h2>Setup</h2>
+      <p>Import</p>
+
+      <pre>
+        <code class="language-ts" [innerHtml]="exampleimport2"></code>
+      </pre>
+      <p>Html</p>
+      <pre>
+      <code class="language-html" [innerHtml]="exampleHTML"></code>
+    </pre>
+      <p>Typescript</p>
+      <pre>
+        <code class="language-ts" [innerHtml]="exampleTS"></code>
+      </pre>
+    </div>
+  </p-tabPanel>
+
+  <p-tabPanel header="Example">
+    <div>
+      <h2>
+        Resize window to see effect. Text will appear in the boxes below at the appropriate breakpoints. Inspect element
+        to see the components added/removed to the DOM
+      </h2>
+      <div>
+        <h3>
+          <code class="language-html"> &#060;div visible=&quot;sm&quot;&#062;Content sm&#060;/div&#062; </code>
+        </h3>
+        <div visible="sm" (isVisible)="showVisibilityStatus($event, 'sm')" class="example-visible">
+          <div>Content sm only</div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div>
+        <h3>
+          <code class="language-html"> &#060;div visible=&quot;md&quot;&#062;Content md&#060;/div&#062; </code>
+        </h3>
+        <div visible="md" (isVisible)="showVisibilityStatus($event, 'md')" class="example-visible">
+          <div>Content md only</div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div>
+        <h3>
+          <code class="language-html"> &#060;div visible=&quot;lg&quot;&#062;Content lg&#060;/div&#062; </code>
+        </h3>
+        <div visible="lg" (isVisible)="showVisibilityStatus($event, 'lg')" class="example-visible">
+          <div>Content lg only</div>
+        </div>
+      </div>
+
+      <hr />
+      <div>
+        <h3>
+          <code class="language-html"> &#060;div visible=&quot;md-up&quot;&#062;Content md-up&#060;/div&#062; </code>
+        </h3>
+        <div visible="md-up" (isVisible)="showVisibilityStatus($event, 'md-up')" class="example-visible">
+          <div>Content md-up</div>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+  <!--
+    <p-tabPanel header="API"> Coming soon! </p-tabPanel>
+    -->
+</p-tabView>

@@ -1,0 +1,23 @@
+<div class="author"><strong>Author:</strong>Warren Dugan</div>
+<h1 class="text-center">Progressive Web App Setup</h1>
+
+<p-timeline [value]="steps" [align]="'opposite-content'">
+  <ng-template pTemplate="opposite" let-event>
+    <div id="{{ event.slug }}" class="opposite ms-auto text-right">
+      <a class="text-decoration-none" [routerLink]="['./']" [fragment]="event.slug">
+        <small class="p-text-secondary">{{ event.alt }}</small>
+      </a>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="content" let-event>
+    <div class="content">
+      <p class="me-auto">{{ event.description }}</p>
+      <img *ngIf="event.path" [src]="event.path" [alt]="event.alt" [width]="event.width" />
+      <pre *ngIf="event.code">
+          <code class="{{ 'language-' + event.type}}" [innerHtml]="event.code"></code>
+      </pre>
+    </div>
+  </ng-template>
+  &plus;
+</p-timeline>

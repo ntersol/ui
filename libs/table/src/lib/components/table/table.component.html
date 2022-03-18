@@ -1,0 +1,180 @@
+<div class="nts-table" [ngClass]="{ 'nts-table-compact': compact }">
+  <p-table
+    #tt
+    [value]="rows || []"
+    [columns]="columns"
+    sortMode="single"
+    (onSort)="onSort($event)"
+    [paginator]="paginator"
+    [rowsPerPageOptions]="rowsPerPageOptions"
+    [rows]="paginateRows"
+    [autoLayout]="false"
+    [rowTrackBy]="rowTrackBy"
+    [dataKey]="dataKey"
+  >
+    <!-- Global filter-->
+    <ng-template pTemplate="caption" *ngIf="showFilter || headerText">
+      <div class="d-flex">
+        <div *ngIf="headerText" [innerHTML]="headerText"></div>
+        <div class="p-filter ms-auto" *ngIf="showFilter">
+          <i class="fas fa-search me-2" style="margin: 4px 4px 0 0"></i>
+          <input
+            #filter
+            type="text"
+            pInputText
+            size="50"
+            placeholder="Global Filter"
+            (input)="filterGlobalUpdate($event)"
+            style="width: auto"
+          />
+          <a class="filter-clear" (click)="filterGlobalUpdate($event); filter.value = ''" *ngIf="filter.value">
+            <i class="fas fa-times"></i>
+          </a>
+        </div>
+      </div>
+    </ng-template>
+    <!-- Table Headers -->
+    <ng-template pTemplate="header" let-columns *ngIf="showHeader">
+      <tr class="nts-table-row" style="height: 30px">
+        <ng-container *ngIf="shouldShowExpandRow">
+          <th>
+            <!-- Empty Header for Row Expand -->
+          </th>
+        </ng-container>
+        <th
+          *ngFor="let col of columns; let i = index"
+          [pSortableColumn]="col.field"
+          [pSortableColumnDisabled]="col.sortable === false"
+          #th
+          [ngStyle]="col | headerStyles"
+          class="nts-table-th-{{ col.field | slug }} nts-table-th-type-{{ col.type | slug }}"
+        >
+          <ng-container *ngIf="templates[col.field] && templates[col.field].templateHeader; else headerDefault">
+            <ng-container
+              *ngTemplateOutlet="
+                templates[col.field].templateHeader;
+                context: {
+                  $$implicit: col.header,
+                  value: col.header,
+                  column: col,
+                  index: i
+                }
+              "
+            ></ng-container>
+          </ng-container>
+          <ng-template #headerDefault>
+            <span [innerHtml]="col.header"></span>
+          </ng-template>
+          <p-sortIcon [field]="col.field" *ngIf="col.sortable !== false"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <!-- Table Body -->
+    <ng-template pTemplate="body" let-expanded="expanded" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+      <!--
+         [ngClass]="{'nts-table-anim-slide-in-from-right' : !loaded}" [ngStyle]="{'animation-delay' : (rowIndex / 25) +'s'}"
+      -->
+      <tr class="nts-table-row">
+        <!-- Expansion Icon -->
+        <ng-container *ngIf="shouldShowExpandRow">
+          <td>
+            <a [pRowToggler]="rowData">
+              <i [ngClass]="expanded ? 'fas fa-caret-down fa-rotate-45' : 'fas fa-caret-right'"></i>
+            </a>
+          </td>
+        </ng-container>
+        <!-- Loop through columns -->
+        <td
+          *ngFor="let col of columns"
+          [ngClass]="[
+            'nts-table-td-' + (col.field | slug),
+            'nts-table-td-type-' + (col.type | slug),
+            col.type === 'limited' ? 'nts-limited' : ''
+          ]"
+        >
+          <!-- Custom cell templates -->
+          <ng-container *ngIf="templates[col.field] && templates[col.field].templateCell">
+            <ng-container
+              *ngTemplateOutlet="
+                templates[col.field].templateCell;
+                context: {
+                  $$implicit: rowData[col.field],
+                  value: rowData[col.field],
+                  column: col,
+                  row: rowData
+                }
+              "
+            ></ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="!templates[col.field] || (templates[col.field] && !templates[col.field].templateCell)">
+            <ng-container [ngSwitch]="col.type">
+              <!-- Email -->
+              <ng-container *ngSwitchCase="'email'">
+                <a href="mailto:{{ rowData[col.field] }}">{{ rowData[col.field] }}</a>
+              </ng-container>
+              <!-- Phone Number -->
+              <ng-container *ngSwitchCase="'phoneNumber'">
+                <a href="tel:{{ rowData[col.field] | phoneNumber: true }}">{{ rowData[col.field] | phoneNumber }}</a>
+              </ng-container>
+              <!-- Date -->
+              <ng-container *ngSwitchCase="'date'">
+                {{ rowData[col.field] | date: col.typeArgs || 'MMM d, y' }}
+              </ng-container>
+              <!-- Date Time -->
+              <ng-container *ngSwitchCase="'dateTime'">
+                {{ rowData[col.field] | date: col.typeArgs || 'medium' }}
+              </ng-container>
+
+              <!-- Currency -->
+              <ng-container *ngSwitchCase="'currency'">
+                {{ rowData[col.field] | currency: '$':'symbol':col.typeArgs || '1.2-2' }}
+              </ng-container>
+              <ng-container *ngSwitchCase="'limited'">
+                <div class="nts-limited-box" [title]="rowData[col.field]">
+                  {{ rowData[col.field] }}
+                </div>
+              </ng-container>
+              <!--
+              <ng-container *ngSwitchCase="'phoneNumber'">
+                    <a href="tel:{{rowData[col.field] | phoneNumber}}">{{ rowData[col.field] | phoneNumber }}</a>
+                  </ng-container>
+              -->
+              <ng-container *ngSwitchDefault>
+                {{ rowData[col.field] }}
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+    <!-- Row Expansion -->
+    <ng-template pTemplate="rowexpansion" let-columns="columns" let-rowData>
+      <ng-container *ngIf="shouldShowExpandRow">
+        <tr>
+          <td [attr.colspan]="columns.length + 1">
+            <!-- Custom Row Expansion Template -->
+            <ng-container
+              *ngTemplateOutlet="
+                templates['expansion'].templateExpansion;
+                context: {
+                  $$implicit: rowData['expansion'],
+                  value: rowData['expansion'],
+                  column: null,
+                  row: rowData
+                }
+              "
+            >
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+    </ng-template>
+    <!-- Empty messages-->
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="columns?.length" class="nts-table-no-content">No rows found</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

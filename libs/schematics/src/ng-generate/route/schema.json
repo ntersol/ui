@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "SchematicsNtersolRoute",
+  "title": "Ntersol Route Options Schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Route name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the component?"
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the route",
+      "visible": false
+    },
+    "module": {
+      "type": "string",
+      "description": "The module to add the route to"
+    },
+    "route": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to use for the route"
+    },
+    "apiStore": {
+      "type": "boolean",
+      "default": false,
+      "description": "Does this route need an API store?"
+    },
+    "uiStore": {
+      "type": "boolean",
+      "default": false,
+      "description": "Does this route need a UI store?"
+    }
+  },
+  "required": ["name"]
+}

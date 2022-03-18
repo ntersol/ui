@@ -1,3 +1,7 @@
 {
-    "git.ignoreLimitWarning": true
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "files.trimTrailingWhitespace": true,
+  "typescript.preferences.importModuleSpecifier": "project-relative",
+  "workbench.settings.editor": "json"
 }

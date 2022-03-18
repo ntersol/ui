@@ -1,0 +1,152 @@
+<div class="author"><strong>Author:</strong> Jerrol Krause</div>
+<h1>FormGroup 2 Api</h1>
+<p>
+  Manage relationships between a form group mega model and a REST endpoint. When this method is called, it will
+  automatically determine which models in the form group need to be saved and where to save them. Supports
+  POST/PUT/PATCH/DELETE.
+</p>
+<p>Imagine that you have a formgroup with the following structure:</p>
+<pre>
+        <code class="language-js" [innerHtml]="structure"></code>
+    </pre>
+<p>And then a REST api with full CRUD operations for each model similar to the following:</p>
+
+<div><strong>/api/v1/loanApplications</strong></div>
+<div><strong>/api/v1/borrowers</strong></div>
+<div><strong>/api/v1/address</strong></div>
+<div><strong>/api/v1/incomes</strong></div>
+<div><strong>/api/v1/assets</strong></div>
+<div class="mb-3"><strong>/api/v1/liabilities</strong></div>
+<p>
+  In a large non-linear form figuring out what data has changed and where it needs to go is a huge task. By defining the
+  relationship between the form group and the api we can automate all this interaction.
+</p>
+<p>Key Features</p>
+<ul>
+  <li>
+    <strong>Recursive:</strong> Supports complex deeply nested form models. Is smart enough to dig through arrays in
+    objects in arrays etc
+  </li>
+  <li>
+    <strong>All CRUD operations supported:</strong> The utility will check the dirty flag to see if any data in the
+    model has changed. If so, it will check if a uniqueID has already been set. If yes, a PUT/PATCH will be performed,
+    if no it will be POST. To perform a delete, set of property of '$$deleted' to true before the utility runs.
+  </li>
+  <li>
+    <strong>Handle API responses automatically:</strong> Responses from the api are patched into the existing model
+    (useful for things like adding in the uniqueID on POST) and the model will be removed from the form group on a
+    successful DELETE.
+  </li>
+  <li>
+    <strong>Resets automatically:</strong> After a successfull api call, all models that have been modified have have
+    their dirty flags reset to reset up for future saves
+  </li>
+  <li>
+    <strong>HTTP requests run in parallel:</strong> All changed models have their http calls run in parallel as a single
+    subscription
+  </li>
+  <li><strong>Supports changed props only</strong> By default it will only send the deltas of any changed models</li>
+</ul>
+
+<hr />
+
+<p-tabView>
+  <p-tabPanel header="Documentation">
+    <div>
+      <h2>1. Create the form group</h2>
+      <p>
+        For larger models that start as JSON it's convenient to use the jsonToFormGroup utility function found in
+        @ntersol/forms. Otherwise just use form builder.
+      </p>
+      <pre>
+                <code class="language-ts" [innerHtml]="exampleTS3"></code>
+            </pre>
+    </div>
+
+    <div>
+      <h2>2. Setup</h2>
+      <p>
+        Import the FormGroup2ApiModel interface and use that to create the model that the "saveFormGroup" function will
+        use
+      </p>
+      <pre>
+                <code class="language-ts" [innerHtml]="exampleTS"></code>
+            </pre>
+    </div>
+    <div>
+      <h2>3. Perform Save</h2>
+      <p>
+        Import the "saveFormGroup" function, supply the angular http service, the formGroupModel that was just created
+        above and then the form group.
+      </p>
+      <pre>
+                <code class="language-ts" [innerHtml]="exampleTS2"></code>
+            </pre>
+    </div>
+  </p-tabPanel>
+
+  <!--
+    <p-tabPanel header="Example">
+        <div>
+
+
+        </div>
+    </p-tabPanel>
+-->
+  <p-tabPanel header="API">
+    <h2>Properties for FormGroup2ApiModel</h2>
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>path</td>
+          <td>The path to this entity in the form group using reactive forms dot notation</td>
+        </tr>
+        <tr>
+          <td>uniqueID</td>
+          <td>The unique ID of this entity</td>
+        </tr>
+        <tr>
+          <td>ignoreProps</td>
+          <td>
+            Ignore these properties within this formgroup for the purposes of checking for changes (via the dirty flag).
+            Otherwise changes within child or nested models will toggle the dirty flag for this model even though
+            nothing within this model has changed. These properties will also be removed from any api calls.
+          </td>
+        </tr>
+        <tr>
+          <td>keepNils</td>
+          <td>
+            By default all nill values are stripped from the payload sent to the api. Set to true to keep nill values.
+            Also removes empty arrays/objects/strings
+          </td>
+        </tr>
+        <tr>
+          <td>parent</td>
+          <td>Information about this entity's parent</td>
+        </tr>
+        <tr>
+          <td>TEMP</td>
+          <td>TEMP</td>
+        </tr>
+        <tr>
+          <td>TEMP</td>
+          <td>TEMP</td>
+        </tr>
+        <tr>
+          <td>TEMP</td>
+          <td>TEMP</td>
+        </tr>
+        <tr>
+          <td>TEMP</td>
+          <td>TEMP</td>
+        </tr>
+      </tbody>
+    </table>
+  </p-tabPanel>
+</p-tabView>

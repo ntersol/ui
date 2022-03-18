@@ -1,0 +1,57 @@
+<div class="nts-docs-tns">
+  <ng-container *ngIf="document?.pages && viewModels && !splitView">
+    <ng-container *ngFor="let page of document?.pages; let i = index">
+      <app-page
+        [isMerge]="isMerge"
+        [isAdd]="isAdd"
+        [leftBox]="leftBox"
+        [page]="page"
+        [viewModels]="viewModels"
+        [settings]="settings"
+        [tnSettings]="tnSettings"
+        [isSelected]="(selection && selection[0].includes(i)) || false"
+        [isActive]="pageActive?.pdfIndex === page?.pdfSrcIndex && pageActive?.pageIndex === page?.pageSrcIndex"
+        [docIndex]="docIndex"
+        [pageIndex]="i"
+        [canDropFromAny]="canDropFromAny"
+        (setActivePage)="setActivePage.emit($event)"
+        (pdfChange)="pdfHasChange()"
+      ></app-page>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="!document?.pages?.length && settings?.canReorder && !splitView">
+    <app-page
+      [isMerge]="isMerge"
+      [isAdd]="isAdd"
+      [leftBox]="leftBox"
+      [page]="null"
+      [viewModels]="viewModels"
+      [settings]="settings"
+      [tnSettings]="tnSettings"
+      [isSelected]="false"
+      [isActive]="false"
+      [docIndex]="docIndex"
+      [pageIndex]="0"
+      [canDropFromAny]="canDropFromAny"
+      (pdfChange)="pdfHasChange()"
+    ></app-page>
+  </ng-container>
+
+  <ng-container *ngIf="document?.pages && viewModels && splitView">
+    <ng-container *ngFor="let page of document?.pages; let i = index">
+      <docs-split-page
+        [page]="page"
+        [viewModels]="viewModels"
+        [settings]="settings"
+        [tnSettings]="tnSettings"
+        [isSelected]="(selection && selection[0].includes(i)) || false"
+        [isActive]="pageActive?.pdfIndex === page?.pdfSrcIndex && pageActive?.pageIndex === page?.pageSrcIndex"
+        [docIndex]="docIndex"
+        [pageIndex]="i"
+        [canDropFromAny]="canDropFromAny"
+        (setActivePage)="setActivePage.emit($event)"
+        (pdfChange)="pdfHasChange()"
+      ></docs-split-page>
+    </ng-container>
+  </ng-container>
+</div>

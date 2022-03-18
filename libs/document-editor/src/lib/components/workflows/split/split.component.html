@@ -1,0 +1,12 @@
+<app-document
+  [document]="documents && documents[0]"
+  [viewModels]="viewModels"
+  [settings]="settings"
+  [tnSettings]="tnSettings"
+  [selection]="[selection[0]]"
+  [pageActive]="pageActive"
+  [docIndex]="0"
+  [splitView]="true"
+  [pageIndex]="pageIndex"
+  (pdfChange)="pdfChangeHandler()"
+></app-document>

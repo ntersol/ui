@@ -1,0 +1,29 @@
+:host {
+  align-items: center;
+  background: initial;
+  border: initial;
+  display: flex;
+  height: 100%;
+  left: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  backdrop-filter: blur(14px) brightness(90%) grayscale(1);
+  overflow: auto auto;
+  transition: backdrop-filter 300ms ease;
+  flex-wrap: wrap;
+
+  &:after {
+    backdrop-filter: inherit;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    transition: backdrop-filter 300ms ease;
+  }
+}

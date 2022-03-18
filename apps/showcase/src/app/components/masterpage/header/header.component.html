@@ -1,0 +1,15 @@
+<header class="p-2">
+  <nav class="d-flex">
+    <a class="brand pl-2 me-3" [routerLink]="['/']">
+      <strong class="logo">{{ appName }}</strong>
+    </a>
+    <div class="nav">
+      <ng-content></ng-content>
+    </div>
+    <div class="github">
+      <a target="_blank" href="https://github.com/ntersol/ui">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </nav>
+</header>

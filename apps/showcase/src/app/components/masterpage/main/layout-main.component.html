@@ -1,0 +1,113 @@
+<app-header>
+  <app-nav class="nav-component"></app-nav>
+</app-header>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-3">
+      <!-- Nav -->
+      <div class="card position-sticky" [style.top]="0">
+        <div class="card-body">
+          <div class="mb-3">
+            <strong>Starter Apps/Templates</strong><br />
+            <div class="pl-3">
+              <a routerLinkActive="strong em" routerLink="/apps/angular-starter">Angular Starter</a><br />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <strong><i class="fas fa-cloud-upload-alt float-end mt-2"></i> State Management</strong><br />
+            <div class="pl-3">
+              <a routerLinkActive="strong em" routerLink="/state-management/api-store-creator">Api Store Creator</a
+              ><br />
+              <a routerLinkActive="strong em" routerLink="/state-management/ui-store-creator">UI Store Creator</a><br />
+
+              <a routerLinkActive="strong em" routerLink="/state-management/store-communication">Store Communication</a
+              ><br />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <strong><i class="fas fa-cubes float-end mt-2"></i> Components</strong><br />
+            <div class="pl-3">
+              <ul>
+                <li><a class="inactive" routerLink="/coming-soon">Calendar</a></li>
+                <li><a class="inactive" routerLink="/coming-soon">Chart</a></li>
+                <li><a routerLinkActive="strong em" routerLink="/components/doc-editor">Document Editor</a></li>
+                <li><a class="inactive" routerLink="/coming-soon">Forms</a></li>
+                <li><a class="inactive" routerLink="/coming-soon">Grid</a></li>
+                <li>
+                  <a routerLinkActive="strong em" routerLink="/components/google-places-autocomplete"
+                    >Google Places Autocomplete</a
+                  >
+                </li>
+                <li><a routerLinkActive="strong em" routerLink="/components/mtg-calc">Mortgage Calculator</a></li>
+                <li><a routerLinkActive="strong em" routerLink="/components/table">Table</a></li>
+                <li><a routerLinkActive="strong em" routerLink="/components/tags">Tags</a></li>
+                <li><a class="inactive" routerLink="/coming-soon">Tree</a></li>
+                <li><a routerLinkActive="strong em" routerLink="/components/wizard">Wizard</a></li>
+                <li><a routerLinkActive="strong em" routerLink="/components/visible">Visible</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <strong><i class="fas fa-map-marker-alt float-end mt-2"></i> Mapping/GIS</strong><br />
+            <div class="pl-3">
+              <ul>
+                <li><a class="inactive" routerLink="/coming-soon">Azure Maps</a></li>
+                <li><a class="inactive" routerLink="/coming-soon">Bing Maps</a></li>
+                <li><a class="inactive" routerLink="/coming-soon">Mapbox</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <strong><i class="fas fa-network-wired float-end mt-2"></i> Services</strong><br />
+            <div class="pl-3">
+              <a routerLinkActive="strong em" routerLink="/services/signal-r">SignalR</a><br />
+              <a routerLinkActive="strong em" routerLink="/services/service-worker">Service Worker</a><br />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <strong><i class="fas fa-cogs float-end mt-2"></i> Utilities</strong><br />
+            <div class="pl-3">
+              <a routerLinkActive="strong em" routerLink="/utilities/script-loader">Script Loader</a><br />
+              <a routerLinkActive="strong em" routerLink="/utilities/lib-loader">Lib Loader</a><br />
+              <a routerLinkActive="strong em" routerLink="/utilities/formgroup-2-api">FormGroup 2 Api</a><br />
+              <a routerLinkActive="strong em" routerLink="/utilities/remove-nils">Remove Nils</a><br />
+              <a routerLinkActive="strong em" routerLink="/utilities/image-resizer">Image Resizer</a><br />
+              <a routerLinkActive="strong em" routerLink="/utilities/focus-trap">Focus Trap</a><br />
+              <a routerLinkActive="strong em" routerLink="/utilities/dialog">Dialog</a><br />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <strong><i class="fas fa-atom float-end mt-2"></i> Schematics</strong><br />
+            <div class="pl-3">
+              <a routerLinkActive="strong em" routerLink="/schematics/generators">Generators</a><br />
+              <a routerLinkActive="strong em" routerLink="/schematics/pwa">PWA Generation</a><br />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <strong><i class="fas fa-image float-end mt-2"></i> Assets</strong><br />
+            <div class="pl-3"><a routerLinkActive="strong em" routerLink="/assets/root">Root Assets</a><br /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-9">
+      <div class="card">
+        <div class="card-body">
+          <!-- Main Router -->
+          <main>
+            <router-outlet></router-outlet>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

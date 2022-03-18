@@ -1,8 +1,0 @@
-<ng-container *ngIf="isBrowser; else noBrowser">
-  <span class="counter" *ngIf="{ timer: timer$ | async } as counter">
-    {{ counter.timer }}
-  </span>
-</ng-container>
-<ng-template #noBrowser>
-  <span class="counter">00:00:00</span>
-</ng-template>

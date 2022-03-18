@@ -1,9 +1,5 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# bitsource
-.bit
-.dependencies
-
 # compiled output
 /dist
 /tmp
@@ -13,7 +9,6 @@
 /node_modules
 
 # IDEs and editors
-/.vs
 /.idea
 .project
 .classpath
@@ -21,7 +16,6 @@
 *.launch
 .settings/
 *.sublime-workspace
-*.user
 
 # IDE - VSCode
 .vscode/*
@@ -36,17 +30,20 @@
 /coverage
 /libpeerconnection.log
 npm-debug.log
+yarn-error.log
 testem.log
 /typings
-
-# e2e
-/e2e/*.js
-/e2e/*.map
 
 # System Files
 .DS_Store
 Thumbs.db
-obj/
-angular-starter.csproj
-App.config
-yarn-error.log
+.angular/*
+
+.angular
+
+scully.log
+scullyStats.json
+.scully
+/scully/**/*.js
+/scully/**/*.js.map
+/scully/**/*.d.ts

@@ -1,0 +1,119 @@
+<div class="author"><strong>Author:</strong> Jerrol Krause</div>
+<h1>Table</h1>
+<p>Wraps a PrimeNG (p-table) and exposes and extends functionality.</p>
+<hr />
+<p-tabView>
+  <p-tabPanel header="Documentation">
+    <div>
+      <h2>Setup</h2>
+      <p>typescript - basic</p>
+      <pre><code class="language-ts" [innerHtml]="basicTS"></code></pre>
+      <p>html</p>
+      <pre><code class="language-html" [innerHtml]="exampleHTML"></code></pre>
+      <p>typescript/template - other options</p>
+      <pre><code class="language-ts" [innerHtml]="otherTS"></code></pre>
+    </div>
+  </p-tabPanel>
+
+  <p-tabPanel header="Examples">
+    <p-tabView>
+      <p-tabPanel header="Basic">
+        <div>
+          <nts-table [rows]="rows" [columns]="columns" [headerText]="headerText"></nts-table>
+        </div>
+        <p>typescript</p>
+        <pre>
+          <code class="language-ts" [innerHtml]="basicTS"></code>
+        </pre>
+        <p>html</p>
+        <pre>
+          <code class="language-html" [innerHtml]="basicHTML"></code>
+        </pre>
+      </p-tabPanel>
+      <p-tabPanel header="Filter">
+        <div>
+          <nts-table [rows]="rows" [columns]="columns" [headerText]="headerText" [showFilter]="showFilter"> </nts-table>
+          <p>typescript></p>
+          <pre>
+            <code class="language-ts" [innerHtml]="filterTS"></code>
+          </pre>
+          <p>html</p>
+          <pre>
+            <code class="language-html" [innerHtml]="filterHTML"></code>
+          </pre>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Pagination">
+        <div>
+          <nts-table
+            [rows]="rows"
+            [columns]="columns"
+            [headerText]="headerText"
+            [paginateRows]="paginateRows"
+            [rowsPerPageOptions]="rowsPerPageOptions"
+          ></nts-table>
+          <p>typescript></p>
+          <pre>
+            <code class="language-ts" [innerHtml]="paginationTS"></code>
+          </pre>
+          <p>html</p>
+          <pre>
+            <code class="language-html" [innerHtml]="paginationHTML"></code>
+          </pre>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Compact">
+        <div>
+          <nts-table [rows]="rows" [columns]="columns" [headerText]="headerText + ' - Regular'"></nts-table>
+        </div>
+        <p></p>
+        <div>
+          <nts-table [rows]="rows" [columns]="columns" [headerText]="headerText + ' - Compact'" [compact]="true">
+          </nts-table>
+        </div>
+        <p>typescript</p>
+        <pre>
+          <code class="language-ts" [innerHtml]="compactTS"></code>
+        </pre>
+        <p>html</p>
+        <pre>
+          <code class="language-html" [innerHtml]="compactHTML"></code>
+        </pre>
+      </p-tabPanel>
+      <p-tabPanel header="Row Expansion">
+        <div>
+          <nts-table #expandExample [rows]="rows" [columns]="columns" [headerText]="headerText" dataKey="name">
+            <table-column field="expansion">
+              <ng-template table-expansion-template let-column="column" let-row="row">
+                <div>Favorite Phrase: {{ row.favoritePhrase }}</div>
+              </ng-template>
+            </table-column>
+          </nts-table>
+          <p>typescript</p>
+          <pre>
+            <code class="language-ts" [innerHtml]="dataKeyTS"></code>
+          </pre>
+          <p>html</p>
+          <pre>
+            <code class="language-html" [innerHtml]="rowExpansionHTML"></code>
+          </pre>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Column Template">
+        <div>
+          <nts-table #expandExample [rows]="rows" [columns]="columns" [headerText]="headerText" dataKey="name">
+            <table-column field="name">
+              <ng-template table-cell-template let-value="value" let-column="column" let-row="row">
+                <div><b>Name: </b>{{ value }}</div>
+              </ng-template>
+            </table-column>
+          </nts-table>
+          <p>html</p>
+          <pre>
+            <code class="language-html" [innerHtml]="customColumnHTML"></code>
+          </pre>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </p-tabPanel>
+</p-tabView>

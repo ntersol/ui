@@ -1,0 +1,27 @@
+<div class="author"><strong>Author:</strong> Jerrol Krause</div>
+<h1>Visible</h1>
+<p>Adds/Edits/Removes tags</p>
+<hr />
+<p-tabView>
+  <!-- Documentation -->
+  <p-tabPanel header="Documentation">
+    <h2>Import</h2>
+    <pre><code class="language-ts" [innerHtml]="import"></code></pre>
+    <p>typescript - input data example</p>
+    <pre><code class="language-ts" [innerHtml]="inputFieldTs"></code></pre>
+    <p>typescript - event handlers example</p>
+    <pre><code class="language-ts" [innerHtml]="handlersTs"></code></pre>
+    <p>html</p>
+    <pre><code class="language-html" [innerHtml]="exampleHTML"></code></pre>
+  </p-tabPanel>
+  <!-- Example -->
+  <p-tabPanel header="Example">
+    <nts-tags
+      [tags]="testTags"
+      (tagCreated)="onCreate($event)"
+      (tagUpdated)="onUpdate($event)"
+      (tagDeleted)="onDelete($event)"
+    >
+    </nts-tags>
+  </p-tabPanel>
+</p-tabView>

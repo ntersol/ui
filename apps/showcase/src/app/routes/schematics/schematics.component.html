@@ -1,0 +1,63 @@
+<div class="author"><strong>Author:</strong>Warren Dugan</div>
+<small class="npm"><a href="https://www.npmjs.com/package/@ntersol/schematics" target="_blank">NPM</a></small>
+<h1>Generators</h1>
+<p>Using Ntersol's schematics and generators</p>
+<hr />
+
+<p-tabView>
+  <p-tabPanel header="Ng Add">
+    <div>
+      <h2>Setup</h2>
+      <pre>
+          <code class="language-bash" [innerHtml]="add"></code>
+      </pre>
+      <img src="assets/img/ntersol-schematics.png" alt="Ntersol Schematics Screenshot" width="500" />
+    </div>
+
+    <div>
+      <p class="mt-5">
+        Already installed the schematics? Don't worry, you can still use ng-add or you can configure default schematics
+        manually like so
+      </p>
+      <pre>
+          <code class="language-bash" [innerHtml]="config"></code>
+      </pre>
+      <div class="footnote">
+        <small>&uparrow; Note: done automatically by ng-add</small>
+      </div>
+    </div>
+  </p-tabPanel>
+
+  <p-tabPanel header="Ng Generate">
+    <div>
+      <h2>Generate</h2>
+      <pre>
+        <code class="language-bash" [innerHtml]="generate"></code>
+      </pre>
+
+      <p class="mt-3 mb-0">Alias with "r"</p>
+      <pre>
+        <code class="language-bash" [innerHtml]="alias"></code>
+      </pre>
+      <img src="assets/img/generate.png" alt="Ntersol Schematics Screenshot - Generate" width="500" />
+
+      <p class="mt-5 mb-0">Add Routing</p>
+      <pre>
+        <code class="language-bash" [innerHtml]="routing"></code>
+      </pre>
+      <img src="assets/img/routing.png" alt="Ntersol Schematics Screenshot - Routing" width="500" />
+      <div class="footnote">
+        <small>&uparrow; Note: declaration of module and route flags in the dry run</small>
+      </div>
+
+      <p class="mt-5 mb-0">Create route specific stores</p>
+      <pre>
+        <code class="language-bash" [innerHtml]="stores"></code>
+      </pre>
+      <img src="assets/img/stores.png" alt="Ntersol Schematics Screenshot - Stores" width="500" />
+      <div class="footnote">
+        <small>&uparrow; We can also generate optional UI and API stores for our route</small>
+      </div>
+    </div>
+  </p-tabPanel>
+</p-tabView>

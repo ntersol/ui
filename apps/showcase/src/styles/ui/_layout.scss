@@ -1,0 +1,34 @@
+// Global branded styling. App specific styling should NOT go in this file
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: #484f59;
+  background-color: $grey;
+}
+.p-container {
+  max-width: 1280px;
+  margin: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.p-container-fluid {
+  margin: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+}
+
+.author {
+  float: right;
+  padding: 0.5rem;
+  background: #f5f2f0;
+}
+.npm {
+  float: right;
+  margin-right: 2ch;
+  padding: 1ch;
+  margin-top: 0.5ch;
+}
+.inactive {
+  opacity: 0.3;
+  color: #000;
+}

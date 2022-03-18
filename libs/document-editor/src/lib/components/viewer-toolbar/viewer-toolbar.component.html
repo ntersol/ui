@@ -1,0 +1,48 @@
+<p-card styleClass="mb-3" *ngIf="viewerOptions">
+  <div class="d-flex align-items-center text-end">
+    <div>Viewing Page {{ (pageActive?.pageIndex || 0) + 1 }} of {{ document?.pages?.length || '--' }}</div>
+    <div class="d-flex ms-auto">
+      <ng-container *ngIf="viewerOptions?.canChangePage">
+        <button
+          class="nts-docs-tn-button me-2"
+          pButton
+          icon="fas fa-arrow-left"
+          title="Previous Page"
+          [disabled]="(pageActive?.pageIndex || 0) === 0"
+          (click)="docSvc.pageActivePrevious()"
+        ></button>
+        <button
+          class="nts-docs-tn-button me-2"
+          pButton
+          icon="fas fa-arrow-right"
+          title="Next Page"
+          [disabled]="(pageActive?.pageIndex || 0) + 1 >= (document?.pages?.length || 0)"
+          (click)="docSvc.pageActiveNext()"
+        ></button>
+      </ng-container>
+      <select
+        id="scaleSelect"
+        title="Zoom"
+        tabindex="23"
+        data-l10n-id="zoom"
+        style="min-width: 144px"
+        *ngIf="viewerOptions?.canZoom"
+      >
+        <option id="pageAutoOption" title="" value="auto" selected="selected" data-l10n-id="page_scale_auto">
+          Automatic Zoom
+        </option>
+        <option id="pageActualOption" title="" value="page-actual" data-l10n-id="page_scale_actual">Actual Size</option>
+        <option id="pageFitOption" title="" value="page-fit" data-l10n-id="page_scale_fit">Page Fit</option>
+        <option id="pageWidthOption" title="" value="page-width" data-l10n-id="page_scale_width">Page Width</option>
+        <option title="" value="0.5">50%</option>
+        <option title="" value="0.75">75%</option>
+        <option title="" value="1">100%</option>
+        <option title="" value="1.25">125%</option>
+        <option title="" value="1.5">150%</option>
+        <option title="" value="2">200%</option>
+        <option title="" value="3">300%</option>
+        <option title="" value="4">400%</option>
+      </select>
+    </div>
+  </div>
+</p-card>

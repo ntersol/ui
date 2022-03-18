@@ -1,249 +1,1733 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
   "projects": {
-    "angular-starter": {
-      "root": "",
-      "sourceRoot": "src",
+    "azure-maps": {
+      "projectType": "library",
+      "root": "libs/azure-maps",
+      "sourceRoot": "libs/azure-maps/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/azure-maps"],
+          "options": {
+            "tsConfig": "libs/azure-maps/tsconfig.lib.json",
+            "project": "libs/azure-maps/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/azure-maps/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/azure-maps/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/azure-maps/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/azure-maps.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/azure-maps/docs/README.md libs/azure-maps/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd dist/libs/azure-maps/ && npm pack",
+              "cd dist/libs/azure-maps/ && npm publish --access public"
+            ],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run azure-maps:patch",
+              "ng run azure-maps:readme",
+              "ng run azure-maps:build:production",
+              "ng run azure-maps:pack"
+            ],
+            "parallel": false
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/azure-maps/src/**/*.ts", "libs/azure-maps/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/azure-maps"],
+          "options": {
+            "jestConfig": "libs/azure-maps/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "chart": {
+      "projectType": "library",
+      "root": "libs/chart",
+      "sourceRoot": "libs/chart/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/chart/tsconfig.lib.json",
+            "project": "libs/chart/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/chart/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/chart/src/**/*.ts", "libs/chart/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/chart"],
+          "options": {
+            "jestConfig": "libs/chart/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/chart/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/chart/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/chart.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/chart/docs/README.md libs/chart/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/chart/ && npm pack", "cd dist/libs/chart/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run chart:patch",
+              "ng run chart:readme",
+              "ng run chart:build:production",
+              "ng run chart:pack"
+            ],
+            "parallel": false
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/chart/.storybook"
+            },
+            "projectBuildConfig": "chart:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/chart",
+            "config": {
+              "configFolder": "libs/chart/.storybook"
+            },
+            "projectBuildConfig": "chart:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "document-editor": {
+      "projectType": "library",
+      "root": "libs/document-editor",
+      "sourceRoot": "libs/document-editor/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/document-editor/tsconfig.lib.json",
+            "project": "libs/document-editor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/document-editor/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/document-editor/src/**/*.ts", "libs/document-editor/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/document-editor"],
+          "options": {
+            "jestConfig": "libs/document-editor/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/document-editor/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/document-editor/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/document-editor.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/document-editor/docs/README.md libs/document-editor/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd dist/libs/document-editor/ && npm pack",
+              "cd dist/libs/document-editor/ && npm publish --access public"
+            ],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run document-editor:patch",
+              "ng run document-editor:build:production",
+              "ng run document-editor:pack"
+            ],
+            "parallel": false
+          }
+        },
+        "auto-publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "ng run document-editor:publish"
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/document-editor/.storybook"
+            },
+            "projectBuildConfig": "document-editor:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/document-editor",
+            "config": {
+              "configFolder": "libs/document-editor/.storybook"
+            },
+            "projectBuildConfig": "document-editor:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "forms": {
+      "projectType": "library",
+      "root": "libs/forms",
+      "sourceRoot": "libs/forms/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/forms/tsconfig.lib.json",
+            "project": "libs/forms/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/forms/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/forms/src/**/*.ts", "libs/forms/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/forms"],
+          "options": {
+            "jestConfig": "libs/forms/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/forms/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/forms/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/forms.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/forms/docs/README.md libs/forms/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/forms/ && npm pack", "cd dist/libs/forms/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run forms:patch",
+              "ng run forms:readme",
+              "ng run forms:build:production",
+              "ng run forms:pack"
+            ],
+            "parallel": false
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/forms/.storybook"
+            },
+            "projectBuildConfig": "forms:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/forms",
+            "config": {
+              "configFolder": "libs/forms/.storybook"
+            },
+            "projectBuildConfig": "forms:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "google-places-autocomplete": {
+      "projectType": "library",
+      "root": "libs/google-places-autocomplete",
+      "sourceRoot": "libs/google-places-autocomplete/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/google-places-autocomplete/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/google-places-autocomplete/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/google-places-autocomplete/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/google-places-autocomplete"],
+          "options": {
+            "jestConfig": "libs/google-places-autocomplete/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/google-places-autocomplete/src/**/*.ts",
+              "libs/google-places-autocomplete/src/**/*.html"
+            ]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/google-places-autocomplete/ && npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd dist/libs/google-places-autocomplete/ && npm pack",
+              "cd dist/libs/google-places-autocomplete/ && npm publish --access public"
+            ],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run google-places-autocomplete:patch",
+              "ng run google-places-autocomplete:build:production",
+              "ng run google-places-autocomplete:pack"
+            ],
+            "parallel": false
+          }
+        }
+      },
+      "tags": []
+    },
+    "grid": {
+      "projectType": "library",
+      "root": "libs/grid",
+      "sourceRoot": "libs/grid/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/grid/tsconfig.lib.json",
+            "project": "libs/grid/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/grid/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/grid/src/**/*.ts", "libs/grid/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/grid"],
+          "options": {
+            "jestConfig": "libs/grid/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/grid/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/grid/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/grid.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/grid/docs/README.md libs/grid/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/grid/ && npm pack", "cd dist/libs/grid/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run grid:patch", "ng run grid:readme", "ng run grid:build:production", "ng run grid:pack"],
+            "parallel": false
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/grid/.storybook"
+            },
+            "projectBuildConfig": "grid:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/grid",
+            "config": {
+              "configFolder": "libs/grid/.storybook"
+            },
+            "projectBuildConfig": "grid:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "mtg-calc": {
+      "projectType": "library",
+      "root": "libs/mtg-calc",
+      "sourceRoot": "libs/mtg-calc/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/mtg-calc"],
+          "options": {
+            "tsConfig": "libs/mtg-calc/tsconfig.lib.json",
+            "project": "libs/mtg-calc/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/mtg-calc/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/mtg-calc/src/**/*.ts", "libs/mtg-calc/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/mtg-calc"],
+          "options": {
+            "jestConfig": "libs/mtg-calc/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/mtg-calc/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/mtg-calc/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/mtg-calc.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/mtg-calc/docs/README.md libs/mtg-calc/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/mtg-calc/ && npm pack", "cd dist/libs/mtg-calc/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run mtg-calc:patch", "ng run mtg-calc:build:production", "ng run mtg-calc:pack"],
+            "parallel": false
+          }
+        },
+        "auto-publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "ng run mtg-calc:publish"
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/mtg-calc/.storybook"
+            },
+            "projectBuildConfig": "mtg-calc:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/mtg-calc",
+            "config": {
+              "configFolder": "libs/mtg-calc/.storybook"
+            },
+            "projectBuildConfig": "mtg-calc:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "schematics": {
+      "projectType": "library",
+      "root": "libs/schematics",
+      "sourceRoot": "libs/schematics/src",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/js:tsc",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "tsConfig": "libs/schematics/tsconfig.lib.json",
+            "outputPath": "dist/out-tsc/schematics",
+            "main": "libs/schematics/index.ts"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/schematics/tsconfig.schematics.json"
+            },
+            "development": {
+              "tsConfig": "libs/schematics/tsconfig.schematics.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "libs/schematics",
+            "command": "npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "dist/out-tsc/schematics",
+            "commands": ["npm pack", "npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "move": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "libs/schematics",
+            "commands": [
+              "npx copyfiles -e tsconfig.json -e tsconfig.**.json *.md **/*.md *.json **/*.json *.d.ts **/*.d.ts ../../dist/out-tsc/schematics/",
+              "npx copyfiles src/ng-add/schema.json ../../dist/out-tsc/schematics/",
+              "npx copyfiles src/ng-generate/route/schema.json ../../dist/out-tsc/schematics/",
+              "npx copyfiles src/ng-generate/page/schema.json ../../dist/out-tsc/schematics/",
+              "npx cp -avr src/ng-generate/route/files ../../dist/out-tsc/schematics/src/ng-generate/route/"
+            ],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run schematics:patch",
+              "ng run schematics:build:production",
+              "ng run schematics:move",
+              "ng run schematics:pack"
+            ],
+            "parallel": false
+          }
+        },
+        "auto-publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "ng run schematics:publish"
+          }
+        }
+      }
+    },
+    "scss": {
+      "projectType": "library",
+      "root": "libs/scss",
+      "sourceRoot": "libs/scss/src",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cp -avr libs/scss/ dist/libs/scss/"]
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "libs/scss",
+            "command": "npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "dist/libs/scss",
+            "commands": ["npm pack", "npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run scss:patch", "ng run scss:build", "ng run scss:pack"],
+            "parallel": false
+          }
+        }
+      }
+    },
+    "services": {
+      "projectType": "library",
+      "root": "libs/services",
+      "sourceRoot": "libs/services/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/services/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/services/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/services/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/services"],
+          "options": {
+            "jestConfig": "libs/services/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/services/src/**/*.ts", "libs/services/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/services/ && npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/services/ && npm pack", "cd dist/libs/services/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run services:patch", "ng run services:build:production", "ng run services:pack"],
+            "parallel": false
+          }
+        }
+      },
+      "tags": []
+    },
+    "showcase": {
       "projectType": "application",
+      "root": "apps/showcase",
+      "sourceRoot": "apps/showcase/src",
+      "prefix": "nts",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
-            "lazyModules": [
-              "src/app/components/general/chart/chart.module",
-              "src/app/components/general/document-editor/document-editor.module",
-              "src/app/components/general/forms/forms.module",
-              "src/app/components/general/generic/generic.module",
-              "src/app/components/general/grid/grid.module",
-              "src/app/components/general/table/table.module",
-              "src/app/components/general/tags/tags.module"
-            ],
-            "outputPath": "dist/browser",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.app.json",
-            "preserveSymlinks": true,
-            "showCircularDependencies": true,
-            "polyfills": "src/polyfills.ts",
-            "assets": ["src/assets", "src/favicon.ico", "src/apple-touch-icon.png", "src/safari-pinned-tab.svg", "src/manifest.webmanifest"],
-            "styles": ["src/styles.scss"],
-            "scripts": [
+            "outputPath": "dist/apps/showcase",
+            "index": "apps/showcase/src/index.html",
+            "main": "apps/showcase/src/main.ts",
+            "polyfills": "apps/showcase/src/polyfills.ts",
+            "tsConfig": "apps/showcase/tsconfig.app.json",
+            "assets": [
               {
-                "input": "node_modules/document-register-element/build/document-register-element.js"
+                "glob": "*",
+                "input": "apps/showcase/src/root-assets",
+                "output": "."
               },
-              {
-                "input": "node_modules/document-register-element/build/document-register-element.js"
-              }
-            ]
+              "apps/showcase/src/assets"
+            ],
+            "styles": ["apps/showcase/src/styles.scss"],
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true,
+            "serviceWorker": true,
+            "ngswConfigPath": "apps/showcase/ngsw-config.json"
           },
           "configurations": {
-            "qa": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true,
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.qa.ts"
-                }
-              ]
-            },
-            "uat": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": true,
-              "buildOptimizer": true,
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.uat.ts"
-                }
-              ]
-            },
             "production": {
-              "budgets": [
+              "fileReplacements": [
                 {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
+                  "replace": "apps/showcase/src/environments/environment.ts",
+                  "with": "apps/showcase/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
-              "vendorChunk": true,
+              "vendorChunk": false,
               "buildOptimizer": true,
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json",
-              "fileReplacements": [
+              "budgets": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-starter:build",
-            "aot": true,
-            "port": 4200
+            "browserTarget": "showcase:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-starter:build:production"
+              "browserTarget": "showcase:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-starter:build"
+            "browserTarget": "showcase:build"
           }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/showcase/src/**/*.ts", "apps/showcase/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/showcase"],
           "options": {
-            "main": "src/test.ts",
-            "karmaConfig": "src/karma.conf.js",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "scripts": [],
-            "styles": ["node_modules/font-awesome/css/font-awesome.css", "src/styles.scss"],
-            "assets": ["src/assets", "src/favicon.ico", "src/apple-touch-icon.png", "src/safari-pinned-tab.svg", "src/manifest.webmanifest"]
+            "jestConfig": "apps/showcase/jest.config.js",
+            "passWithNoTests": true
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+        "move-coverage": {
+          "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "commands": ["cp -avr coverage dist/apps/showcase/"]
           }
         },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
+        "curate": {
+          "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "outputPath": "dist/server",
-            "main": "src/server.ts",
-            "tsConfig": "src/tsconfig.server.json"
-          },
-          "configurations": {
-            "production": {
-              "outputHashing": "media",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "sourceMap": false,
-              "optimization": true
-            }
+            "cwd": "dist/apps/showcase/",
+            "command": "npx pwa-asset-generator ./n-colored.svg -i ./index.html -m ./manifest.webmanifest --path https://ntersol.github.io/ui --path-override https://ntersol.github.io/ui"
           }
         },
-        "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
+        "gh": {
+          "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "browserTarget": "angular-starter:build",
-            "serverTarget": "angular-starter:server"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "angular-starter:build:production",
-              "serverTarget": "angular-starter:server:production"
-            }
+            "cname": "",
+            "noBuild": true,
+            "name": "Github Actions",
+            "email": "actions@github.com",
+            "message": "Auto-generated commit [ci skip]"
           }
         },
-        "prerender": {
-          "builder": "@nguniversal/builders:prerender",
+
+        "deploy": {
+          "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "browserTarget": "angular-starter:build:production",
-            "serverTarget": "angular-starter:server:production",
-            "routes": ["/"]
-          },
-          "configurations": {
-            "production": {}
+            "commands": [
+              "ng run showcase:scully-build",
+              "ng run showcase:move-coverage",
+              "ng run showcase:curate",
+              "ng run showcase:gh"
+            ],
+            "parallel": false
+          }
+        },
+        "scully-build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run showcase:build:production",
+              "npx scully --project showcase --scanRoutes",
+              "cp -a dist/static/. dist/apps/showcase/"
+            ],
+            "parallel": false
           }
         }
-      }
+      },
+      "tags": []
     },
-    "angular-starter-e2e": {
-      "root": "",
-      "sourceRoot": "",
-      "projectType": "application",
+    "state-management": {
+      "projectType": "library",
+      "root": "libs/state-management",
+      "sourceRoot": "libs/state-management/src",
+      "prefix": "nts",
       "architect": {
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
+        "build": {
+          "builder": "@nrwl/angular:package",
           "options": {
-            "outputPath": "dist/server",
-            "main": "src/server.ts",
-            "tsConfig": "src/tsconfig.server.json"
+            "tsConfig": "libs/state-management/tsconfig.lib.json",
+            "project": "libs/state-management/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/state-management/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/state-management/src/**/*.ts", "libs/state-management/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/state-management"],
+          "options": {
+            "jestConfig": "libs/state-management/jest.config.js",
+            "passWithNoTests": true
           }
         },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "angular-starter:serve"
+            "command": "cd libs/state-management/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx typedoc --plugin typedoc-plugin-markdown libs/state-management/src/lib/state-management.module.ts --tsconfig libs/state-management/tsconfig.json --out libs/state-management/docs",
+              "cp libs/state-management/docs/README.md libs/state-management/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd dist/libs/state-management/ && npm pack",
+              "cd dist/libs/state-management/ && npm publish --access public"
+            ],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run state-management:patch",
+              "ng run state-management:build:production",
+              "ng run state-management:pack"
+            ],
+            "parallel": false
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/state-management/.storybook"
+            },
+            "projectBuildConfig": "state-management:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/state-management",
+            "config": {
+              "configFolder": "libs/state-management/.storybook"
+            },
+            "projectBuildConfig": "state-management:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "storybook": {
+      "projectType": "library",
+      "root": "libs/storybook",
+      "sourceRoot": "libs/storybook/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/storybook/tsconfig.lib.json",
+            "project": "libs/storybook/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/storybook/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/storybook/src/**/*.ts", "libs/storybook/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/storybook"],
+          "options": {
+            "jestConfig": "libs/storybook/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/storybook/.storybook"
+            },
+            "projectBuildConfig": "storybook:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/storybook",
+            "config": {
+              "configFolder": "libs/storybook/.storybook"
+            },
+            "projectBuildConfig": "storybook:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "table": {
+      "projectType": "library",
+      "root": "libs/table",
+      "sourceRoot": "libs/table/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/table/tsconfig.lib.json",
+            "project": "libs/table/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/table/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/table/src/**/*.ts", "libs/table/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/table"],
+          "options": {
+            "jestConfig": "libs/table/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/table/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/table/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/table.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/table/docs/README.md libs/table/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/table/ && npm pack", "cd dist/libs/table/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run table:patch", "ng run table:build:production", "ng run table:pack"],
+            "parallel": false
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/table/.storybook"
+            },
+            "projectBuildConfig": "table:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/table",
+            "config": {
+              "configFolder": "libs/table/.storybook"
+            },
+            "projectBuildConfig": "table:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "tags": {
+      "projectType": "library",
+      "root": "libs/tags",
+      "sourceRoot": "libs/tags/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/tags/tsconfig.lib.json",
+            "project": "libs/tags/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/tags/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/tags/src/**/*.ts", "libs/tags/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tags"],
+          "options": {
+            "jestConfig": "libs/tags/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/tags/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/tags/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/tags.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/tags/docs/README.md libs/tags/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/tags/ && npm pack", "cd dist/libs/tags/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run tags:patch", "ng run tags:build:production", "ng run tags:pack"],
+            "parallel": false
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/tags/.storybook"
+            },
+            "projectBuildConfig": "tags:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/tags",
+            "config": {
+              "configFolder": "libs/tags/.storybook"
+            },
+            "projectBuildConfig": "tags:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "tree": {
+      "projectType": "library",
+      "root": "libs/tree",
+      "sourceRoot": "libs/tree/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/tree/tsconfig.lib.json",
+            "project": "libs/tree/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/tree/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/tree/src/**/*.ts", "libs/tree/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tree"],
+          "options": {
+            "jestConfig": "libs/tree/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/tree/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/tree/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/tree.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/tree/docs/README.md libs/tree/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/tree/ && npm pack", "cd dist/libs/tree/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run tree:patch", "ng run tree:readme", "ng run tree:build:production", "ng run tree:pack"],
+            "parallel": false
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/tree/.storybook"
+            },
+            "projectBuildConfig": "tree:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/tree",
+            "config": {
+              "configFolder": "libs/tree/.storybook"
+            },
+            "projectBuildConfig": "tree:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "utils": {
+      "projectType": "library",
+      "root": "libs/utils",
+      "sourceRoot": "libs/utils/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "project": "libs/utils/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/utils/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/utils/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/utils"],
+          "options": {
+            "jestConfig": "libs/utils/jest.config.js",
+            "passWithNoTests": true
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "tsConfig": ["e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**"]
+            "lintFilePatterns": ["libs/utils/src/**/*.ts", "libs/utils/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/utils/ && npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/utils/ && npm pack", "cd dist/libs/utils/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run utils:patch", "ng run utils:build:production", "ng run utils:pack"],
+            "parallel": false
           }
         }
-      }
-    }
-  },
-  "defaultProject": "angular-starter",
-  "schematics": {
-    "@schematics/angular:component": {
-      "changeDetection": "OnPush",
-      "prefix": "app",
-      "style": "scss"
+      },
+      "tags": []
     },
-    "@schematics/angular:directive": {
-      "prefix": "app"
+    "visible": {
+      "projectType": "library",
+      "root": "libs/visible",
+      "sourceRoot": "libs/visible/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/visible/tsconfig.lib.json",
+            "project": "libs/visible/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/visible/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/visible/src/**/*.ts", "libs/visible/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/visible"],
+          "options": {
+            "jestConfig": "libs/visible/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/visible/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/visible/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/visible.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/visible/docs/README.md libs/visible/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/visible/ && npm pack", "cd dist/libs/visible/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run visible:patch",
+              "ng run visible:readme",
+              "ng run visible:build:production",
+              "ng run visible:pack"
+            ],
+            "parallel": false
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/visible/.storybook"
+            },
+            "projectBuildConfig": "visible:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/visible",
+            "config": {
+              "configFolder": "libs/visible/.storybook"
+            },
+            "projectBuildConfig": "visible:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "wizard": {
+      "projectType": "library",
+      "root": "libs/wizard",
+      "sourceRoot": "libs/wizard/src",
+      "prefix": "nts",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/wizard/tsconfig.lib.json",
+            "project": "libs/wizard/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/wizard/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/wizard/src/**/*.ts", "libs/wizard/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/wizard"],
+          "options": {
+            "jestConfig": "libs/wizard/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/wizard/ && npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/wizard/ && npm pack", "cd dist/libs/wizard/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run wizard:patch", "ng run wizard:build:production", "ng run wizard:pack"],
+            "parallel": false
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/wizard/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/wizard.component.ts --tsconfig ./tsconfig.json",
+              "cp libs/wizard/docs/README.md libs/wizard/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/wizard/.storybook"
+            },
+            "projectBuildConfig": "wizard:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/wizard",
+            "config": {
+              "configFolder": "libs/wizard/.storybook"
+            },
+            "projectBuildConfig": "wizard:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
     }
-  },
-  "cli": {
-    "analytics": false
   }
 }

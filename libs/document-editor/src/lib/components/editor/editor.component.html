@@ -1,0 +1,125 @@
+<div
+  class="nts-document-editor"
+  [ngClass]="{ signature: isSignature }"
+  *ngIf="{ documentsModel: documentsModel$ | async, viewModels: viewModels$ | async, state: state$ | async } as editor"
+>
+  <div
+    class="nts-document-loading p-3"
+    *ngIf="!editor?.state?.pdfs && (editor?.state?.loadingScript || editor?.state?.loadingPdf)"
+  >
+    <p-progressBar mode="indeterminate" class="mb-3"></p-progressBar>
+    <ng-container *ngIf="editor?.state?.loadingScript"> Loading Document Editor... </ng-container>
+    <ng-container *ngIf="editor?.state?.loadingPdf && !editor?.state?.loadingScript"> Loading Pdf... </ng-container>
+  </div>
+
+  <div class="alert alert-danger p-3 m-3" *ngIf="editor?.state?.error">
+    {{ editor?.state?.error }}
+  </div>
+
+  <div
+    class="alert alert-info p-3 m-3"
+    *ngIf="!editor?.state?.pdfs && !editor?.state?.loadingScript && !editor?.state?.loadingPdf && !editor?.state?.error"
+  >
+    No documents available
+  </div>
+
+  <div *ngIf="editor?.state?.pdfs">
+    <!--
+        <docs-toolbar [state]="editor.state" [thumbnailSizes]="thumbnailSizes"></docs-toolbar>
+        -->
+    <!-- Tab View -->
+    <ng-container [ngSwitch]="workflow">
+      <!-- Multidoc management view-->
+      <ng-container *ngSwitchCase="'multiDoc'">
+        <app-multi-doc
+          *ngIf="editor && editor.documentsModel && editor.viewModels && editor.state"
+          [isAdd]="isAdd"
+          [documents]="editor && editor.documentsModel"
+          [viewModels]="editor.viewModels"
+          [settings]="editor.state.settings"
+          [tnSettings]="editor.state.tnSettings"
+          [selection]="editor.state.selection"
+          [pageActive]="editor.state?.pageActive"
+          [pdfSrcs]="editor.state.pdfs || []"
+          [pdfInfo]="editor.state?.pdfInfo"
+          (pdfChange)="pdfEventHandler()"
+          [maxHeight]="maxHeight"
+        ></app-multi-doc>
+      </ng-container>
+
+      <!-- Viewer Only -->
+      <ng-container *ngSwitchCase="'display'">
+        <app-display
+          *ngIf="editor && editor.documentsModel && editor.viewModels && editor.state"
+          [document]="
+            editor && editor.documentsModel && editor.documentsModel[(editor.state && editor.state.docActive) || 0]
+          "
+          [viewerOptions]="viewerOptions"
+          [viewModels]="editor && editor.viewModels"
+          [settings]="(editor.state && editor.state.settings) || settings"
+          [tnSettings]="(editor && editor.state && editor.state.tnSettings) || { width: 0, height: 0 }"
+          [selection]="editor.state.selection"
+          [pageActive]="editor.state.pageActive"
+          [pdfSrcs]="editor.state.pdfs || []"
+          [pdfInfo]="editor.state.pdfInfo"
+          [rotation]="
+            editor.documentsModel[editor.state.pageActive.pdfIndex].pages[editor.state.pageActive.pageIndex].rotation
+          "
+          (pdfChange)="pdfEventHandler()"
+          [isSignature]="isSignature"
+          [maxHeight]="maxHeight"
+        ></app-display>
+        <!--
+      <docs-viewer
+        [pdfSrcs]="editor.state?.pdfs"
+        [pageActive]="editor.state?.pageActive"
+        [viewerOptions]="viewerOptions"
+        [document]="editor?.documentsModel[editor.state.docActive]"
+        [rotation]="
+          ((editor?.documentsModel)[editor?.state?.pageActive?.pdfIndex]?.pages)[editor?.state?.pageActive?.pageIndex]
+            ?.rotation
+        "
+      ></docs-viewer>
+      -->
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'split'">
+        <app-split
+          *ngIf="editor && editor.documentsModel && editor.viewModels && editor.state"
+          [documents]="editor.documentsModel"
+          [viewModels]="editor.viewModels"
+          [settings]="editor.state.settings"
+          [tnSettings]="editor.state.tnSettings"
+          [selection]="editor.state.selection"
+          [pageActive]="editor.state?.pageActive"
+          [pdfSrcs]="editor.state.pdfs || []"
+          [pdfInfo]="editor.state?.pdfInfo"
+          [rotation]="
+            editor.documentsModel[editor.state.pageActive.pdfIndex].pages[editor.state.pageActive.pageIndex].rotation
+          "
+          (pdfChange)="pdfEventHandler()"
+        ></app-split>
+      </ng-container>
+
+      <!-- Default View -->
+      <ng-container *ngSwitchDefault>
+        <app-default
+          *ngIf="editor && editor.documentsModel && editor.viewModels && editor.state"
+          [isMerge]="isMerge"
+          [leftBox]="true"
+          [documents]="editor.documentsModel"
+          [viewModels]="editor?.viewModels"
+          [settings]="editor.state.settings"
+          [tnSettings]="editor.state.tnSettings"
+          [selection]="editor.state.selection"
+          [pageActive]="editor.state?.pageActive"
+          [pdfSrcs]="editor.state.pdfs || []"
+          [pdfInfo]="editor.state?.pdfInfo"
+          [rotation]="getRotation(editor)"
+          (pdfChange)="pdfEventHandler()"
+          [maxHeight]="maxHeight"
+        ></app-default>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

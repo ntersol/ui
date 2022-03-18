@@ -1,0 +1,102 @@
+{
+  "title": "curate",
+  "description": "Favicon Generator",
+  "properties": {
+    "source": {
+      "type": "path",
+      "description": "Path to source image to use for asset curation"
+    },
+    "project": {
+      "type": "string",
+      "description": "Project to add asset to"
+    },
+    "background": {
+      "type": "string",
+      "description": "Page background to use when image source is provided: css value  [default: transparent]"
+    },
+    "opaque": {
+      "type": "boolean",
+      "description": "Shows white as canvas background and generates images without transparency  [default: true]"
+    },
+    "padding": {
+      "type": "string",
+      "description": "Padding to use when image source provided: css value  [default: \"10%\"]"
+    },
+    "scrape": {
+      "type": "boolean",
+      "description": "Scraping Apple Human Interface guidelines to fetch splash screen specs  [default: true]"
+    },
+    "manifest": {
+      "type": "string",
+      "description": "Web app manifest file path to automatically update manifest file with the generated icons"
+    },
+    "index": {
+      "type": "string",
+      "description": "Index HTML file path to automatically put splash screen and icon meta tags in"
+    },
+    "path": {
+      "type": "string",
+      "description": "Path prefix to prepend for href links generated for meta tags"
+    },
+    "pathOverride": {
+      "type": "string",
+      "description": "Override the path of images used in href/src tags of manifest and HTML files"
+    },
+    "type": {
+      "type": "string",
+      "description": "Image type: png|jpg  [default: jpg - with the exception of manifest files]"
+    },
+    "quality": {
+      "type": "number",
+      "description": "Image quality: 0...100 (Only for JPG)  [default: 70]"
+    },
+    "splashOnly": {
+      "type": "boolean",
+      "description": "Only generate splash screens  [default: false]"
+    },
+    "iconOnly": {
+      "type": "boolean",
+      "description": "Only generate icons  [default: false]"
+    },
+    "favicon": {
+      "type": "boolean",
+      "description": "Generate favicon image and HTML meta tag  [default: false]"
+    },
+    "mstile": {
+      "type": "boolean",
+      "description": "Generate Windows static tile icons and HTML meta tags  [default: false]"
+    },
+    "maskable": {
+      "type": "boolean",
+      "description": "Declare icons in manifest file as maskable icons  [default: true]"
+    },
+    "landscapeOnly": {
+      "type": "boolean",
+      "description": "Only generate landscape splash screens  [default: false]"
+    },
+    "portraitOnly": {
+      "type": "boolean",
+      "description": "Only generate portrait splash screens  [default: false]"
+    },
+    "darkMode": {
+      "type": "boolean",
+      "description": "Generate iOS splash screen meta with (prefers-color-scheme: dark) media attr  [default: false]"
+    },
+    "singleQuotes": {
+      "type": "boolean",
+      "description": "Generate HTML meta tags with single quotes  [default: false]"
+    },
+    "xhtml": {
+      "type": "boolean",
+      "description": "Generate HTML meta tags by self-closing the tags  [default: false]"
+    },
+    "log": {
+      "type": "boolean",
+      "description": "Logs the steps of the library process  [default: true]"
+    },
+    "noSandbox": {
+      "type": "boolean",
+      "description": "Disable sandbox on bundled Chromium on Linux platforms - not recommended  [default: false]"
+    }
+  }
+}
