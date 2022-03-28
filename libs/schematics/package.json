@@ -12,7 +12,7 @@
     "src/ng-generate/route/schema": "./src/ng-generate/route/schema.json",
     "src/builders/curate/schema": "./src/builders/curate/schema.json"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@angular-devkit/schematics": "^13.2.1",
     "@angular-devkit/core": "^13.2.1",
     "@schematics/angular": "^13.2.1",
