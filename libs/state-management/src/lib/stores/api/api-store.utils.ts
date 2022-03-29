@@ -6,7 +6,7 @@ import { mergeDeepRight } from 'ramda';
  * @param c1
  * @param c2
  */
-export function mergeConfig(c1: NtsState.ConfigEntity, c2: NtsState.ConfigEntity): NtsState.ConfigEntity;
+export function mergeConfig(c1: NtsState.Config, c2: NtsState.ConfigEntity): NtsState.ConfigEntity;
 export function mergeConfig(c1: NtsState.Config, c2: NtsState.Config): NtsState.Config;
 export function mergeConfig(c1: NtsState.Config | NtsState.ConfigEntity, c2: NtsState.Config | NtsState.ConfigEntity): NtsState.Config | NtsState.ConfigEntity {
   return {
