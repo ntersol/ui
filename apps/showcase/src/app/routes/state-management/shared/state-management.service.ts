@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ntsApiStoreCreator, ntsUIStoreCreator } from '@ntersol/state-management';
+import { ntsApiStoreCreator, ntsUIStoreCreator, NtsApiStoreCreatorNew } from '@ntersol/state-management';
 import { Models } from '../../../shared/models';
 
 export enum StoreIds {
@@ -28,9 +28,19 @@ export class StateManagementService {
 
   public uiStore = ntsUIStoreCreator<UIStoreModel>({ name: null, user: { age: 12, nameFirst: 'NameFirst123' } }, { persistId: 'uiStore' });
 
-  // List all store services here
-  constructor(public http: HttpClient) {
 
+  private storeCreator = this.store2.createBaseStore({ apiUrlBase: '//jsonplaceholder.typicode.com' });
+  private apiStore = this.storeCreator<Models.User>({ uniqueId: 'id', storeId: StoreIds.USERS, apiUrl: '/users' });
+  private apiStore2 = this.storeCreator<Models.User>({ storeId: StoreIds.USERS, apiUrl: '/users' });
+
+  // List all store services here
+  constructor(public http: HttpClient, public store2: NtsApiStoreCreatorNew) {
+    this.apiStore.selectAll$.subscribe(users => {
+
+    });
+    this.apiStore2.select$.subscribe(user => {
+
+    })
     /**
     this.uiStore.select$('isString').subscribe(x => console.log(x));
 
