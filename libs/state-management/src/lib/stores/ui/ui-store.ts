@@ -43,11 +43,11 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
   /**
    * Update data in the store
    * @param update
-   * @returns A promise with the entire store state object
+   * @returns An observable with the entire store state object. Completes immediately.
    */
-  public update(value: Partial<t>): Promise<t>;
-  public update(value: (s: t) => Partial<t>): Promise<t>;
-  public update(value: unknown): Promise<t> {
+  public update(value: Partial<t>): Observable<t>;
+  public update(value: (s: t) => Partial<t>): Observable<t>;
+  public update(value: unknown): Observable<t> {
     if (typeof value === 'function') {
       const n = value(this.state);
       this.stateChange(n);
@@ -59,7 +59,7 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
       localStorage.setItem(this.options?.persistId, JSON.stringify(this.state));
     }
 
-    return this.state$.pipe(take(1)).toPromise();
+    return this.state$.pipe(take(1));
   }
 
   /**

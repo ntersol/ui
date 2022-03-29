@@ -20,7 +20,7 @@ export class MtgCalcComponent implements OnInit {
   }
 
   @Input() set config(value: MtgCalcConfig) {
-    this._config = mergeDeepRight(DEFAULT, value);
+    this._config = mergeDeepRight(DEFAULT, value) as any; // TODO: Fix any;
     this.calculatePayments();
   }
 
