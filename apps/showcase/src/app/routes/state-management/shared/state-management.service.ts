@@ -20,21 +20,15 @@ interface UIStoreModel {
 })
 export class StateManagementService {
   // Create a curried store creator instance with default settings
-  // private store = ntsApiStoreCreator(this.http, { apiUrlBase: '//jsonplaceholder.typicode.com' });
   private store = this.sms.createBaseStore({ apiUrlBase: '//jsonplaceholder.typicode.com' });
-  // Create an instance of an entity based store
+  // Create an instance of an entity based store. Inherits configuration from base store
   public users = this.store<Models.User>({ uniqueId: 'id', storeId: StoreIds.USERS, apiUrl: '/users' });
-  // Create an instance of a non-entity based store
+  // Create an instance of a non-entity based store. Inherits configuration from base store
   public post = this.store<Models.Post>({ apiUrl: '/posts/1' });
-
+  // Create a UI Store
   public uiStore = ntsUIStoreCreator<UIStoreModel>({ name: null, user: { age: 12, nameFirst: 'NameFirst123' } }, { persistId: 'uiStore' });
 
-  // private storeCreator = this.store2.createBaseStore({ apiUrlBase: '//jsonplaceholder.typicode.com' });
-  // private apiStore = this.storeCreator<Models.User>({ uniqueId: 'id', storeId: StoreIds.USERS, apiUrl: '/users' });
-  // private apiStore2 = this.storeCreator<Models.User>({ storeId: StoreIds.USERS, apiUrl: '/users' });
-
-  // List all store services here
-  constructor(public http: HttpClient, public sms: NtsStateManagementService) {
+  constructor(public sms: NtsStateManagementService) {
     /**
     this.uiStore.select$('isString').subscribe(x => console.log(x));
 
