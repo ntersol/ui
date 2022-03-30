@@ -1,6 +1,6 @@
 {
   "name": "@ntersol/schematics",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "private": false,
   "license": "MIT",
   "type": "commonjs",
@@ -10,8 +10,6 @@
     "@angular-devkit/schematics": "^13.2.1",
     "@angular-devkit/core": "^13.2.1",
     "@schematics/angular": "^13.2.1",
-    "@angular/cdk": "^13.1.2",
-    "@ntersol/state-management": "^1.0.6",
-    "pwa-asset-generator": "^6.0.6"
+    "@angular/cdk": "^13.1.2"
   }
 }
