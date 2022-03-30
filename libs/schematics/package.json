@@ -1,5 +1,6 @@
 {
   "name": "@ntersol/schematics",
+  "description": "Schematics for NTERSOL",
   "version": "0.0.97",
   "private": false,
   "license": "MIT",
