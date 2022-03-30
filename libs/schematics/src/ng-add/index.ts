@@ -29,13 +29,6 @@ function installPackageJsonDependencies(): Rule {
   };
 }
 
-function injectImports(options: AddSchema) {
-  return async (host: Tree, _context: SchematicContext) => {
-    const workspace = await getWorkspace(host);
-    const project = getProjectFromWorkspace(workspace);
-  };
-}
-
 function setSchematicsAsDefault(): Rule {
   return (host: Tree, context: SchematicContext) => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -60,10 +53,7 @@ export default function ngAdd(options: AddSchema): Rule {
   return chain([
     options && options.skipPackageJson ? noop() : addPackageJsonDependencies(options),
     options && options.skipPackageJson ? noop() : installPackageJsonDependencies(),
-    injectImports(options),
     setSchematicsAsDefault(),
     log(),
   ]);
 }
-
-export * from './schema';
