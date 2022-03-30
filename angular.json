@@ -809,7 +809,7 @@
               "npx copyfiles src/ng-add/schema.json ../../dist/out-tsc/schematics/",
               "npx copyfiles src/ng-generate/route/schema.json ../../dist/out-tsc/schematics/",
               "npx copyfiles src/ng-generate/page/schema.json ../../dist/out-tsc/schematics/",
-              "npx cp -avr src/ng-generate/route/files ../../dist/out-tsc/schematics/src/ng-generate/route/"
+              "cp -avr src/ng-generate/route/files ../../dist/out-tsc/schematics/src/ng-generate/route/"
             ],
             "parallel": false
           }
