@@ -26,10 +26,7 @@ export class MtgCalcComponent {
   }
 
   @Input() set config(value: MtgCalcConfig) {
-    this._config = mergeDeepRight(DEFAULT, value) as MtgCalcConfig;
-    if (this._config.chartOptions) {
-      this.monthlyChart = JSON.parse(JSON.stringify(this._config.chartOptions));
-    }
+    this._config = mergeDeepRight(DEFAULT, value) as any; // TODO: Fix any;
     this.calculatePayments();
   }
 

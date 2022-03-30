@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ntsApiStoreCreator, ntsUIStoreCreator } from '@ntersol/state-management';
+import { NtsStateManagementService } from '@ntersol/state-management';
 import { Models } from '../../../shared/models';
 
 export enum StoreIds {
@@ -20,19 +19,16 @@ interface UIStoreModel {
 })
 export class StateManagementService {
   // Create a curried store creator instance with default settings
-  private store = ntsApiStoreCreator(this.http, { apiUrlBase: '//jsonplaceholder.typicode.com' });
-  // Create an instance of an entity based store
+  private store = this.sms.createBaseStore({ apiUrlBase: '//jsonplaceholder.typicode.com' });
+  // Create an instance of an entity based store. Inherits configuration from base store
   public users = this.store<Models.User>({ uniqueId: 'id', storeId: StoreIds.USERS, apiUrl: '/users' });
-  // Create an instance of a non-entity based store
-  // public post = this.store<Models.Post>({ apiUrl: '/posts/1' }, false);
+  // Create an instance of a non-entity based store. Inherits configuration from base store
+  public post = this.store<Models.Post>({ apiUrl: '/posts/1' });
+  // Create a UI Store
+  public uiStore = this.sms.createUIStore<UIStoreModel>({ name: null, user: { age: 12, nameFirst: 'NameFirst123' } }, { persistId: 'uiStore' });
 
-  public uiStore = ntsUIStoreCreator<UIStoreModel>(
-    { name: null, user: { age: 12, nameFirst: 'NameFirst123' } },
-    { persistId: 'uiStore' },
-  );
+  constructor(public sms: NtsStateManagementService) {
 
-  // List all store services here
-  constructor(public http: HttpClient) {
     /**
     this.uiStore.select$('isString').subscribe(x => console.log(x));
 
@@ -44,6 +40,7 @@ export class StateManagementService {
        */
     /**
   setTimeout(() => {
+    // this.sms.dispatch(({ storeId: StoreIds.USERS, type: ApiActions.POST, payload: { name: 'Jerrol!' } })
     // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.POST, payload: { name: 'Jerrol!' } });
     // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.PUT, payload: { name: 'WINNING', id: 5 } });
     // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.DELETE, payload: { id: 4 } });

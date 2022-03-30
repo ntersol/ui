@@ -18,4 +18,4 @@ const Components = [NtsDomainStateComponent, NtsErrorComponent, EntityData, Enti
   imports: [CommonModule, AccordionModule, ProgressBarModule, MessageModule],
   exports: [Components],
 })
-export class NtsStateManagementModule {}
+export class NtsStateManagementModule { }

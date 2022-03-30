@@ -80,7 +80,7 @@ export function libLoader$(lib: LibLoader.Libs): Observable<void>;
  * @returns
  */
 export function libLoader$(libType: LibLoader.Libs): Observable<any> {
-  let lib: Observable<any> = of();
+  let lib: Observable<unknown> = of();
   let url = '';
   switch (libType.lib) {
     case 'dayjs':

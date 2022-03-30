@@ -67,8 +67,11 @@ export class StoreComsService {
 
   public usage4 = `
   // Import the base store instance
-  import { ntsStore } from '@ntersol/state-management';
+  import { NtsStateManagementService } from '@ntersol/state-management';
+  // Import the action creator
+  import { tokenChangedAction } from './store.actions';
 
+  constructor(public sms: NtsStateManagementService) {}
   /**
    * Update the token in the UI store
    * @param token
@@ -77,7 +80,7 @@ export class StoreComsService {
     // Create an action with the appropriate payload
     const tokenAction = tokenChangedAction(token);
     // Dispatch the action to the base store instance. Note that all stores receive all actions regardless of where it was dispatched
-    ntsStore.dispatch(tokenAction);
+    this.sms.dispatch.dispatch(tokenAction);
   }`;
 
   public token: string | null = null;

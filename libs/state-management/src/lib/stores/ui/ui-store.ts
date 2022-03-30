@@ -1,5 +1,5 @@
-import { BehaviorSubject, firstValueFrom, identity, Observable } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { BehaviorSubject, identity, Observable } from 'rxjs';
+import { distinctUntilChanged, map, take } from 'rxjs/operators';
 import { NtsBaseStore } from '../base/base-store';
 import { NtsState } from '../../state.models';
 import { isBrowser } from '../../utils/guards.util';
@@ -44,11 +44,11 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
   /**
    * Update data in the store
    * @param update
-   * @returns A promise with the entire store state object
+   * @returns An observable with the entire store state object. Completes immediately.
    */
-  public update(value: Partial<t>): Promise<t>;
-  public update(value: (s: t) => Partial<t>): Promise<t>;
-  public update(value: unknown): Promise<t> {
+  public update(value: Partial<t>): Observable<t>;
+  public update(value: (s: t) => Partial<t>): Observable<t>;
+  public update(value: unknown): Observable<t> {
     if (typeof value === 'function') {
       const n = value(this.state);
       this.stateChange(n);
@@ -60,7 +60,7 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
       localStorage.setItem(this.options?.persistId, JSON.stringify(this.state));
     }
 
-    return firstValueFrom(this.state$);
+    return this.state$.pipe(take(1));
   }
 
   /**
