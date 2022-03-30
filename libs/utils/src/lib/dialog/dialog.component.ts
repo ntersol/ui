@@ -17,6 +17,7 @@ import { FADE } from '../animations/fade';
 import { FocusTrapDirective } from '../focus-trap/focus-trap.directive';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'dialog[nts]',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],

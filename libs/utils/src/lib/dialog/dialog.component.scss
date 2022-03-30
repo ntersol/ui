@@ -10,7 +10,6 @@
   top: 0;
   width: 100%;
   z-index: 9999;
-  -webkit-backdrop-filter: blur(14px) brightness(90%) grayscale(1);
   backdrop-filter: blur(14px) brightness(90%) grayscale(1);
   overflow: auto auto;
   transition: backdrop-filter 300ms ease;
