@@ -4,20 +4,17 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 @Component({
   selector: 'nts-signal-r',
   templateUrl: './signal-r.component.html',
-  styleUrls: ['./signal-r.component.scss']
+  styleUrls: ['./signal-r.component.scss'],
 })
 export class SignalRComponent implements OnInit {
-
-  public exampleTSInstall: string =
-    `
+  public exampleTSInstall: string = `
   // Install this library
   npm i @ntersol/services --save
 
   // Install signalR
   npm install @aspnet/signalr –-save  `;
 
-  public exampleTS: string =
-    `
+  public exampleTS: string = `
     // Import into a service or component
     import { NtsSignalRService } from '@ntersol/services';
 
@@ -48,7 +45,7 @@ export class SignalRComponent implements OnInit {
     // End signalR connection
     this.signalR.connectionEnd();    `;
 
-  constructor(private highlight: HighlightService) { }
+  constructor(private highlight: HighlightService) {}
 
   ngOnInit(): void {
     /**
@@ -76,10 +73,6 @@ export class SignalRComponent implements OnInit {
     this.signalR.connectionEnd();
      */
   }
-
-
-
-
 
   ngAfterViewInit() {
     this.highlight.highlightAll();

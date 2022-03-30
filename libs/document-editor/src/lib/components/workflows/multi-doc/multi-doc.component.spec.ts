@@ -8,9 +8,8 @@ describe('MultiDocComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MultiDocComponent ]
-    })
-    .compileComponents();
+      declarations: [MultiDocComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

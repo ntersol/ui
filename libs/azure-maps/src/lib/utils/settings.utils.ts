@@ -34,7 +34,7 @@ export const settingsChange = (
       const container = document.getElementsByClassName('atlas-control-container');
       const controls = container ? container[0]?.querySelectorAll('button') : null;
       if (controls) {
-        Array.from(controls).forEach(e => (e.disabled = settingsNew.controls?.options?.disabled || false));
+        Array.from(controls).forEach((e) => (e.disabled = settingsNew.controls?.options?.disabled || false));
       }
     }
   }

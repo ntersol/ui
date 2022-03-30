@@ -1,14 +1,37 @@
 <!---->
 
 <p-card>
-    <div class="nts-doc-viewer-container p-2 text-center" [style]="{'overflow': 'auto', 'height': maxHeight + ' !important'}">
-      <div
-        id="nts-doc-viewer"
-        class="nts-doc-viewer-card"
-        #container
-        [ngStyle]="{ transform: 'rotate(' + rotation + 'deg)' }"
-      >
-        <canvas #viewer style="display:block;width:100%;"></canvas>
-      </div>
+  <div class="nts-doc-viewer-container p-2 text-center" [ngStyle]="{ overflow: 'auto', 'max-height': maxHeight }">
+    <div class="docs-zoom ms-auto mb-3" *ngIf="!isSignature">
+      <button
+        class="nts-docs-tn-button"
+        pButton
+        [icon]="'fas fa-search-plus'"
+        [disabled]="disableZoom"
+        (click)="zoom(1.25)"
+      ></button>
+      <button
+        class="nts-docs-tn-button"
+        pButton
+        [icon]="'fas fa-sync'"
+        [disabled]="disableReset"
+        (click)="resetZoom()"
+      ></button>
+      <button
+        class="nts-docs-tn-button"
+        pButton
+        [icon]="'fas fa-search-minus'"
+        [disabled]="disableUnzoom"
+        (click)="zoom(0.75)"
+      ></button>
     </div>
-  </p-card>
+    <div
+      id="nts-doc-viewer"
+      class="nts-doc-viewer-card"
+      #container
+      [ngStyle]="{ transform: 'rotate(' + rotation + 'deg)' }"
+    >
+      <canvas #viewer style="display: block; width: 100%"></canvas>
+    </div>
+  </div>
+</p-card>

@@ -6,4 +6,4 @@
 
 ### Classes
 
-- [NtsChartModule](classes/ntschartmodule.md)
+- [NtsChartModule](classes/NtsChartModule.md)

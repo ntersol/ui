@@ -13,7 +13,7 @@ export const filterTreeNodes = (
   depth: number[] = [],
   depthCurrent = 0,
 ): NtsTree.TreeNode[] => {
-  return nodes.filter(node => {
+  return nodes.filter((node) => {
     // Recurse through any children
     if (node.children) {
       node.children = filterTreeNodes(node.children, fn, depth, depthCurrent + 1);

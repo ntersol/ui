@@ -1,7 +1,8 @@
 /**
  * Node JS check for SSR
  */
-export const isBrowser = typeof window !== 'undefined' ? true : false;
+export const isNode = typeof process !== 'undefined' && process.versions != null && process.versions.node != null;
+export const isBrowser = !isNode;
 
 /**
  * Returns true if the input is null or undefined
@@ -61,6 +62,7 @@ export type markRequired<T extends Record<any, any>, RS extends keyof T> = Requi
  * Check if an object has a property
  * @param key
  */
-export const hasField = <T extends Record<any, any>, K extends keyof T>(key: K) => (
-  obj: T,
-): obj is T & markRequired<T, K> => isNotNil(obj) && isNotNil(obj[key]);
+export const hasField =
+  <T extends Record<any, any>, K extends keyof T>(key: K) =>
+  (obj: T): obj is T & markRequired<T, K> =>
+    isNotNil(obj) && isNotNil(obj[key]);

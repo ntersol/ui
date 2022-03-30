@@ -1,65 +1,71 @@
 <div class="author"><strong>Author:</strong> Jerrol Krause</div>
 <h1>Lib Loader</h1>
-<p>A utility that eliminates all of the overhead of loading and using 3rd party javascript libraries. This utility will
-    load the library as an observable and then return a properly typed instance of that library upon load.</p>
+<p>
+  A utility that eliminates all of the overhead of loading and using 3rd party javascript libraries. This utility will
+  load the library as an observable and then return a properly typed instance of that library upon load.
+</p>
 <p><strong>Key Features</strong></p>
 <ul>
-    <li>Returns library instance from an observable (uses the Script Loader utility)</li>
-    <li>Library will be properly typed</li>
-    <li>Library instance will be cached and will only be loaded on the first request</li>
-    <li>Supports optional and automatic loading of plugins</li>
-    <li>Loaded from a CDN (CDNJS via cloudflare)</li>
-    <li>Version is configurable</li>
+  <li>Returns library instance from an observable (uses the Script Loader utility)</li>
+  <li>Library will be properly typed</li>
+  <li>Library instance will be cached and will only be loaded on the first request</li>
+  <li>Supports optional and automatic loading of plugins</li>
+  <li>Loaded from a CDN (CDNJS via cloudflare)</li>
+  <li>Version is configurable</li>
 </ul>
 <p>Current Libraries Supported:</p>
 <table class="table table-sm table-striped small">
-    <thead>
-        <tr>
-            <th style="width:10%">Library</th>
-            <th>Prop</th>
-            <th>Decription</th>
-            <th>Link</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Day.js</td>
-            <td>dayjs</td>
-            <td>Day.js is a minimalist JavaScript library that parses, validates, manipulates, and displays dates and
-                times for modern browsers with a largely Moment.js-compatible API.</td>
-            <td><a href="https://day.js.org/">Documentation</a></td>
-        </tr>
-        <tr>
-            <td>jQuery</td>
-            <td>jquery</td>
-            <td>jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document
-                traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API
-                that works across a multitude of browsers.</td>
-            <td><a href="https://jquery.com/">Documentation</a></td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th style="width: 10%">Library</th>
+      <th>Prop</th>
+      <th>Decription</th>
+      <th>Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Day.js</td>
+      <td>dayjs</td>
+      <td>
+        Day.js is a minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for
+        modern browsers with a largely Moment.js-compatible API.
+      </td>
+      <td><a href="https://day.js.org/">Documentation</a></td>
+    </tr>
+    <tr>
+      <td>jQuery</td>
+      <td>jquery</td>
+      <td>
+        jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and
+        manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a
+        multitude of browsers.
+      </td>
+      <td><a href="https://jquery.com/">Documentation</a></td>
+    </tr>
+  </tbody>
 </table>
 <ul>
-    <li>DayJS</li>
+  <li>DayJS</li>
 </ul>
 <hr />
 
 <p-tabView>
-    <p-tabPanel header="Documentation">
-        <div>
-            <h2>Setup</h2>
-            <pre>
+  <p-tabPanel header="Documentation">
+    <div>
+      <h2>Setup</h2>
+      <pre>
                 <code class="language-ts" [innerHtml]="exampleTS"></code>
             </pre>
-        </div>
-    </p-tabPanel>
+    </div>
+  </p-tabPanel>
 
-    <p-tabPanel header="Example">
-        <div>
-            <h2>Check the console and the JS tab in the Network Tab to see the libraries loading</h2>
-        </div>
-    </p-tabPanel>
-    <!--
+  <p-tabPanel header="Example">
+    <div>
+      <h2>Check the console and the JS tab in the Network Tab to see the libraries loading</h2>
+    </div>
+  </p-tabPanel>
+  <!--
     <p-tabPanel header="API"> Coming soon! </p-tabPanel>
 -->
 </p-tabView>

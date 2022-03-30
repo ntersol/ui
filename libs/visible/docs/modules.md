@@ -6,4 +6,4 @@
 
 ### Classes
 
-- [NtsVisibleModule](classes/ntsvisiblemodule.md)
+- [NtsVisibleModule](classes/NtsVisibleModule.md)

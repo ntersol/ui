@@ -6,4 +6,4 @@ import { pdfjsDist } from '../models/pdf';
  * @param pdf
  */
 export const viewModelCreate = (pdfs: pdfjsDist.PDFDocumentProxy[], width: number, height: number) =>
-  pdfs.map(pdf => pageViewCreate(pdf, width, height));
+  pdfs.map((pdf) => pageViewCreate(pdf, width, height));

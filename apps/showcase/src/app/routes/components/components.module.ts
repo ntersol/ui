@@ -1,45 +1,54 @@
+import { CommonModule, PathLocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SiteModule } from '$site'; // Site modules
-import { TabViewModule } from 'primeng/tabview';
+import { NtsDocumentEditorModule } from '@ntersol/document-editor';
 import { NtsFormsModule } from '@ntersol/forms';
+import { NtsGooglePlacesAutocompleteModule } from '@ntersol/google-places-autocomplete';
+import { NtsMtgCalcModule } from '@ntersol/mtg-calc';
 import { NtsStateManagementModule } from '@ntersol/state-management';
 import { NtsTableModule } from '@ntersol/table';
 import { NtsTagsModule } from '@ntersol/tags';
-import { NtsMtgCalcModule } from '@ntersol/mtg-calc';
-import { NtsDocumentEditorModule } from '@ntersol/document-editor';
-import { NtsGooglePlacesAutocompleteModule } from '@ntersol/google-places-autocomplete';
-
-// Routing
-import { routing } from './routes';
-
-import { WizardComponent } from './routes/wizard/wizard.component';
-import { VisibleComponent } from './routes/visible/visible.component';
-import { ShowcaseTableComponent } from './routes/table/table.component';
-import { ShowcaseTagsComponent } from './routes/tags/tags.component';
-import { FormsComponent } from './routes/forms/forms.component';
-
+import { NtsVisibleModule } from '@ntersol/visible';
+import { TabViewModule } from 'primeng/tabview';
+import { SiteModule } from '../../site.module';
 // Components
 import { ComponentsComponent } from './components.component';
-import { MtgCalcComponent } from './routes/mtg-calc/mtg-calc.component';
+// Routing
+import { routing } from './routes';
 import { DocEditorComponent } from './routes/doc-editor/doc-editor.component';
 import { GooglePlacesAutocompleteComponent } from './routes/google-places-autocomplete/google-places-autocomplete.component';
-import { NtsVisibleModule } from '@ntersol/visible';
-import { ExampleComponent } from './routes/forms/example/example.component';
-import { BasicsComponent } from './routes/forms/basics/basics.component';
-import { TextComponent } from './routes/forms/text/text.component';
-import { NumbersComponent } from './routes/forms/numbers/numbers.component';
-import { SelectComponent } from './routes/forms/select/select.component';
-import { ValidatorsComponent } from './routes/forms/validators/validators.component';
-import { CheckboxesComponent } from './routes/forms/checkboxes/checkboxes.component';
-import { RadioComponent } from './routes/forms/radio/radio.component';
-
+import { MtgCalcComponent } from './routes/mtg-calc/mtg-calc.component';
+import { ShowcaseTableComponent } from './routes/table/table.component';
+import { ShowcaseTagsComponent } from './routes/tags/tags.component';
+import { VisibleComponent } from './routes/visible/visible.component';
+import { WizardComponent } from './routes/wizard/wizard.component';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, NtsStateManagementModule, TabViewModule, NtsFormsModule, NtsTableModule, NtsTagsModule, NtsGooglePlacesAutocompleteModule, NtsMtgCalcModule, NtsVisibleModule, NtsDocumentEditorModule],
-  declarations: [ComponentsComponent, FormsComponent, WizardComponent, MtgCalcComponent, VisibleComponent, ShowcaseTableComponent, ShowcaseTagsComponent, GooglePlacesAutocompleteComponent, DocEditorComponent, ExampleComponent, BasicsComponent, TextComponent, NumbersComponent, SelectComponent, ValidatorsComponent, CheckboxesComponent, RadioComponent],
-  providers: [],
+  imports: [
+    CommonModule,
+    SiteModule,
+    routing,
+    NtsStateManagementModule,
+    TabViewModule,
+    NtsFormsModule,
+    NtsTableModule,
+    NtsTagsModule,
+    NtsGooglePlacesAutocompleteModule,
+    NtsMtgCalcModule,
+    NtsVisibleModule,
+    NtsDocumentEditorModule,
+  ],
+  declarations: [
+    ComponentsComponent,
+    WizardComponent,
+    MtgCalcComponent,
+    VisibleComponent,
+    ShowcaseTableComponent,
+    ShowcaseTagsComponent,
+    GooglePlacesAutocompleteComponent,
+    DocEditorComponent,
+  ],
+  providers: [PathLocationStrategy],
   exports: [],
   entryComponents: [],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

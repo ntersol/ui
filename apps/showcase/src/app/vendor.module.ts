@@ -11,6 +11,11 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmationService } from 'primeng/api';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { AccordionModule } from 'primeng/accordion';
 
 const modules = [
   // Prime NG UI Lib
@@ -21,6 +26,11 @@ const modules = [
   DialogModule,
   ConfirmDialogModule,
   DynamicDialogModule,
+  InputSwitchModule,
+  ColorPickerModule,
+  DropdownModule,
+  InputNumberModule,
+  AccordionModule,
 ];
 
 @NgModule({
@@ -36,4 +46,4 @@ const modules = [
   exports: [RouterModule, FormsModule, ReactiveFormsModule, ...modules],
   declarations: [],
 })
-export class VendorModule { }
+export class VendorModule {}

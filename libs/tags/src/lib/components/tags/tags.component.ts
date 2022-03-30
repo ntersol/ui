@@ -21,21 +21,17 @@ export class TagsComponent implements OnInit {
 
   // public formTag: any;
   public tagActive: NtsTags.TagDef | null = null;
- 
 
   constructor() {}
 
-  ngOnInit() {
-  }
-
-  
+  ngOnInit() {}
 
   /**
    * Edit an existing tag
    * @param tag
    */
   public tagEdit(tag: NtsTags.TagDef) {
-    this.tagActive = {...tag};
+    this.tagActive = { ...tag };
     // this.formTag.patchValue(tag);
   }
 
@@ -49,6 +45,4 @@ export class TagsComponent implements OnInit {
       this.tagDeleted.emit(tag);
     }
   }
-
- 
 }

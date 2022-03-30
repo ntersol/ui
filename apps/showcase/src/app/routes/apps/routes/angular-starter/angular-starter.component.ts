@@ -4,10 +4,9 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 @Component({
   selector: 'nts-angular-starter',
   templateUrl: './angular-starter.component.html',
-  styleUrls: ['./angular-starter.component.css']
+  styleUrls: ['./angular-starter.component.css'],
 })
 export class AngularStarterComponent implements OnInit {
-
   public install = `
 # Clone the repo
 git clone https://github.com/ntersol/angular-starter.git
@@ -18,15 +17,13 @@ git clone https://github.com/ntersol/angular-starter.git
 cd your-app
 
 # Install the repo with npm
-npm i`
+npm i`;
 
-  constructor(private highlight: HighlightService) { }
+  constructor(private highlight: HighlightService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.highlight.highlightAll();
   }
-
 }

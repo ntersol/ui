@@ -8,7 +8,7 @@ export const jsonToFormGroup = (model: any) => {
   // console.log('jsonToFormGroup', model);
   const formModel: any = {};
   // Loop through all props in the model
-  Object.keys(model).forEach(key => {
+  Object.keys(model).forEach((key) => {
     // Delete props from loan modal that cause saving to fail
 
     // If this is a nested object, recurse to create form group

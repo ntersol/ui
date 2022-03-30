@@ -6,4 +6,4 @@
 
 ### Classes
 
-- [NtsTableModule](classes/ntstablemodule.md)
+- [NtsTableModule](classes/NtsTableModule.md)

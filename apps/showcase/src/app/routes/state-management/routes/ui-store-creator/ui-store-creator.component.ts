@@ -15,14 +15,14 @@ export class UiStoreCreatorComponent implements OnInit {
   public usage2 = usage2;
   public usage3 = usage3;
   public name$ = this.sm.uiStore.select$('name');
-  public name2$ = this.sm.uiStore.select$(state => state.user?.age);
+  public name2$ = this.sm.uiStore.select$((state) => state.user?.age);
   public name: string | null = null;
 
-  constructor(private sm: StateManagementService, private highlight: HighlightService) { }
+  constructor(private sm: StateManagementService, private highlight: HighlightService) {}
 
   ngOnInit(): void {
-    this.name$.subscribe(x => console.log(x));
-    this.name2$.subscribe(x => console.log(x));
+    this.name$.subscribe((x) => console.log(x));
+    this.name2$.subscribe((x) => console.log(x));
   }
 
   ngAfterViewInit() {

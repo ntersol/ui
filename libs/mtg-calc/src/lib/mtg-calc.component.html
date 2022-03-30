@@ -1,70 +1,143 @@
-<h2>Mortgage Payment Calculator</h2>
+<h2><strong>Mortgage Payment Calculator</strong></h2>
 <p>Calculate how much your monthly mortgage payment could be.</p>
 <div class="row">
-    <div class="col-12 col-md-4 col-xl-2">
+  <div class="col-12 col-xl-6">
+    <div class="row">
+      <div class="col-12 col-md-4">
         <label for="loanAmount">Loan Amount</label>
-        <span class="mtg-calc-input p-input-icon-left">
-            <i class="pi pi-dollar"></i>
-            <input class="p-inputtext" id="loanAmount" type="number" [(ngModel)]="config.loanAmount"
-                (ngModelChange)="calculatePayments()" pInputText>
-        </span>
-    </div>
-    <div class="col-12 col-md-4 col-xl-2">
+        <p-inputNumber
+          class="mtg-calc-input"
+          [(ngModel)]="config.loanAmount"
+          (ngModelChange)="onInputChange()"
+          inputId="loanAmount"
+          mode="currency"
+          currency="USD"
+          locale="en-US"
+        >
+        </p-inputNumber>
+      </div>
+      <div class="col-12 col-md-4">
         <label for="terms" (click)="showDropdown()">Term (years)</label>
-        <p-dropdown #termDropdownRef inputId="terms" [style]="{'width':'100%'}" class="mtg-calc-input"
-            [options]="config.termOptions || []" (onChange)="calculatePayments()" [(ngModel)]="config.terms"
-            optionLabel="name" optionValue="value">
+        <p-dropdown
+          #termDropdownRef
+          inputId="terms"
+          [style]="{ width: '100%' }"
+          class="mtg-calc-input"
+          [options]="config.termOptions || []"
+          [(ngModel)]="config.terms"
+          optionLabel="name"
+          optionValue="value"
+          (ngModelChange)="onInputChange()"
+        >
         </p-dropdown>
-    </div>
-    <div class="col-12 col-md-4 col-xl-2">
+      </div>
+      <div class="col-12 col-md-4">
         <label for="interestRate">Interest Rate</label>
-        <span class="mtg-calc-input p-input-icon-right">
-            <i class="pi pi-percentage"></i>
-            <input class="p-inputtext" id="interestRate" [(ngModel)]="config.interestRate"
-                (ngModelChange)="calculatePayments()" type="number" pInputText>
-        </span>
+        <p-inputNumber
+          class="mtg-calc-input"
+          mode="decimal"
+          [maxFractionDigits]="2"
+          [minFractionDigits]="2"
+          [(ngModel)]="config.interestRate"
+          (ngModelChange)="onInputChange()"
+          inputId="interestRate"
+          suffix="%"
+        >
+        </p-inputNumber>
+      </div>
+      <div class="mtg-calc-btns">
+        <button type="button" class="btn btn-primary me-2" *ngIf="!config.autoCalculate" (click)="calculatePayments()">
+          Calculate
+        </button>
+        <button
+          type="button"
+          class="btn"
+          [ngClass]="config.autoCalculate ? 'btn-primary' : 'btn-secondary'"
+          *ngIf="config.showAmortization"
+          (click)="toggleSchedule()"
+        >
+          View Amortization Schedule
+        </button>
+      </div>
     </div>
-    <p-divider class="d-none d-xl-block col-1" layout="vertical"></p-divider>
-    <div class="col-12 col-md-7 col-xl-5">
-        <h3>Monthly Payment</h3>
-        <span class="mtg-calc-amt">{{ monthlyAmount | currency }}</span>
-        <p-divider></p-divider>
-        <div class="row">
-            <div class="col-6">
-                <h4>Principle</h4>
-                <span>{{ (amortization.length ? amortization[0].principle : 0) | currency}}</span>
-            </div>
-            <div class="col-6">
-                <h4>Interest</h4>
-                <span>{{ (amortization.length ? amortization[0].interest : 0) | currency}}</span>
-            </div>
-        </div>
-    </div>
+    <ng-template [ngTemplateOutlet]="paymentBreakdown" *ngIf="config.showChart"> </ng-template>
+  </div>
+  <p-divider class="d-none d-xl-block col-1" layout="vertical"></p-divider>
+  <div class="col-12 col-xl-5">
+    <ng-template [ngTemplateOutlet]="paymentBreakdown" *ngIf="!config.showChart"> </ng-template>
+    <p-tabView class="mtg-calc-tabs" *ngIf="config.showChart" (onChange)="onTabChange()">
+      <p-tabPanel header="Total">
+        <p-chart
+          class="mtg-calc-pie"
+          #pieChart
+          [type]="config.chartOptions?.type || 'doughnut'"
+          [data]="config.chartOptions?.data"
+          [options]="config.chartOptions"
+        >
+        </p-chart>
+      </p-tabPanel>
+      <p-tabPanel header="First Month">
+        <p-chart
+          class="mtg-calc-pie"
+          #monthlyPieChart
+          [type]="monthlyChart?.type || 'doughnut'"
+          [data]="monthlyChart?.data"
+          [options]="monthlyChart"
+        >
+        </p-chart>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
 </div>
-<div class="row mtg-calc-btns">
-    <div class="col-12 text-right">
-        <button type="button" class="btn btn-primary" *ngIf="config.showAmortization" (click)="toggleSchedule()">View
-            Amortization Schedule</button>
+<ng-template #paymentBreakdown>
+  <div class="row">
+    <div class="col">
+      <h3><strong>Monthly Payment</strong></h3>
+      <strong class="mtg-calc-amt">{{ monthlyAmount | currency }}</strong>
     </div>
-</div>
-<p-dialog header="Amortization Schedule" position="top" [(visible)]="showAmortization" [modal]="true"
-    [style]="{width: '80vw'}" [draggable]="false" [resizable]="false">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col" class="text-center">Payment #</th>
-                <th scope="col" class="text-right">Principle</th>
-                <th scope="col" class="text-right">Interest</th>
-                <th scope="col" class="text-right">Principle Balance</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let payment of amortization; let i = index">
-                <th scope="row" class="text-center">{{i + 1}}</th>
-                <td class="text-right">{{payment.principle | currency}}</td>
-                <td class="text-right">{{payment.interest | currency}}</td>
-                <td class="text-right">{{payment.balance | currency}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="col" *ngIf="config.showTotal">
+      <h3><strong>Total Payments</strong></h3>
+      <strong class="mtg-calc-amt">{{ totalPayment | currency }}</strong>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <div class="row">
+    <div class="col">
+      <h4>Principle</h4>
+      <span>{{ (amortization.length ? amortization[0].principle : 0) | currency }}</span>
+    </div>
+    <div class="col">
+      <h4>Interest</h4>
+      <span>{{ (amortization.length ? amortization[0].interest : 0) | currency }}</span>
+    </div>
+  </div>
+</ng-template>
+<p-dialog
+  header="Amortization Schedule"
+  position="top"
+  [(visible)]="showAmortization"
+  [modal]="true"
+  styleClass="nts-amortization-schedule"
+  [style]="{ width: '80vw' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center">Payment #</th>
+        <th scope="col" class="text-end">Principle</th>
+        <th scope="col" class="text-end">Interest</th>
+        <th scope="col" class="text-end">Principle Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payment of amortization; let i = index">
+        <th scope="row" class="text-center">{{ i + 1 }}</th>
+        <td class="text-end">{{ payment.principle | currency }}</td>
+        <td class="text-end">{{ payment.interest | currency }}</td>
+        <td class="text-end">{{ payment.balance | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
 </p-dialog>

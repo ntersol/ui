@@ -1,8 +1,6 @@
-.tn-viewer {
-  width: 200px;
-  max-height: 63vh;
-  overflow-y: auto;
-}
-.viewer-container {
-  max-width: 79%;
+.docs-thumbnail-zoom {
+  display: flex;
+  justify-content: space-around;
+  max-width: 200px;
+  width: 100%;
 }

@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { UiStoreCreatorComponent } from './ui-store-creator.component';
 import { TabViewModule } from 'primeng/tabview';
-import { StateManagementService } from '../../shared/state-management.service';
-import { HighlightService } from '../../../../shared/services/highlight.service';
 import { of } from 'rxjs';
+import { HighlightService } from '../../../../shared/services/highlight.service';
+import { StateManagementService } from '../../shared/state-management.service';
+import { UiStoreCreatorComponent } from './ui-store-creator.component';
 
 describe('UiStoreCreatorComponent', () => {
   let component: UiStoreCreatorComponent;
@@ -13,15 +13,17 @@ describe('UiStoreCreatorComponent', () => {
 
   const stateManagementServiceMock = {
     uiStore: {
-      select$: jest.fn().mockReturnValueOnce(of('test')).mockReturnValueOnce(of({ user: { age: 30 } })),
+      select$: jest
+        .fn()
+        .mockReturnValueOnce(of('test'))
+        .mockReturnValueOnce(of({ user: { age: 30 } })),
       update: jest.fn(),
-    }
+    },
   };
 
   const highlightServiceMock = {
     highlightAll: jest.fn(),
   };
-
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -31,8 +33,7 @@ describe('UiStoreCreatorComponent', () => {
         { provide: StateManagementService, useValue: stateManagementServiceMock },
         { provide: HighlightService, useValue: highlightServiceMock },
       ],
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

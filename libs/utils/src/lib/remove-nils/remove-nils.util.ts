@@ -8,21 +8,21 @@
  * @returns
  */
 export const removeNils = <t>(o: t): t =>
-    JSON.parse(JSON.stringify(o), (_key, value) => {
-        if (
-            value === null ||
-            value === undefined ||
-            value === '' ||
-            value === [] ||
-            value === {} ||
-            (typeof value === 'object' && Array.isArray(value) && value.length === 0) ||
-            (typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length === 0)
-        ) {
-            return undefined;
-        }
-        if (typeof value === 'object' && Array.isArray(value) && value.length) {
-            const val = value.filter(d => !!d);
-            return val.length ? val : undefined;
-        }
-        return value;
-    });
+  JSON.parse(JSON.stringify(o), (_key, value) => {
+    if (
+      value === null ||
+      value === undefined ||
+      value === '' ||
+      value === [] ||
+      value === {} ||
+      (typeof value === 'object' && Array.isArray(value) && value.length === 0) ||
+      (typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length === 0)
+    ) {
+      return undefined;
+    }
+    if (typeof value === 'object' && Array.isArray(value) && value.length) {
+      const val = value.filter((d) => !!d);
+      return val.length ? val : undefined;
+    }
+    return value;
+  });

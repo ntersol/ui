@@ -1,7 +1,7 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
-import { NtsDocumentEditor } from '../../document-editor';
+import { NtsDocumentEditor } from '../../shared/models/document-editor.model';
 
 @Component({
   selector: 'app-document',
@@ -29,7 +29,7 @@ export class DocumentComponent implements OnInit, OnChanges {
   };
   @Input() tnSettings: NtsDocumentEditor.ThumbnailSize = { width: 0, height: 0 };
   @Input() viewModels?: Array<Array<NtsDocumentEditor.Preview>>;
-  @Input() splitView?= false;
+  @Input() splitView? = false;
   @Input() leftBox = false;
   @Input() isAdd = false;
   @Input() isMerge = false;
@@ -37,9 +37,9 @@ export class DocumentComponent implements OnInit, OnChanges {
   @Output() pdfChange = new EventEmitter<boolean>();
   @Output() setActivePage = new EventEmitter<NtsDocumentEditor.PageActive>();
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  ngOnChanges() { }
+  ngOnChanges() {}
 
   pdfHasChange() {
     this.pdfChange.emit(true);

@@ -30,7 +30,7 @@ export class TagBuilderComponent implements OnInit, OnChanges {
 
   @Output() tagCreated = new EventEmitter<NtsTags.TagDef>();
   @Output() tagUpdated = new EventEmitter<NtsTags.TagDef>();
- 
+
   // Formgroup
   public formTag = this.fb.group({
     guid: [null, []],
@@ -65,7 +65,7 @@ export class TagBuilderComponent implements OnInit, OnChanges {
     // Get instance of tag data
     const tag = this.formTag.value;
     // Trim any whitespace
-    Object.keys(tag).forEach(key =>
+    Object.keys(tag).forEach((key) =>
       tag[key] && typeof tag[key] === 'string' ? (tag[key] = tag[key].trim()) : tag[key],
     );
     this.tagCreated.emit(tag);
@@ -79,7 +79,7 @@ export class TagBuilderComponent implements OnInit, OnChanges {
     // Get instance of tag data
     const tag = this.formTag.value;
     // Trim any whitespace
-    Object.keys(tag).forEach(key =>
+    Object.keys(tag).forEach((key) =>
       tag[key] && typeof tag[key] === 'string' ? (tag[key] = tag[key].trim()) : tag[key],
     );
     this.tagUpdated.emit(tag);

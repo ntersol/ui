@@ -25,13 +25,13 @@ export const pageControlCreate = (
 ): Wizard.PageControl => {
   const src = clone<Wizard.Page>(page);
   // Convert content to controls
-  const content = src.content.map((c) => {
+  const content = src.content.map((c: any) => {
     // If row, recurse into columns content and convert those to a control
     if (isType.row(c)) {
       return Object.assign({}, c, {
         columns: c.columns.map((c2) =>
           Object.assign(c2, {
-            content: c2.content.map((c3) =>
+            content: c2.content.map((c3: any) =>
               contentControlCreate(c3, rulesEngine, expressionReplacer, form, formActive),
             ),
           }),

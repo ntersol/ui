@@ -1,15 +1,27 @@
 .mtg-calc {
   &-input {
     width: 100%;
-    margin-bottom: 1rem;
+
+    & ::ng-deep .p-inputnumber-input,
+    & ::ng-deep .p-inputnumber {
+      width: 100%;
+    }
   }
   &-amt {
     font-size: 1.5rem;
   }
   &-btns {
-    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: right;
   }
-}
-.p-inputtext {
-  width: 100%;
+
+  &-pie {
+    max-width: 70%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  &-tabs ::ng-deep .p-tabview-nav {
+    justify-content: center;
+  }
 }

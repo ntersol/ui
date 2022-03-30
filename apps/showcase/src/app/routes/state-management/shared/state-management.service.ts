@@ -25,10 +25,12 @@ export class StateManagementService {
   // Create an instance of a non-entity based store. Inherits configuration from base store
   public post = this.store<Models.Post>({ apiUrl: '/posts/1' });
   // Create a UI Store
-  public uiStore = this.sms.createUIStore<UIStoreModel>({ name: null, user: { age: 12, nameFirst: 'NameFirst123' } }, { persistId: 'uiStore' });
+  public uiStore = this.sms.createUIStore<UIStoreModel>(
+    { name: null, user: { age: 12, nameFirst: 'NameFirst123' } },
+    { persistId: 'uiStore' },
+  );
 
   constructor(public sms: NtsStateManagementService) {
-
     /**
     this.uiStore.select$('isString').subscribe(x => console.log(x));
 
@@ -38,7 +40,6 @@ export class StateManagementService {
         console.log(1, s);
       });
        */
-
     /**
   setTimeout(() => {
     // this.sms.dispatch(({ storeId: StoreIds.USERS, type: ApiActions.POST, payload: { name: 'Jerrol!' } })

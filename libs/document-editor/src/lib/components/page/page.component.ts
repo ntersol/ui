@@ -13,8 +13,8 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { NtsDocumentEditor } from '../../document-editor';
-import { DocumentEditorService } from '../../shared/document-editor.service';
+import { NtsDocumentEditor } from '../../shared/models/document-editor.model';
+import { DocumentEditorService } from '../../shared/services/document-editor.service';
 
 @Component({
   selector: 'app-page',
@@ -39,7 +39,7 @@ export class PageComponent implements OnInit, OnChanges {
     canSelect: false,
     canViewFull: false,
     canReset: false,
-  };;
+  };
   @Input() tnSettings: NtsDocumentEditor.ThumbnailSize = { width: 0, height: 0 };
   @Input() viewModels?: Array<Array<NtsDocumentEditor.Preview>>;
   @Input() leftBox = false;
@@ -62,7 +62,7 @@ export class PageComponent implements OnInit, OnChanges {
     this._cdr.detectChanges();
   }
   ngOnChanges(model: SimpleChanges) {
-    if (this.loaded && model.view) {
+    if (this.loaded && (model.view || model.tnSettings)) {
       this.setCanvas(this.pageRef.nativeElement);
       this._cdr.detectChanges();
     }

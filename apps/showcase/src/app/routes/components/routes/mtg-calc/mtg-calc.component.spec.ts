@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MtgCalcComponent } from './mtg-calc.component';
 
 describe('MtgCalcComponent', () => {
@@ -8,9 +7,8 @@ describe('MtgCalcComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MtgCalcComponent ]
-    })
-    .compileComponents();
+      declarations: [MtgCalcComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

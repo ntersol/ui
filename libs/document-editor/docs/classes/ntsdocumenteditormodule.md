@@ -6,12 +6,10 @@
 
 ### Constructors
 
-- [constructor](ntsdocumenteditormodule.md#constructor)
+- [constructor](NtsDocumentEditorModule.md#constructor)
 
 ## Constructors
 
 ### constructor
 
-\+ **new NtsDocumentEditorModule**(): [*NtsDocumentEditorModule*](ntsdocumenteditormodule.md)
-
-**Returns:** [*NtsDocumentEditorModule*](ntsdocumenteditormodule.md)
+• **new NtsDocumentEditorModule**()

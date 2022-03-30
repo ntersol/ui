@@ -30,23 +30,24 @@ export const isActionType = <t>(
  * }
  * @returns
  */
-export const actionCreator = <t>(type: string): NtsState.ActionCreator<t> => Object.assign(
-  (payload: t) => {
-    const action: NtsState.Action<t> = {
+export const actionCreator = <t>(type: string): NtsState.ActionCreator<t> =>
+  Object.assign(
+    (payload: t) => {
+      const action: NtsState.Action<t> = {
+        type: type,
+        payload: payload,
+      };
+      return action;
+    },
+    {
       type: type,
-      payload: payload,
-    };
-    return action;
-  },
-  {
-    type: type,
-    match: (action: NtsState.Action): action is NtsState.Action<t> => action.type === type,
-  },
-)
+      match: (action: NtsState.Action): action is NtsState.Action<t> => action.type === type,
+    },
+  );
 
 /**
  * USAGE EXAMPLES
-*/
+ */
 // Create a new file that will be easily importable by the stores that need to consume it such as
 // /shared/stores/store.actions.ts
 

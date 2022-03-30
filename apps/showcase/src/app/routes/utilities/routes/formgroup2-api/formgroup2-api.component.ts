@@ -4,10 +4,9 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 @Component({
   selector: 'nts-formgroup2-api',
   templateUrl: './formgroup2-api.component.html',
-  styleUrls: ['./formgroup2-api.component.css']
+  styleUrls: ['./formgroup2-api.component.css'],
 })
 export class Formgroup2ApiComponent implements OnInit {
-
   public structure = `
   {
     loanApplication: {
@@ -70,7 +69,7 @@ export const formGroupModel: FormGroup2ApiModel[] = [
     apiUrl: (parent: any) => apiBase + '/borrowers/' + parent.guid + '/assets',
   },
 ];
-`
+`;
   public exampleTS2 = `
 // Import save method
 import { saveFormGroup$ } from '@ntersol/utils';
@@ -116,16 +115,11 @@ public formGroup = this.fb.group({
 })
 `;
 
-  constructor(private highlight: HighlightService) { }
+  constructor(private highlight: HighlightService) {}
 
-  ngOnInit(): void {
-
-  }
-
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.highlight.highlightAll();
   }
-
 }
-

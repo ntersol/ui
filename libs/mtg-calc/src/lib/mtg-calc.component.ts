@@ -1,16 +1,22 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ViewChild } from '@angular/core';
 import { mergeDeepRight } from 'ramda';
 import { MtgCalcConfig, PAndI } from './mtg-calc.model';
 import { DEFAULT } from './mtg-calc.constants';
+import { ChartConfiguration } from 'chart.js';
+import { MtgCalcService } from './mtg-calc.service';
+import { UIChart } from 'primeng/chart';
+import { Dropdown } from 'primeng/dropdown';
 
 @Component({
   selector: 'nts-mtg-calc',
   templateUrl: './mtg-calc.component.html',
   styleUrls: ['./mtg-calc.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtgCalcComponent implements OnInit {
-  _config: MtgCalcConfig = DEFAULT;
+export class MtgCalcComponent {
+  _config = DEFAULT;
+  monthlyChart!: ChartConfiguration;
+  totalPayment = 0;
   showAmortization = false;
   amortization: Array<PAndI> = [];
   monthlyAmount = 0;
@@ -24,40 +30,54 @@ export class MtgCalcComponent implements OnInit {
     this.calculatePayments();
   }
 
-  @ViewChild('termDropdownRef') termDropdownRef: any;
+  @ViewChild('termDropdownRef') termDropdownRef!: Dropdown;
+  @ViewChild('pieChart') pieChart!: UIChart;
+  @ViewChild('monthlyPieChart') monthlyPieChart!: UIChart;
 
-  ngOnInit(): void {
-    this.calculatePayments();
-  }
+  constructor(private mtgSvc: MtgCalcService) {}
 
   calculatePayments(): void {
-    let p = this.config.loanAmount;
-    const l = this.config.terms;
-    const i = this.config.interestRate;
-    // M = P[r(1+r)^n/((1+r)^n)-1)]
-    if (!!p && !!l && !!i && !isNaN(p) && !isNaN(l) && !isNaN(i)) {
-      const j = i / 12 / 100;
-      const n = l * 12;
-      const m = p * j / (1 - Math.pow(1 + j, -n));
-      this.monthlyAmount = m;
-      this.amortization = [];
-      let q = 1;
-      let h = 1;
-      let c = 1;
-      while (p >= 0) {
-        h = p * j;
-        c = m - h;
-        q = p - c;
-        if (this.amortization.length < n) {
-          this.amortization.push({
-            principle: c,
-            interest: h,
-            balance: p
-          });
+    if (
+      !!this.config.loanAmount &&
+      !!this.config.terms &&
+      !!this.config.interestRate &&
+      !isNaN(this.config.loanAmount) &&
+      !isNaN(this.config.terms) &&
+      !isNaN(this.config.interestRate)
+    ) {
+      const finalData = this.mtgSvc.calculatePayments(
+        this.config.loanAmount,
+        this.config.terms,
+        this.config.interestRate,
+      );
+      this.amortization = finalData.amortization;
+      this.totalPayment = finalData.totalPayment;
+      this.monthlyAmount = finalData.firstMonthInterest + finalData.firstMonthPrinciple;
+      if (this.config.showChart) {
+        if (this.config.chartOptions) {
+          this.config.chartOptions.data.datasets[0].data = [finalData.loanAmount, finalData.interestTotal];
         }
-        p = q;
+        this.monthlyChart.data.datasets[0].data = [finalData.firstMonthPrinciple, finalData.firstMonthInterest];
+        if (this.monthlyPieChart) {
+          this.monthlyPieChart.refresh();
+        }
+        if (this.pieChart) {
+          this.pieChart.refresh();
+        }
       }
     }
+  }
+
+  onInputChange(): void {
+    if (this.config.autoCalculate) {
+      this.calculatePayments();
+    }
+  }
+
+  onTabChange(): void {
+    setTimeout(() => {
+      this.calculatePayments();
+    }, 100);
   }
 
   showDropdown(): void {
@@ -70,5 +90,4 @@ export class MtgCalcComponent implements OnInit {
   toggleSchedule(): void {
     this.showAmortization = !this.showAmortization;
   }
-
 }

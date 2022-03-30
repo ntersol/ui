@@ -11,7 +11,6 @@ import {
   SimpleChanges,
   ViewChildren,
   ElementRef,
-  ChangeDetectorRef,
   OnDestroy,
 } from '@angular/core';
 import { Table } from 'primeng/table';
@@ -74,7 +73,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
   @ViewChildren('th') tableHeaders!: QueryList<ElementRef>;
 
-  constructor(private ref: ChangeDetectorRef) {}
+  constructor() {}
 
   ngOnInit() {
     if (this.rows) {
@@ -96,12 +95,14 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
       this.rowsSrc = [...this.rows];
     }
 
+    /**
     if (this.tableHeaders) {
       setTimeout(() => {
-        this.columnWidthsPercent = this.columnWidthFix(this.tableHeaders.toArray());
+        // this.columnWidthsPercent = this.columnWidthFix(this.tableHeaders.toArray());
         this.ref.markForCheck();
       });
     }
+     */
 
     this.updateShouldShowExpandRow();
   }
@@ -132,7 +133,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
    * Create an array of column width percentages
    *
    * @param th
-   */
+
   private columnWidthFix(th: ElementRef<any>[]) {
     if (!th || !th.length) {
       return null;
@@ -144,6 +145,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     }
     return widthsPx.map((x) => Math.floor((x / tableWidth) * 100));
   }
+  */
 
   private updateShouldShowExpandRow() {
     this.shouldShowExpandRow =

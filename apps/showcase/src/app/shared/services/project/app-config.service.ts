@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { SettingsService } from '$settings';
+import { SettingsService } from '../../stores/settings';
 
 interface EnvSettings {
   ApiUrl: string;
@@ -26,7 +25,7 @@ export class AppConfigService {
    */
   public appSettingsUpdate(settings: EnvSettings) {
     // Loop through all env properties passed by web api
-    Object.keys(settings).forEach(key => {
+    Object.keys(settings).forEach((key) => {
       // Check to make sure this prop has been declared in app.settings and is not undefined
       // If defined, updated prop value
       // If not throw error

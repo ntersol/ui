@@ -18,7 +18,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "nts",
+            "prefixes": ["nts", "app"],
             "style": "kebab-case"
           }
         ]

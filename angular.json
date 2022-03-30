@@ -1,99 +1,6 @@
 {
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
   "projects": {
-    "angular-starter": {
-      "projectType": "application",
-      "root": "apps/angular-starter",
-      "sourceRoot": "apps/angular-starter/src",
-      "prefix": "nts",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/angular-starter",
-            "index": "apps/angular-starter/src/index.html",
-            "main": "apps/angular-starter/src/main.ts",
-            "polyfills": "apps/angular-starter/src/polyfills.ts",
-            "tsConfig": "apps/angular-starter/tsconfig.app.json",
-            "assets": ["apps/angular-starter/src/favicon.ico", "apps/angular-starter/src/assets"],
-            "styles": ["apps/angular-starter/src/styles.scss"],
-            "scripts": [],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/angular-starter/src/environments/environment.ts",
-                  "with": "apps/angular-starter/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ]
-            }
-          },
-          "defaultConfiguration": ""
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "angular-starter:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "angular-starter:build:production"
-            }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "angular-starter:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/angular-starter/src/**/*.ts", "apps/angular-starter/src/**/*.html"]
-          },
-          "outputs": ["{options.outputFile}"]
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/angular-starter"],
-          "options": {
-            "jestConfig": "apps/angular-starter/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
     "azure-maps": {
       "projectType": "library",
       "root": "libs/azure-maps",
@@ -106,6 +13,50 @@
           "options": {
             "tsConfig": "libs/azure-maps/tsconfig.lib.json",
             "project": "libs/azure-maps/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/azure-maps/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/azure-maps/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/azure-maps/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/azure-maps.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/azure-maps/docs/README.md libs/azure-maps/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd dist/libs/azure-maps/ && npm pack",
+              "cd dist/libs/azure-maps/ && npm publish --access public"
+            ],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run azure-maps:patch",
+              "ng run azure-maps:readme",
+              "ng run azure-maps:build:production",
+              "ng run azure-maps:pack"
+            ],
+            "parallel": false
           }
         },
         "lint": {
@@ -121,108 +72,6 @@
           "options": {
             "jestConfig": "libs/azure-maps/jest.config.js",
             "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
-    "calendar": {
-      "projectType": "library",
-      "root": "libs/calendar",
-      "sourceRoot": "libs/calendar/src",
-      "prefix": "nts",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/calendar/tsconfig.lib.json",
-            "project": "libs/calendar/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/calendar/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/calendar/src/**/*.ts", "libs/calendar/src/**/*.html"]
-          },
-          "outputs": ["{options.outputFile}"]
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/calendar"],
-          "options": {
-            "jestConfig": "libs/calendar/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "patch": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "command": "cd libs/calendar/ && npm version patch"
-          }
-        },
-        "readme": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "cd libs/calendar/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/calendar.component.ts --tsconfig ./tsconfig.json",
-              "cp libs/calendar/docs/README.md libs/calendar/README.md"
-            ],
-            "parallel": false
-          }
-        },
-        "pack": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["cd dist/libs/calendar/ && npm pack", "cd dist/libs/calendar/ && npm publish --access public"],
-            "parallel": false
-          }
-        },
-        "publish": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "ng run calendar:patch",
-              "ng run calendar:readme",
-              "ng run calendar:build:production",
-              "ng run calendar:pack"
-            ],
-            "parallel": false
-          }
-        },
-        "storybook": {
-          "builder": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "port": 4400,
-            "config": {
-              "configFolder": "libs/calendar/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@nrwl/storybook:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "uiFramework": "@storybook/angular",
-            "outputPath": "dist/storybook/calendar",
-            "config": {
-              "configFolder": "libs/calendar/.storybook"
-            }
-          },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
           }
         }
       },
@@ -244,7 +93,8 @@
             "production": {
               "tsConfig": "libs/chart/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -303,7 +153,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/chart/.storybook"
-            }
+            },
+            "projectBuildConfig": "chart:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -319,7 +170,8 @@
             "outputPath": "dist/storybook/chart",
             "config": {
               "configFolder": "libs/chart/.storybook"
-            }
+            },
+            "projectBuildConfig": "chart:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -346,7 +198,8 @@
             "production": {
               "tsConfig": "libs/document-editor/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -394,11 +247,16 @@
           "options": {
             "commands": [
               "ng run document-editor:patch",
-              "ng run document-editor:readme",
               "ng run document-editor:build:production",
               "ng run document-editor:pack"
             ],
             "parallel": false
+          }
+        },
+        "auto-publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "ng run document-editor:publish"
           }
         },
         "storybook": {
@@ -408,7 +266,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/document-editor/.storybook"
-            }
+            },
+            "projectBuildConfig": "document-editor:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -424,7 +283,8 @@
             "outputPath": "dist/storybook/document-editor",
             "config": {
               "configFolder": "libs/document-editor/.storybook"
-            }
+            },
+            "projectBuildConfig": "document-editor:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -451,7 +311,8 @@
             "production": {
               "tsConfig": "libs/forms/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -510,7 +371,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/forms/.storybook"
-            }
+            },
+            "projectBuildConfig": "forms:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -526,7 +388,8 @@
             "outputPath": "dist/storybook/forms",
             "config": {
               "configFolder": "libs/forms/.storybook"
-            }
+            },
+            "projectBuildConfig": "forms:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -537,7 +400,6 @@
       },
       "tags": []
     },
-
     "google-places-autocomplete": {
       "projectType": "library",
       "root": "libs/google-places-autocomplete",
@@ -623,7 +485,8 @@
             "production": {
               "tsConfig": "libs/grid/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -677,7 +540,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/grid/.storybook"
-            }
+            },
+            "projectBuildConfig": "grid:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -693,7 +557,8 @@
             "outputPath": "dist/storybook/grid",
             "config": {
               "configFolder": "libs/grid/.storybook"
-            }
+            },
+            "projectBuildConfig": "grid:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -716,13 +581,20 @@
           "options": {
             "tsConfig": "libs/mtg-calc/tsconfig.lib.json",
             "project": "libs/mtg-calc/ng-package.json"
-          }
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/mtg-calc/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/mtg-calc/src/**/*.ts", "libs/mtg-calc/src/**/*.html"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -731,9 +603,185 @@
             "jestConfig": "libs/mtg-calc/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/mtg-calc/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/mtg-calc/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/mtg-calc.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/mtg-calc/docs/README.md libs/mtg-calc/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cd dist/libs/mtg-calc/ && npm pack", "cd dist/libs/mtg-calc/ && npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run mtg-calc:patch", "ng run mtg-calc:build:production", "ng run mtg-calc:pack"],
+            "parallel": false
+          }
+        },
+        "auto-publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "ng run mtg-calc:publish"
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/mtg-calc/.storybook"
+            },
+            "projectBuildConfig": "mtg-calc:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/mtg-calc",
+            "config": {
+              "configFolder": "libs/mtg-calc/.storybook"
+            },
+            "projectBuildConfig": "mtg-calc:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
         }
       },
       "tags": []
+    },
+    "schematics": {
+      "projectType": "library",
+      "root": "libs/schematics",
+      "sourceRoot": "libs/schematics/src",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/js:tsc",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "tsConfig": "libs/schematics/tsconfig.lib.json",
+            "outputPath": "dist/out-tsc/schematics",
+            "main": "libs/schematics/index.ts"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/schematics/tsconfig.schematics.json"
+            },
+            "development": {
+              "tsConfig": "libs/schematics/tsconfig.schematics.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "libs/schematics",
+            "command": "npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "dist/out-tsc/schematics",
+            "commands": ["npm pack", "npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "move": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "libs/schematics",
+            "commands": [
+              "npx copyfiles -e tsconfig.json -e tsconfig.**.json *.md **/*.md *.json **/*.json *.d.ts **/*.d.ts ../../dist/out-tsc/schematics/",
+              "npx copyfiles src/ng-add/schema.json ../../dist/out-tsc/schematics/",
+              "npx copyfiles src/ng-generate/route/schema.json ../../dist/out-tsc/schematics/",
+              "npx copyfiles src/ng-generate/page/schema.json ../../dist/out-tsc/schematics/",
+              "npx cp -avr src/ng-generate/route/files ../../dist/out-tsc/schematics/src/ng-generate/route/"
+            ],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run schematics:patch",
+              "ng run schematics:build:production",
+              "ng run schematics:move",
+              "ng run schematics:pack"
+            ],
+            "parallel": false
+          }
+        },
+        "auto-publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "ng run schematics:publish"
+          }
+        }
+      }
+    },
+    "scss": {
+      "projectType": "library",
+      "root": "libs/scss",
+      "sourceRoot": "libs/scss/src",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cp -avr libs/scss/ dist/libs/scss/"]
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "libs/scss",
+            "command": "npm version patch"
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "dist/libs/scss",
+            "commands": ["npm pack", "npm publish --access public"],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["ng run scss:patch", "ng run scss:build", "ng run scss:pack"],
+            "parallel": false
+          }
+        }
+      }
     },
     "services": {
       "projectType": "library",
@@ -808,7 +856,14 @@
             "main": "apps/showcase/src/main.ts",
             "polyfills": "apps/showcase/src/polyfills.ts",
             "tsConfig": "apps/showcase/tsconfig.app.json",
-            "assets": ["apps/showcase/src/favicon.ico", "apps/showcase/src/assets"],
+            "assets": [
+              {
+                "glob": "*",
+                "input": "apps/showcase/src/root-assets",
+                "output": "."
+              },
+              "apps/showcase/src/assets"
+            ],
             "styles": ["apps/showcase/src/styles.scss"],
             "scripts": [],
             "vendorChunk": true,
@@ -816,7 +871,9 @@
             "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "serviceWorker": true,
+            "ngswConfigPath": "apps/showcase/ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -881,170 +938,52 @@
             "passWithNoTests": true
           }
         },
-        "deploy": {
+        "move-coverage": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": ["cp -avr coverage dist/apps/showcase/"]
+          }
+        },
+        "curate": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "cwd": "dist/apps/showcase/",
+            "command": "npx pwa-asset-generator ./n-colored.svg -i ./index.html -m ./manifest.webmanifest --path https://ntersol.github.io/ui --path-override https://ntersol.github.io/ui"
+          }
+        },
+        "gh": {
           "builder": "angular-cli-ghpages:deploy",
-          "options": {}
-        }
-      },
-      "tags": []
-    },
-    "starter": {
-      "root": "archive",
-      "sourceRoot": "archive/src",
-      "projectType": "application",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/browser",
-            "index": "archive/src/index.html",
-            "main": "archive/src/main.ts",
-            "tsConfig": "archive/src/tsconfig.app.json",
-            "preserveSymlinks": true,
-            "showCircularDependencies": true,
-            "polyfills": "archive/src/polyfills.ts",
-            "assets": [
-              "archive/src/assets",
-              "archive/src/favicon.ico",
-              "archive/src/apple-touch-icon.png",
-              "archive/src/safari-pinned-tab.svg",
-              "archive/src/manifest.webmanifest"
+            "cname": "",
+            "noBuild": true,
+            "name": "Github Actions",
+            "email": "actions@github.com",
+            "message": "Auto-generated commit [ci skip]"
+          }
+        },
+
+        "deploy": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run showcase:scully-build",
+              "ng run showcase:move-coverage",
+              "ng run showcase:curate",
+              "ng run showcase:gh"
             ],
-            "styles": ["archive/src/styles.scss"],
-            "scripts": [
-              {
-                "input": "node_modules/document-register-element/build/document-register-element.js",
-                "inject": true
-              },
-              {
-                "input": "node_modules/document-register-element/build/document-register-element.js",
-                "inject": true
-              }
+            "parallel": false
+          }
+        },
+        "scully-build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run showcase:build:production",
+              "npx scully --project showcase --scanRoutes",
+              "cp -a dist/static/. dist/apps/showcase/"
             ],
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true
-          },
-          "configurations": {
-            "qa": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "buildOptimizer": true,
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json",
-              "fileReplacements": [
-                {
-                  "replace": "archive/src/environments/environment.ts",
-                  "with": "archive/src/environments/environment.qa.ts"
-                }
-              ]
-            },
-            "uat": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "buildOptimizer": true,
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json",
-              "fileReplacements": [
-                {
-                  "replace": "archive/src/environments/environment.ts",
-                  "with": "archive/src/environments/environment.uat.ts"
-                }
-              ]
-            },
-            "production": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "buildOptimizer": true,
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json",
-              "fileReplacements": [
-                {
-                  "replace": "archive/src/environments/environment.ts",
-                  "with": "archive/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          },
-          "defaultConfiguration": ""
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "starter:build",
-            "aot": true,
-            "port": 4200
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "starter:build:production"
-            }
+            "parallel": false
           }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "starter:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "archive/src/test.ts",
-            "karmaConfig": "archive/src/karma.conf.js",
-            "polyfills": "archive/src/polyfills.ts",
-            "tsConfig": "archive/src/tsconfig.spec.json",
-            "scripts": [],
-            "styles": ["archive/src/styles.scss"],
-            "assets": [
-              "archive/src/assets",
-              "archive/src/favicon.ico",
-              "archive/src/apple-touch-icon.png",
-              "archive/src/safari-pinned-tab.svg",
-              "archive/src/manifest.webmanifest"
-            ]
-          }
-        },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/server",
-            "main": "archive/src/main.server.ts",
-            "tsConfig": "archive/src/tsconfig.server.json",
-            "sourceMap": true,
-            "optimization": false
-          },
-          "defaultConfiguration": ""
         }
       },
       "tags": []
@@ -1065,7 +1004,8 @@
             "production": {
               "tsConfig": "libs/state-management/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1126,7 +1066,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/state-management/.storybook"
-            }
+            },
+            "projectBuildConfig": "state-management:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1142,7 +1083,8 @@
             "outputPath": "dist/storybook/state-management",
             "config": {
               "configFolder": "libs/state-management/.storybook"
-            }
+            },
+            "projectBuildConfig": "state-management:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1169,7 +1111,8 @@
             "production": {
               "tsConfig": "libs/storybook/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1193,7 +1136,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/storybook/.storybook"
-            }
+            },
+            "projectBuildConfig": "storybook:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1209,7 +1153,8 @@
             "outputPath": "dist/storybook/storybook",
             "config": {
               "configFolder": "libs/storybook/.storybook"
-            }
+            },
+            "projectBuildConfig": "storybook:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1236,7 +1181,8 @@
             "production": {
               "tsConfig": "libs/table/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1279,12 +1225,7 @@
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run table:patch",
-              "ng run table:readme",
-              "ng run table:build:production",
-              "ng run table:pack"
-            ],
+            "commands": ["ng run table:patch", "ng run table:build:production", "ng run table:pack"],
             "parallel": false
           }
         },
@@ -1295,7 +1236,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/table/.storybook"
-            }
+            },
+            "projectBuildConfig": "table:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1311,7 +1253,8 @@
             "outputPath": "dist/storybook/table",
             "config": {
               "configFolder": "libs/table/.storybook"
-            }
+            },
+            "projectBuildConfig": "table:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1338,7 +1281,8 @@
             "production": {
               "tsConfig": "libs/tags/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1381,7 +1325,7 @@
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["ng run tags:patch", "ng run tags:readme", "ng run tags:build:production", "ng run tags:pack"],
+            "commands": ["ng run tags:patch", "ng run tags:build:production", "ng run tags:pack"],
             "parallel": false
           }
         },
@@ -1392,7 +1336,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/tags/.storybook"
-            }
+            },
+            "projectBuildConfig": "tags:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1408,7 +1353,8 @@
             "outputPath": "dist/storybook/tags",
             "config": {
               "configFolder": "libs/tags/.storybook"
-            }
+            },
+            "projectBuildConfig": "tags:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1435,7 +1381,8 @@
             "production": {
               "tsConfig": "libs/tree/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1489,7 +1436,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/tree/.storybook"
-            }
+            },
+            "projectBuildConfig": "tree:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1505,7 +1453,8 @@
             "outputPath": "dist/storybook/tree",
             "config": {
               "configFolder": "libs/tree/.storybook"
-            }
+            },
+            "projectBuildConfig": "tree:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1591,7 +1540,8 @@
             "production": {
               "tsConfig": "libs/visible/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1650,7 +1600,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/visible/.storybook"
-            }
+            },
+            "projectBuildConfig": "visible:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1666,7 +1617,8 @@
             "outputPath": "dist/storybook/visible",
             "config": {
               "configFolder": "libs/visible/.storybook"
-            }
+            },
+            "projectBuildConfig": "visible:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1693,7 +1645,8 @@
             "production": {
               "tsConfig": "libs/wizard/tsconfig.lib.prod.json"
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
@@ -1747,7 +1700,8 @@
             "port": 4400,
             "config": {
               "configFolder": "libs/wizard/.storybook"
-            }
+            },
+            "projectBuildConfig": "wizard:build-storybook"
           },
           "configurations": {
             "ci": {
@@ -1763,7 +1717,8 @@
             "outputPath": "dist/storybook/wizard",
             "config": {
               "configFolder": "libs/wizard/.storybook"
-            }
+            },
+            "projectBuildConfig": "wizard:build-storybook"
           },
           "configurations": {
             "ci": {

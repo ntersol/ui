@@ -4,11 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { merge, interval, BehaviorSubject, fromEvent } from 'rxjs';
 import { throttleTime, tap, switchMap, filter, map, distinctUntilChanged, startWith, take } from 'rxjs/operators';
 import { DialogService } from 'primeng/dynamicdialog';
-import { environment } from '$env';
-import { DomainService } from '$domain';
-import { SettingsService } from '$settings';
 import { Models } from '../../models/global.models';
 import { LogoutModalComponent } from '../../../components/modals';
+import { environment } from '../../../../environments/environment';
+import { DomainService } from '../../stores/domain';
+import { SettingsService } from '../../stores/settings';
 
 export enum AuthState {
   initial,
@@ -35,7 +35,11 @@ export class AuthService {
   private logoutModalVisible = false;
 
   /** User interaction events. Watches mouse movement, clicks and key presses */
-  private refreshEvent$ = merge(fromEvent(document, 'keypress'), fromEvent(document, 'mousemove'), fromEvent(document, 'click')).pipe(
+  private refreshEvent$ = merge(
+    fromEvent(document, 'keypress'),
+    fromEvent(document, 'mousemove'),
+    fromEvent(document, 'click'),
+  ).pipe(
     throttleTime(1000), // Throttle to every one second
     startWith(0),
   ); // 10 seconds
@@ -45,7 +49,7 @@ export class AuthService {
     switchMap(() => interval(1000)), // Reset interval everytime refresh fires
     // tap(val => console.log(val, this.idleDuration)), // Test auth functionality
     filter(() => !!this.settings.token), // Only capture refresh events if token present
-    map(val => (val > this.idleDuration ? true : false)), // If val is greater than duration, convert to true or false
+    map((val) => (val > this.idleDuration ? true : false)), // If val is greater than duration, convert to true or false
     startWith(false),
     distinctUntilChanged(),
   );
@@ -60,7 +64,7 @@ export class AuthService {
   ) {
     // Manage logout timer
     // Only fire events when timer expires and is not inactive (IE the logout modal is active)
-    this.logoutTimerExpired$.pipe(filter(expired => expired && !this.logoutModalVisible)).subscribe(() => {
+    this.logoutTimerExpired$.pipe(filter((expired) => expired && !this.logoutModalVisible)).subscribe(() => {
       this.launchLogoutModal();
       this.logoutModalVisible = true;
     });
@@ -77,9 +81,9 @@ export class AuthService {
     }
 
     // If a token was passed in via query param
-    this.route.queryParams.pipe(take(1)).subscribe(params => {
-      if (params.token) {
-        this.settings.token = params.token;
+    this.route.queryParams.pipe(take(1)).subscribe((params) => {
+      if (params['token']) {
+        this.settings.token = params['token'];
       }
     });
 
@@ -113,7 +117,7 @@ export class AuthService {
         ? this.http.post<Models.Auth>(environment.endpoints.apiUrl + environment.endpoints.authLogin, data)
         : this.http.get<Models.Auth>('assets/mock-data/login.json');
     return authApi.pipe(
-      tap(response => {
+      tap((response) => {
         this.settings.token = response.data.token;
         this.authState$.next(AuthState.loggedIn);
         // Override default idle duration if specified in the api response
@@ -135,7 +139,7 @@ export class AuthService {
     const refreshApi = this.http.post<Models.Auth>(environment.endpoints.apiUrl + environment.endpoints.authLogin, {});
 
     refreshApi.subscribe(
-      response => {
+      (response) => {
         if (this.settings.token) {
           // Make sure a token is present before it is replaced
           this.authState$.next(AuthState.loggedIn);
@@ -160,7 +164,7 @@ export class AuthService {
       dismissableMask: true,
     });
     // When modal closes
-    ref.onClose.subscribe(reason => {
+    ref.onClose.subscribe((reason) => {
       if (reason) {
         this.logOut(AuthState.loggedOut);
       } else {

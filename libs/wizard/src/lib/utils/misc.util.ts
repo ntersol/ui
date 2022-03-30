@@ -12,7 +12,10 @@ export const arrayToRecord = <t extends object>(array: any[], keyField: string):
   }, {});
 
 // getKeyValue<keyof User, User>("name")(user);
-export const getKeyValue = <U extends keyof T, T extends object>(key: U) => (obj: T) => obj[key];
+export const getKeyValue =
+  <U extends keyof T, T extends object>(key: U) =>
+  (obj: T) =>
+    obj[key];
 
 /** Typesafe version of clone deep */
 export const clone = <t>(e: t): t => cloneDeep(e);

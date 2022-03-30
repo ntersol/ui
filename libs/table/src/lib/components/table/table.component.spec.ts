@@ -18,16 +18,12 @@ describe('TableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        TableComponent
-      ],
-      imports: [
-        NtsTableModule
-      ]
+      declarations: [TableComponent],
+      imports: [NtsTableModule],
     })
       // Method to avoid using cdRef to force CD for testing
       .overrideComponent(TableComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.Default }
+        set: { changeDetection: ChangeDetectionStrategy.Default },
       })
       .compileComponents();
   }));
@@ -64,12 +60,10 @@ describe('TableComponent', () => {
     component.columns = [
       {
         field: 'testcol1',
-        header: 'Test Column 1'
-      }
+        header: 'Test Column 1',
+      },
     ];
-    component.rows = [
-      { testcol1: 'Test Row Cell 1' }
-    ];
+    component.rows = [{ testcol1: 'Test Row Cell 1' }];
 
     fixture.detectChanges();
 
@@ -83,12 +77,10 @@ describe('TableComponent', () => {
     component.columns = [
       {
         field: 'testcol1',
-        header: 'Test Column 1'
-      }
+        header: 'Test Column 1',
+      },
     ];
-    component.rows = [
-      { testcol1: 'Test Row Cell 1' }
-    ];
+    component.rows = [{ testcol1: 'Test Row Cell 1' }];
     component.shouldShowExpandRow = true;
 
     fixture.detectChanges();

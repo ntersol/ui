@@ -3,8 +3,8 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { map, filter, mergeMap } from 'rxjs/operators';
 
-import { environment } from '$env';
 import { NtsVersionManagementService, NtsServiceWorkerService } from './shared/services/general';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -49,18 +49,18 @@ export class AppComponent implements OnInit {
   public routeChange() {
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
+        filter((event) => event instanceof NavigationEnd),
         map(() => this.activatedRoute),
-        map(route => {
+        map((route) => {
           while (route.firstChild) {
             route = route.firstChild;
           }
           return route;
         }),
-        filter(route => route.outlet === 'primary'),
-        mergeMap(route => route.data),
+        filter((route) => route.outlet === 'primary'),
+        mergeMap((route) => route.data),
       )
-      .subscribe(event => {
+      .subscribe((event) => {
         // Change document title
         this.title.setTitle(event['title'] + ' | ' + environment.properties.appName);
       });

@@ -1,4 +1,3 @@
-
 import { forkJoin, Observable, of } from 'rxjs';
 import { map, share, switchMap, take } from 'rxjs/operators';
 import { scriptLoad$ } from '../script-loader/script-loader.util';
@@ -11,7 +10,7 @@ import * as jquery from 'jquery';
 declare global {
   interface Window {
     dayjs: () => dayjs.Dayjs;
-    $: JQuery
+    $: JQuery;
   }
 }
 
@@ -27,8 +26,6 @@ export namespace LibLoader {
   export interface jQueryLib extends Options {
     lib: 'jquery';
   }
-
-
 
   export interface Options {
     lib: string;
@@ -51,12 +48,14 @@ export namespace LibLoader {
 const libs: LibLoader.Definitions = {
   dayjs: {
     srcUrl: (version: string) => `https://cdnjs.cloudflare.com/ajax/libs/dayjs/${version}/dayjs.min.js`,
-    srcUrlPlugins: (version: string, plugin: string) => `https://cdnjs.cloudflare.com/ajax/libs/dayjs/${version}/plugin/${plugin}.min.js`,
+    srcUrlPlugins: (version: string, plugin: string) =>
+      `https://cdnjs.cloudflare.com/ajax/libs/dayjs/${version}/plugin/${plugin}.min.js`,
   },
   jquery: {
     srcUrl: (version: string) => `https://cdnjs.cloudflare.com/ajax/libs/jquery/${version}/jquery.min.js`,
-    srcUrlPlugins: (version: string, plugin: string) => `https://cdnjs.cloudflare.com/ajax/libs/jquery/${version}/plugin/${plugin}.min.js`,
-  }
+    srcUrlPlugins: (version: string, plugin: string) =>
+      `https://cdnjs.cloudflare.com/ajax/libs/jquery/${version}/plugin/${plugin}.min.js`,
+  },
 };
 
 /**
@@ -64,9 +63,7 @@ const libs: LibLoader.Definitions = {
  * @param srcUrl
  * @param options
  */
-export function libLoader$(
-  lib: LibLoader.jQueryLib,
-): Observable<typeof jquery>;
+export function libLoader$(lib: LibLoader.jQueryLib): Observable<typeof jquery>;
 /**
  * Load dayJS, a fantastic JS date manipulation library
  * @param srcUrl
@@ -83,7 +80,11 @@ export function libLoader$(lib: LibLoader.Libs): Observable<void>;
  * @returns
  */
 export function libLoader$(libType: LibLoader.Libs): Observable<any> {
+<<<<<<< HEAD
   let lib: Observable<unknown> = of();
+=======
+  let lib: Observable<any> = of();
+>>>>>>> origin/main
   let url = '';
   switch (libType.lib) {
     case 'dayjs':
@@ -91,10 +92,13 @@ export function libLoader$(libType: LibLoader.Libs): Observable<any> {
       url = typeof libs.dayjs.srcUrl === 'string' ? libs.dayjs.srcUrl : libs.dayjs.srcUrl(libType.version);
       // Get scripts for plugins
       const plugins = libType?.plugins?.length
-        ? libType.plugins?.map(plugin => {
-          const urlPlugin = typeof plugin === 'string' && libs?.dayjs?.srcUrlPlugins ? plugin : libs.dayjs.srcUrlPlugins(libType.version, plugin);
-          return scriptLoad$(urlPlugin);
-        })
+        ? libType.plugins?.map((plugin) => {
+            const urlPlugin =
+              typeof plugin === 'string' && libs?.dayjs?.srcUrlPlugins
+                ? plugin
+                : libs.dayjs.srcUrlPlugins(libType.version, plugin);
+            return scriptLoad$(urlPlugin);
+          })
         : [of(null)];
       // Get main http call
       lib = scriptLoad$(url).pipe(
@@ -109,9 +113,7 @@ export function libLoader$(libType: LibLoader.Libs): Observable<any> {
       // Resolve url if string or callback function
       url = typeof libs.jquery.srcUrl === 'string' ? libs.jquery.srcUrl : libs.jquery.srcUrl(libType.version);
       // Get main http call
-      lib = scriptLoad$(url).pipe(
-        map(() => window.$),
-      );
+      lib = scriptLoad$(url).pipe(map(() => window.$));
       break;
   }
   return lib.pipe(take(1), share());
@@ -130,7 +132,7 @@ export function pluginsGet(plugins?: string[] | null) {
         : [of()];
    */
   if (plugins?.length) {
-    plugins.forEach(str => {
+    plugins.forEach((str) => {
       console.log(str);
     });
   }

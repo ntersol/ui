@@ -5,12 +5,10 @@ import { libLoader$ } from '@ntersol/utils';
 @Component({
   selector: 'nts-lib-loader',
   templateUrl: './lib-loader.component.html',
-  styleUrls: ['./lib-loader.component.css']
+  styleUrls: ['./lib-loader.component.css'],
 })
 export class LibLoaderComponent implements OnInit {
-
-  public exampleTS: string =
-    `
+  public exampleTS: string = `
   // Import utility
   import { libLoader$ } from '@ntersol/utils';
 
@@ -25,21 +23,19 @@ export class LibLoaderComponent implements OnInit {
     console.warn(jquery('body'));
   });`;
 
-  constructor(private highlight: HighlightService) { }
+  constructor(private highlight: HighlightService) {}
 
   ngOnInit(): void {
     // Load DayJS
-    libLoader$({ lib: 'dayjs', version: '1.10.7', plugins: ['utc'] }).subscribe(dayjs => {
+    libLoader$({ lib: 'dayjs', version: '1.10.7', plugins: ['utc'] }).subscribe((dayjs) => {
       console.warn('DayJS', dayjs(new Date()));
     });
 
     // Load jQuery
-    libLoader$({ lib: 'jquery', version: '3.6.0' }).subscribe(jquery => {
+    libLoader$({ lib: 'jquery', version: '3.6.0' }).subscribe((jquery) => {
       console.warn('jQuery Loaded', jquery('body'));
     });
   }
-
-
 
   ngAfterViewInit() {
     this.highlight.highlightAll();

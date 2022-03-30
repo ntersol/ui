@@ -1,29 +1,34 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SiteModule } from '$site'; // Site modules
+import { NgModule } from '@angular/core';
+import { DialogModule, FocusTrapModule } from '@ntersol/utils';
 import { TabViewModule } from 'primeng/tabview';
-
+import { SiteModule } from '../../site.module';
 // Routing
 import { routing } from './routes';
-
-// Components
-import { UtilitiesComponent } from './utilities.component';
-import { RouteUiStateService, RouteUiStateStore, RouteUiStateQuery } from './shared/state/ui/route-ui-state.service';
-import { ScriptLoaderComponent } from './routes/script-loader/script-loader.component';
+import { DialogPage } from './routes/dialog/dialog.page';
+import { FocusTrapComponent } from './routes/focus-trap/focus-trap.component';
 import { Formgroup2ApiComponent } from './routes/formgroup2-api/formgroup2-api.component';
 import { ImageResizerComponent } from './routes/image-resizer/image-resizer.component';
-import { RemoveNilsComponent } from './routes/remove-nils/remove-nils.component';
 import { LibLoaderComponent } from './routes/lib-loader/lib-loader.component';
+import { RemoveNilsComponent } from './routes/remove-nils/remove-nils.component';
+import { ScriptLoaderComponent } from './routes/script-loader/script-loader.component';
+import { RouteUiStateQuery, RouteUiStateService, RouteUiStateStore } from './shared/state/ui/route-ui-state.service';
+// Components
+import { UtilitiesComponent } from './utilities.component';
 
 @NgModule({
-  imports: [CommonModule, SiteModule, routing, TabViewModule],
-  declarations: [UtilitiesComponent, ScriptLoaderComponent, Formgroup2ApiComponent, ImageResizerComponent, RemoveNilsComponent, LibLoaderComponent],
-  providers: [
-    RouteUiStateService,
-    RouteUiStateStore,
-    RouteUiStateQuery,
+  imports: [CommonModule, SiteModule, routing, TabViewModule, DialogModule, FocusTrapModule],
+  declarations: [
+    UtilitiesComponent,
+    ScriptLoaderComponent,
+    Formgroup2ApiComponent,
+    ImageResizerComponent,
+    RemoveNilsComponent,
+    LibLoaderComponent,
+    FocusTrapComponent,
+    DialogPage,
   ],
-  exports: [],
+  providers: [RouteUiStateService, RouteUiStateStore, RouteUiStateQuery],
   entryComponents: [],
 })
-export class UtilitiesModule { }
+export class UtilitiesModule {}

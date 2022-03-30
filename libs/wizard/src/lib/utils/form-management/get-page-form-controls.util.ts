@@ -16,7 +16,7 @@ export const getPageFormControls = (content: Wizard.Content[]): Record<string, F
   // Get form controls nested in side row > column > content
   (content.filter((c) => isType.row(c)) as Wizard.Row[]).forEach((c) => {
     c.columns.forEach((c2) => {
-      (c2.content.filter((c3) => c3.visible && isType.formFieldControl(c3)) as Wizard.FormFieldControl[]).forEach(
+      (c2.content.filter((c3: any) => c3.visible && isType.formFieldControl(c3)) as Wizard.FormFieldControl[]).forEach(
         (c4) => (controlsById[c4.field] = c4.formControl),
       );
     });

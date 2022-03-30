@@ -35,18 +35,18 @@ export class VisibleComponent implements OnInit {
   /** Show or hide this content based on the visible properties and media query selection */
   public show$ = this.isBrowser
     ? fromEvent(window, 'resize').pipe(
-      startWith(0),
-      debounceTime(50),
-      map(() => isVisible(this.visible || 'all', mediaQueries)),
-      distinctUntilChanged(),
-      tap((x) => this.isVisible.emit(x)),
-    )
+        startWith(0),
+        debounceTime(50),
+        map(() => isVisible(this.visible || 'all', mediaQueries)),
+        distinctUntilChanged(),
+        tap((x) => this.isVisible.emit(x)),
+      )
     : of(true);
 
   /** Holds fallback bootstrap classes to support SSR */
   public bootstrapClasses = '';
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit(): void {
     this.bootstrapClasses = breakpointsToBootStrapClasses(this.visible);

@@ -125,12 +125,12 @@ export namespace Wizard {
     };
     readonly data?: unknown;
     readonly canSave?: boolean;
-    readonly content: ContentType[];
+    readonly content: ContentType[] | any;
     /** Corresponds to the ID in the PAGE validators array */
     readonly validatorId?: string;
   }
 
-  export type ContentType = Html | Feature | Row | FormField | ButtonGroup;
+  export type ContentType = Html | Feature | Row | FormField | ButtonGroup | Wizard.Option;
   export type ContentTypeControl = Html | Feature | Row | FormFieldControl | Content;
 
   type ContentFormat = 'formField' | 'html' | 'feature' | 'row' | 'buttonGroup';

@@ -1,0 +1,57 @@
+name: Manual
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Target'
+        required: true
+        default: 'build'
+      projects:
+        description: 'Projects (comma-delimited,no-space)'
+        required: true
+        default: ''
+
+jobs:
+  trigger:
+    name: Trigger
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout [main]
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set SHAs
+        id: setSHAs
+        uses: nrwl/nx-set-shas@v2
+      - name: Setup Node [14]
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+          always-auth: true
+          registry-url: 'https://registry.npmjs.org/'
+          scope: '@ntersol'
+      - name: Cache Configuration
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install
+        run: npm install
+      - name: Run Request
+        run: npx nx run-many --target="${{ github.event.inputs.target }}" --projects="${{ github.event.inputs.projects }}" --skip-nx-cache
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Save
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: Auto-generated commit [ci skip]
+          committer_name: GitHub Actions
+          committer_email: actions@github.com

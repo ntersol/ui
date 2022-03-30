@@ -15,10 +15,11 @@
               <ng-container *ngFor="let contentSub of column.content">
                 <app-content
                   *ngIf="contentSub.visible"
-                  [content]="contentSub"
+                  [attr.content]="contentSub"
                   [templates]="templates"
                   [dataField]="dataFields && contentSub.dataField ? dataFields[contentSub.dataField] : null"
-                ></app-content>
+                >
+                </app-content>
               </ng-container>
             </div>
           </ng-container>

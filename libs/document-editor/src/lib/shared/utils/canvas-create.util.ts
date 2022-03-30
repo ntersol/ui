@@ -1,4 +1,4 @@
-import { NtsDocumentEditor } from '../../document-editor';
+import { NtsDocumentEditor } from '../models/document-editor.model';
 import { pdfjsDist } from '../models/pdf';
 
 export class DocumentPreview implements NtsDocumentEditor.Preview {
@@ -31,7 +31,7 @@ export class DocumentPreview implements NtsDocumentEditor.Preview {
       });
     }
      */
-    this.page.then(pageSrc => (this._page = pageSrc));
+    this.page.then((pageSrc) => (this._page = pageSrc));
   }
 
   /**
@@ -48,7 +48,7 @@ export class DocumentPreview implements NtsDocumentEditor.Preview {
       this.viewCreate(this._page, canvas, this._width).promise.then();
       this._isRendered = true;
     } else {
-      this.page.then(page => {
+      this.page.then((page) => {
         this._page = page;
         this.viewCreate(this._page, canvas, this._width).promise.then();
         this._isRendered = true;

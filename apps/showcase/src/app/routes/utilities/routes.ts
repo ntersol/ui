@@ -1,10 +1,12 @@
 import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { DialogPage } from './routes/dialog/dialog.page';
+import { FocusTrapComponent } from './routes/focus-trap/focus-trap.component';
 import { Formgroup2ApiComponent } from './routes/formgroup2-api/formgroup2-api.component';
 import { ImageResizerComponent } from './routes/image-resizer/image-resizer.component';
 import { LibLoaderComponent } from './routes/lib-loader/lib-loader.component';
 import { RemoveNilsComponent } from './routes/remove-nils/remove-nils.component';
-import { ScriptLoaderComponent } from './routes/script-loader/script-loader.component'
+import { ScriptLoaderComponent } from './routes/script-loader/script-loader.component';
 import { UtilitiesComponent } from './utilities.component';
 import { UtilitiesModule } from './utilities.module';
 
@@ -33,6 +35,16 @@ const routes: Routes = [
     path: 'image-resizer',
     component: ImageResizerComponent,
     data: { title: 'Image Resizer' },
+  },
+  {
+    path: 'focus-trap',
+    component: FocusTrapComponent,
+    data: { title: 'Focus Trap' },
+  },
+  {
+    path: 'dialog',
+    component: DialogPage,
+    data: { title: 'Dialog' },
   },
   {
     path: '',

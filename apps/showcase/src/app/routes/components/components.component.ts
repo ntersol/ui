@@ -7,12 +7,9 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComponentsComponent implements OnInit, OnDestroy {
+  constructor() {}
 
-  constructor(
+  ngOnInit() {}
 
-  ) { }
-
-  ngOnInit() { }
-
-  ngOnDestroy() { }
+  ngOnDestroy() {}
 }

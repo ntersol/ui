@@ -1,26 +1,56 @@
 <p-card styleClass="mb-3">
-  <div class="d-flex align-items-center text-right">
+  <div class="d-flex align-items-center text-end">
     <a (click)="docReset()">Reset</a>
-    <div class="d-flex ml-auto">
-      <button class="nts-docs-tn-button mr-2" pButton icon="far fa-hand-pointer" (click)="selectionChange(true)" title="Select All Documents"></button>
-      <button class="nts-docs-tn-button mr-2" pButton icon="fas fa-times" (click)="selectionChange(false)" title="Deselect All Documents"></button>
+    <div class="d-flex ms-auto">
+      <button
+        class="nts-docs-tn-button me-2"
+        pButton
+        icon="far fa-hand-pointer"
+        (click)="selectionChange(true)"
+        title="Select All Documents"
+      ></button>
+      <button
+        class="nts-docs-tn-button me-2"
+        pButton
+        icon="fas fa-times"
+        (click)="selectionChange(false)"
+        title="Deselect All Documents"
+      ></button>
 
-      <span class="mr-2">|</span>
+      <span class="me-2">|</span>
 
       <button
-        class="nts-docs-tn-button mr-2"
+        class="nts-docs-tn-button me-2"
         pButton
         icon="fas fa-check-square"
         (click)="inclusionChange(false)"
         title="Set all documents to excluded"
       ></button>
-      <button class="nts-docs-tn-button mr-2" pButton icon="far fa-square" (click)="inclusionChange(true)" title="Set all documents to included"></button>
+      <button
+        class="nts-docs-tn-button me-2"
+        pButton
+        icon="far fa-square"
+        (click)="inclusionChange(true)"
+        title="Set all documents to included"
+      ></button>
 
-      <span class="mr-2">|</span>
+      <span class="me-2">|</span>
 
-      <button class="nts-docs-tn-button mr-2" pButton icon="fas fa-undo" title="Rotate all documents left 90 degrees" (click)="rotateAll(990)"></button>
-      <button class="nts-docs-tn-button mr-2" pButton icon="fas fa-redo" title="Rotate all documents right 90 degrees" (click)="rotateAll(90)"></button>
-      <span class="mr-2">|</span>
+      <button
+        class="nts-docs-tn-button me-2"
+        pButton
+        icon="fas fa-undo"
+        title="Rotate all documents left 90 degrees"
+        (click)="rotateAll(990)"
+      ></button>
+      <button
+        class="nts-docs-tn-button me-2"
+        pButton
+        icon="fas fa-redo"
+        title="Rotate all documents right 90 degrees"
+        (click)="rotateAll(90)"
+      ></button>
+      <span class="me-2">|</span>
       <div class="btn-group">
         <button
           class="nts-docs-tn-button"
@@ -30,7 +60,9 @@
           *ngFor="let size of thumbnailSizes; let i = index"
           [ngClass]="[
             'nts-zoom-' + (i + 1),
-            state?.tnSettings?.width === size?.width && state?.tnSettings?.height === size?.height ? 'nts-zoom-active' : 'nts-zoom-inactive'
+            state?.tnSettings?.width === size?.width && state?.tnSettings?.height === size?.height
+              ? 'nts-zoom-active'
+              : 'nts-zoom-inactive'
           ]"
           [title]="'Zoom level ' + (i + 1)"
           (click)="zoomLevelChange(size)"

@@ -10,8 +10,8 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { NtsDocumentEditor } from '../../../document-editor';
-import { DocumentEditorService } from '../../../shared/document-editor.service';
+import { NtsDocumentEditor } from '../../../shared/models/document-editor.model';
+import { DocumentEditorService } from '../../../shared/services/document-editor.service';
 import { pdfjsDist } from '../../../shared/models/pdf';
 
 @Component({
@@ -21,6 +21,10 @@ import { pdfjsDist } from '../../../shared/models/pdf';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisplayComponent implements OnInit {
+  disableZoom: boolean = false;
+  disableUnzoom: boolean = false;
+  disableReset: boolean = false;
+  _zoom!: NtsDocumentEditor.ThumbnailSize;
   // Documents
   @Input() document?: NtsDocumentEditor.Document;
   @Input() pageActive?: NtsDocumentEditor.PageActive;
@@ -42,16 +46,50 @@ export class DisplayComponent implements OnInit {
   @Input() viewerOptions?: NtsDocumentEditor.ViewerOptions | false;
   @Input() viewModels?: Array<Array<NtsDocumentEditor.Preview>>;
   @Input() isSignature = false;
+  @Input() maxHeight = '100%';
   @Output() pdfChange = new EventEmitter<boolean>();
   @ViewChild('scrollbar', { static: true }) scrollbar!: ElementRef;
 
-  constructor(public docSvc: DocumentEditorService) { }
+  constructor(public docSvc: DocumentEditorService) {}
 
   ngOnInit() {
+    this._zoom = {
+      width: this.tnSettings?.width || 55,
+      height: this.tnSettings?.height || 138,
+    };
+    this.disableReset = true;
     // Add scrollbar
     if (this.scrollbar) {
       this.docSvc.scrollBarAdd(this.scrollbar.nativeElement);
     }
+  }
+
+  zoomThumbnails(value: number): void {
+    if (
+      (value > 1 && this.tnSettings?.width && this.tnSettings.width >= 590) ||
+      (value < 1 && this.tnSettings?.width && this.tnSettings.width <= 60)
+    ) {
+      return;
+    }
+    if (this.tnSettings?.height && this.tnSettings?.width) {
+      const newSize = {
+        tnSettings: {
+          height: Math.floor(this.tnSettings?.height * value),
+          width: Math.floor(this.tnSettings?.width * value),
+        },
+      };
+      this.disableZoom = newSize.tnSettings.width >= 590;
+      this.disableUnzoom = newSize.tnSettings.width <= 60;
+      this.disableReset = newSize.tnSettings.width === this._zoom.width;
+      this.docSvc.stateChange(newSize);
+    }
+  }
+
+  resetZoom(): void {
+    this.docSvc.stateChange({ tnSettings: this._zoom });
+    this.disableReset = true;
+    this.disableUnzoom = false;
+    this.disableZoom = false;
   }
 
   pdfChangeHandler() {

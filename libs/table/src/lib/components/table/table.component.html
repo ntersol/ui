@@ -16,8 +16,8 @@
     <ng-template pTemplate="caption" *ngIf="showFilter || headerText">
       <div class="d-flex">
         <div *ngIf="headerText" [innerHTML]="headerText"></div>
-        <div class="p-filter ml-auto" *ngIf="showFilter">
-          <i class="fas fa-search mr-2" style="margin: 4px 4px 0 0"></i>
+        <div class="p-filter ms-auto" *ngIf="showFilter">
+          <i class="fas fa-search me-2" style="margin: 4px 4px 0 0"></i>
           <input
             #filter
             type="text"
@@ -46,7 +46,7 @@
           [pSortableColumn]="col.field"
           [pSortableColumnDisabled]="col.sortable === false"
           #th
-          [ngStyle]="{ width: columnWidthsPercent && columnWidthsPercent[i] ? columnWidthsPercent[i] + '%' : null }"
+          [ngStyle]="col | headerStyles"
           class="nts-table-th-{{ col.field | slug }} nts-table-th-type-{{ col.type | slug }}"
         >
           <ng-container *ngIf="templates[col.field] && templates[col.field].templateHeader; else headerDefault">
@@ -56,7 +56,8 @@
                 context: {
                   $$implicit: col.header,
                   value: col.header,
-                  column: col
+                  column: col,
+                  index: i
                 }
               "
             ></ng-container>

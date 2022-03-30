@@ -49,7 +49,7 @@ export class NtsTreeComponent implements OnInit, OnChanges {
   public nodesSrc$ = new BehaviorSubject<TreeNode[]>(this.value || []);
   /** Final out put of nodes with filtering applied */
   public nodes$: Observable<TreeNode<any>[]> = this.nodesSrc$.pipe(
-    map(nodes => {
+    map((nodes) => {
       if (!nodes) {
         return [];
       }

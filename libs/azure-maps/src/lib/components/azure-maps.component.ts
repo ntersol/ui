@@ -89,14 +89,14 @@ export class NtsAzureMapsComponent implements OnInit, AfterViewInit, OnChanges, 
   /** Main state object, composed of options, config and computed props */
   public state$ = this.store.state$.pipe(
     untilDestroyed(this),
-    filter(s => !!s.map),
+    filter((s) => !!s.map),
     debounceTime(1),
   );
 
   /** Manage the smooth fading animation from the loader to the map */
   public loadMap$ = this.state$.pipe(
-    map(s => !!s.map),
-    filter(s => !!s),
+    map((s) => !!s.map),
+    filter((s) => !!s),
     delay(300), // Needs 300ms delay to allow animation to complete
   );
 
@@ -148,7 +148,7 @@ export class NtsAzureMapsComponent implements OnInit, AfterViewInit, OnChanges, 
     // When locations/markers are changed
     if (model.htmlMarkers && this.htmlMarkers) {
       // Attach event emitter for click event
-      const htmlMarkers = this.htmlMarkers.map(m => ({
+      const htmlMarkers = this.htmlMarkers.map((m) => ({
         ...m,
         events: {
           marker: { click: this.htmlMarkerClick, mouseenter: this.htmlMarkerMouseEnter },
@@ -160,7 +160,7 @@ export class NtsAzureMapsComponent implements OnInit, AfterViewInit, OnChanges, 
 
     // When layers are changed
     if (model.layers && this.layers) {
-      const layers = this.layers.map(m => ({ ...m, emitter: this.layerEvent }));
+      const layers = this.layers.map((m) => ({ ...m, emitter: this.layerEvent }));
       this.store.stateChange(Action.layersChange(layers));
     }
 
@@ -221,7 +221,7 @@ export class NtsAzureMapsComponent implements OnInit, AfterViewInit, OnChanges, 
     }
 
     this.mapRef = this.svc.create(this.uniqueId, this.apiKey, this.settings?.options);
-    
+
     if (!this.mapRef || !this.mapContainer) {
       console.error('Error loading map');
       return;
@@ -247,7 +247,6 @@ export class NtsAzureMapsComponent implements OnInit, AfterViewInit, OnChanges, 
       zoom: 9,
       ...(this.settings?.options ?? {}),
     });
-     
 
     // Construct a compass control and add it to the map.
     if (this.settings?.controls?.compass) {
@@ -262,11 +261,15 @@ export class NtsAzureMapsComponent implements OnInit, AfterViewInit, OnChanges, 
     // Click events
     atlasMap.events.add('click', () => {
       // Close any open popups if that setting is true
-      if (this.settings.popup?.closeOn?.click && this.settings.popup.singleInstance && atlasMap.popups.getPopups().length) {
+      if (
+        this.settings.popup?.closeOn?.click &&
+        this.settings.popup.singleInstance &&
+        atlasMap.popups.getPopups().length
+      ) {
         // Close all popups
         const isPopupOpen = atlasMap.popups.getPopups().reduce((a, b) => (a ? a : b.isOpen()), false);
         if (isPopupOpen) {
-          atlasMap.popups.getPopups().forEach(p => p.close());
+          atlasMap.popups.getPopups().forEach((p) => p.close());
         }
       }
 
@@ -275,7 +278,7 @@ export class NtsAzureMapsComponent implements OnInit, AfterViewInit, OnChanges, 
       const markers = atlasMap.markers.getMarkers();
       if (markers.length) {
         // Remove the active css class from all markers
-        markers.forEach(m => {
+        markers.forEach((m) => {
           const elem = (m as any).element as HTMLDivElement;
           elem.classList.remove('marker-active');
         });
@@ -284,24 +287,27 @@ export class NtsAzureMapsComponent implements OnInit, AfterViewInit, OnChanges, 
 
     // Construct a zoom control and add it to the map.
     if (this.settings?.controls?.style) {
-      atlasMap.controls.add(new atlas.control.StyleControl(this.settings?.controls?.style), this.settings?.controls?.style);
+      atlasMap.controls.add(
+        new atlas.control.StyleControl(this.settings?.controls?.style),
+        this.settings?.controls?.style,
+      );
     }
 
     // When the map has loaded and is ready
-    atlasMap.events.addOnce('ready', e => {
+    atlasMap.events.addOnce('ready', (e) => {
       this.store.stateChange(Action.mapLoaded(atlasMap));
       this.store.events.load$.next(e);
       this.loaded.emit(this.store);
     });
     // Zoom end event
-    atlasMap.events.add('zoomend', e => {
+    atlasMap.events.add('zoomend', (e) => {
       const zoom = e.map.getCamera().zoom;
       if (zoom) {
         this.store.stateChange(Action.zoomChange(zoom));
       }
       this.zoomend.emit(e);
     });
-    atlasMap.events.add('dragend', e => this.dragend.emit(e));
+    atlasMap.events.add('dragend', (e) => this.dragend.emit(e));
   }
 
   ngOnDestroy() {

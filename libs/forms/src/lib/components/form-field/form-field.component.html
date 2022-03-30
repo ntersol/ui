@@ -1,6 +1,6 @@
 <div class="nts-form-field" [ngClass]="'nts-form-field-type-' + type">
   <div class="d-flex">
-    <div style="flex-grow: 1;">
+    <div style="flex-grow: 1">
       <ng-container [ngSwitch]="fieldType">
         <!-- Generic (text field, number, phone number, etc) -->
         <ng-container *ngSwitchCase="'generic'">
@@ -17,7 +17,11 @@
               (completeMethod)="autoCompleteFilterTerms($event)"
               (ngModelChange)="autoCompleteSelection($event)"
             ></p-autoComplete>
-            <a class="cancel" (click)="model = null; formControl.patchValue(null)" *ngIf="formControl.value !== null" title="Remove selection"
+            <a
+              class="cancel"
+              (click)="model = null; formControl.patchValue(null)"
+              *ngIf="formControl.value !== null"
+              title="Remove selection"
               ><i class="fas fa-times"></i
             ></a>
           </div>
@@ -25,7 +29,7 @@
 
         <!-- Button group -->
         <ng-container *ngSwitchCase="'buttonGroup'">
-          <p-selectButton [options]="options" [formControl]="formControl"></p-selectButton>
+          <p-selectButton [attr.options]="options" [formControl]="formControl"></p-selectButton>
         </ng-container>
 
         <!-- Toggle -->
@@ -55,13 +59,16 @@
             <ng-container *ngIf="is.selectItemArray(options) && options?.length">
               <ng-container *ngFor="let option of options">
                 <option
-                  *ngIf="is.selectItem(option) && option[optionValue] !== undefined && option[optionLabel] !== undefined; else optionsSelectStringArray"
+                  *ngIf="
+                    is.selectItem(option) && option[optionValue] !== undefined && option[optionLabel] !== undefined;
+                    else optionsSelectStringArray
+                  "
                   [ngValue]="option[optionValue]"
                 >
                   {{ option[optionLabel] }}
                 </option>
                 <ng-template #optionsSelectStringArray>
-                  <option [ngValue]="option"> {{ option }} </option>
+                  <option [ngValue]="option">{{ option }}</option>
                 </ng-template>
               </ng-container>
             </ng-container>
@@ -94,14 +101,22 @@
                 [formControl]="formControl"
                 [label]="is.selectItem(option) && option[optionLabel] !== undefined ? option[optionLabel] : option"
                 [value]="is.selectItem(option) && option[optionValue] !== undefined ? option[optionValue] : option"
-              ></p-checkbox>
+              >
+              </p-checkbox>
             </div>
           </ng-container>
         </ng-container>
 
         <!-- Single checkbox that returns a boolean value -->
         <ng-container *ngSwitchCase="'checkboxBoolean'">
-          <p-checkbox class="nts-checkbox-boolean" [binary]="true" [name]="name" [id]="id" [formControl]="formControl" [label]="placeholder"></p-checkbox>
+          <p-checkbox
+            class="nts-checkbox-boolean"
+            [binary]="true"
+            [name]="name"
+            [id]="id"
+            [formControl]="formControl"
+            [label]="placeholder || ''"
+          ></p-checkbox>
         </ng-container>
 
         <!-- Radio -->
@@ -112,9 +127,14 @@
                 [name]="name"
                 [id]="id"
                 [formControl]="formControl"
-                [label]="is.selectItem(option) && option[optionLabel] !== undefined ? option[optionLabel] : option"
-                [value]="is.selectItem(option) && option[optionValue] !== undefined ? option[optionValue] : option"
-              ></p-radioButton>
+                [label]="
+                  is.selectItem(option) && option[optionLabel] !== undefined ? option[optionLabel] || '' : option
+                "
+                [value]="
+                  is.selectItem(option) && option[optionValue] !== undefined ? option[optionValue] || '' : option
+                "
+              >
+              </p-radioButton>
             </div>
           </ng-container>
         </ng-container>
@@ -131,9 +151,15 @@
   <div class="nts-form-field-hint" [innerHtml]="hint" *ngIf="hint"></div>
 
   <!-- Errors -->
-  <div *ngIf="formControl?.invalid && formControl?.touched && formControl?.errors && showError" class="red pt-1 anim-fade-in">
+  <div
+    *ngIf="formControl?.invalid && formControl?.touched && formControl?.errors && showError"
+    class="red pt-1 anim-fade-in"
+  >
     <div *ngIf="errorCustom && formControl?.errors?.required" [innerHtml]="errorCustom"></div>
-    <div *ngIf="!errorCustom && formControl?.errors?.required" class="small">{{ placeholder || 'This field' }} is <strong>required</strong></div>
+    <div *ngIf="!errorCustom && formControl?.errors?.required" class="small">
+      {{ placeholder || 'This field' }} is
+      <strong>required</strong>
+    </div>
 
     <div *ngIf="formControl?.errors?.minlength" class="small">
       Please enter at least
@@ -224,14 +250,15 @@
             thosandSeparator=","
             decimalSeparator="."
             [attr.maxlength]="maxlength ? maxlength : null"
-            [placeholder]="!placeholderFloat ? placeholder : ''"
+            [placeholder]="!placeholderFloat ? placeholder || '' : ''"
             #currency
             [step]="0.01"
             [(ngModel)]="model"
             (onFocus)="focused = true"
             (onBlur)="focused = false"
             (ngModelChange)="currencyChange(currency)"
-          ></p-spinner>
+          >
+          </p-spinner>
         </ng-container>
 
         <!-- SSN -->
@@ -252,7 +279,7 @@
 
         <!-- Date -->
         <ng-container *ngSwitchCase="'date'">
-          <div class="p-inputgroup w-100" style="position: relative;">
+          <div class="p-inputgroup w-100" style="position: relative">
             <p-inputMask
               #field
               [name]="name"
@@ -267,7 +294,13 @@
               (onBlur)="focused = false"
             ></p-inputMask>
             <span class="p-inputgroup-addon">
-              <p-calendar #date dateFormat="mm/dd/yy" [showIcon]="true" (onSelect)="dateChange(date)" [appendTo]="field"></p-calendar>
+              <p-calendar
+                #date
+                dateFormat="mm/dd/yy"
+                [showIcon]="true"
+                (onSelect)="dateChange(date)"
+                [appendTo]="field"
+              ></p-calendar>
             </span>
           </div>
         </ng-container>
@@ -280,7 +313,7 @@
             id="float-input"
             [type]="type"
             pInputText
-            [placeholder]="!placeholderFloat ? placeholder : ''"
+            [placeholder]="!placeholderFloat ? placeholder || '' : ''"
             [formControl]="formControl"
             [attr.max]="max ? max : null"
             [attr.min]="min ? min : null"

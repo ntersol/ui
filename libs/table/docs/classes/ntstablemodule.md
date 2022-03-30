@@ -6,12 +6,10 @@
 
 ### Constructors
 
-- [constructor](ntstablemodule.md#constructor)
+- [constructor](NtsTableModule.md#constructor)
 
 ## Constructors
 
 ### constructor
 
-\+ **new NtsTableModule**(): [*NtsTableModule*](ntstablemodule.md)
-
-**Returns:** [*NtsTableModule*](ntstablemodule.md)
+• **new NtsTableModule**()

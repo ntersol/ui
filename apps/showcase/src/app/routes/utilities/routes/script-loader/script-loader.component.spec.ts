@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ScriptLoaderComponent } from './script-loader.component';
-
 import { TabViewModule } from 'primeng/tabview';
+import { ScriptLoaderComponent } from './script-loader.component';
 
 describe('ScriptLoaderComponent', () => {
   let component: ScriptLoaderComponent;
@@ -11,9 +9,8 @@ describe('ScriptLoaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ScriptLoaderComponent],
-      imports: [TabViewModule]
-    })
-      .compileComponents();
+      imports: [TabViewModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

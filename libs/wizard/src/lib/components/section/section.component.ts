@@ -9,7 +9,7 @@ import { Wizard } from '../../wizard.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SectionComponent implements OnInit {
-  @Input() section?: Wizard.SectionControl;
+  @Input() section?: Wizard.SectionControl | null;
 
   constructor() {}
 

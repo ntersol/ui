@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
-import { StoreCommunicationComponent } from './store-communication.component';
-import { StoreComsService } from './store-communication.service'
-import { HighlightService } from '../../../../shared/services/highlight.service';
-import { TabViewModule } from 'primeng/tabview';
 import { FormsModule } from '@angular/forms';
+import { TabViewModule } from 'primeng/tabview';
+import { of } from 'rxjs';
+import { HighlightService } from '../../../../shared/services/highlight.service';
+import { StoreCommunicationComponent } from './store-communication.component';
+import { StoreComsService } from './store-communication.service';
 
 describe('StoreCommunicationComponent', () => {
   let component: StoreCommunicationComponent;
@@ -14,7 +14,7 @@ describe('StoreCommunicationComponent', () => {
     uiStore: {
       select$: jest.fn().mockReturnValue(of('123')),
       dispatch: jest.fn(),
-    }
+    },
   };
 
   const highlightServiceMock = {
@@ -23,17 +23,13 @@ describe('StoreCommunicationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        TabViewModule,
-        FormsModule,
-      ],
+      imports: [TabViewModule, FormsModule],
       providers: [
         { provide: StoreComsService, useValue: storeComsServiceMock },
         { provide: HighlightService, useValue: highlightServiceMock },
       ],
-      declarations: [StoreCommunicationComponent]
-    })
-      .compileComponents();
+      declarations: [StoreCommunicationComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

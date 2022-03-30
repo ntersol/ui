@@ -189,7 +189,10 @@ export class HtmlMarkerLayer extends layer.BubbleLayer {
       this._options.clusterRenderCallback = options.clusterRenderCallback;
       cc = true;
     }
-    if (typeof options.updateWhileMoving === 'boolean' && this._options.updateWhileMoving !== options.updateWhileMoving) {
+    if (
+      typeof options.updateWhileMoving === 'boolean' &&
+      this._options.updateWhileMoving !== options.updateWhileMoving
+    ) {
       this._options.updateWhileMoving = options.updateWhileMoving;
     }
     if (cc) {
@@ -418,7 +421,11 @@ export class HtmlMarkerLayer extends layer.BubbleLayer {
   /**
    * Get existing marker
    */
-  public getMarker(id: string, position: atlas.Pixel, properties: ClusteredProperties): NtsAzureMaps.IHtmlMarker | null {
+  public getMarker(
+    id: string,
+    position: atlas.Pixel,
+    properties: ClusteredProperties,
+  ): NtsAzureMaps.IHtmlMarker | null {
     // Check cache for existing marker.
     if (this._markerCache[id]) {
       return this._markerCache[id];
@@ -428,8 +435,8 @@ export class HtmlMarkerLayer extends layer.BubbleLayer {
         if (this._options.clusterRenderCallback && typeof properties.cluster_id === 'number') {
           m = this._options.clusterRenderCallback(id, position, properties);
           // When the user clicks on a cluster, center and zoom the map so that the cluster breaks apart
-          this._map?.events.add('click', m, e => {
-            this.dataSource?.getClusterExpansionZoom(properties.cluster_id).then(zoom => {
+          this._map?.events.add('click', m, (e) => {
+            this.dataSource?.getClusterExpansionZoom(properties.cluster_id).then((zoom) => {
               this._map?.setCamera({
                 center: e.target?.getOptions().position,
                 zoom: zoom + 0.75,

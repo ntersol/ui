@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NtsTagsModule } from '@ntersol/tags';
 import { TabViewModule } from 'primeng/tabview';
 import { ShowcaseTagsComponent } from './tags.component';
-import { NtsTagsModule } from '@ntersol/tags';
 
 describe('TagsComponent', () => {
   let component: ShowcaseTagsComponent;
@@ -10,9 +10,8 @@ describe('TagsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [TabViewModule, NtsTagsModule],
-      declarations: [ShowcaseTagsComponent]
-    })
-      .compileComponents();
+      declarations: [ShowcaseTagsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

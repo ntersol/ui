@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { DocumentEditorService } from '../../shared/document-editor.service';
-import { NtsDocumentEditor } from '../../document-editor';
+import { DocumentEditorService } from '../../shared/services/document-editor.service';
+import { NtsDocumentEditor } from '../../shared/models/document-editor.model';
 
 @Component({
   selector: 'app-viewer-toolbar',
@@ -14,7 +14,7 @@ export class ViewerToolbarComponent implements OnInit {
   @Input() pageActive?: NtsDocumentEditor.PageActive;
   @Input() rotation = 0;
 
-  constructor(public docSvc: DocumentEditorService) { }
+  constructor(public docSvc: DocumentEditorService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

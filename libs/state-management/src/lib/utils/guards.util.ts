@@ -3,6 +3,15 @@ import { NtsState } from '../state.models';
 const keysApi = Object.keys(initialState).sort();
 const keysEntity = Object.keys(initialEntityState).sort();
 
+declare const process: any;
+
+/**
+ * Node JS check for SSR
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isNode = typeof process !== 'undefined' && process.versions != null && process.versions.node != null;
+export const isBrowser = !isNode;
+
 /**
  * Typeguard for actions, checks action and ensures payload is properly typed
  * @param action

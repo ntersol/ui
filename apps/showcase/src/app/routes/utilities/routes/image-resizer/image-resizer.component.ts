@@ -6,12 +6,10 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 @Component({
   selector: 'nts-image-resizer',
   templateUrl: './image-resizer.component.html',
-  styleUrls: ['./image-resizer.component.css']
+  styleUrls: ['./image-resizer.component.css'],
 })
 export class ImageResizerComponent implements OnInit {
-
-  public exampleTS: string =
-    `
+  public exampleTS: string = `
   // Import util
   import { imageResize } from '@ntersol/utils';
 
@@ -26,10 +24,9 @@ export class ImageResizerComponent implements OnInit {
 
   public imagePreview$ = new BehaviorSubject<string | null>(null);
 
-  constructor(private highlight: HighlightService) { }
+  constructor(private highlight: HighlightService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public resize(e: any) {
     this.file = e.target.files[0];
@@ -37,14 +34,12 @@ export class ImageResizerComponent implements OnInit {
   }
 
   public display() {
-    imageResize(this.file, this.maxSize).then(file => {
-      this.imagePreview$.next(URL.createObjectURL(file))
+    imageResize(this.file, this.maxSize).then((file) => {
+      this.imagePreview$.next(URL.createObjectURL(file));
     });
-
   }
 
   ngAfterViewInit() {
     this.highlight.highlightAll();
   }
-
 }

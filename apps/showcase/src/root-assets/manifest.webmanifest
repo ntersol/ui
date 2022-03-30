@@ -1,0 +1,10 @@
+{
+  "name": "Showcase",
+  "short_name": "Showcase",
+  "theme_color": "#1976d2",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "scope": "https://ntersol.github.io/ui/",
+  "start_url": "https://ntersol.github.io/ui/",
+  "icons": []
+}

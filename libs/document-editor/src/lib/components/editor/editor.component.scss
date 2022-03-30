@@ -15,24 +15,23 @@
   }
   .nts-docs-tns {
     display: flex;
-    // justify-content: space-between;
     flex-wrap: wrap;
   }
   .nts-zoom-1 {
-    .fa {
+    .fas {
       transform: scale(0.8);
     }
     .nts-docs-tn .nts-docs-tn-button {
       font-size: 8px;
     }
   }
-  .nts-zoom-2 .fa {
+  .nts-zoom-2 .fas {
     transform: scale(1);
   }
-  .nts-zoom-3 .fa {
+  .nts-zoom-3 .fas {
     transform: scale(1.2);
   }
-  .nts-zoom-4 .fa {
+  .nts-zoom-4 .fas {
     transform: scale(1.4);
   }
 

@@ -48,7 +48,7 @@ export class ExampleComponent implements OnInit {
   /** Create or edit a user */
   public isEdit = false;
 
-  constructor(private api: StateManagementService, private fb: FormBuilder) { }
+  constructor(private api: StateManagementService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.api.users.state$.subscribe(x => console.log('selectOne', x));
@@ -74,7 +74,6 @@ export class ExampleComponent implements OnInit {
       this.userForm.reset();
       this.isEdit = false;
     });
-
   }
 
   /**

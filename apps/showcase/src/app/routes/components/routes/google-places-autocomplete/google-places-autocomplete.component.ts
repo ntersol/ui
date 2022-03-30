@@ -7,12 +7,10 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 @Component({
   selector: 'nts-google-places-autocomplete-route',
   templateUrl: './google-places-autocomplete.component.html',
-  styleUrls: ['./google-places-autocomplete.component.scss']
+  styleUrls: ['./google-places-autocomplete.component.scss'],
 })
 export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
-
-  public exampleTSInstall =
-    `
+  public exampleTSInstall = `
   // Install this library
   npm i @ntersol/services --save`;
 
@@ -31,10 +29,8 @@ export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
     console.log(place);
   }`);
 
-
   public html = this.highlight.htmlEncode(`
   <input id="autocomplete" />  `);
-
 
   public exampleTS = this.highlight.htmlEncode(
     `
@@ -59,7 +55,8 @@ export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
       // Clean up subscriptions and free up memory. Uses ID of the input.
       this.places.destroy('autocomplete');
     }
-)`);
+)`,
+  );
 
   public property = this.fb.group({
     property: this.fb.group({
@@ -69,8 +66,8 @@ export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
       state: [],
       state_long: [],
       zip: [],
-    })
-  })
+    }),
+  });
 
   public exampleTS2 = this.highlight.htmlEncode(
     `
@@ -117,7 +114,8 @@ export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
     // Clean up subscriptions and free up memory. Uses ID of the input.
     this.places.destroy('autocomplete');
   }
-)`);
+)`,
+  );
 
   public response = `
   {
@@ -157,13 +155,9 @@ export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
     "utc_offset_minutes": -240
   }`;
 
-  constructor(private highlight: HighlightService, private fb: FormBuilder) { }
+  constructor(private highlight: HighlightService, private fb: FormBuilder) {}
 
-  ngOnInit() {
-
-  }
-
-
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.highlight.highlightAll();
@@ -183,7 +177,6 @@ export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
       }
     }).subscribe();
      */
-
   }
 
   /**
@@ -198,5 +191,4 @@ export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
     // Clean up subscriptions and free up memory
     // this.places.destroy('autocomplete');
   }
-
 }
