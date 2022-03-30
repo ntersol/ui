@@ -1,6 +1,5 @@
 {
   "name": "@ntersol/schematics",
-  "description": "Schematics for NTERSOL",
   "version": "0.0.97",
   "private": false,
   "license": "MIT",
@@ -9,7 +8,7 @@
   "scripts": {},
   "exports": {
     "src/ng-add/schema": "./src/ng-add/schema.json",
-    "src/ng-generate/route/schema": "./src/ng-generate/route/schema.json",
+    "src/ng-generate/route/schema": "./src/ng-generate/route/schema.json"
   },
   "peerDependencies": {
     "@angular-devkit/schematics": "^13.2.1",
