@@ -5,12 +5,10 @@
   "license": "MIT",
   "type": "commonjs",
   "schematics": "./src/collection.json",
-  "builders": "./src/builders.json",
   "scripts": {},
   "exports": {
     "src/ng-add/schema": "./src/ng-add/schema.json",
     "src/ng-generate/route/schema": "./src/ng-generate/route/schema.json",
-    "src/builders/curate/schema": "./src/builders/curate/schema.json"
   },
   "peerDependencies": {
     "@angular-devkit/schematics": "^13.2.1",
