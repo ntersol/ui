@@ -1,6 +1,6 @@
 {
   "name": "@ntersol/schematics",
-  "version": "0.0.99",
+  "version": "0.0.100",
   "private": false,
   "license": "MIT",
   "type": "commonjs",
