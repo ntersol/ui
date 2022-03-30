@@ -1,15 +1,11 @@
 {
   "name": "@ntersol/schematics",
-  "version": "0.0.102",
+  "version": "0.1.0",
   "private": false,
   "license": "MIT",
   "type": "commonjs",
   "schematics": "./src/collection.json",
   "scripts": {},
-  "exports": {
-    "src/ng-add/schema": "./src/ng-add/schema.json",
-    "src/ng-generate/route/schema": "./src/ng-generate/route/schema.json"
-  },
   "dependencies": {
     "@angular-devkit/schematics": "^13.2.1",
     "@angular-devkit/core": "^13.2.1",

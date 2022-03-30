@@ -1,8 +1,6 @@
 import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { getProjectFromWorkspace } from '@angular/cdk/schematics';
 import { addPackageJsonDependency, NodeDependency } from '@schematics/angular/utility/dependencies';
-import { getWorkspace } from '@schematics/angular/utility/workspace';
 import { AddSchema } from './schema';
 
 function addPackageJsonDependencies(options: AddSchema): Rule {
