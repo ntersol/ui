@@ -120,7 +120,6 @@ function addFiles(options: Options) {
     if (isLazyLoadedModuleGen) {
       routingModulePath = getRoutingModulePath(host, options.module as string);
     }
-
     const templateSource = apply(url('./files'), [
       template({
         ...strings,
