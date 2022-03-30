@@ -50,7 +50,7 @@ export class NtsStateManagementService {
    * @param options
    * @returns
    */
-  public uiStoreCreator = <t>(initialState: t, options?: NtsState.UIStoreOptions) =>
+  public createUIStore = <t>(initialState: t, options?: NtsState.UIStoreOptions) =>
     new NtsUIStoreCreator<t>(initialState, options);
 
   /**

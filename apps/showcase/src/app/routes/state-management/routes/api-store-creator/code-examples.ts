@@ -5,21 +5,20 @@ export const importExample = `
   import { NtsStateManagementModule } from '@ntersol/state-management';`;
 
 export const usage1 = `
-  import { ntsApiStoreCreator } from &#39;@ntersol/state-management&#39;;
-  import { HttpClient } from &#39;@angular/common/http&#39;;
+  import {  NtsStateManagementService } from '@ntersol/state-management';
 
   @Injectable({
     providedIn: &#39;root&#39;,
   })
   export class SampleService {
     // Create a curried store creator instance with default settings
-    private store = ntsApiStoreCreator(this.http, { apiUrlBase: &#39;//jsonplaceholder.typicode.com&#39; });
-    // Create an instance of an entity based store
-    public users = this.store&lt;Models.User&gt;({ apiUrl: &#39;/users&#39; });
-    // Create an instance of a non-entity based store
-    public post = this.store&lt;Models.Post&gt;({ apiUrl: &#39;/posts/1&#39; }, false);
+    private store = this.sms.createBaseStore({ apiUrlBase: '//jsonplaceholder.typicode.com' });
+    // Create an instance of an entity based store. Inherits configuration from base store
+    public users = this.store<Models.User>({ uniqueId: 'id', storeId: StoreIds.USERS, apiUrl: '/users' });
+    // Create an instance of a non-entity based store. Inherits configuration from base store
+    public post = this.store<Models.Post>({ apiUrl: '/posts/1' });
 
-    constructor(public http: HttpClient) {}
+    constructor(public sms: NtsStateManagementService) {}
   }`;
 
 export const usage2 = `

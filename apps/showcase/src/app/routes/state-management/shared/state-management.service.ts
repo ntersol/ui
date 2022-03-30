@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ntsUIStoreCreator, NtsStateManagementService } from '@ntersol/state-management';
+import { NtsStateManagementService } from '@ntersol/state-management';
 import { Models } from '../../../shared/models';
 
 export enum StoreIds {
@@ -26,9 +25,10 @@ export class StateManagementService {
   // Create an instance of a non-entity based store. Inherits configuration from base store
   public post = this.store<Models.Post>({ apiUrl: '/posts/1' });
   // Create a UI Store
-  public uiStore = ntsUIStoreCreator<UIStoreModel>({ name: null, user: { age: 12, nameFirst: 'NameFirst123' } }, { persistId: 'uiStore' });
+  public uiStore = this.sms.createUIStore<UIStoreModel>({ name: null, user: { age: 12, nameFirst: 'NameFirst123' } }, { persistId: 'uiStore' });
 
   constructor(public sms: NtsStateManagementService) {
+
     /**
     this.uiStore.select$('isString').subscribe(x => console.log(x));
 
@@ -41,6 +41,7 @@ export class StateManagementService {
 
     /**
   setTimeout(() => {
+    // this.sms.dispatch(({ storeId: StoreIds.USERS, type: ApiActions.POST, payload: { name: 'Jerrol!' } })
     // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.POST, payload: { name: 'Jerrol!' } });
     // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.PUT, payload: { name: 'WINNING', id: 5 } });
     // ntsBaseStore().dispatch({ storeId: StoreIds.USERS, type: ApiActions.DELETE, payload: { id: 4 } });

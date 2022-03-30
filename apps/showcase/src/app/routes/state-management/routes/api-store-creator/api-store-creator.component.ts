@@ -11,7 +11,7 @@ export class ApiStoreCreatorComponent implements OnInit {
   public install = install;
   public importExample = importExample;
   public usage1 = usage1;
-  public usage2 = usage2;
+  public usage2 = this.highlight.htmlEncode(usage2);
   public usage3 = usage3;
   public state = this.highlight.htmlEncode(state);
   public select = this.highlight.htmlEncode(select);
