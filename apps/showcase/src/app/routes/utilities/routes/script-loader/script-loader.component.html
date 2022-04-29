@@ -22,6 +22,7 @@
   <p-tabPanel header="Example">
     <div>
       <h2>Check the console and the JS tab in the Network Tab to see the script loading</h2>
+      <p *ngIf="dayJS$ | async"><em>Script loaded successfully and used in ngIf statement.</em></p>
     </div>
   </p-tabPanel>
   <!--

@@ -1,5 +1,5 @@
 import { forkJoin, Observable } from 'rxjs';
-import { share, take } from 'rxjs/operators';
+import { map, share, take } from 'rxjs/operators';
 
 // A cache that keep track of what scripts have been loaded by their request url
 let scriptsLoaded: Record<string, boolean> = {};
@@ -18,11 +18,19 @@ let scriptsLoaded: Record<string, boolean> = {};
  * scriptLoad$(['https://unpkg.com/dayjs@1.8.21/dayjs.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js']).subscribe(() => {
  * // Script loaded successfully
  * })
+ *
+ * // Returns a boolean to indicate success/fail
+ * public isLoaded$ = scriptLoad$(['https://unpkg.com/dayjs@1.8.21/dayjs.min.js']); // Returns
+ *
+ * <div *ngIf="isLoaded$ | async"></div>
  * @returns void
  */
-export const scriptLoad$ = <t = void>(srcUrl: string | string[]) => {
+export const scriptLoad$ = (srcUrl: string | string[]) => {
   const str = Array.isArray(srcUrl) ? srcUrl : [srcUrl];
-  return forkJoin(str.map((s) => scriptLoad<t>(s)));
+  return forkJoin(str.map((s) => scriptLoad(s))).pipe(
+    // Flatten any array into a single boolean
+    map((results) => results.reduce((a, b) => (a === false ? false : b), true)),
+  );
 };
 
 /**
@@ -35,16 +43,16 @@ export const scriptLoad$ = <t = void>(srcUrl: string | string[]) => {
  * })
  * @returns void
  */
-const scriptLoad = <t = void>(srcUrl: string) =>
-  new Observable<t>((obs) => {
+const scriptLoad = (srcUrl: string) =>
+  new Observable<boolean>((obs) => {
     // Check of this script has already been successfully loaded
-    if (!!scriptsLoaded[srcUrl]) {
-      obs.next();
+    if (scriptsLoaded[srcUrl]) {
+      obs.next(true);
       obs.complete();
       return;
     }
     // Create new script instance
-    let script = document.createElement('script');
+    const script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = srcUrl;
     script.async = true;
@@ -53,13 +61,13 @@ const scriptLoad = <t = void>(srcUrl: string) =>
     script.onload = () => {
       // Update record of scripts that have been loaded
       scriptsLoaded = { ...scriptsLoaded, [srcUrl]: true };
-      obs.next();
+      obs.next(true);
       obs.complete();
     };
 
     // Handle errors
-    script.onerror = (error) => {
-      obs.error('Unable to load script: ' + srcUrl + ' with error ' + error);
+    script.onerror = () => {
+      obs.error(false);
       obs.complete();
     };
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HighlightService } from '../../../../shared/services/highlight.service';
-import { libLoader$ } from '@ntersol/utils';
+// import { libLoader$ } from '@ntersol/utils';
 
 @Component({
   selector: 'nts-lib-loader',
@@ -26,6 +26,7 @@ export class LibLoaderComponent implements OnInit {
   constructor(private highlight: HighlightService) {}
 
   ngOnInit(): void {
+    /**
     // Load DayJS
     libLoader$({ lib: 'dayjs', version: '1.10.7', plugins: ['utc'] }).subscribe((dayjs) => {
       console.warn('DayJS', dayjs(new Date()));
@@ -35,6 +36,7 @@ export class LibLoaderComponent implements OnInit {
     libLoader$({ lib: 'jquery', version: '3.6.0' }).subscribe((jquery) => {
       console.warn('jQuery Loaded', jquery('body'));
     });
+     */
   }
 
   ngAfterViewInit() {

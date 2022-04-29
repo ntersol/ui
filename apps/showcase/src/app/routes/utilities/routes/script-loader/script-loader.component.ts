@@ -9,7 +9,7 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
   styleUrls: ['./script-loader.component.css'],
 })
 export class ScriptLoaderComponent implements OnInit {
-  public exampleTS: string = `
+  public exampleTS: string = this.highlight.htmlEncode(`
     // Import util
     import { scriptLoad$ } from '@ntersol/utils';
 
@@ -38,13 +38,21 @@ export class ScriptLoaderComponent implements OnInit {
     scriptLoad$('https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.BAD.js').pipe(debounceTime(100)).subscribe(
       () => console.log('Script loaded successfully'),
       error => console.error(error)
-    );`;
+    );
+
+    // Use in conjunction with ngIf and the asyc pipe
+    public dayJS$ = scriptLoad$('https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js');
+    ...
+    <p *ngIf="dayJS$ | async"><em>Script loaded successfully and used in ngIf statement.</em></p>
+    `);
+
+  public dayJS$ = scriptLoad$('https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js');
 
   constructor(private highlight: HighlightService) {}
 
   ngOnInit(): void {
-    scriptLoad$('https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js').subscribe(() => {
-      console.log('Script loaded successfully');
+    this.dayJS$.subscribe((b) => {
+      console.log('Script loaded successfully', b);
     });
 
     scriptLoad$('https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.BAD.js')
