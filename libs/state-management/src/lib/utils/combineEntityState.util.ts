@@ -9,7 +9,12 @@ import { isApiState } from './guards.util';
  * @param data
  */
 export const NtsCombineEntityState = (
-  states: NtsState.ApiState | (NtsState.ApiState | unknown)[] | null | undefined,
+  states:
+    | NtsState.ApiState
+    | NtsState.EntityApiState
+    | (NtsState.ApiState | NtsState.EntityApiState | null | undefined)[]
+    | undefined
+    | null,
 ): NtsState.ApiState => {
   const state: NtsState.ApiState = {
     loading: false,
