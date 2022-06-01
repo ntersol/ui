@@ -13,7 +13,10 @@ import { NtsApiStore } from './api-store';
  * @param configBase Default configuration for all store instances used by this creator. Will be overwritten by individual store properties
  * @returns
  */
-export const ntsApiStoreCreator = (http: HttpClient, configBase?: NtsState.ConfigEntity | NtsState.Config | null) => {
+export const ntsApiStoreCreator = (
+  http: HttpClient,
+  configBase?: NtsState.ConfigEntity | NtsState.ConfigApi | null,
+) => {
   // @ts-ignore : TODO: Resolve overload typings issue. Maybe :/
   const store: {
     /**
@@ -33,9 +36,9 @@ export const ntsApiStoreCreator = (http: HttpClient, configBase?: NtsState.Confi
      * @param isEntityStore Should the store create and manage entities
      * @returns
      */
-    <t>(config: NtsState.Config, isEntityStore?: false): NtsApiStore<t>;
-  } = <t>(config: NtsState.Config | NtsState.ConfigEntity, isEntityStore = true) =>
-    !!isEntityStore
+    <t>(config: NtsState.ConfigApi<t>, isEntityStore?: false): NtsApiStore<t>;
+  } = <t>(config: NtsState.ConfigApi<t> | NtsState.ConfigEntity<t>, isEntityStore = true) =>
+    isEntityStore
       ? new NtsEntityStore<t>(
           http,
           mergeConfig((configBase as NtsState.ConfigEntity) || {}, config as NtsState.ConfigEntity),

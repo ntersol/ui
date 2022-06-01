@@ -6,12 +6,12 @@ import { mergeDeepRight } from 'ramda';
  * @param c1
  * @param c2
  */
-export function mergeConfig(c1: NtsState.Config, c2: NtsState.ConfigEntity): NtsState.ConfigEntity;
-export function mergeConfig(c1: NtsState.Config, c2: NtsState.Config): NtsState.Config;
-export function mergeConfig(
-  c1: NtsState.Config | NtsState.ConfigEntity,
-  c2: NtsState.Config | NtsState.ConfigEntity,
-): NtsState.Config | NtsState.ConfigEntity {
+export function mergeConfig<t>(c1: NtsState.ConfigEntity<t>, c2: NtsState.ConfigEntity<t>): NtsState.ConfigEntity<t>;
+export function mergeConfig<t>(c1: NtsState.ConfigApi<t>, c2: NtsState.ConfigApi<t>): NtsState.ConfigApi<t>;
+export function mergeConfig<t>(
+  c1: NtsState.ConfigApi<t> | NtsState.ConfigEntity<t>,
+  c2: NtsState.ConfigApi<t> | NtsState.ConfigEntity<t>,
+): NtsState.ConfigApi<t> | NtsState.ConfigEntity<t> {
   return {
     disableAppendId: {
       ...c1.disableAppendId,
@@ -20,7 +20,7 @@ export function mergeConfig(
     map: {
       ...c1.map,
       ...c2.map,
-    },
+    } as any, // TODO: Figure out how to overload properly without any
     ...c1,
     ...c2,
   };
@@ -50,7 +50,7 @@ export const mergeConfig = (c1: any, c2: any): any => ({
  * Typeguards
  */
 export const is = {
-  entityConfig: (c: NtsState.Config): c is NtsState.ConfigEntity =>
+  entityConfig: <t>(c: NtsState.ConfigApi<t> | NtsState.ConfigEntity<t>): c is NtsState.ConfigEntity<t> =>
     (c as NtsState.ConfigEntity).uniqueId ? true : false,
   callbackFn: (c: NtsState.ApiUrl): c is NtsState.ApiUrlCallback => typeof c === 'function',
 };
@@ -166,7 +166,7 @@ export const deleteEntities = <t>(
  * @returns
  */
 export const apiUrlGet = <t2>(
-  config: NtsState.Config | NtsState.ConfigEntity,
+  config: NtsState.ConfigApi | NtsState.ConfigEntity,
   verb: keyof NtsState.ApiUrlOverride,
   e: Partial<t2> | Partial<t2>[] | null,
 ): string => {

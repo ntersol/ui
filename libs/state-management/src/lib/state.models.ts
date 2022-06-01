@@ -45,9 +45,30 @@ export namespace NtsState {
     replace?: boolean;
   }
 
+  /** Config for entity stores */
   export interface ConfigEntity<t = any> extends Config {
     /** The uniqueID or guid or the entity format. Default is 'guid'. Required for entities to work */
     uniqueId: string | number;
+    map?: {
+      get?: (x: any) => t[];
+      post?: (x: any) => any;
+      put?: (x: any) => any;
+      patch?: (x: any) => any;
+    };
+  }
+
+  /** Config for api stores */
+  export interface ConfigApi<t = any> extends Config {
+    /** Map the webapi response before it is passed to the store on a per verb basis */
+    map?: {
+      get?: (x: any) => t;
+      post?: (x: any) => any;
+      put?: (x: any) => any;
+      patch?: (x: any) => any;
+    };
+  }
+
+  export interface Config extends Options {
     /** If the store has a subscriber but no data, automatically perform a get request. Default true */
     autoLoad?: boolean;
     /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests.
@@ -57,16 +78,7 @@ export namespace NtsState {
       patch?: true;
       delete?: true;
     };
-    /** Map the webapi response before it is passed to the store on a per verb basis */
-    map?: {
-      get?: (x: any) => t[];
-      post?: (x: any) => any;
-      put?: (x: any) => any;
-      patch?: (x: any) => any;
-    };
-  }
 
-  export interface Config extends Options {
     /** Define the initial state of the store */
     // initialState?: Record<string, any>;
     /** A unique name or id for this store. Only necessary if communication between stores is required */

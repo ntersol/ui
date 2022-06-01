@@ -27,15 +27,16 @@ export class NtsStateManagementService {
    * public post = this.store<Models.Post>({ apiUrl: '/posts/1' });
    * @returns
    */
-  public createBaseStore = ((configBase: NtsState.Config | NtsState.ConfigEntity) =>
-    <t>(config: NtsState.Config | NtsState.ConfigEntity<t>) => {
+  public createBaseStore = ((configBase: NtsState.ConfigApi | NtsState.ConfigEntity) =>
+    <t>(config: NtsState.ConfigApi<t> | NtsState.ConfigEntity<t>) => {
       // Merge base config with specific store config
-      const c: NtsState.Config | NtsState.ConfigEntity<t> = config ? mergeConfig(configBase, config) : config;
+      const c: NtsState.ConfigApi<t> | NtsState.ConfigEntity<t> = config ? mergeConfig(configBase, config) : config;
       // If a uniqueID is specified, return an entity store. If not return an api store
       return is.entityConfig(c) ? this.createEntityStore<t>(c) : this.createApiStore<t>(c);
     }) as (
-    configBase: NtsState.Config | NtsState.ConfigEntity,
-  ) => (<t>(config: NtsState.Config) => NtsApiStore<t>) & (<t>(config: NtsState.ConfigEntity<t>) => NtsEntityStore<t>);
+    configBase: NtsState.ConfigApi | NtsState.ConfigEntity,
+  ) => (<t>(config: NtsState.ConfigApi<t>) => NtsApiStore<t>) &
+    (<t>(config: NtsState.ConfigEntity<t>) => NtsEntityStore<t>);
 
   /**
    * Create an entity based api store
@@ -49,7 +50,7 @@ export class NtsStateManagementService {
    * @param config Configuration for this store
    * @returns
    */
-  public createApiStore = <t>(config: NtsState.Config) => new NtsApiStore<t>(this.http, config);
+  public createApiStore = <t>(config: NtsState.ConfigApi<t>) => new NtsApiStore<t>(this.http, config);
 
   /**
    *

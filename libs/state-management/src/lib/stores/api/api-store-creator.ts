@@ -71,7 +71,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
 
   constructor(
     private http: HttpClient,
-    protected config: NtsState.Config | NtsState.ConfigEntity,
+    protected config: NtsState.ConfigApi | NtsState.ConfigEntity,
     private isEntityStore = true,
   ) {
     super();
