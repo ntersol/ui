@@ -9,9 +9,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/azure-maps"
-          ],
+          "outputs": ["dist/libs/azure-maps"],
           "options": {
             "tsConfig": "libs/azure-maps/tsconfig.lib.json",
             "project": "libs/azure-maps/ng-package.json"
@@ -64,20 +62,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/azure-maps/src/**/*.ts",
-              "libs/azure-maps/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/azure-maps/src/**/*.ts", "libs/azure-maps/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/azure-maps"
-          ],
+          "outputs": ["coverage/libs/azure-maps"],
           "options": {
             "jestConfig": "libs/azure-maps/jest.config.js",
             "passWithNoTests": true
@@ -108,20 +99,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/chart/src/**/*.ts",
-              "libs/chart/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/chart/src/**/*.ts", "libs/chart/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/chart"
-          ],
+          "outputs": ["coverage/libs/chart"],
           "options": {
             "jestConfig": "libs/chart/jest.config.js",
             "passWithNoTests": true
@@ -146,10 +130,7 @@
         "pack": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cd dist/libs/chart/ && npm pack",
-              "cd dist/libs/chart/ && npm publish --access public"
-            ],
+            "commands": ["cd dist/libs/chart/ && npm pack", "cd dist/libs/chart/ && npm publish --access public"],
             "parallel": false
           }
         },
@@ -183,9 +164,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/chart",
@@ -225,20 +204,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/document-editor/src/**/*.ts",
-              "libs/document-editor/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/document-editor/src/**/*.ts", "libs/document-editor/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/document-editor"
-          ],
+          "outputs": ["coverage/libs/document-editor"],
           "options": {
             "jestConfig": "libs/document-editor/jest.config.js",
             "passWithNoTests": true
@@ -305,9 +277,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/document-editor",
@@ -347,20 +317,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/forms/src/**/*.ts",
-              "libs/forms/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/forms/src/**/*.ts", "libs/forms/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/forms"
-          ],
+          "outputs": ["coverage/libs/forms"],
           "options": {
             "jestConfig": "libs/forms/jest.config.js",
             "passWithNoTests": true
@@ -376,7 +339,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "cd libs/forms/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/forms.module.ts --tsconfig ./tsconfig.json",
+              "npx typedoc --plugin typedoc-plugin-markdown libs/forms/src/lib/forms.module.ts --tsconfig libs/forms/tsconfig.json --out libs/forms/docs",
               "cp libs/forms/docs/README.md libs/forms/README.md"
             ],
             "parallel": false
@@ -385,22 +348,14 @@
         "pack": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cd dist/libs/forms/ && npm pack",
-              "cd dist/libs/forms/ && npm publish --access public"
-            ],
+            "commands": ["cd dist/libs/forms/ && npm pack", "cd dist/libs/forms/ && npm publish --access public"],
             "parallel": false
           }
         },
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run forms:patch",
-              "ng run forms:readme",
-              "ng run forms:build:production",
-              "ng run forms:pack"
-            ],
+            "commands": ["ng run forms:patch", "ng run forms:build:production", "ng run forms:pack"],
             "parallel": false
           }
         },
@@ -422,9 +377,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/forms",
@@ -465,9 +418,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/google-places-autocomplete"
-          ],
+          "outputs": ["coverage/libs/google-places-autocomplete"],
           "options": {
             "jestConfig": "libs/google-places-autocomplete/jest.config.js",
             "passWithNoTests": true
@@ -481,9 +432,7 @@
               "libs/google-places-autocomplete/src/**/*.html"
             ]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "patch": {
           "builder": "@nrwl/workspace:run-commands",
@@ -537,20 +486,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/grid/src/**/*.ts",
-              "libs/grid/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/grid/src/**/*.ts", "libs/grid/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/grid"
-          ],
+          "outputs": ["coverage/libs/grid"],
           "options": {
             "jestConfig": "libs/grid/jest.config.js",
             "passWithNoTests": true
@@ -575,22 +517,14 @@
         "pack": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cd dist/libs/grid/ && npm pack",
-              "cd dist/libs/grid/ && npm publish --access public"
-            ],
+            "commands": ["cd dist/libs/grid/ && npm pack", "cd dist/libs/grid/ && npm publish --access public"],
             "parallel": false
           }
         },
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run grid:patch",
-              "ng run grid:readme",
-              "ng run grid:build:production",
-              "ng run grid:pack"
-            ],
+            "commands": ["ng run grid:patch", "ng run grid:readme", "ng run grid:build:production", "ng run grid:pack"],
             "parallel": false
           }
         },
@@ -612,9 +546,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/grid",
@@ -640,9 +572,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/mtg-calc"
-          ],
+          "outputs": ["dist/libs/mtg-calc"],
           "options": {
             "tsConfig": "libs/mtg-calc/tsconfig.lib.json",
             "project": "libs/mtg-calc/ng-package.json"
@@ -657,20 +587,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/mtg-calc/src/**/*.ts",
-              "libs/mtg-calc/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/mtg-calc/src/**/*.ts", "libs/mtg-calc/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/mtg-calc"
-          ],
+          "outputs": ["coverage/libs/mtg-calc"],
           "options": {
             "jestConfig": "libs/mtg-calc/jest.config.js",
             "passWithNoTests": true
@@ -695,21 +618,14 @@
         "pack": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cd dist/libs/mtg-calc/ && npm pack",
-              "cd dist/libs/mtg-calc/ && npm publish --access public"
-            ],
+            "commands": ["cd dist/libs/mtg-calc/ && npm pack", "cd dist/libs/mtg-calc/ && npm publish --access public"],
             "parallel": false
           }
         },
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run mtg-calc:patch",
-              "ng run mtg-calc:build:production",
-              "ng run mtg-calc:pack"
-            ],
+            "commands": ["ng run mtg-calc:patch", "ng run mtg-calc:build:production", "ng run mtg-calc:pack"],
             "parallel": false
           }
         },
@@ -737,9 +653,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/mtg-calc",
@@ -764,9 +678,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/js:tsc",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "tsConfig": "libs/schematics/tsconfig.lib.json",
             "outputPath": "dist/out-tsc/schematics",
@@ -793,10 +705,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "cwd": "dist/out-tsc/schematics",
-            "commands": [
-              "npm pack",
-              "npm publish --access public"
-            ],
+            "commands": ["npm pack", "npm publish --access public"],
             "parallel": false
           }
         },
@@ -842,9 +751,7 @@
         "build": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cp -avr libs/scss/ dist/libs/scss/"
-            ]
+            "commands": ["cp -avr libs/scss/ dist/libs/scss/"]
           }
         },
         "patch": {
@@ -858,21 +765,14 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "cwd": "dist/libs/scss",
-            "commands": [
-              "npm pack",
-              "npm publish --access public"
-            ],
+            "commands": ["npm pack", "npm publish --access public"],
             "parallel": false
           }
         },
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run scss:patch",
-              "ng run scss:build",
-              "ng run scss:pack"
-            ],
+            "commands": ["ng run scss:patch", "ng run scss:build", "ng run scss:pack"],
             "parallel": false
           }
         }
@@ -901,9 +801,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/services"
-          ],
+          "outputs": ["coverage/libs/services"],
           "options": {
             "jestConfig": "libs/services/jest.config.js",
             "passWithNoTests": true
@@ -912,14 +810,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/services/src/**/*.ts",
-              "libs/services/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/services/src/**/*.ts", "libs/services/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "patch": {
           "builder": "@nrwl/workspace:run-commands",
@@ -930,21 +823,14 @@
         "pack": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cd dist/libs/services/ && npm pack",
-              "cd dist/libs/services/ && npm publish --access public"
-            ],
+            "commands": ["cd dist/libs/services/ && npm pack", "cd dist/libs/services/ && npm publish --access public"],
             "parallel": false
           }
         },
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run services:patch",
-              "ng run services:build:production",
-              "ng run services:pack"
-            ],
+            "commands": ["ng run services:patch", "ng run services:build:production", "ng run services:pack"],
             "parallel": false
           }
         }
@@ -973,9 +859,7 @@
               },
               "apps/showcase/src/assets"
             ],
-            "styles": [
-              "apps/showcase/src/styles.scss"
-            ],
+            "styles": ["apps/showcase/src/styles.scss"],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -1037,20 +921,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/showcase/src/**/*.ts",
-              "apps/showcase/src/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/showcase/src/**/*.ts", "apps/showcase/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/showcase"
-          ],
+          "outputs": ["coverage/apps/showcase"],
           "options": {
             "jestConfig": "apps/showcase/jest.config.js",
             "passWithNoTests": true
@@ -1059,9 +936,7 @@
         "move-coverage": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cp -avr coverage dist/apps/showcase/"
-            ]
+            "commands": ["cp -avr coverage dist/apps/showcase/"]
           }
         },
         "curate": {
@@ -1129,20 +1004,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/state-management/src/**/*.ts",
-              "libs/state-management/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/state-management/src/**/*.ts", "libs/state-management/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/state-management"
-          ],
+          "outputs": ["coverage/libs/state-management"],
           "options": {
             "jestConfig": "libs/state-management/jest.config.js",
             "passWithNoTests": true
@@ -1203,9 +1071,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/state-management",
@@ -1245,20 +1111,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/storybook/src/**/*.ts",
-              "libs/storybook/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/storybook/src/**/*.ts", "libs/storybook/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/storybook"
-          ],
+          "outputs": ["coverage/libs/storybook"],
           "options": {
             "jestConfig": "libs/storybook/jest.config.js",
             "passWithNoTests": true
@@ -1282,9 +1141,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/storybook",
@@ -1324,20 +1181,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/table/src/**/*.ts",
-              "libs/table/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/table/src/**/*.ts", "libs/table/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/table"
-          ],
+          "outputs": ["coverage/libs/table"],
           "options": {
             "jestConfig": "libs/table/jest.config.js",
             "passWithNoTests": true
@@ -1362,21 +1212,14 @@
         "pack": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cd dist/libs/table/ && npm pack",
-              "cd dist/libs/table/ && npm publish --access public"
-            ],
+            "commands": ["cd dist/libs/table/ && npm pack", "cd dist/libs/table/ && npm publish --access public"],
             "parallel": false
           }
         },
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run table:patch",
-              "ng run table:build:production",
-              "ng run table:pack"
-            ],
+            "commands": ["ng run table:patch", "ng run table:build:production", "ng run table:pack"],
             "parallel": false
           }
         },
@@ -1398,9 +1241,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/table",
@@ -1440,20 +1281,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/tags/src/**/*.ts",
-              "libs/tags/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/tags/src/**/*.ts", "libs/tags/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/tags"
-          ],
+          "outputs": ["coverage/libs/tags"],
           "options": {
             "jestConfig": "libs/tags/jest.config.js",
             "passWithNoTests": true
@@ -1478,21 +1312,14 @@
         "pack": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cd dist/libs/tags/ && npm pack",
-              "cd dist/libs/tags/ && npm publish --access public"
-            ],
+            "commands": ["cd dist/libs/tags/ && npm pack", "cd dist/libs/tags/ && npm publish --access public"],
             "parallel": false
           }
         },
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run tags:patch",
-              "ng run tags:build:production",
-              "ng run tags:pack"
-            ],
+            "commands": ["ng run tags:patch", "ng run tags:build:production", "ng run tags:pack"],
             "parallel": false
           }
         },
@@ -1514,9 +1341,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/tags",
@@ -1556,20 +1381,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/tree/src/**/*.ts",
-              "libs/tree/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/tree/src/**/*.ts", "libs/tree/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/tree"
-          ],
+          "outputs": ["coverage/libs/tree"],
           "options": {
             "jestConfig": "libs/tree/jest.config.js",
             "passWithNoTests": true
@@ -1594,22 +1412,14 @@
         "pack": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cd dist/libs/tree/ && npm pack",
-              "cd dist/libs/tree/ && npm publish --access public"
-            ],
+            "commands": ["cd dist/libs/tree/ && npm pack", "cd dist/libs/tree/ && npm publish --access public"],
             "parallel": false
           }
         },
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run tree:patch",
-              "ng run tree:readme",
-              "ng run tree:build:production",
-              "ng run tree:pack"
-            ],
+            "commands": ["ng run tree:patch", "ng run tree:readme", "ng run tree:build:production", "ng run tree:pack"],
             "parallel": false
           }
         },
@@ -1631,9 +1441,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/tree",
@@ -1674,9 +1482,7 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/utils"
-          ],
+          "outputs": ["coverage/libs/utils"],
           "options": {
             "jestConfig": "libs/utils/jest.config.js",
             "passWithNoTests": true
@@ -1685,14 +1491,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/utils/src/**/*.ts",
-              "libs/utils/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/utils/src/**/*.ts", "libs/utils/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "patch": {
           "builder": "@nrwl/workspace:run-commands",
@@ -1703,21 +1504,14 @@
         "pack": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cd dist/libs/utils/ && npm pack",
-              "cd dist/libs/utils/ && npm publish --access public"
-            ],
+            "commands": ["cd dist/libs/utils/ && npm pack", "cd dist/libs/utils/ && npm publish --access public"],
             "parallel": false
           }
         },
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run utils:patch",
-              "ng run utils:build:production",
-              "ng run utils:pack"
-            ],
+            "commands": ["ng run utils:patch", "ng run utils:build:production", "ng run utils:pack"],
             "parallel": false
           }
         }
@@ -1746,20 +1540,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/visible/src/**/*.ts",
-              "libs/visible/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/visible/src/**/*.ts", "libs/visible/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/visible"
-          ],
+          "outputs": ["coverage/libs/visible"],
           "options": {
             "jestConfig": "libs/visible/jest.config.js",
             "passWithNoTests": true
@@ -1784,10 +1571,7 @@
         "pack": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cd dist/libs/visible/ && npm pack",
-              "cd dist/libs/visible/ && npm publish --access public"
-            ],
+            "commands": ["cd dist/libs/visible/ && npm pack", "cd dist/libs/visible/ && npm publish --access public"],
             "parallel": false
           }
         },
@@ -1821,9 +1605,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/visible",
@@ -1863,20 +1645,13 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/wizard/src/**/*.ts",
-              "libs/wizard/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/wizard/src/**/*.ts", "libs/wizard/src/**/*.html"]
           },
-          "outputs": [
-            "{options.outputFile}"
-          ]
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/wizard"
-          ],
+          "outputs": ["coverage/libs/wizard"],
           "options": {
             "jestConfig": "libs/wizard/jest.config.js",
             "passWithNoTests": true
@@ -1891,21 +1666,14 @@
         "pack": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "cd dist/libs/wizard/ && npm pack",
-              "cd dist/libs/wizard/ && npm publish --access public"
-            ],
+            "commands": ["cd dist/libs/wizard/ && npm pack", "cd dist/libs/wizard/ && npm publish --access public"],
             "parallel": false
           }
         },
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run wizard:patch",
-              "ng run wizard:build:production",
-              "ng run wizard:pack"
-            ],
+            "commands": ["ng run wizard:patch", "ng run wizard:build:production", "ng run wizard:pack"],
             "parallel": false
           }
         },
@@ -1937,9 +1705,7 @@
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/angular",
             "outputPath": "dist/storybook/wizard",
