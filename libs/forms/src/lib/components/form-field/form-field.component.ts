@@ -7,6 +7,8 @@ import {
   Optional,
   OnDestroy,
   ChangeDetectionStrategy,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { NgControl, FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -48,7 +50,7 @@ export type FormFieldType =
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NtsFormFieldComponent implements OnInit, OnDestroy {
+export class NtsFormFieldComponent implements OnInit, OnChanges, OnDestroy {
   /** A dictionary that helps manage unique name and id properties. This is on the class so all instances on a page can be made unique */
   static uniqueIds: Record<string, number> | null = null;
   /** Some ui controls need an ngModel to store data if a form control is not supplied */
@@ -191,6 +193,13 @@ export class NtsFormFieldComponent implements OnInit, OnDestroy {
       if (!this.id) {
         this.id = slug;
       }
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // If field type is a dropdown, add a null option
+    if (this.type === 'dropdown' && changes['options'] && this.optionIsObjectsArray) {
+      this.optionsOutput = this.dropdownAddNullOption(<SelectItem[]>this.options);
     }
   }
 
