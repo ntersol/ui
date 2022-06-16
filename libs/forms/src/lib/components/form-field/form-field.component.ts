@@ -198,7 +198,7 @@ export class NtsFormFieldComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     // If field type is a dropdown, add a null option
-    if (this.type === 'dropdown' && changes['options'] && this.optionIsObjectsArray) {
+    if (this.type === 'dropdown' && this.options && changes['options'] && this.optionIsObjectsArray) {
       this.optionsOutput = this.dropdownAddNullOption(<SelectItem[]>this.options);
     }
   }
