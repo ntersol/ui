@@ -30,9 +30,16 @@
     (routeChanged)="routeChanged()"
     (complete)="complete = true"
     -->
-    <!--
-    <nts-wizard [settings]="settings" [form]="formGroup" [dataFields]="{}" [sections]="[]" [pages]="[]" [routes]="[]"> </nts-wizard>
-  -->
+    <!--  -->
+    <nts-wizard
+      [settings]="settings"
+      [form]="formGroup"
+      [dataFields]="null"
+      [sections]="sections"
+      [pages]="pages"
+      [routes]="routes"
+    >
+    </nts-wizard>
   </p-tabPanel>
   <p-tabPanel header="API"> Content 3 </p-tabPanel>
 </p-tabView>

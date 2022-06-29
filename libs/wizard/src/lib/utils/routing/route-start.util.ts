@@ -1,11 +1,11 @@
-import { Wizard } from '../../wizard.models';
+import { NtsWizard } from '../../wizard.models';
 
 /**
  * Determine the initial starting route of the application based on supplied query params
  * @param params
  * @param sections
  */
-export const routeStart = (params: Wizard.RouteParams, sections: Wizard.Section[]): Wizard.RouteParams => {
+export const routeStart = (params: Partial<NtsWizard.RouteParams>, sections: NtsWizard.Section[]): NtsWizard.RouteParams => {
   if (params.sectionUrl === 'continue') {
     // Continue app
     console.warn('TODO: Add Continue all sections');
@@ -17,7 +17,7 @@ export const routeStart = (params: Wizard.RouteParams, sections: Wizard.Section[
     return { sectionUrl: params.sectionUrl, routeUrl: params.routeUrl };
   } else if (params.sectionUrl && !params.routeUrl) {
     // Has section but no route, add first route in section
-    const section = sections.filter((s) => s.urlSlug === params.sectionUrl)[0];
+    const section = sections.filter(s => s.urlSlug === params.sectionUrl)[0];
     return { sectionUrl: params.sectionUrl, routeUrl: section.routeStart };
   }
   // Initial start, no section or route url supplied. Go to first section and first route

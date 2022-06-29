@@ -22,5 +22,5 @@
     "**/*.stories.ts",
     "**/*.stories.js"
   ],
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "src/lib/utils/clone-deep.js"]
 }

@@ -8,6 +8,7 @@ import { NtsStateManagementModule } from '@ntersol/state-management';
 import { NtsTableModule } from '@ntersol/table';
 import { NtsTagsModule } from '@ntersol/tags';
 import { NtsVisibleModule } from '@ntersol/visible';
+import { NtsWizardModule } from '@ntersol/wizard';
 import { TabViewModule } from 'primeng/tabview';
 import { SiteModule } from '../../site.module';
 // Components
@@ -36,6 +37,7 @@ import { WizardComponent } from './routes/wizard/wizard.component';
     NtsMtgCalcModule,
     NtsVisibleModule,
     NtsDocumentEditorModule,
+    NtsWizardModule,
   ],
   declarations: [
     ComponentsComponent,

@@ -1,4 +1,4 @@
-<div class="nts-wizard-content" *ngIf="content">
+<div class="nts-wizard-content" *ngIf="content" [ngClass]="content?.classes || ''">
   <!-- Form field control -->
   <ng-container *ngIf="isType.formFieldControl(content)">
     <ng-container [ngSwitch]="content.formFieldType">
@@ -13,10 +13,9 @@
           </p-checkbox>
         </ng-container>
         <ng-container *ngIf="content.options && content.options[0] && content.options.length > 1">
-          <ng-container *ngFor="let option; in: content.options">
-            <div class="checkbox-single">
-              <p-checkbox [formControl]="content.formControl" [value]="option?.value" [label]="option.label">
-              </p-checkbox>
+          <ng-container *ngFor="let option of content.options">
+            <div class="checkbox-single" *ngIf="isType.option(option)">
+              <p-checkbox [formControl]="content.formControl" [value]="option?.value" [label]="option.label"> </p-checkbox>
             </div>
           </ng-container>
         </ng-container>
@@ -26,39 +25,95 @@
         <nts-form-field
           [formControl]="content.formControl"
           [options]="dataField || content.options || []"
-          [attr.type]="content.formFieldType"
-          [attr.placeholder]="content.placeholder"
-          [attr.tooltip]="content.tooltip"
-          [attr.hint]="content.hint"
-          [attr.prefix]="content.prefix"
-          [attr.suffix]="content.suffix"
-          [attr.min]="content.min"
-          [attr.max]="content.max"
-          [attr.maxlength]="content.maxlength"
-          [attr.minlength]="content.minlength"
+          [type]="content.formFieldType || 'text'"
+          [placeholder]="content.placeholder"
+          [label]="content.label"
+          [tooltip]="content.tooltip"
+          [disabledChange]="!!content.disabled"
+          [hint]="content.hint"
+          [prefix]="content.prefix"
+          [suffix]="content.suffix"
+          [attributes]="content?.attributes"
+          [min]="content.min || null"
+          [max]="content.max || null"
+          [maxLength]="content.maxlength || null"
+          [minLength]="content.minlength || null"
+          [canDeselect]="content?.canDeselect === undefined ? true : content.canDeselect"
+          [id]="content.id || null"
+          [automationId]="content.automationId || null"
+          [maxDate]="content?.maxDate || null"
+          [minDate]="content?.minDate || null"
+          [readonlyDateInput]="content?.readonlyDateInput || null"
         >
         </nts-form-field>
       </ng-container>
     </ng-container>
   </ng-container>
 
+  <!-- HTML -->
   <ng-container *ngIf="isType.html(content)">
     <div [innerHtml]="content.html"></div>
   </ng-container>
 
-  <ng-container *ngIf="isType.buttonGroup(content)">
-    <button class="btn btn-primary me-2" *ngFor="let button of content.options">
-      {{ button.label }}
-    </button>
+  <!-- Button -->
+  <ng-container *ngIf="isType.button(content)">
+    <button
+      [attr.automation-id]="content.automationId || null"
+      class="btn btn-primary btn-action mr-2"
+      (click)="buttonEvent.emit(content)"
+      [ngClass]="content.classes || ''"
+      [disabled]="content.disabled"
+      [innerHtml]="content.label"
+    ></button>
   </ng-container>
 
+  <!-- Button Group -->
+  <ng-container *ngIf="isType.buttonGroup(content)">
+    <!--
+          Stack if vertical is specified OR if it is undefined and has more than 2 options
+        -->
+    <div
+      class="wiz-btn-group"
+      [attr.automation-id]="content.automationId || null"
+      [ngClass]="{
+        stacked: content.orientation === 'vertical' || (content.orientation === undefined && content.options.length > 2)
+      }"
+    >
+      <div class="text-center">
+        <div class="d-inline-block">
+          <ng-container *ngFor="let button of content.options; let i = index">
+            <button
+              class="btn btn-primary btn-action"
+              *ngIf="button.visible"
+              [ngClass]="[
+                button.classes || '',
+                button.hasDataChange &&
+                buttonActionDataControls !== null &&
+                buttonActionDataControls[i] !== null &&
+                isType.buttonActionDataChange(buttonActionDataControls[i]) &&
+                buttonActionDataControls[i].control.value === buttonActionDataControls[i].value
+                  ? 'active'
+                  : button.hasDataChange
+                  ? 'btn-outline-primary'
+                  : ''
+              ]"
+              (click)="buttonEvent.emit(button)"
+              [disabled]="button.disabled"
+              [innerHtml]="button.label"
+            ></button>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Feature -->
   <ng-container *ngIf="isType.feature(content)">
-    <ng-container *ngIf="templates && content.featureId && templates[content.featureId]; else noFeature">
-      <ng-container *ngTemplateOutlet="templates[content.featureId].template; context: { content: content }">
-      </ng-container>
+    <ng-container *ngIf="templates && content?.featureId && templates[content.featureId]; else noFeature">
+      <ng-container *ngTemplateOutlet="templates[content.featureId].template; context: { content: content }"></ng-container>
     </ng-container>
     <ng-template #noFeature>
-      No feature found with an ID of <strong>{{ content.featureId }}</strong>
+      No feature found with an ID of <strong>{{ content?.featureId }}</strong>
     </ng-template>
   </ng-container>
 </div>

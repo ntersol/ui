@@ -3,6 +3,5 @@
   "dest": "../../dist/libs/forms",
   "lib": {
     "entryFile": "src/index.ts"
-  },
-  "allowedNonPeerDependencies": ["primeng", "primeicons", "bootstrap", "@types/node"]
+  }
 }

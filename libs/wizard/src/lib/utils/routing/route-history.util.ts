@@ -1,4 +1,4 @@
-import { Wizard } from '../../wizard.models';
+import { NtsWizard } from '../../wizard.models';
 import { isType } from '../typeguards.util';
 
 /**
@@ -7,10 +7,7 @@ import { isType } from '../typeguards.util';
  * @param routes
  * @param pages
  */
-export const routeCreateHistory = (
-  sectionActive: Wizard.SectionControl,
-  routes: Record<string, Wizard.RouteControl>,
-): string[] => {
+export const routeCreateHistory = (sectionActive: NtsWizard.SectionControl, routes: Record<string, NtsWizard.RouteControl>): string[] => {
   console.log(sectionActive, routes);
   const history: string[] = [];
 

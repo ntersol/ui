@@ -18,6 +18,16 @@ const routes: Routes = [
     data: { title: 'Google Places Autocomplete' },
   },
   {
+    path: 'wizard/:sectionUrl/:routeUrl',
+    component: WizardComponent,
+    data: { title: 'Online Mortgage Form', disableAutoTrack: true },
+  },
+  {
+    path: 'wizard/:sectionUrl',
+    component: WizardComponent,
+    data: { title: 'Online Mortgage Form', disableAutoTrack: true },
+  },
+  {
     path: 'wizard',
     component: WizardComponent,
     data: { title: 'Wizard' },

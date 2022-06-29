@@ -1,6 +1,4 @@
 {
   "name": "@ntersol/forms",
-  "version": "0.0.7",
-  "peerDependencies": {},
-  "dependencies": {}
+  "version": "0.0.9"
 }

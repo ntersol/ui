@@ -1,4 +1,4 @@
 <div class="nts-section-wizard">
-  <p class="nts-section-title" *ngIf="section?.title">{{ section?.title }}</p>
+  <p class="nts-section-title" *ngIf="section?.title && section?.hideSectionTitle !== true && page?.hideSectionTitle !== true">{{ section?.title }}</p>
   <ng-content></ng-content>
 </div>

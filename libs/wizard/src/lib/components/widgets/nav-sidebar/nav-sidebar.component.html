@@ -1,6 +1,55 @@
-<h3>Navigation</h3>
-<ul>
-  <li *ngFor="let section of state.sectionsSrc$ | async">
-    <a (click)="state.routeChange({ sectionUrl: section.urlSlug })">{{ section.title }}</a>
-  </li>
-</ul>
+<ng-container *ngIf="store">
+  <nav
+    class="nts-wizard-sidebar"
+    *ngIf="{
+      sectionsState: sectionsState$ | async,
+      activeSectionNumber: activeSectionNumber$ | async,
+      sections: store.sectionsSrc$ | async
+    } as nav"
+  >
+    <ng-container *ngIf="nav?.sectionsState && nav?.sections?.length">
+      <div class="d-md-none d-lg-none d-xl-none">
+        <div class="nts-progress">
+          <div>
+            <a class="nts-wizard-loc mr-3">
+              <span>{{ nav.activeSectionNumber }}</span>
+              <span class="nts-wizard-loc-anim"></span>
+            </a>
+          </div>
+          <div>
+            <nts-form-field
+              (onChange)="store.routeGoTo({ sectionUrl: $event.value })"
+              [formControl]="active"
+              [options]="sectionsSelector$ | async"
+              type="dropdown"
+            >
+            </nts-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="d-none d-md-block d-lg-block d-xl-block">
+        <div class="nts-progress">
+          <ng-container *ngFor="let section of nav.sections; let i = index">
+            <a
+              *ngIf="nav.sectionsState"
+              class="nts-wizard-link d-flex align-items-center"
+              [ngClass]="{ completed: nav.sectionsState[i].completed, active: nav.sectionsState[i].active }"
+              (click)="store.routeGoTo({ sectionUrl: section.urlSlug })"
+            >
+              <span class="nts-wizard-loc-spacer">
+                <span class="nts-wizard-loc" [ngClass]="{ completed: nav.sectionsState[i].completed, active: nav.sectionsState[i].active }">
+                  <span *ngIf="!nav.sectionsState[i].completed">{{ i + 1 }}</span>
+                  <span *ngIf="nav.sectionsState[i].completed"><i class="fa fa-check" aria-hidden="true"></i></span>
+                  <span class="nts-wizard-loc-anim"></span>
+                </span>
+              </span>
+              <span class="nts-wizard-section-name" [ngClass]="nav.sectionsState[i].active ? 'active' : ''">
+                {{ section.title }}
+              </span>
+            </a>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </nav>
+</ng-container>

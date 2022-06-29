@@ -10,3 +10,5 @@ export { sectionStateChange } from './section-state-change.util';
 export { arrayToRecord } from './misc.util';
 export { getBaseUrl } from './get-base-url.util';
 export { audit } from './audit.util';
+export { getContentById } from './get-content.util';
+export * from './typeguards.util';

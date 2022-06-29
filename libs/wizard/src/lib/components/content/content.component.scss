@@ -1,0 +1,9 @@
+.btn-action {
+  margin: 10px;
+}
+.wiz-btn-group {
+  &.stacked {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,6 +1,4 @@
 {
   "name": "@ntersol/wizard",
-  "version": "0.0.3",
-  "peerDependencies": {},
-  "dependencies": {}
+  "version": "1.0.0"
 }

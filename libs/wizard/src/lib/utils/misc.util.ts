@@ -1,5 +1,3 @@
-import { cloneDeep } from 'lodash';
-
 /**
  * Convert array to record using unique Id
  * @param arr
@@ -18,4 +16,4 @@ export const getKeyValue =
     obj[key];
 
 /** Typesafe version of clone deep */
-export const clone = <t>(e: t): t => cloneDeep(e);
+export const clone = <t>(e: t): t => JSON.parse(JSON.stringify(e));

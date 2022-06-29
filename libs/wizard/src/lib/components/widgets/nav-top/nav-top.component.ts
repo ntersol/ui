@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation, Input, OnChanges } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { WizardStore } from '../../../shared/store/wizard.store';
-import { Wizard } from '../../../wizard.models';
+import { NtsWizard } from '../../../wizard.models';
 @Component({
   selector: 'nts-wizard-nav-top',
   templateUrl: './nav-top.component.html',
@@ -19,7 +19,9 @@ export class WizNavTopComponent implements OnInit, OnChanges {
     active: [null, []],
   });
 
-  public sectionsState$?: Observable<Wizard.SectionState[] | null>;
+  public active = this.selector.get('active') as FormControl;
+
+  public sectionsState$?: Observable<NtsWizard.SectionState[] | null>;
   public activeSectionNumber$?: Observable<number | null>;
   public sectionsSelector$?: Observable<
     {
@@ -46,8 +48,8 @@ export class WizNavTopComponent implements OnInit, OnChanges {
     }
     // Set up sectionState
     this.sectionsState$ = this.store.sectionsState$.pipe(
-      tap((sections) => {
-        const sectionActive = sections?.filter((s) => s.active)[0];
+      tap(sections => {
+        const sectionActive = sections?.filter(s => s.active)[0];
         const active = this.selector.get('active');
         if (sectionActive && active) {
           active.patchValue(sectionActive.sectionId);
@@ -56,24 +58,16 @@ export class WizNavTopComponent implements OnInit, OnChanges {
     );
     // Get active section
     this.activeSectionNumber$ = this.sectionsState$.pipe(
-      map((sections) => {
+      map(sections => {
         if (sections && sections.length) {
-          return sections.findIndex((section) => section.active) + 1;
+          return sections.findIndex(section => section.active) + 1;
         }
         return null;
       }),
     );
     //
     this.sectionsSelector$ = this.store.sectionsSrc$.pipe(
-      map((sections) => (sections ? sections.map((s) => Object.assign({}, { label: s.title, value: s.urlSlug })) : [])),
+      map(sections => (sections ? sections.map(s => Object.assign({}, { label: s.title, value: s.urlSlug })) : [])),
     );
-  }
-
-  eventValue(event: any) {
-    return event.value;
-  }
-
-  get active() {
-    return this.selector.get('active') as FormControl;
   }
 }

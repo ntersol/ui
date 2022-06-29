@@ -1,10 +1,10 @@
-import { Wizard } from '../wizard.models';
+import { NtsWizard } from '../wizard.models';
 
 /**
  * Generate the initial section state
  */
-export const sectionStateCreate = (sections: Wizard.Section[]): Wizard.SectionState[] =>
-  sections.map((s) =>
+export const sectionStateCreate = (sections: NtsWizard.Section[]): NtsWizard.SectionState[] =>
+  sections.map(s =>
     Object.assign({
       sectionId: s.urlSlug,
       active: false,
@@ -14,5 +14,5 @@ export const sectionStateCreate = (sections: Wizard.Section[]): Wizard.SectionSt
       routeStart: s.routeStart,
       started: false,
       startedDate: null,
-    } as Wizard.SectionState),
+    } as NtsWizard.SectionState),
   );

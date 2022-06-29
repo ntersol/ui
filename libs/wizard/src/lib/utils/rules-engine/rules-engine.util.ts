@@ -1,5 +1,5 @@
 import { FormGroup } from '@angular/forms';
-import { Wizard } from '../../wizard.models';
+import { NtsWizard } from '../../wizard.models';
 import { ruleSet } from './rule-set.util';
 
 /**
@@ -8,29 +8,26 @@ import { ruleSet } from './rule-set.util';
  * @param model
  * @param arrayIndexs
  */
-export const rulesEngine =
-  (model: FormGroup, arrayIndexes: FormGroup) =>
-  (ruleGroups: Wizard.RuleGroup[]): false | Wizard.RuleGroup => {
-    // Get model and array index values
-    const modelSrc = model.getRawValue();
-    const arrayIndexesSrc = arrayIndexes.getRawValue();
+export const rulesEngine = (model: FormGroup, ruleGroups: NtsWizard.RuleGroup[]): false | NtsWizard.RuleGroup => {
+  // Get model and array index values
+  const modelSrc = model.getRawValue();
 
-    for (let i = 0; i < ruleGroups.length; i++) {
-      // Get current group
-      const groupCurrent = ruleGroups[i];
-      let rulesMatch = false;
+  for (let i = 0; i < ruleGroups.length; i++) {
+    // Get current group
+    const groupCurrent = ruleGroups[i];
+    let rulesMatch = false;
 
-      // Check for rules
-      if (groupCurrent.rules) {
-        // Handle ruleset
-        rulesMatch = ruleSet(groupCurrent.rules, modelSrc, arrayIndexesSrc);
-      }
-
-      // Return match of rulegroup
-      if (rulesMatch) {
-        return groupCurrent;
-      }
+    // Check for rules
+    if (groupCurrent.rules) {
+      // Handle ruleset
+      rulesMatch = ruleSet(groupCurrent.rules, modelSrc);
     }
-    // No rulegroup matched
-    return false;
-  };
+
+    // Return match of rulegroup
+    if (rulesMatch) {
+      return groupCurrent;
+    }
+  }
+  // No rulegroup matched
+  return false;
+};

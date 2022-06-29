@@ -1,0 +1,90 @@
+$neutral-bg: #ccc;
+$complete-bg: #4caf50;
+
+a:hover {
+  text-decoration: none;
+}
+
+.nts-wizard-sidebar {
+  margin-bottom: 2rem;
+  .dropdown {
+    margin-top: 0 !important;
+  }
+  .nts-progress {
+    .nts-wizard-link {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      font-size: 0.8rem;
+      &.active {
+        font-weight: bold;
+      }
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+        .nts-wizard-loc-anim {
+          transform: scale(1.05);
+        }
+      }
+    }
+    .nts-wizard-loc-spacer {
+      min-width: 40px;
+    }
+    .nts-wizard-loc {
+      padding-top: 4px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: 12px;
+      background-color: $neutral-bg;
+      color: #fff;
+      width: 25px;
+      height: 25px;
+      display: block;
+      position: relative;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      span {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+      }
+      &.completed {
+        background-color: $complete-bg;
+      }
+      .nts-wizard-section-name {
+        font-size: 11px;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%);
+        color: #9e9e9e;
+        line-height: initial;
+        margin-top: 7px;
+      }
+
+      .nts-wizard-loc-anim {
+        display: block;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: #b19a9a;
+        transform: scale(0);
+        transition: 0.3s ease;
+        border-radius: 50%;
+      }
+    }
+    .nts-wizard-progress-bar {
+      flex: 1 1 auto;
+      &.nts-wizard-progress-bar-complete .ui-progressbar-value {
+        background-color: $complete-bg;
+      }
+      .ui-progressbar {
+        background-color: $neutral-bg;
+      }
+      .nts-wizard-progress-box {
+        padding: 7px;
+        padding-top: 14px;
+      }
+    }
+  }
+}

@@ -1,19 +1,16 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { Wizard } from '../../wizard.models';
+import { NtsWizard } from '../../wizard.models';
 
 @Component({
-  selector: 'app-section',
+  selector: 'nts-section',
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SectionComponent implements OnInit {
-  @Input() section?: Wizard.SectionControl | null;
-
-  constructor() {}
-
-  ngOnInit() {
-    this.section;
-  }
+export class SectionComponent {
+  @Input() section?: NtsWizard.SectionControl | null = null;
+  @Input() page?: NtsWizard.PageControl | null = null;
+  /** Used to update change detection */
+  @Input() cd: number | null = null;
 }

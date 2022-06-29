@@ -1,10 +1,10 @@
 import { FormGroup } from '@angular/forms';
-import { jsonToFormGroup } from '@ntersol/forms';
+import { jsonToFormGroup } from './json-to-form-group.util';
 
 export const createActiveFormGroup = (form: FormGroup): FormGroup => {
   const formValue = form.getRawValue();
   const output: Record<string, any> = {};
-  Object.keys(formValue).forEach((key) => {
+  Object.keys(formValue).forEach(key => {
     const entity: any[] | Record<string | number, any> = formValue[key];
     if (Array.isArray(entity)) {
       output[key] = {

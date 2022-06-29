@@ -34,6 +34,8 @@ $complete-bg: #4caf50;
         left: 50%;
         transform: translate(-50%);
         color: #9e9e9e;
+        line-height: initial;
+        margin-top: 7px;
       }
 
       .nts-wizard-loc-anim {
@@ -71,34 +73,4 @@ $complete-bg: #4caf50;
       }
     }
   }
-  /*
-  ul,
-  li {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  ul {
-    display: flex;
-    margin-bottom: 0.5rem;
-  }
-  li {
-    flex: 1 1 auto;
-    a {
-      padding: 10px 10px;
-      text-align: center;
-      display: block;
-      font-size: 11px;
-      &:hover {
-        background: #e5e5e5;
-      }
-    }
-    &:first-child a {
-      text-align: left;
-    }
-    &:last-child a {
-      text-align: center;
-    }
-  }
-*/
 }

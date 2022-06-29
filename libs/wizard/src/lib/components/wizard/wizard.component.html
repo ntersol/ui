@@ -2,33 +2,104 @@
   id="nts-wizard"
   class="nts-wizard-section-{{ wiz?.sectionActive?.urlSlug }} nts-wizard-page-{{ wiz?.pageActive?.id }}"
   *ngIf="{
-    state: state$ | async,
     pageActive: pageActive$ | async,
     settings: settings$ | async,
-    sectionActive: svc.sectionActive$ | async
+    sectionActive: svc.sectionActive$ | async,
+    nextWaiting: nextWaiting$ | async,
+    cd: svc.cd$ | async
   } as wiz"
+  [ngClass]="{ 'nts-wizard-simple-page': wiz?.pageActive?.simpleRoute }"
 >
-  <ng-container *ngIf="wiz?.state?.ready; else loading">
-    <app-section [section]="wiz.sectionActive">
-      <app-page [page]="wiz.pageActive" [templates]="templates" [dataFields]="dataFields"></app-page>
-    </app-section>
+  <ng-container *ngIf="ready$ | async; else loading">
+    <nts-section [section]="wiz.sectionActive" [page]="wiz.pageActive" [cd]="wiz.cd">
+      <nts-page
+        [page]="wiz.pageActive"
+        [templates]="templates"
+        [dataFields]="dataFields"
+        [form]="form"
+        [cd]="wiz.cd"
+        (buttonEvent)="buttonEvent($event)"
+      ></nts-page>
+    </nts-section>
     <div
       class="nts-wizard-footer d-flex justify-content-between"
-      [ngClass]="{ 'nts-wizard-footer-sticky': wiz?.settings?.stickyFooter }"
+      [ngClass]="{
+        'nts-wizard-footer-sticky': wiz?.settings?.stickyFooter,
+        'nts-footer-has-next': !wiz?.pageActive?.options?.hideNextButton && !wiz?.pageActive?.simpleRoute,
+        'nts-footer-has-prev': !wiz?.pageActive?.options?.hideBackButton
+      }"
     >
-      <div class="nts-wizard-btn-prev">
+      <div class="nts-wizard-btn-prev" *ngIf="!wiz?.pageActive?.options?.hideBackButton">
         <button
-          class="btn btn-outline-primary btn-main btn-main-prev"
-          (click)="svc.routePrevious()"
-          *ngIf="previousButtonVisible$ | async"
+          class="btn btn-main-prev"
           aria-label="Back"
+          *ngIf="previousButtonVisible$ | async"
+          [ngClass]="wiz.settings?.buttonsNav?.prev?.classes || 'btn-outline-primary btn-main'"
+          (click)="svc.routePrevious()"
         >
-          <i class="fa fa-arrow-left me-2" aria-hidden="true"></i> Back
+          <ng-container
+            *ngIf="wiz.pageActive?.buttonsNav?.prev?.icon || wiz.settings?.buttonsNav?.prev?.icon; else backIcon"
+          >
+            <i
+              class="mr-2"
+              aria-hidden="true"
+              [ngClass]="wiz.pageActive?.buttonsNav?.prev?.icon || wiz.settings?.buttonsNav?.prev?.icon || ''"
+            ></i>
+          </ng-container>
+          <ng-template #backIcon>
+            <i
+              class="fa fa-arrow-left mr-2"
+              *ngIf="wiz.settings?.buttonsNav?.prev?.icon !== null"
+              aria-hidden="true"
+            ></i>
+          </ng-template>
+
+          <ng-container
+            *ngIf="wiz.pageActive?.buttonsNav?.prev?.label || wiz.settings?.buttonsNav?.prev?.label; else backLabel"
+          >
+            <span [innerHtml]="wiz.pageActive?.buttonsNav?.prev?.label || wiz.settings?.buttonsNav?.prev?.label"></span>
+          </ng-container>
+          <ng-template #backLabel> Back </ng-template>
         </button>
       </div>
-      <div class="nts-wizard-btn-next">
-        <button class="btn btn-primary btn-main btn-main-next" (click)="svc.routeNext()" aria-label="Next">
-          Next <i class="fa fa-arrow-right ms-2" aria-hidden="true"></i>
+
+      <div
+        class="nts-wizard-btn-next"
+        *ngIf="!wiz?.pageActive?.options?.hideNextButton && !wiz?.pageActive?.simpleRoute"
+      >
+        <button
+          class="btn btn-main-next"
+          aria-label="Back"
+          [ngClass]="
+            (wiz.settings?.buttonsNav?.next?.classes || 'btn-outline-primary btn-main') +
+            ' ' +
+            (wiz.nextWaiting ? 'btn-waiting' : '')
+          "
+          (click)="svc.routeNext()"
+          [disabled]="wiz.nextWaiting"
+        >
+          <ng-container
+            *ngIf="wiz.pageActive?.buttonsNav?.next?.label || wiz.settings?.buttonsNav?.next?.label; else nextLabel"
+          >
+            <span [innerHtml]="wiz.pageActive?.buttonsNav?.next?.label || wiz.settings?.buttonsNav?.next?.label"></span>
+          </ng-container>
+          <ng-template #nextLabel> Next </ng-template>
+          <ng-container
+            *ngIf="wiz.pageActive?.buttonsNav?.next?.icon || wiz.settings?.buttonsNav?.next?.icon; else nextIcon"
+          >
+            <i
+              class="mr-2"
+              [ngClass]="wiz.pageActive?.buttonsNav?.next?.icon || wiz.settings?.buttonsNav?.next?.icon || ''"
+              aria-hidden="true"
+            ></i>
+          </ng-container>
+          <ng-template #nextIcon>
+            <i
+              class="fa fa-arrow-right ml-2"
+              *ngIf="wiz.settings?.buttonsNav?.next?.icon !== null"
+              aria-hidden="true"
+            ></i>
+          </ng-template>
         </button>
       </div>
     </div>

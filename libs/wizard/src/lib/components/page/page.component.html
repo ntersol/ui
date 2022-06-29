@@ -1,46 +1,81 @@
 <div class="nts-wizard-page" *ngIf="page; else noPage">
   <h1 *ngIf="page?.title" [innerHtml]="page?.title"></h1>
-  <div class="alert alert-danger" *ngIf="!page?.valid && page?.pageTouched">Please fix the issues below</div>
   <ng-container *ngIf="page?.content?.length; else noContent">
-    <div
-      class="nts-wizard-content-container"
-      *ngFor="let content of page.content; let i = index"
-      [ngStyle]="{ 'animation-delay': i / 10 + 's' }"
-    >
-      <!-- If is row -->
-      <ng-container *ngIf="content.type === 'row'; else noRow">
-        <div class="p-grid">
-          <ng-container *ngFor="let column of content.columns">
-            <div class="p-col-12 p-md-{{ column.columnSize }}">
-              <ng-container *ngFor="let contentSub of column.content">
-                <app-content
-                  *ngIf="contentSub.visible"
-                  [attr.content]="contentSub"
-                  [templates]="templates"
-                  [dataField]="dataFields && contentSub.dataField ? dataFields[contentSub.dataField] : null"
-                >
-                </app-content>
+    <div class="nts-wizard-content">
+      <div
+        class="alert alert-danger"
+        *ngIf="page.errorTop$ | async as errorTop"
+        [innerHtml]="errorTop || 'Please fix the issues below'"
+      ></div>
+      <div
+        class="nts-wizard-content-container nts-wizard-content-container-{{ i }}"
+        *ngFor="let content of page.content; let i = index"
+        [ngStyle]="{ 'animation-delay': i / 10 + 's' }"
+      >
+        <ng-container *ngIf="isType.loopControl(content)">
+          <div class="nts-wizard-loop nts-wizard-loop-{{ content.loopIndex }}">
+            <div class="nts-wizard-loop-content-{{ i }}" *ngFor="let c2 of content.loopContent; let i = index">
+              <ng-container *ngIf="!c2.deleted">
+                <!-- Is Row Type-->
+                <ng-container *ngIf="c2.content.type === 'row'">
+                  <ng-container [ngTemplateOutlet]="row" [ngTemplateOutletContext]="{ content: c2.content }">
+                  </ng-container>
+                </ng-container>
+                <!-- Is Not Row Type-->
+                <ng-container *ngIf="c2.content.type !== 'row'">
+                  <ng-container [ngTemplateOutlet]="notRow" [ngTemplateOutletContext]="{ content: c2.content }">
+                  </ng-container>
+                </ng-container>
               </ng-container>
             </div>
-          </ng-container>
-        </div>
-      </ng-container>
-      <!-- Not a row, normal content -->
-      <ng-template #noRow>
-        <app-content
-          *ngIf="content.visible"
-          [content]="content"
-          [templates]="templates"
-          [dataField]="dataFields && content.dataField ? dataFields[content.dataField] : null"
-        ></app-content>
-      </ng-template>
+          </div>
+        </ng-container>
+        <!-- Is Row Type-->
+        <ng-container *ngIf="content.type === 'row'">
+          <ng-container [ngTemplateOutlet]="row" [ngTemplateOutletContext]="{ content: content }"> </ng-container>
+        </ng-container>
+        <!-- Is Not Row Type-->
+        <ng-container *ngIf="content.type !== 'row'">
+          <ng-container [ngTemplateOutlet]="notRow" [ngTemplateOutletContext]="{ content: content }"> </ng-container>
+        </ng-container>
+      </div>
     </div>
   </ng-container>
-  <!--
-    No content message?
-  -->
-  <ng-template #noContent> </ng-template>
+  <div
+    class="alert alert-danger"
+    *ngIf="page.errorBottom$ | async as errorBottom"
+    [innerHtml]="errorBottom || 'Please fix the issues above'"
+  ></div>
 </div>
+<!-- No content message -->
+<ng-template #noContent> </ng-template>
+<!-- No Page-->
 <ng-template #noPage>
   <div class="alert alert-info">Page not found</div>
+</ng-template>
+
+<!-- Row -->
+<ng-template #row let-content="content">
+  <div class="row" [ngClass]="content.classes || ''" *ngIf="content.visible">
+    <ng-container *ngFor="let column of content.columns">
+      <div class="col col-12 col-md-{{ column.columnSize }}" [ngClass]="column.classes || ''">
+        <ng-container *ngFor="let contentSub of column.content">
+          <ng-container [ngTemplateOutlet]="notRow" [ngTemplateOutletContext]="{ content: contentSub }"> </ng-container>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<!-- Not a row, normal content -->
+<ng-template #notRow let-content="content">
+  <nts-content
+    *ngIf="content.visible"
+    [content]="content"
+    [templates]="templates"
+    [dataField]="isType.formField(content) && dataFields && content.dataField ? dataFields[content.dataField] : null"
+    [form]="form"
+    [cd]="cd"
+    (buttonEvent)="buttonEvent.emit($event)"
+  ></nts-content>
 </ng-template>

@@ -6,10 +6,12 @@
 
 ### Constructors
 
-- [constructor](NtsFormsModule.md#constructor)
+- [constructor](ntsformsmodule.md#constructor)
 
 ## Constructors
 
 ### constructor
 
-• **new NtsFormsModule**()
+\+ **new NtsFormsModule**(): [*NtsFormsModule*](ntsformsmodule.md)
+
+**Returns:** [*NtsFormsModule*](ntsformsmodule.md)

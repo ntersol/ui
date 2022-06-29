@@ -1,4 +1,6 @@
-import { Wizard } from '../../wizard.models';
+import { FormGroup } from '@angular/forms';
+import { NtsWizard } from '../../wizard.models';
+import { rulesEngine } from '../rules-engine/rules-engine.util';
 import { isType } from '../typeguards.util';
 
 /**
@@ -8,11 +10,11 @@ import { isType } from '../typeguards.util';
  * @param sections
  */
 export const routeGetNext = (
-  state: Wizard.State,
-  routes: Record<string, Record<string, Wizard.RouteControl>>,
-  sections: Record<string, Wizard.SectionControl>,
-  rulesEngine: (ruleGroups: Wizard.RuleGroup[]) => false | Wizard.RuleGroup,
-): Wizard.RouteAction | null => {
+  state: NtsWizard.State,
+  routes: Record<string, Record<string, NtsWizard.RouteControl>>,
+  sections: Record<string, NtsWizard.SectionControl>,
+  form: FormGroup,
+): NtsWizard.RouteAction | null => {
   // Get current section
   const sectionCurrent = sections[state.sectionUrl];
   // Get current route
@@ -29,7 +31,7 @@ export const routeGetNext = (
      * Section Complete
      */
   } else if (isType.routeComplete(routeCurrent)) {
-    let sectionNext: Wizard.SectionControl | null = null;
+    let sectionNext: NtsWizard.SectionControl | null = null;
     for (let index = 0; index < Object.keys(sections).length; index++) {
       const key = Object.keys(sections)[index];
       if (sectionCurrent.position + 1 === sections[key].position) {
@@ -51,10 +53,10 @@ export const routeGetNext = (
      * Next route is a rulegroup
      */
   } else if (isType.routeNext(routeCurrent) && isType.ruleGroup(routeCurrent.routeNext)) {
-    const routeNext = rulesEngine(routeCurrent.routeNext);
+    const routeNext = rulesEngine(form, routeCurrent.routeNext);
     // Check if the matched rulegroup is a section complete
     if (routeNext && routeNext.sectionComplete) {
-      let sectionNext: Wizard.SectionControl | null = null;
+      let sectionNext: NtsWizard.SectionControl | null = null;
       for (let index = 0; index < Object.keys(sections).length; index++) {
         const key = Object.keys(sections)[index];
         if (sectionCurrent.position + 1 === sections[key].position) {
@@ -92,11 +94,7 @@ export const routeGetNext = (
         routeParams: { sectionUrl: routeNext.sectionId, routeUrl: routeNext.urlSlug },
       };
     } else {
-      console.error(
-        '<Wizard> That section and route combination does not exist:',
-        state.sectionUrl,
-        routeCurrent.routeNext,
-      );
+      console.error('<Wizard> That section and route combination does not exist:', state.sectionUrl, routeCurrent.routeNext);
     }
   }
 

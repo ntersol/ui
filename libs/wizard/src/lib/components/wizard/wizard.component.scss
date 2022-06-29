@@ -31,6 +31,20 @@
   .btn {
     padding: 10px;
   }
+  .btn[disabled] {
+    color: dimgray;
+    border-color: #a7a7a7;
+    background: #ededed;
+  }
+  .btn.btn-waiting:before {
+    font-family: FontAwesome;
+    content: '';
+    -webkit-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear;
+    display: inline-block;
+    position: relative;
+    left: -3px;
+  }
   .btn-main {
     width: 120px;
     position: relative;

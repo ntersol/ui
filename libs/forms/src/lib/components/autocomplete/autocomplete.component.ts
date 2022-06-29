@@ -1,13 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -15,10 +6,12 @@ import { FormControl } from '@angular/forms';
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // tslint:disable-next-line:use-component-view-encapsulation
+  encapsulation: ViewEncapsulation.None,
 })
 export class NtsAutocompleteComponent implements OnInit, OnChanges {
   @Input() terms: (string | Record<string, any>)[] | null = [];
-  @Input() label?: string;
+  @Input() label = '';
   @Input() field?: string;
   @Input() placeholder = 'Type to search';
   @Input() control?: FormControl;
@@ -39,7 +32,7 @@ export class NtsAutocompleteComponent implements OnInit, OnChanges {
   ngOnChanges(model: SimpleChanges) {
     // Load default value if one is found in the form control
     if (this.control && this.terms) {
-      const termDefault = this.terms.filter((term) => {
+      const termDefault = this.terms.filter(term => {
         if (!this.control) {
           return false;
         }
@@ -95,8 +88,8 @@ export class NtsAutocompleteComponent implements OnInit, OnChanges {
   }
 
   private filterTermsAll(terms: string[] | any[], query: string | null) {
-    return terms.filter((term) => {
-      const label: string = this.label && term && term[this.label as any] ? term[this.label as any] : term || '';
+    return terms.filter(term => {
+      const label: string = this.label && term && term[this.label] ? term[this.label] : term || '';
       return String(label || '')
         .toLowerCase()
         .replace(/[^a-z0-9]/gi, '')
