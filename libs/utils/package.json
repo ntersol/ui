@@ -1,6 +1,5 @@
 {
   "name": "@ntersol/utils",
-  "version": "0.0.10",
-  "peerDependencies": {},
-  "dependencies": {}
+  "version": "0.0.11",
+  "license": "MIT"
 }

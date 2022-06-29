@@ -50,12 +50,7 @@
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run azure-maps:patch",
-              "ng run azure-maps:readme",
-              "ng run azure-maps:build:production",
-              "ng run azure-maps:pack"
-            ],
+            "commands": ["ng run azure-maps:patch", "ng run azure-maps:build:production", "ng run azure-maps:pack"],
             "parallel": false
           }
         },
@@ -137,12 +132,7 @@
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run chart:patch",
-              "ng run chart:readme",
-              "ng run chart:build:production",
-              "ng run chart:pack"
-            ],
+            "commands": ["ng run chart:patch", "ng run chart:build:production", "ng run chart:pack"],
             "parallel": false
           }
         },
@@ -524,7 +514,7 @@
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["ng run grid:patch", "ng run grid:readme", "ng run grid:build:production", "ng run grid:pack"],
+            "commands": ["ng run grid:patch", "ng run grid:build:production", "ng run grid:pack"],
             "parallel": false
           }
         },
@@ -1419,7 +1409,7 @@
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["ng run tree:patch", "ng run tree:readme", "ng run tree:build:production", "ng run tree:pack"],
+            "commands": ["ng run tree:patch", "ng run tree:build:production", "ng run tree:pack"],
             "parallel": false
           }
         },
@@ -1578,12 +1568,7 @@
         "publish": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run visible:patch",
-              "ng run visible:readme",
-              "ng run visible:build:production",
-              "ng run visible:pack"
-            ],
+            "commands": ["ng run visible:patch", "ng run visible:build:production", "ng run visible:pack"],
             "parallel": false
           }
         },

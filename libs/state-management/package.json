@@ -1,6 +1,5 @@
 {
   "name": "@ntersol/state-management",
-  "version": "3.0.6",
-  "peerDependencies": {},
-  "dependencies": {}
+  "version": "3.0.7",
+  "license": "MIT"
 }

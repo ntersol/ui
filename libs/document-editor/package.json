@@ -1,8 +1,5 @@
 {
   "name": "@ntersol/document-editor",
-  "version": "0.0.51",
-  "peerDependencies": {},
-  "dependencies": {
-    "tslib": "^2.0.0"
-  }
+  "version": "0.0.52",
+  "license": "MIT"
 }

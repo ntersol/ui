@@ -1,6 +1,5 @@
 {
   "name": "@ntersol/tags",
-  "version": "0.0.5",
-  "peerDependencies": {},
-  "dependencies": {}
+  "version": "0.0.6",
+  "license": "MIT"
 }

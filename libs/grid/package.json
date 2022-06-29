@@ -1,6 +1,5 @@
 {
   "name": "@ntersol/grid",
-  "version": "0.0.4",
-  "peerDependencies": {},
-  "dependencies": {}
+  "version": "0.0.6",
+  "license": "MIT"
 }
