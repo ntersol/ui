@@ -138,6 +138,7 @@
     "@angular/forms": "13.2.2",
     "@angular/router": "13.2.2",
     "@nrwl/angular": "13.8.3",
+    "@ntersol/forms": "0.0.10",
     "@scullyio/init": "2.1.21",
     "@scullyio/ng-lib": "2.1.0",
     "@scullyio/scully": "2.1.0",
