@@ -101,7 +101,7 @@ export const sectionStateChange = (sectionsSrc: NtsWizard.SectionState[], state:
     return sectionsSrc.map(s => {
       const section = { ...s };
       // If section has not been started yet, set start flag and date
-      if (!section.started) {
+      if (section.sectionId === action.payload && !section.started && !section.startedDate) {
         section.started = true;
         section.startedDate = new Date();
       }
@@ -117,15 +117,10 @@ export const sectionStateChange = (sectionsSrc: NtsWizard.SectionState[], state:
     });
   }
 
-  // Section Change
+  // Section Complete
   if (sectionStateActions.sectionComplete.match(action)) {
     return sectionsSrc.map(s => {
       const section = { ...s };
-      // If section has not been started yet, set start flag and date
-      if (!section.started) {
-        section.started = true;
-        section.startedDate = new Date();
-      }
       // If this is the active section and it has not been completed yet, set flag and completed date
       if (section.active && !section.completed) {
         section.completed = true;
@@ -169,92 +164,3 @@ export interface SectionChangeType {
   type: 'initial' | 'reload' | 'routeChange' | 'routePrev' | 'sectionChange' | 'sectionComplete' | 'wizardComplete';
   payload?: any;
 }
-
-/**
- * Reducer to manage section state changes
- * @param sectionsSrc
- * @param action
- * @param sectionNext
- * @param routeHistory
- */
-export const sectionStateChange2 = (
-  sectionsSrc: NtsWizard.SectionState[],
-  action: SectionChangeType,
-  sectionNext?: string,
-  routeHistorySrc?: NtsWizard.RouteParams[],
-): NtsWizard.SectionState[] => {
-  // console.warn(sectionsSrc, action, sectionNext, routeHistorySrc);
-  const sections = [...sectionsSrc];
-  const routeHistory = routeHistorySrc ? [...routeHistorySrc] : [];
-  switch (action.type) {
-    case 'reload':
-      return sections;
-    case 'initial':
-      return sections.map((s, i) => {
-        const section = { ...s };
-        // Set all sections to inactive
-        section.active = false;
-        // If no next section is supplied OR next section = current section
-        if ((!sectionNext && i === 0) || sectionNext === section.sectionId) {
-          section.active = true; // Set active
-          // If active section does not yet have started flag and date, set it
-          if (!section.started) {
-            section.started = true;
-            section.startedDate = new Date();
-          }
-          section.routeHistory = [{ routeUrl: section.routeStart, sectionUrl: section.sectionId }];
-        }
-        return section;
-      });
-    case 'routeChange':
-      // Attach route history to active route
-      return sections.map(s => (s.active ? { ...s, routeHistory: routeHistory } : s));
-    case 'routePrev':
-      console.warn(sectionsSrc, action, sectionNext, routeHistorySrc);
-      // Remove route from
-      return sections.map(s => {
-        const rtHistory = s.routeHistory;
-        if (s.active && rtHistory.length) {
-          rtHistory.length = s.routeHistory.length - 1;
-        }
-        return s.active ? { ...s, routeHistory: rtHistory } : s;
-      });
-    case 'sectionChange':
-      return sections.map(s => {
-        const section = { ...s };
-        // If section has not been started yet, set start flag and date
-        if (!section.started) {
-          section.started = true;
-          section.startedDate = new Date();
-        }
-        // Set active for current section, inactive for all others
-        // Changing a section starts the user at the beginning and resets the route history
-        return section.sectionId === sectionNext
-          ? { ...section, active: true, routeHistory: [{ routeUrl: section.routeStart, sectionUrl: section.sectionId }] }
-          : { ...section, active: false };
-      });
-    case 'sectionComplete':
-      return sections.map(s => {
-        const section = { ...s };
-        // If section has not been started yet, set start flag and date
-        if (!section.started) {
-          section.started = true;
-          section.startedDate = new Date();
-        }
-        // If this is the active section and it has not been completed yet, set flag and completed date
-        if (section.active && !section.completed) {
-          section.completed = true;
-          section.completedDate = new Date();
-        }
-        // Set all active flags to false
-        section.active = false;
-        // Set next section to active
-        if (section.sectionId === sectionNext) {
-          section.active = true;
-          section.routeHistory = routeHistory;
-        }
-        return section;
-      });
-  }
-  return sections;
-};

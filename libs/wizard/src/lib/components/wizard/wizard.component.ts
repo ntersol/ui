@@ -69,7 +69,7 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
   set columnTemplates(val: QueryList<WizardFeatureDirective>) {
     const arr = val.toArray();
     if (arr.length) {
-      arr.forEach((template) => (this.templates[template.id] = template));
+      arr.forEach(template => (this.templates[template.id] = template));
     }
   }
 
@@ -78,14 +78,14 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
   @Output() sectionStateChanged = new EventEmitter<NtsWizard.SectionState[]>();
   @Output() stateChanged = new EventEmitter<NtsWizard.State>();
   /** When the wizard has completed the last page of the last section and is complete */
-  @Output() completed = new EventEmitter<void>();
+  @Output() complete = new EventEmitter<void>();
   @Output() actionPerformed = new EventEmitter<NtsWizard.Action>();
   /** Store/state management */
   public svc = wizardStore(this.router, this.location);
 
   /** When wizard is loaded and ready */
   public ready$ = this.svc.state$.pipe(
-    map((s) => s.ready),
+    map(s => s.ready),
     distinctUntilChanged(),
     debounceTime(100), // Add slight debounce to initial load to ensure everything is loaded
   );
@@ -94,13 +94,8 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
 
   /** Pass section state changes to parent component */
   public sectionsState$ = this.svc.sectionsState$.pipe(
-    untilDestroyed(this),
-    filter((s) => !!s),
-    tap((s) => {
-      if (s) {
-        this.sectionStateChanged.emit(s);
-      }
-    }),
+    debounceTime(1),
+    filter(s => !!s),
   );
 
   /** Should previous button be visible */
@@ -114,7 +109,7 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
   public pageActive$ = this.svc.pageActive$;
 
   public nextWaiting$ = this.svc.state$.pipe(
-    map((s) => s.status.nextWaiting),
+    map(s => s.status.nextWaiting),
     distinctUntilChanged(),
   );
 
@@ -132,10 +127,10 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     // Emit state changes to parent
-    this.svc.state$.pipe(untilDestroyed(this)).subscribe((state) => {
+    this.svc.state$.pipe(debounceTime(100), untilDestroyed(this)).subscribe(state => {
       this.stateChanged.emit(state);
       if (state.complete) {
-        this.completed.emit();
+        this.complete.emit();
         this.svc.stateChange({ complete: false });
       }
     });
@@ -147,10 +142,10 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
         // Check if title tag is supplied, if not default to page title
         let title = p?.titleTag ?? p?.title;
         // Only update title tag if either title supplied
-        if (title) {
+        if (!!title) {
           // If append/prepend slugs are provided in settings, attach those
-          title = settings?.pageTitle?.prepend ? settings?.pageTitle?.prepend + title : title;
-          title = settings?.pageTitle?.append ? title + settings?.pageTitle?.append : title;
+          title = !!settings?.pageTitle?.prepend ? settings?.pageTitle?.prepend + title : title;
+          title = !!settings?.pageTitle?.append ? title + settings?.pageTitle?.append : title;
           this.title.setTitle(title);
         }
       });
@@ -160,18 +155,15 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
       this.route.params,
       // Check for restoredState prop, this is when the user uses the forward/back button in the browser
       this.router.events.pipe(
-        filter((event) => event instanceof NavigationStart),
-        map((e) => !!(e as NavigationStart)?.restoredState?.navigationId),
+        filter(event => event instanceof NavigationStart),
+        map(e => !!(e as NavigationStart)?.restoredState?.navigationId),
       ),
     ])
       .pipe(untilDestroyed(this), debounceTime(1))
       .subscribe(([params, isBrowserButton]) => {
         this.routeParams = { sectionUrl: params.sectionUrl, routeUrl: params.routeUrl };
         if (this.isLoaded) {
-          this.svc.routeChange(
-            { sectionUrl: this.routeParams.sectionUrl, routeUrl: this.routeParams.routeUrl },
-            isBrowserButton,
-          );
+          this.svc.routeChange({ sectionUrl: this.routeParams.sectionUrl, routeUrl: this.routeParams.routeUrl }, isBrowserButton);
         }
       });
 
@@ -179,12 +171,12 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
     this.pageActive$
       .pipe(
         untilDestroyed(this),
-        filter((page) => !!page?.actions?.beforeLoad),
+        filter(page => !!page?.actions?.beforeLoad),
       )
-      .subscribe((page) => this.svc.actions(page?.actions?.beforeLoad));
+      .subscribe(page => this.svc.actions(page?.actions?.beforeLoad));
 
     // Pass actions to the parent component
-    this.svc.actions$.pipe(untilDestroyed(this)).subscribe((a) => this.actionPerformed.emit(a));
+    this.svc.actions$.pipe(untilDestroyed(this)).subscribe(a => this.actionPerformed.emit(a));
 
     // Emit route changes to parent component
     combineLatest([
@@ -193,7 +185,7 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
         startWith(null),
         pairwise(), // Get previous value, IE current and previous page
         map(
-          (x) =>
+          x =>
             ({
               previous: x && x[0] ? x[0] : null,
               current: x && x[1] ? x[1] : null,
@@ -203,10 +195,10 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
       this.svc.routeDir$.pipe(startWith('initial' as NtsWizard.RouteDirection)),
     ])
       .pipe(debounceTime(10), untilDestroyed(this))
-      .subscribe((r) => this.routeChanged.emit({ ...r[0], dir: r[1] }));
+      .subscribe(r => this.routeChanged.emit({ ...r[0], dir: r[1] }));
 
     // Watch section state changes
-    this.sectionsState$.pipe(untilDestroyed(this)).subscribe();
+    this.sectionsState$.pipe(untilDestroyed(this)).subscribe(s => (s ? this.sectionStateChanged.emit(s) : null));
 
     this.isReady = true;
     this.readyCheck();
@@ -214,7 +206,7 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
     // Handle change detection logic for simple routes
     let sub: Subscription | null = null;
     // When the active page changes
-    this.pageActive$.pipe(untilDestroyed(this)).subscribe((p) => {
+    this.pageActive$.pipe(untilDestroyed(this)).subscribe(p => {
       // If a sub is existing when page changes. This is to catch scenarios where routing occurs without this method
       if (sub) {
         sub.unsubscribe();
@@ -222,7 +214,7 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
       // If this page has the simpleRoute flag checked and has content
       if (p?.simpleRoute && p?.content?.length) {
         // Get all the form fields associated with this page
-        const formFields = p?.content.filter(isType.formFieldControl).map((c) => c.formControl.valueChanges);
+        const formFields = p?.content.filter(isType.formFieldControl).map(c => c.formControl.valueChanges);
         // When any of the formfield's data changes
         sub = combineLatest([...formFields])
           .pipe(take(1))
@@ -259,7 +251,6 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
         console.error('Received array for sections, pages and routes but one was empty');
         return;
       }
-
       // Catch simple mistakes in config
       audit(this.sections, this.pages, this.routes);
       // Send to svc
@@ -289,6 +280,5 @@ export class NtsWizardComponent implements OnInit, OnChanges, OnDestroy {
     this.svc.actions(button.actions);
   }
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnDestroy() {}
 }
