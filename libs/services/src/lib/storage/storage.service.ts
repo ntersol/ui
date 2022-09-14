@@ -192,7 +192,9 @@ class BaseStorageService<Keys> {
    * @returns
    */
   private getStorage(): Record<string, unknown> {
-    return Object.keys(this.storage).reduce((a, b) => ({ ...a, [b]: localStorage[b] }), {});
+    return this.isBrowser && this.storage
+      ? Object.keys(this.storage).reduce((a, b) => ({ ...a, [b]: this.storage.getItem(b) }), {})
+      : {};
   }
 
   /**
