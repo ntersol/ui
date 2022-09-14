@@ -38,7 +38,7 @@ export class DomService {
    * Get DOM document
    * @returns
    */
-  get document(): Document {
+  get document(): Document | null {
     return this.isBrowser ? document : this._doc;
   }
 
@@ -46,21 +46,21 @@ export class DomService {
    * Get DOM location
    * @returns
    */
-  get location(): Location {
+  get location(): Location | null {
     return this.isBrowser ? document.location : this._doc.location;
   }
 
   /**
    * Abstraction for localstorage
    */
-  get localStorage(): Storage {
+  get localStorage(): Storage | null {
     return this.isBrowser ? window.localStorage : this._storage;
   }
 
   /**
    * Abstraction for localstorage
    */
-  get sessionStorage(): Storage {
+  get sessionStorage(): Storage | null {
     return this.isBrowser ? window.sessionStorage : this._storage;
   }
 }
