@@ -4,12 +4,6 @@
 import { Inject } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, fromEvent, identity, map, Observable, of, take, tap } from 'rxjs';
 
-declare global {
-  interface Window {
-    process: any;
-  }
-}
-
 namespace Storage {
   export interface Options {
     /** If true, convert the response to JSON from a string */
