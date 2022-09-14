@@ -37,7 +37,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitReturns": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
@@ -54,7 +54,7 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
     "enableIvy": true,
-    "compilationMode": "partial"
+    "compilationMode": "full"
   },
   "exclude": ["node_modules", "tmp"]
 }

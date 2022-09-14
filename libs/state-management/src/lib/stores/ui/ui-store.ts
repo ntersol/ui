@@ -8,10 +8,8 @@ import { isBrowser } from '../../utils/guards.util';
  * Create an instance of a UI store
  */
 export class NtsUIStoreCreator<t> extends NtsBaseStore {
-  /** Internal state of the store */
-  public state: t = { ...this.initialState };
   /** Observable of store state */
-  public state$ = new BehaviorSubject<t>({ ...this.state });
+  public state$ = new BehaviorSubject<t>({ ...this.initialState });
 
   constructor(private initialState: t, private options?: NtsState.UIStoreOptions) {
     super();
@@ -50,14 +48,18 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
   public update(value: (s: t) => Partial<t>): Observable<t>;
   public update(value: unknown): Observable<t> {
     if (typeof value === 'function') {
-      const n = value(this.state);
-      this.stateChange(n);
+      this.state$.pipe(take(1)).subscribe((state) => {
+        const n = value(state);
+        this.stateChange(n);
+      });
     } else {
       this.stateChange(value as t);
     }
     // If persistId is specified, save all state changes to localStorage
     if (isBrowser && this.options?.persistId) {
-      localStorage.setItem(this.options?.persistId, JSON.stringify(this.state));
+      this.state$
+        .pipe(take(1))
+        .subscribe((state) => localStorage.setItem(this.options?.persistId || '', JSON.stringify(state)));
     }
 
     return this.state$.pipe(take(1));
@@ -68,8 +70,7 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
    * @param update
    */
   private stateChange(update: Partial<t>) {
-    this.state = { ...this.state, ...update };
-    this.state$.next(this.state);
+    this.state$.pipe(take(1)).subscribe((state) => this.state$.next({ ...state, ...update }));
   }
 }
 

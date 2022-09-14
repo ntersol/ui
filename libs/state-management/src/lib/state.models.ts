@@ -47,8 +47,8 @@ export namespace NtsState {
 
   /** Config for entity stores */
   export interface ConfigEntity<t = any> extends Config {
-    /** The uniqueID or guid or the entity format. Default is 'guid'. Required for entities to work */
-    uniqueId: string | number;
+    /** The uniqueID or guid or the entity format. Default is 'guid'. Setting this value will enable an entity store */
+    uniqueId: keyof t;
     map?: {
       get?: (x: any) => t[];
       post?: (x: any) => any;
