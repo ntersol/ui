@@ -54,7 +54,7 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
     "enableIvy": true,
-    "compilationMode": "partial"
+    "compilationMode": "full"
   },
   "exclude": ["node_modules", "tmp"]
 }
