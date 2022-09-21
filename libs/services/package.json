@@ -1,8 +1,11 @@
 {
   "name": "@ntersol/services",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": ">11.0.1"
+  },
   "devDependencies": {
-    "@types/node": "17.0.21"
+    "@types/node": "^17.0.21"
   }
 }
