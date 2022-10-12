@@ -1,3 +1,7 @@
+import { NtsApiStore } from './stores/api/api-store';
+import { NtsEntityStore } from './stores/api/entity-store';
+import { NtsUIStoreCreator } from './stores/ui/ui-store';
+
 export namespace NtsState {
   export interface EntityApiState<t = any, e = any> extends ApiState<t[], e> {
     /** If api response type is an array of objects, create record here. Will be null otherwise */
@@ -144,5 +148,13 @@ export namespace NtsState {
      */
     match: (action: NtsState.Action) => action is NtsState.Action<t, unknown>;
     (payload: t, meta?: unknown): Action<t>;
+  }
+
+  export type StoreType = 'api' | 'ui' | 'all';
+
+  export interface StoreRef<t> {
+    type: StoreType;
+    storeId: string;
+    ref: NtsEntityStore<t> | NtsApiStore<t> | NtsUIStoreCreator<t>;
   }
 }

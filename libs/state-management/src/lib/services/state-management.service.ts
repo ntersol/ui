@@ -11,10 +11,11 @@ import { ntsStore } from '../..';
   providedIn: 'root',
 })
 export class NtsStateManagementService {
-  /**
-   * Listen to global events
-   */
+  /** Listen to global events */
   public events$ = ntsStore.events$;
+
+  /** Store references to all created stores  */
+  private storeRefs: NtsState.StoreRef<any>[] = [];
 
   /**
    * Create a curried instance of the api store creator
@@ -43,14 +44,28 @@ export class NtsStateManagementService {
    * @param config Configuration for this store
    * @returns
    */
-  public createEntityStore = <t>(config: NtsState.ConfigEntity<t>) => new NtsEntityStore<t>(this.http, config);
+  public createEntityStore = <t>(config: NtsState.ConfigEntity<t>) => {
+    const store = new NtsEntityStore<t>(this.http, config);
+    this.storeRefs = [
+      ...this.storeRefs,
+      { type: 'api', storeId: config?.storeId || String(Math.floor(Math.random() * 10000000)), ref: store },
+    ];
+    return store;
+  };
 
   /**
    * Create a non-entity based api store
    * @param config Configuration for this store
    * @returns
    */
-  public createApiStore = <t>(config: NtsState.ConfigApi<t>) => new NtsApiStore<t>(this.http, config);
+  public createApiStore = <t>(config: NtsState.ConfigApi<t>) => {
+    const store = new NtsApiStore<t>(this.http, config);
+    this.storeRefs = [
+      ...this.storeRefs,
+      { type: 'api', storeId: config?.storeId || String(Math.floor(Math.random() * 10000000)), ref: store },
+    ];
+    return store;
+  };
 
   /**
    *
@@ -58,10 +73,27 @@ export class NtsStateManagementService {
    * @param options
    * @returns
    */
-  public createUIStore = <t>(initialState: t, options?: NtsState.UIStoreOptions) =>
-    new NtsUIStoreCreator<t>(initialState, options);
+  public createUIStore = <t>(initialState: t, options?: NtsState.UIStoreOptions) => {
+    const store = new NtsUIStoreCreator<t>(initialState, options);
+    this.storeRefs = [
+      ...this.storeRefs,
+      { type: 'ui', storeId: options?.persistId || String(Math.floor(Math.random() * 10000000)), ref: store },
+    ];
+    return store;
+  };
 
   constructor(private http: HttpClient) {}
+
+  /**
+   * Reset stores created by this service, can be API, UI or all
+   * This is useful for clearing data on auth failures
+   */
+  public resetStores(type: NtsState.StoreType = 'all') {
+    // If all stores, return all. If only a specific type, filter out wrong types
+    const stores = type === 'all' ? this.storeRefs : this.storeRefs.filter((s) => s.type === type);
+    // Reset stores
+    stores.forEach((s) => s.ref.reset());
+  }
 
   /**
    * Dispatch an action to all stores
