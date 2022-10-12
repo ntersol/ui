@@ -75,6 +75,8 @@ export namespace NtsState {
   export interface Config extends Options {
     /** If the store has a subscriber but no data, automatically perform a get request. Default true */
     autoLoad?: boolean;
+    /** TODO: If autoload is true and the last GET request returned an error, automatically make another request for subsequent subscriptions. Default true  */
+    // reloadOnError?: boolean;
     /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests.
      * If true the url to the web api must added manually via the apiUrl property */
     disableAppendId?: {

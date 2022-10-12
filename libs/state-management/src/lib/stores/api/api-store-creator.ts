@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, delay, filter, share, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, filter, share, switchMap, take, tap } from 'rxjs/operators';
+import { timer } from 'rxjs';
 import { NtsState } from '../../state.models';
 import { isActionApi } from '../../utils/guards.util';
 import { NtsBaseStore } from '../base/base-store';
@@ -47,10 +48,9 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
     tap((s) => {
       if (this.config.autoLoad !== false && s.data === null && !this.autoloaded) {
         this.autoloaded = true;
-        new BehaviorSubject(null)
+        timer(1, 1)
           .pipe(
             take(1),
-            delay(1),
             switchMap(() => this.get()),
           )
           .subscribe();
