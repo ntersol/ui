@@ -138,7 +138,7 @@ export const mergeDedupeArrays = <t>(
  */
 export const deleteEntities = <t>(
   storeDataSrc: t | t[],
-  payloadSrc: t | t[],
+  payloadSrc: Partial<t> | Partial<t>[],
   uniqueId: keyof t,
 ): Partial<NtsState.ApiState> => {
   // Ensure array types
