@@ -66,6 +66,13 @@ export class NtsUIStoreCreator<t> extends NtsBaseStore {
   }
 
   /**
+   * Reset store to it's initial state
+   */
+  public reset() {
+    this.stateChange({ ...this.initialState });
+  }
+
+  /**
    * Update state of UI store
    * @param update
    */

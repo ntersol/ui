@@ -1,17 +1,27 @@
+import { NtsApiStore } from './stores/api/api-store';
+import { NtsEntityStore } from './stores/api/entity-store';
+import { NtsUIStoreCreator } from './stores/ui/ui-store';
+
 export namespace NtsState {
-  export interface EntityApiState<t = any, e = any> extends ApiState<t[], e> {
+  export interface EntityApiState<t = any, e = any> extends ApiStateSrc<e> {
     /** If api response type is an array of objects, create record here. Will be null otherwise */
     entities: Record<string | number, t>;
+    data: null | t[];
   }
 
   /** Contains both the api state and any data */
-  export interface ApiState<t = any, e = any> {
+  export interface ApiState<t = any, e = any> extends ApiStateSrc<e> {
+    data: null | t;
+  }
+
+  /** Contains both the api state and any data */
+  export interface ApiStateSrc<e = any> {
     [key: string]: any;
     loading: boolean;
     modifying: boolean;
     error: null | e;
     errorModify: null | e;
-    data: null | t;
+    data: any;
   }
 
   /** Different methods to pass the api url string to the store */
@@ -71,6 +81,8 @@ export namespace NtsState {
   export interface Config extends Options {
     /** If the store has a subscriber but no data, automatically perform a get request. Default true */
     autoLoad?: boolean;
+    /** TODO: If autoload is true and the last GET request returned an error, automatically make another request for subsequent subscriptions. Default true  */
+    // reloadOnError?: boolean;
     /** Disable automatically appending the unique ID For PUT, PATCH & DELETE requests.
      * If true the url to the web api must added manually via the apiUrl property */
     disableAppendId?: {
@@ -144,5 +156,13 @@ export namespace NtsState {
      */
     match: (action: NtsState.Action) => action is NtsState.Action<t, unknown>;
     (payload: t, meta?: unknown): Action<t>;
+  }
+
+  export type StoreType = 'api' | 'ui' | 'all';
+
+  export interface StoreRef<t> {
+    type: StoreType;
+    storeId: string;
+    ref: NtsEntityStore<t> | NtsApiStore<t> | NtsUIStoreCreator<t>;
   }
 }

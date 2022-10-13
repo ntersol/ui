@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, delay, filter, share, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, filter, share, switchMap, take, tap } from 'rxjs/operators';
+import { timer } from 'rxjs';
 import { NtsState } from '../../state.models';
 import { isActionApi } from '../../utils/guards.util';
 import { NtsBaseStore } from '../base/base-store';
@@ -47,10 +48,9 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
     tap((s) => {
       if (this.config.autoLoad !== false && s.data === null && !this.autoloaded) {
         this.autoloaded = true;
-        new BehaviorSubject(null)
+        timer(1, 1)
           .pipe(
             take(1),
-            delay(1),
             switchMap(() => this.get()),
           )
           .subscribe();
@@ -61,13 +61,53 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
   /** Keep track of whether an autoload request has been performed */
   private autoloaded = false;
 
-  /** Events broadcast by this store */
+  /** Listen to events being broadcast, handle events sent to this store or all stores */
   public override events$ = NtsApiStoreCreator._events$.pipe(
-    filter((a) => isActionApi(a) && a.storeId === this.config.storeId),
+    filter(
+      (a) =>
+        isActionApi(a) &&
+        (a.storeId === this.config.storeId || a.storeId === StoreTypes.ALL || a.storeId === StoreTypes.API_ONLY),
+    ),
+    tap((a) => {
+      // Add typeguard for api actions
+      if (!isActionApi(a)) {
+        return;
+      }
+      switch (a.type) {
+        // Refresh data in store
+        case ApiActions.GET:
+          this.get(a.options).subscribe();
+          break;
+        // Perform POST request
+        case ApiActions.POST:
+          this.post(a.payload, a.options).subscribe();
+          break;
+        // Perform PUT request
+        case ApiActions.PUT:
+          this.put(a.payload, a.options).subscribe();
+          break;
+        // Perform PATCH request
+        case ApiActions.PATCH:
+          this.patch(a.payload, a.options).subscribe();
+          break;
+        // Perform DELETE request
+        case ApiActions.DELETE:
+          this.delete(a.payload, a.options).subscribe();
+          break;
+        // Refresh data in store
+        case ApiActions.REFRESH:
+          this.refresh(a.options).subscribe();
+          break;
+        // Reset store
+        case ApiActions.RESET:
+          this.reset();
+          break;
+      }
+    }),
   );
 
   /** Store a shared reference to the http get request so it can be canceled and shared */
-  private httpGet$: Observable<t>;
+  private httpGet$ = this.http.get<t>(apiUrlGet(this.config, 'get', null));
 
   constructor(
     private http: HttpClient,
@@ -75,58 +115,6 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
     private isEntityStore = true,
   ) {
     super();
-
-    // If a store ID was supplied, listen for global actions
-    // Only listen for actions that match this store ID OR all
-    if (this.config.storeId) {
-      this.events$
-        // Only allow through api actions AND if the store ID matches OR the store type is ALL or API_ONLY
-        .pipe(
-          filter(
-            (a) =>
-              isActionApi(a) &&
-              (a.storeId === this.config.storeId || a.storeId === StoreTypes.ALL || a.storeId === StoreTypes.API_ONLY),
-          ),
-        )
-        .subscribe((a) => {
-          // Add typeguard for api actions
-          if (!isActionApi(a)) {
-            return;
-          }
-          switch (a.type) {
-            // Refresh data in store
-            case ApiActions.GET:
-              this.get(a.options).subscribe();
-              break;
-            // Perform POST request
-            case ApiActions.POST:
-              this.post(a.payload, a.options).subscribe();
-              break;
-            // Perform PUT request
-            case ApiActions.PUT:
-              this.put(a.payload, a.options).subscribe();
-              break;
-            // Perform PATCH request
-            case ApiActions.PATCH:
-              this.patch(a.payload, a.options).subscribe();
-              break;
-            // Perform DELETE request
-            case ApiActions.DELETE:
-              this.delete(a.payload, a.options).subscribe();
-              break;
-            // Refresh data in store
-            case ApiActions.REFRESH:
-              this.refresh(a.options).subscribe();
-              break;
-            // Reset store
-            case ApiActions.RESET:
-              this.reset();
-              break;
-          }
-        });
-    }
-    // Create initial instance of http get, mostly just for type safety
-    this.httpGet$ = this.http.get<t>(apiUrlGet(this.config, 'get', null));
   }
 
   /**
@@ -158,7 +146,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
     // If data is null or refresh cache is requested, otherwise default to cache
     if ((this.state.data === null || options.refresh || !this.httpGet$) && !this.state.loading) {
       const url = apiUrlGet(options, 'get', null);
-      // Set loading to true, reset any errors
+      // Set loading to true, reset  errors
       this.stateChange({ loading: true, error: null });
       // Dispatch event to the global scope
       if (this.config.storeId) {
@@ -166,6 +154,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
       }
       // Is this a GET request or a POST that functions as a GET
       // Some data request require a post body
+      // TODO: Fix any
       const httpRequest = postPayload ? this.http.post<any>(url, postPayload) : this.http.get<t>(url);
       this.httpGet$ = httpRequest.pipe(
         // Handle api success
@@ -177,9 +166,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
           // Check if this api response has entities, create entity property
           const config = this.config; // Run through typeguard so it doesn't need to be typechecked again in the reduce
           if (this.isEntityStore && is.entityConfig(config) && config.uniqueId && Array.isArray(result)) {
-            entities = <Record<string, t>>(
-              result.reduce((a: any, b: any) => ({ ...a, [b[String(config.uniqueId)]]: b }), {})
-            );
+            entities = <Record<string, t>>result.reduce((a, b) => ({ ...a, [b[String(config.uniqueId)]]: b }), {});
             state.entities = entities;
           }
 
@@ -212,7 +199,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param optionsOverride
    * @returns
    */
-  public post(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
+  public post(data: Partial<t>, optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'post', null);
     return this.upsert(this.http.post(url, data), data, this.config.map?.post) as Observable<Partial<t>>;
@@ -224,7 +211,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param optionsOverride
    * @returns
    */
-  public put(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
+  public put(data: Partial<t>, optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'put', data);
     return this.upsert(this.http.put(url, data), data, this.config.map?.put) as Observable<Partial<t>>;
@@ -236,7 +223,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param optionsOverride
    * @returns
    */
-  public patch(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
+  public patch(data: Partial<t>, optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'patch', data);
     return this.upsert(this.http.patch(url, data), data, this.config.map?.patch) as Observable<Partial<t>>;
@@ -248,13 +235,13 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param optionsOverride
    * @returns
    */
-  public delete(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
+  public delete(data: Partial<t>, optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'delete', data);
     // Reset state
     this.stateChange({ modifying: true, errorModify: null });
     return this.http.delete<unknown>(url).pipe(
-      // Most deletes shouldn't return anything but sometimes it's necessary
+      // Most deletes shouldn't have a return but sometimes it's necessary
       tap((r) => {
         // Check if this is an entity store
         if (
@@ -264,7 +251,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
           Array.isArray(this.state.data)
         ) {
           // Delete entities from store
-          const updated = deleteEntities(this.state.data, data, this.config.uniqueId);
+          const updated = deleteEntities<t>(this.state.data, data, this.config.uniqueId as keyof t);
           this.stateChange({ modifying: false, ...updated });
         } else {
           // Delete on a non entity format
@@ -286,7 +273,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param data
    * @returns
    */
-  private upsert<t>(apiRequest: Observable<t>, data: t | t[], mapFn?: <t>(x: t | null) => any): Observable<Partial<t>> {
+  private upsert<t>(apiRequest: Observable<t>, data: t, mapFn?: <t>(x: t | null) => unknown): Observable<Partial<t>> {
     // Reset state
     this.stateChange({ modifying: true, errorModify: null });
     // Dispatch event to the global scope

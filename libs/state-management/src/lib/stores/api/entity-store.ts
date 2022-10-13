@@ -11,8 +11,14 @@ const configSrc: NtsState.ConfigEntity = {
 /**
  * Create an instance of an entity store
  */
-export class NtsEntityStore<t> extends NtsApiStoreCreator<t[]> {
+export class NtsEntityStore<t> extends NtsApiStoreCreator<t> {
   public override state$!: Observable<NtsState.EntityApiState<t>>;
+
+  /** Select an array of all the entities in the store. Does not include state. */
+  public selectAll$ = this.state$.pipe(
+    map((s) => s.data),
+    distinctUntilChanged(),
+  );
 
   /** Modify the store data with the supplied callback function while preserving state information.
    *
@@ -20,19 +26,13 @@ export class NtsEntityStore<t> extends NtsApiStoreCreator<t[]> {
   public stateSelect$ = (fn: NtsState.SelectEntities<t>) =>
     this.state$.pipe(
       map((state) => {
-        const data = !!state.data ? fn([...state.data]) : state.data;
-        const entities = !!data
-          ? <Record<string, t>>data.reduce((a: any, b: any) => ({ ...a, [b[String(this.config.uniqueId)]]: b }), {})
+        const data = state.data ? fn([...state.data]) : state.data;
+        const entities = data
+          ? <Record<string, t>>data.reduce((a, b) => ({ ...a, [b[String(this.config.uniqueId)]]: b }), {})
           : {};
         return Object.assign({}, state, { data: data, entities: entities }) as NtsState.EntityApiState<t>;
       }),
     );
-
-  /** Select an array of all the entities in the store. Does not include state. */
-  public selectAll$ = this.state$.pipe(
-    map((s) => s.data),
-    distinctUntilChanged(),
-  );
 
   /** Select a single entity from the store. Does not include state. */
   public selectOne$ = (uniqueId: string | number) =>
@@ -47,7 +47,7 @@ export class NtsEntityStore<t> extends NtsApiStoreCreator<t[]> {
    */
   public select$ = (fn: NtsState.SelectEntities<t>) =>
     this.state$.pipe(
-      map((s) => fn(!!s.data ? [...s.data] : s.data)),
+      map((s) => fn(s.data ? [...s.data] : s.data)),
       distinctUntilChanged(),
     );
 
