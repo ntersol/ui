@@ -1,6 +1,9 @@
 .nts-state {
   position: relative;
-  .nts-loader-spacer {
-    height: 2px;
+  .nts-state-spacer {
+    position: absolute;
+    top: 0;
+    z-index: 25;
+    width: 100%;
   }
 }

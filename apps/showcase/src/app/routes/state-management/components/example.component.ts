@@ -52,7 +52,7 @@ export class ExampleComponent implements OnInit {
 
   ngOnInit(): void {
     /**
-    this.api.users.state$.subscribe(x => console.log('selectOne', x));
+    this.api.users.state$.subscribe((x) => console.log('state', x));
     this.api.users.selectOne$('2').subscribe(x => console.log('selectOne', x));
     this.api.users.selectAll$.subscribe(x => console.log('selectAll', x));
     this.api.users.select$(data => data?.filter(user => user.id > 5) || null).subscribe(x => console.log('select', x));

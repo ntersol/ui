@@ -1,16 +1,13 @@
-<div class="nts-state" [ngClass]="{ 'nts-state-spacer': !(stateSrc?.loading && stateSrc?.data) }">
+<div class="nts-state">
   <!-- Loading, no data -->
   <ng-container *ngIf="!stateSrc || (showLoading && stateSrc?.loading && !stateSrc?.data)">
-    <p-progressBar mode="indeterminate" [style]="{ height: '12px' }"></p-progressBar>
+    <p-progressBar mode="indeterminate" class="nts-state-spacer" [style]="{ height: '12px' }"></p-progressBar>
   </ng-container>
 
   <!-- Loading with data OR modifying -->
-  <ng-container
-    *ngIf="(showLoading && stateSrc?.loading && stateSrc?.data) || (showModifying && stateSrc?.modifying); else spacer"
-  >
-    <p-progressBar mode="indeterminate" [style]="{ height: '2px' }"></p-progressBar>
+  <ng-container *ngIf="(showLoading && stateSrc?.loading && stateSrc?.data) || (showModifying && stateSrc?.modifying)">
+    <p-progressBar mode="indeterminate" class="nts-state-spacer" [style]="{ height: '2px' }"></p-progressBar>
   </ng-container>
-  <ng-template #spacer><div class="nts-loader-spacer"></div></ng-template>
 
   <!-- Loading error -->
   <ng-container *ngIf="showLoading && showErrorLoading && stateSrc?.error">
