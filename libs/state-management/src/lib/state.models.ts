@@ -3,19 +3,25 @@ import { NtsEntityStore } from './stores/api/entity-store';
 import { NtsUIStoreCreator } from './stores/ui/ui-store';
 
 export namespace NtsState {
-  export interface EntityApiState<t = any, e = any> extends ApiState<t[], e> {
+  export interface EntityApiState<t = any, e = any> extends ApiStateSrc<e> {
     /** If api response type is an array of objects, create record here. Will be null otherwise */
     entities: Record<string | number, t>;
+    data: null | t[];
   }
 
   /** Contains both the api state and any data */
-  export interface ApiState<t = any, e = any> {
+  export interface ApiState<t = any, e = any> extends ApiStateSrc<e> {
+    data: null | t;
+  }
+
+  /** Contains both the api state and any data */
+  export interface ApiStateSrc<e = any> {
     [key: string]: any;
     loading: boolean;
     modifying: boolean;
     error: null | e;
     errorModify: null | e;
-    data: null | t;
+    data: any;
   }
 
   /** Different methods to pass the api url string to the store */

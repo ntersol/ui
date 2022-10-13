@@ -198,7 +198,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param optionsOverride
    * @returns
    */
-  public post(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
+  public post(data: Partial<t>, optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'post', null);
     return this.upsert(this.http.post(url, data), data, this.config.map?.post) as Observable<Partial<t>>;
@@ -210,7 +210,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param optionsOverride
    * @returns
    */
-  public put(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
+  public put(data: Partial<t>, optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'put', data);
     return this.upsert(this.http.put(url, data), data, this.config.map?.put) as Observable<Partial<t>>;
@@ -222,7 +222,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param optionsOverride
    * @returns
    */
-  public patch(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
+  public patch(data: Partial<t>, optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'patch', data);
     return this.upsert(this.http.patch(url, data), data, this.config.map?.patch) as Observable<Partial<t>>;
@@ -234,7 +234,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param optionsOverride
    * @returns
    */
-  public delete(data: Partial<any> | Partial<any>[], optionsOverride: NtsState.Options = {}) {
+  public delete(data: Partial<t>, optionsOverride: NtsState.Options = {}) {
     const options = mergeConfig(this.config, optionsOverride);
     const url = apiUrlGet(options, 'delete', data);
     // Reset state
@@ -272,7 +272,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param data
    * @returns
    */
-  private upsert<t>(apiRequest: Observable<t>, data: t | t[], mapFn?: <t>(x: t | null) => any): Observable<Partial<t>> {
+  private upsert<t>(apiRequest: Observable<t>, data: t, mapFn?: <t>(x: t | null) => any): Observable<Partial<t>> {
     // Reset state
     this.stateChange({ modifying: true, errorModify: null });
     // Dispatch event to the global scope
