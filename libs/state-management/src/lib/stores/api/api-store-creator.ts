@@ -146,7 +146,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
     // If data is null or refresh cache is requested, otherwise default to cache
     if ((this.state.data === null || options.refresh || !this.httpGet$) && !this.state.loading) {
       const url = apiUrlGet(options, 'get', null);
-      // Set loading to true, reset any errors
+      // Set loading to true, reset  errors
       this.stateChange({ loading: true, error: null });
       // Dispatch event to the global scope
       if (this.config.storeId) {
@@ -154,6 +154,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
       }
       // Is this a GET request or a POST that functions as a GET
       // Some data request require a post body
+      // TODO: Fix any
       const httpRequest = postPayload ? this.http.post<any>(url, postPayload) : this.http.get<t>(url);
       this.httpGet$ = httpRequest.pipe(
         // Handle api success
@@ -240,7 +241,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
     // Reset state
     this.stateChange({ modifying: true, errorModify: null });
     return this.http.delete<unknown>(url).pipe(
-      // Most deletes shouldn't return anything but sometimes it's necessary
+      // Most deletes shouldn't have a return but sometimes it's necessary
       tap((r) => {
         // Check if this is an entity store
         if (
@@ -272,7 +273,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * @param data
    * @returns
    */
-  private upsert<t>(apiRequest: Observable<t>, data: t, mapFn?: <t>(x: t | null) => any): Observable<Partial<t>> {
+  private upsert<t>(apiRequest: Observable<t>, data: t, mapFn?: <t>(x: t | null) => unknown): Observable<Partial<t>> {
     // Reset state
     this.stateChange({ modifying: true, errorModify: null });
     // Dispatch event to the global scope
