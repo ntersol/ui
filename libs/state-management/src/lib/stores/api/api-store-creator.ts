@@ -155,7 +155,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
       // Is this a GET request or a POST that functions as a GET
       // Some data request require a post body
       // TODO: Fix any
-      const httpRequest = postPayload ? this.http.post<any>(url, postPayload) : this.http.get<t>(url);
+      const httpRequest = postPayload ? this.http.post<any>(url, postPayload) : this.http.get(url);
       this.httpGet$ = httpRequest.pipe(
         // Handle api success
         tap((r) => {
@@ -330,6 +330,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    */
   public reset() {
     this.stateChange(this.isEntityStore ? { ...stateEntitySrc } : { ...stateSrc });
+    this.autoloaded = false; // Reset autoload so subsequent subscribers trigger load
   }
 
   /**
