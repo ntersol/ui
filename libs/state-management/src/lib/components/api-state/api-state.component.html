@@ -19,10 +19,6 @@
     <nts-error [error]="stateSrc?.errorModify" [canClose]="false"></nts-error>
   </ng-container>
 
-  <!--
-    Always show content if data prop is not null
-  -->
-  <ng-container *ngIf="stateSrc?.data">
-    <ng-content></ng-content>
-  </ng-container>
+  <!-- Content from parent -->
+  <ng-content></ng-content>
 </div>

@@ -15,26 +15,43 @@ import {
   mergePayloadWithApiResponse,
 } from './api-store.utils';
 
-// Default api store state
-const stateSrc: NtsState.ApiState<any> = {
-  loading: false,
-  modifying: false,
-  error: false,
-  errorModify: false,
-  data: null,
-};
-
-// Default entity store state
-const stateEntitySrc: NtsState.EntityApiState<any> = Object.assign(stateSrc, { entities: {} });
-
 /**
  * Automatically create an api store to manage interaction between a local flux store and a remote api
  */
 export class NtsApiStoreCreator<t> extends NtsBaseStore {
+  /** Default non-entity API state */
+  private get getStateSrc(): NtsState.ApiState<t> {
+    return Object.assign(
+      {},
+      {
+        loading: false,
+        modifying: false,
+        error: false,
+        errorModify: false,
+        data: null,
+      },
+    );
+  }
+
+  /** Default entity API state */
+  private get getStateEntitySrc(): NtsState.EntityApiState<t> {
+    return Object.assign(
+      {},
+      {
+        loading: false,
+        modifying: false,
+        error: false,
+        errorModify: false,
+        data: null,
+        entities: {},
+      },
+    );
+  }
+
   /** Store state object */
   protected state: NtsState.ApiState<t> | NtsState.EntityApiState<t> = this.isEntityStore
-    ? { ...stateEntitySrc }
-    : { ...stateSrc };
+    ? this.getStateEntitySrc
+    : this.getStateSrc;
 
   /** Returns both the api state and data */
   private _state$ = new BehaviorSubject(this.state);
@@ -326,11 +343,11 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
   }
 
   /**
-   * Reset store to it's initial state
+   * Reset store to its initial state
    */
   public reset() {
-    this.stateChange(this.isEntityStore ? { ...stateEntitySrc } : { ...stateSrc });
-    this.autoloaded = false; // Reset autoload so subsequent subscribers trigger load
+    this.stateChange(this.isEntityStore ? this.getStateEntitySrc : this.getStateSrc);
+    this.autoloaded = false; // Reset autoload so subsequent subscribers trigger data reload
   }
 
   /**
