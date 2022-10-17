@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { NtsState } from '../../state.models';
 import { NtsCombineEntityState } from '../../utils/combineEntityState.util';
 
@@ -6,6 +6,8 @@ import { NtsCombineEntityState } from '../../utils/combineEntityState.util';
   selector: 'nts-api-state',
   templateUrl: './api-state.component.html',
   styleUrls: ['./api-state.component.scss'],
+  // tslint:disable-next-line:use-component-view-encapsulation
+  encapsulation: ViewEncapsulation.None,
 })
 export class NtsDomainStateComponent {
   /** Default domain state */

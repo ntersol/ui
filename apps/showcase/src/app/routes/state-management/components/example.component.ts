@@ -114,6 +114,13 @@ export class ExampleComponent implements OnInit {
   public refresh() {
     this.api.users.refresh().subscribe();
   }
+
+  /**
+   * Reset store
+   */
+  public reset() {
+    this.api.users.reset();
+  }
 }
 
 /**

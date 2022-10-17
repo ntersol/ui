@@ -2,7 +2,7 @@
   <div class="row px-0">
     <div class="col-12 col-md-9 pl-0">
       <nts-api-state [state]="state" *ngIf="users$ | async as state">
-        <nts-table [rows]="state.data" [columns]="columns">
+        <nts-table [rows]="state.data" [columns]="columns" *ngIf="state.data?.length">
           <table-column field="actions">
             <ng-template table-cell-template let-value="value" let-column="column" let-row="row">
               <div class="text-end">
@@ -12,6 +12,7 @@
             </ng-template>
           </table-column>
         </nts-table>
+        <div class="alert alert-info" *ngIf="!state.data?.length">No users found</div>
       </nts-api-state>
     </div>
     <div class="col-12 col-md-3 pr-0">
@@ -42,9 +43,16 @@
           </form>
         </div>
       </div>
-      <button class="btn btn-primary w-100" (click)="refresh()">
-        <i class="fa fa-refresh" aria-hidden="true"></i> Refresh All Users
-      </button>
+      <p>
+        <button class="btn btn-primary w-100" (click)="refresh()">
+          <i class="fa fa-refresh" aria-hidden="true"></i> Refresh All Users
+        </button>
+      </p>
+      <p>
+        <button class="btn btn-primary w-100" (click)="reset()">
+          <i class="fa fa-refresh" aria-hidden="true"></i> Reset Store
+        </button>
+      </p>
     </div>
   </div>
 </div>
