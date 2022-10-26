@@ -1,6 +1,6 @@
 {
   "name": "@ntersol/state-management",
-  "version": "4.0.5",
+  "version": "4.1.6",
   "license": "MIT",
   "peerDependencies": {
     "@angular/common": ">11.0.1",

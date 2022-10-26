@@ -188,11 +188,6 @@ export const apiUrlGet = <t2>(
     apiUrl = config.apiUrlBase + apiUrl;
   }
 
-  // If append url is specified
-  if (config.apiUrlAppend) {
-    apiUrl = apiUrl + config.apiUrlAppend;
-  }
-
   // If PUT/PATCH/DELETE, append unique ID provided it's not disabled
   if (
     is.entityConfig(config) &&
@@ -201,6 +196,11 @@ export const apiUrlGet = <t2>(
       (verb === 'delete' && config.disableAppendId?.delete !== true && config.uniqueId && e && !Array.isArray(e)))
   ) {
     apiUrl = apiUrl + '/' + e[config.uniqueId as keyof t2];
+  }
+
+  // If append url is specified
+  if (config.apiUrlAppend) {
+    apiUrl = apiUrl + config.apiUrlAppend;
   }
 
   // If a custom override url was specified for this verb
