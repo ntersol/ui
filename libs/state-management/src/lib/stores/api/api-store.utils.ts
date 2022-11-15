@@ -229,12 +229,13 @@ export const apiUrlGet = <t2>(
  * @returns
  */
 export const canRefreshStoreData = <t>(s: NtsState.ApiState<t, any> | NtsState.EntityApiState<t, any>): boolean => {
-  if (s.data === null || s.error) {
-    return true;
-  } else if (typeof s.data === 'object' && Array.isArray(s.data) && !s.data.length) {
+  return s.data === null || s.error ? true : false;
+  /**
+   * Future State or configurable option, autoreload of empty array or object
+   else if (typeof s.data === 'object' && Array.isArray(s.data) && !s.data.length) {
     return true;
   } else if (typeof s.data === 'object' && !Array.isArray(s.data) && !Object.keys(s.data).length) {
     return true;
   }
-  return false;
+   */
 };
