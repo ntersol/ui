@@ -217,3 +217,24 @@ export const apiUrlGet = <t2>(
 
   return apiUrl;
 };
+
+/**
+ * Should the store refresh data for an autoload?
+ *
+ * Conditions:
+ * - Data property is null, ie no data
+ * - Error from previous get request
+ * - API response was an empty array or empty object
+ * @param s
+ * @returns
+ */
+export const canRefreshStoreData = <t>(s: NtsState.ApiState<t, any> | NtsState.EntityApiState<t, any>): boolean => {
+  if (s.data === null || s.error) {
+    return true;
+  } else if (typeof s.data === 'object' && Array.isArray(s.data) && !s.data.length) {
+    return true;
+  } else if (typeof s.data === 'object' && !Array.isArray(s.data) && !Object.keys(s.data).length) {
+    return true;
+  }
+  return false;
+};

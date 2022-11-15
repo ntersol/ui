@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, filter, share, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, debounceTime, filter, share, take, tap } from 'rxjs/operators';
 import { timer } from 'rxjs';
 import { NtsState } from '../../state.models';
 import { isActionApi } from '../../utils/guards.util';
@@ -8,6 +8,7 @@ import { NtsBaseStore } from '../base/base-store';
 import { ApiActions, ApiEvents, StoreTypes } from '../store.enums';
 import {
   apiUrlGet,
+  canRefreshStoreData,
   deleteEntities,
   is,
   mergeConfig,
@@ -60,23 +61,31 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * Holds both the store data and api state in a single subscription
    */
   public state$ = this._state$.pipe(
-    // If autoload is requested and data is null and an autoload has not already been requested
-    // This method ensures that the store only loads data when it has a subscriber
+    debounceTime(1),
+    // Autoload data if a subscriber is present and no data is already in store
+    // Will reload data if last request was an error or data in store is nill or empty array/object
     tap((s) => {
-      if (this.config.autoLoad !== false && s.data === null && !this.autoloaded) {
-        this.autoloaded = true;
-        timer(1, 1)
-          .pipe(
-            take(1),
-            switchMap(() => this.get()),
-          )
-          .subscribe();
+      if (this.config.autoLoad !== false && canRefreshStoreData(s) && this.autoloadInProgress === false) {
+        this.autoloadInProgress = true; // Set autoload in progress
+        this.get()
+          .pipe(take(1))
+          .subscribe(
+            // After completing API call, set in progress to false. Prevents infinite refresh loop
+            () =>
+              timer(1)
+                .pipe(take(1))
+                .subscribe(() => (this.autoloadInProgress = false)),
+            () =>
+              timer(1)
+                .pipe(take(1))
+                .subscribe(() => (this.autoloadInProgress = false)),
+          );
       }
     }),
   );
 
-  /** Keep track of whether an autoload request has been performed */
-  private autoloaded = false;
+  /** Is autoload request in flight */
+  private autoloadInProgress = false;
 
   /** Listen to events being broadcast, handle events sent to this store or all stores */
   public override events$ = NtsApiStoreCreator._events$.pipe(
@@ -178,7 +187,7 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
         tap((r) => {
           // Map api response if requested
           const result = this.config.map && this.config.map.get ? this.config.map.get(r) : r;
-          const state: Partial<NtsState.ApiState> = { loading: false, data: result };
+          const state: Partial<NtsState.ApiState> = { loading: false, data: result, errorModify: null };
           let entities: Record<string, t> | null = null;
           // Check if this api response has entities, create entity property
           const config = this.config; // Run through typeguard so it doesn't need to be typechecked again in the reduce
@@ -346,8 +355,13 @@ export class NtsApiStoreCreator<t> extends NtsBaseStore {
    * Reset store to its initial state
    */
   public reset() {
+    // Set autoload in progress flag to prevent active subscribers from immediately reloading store data when reset is performed
+    this.autoloadInProgress = true;
     this.stateChange(this.isEntityStore ? this.getStateEntitySrc : this.getStateSrc);
-    this.autoloaded = false; // Reset autoload so subsequent subscribers trigger data reload
+    // Reset flag so that next sub will reload store data
+    timer(1)
+      .pipe(take(1))
+      .subscribe(() => (this.autoloadInProgress = false));
   }
 
   /**
