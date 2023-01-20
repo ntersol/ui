@@ -14,6 +14,7 @@
     "types": ["node"],
     "typeRoots": ["node_modules/@types"],
     "paths": {
+      "@@ntersol/file-uploader": ["libs/file-uploader/src/index.ts"],
       "@ntersol/azure-maps": ["libs/azure-maps/src/index.ts"],
       "@ntersol/chart": ["libs/chart/src/index.ts"],
       "@ntersol/document-editor": ["libs/document-editor/src/index.ts"],

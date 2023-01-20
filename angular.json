@@ -1,7 +1,4 @@
 {
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
   "projects": {
     "azure-maps": {
@@ -283,6 +280,29 @@
             "ci": {
               "quiet": true
             }
+          }
+        }
+      },
+      "tags": []
+    },
+    "file-uploader": {
+      "projectType": "library",
+      "root": "libs/file-uploader",
+      "sourceRoot": "libs/file-uploader/src",
+      "prefix": "file-uploader",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/file-uploader"],
+          "options": {
+            "jestConfig": "libs/file-uploader/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/file-uploader/src/**/*.ts", "libs/file-uploader/src/**/*.html"]
           }
         }
       },
