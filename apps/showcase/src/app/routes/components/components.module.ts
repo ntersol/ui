@@ -23,6 +23,7 @@ import { ShowcaseTagsComponent } from './routes/tags/tags.component';
 import { VisibleComponent } from './routes/visible/visible.component';
 import { WizardComponent } from './routes/wizard/wizard.component';
 import { FileUploaderComponent } from './routes/file-uploader/file-uploader.component';
+import { NtsFileUploaderModule } from '@@ntersol/file-uploader';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { FileUploaderComponent } from './routes/file-uploader/file-uploader.comp
     NtsVisibleModule,
     NtsDocumentEditorModule,
     NtsWizardModule,
+    NtsFileUploaderModule,
   ],
   declarations: [
     ComponentsComponent,

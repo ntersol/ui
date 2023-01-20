@@ -10,6 +10,7 @@ import { ShowcaseTagsComponent } from './routes/tags/tags.component';
 import { MtgCalcComponent } from './routes/mtg-calc/mtg-calc.component';
 import { DocEditorComponent } from './routes/doc-editor/doc-editor.component';
 import { GooglePlacesAutocompleteComponent } from './routes/google-places-autocomplete/google-places-autocomplete.component';
+import { FileUploaderComponent } from './routes/file-uploader/file-uploader.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,12 @@ const routes: Routes = [
     path: 'visible',
     component: VisibleComponent,
     data: { title: 'Visible' },
+  },
+
+  {
+    path: 'file-uploader',
+    component: FileUploaderComponent,
+    data: { title: 'File Uploader' },
   },
 
   {

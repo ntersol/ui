@@ -1,1 +1,23 @@
-<p>file-uploader works!</p>
+<div class="nts-file-uploader">
+  <label class="nts-file-uploader-label" [for]="id">
+    <div
+      class="nts-file-uploader-icon"
+      [ngClass]="{
+        'custom-icon': iconCustom
+      }"
+      [innerHtml]="iconCustom"
+    ></div>
+    <div class="nts-file-uploader-title" *ngIf="title" [innerHtml]="title"></div>
+    <div class="nts-file-uploader-description" *ngIf="title" [innerHtml]="description"></div>
+    <input
+      [id]="id"
+      class="nts-file-uploader-input"
+      [multiple]="multiple ? 'multiple' : null"
+      type="file"
+      (change)="filesChanged($event)"
+    />
+    <ng-container *ngFor="let url of filesOutput?.urls">
+      <img *ngIf="url" [src]="url" />
+    </ng-container>
+  </label>
+</div>

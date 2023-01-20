@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FileUploaderComponent } from './file-uploader/file-uploader.component';
+import { NtsFileUploaderComponent } from './file-uploader/file-uploader.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [
-    FileUploaderComponent
-  ],
+  declarations: [NtsFileUploaderComponent],
+  exports: [NtsFileUploaderComponent],
 })
-export class FileUploaderModule {}
+export class NtsFileUploaderModule {}
