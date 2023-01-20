@@ -22,6 +22,7 @@ import { ShowcaseTableComponent } from './routes/table/table.component';
 import { ShowcaseTagsComponent } from './routes/tags/tags.component';
 import { VisibleComponent } from './routes/visible/visible.component';
 import { WizardComponent } from './routes/wizard/wizard.component';
+import { FileUploaderComponent } from './routes/file-uploader/file-uploader.component';
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import { WizardComponent } from './routes/wizard/wizard.component';
     ShowcaseTagsComponent,
     GooglePlacesAutocompleteComponent,
     DocEditorComponent,
+    FileUploaderComponent,
   ],
   providers: [PathLocationStrategy],
   exports: [],
