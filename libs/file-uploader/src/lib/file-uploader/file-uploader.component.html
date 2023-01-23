@@ -2,8 +2,7 @@
   class="nts-file-uploader"
   *ngIf="{
     filesOutput: filesOutput$ | async,
-    state: state$ | async,
-    fileSizes: fileSizes$ | async
+    state: state$ | async
   } as comp"
 >
   <!-- Error handling -->
@@ -19,7 +18,7 @@
   <label class="nts-file-uploader-label" [for]="id" *ngIf="!comp?.filesOutput">
     <div class="nts-file-uploader-icon" [ngClass]="{ 'custom-icon': iconCustom }" [innerHtml]="iconCustom"></div>
     <div class="nts-file-uploader-title" *ngIf="title" [innerHtml]="title"></div>
-    <div class="nts-file-uploader-description" *ngIf="title" [innerHtml]="description"></div>
+    <div class="nts-file-uploader-description" *ngIf="description" [innerHtml]="description"></div>
     <input
       [id]="id"
       class="nts-file-uploader-input"
@@ -29,27 +28,33 @@
     />
   </label>
   <ng-container *ngIf="comp?.filesOutput">
-    <a class="nts-file-uploader-reset" (click)="reset()">Remove</a>
+    <a class="nts-file-uploader-reset" (click)="reset()">Remove All</a>
     <p><strong>Files to be uploaded</strong></p>
     <div class="nts-file-row">
       <ng-container *ngFor="let url of comp?.filesOutput?.fileReader; let i = index">
-        <div class="preview" style="max-width: 33%">
+        <div class="preview" style="max-width: 25%">
           <img class="nts-file-uploader-img" width="50px" *ngIf="url" [src]="url" />
         </div>
 
         <div
           class="filename"
-          style="max-width: 33%"
+          style="max-width: 25%"
           *ngIf="comp?.filesOutput?.files?.length"
           [innerHtml]="comp!.filesOutput!.files![i].name"
         ></div>
 
         <div
           class="filesize"
-          style="max-width: 33%"
-          *ngIf="comp?.fileSizes?.length"
-          [innerHtml]="(comp?.fileSizes)![i]"
+          style="max-width: 25%"
+          *ngIf="comp?.state?.fileSizes?.length"
+          [innerHtml]="(comp?.state?.fileSizes)![i]"
         ></div>
+
+        <div class="nts-remove" style="max-width: 25%">
+          <button type="button" icon="pi pi-times" class="p-element p-button p-component p-button-icon-only">
+            <span class="p-button-icon pi pi-times" aria-hidden="true"></span>
+          </button>
+        </div>
       </ng-container>
     </div>
   </ng-container>

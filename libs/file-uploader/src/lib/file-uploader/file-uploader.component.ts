@@ -19,30 +19,43 @@ interface State {
   errors: null | string[];
 }
 
+/**
+ * FileUploadComponent
+ *
+ * This component handles file uploads and provides the following features:
+ * - Validates the file type and size before uploading
+ * - Displays a preview of the selected image
+ * - Allows the user to remove the selected file
+ * - Emits an event when the file is uploaded successfully
+ *
+ * @example
+ * <nts-file-uploader (filesChanged)="yourFunction($event)"></nts-file-uploader>
+ *
+ * @output {EventEmitter<File>} filesChanged -
+ */
 @Component({
   selector: 'nts-file-uploader',
   templateUrl: './file-uploader.component.html',
   styleUrls: ['./file-uploader.component.scss'],
 })
 export class NtsFileUploaderComponent implements OnInit {
+  /** Wrapper ID */
   @Input() id: string | null = 'nts-file-uploader-input-' + Math.floor(Math.random() * 1000000);
-
   /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
   @Input() iconCustom?: string | null = null;
   /** Title that appears below the icon */
   @Input() title?: string | null = 'Drag here or browser to upload';
   /** Description that appears below the title */
-  @Input() description: string | null = 'Supports JPG, PNG, GIF, and BMP with a max file size of 3MB.';
+  @Input() description: string | null = null;
   /** Allow the user to upload multiple files */
   @Input() multiple?: boolean | null = true;
-  /** A string array of allowed mimetypes, IE ["image/png", "image/jpeg", "application/pdf"] */
-  @Input() allowedFileTypes?: string[] | null = ['image/png', 'image/jpeg', 'application/pdf'];
+  /** A string array of allowed mimetypes, IE ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'] */
+  @Input() allowedFileTypes?: string[] | null = null;
   /** The maximum number of bytes that the user is allowed to upload. In the event of multiple files, will be the sum of them all */
   @Input() maxFileSize?: number | null = null;
   /** The maximum number of files allowed if multiple is true */
   @Input() maxFiles?: number | null = null;
 
-  // public filesOutput: FilesOutput = {};
   public filesOutput$ = new BehaviorSubject<FilesOutput | null>(null);
 
   public state$ = new BehaviorSubject<State>({
@@ -58,23 +71,35 @@ export class NtsFileUploaderComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // If no description supplied and at least one restriction exists, autogen description
+    if (!this.description && (this.allowedFileTypes || this.maxFileSize)) {
+      this.description = this.getDescription(this.allowedFileTypes, this.maxFileSize);
+    }
+  }
 
   /**
-   *
+   * Reset file uploader and remove all files
    */
-  public filesChanged(e: any) {
-    const fileList = e?.target?.files as FileList;
+  public reset() {
+    this.filesOutput$.next(null);
+    this.filesOutput.emit(null);
+  }
+
+  /**
+   * Handles the change event of a file input
+   * @param {Event} e - The change event object
+   */
+  public filesChanged(e: Event) {
+    const fileInput = e.target as HTMLInputElement;
+    const fileList = fileInput.files as FileList;
+    // Nill Check
     if (!fileList) {
       return;
     }
-    // Null typeguard
-    const notEmpty = <TValue>(value: TValue | null | undefined): value is TValue =>
-      value !== null && value !== undefined;
+
     // Extract the list of files from the input
-    const files = Object.keys(fileList)
-      .map((_key, i) => fileList.item(i))
-      .filter(notEmpty);
+    const files = Array.from(fileList);
 
     // Generate initial state
     const state: State = {
@@ -86,14 +111,13 @@ export class NtsFileUploaderComponent implements OnInit {
       }),
       errors: null,
     };
-
+    // Check for errors and assign to state object
     const errors = this.errorCheck(state);
     state.errors = errors;
-
-    console.log(state);
-
+    // Update state
     this.state$.next(state);
 
+    // If errors found, end processing
     if (errors) {
       return;
     }
@@ -116,7 +140,6 @@ export class NtsFileUploaderComponent implements OnInit {
           this.fileSizes$.next(files.map((file) => this.formatFileSize(file.size)));
           this.filesOutput$.next(filesOutput); // Push the fileoutput to the observable
           this.filesOutput.emit(filesOutput); // Send files to parent
-          console.log(filesOutput);
         }
       };
       reader.readAsDataURL(file);
@@ -203,10 +226,41 @@ export class NtsFileUploaderComponent implements OnInit {
   }
 
   /**
-   * Reset file uploader and remove all files
+   * Generates a human readable string describing the file upload description
+   * Mostly written by Chat GPT
+   * @param allowedFileTypes
+   * @param maxFileSize
+   * @returns
    */
-  public reset() {
-    this.filesOutput$.next(null);
-    this.filesOutput.emit(null);
+  private getDescription(allowedFileTypes?: string[] | null, maxFileSize?: number | null): string {
+    let fileTypesDescription = '';
+    let maxSizeDescription = '';
+
+    // Format allowed filetypes
+    if (allowedFileTypes && allowedFileTypes.length > 0) {
+      fileTypesDescription = `You can upload files of types: ${allowedFileTypes
+        .map((type) => type.split('/')[1].toUpperCase())
+        .join(', ')}.`;
+    } else {
+      fileTypesDescription = `You are allowed to upload any file type.`;
+    }
+
+    // Format max filesize
+    if (maxFileSize) {
+      const maxSize = maxFileSize;
+      if (maxSize >= 1000000000) {
+        maxSizeDescription = `The maximum file size is ${(maxSize / 1000000000).toFixed(2)} GB.`;
+      } else if (maxSize >= 1000000) {
+        maxSizeDescription = `The maximum file size is ${(maxSize / 1000000).toFixed(2)} MB.`;
+      } else if (maxSize >= 1000) {
+        maxSizeDescription = `The maximum file size is ${(maxSize / 1000).toFixed(2)} KB.`;
+      } else {
+        maxSizeDescription = `The maximum file size is ${maxSize} bytes.`;
+      }
+    } else {
+      maxSizeDescription = `There is no maximum file size limit.`;
+    }
+
+    return `${fileTypesDescription} ${maxSizeDescription}`;
   }
 }
