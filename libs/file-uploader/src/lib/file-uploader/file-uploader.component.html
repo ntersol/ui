@@ -2,17 +2,22 @@
   class="nts-file-uploader"
   *ngIf="{
     filesOutput: filesOutput$ | async,
+    state: state$ | async,
     fileSizes: fileSizes$ | async
   } as comp"
 >
+  <!-- Error handling -->
+  <div class="nts-file-uploader-error" *ngIf="comp.state?.errors?.length">
+    <p-message
+      styleClass="w-100 mb-1"
+      severity="error"
+      [text]="error"
+      *ngFor="let error of comp.state?.errors"
+    ></p-message>
+  </div>
+
   <label class="nts-file-uploader-label" [for]="id" *ngIf="!comp?.filesOutput">
-    <div
-      class="nts-file-uploader-icon"
-      [ngClass]="{
-        'custom-icon': iconCustom
-      }"
-      [innerHtml]="iconCustom"
-    ></div>
+    <div class="nts-file-uploader-icon" [ngClass]="{ 'custom-icon': iconCustom }" [innerHtml]="iconCustom"></div>
     <div class="nts-file-uploader-title" *ngIf="title" [innerHtml]="title"></div>
     <div class="nts-file-uploader-description" *ngIf="title" [innerHtml]="description"></div>
     <input
