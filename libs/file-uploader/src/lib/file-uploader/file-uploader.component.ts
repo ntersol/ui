@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { BehaviorSubject, take } from 'rxjs';
 
 export interface FilesOutput {
@@ -14,7 +14,7 @@ export interface FilesOutput {
 
 interface State {
   files: File[];
-  fileSizes: number[];
+  fileSizes: string[];
   fileTypes: string[];
   errors: null | string[];
 }
@@ -37,8 +37,9 @@ interface State {
   selector: 'nts-file-uploader',
   templateUrl: './file-uploader.component.html',
   styleUrls: ['./file-uploader.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NtsFileUploaderComponent implements OnInit {
+export class NtsFileUploaderComponent implements OnInit, OnDestroy {
   /** Wrapper ID */
   @Input() id: string | null = 'nts-file-uploader-input-' + Math.floor(Math.random() * 1000000);
   /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
@@ -52,7 +53,7 @@ export class NtsFileUploaderComponent implements OnInit {
   /** A string array of allowed mimetypes, IE ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'] */
   @Input() allowedFileTypes?: string[] | null = null;
   /** The maximum number of bytes that the user is allowed to upload. In the event of multiple files, will be the sum of them all */
-  @Input() maxFileSize?: number | null = null;
+  @Input() maxFileSize?: number | null = 100000;
   /** The maximum number of files allowed if multiple is true */
   @Input() maxFiles?: number | null = null;
 
@@ -64,8 +65,6 @@ export class NtsFileUploaderComponent implements OnInit {
     fileTypes: [],
     errors: null,
   });
-
-  public fileSizes$ = new BehaviorSubject<string[] | null>(null);
 
   @Output() filesOutput = new EventEmitter();
 
@@ -111,8 +110,11 @@ export class NtsFileUploaderComponent implements OnInit {
 
       // Get the input and attach the new filelist, notify the parent and update state
       const input = document.getElementById(this.id || '') as HTMLInputElement;
-      if (input) {
-        input.files = dt.files;
+      // If all items in filelist have been removed, reset file input
+      if (!Array.from(dt.files).length) {
+        this.reset();
+      } else if (input) {
+        input.files = dt.files; // Assign filelist back to input control
         this.stateChange(dt.files);
       }
     });
@@ -134,7 +136,7 @@ export class NtsFileUploaderComponent implements OnInit {
     // Generate initial state
     const state: State = {
       files: files,
-      fileSizes: files.map((file) => file.size),
+      fileSizes: files.map((file) => this.formatFileSize(file.size)),
       fileTypes: files.map((file) => {
         const split = file.name.split('.');
         return split[split.length - 1];
@@ -162,17 +164,25 @@ export class NtsFileUploaderComponent implements OnInit {
 
     // Generate file reader version
     files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        filesOutput.fileReader?.push(reader.result);
-        // When all fileReader files have finished loading,
+      // Only create fileReader entities for images for security reasons
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          filesOutput.fileReader?.push(reader.result);
+          // When all fileReader files have finished loading,
+          if (files.length === filesOutput.fileReader?.length) {
+            this.filesOutput$.next(filesOutput); // Push the fileoutput to the observable
+            this.filesOutput.emit(filesOutput); // Send files to parent
+          }
+        };
+        reader.readAsDataURL(file);
+      } else {
+        filesOutput.fileReader?.push(null);
         if (files.length === filesOutput.fileReader?.length) {
-          this.fileSizes$.next(files.map((file) => this.formatFileSize(file.size)));
           this.filesOutput$.next(filesOutput); // Push the fileoutput to the observable
           this.filesOutput.emit(filesOutput); // Send files to parent
         }
-      };
-      reader.readAsDataURL(file);
+      }
     });
   }
 
@@ -182,12 +192,15 @@ export class NtsFileUploaderComponent implements OnInit {
    * @returns
    */
   private formatFileSize(bytes: number) {
-    if (bytes > 1000000) {
-      return String(Math.floor(bytes / 1000000)) + ' MB';
-    } else if (bytes > 1000) {
-      return String(Math.floor(bytes / 1000)) + ' KB';
+    if (bytes >= 1000000000) {
+      return `${(bytes / 1000000000).toFixed(2)} GB`;
+    } else if (bytes >= 1000000) {
+      return `${(bytes / 1000000).toFixed(2)} MB`;
+    } else if (bytes >= 1000) {
+      return `${(bytes / 1000).toFixed(2)} KB`;
+    } else {
+      return `${bytes} bytes.`;
     }
-    return String(Math.floor(bytes)) + ' Bytes';
   }
 
   /**
@@ -197,7 +210,7 @@ export class NtsFileUploaderComponent implements OnInit {
    */
   private errorCheck(state: State) {
     const errors: string[] = [];
-    const totalFileSize = state.fileSizes.reduce((a, b) => a + b, 0);
+    const totalFileSize = state.files.reduce((a, b) => a + b.size, 0);
     const isValid = this.allowedFileTypes?.length
       ? state.files.every((file) => this.allowedFileTypes?.includes(file.type))
       : true;
@@ -278,19 +291,13 @@ export class NtsFileUploaderComponent implements OnInit {
     // Format max filesize
     if (maxFileSize) {
       const maxSize = maxFileSize;
-      if (maxSize >= 1000000000) {
-        maxSizeDescription = `The maximum file size is ${(maxSize / 1000000000).toFixed(2)} GB.`;
-      } else if (maxSize >= 1000000) {
-        maxSizeDescription = `The maximum file size is ${(maxSize / 1000000).toFixed(2)} MB.`;
-      } else if (maxSize >= 1000) {
-        maxSizeDescription = `The maximum file size is ${(maxSize / 1000).toFixed(2)} KB.`;
-      } else {
-        maxSizeDescription = `The maximum file size is ${maxSize} bytes.`;
-      }
+      maxSizeDescription = `The maximum file size is ${this.formatFileSize(maxSize)}.`;
     } else {
       maxSizeDescription = `There is no maximum file size limit.`;
     }
 
     return `${fileTypesDescription} ${maxSizeDescription}`;
   }
+
+  ngOnDestroy(): void {}
 }
