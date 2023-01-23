@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
 
 export interface FilesOutput {
   /** Filelist as returned directly form a file input */
@@ -20,7 +20,7 @@ interface State {
 }
 
 /**
- * FileUploadComponent
+ * NtsFileUploaderComponent
  *
  * This component handles file uploads and provides the following features:
  * - Validates the file type and size before uploading
@@ -87,12 +87,42 @@ export class NtsFileUploaderComponent implements OnInit {
   }
 
   /**
-   * Handles the change event of a file input
-   * @param {Event} e - The change event object
+   * When files are changed in the input
+   * @param e
    */
   public filesChanged(e: Event) {
     const fileInput = e.target as HTMLInputElement;
     const fileList = fileInput.files as FileList;
+    this.stateChange(fileList);
+  }
+
+  /**
+   * Remove a file from the list
+   * @param index
+   */
+  public removeFile(index: number) {
+    // Get latest state
+    this.state$.pipe(take(1)).subscribe((state) => {
+      const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
+      // Remove the selected item and add the other files to the datatransfer
+      Array.from(state.files)
+        .filter((_file, i) => i !== index)
+        .forEach((file) => dt.items.add(file));
+
+      // Get the input and attach the new filelist, notify the parent and update state
+      const input = document.getElementById(this.id || '') as HTMLInputElement;
+      if (input) {
+        input.files = dt.files;
+        this.stateChange(dt.files);
+      }
+    });
+  }
+
+  /**
+   * Handles the change event of a file input
+   * @param {Event} e - The change event object
+   */
+  public stateChange(fileList?: FileList | null) {
     // Nill Check
     if (!fileList) {
       return;

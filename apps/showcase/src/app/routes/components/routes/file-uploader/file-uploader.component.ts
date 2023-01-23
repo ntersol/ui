@@ -82,4 +82,8 @@ export class FileUploaderComponent implements OnInit {
   htmlEncode(str: string): string {
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
+
+  public filesOutput(files: any) {
+    console.log('Output', files);
+  }
 }
