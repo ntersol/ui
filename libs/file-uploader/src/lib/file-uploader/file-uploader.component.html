@@ -1,4 +1,10 @@
-<div class="nts-file-uploader" *ngIf="{ filesOutput: filesOutput$ | async } as comp">
+<div
+  class="nts-file-uploader"
+  *ngIf="{
+    filesOutput: filesOutput$ | async,
+    fileSizes: fileSizes$ | async
+  } as comp"
+>
   <label class="nts-file-uploader-label" [for]="id" *ngIf="!comp?.filesOutput">
     <div
       class="nts-file-uploader-icon"
@@ -18,8 +24,28 @@
     />
   </label>
   <ng-container *ngIf="comp?.filesOutput">
-    <ng-container *ngFor="let url of comp?.filesOutput?.fileReader">
-      <img *ngIf="url" [src]="url" />
-    </ng-container>
+    <a class="nts-file-uploader-reset" (click)="reset()">Remove</a>
+    <p><strong>Files to be uploaded</strong></p>
+    <div class="nts-file-row">
+      <ng-container *ngFor="let url of comp?.filesOutput?.fileReader; let i = index">
+        <div class="preview" style="max-width: 33%">
+          <img class="nts-file-uploader-img" width="50px" *ngIf="url" [src]="url" />
+        </div>
+
+        <div
+          class="filename"
+          style="max-width: 33%"
+          *ngIf="comp?.filesOutput?.files?.length"
+          [innerHtml]="comp!.filesOutput!.files![i].name"
+        ></div>
+
+        <div
+          class="filesize"
+          style="max-width: 33%"
+          *ngIf="comp?.fileSizes?.length"
+          [innerHtml]="(comp?.fileSizes)![i]"
+        ></div>
+      </ng-container>
+    </div>
   </ng-container>
 </div>

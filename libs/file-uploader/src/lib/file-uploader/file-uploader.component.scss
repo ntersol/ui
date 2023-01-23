@@ -19,6 +19,21 @@
     height: initial;
   }
 }
+.nts-file-uploader-img {
+  max-width: 100%;
+}
+.nts-file-uploader-reset {
+  float: right;
+}
+.nts-file-row {
+  display: flex;
+  align-items: center;
+  & > div {
+    flex: 1 1 auto;
+    width: 33.33%;
+    padding: 1rem;
+  }
+}
 
 .nts-file-uploader-input {
   opacity: 0;

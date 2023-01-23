@@ -2,12 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface FilesOutput {
-  fileList?: FileList | null;
-  files?: File[] | null;
-  /** Object urls created with URL.createObjectURL() */
-  urls?: string[] | null;
+  /** Filelist as returned directly form a file input */
+  fileList: FileList | null;
+  /** Individual files from the fileList in an array */
+  files: File[] | null;
+  /** Object urls created with URL.createObjectURL() in blob format */
+  urls: string[] | null;
   /** Base64 encoded version generated using fileReader */
-  fileReader?: (string | ArrayBuffer | null)[] | null;
+  fileReader: (string | ArrayBuffer | null)[] | null;
 }
 
 @Component({
@@ -30,7 +32,9 @@ export class NtsFileUploaderComponent implements OnInit {
   // public filesOutput: FilesOutput = {};
   public filesOutput$ = new BehaviorSubject<FilesOutput | null>(null);
 
-  @Output() FilesOutput = new EventEmitter();
+  public fileSizes$ = new BehaviorSubject<string[] | null>(null);
+
+  @Output() filesOutput = new EventEmitter();
 
   constructor() {}
 
@@ -41,13 +45,18 @@ export class NtsFileUploaderComponent implements OnInit {
    */
   public filesChanged(e: any) {
     const fileList = e?.target?.files as FileList;
+    if (!fileList) {
+      return;
+    }
     // Null typeguard
     const notEmpty = <TValue>(value: TValue | null | undefined): value is TValue =>
       value !== null && value !== undefined;
+    // Extract the list of files from the input
     const files = Object.keys(fileList)
       .map((_key, i) => fileList.item(i))
       .filter(notEmpty);
 
+    // Hold output of different formats
     const filesOutput: FilesOutput = {
       fileList: fileList,
       files: files,
@@ -60,12 +69,32 @@ export class NtsFileUploaderComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         filesOutput.fileReader?.push(reader.result);
-        // When all fileReader files have finished loading, push the fileoutput to the observable
+        // When all fileReader files have finished loading,
         if (files.length === filesOutput.fileReader?.length) {
-          this.filesOutput$.next(filesOutput);
+          this.fileSizes$.next(
+            files.map((file) => {
+              if (file.size > 1000000) {
+                return String(Math.floor(file.size / 1000000)) + ' MB';
+              } else if (file.size > 1000) {
+                return String(Math.floor(file.size / 1000)) + ' KB';
+              }
+              return String(Math.floor(file.size)) + ' Bytes';
+            }),
+          );
+          this.filesOutput$.next(filesOutput); // Push the fileoutput to the observable
+          this.filesOutput.emit(filesOutput); // Send files to parent
+          console.log(filesOutput);
         }
       };
       reader.readAsDataURL(file);
     });
+  }
+
+  /**
+   * Reset file uploader and remove all files
+   */
+  public reset() {
+    this.filesOutput$.next(null);
+    this.filesOutput.emit(null);
   }
 }
