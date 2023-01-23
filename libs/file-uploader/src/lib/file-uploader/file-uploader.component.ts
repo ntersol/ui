@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 export interface FilesOutput {
   fileList?: FileList | null;
@@ -6,7 +7,7 @@ export interface FilesOutput {
   /** Object urls created with URL.createObjectURL() */
   urls?: string[] | null;
   /** Base64 encoded version generated using fileReader */
-  fileReader?: string[] | null;
+  fileReader?: (string | ArrayBuffer | null)[] | null;
 }
 
 @Component({
@@ -26,7 +27,8 @@ export class NtsFileUploaderComponent implements OnInit {
   /** Allow the user to upload multiple files */
   @Input() multiple?: boolean | null = false;
 
-  public filesOutput: FilesOutput = {};
+  // public filesOutput: FilesOutput = {};
+  public filesOutput$ = new BehaviorSubject<FilesOutput | null>(null);
 
   @Output() FilesOutput = new EventEmitter();
 
@@ -46,24 +48,24 @@ export class NtsFileUploaderComponent implements OnInit {
       .map((_key, i) => fileList.item(i))
       .filter(notEmpty);
 
-    const filesOutput = {
+    const filesOutput: FilesOutput = {
       fileList: fileList,
       files: files,
       urls: files.map((file) => URL.createObjectURL(file)),
+      fileReader: [],
     };
 
-    const temp2: any = [];
-
+    // Generate file reader version
     files.forEach((file) => {
       const reader = new FileReader();
-      reader.onload = () => temp2.push(reader.result);
-
+      reader.onload = () => {
+        filesOutput.fileReader?.push(reader.result);
+        // When all fileReader files have finished loading, push the fileoutput to the observable
+        if (files.length === filesOutput.fileReader?.length) {
+          this.filesOutput$.next(filesOutput);
+        }
+      };
       reader.readAsDataURL(file);
     });
-    setTimeout(() => {
-      console.log(temp2);
-    }, 100);
-    this.filesOutput = filesOutput;
-    console.log(this.filesOutput);
   }
 }

@@ -1,5 +1,5 @@
-<div class="nts-file-uploader">
-  <label class="nts-file-uploader-label" [for]="id">
+<div class="nts-file-uploader" *ngIf="{ filesOutput: filesOutput$ | async } as comp">
+  <label class="nts-file-uploader-label" [for]="id" *ngIf="!comp?.filesOutput">
     <div
       class="nts-file-uploader-icon"
       [ngClass]="{
@@ -16,8 +16,10 @@
       type="file"
       (change)="filesChanged($event)"
     />
-    <ng-container *ngFor="let url of filesOutput?.urls">
+  </label>
+  <ng-container *ngIf="comp?.filesOutput">
+    <ng-container *ngFor="let url of comp?.filesOutput?.fileReader">
       <img *ngIf="url" [src]="url" />
     </ng-container>
-  </label>
+  </ng-container>
 </div>
