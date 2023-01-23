@@ -28,7 +28,9 @@
     />
   </label>
   <div [hidden]="!comp?.filesOutput">
-    <a class="nts-file-uploader-reset" (click)="reset()">Remove All</a>
+    <a class="nts-file-uploader-reset" (click)="reset()" *ngIf="multiple && (comp?.filesOutput?.files?.length || 0) > 1"
+      >Remove All</a
+    >
     <p><strong>Files to be uploaded</strong></p>
     <div class="nts-file-row" *ngFor="let url of comp?.filesOutput?.fileReader; let i = index">
       <div class="preview" style="max-width: 25%">
