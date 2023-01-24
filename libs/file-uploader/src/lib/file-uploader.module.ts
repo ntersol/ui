@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MessageModule } from 'primeng/message';
-import { NtsFileUploaderComponent } from './file-uploader/file-uploader.component';
+import { NtsFileUploaderComponent } from './components/file-uploader/file-uploader.component';
 
 @NgModule({
   imports: [CommonModule, MessageModule],

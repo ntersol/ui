@@ -16,6 +16,7 @@ interface State {
   files: File[];
   fileSizes: string[];
   fileTypes: string[];
+  icons: string[];
   errors: null | string[];
 }
 
@@ -45,7 +46,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy {
   /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
   @Input() iconCustom?: string | null = null;
   /** Title that appears below the icon */
-  @Input() title?: string | null = 'Drag here or browser to upload';
+  @Input() title?: string | null = 'Click or drag here to upload';
   /** Description that appears below the title */
   @Input() description: string | null = null;
   /** Allow the user to upload multiple files */
@@ -53,7 +54,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy {
   /** A string array of allowed mimetypes, IE ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'] */
   @Input() allowedFileTypes?: string[] | null = null;
   /** The maximum number of bytes that the user is allowed to upload. In the event of multiple files, will be the sum of them all */
-  @Input() maxFileSize?: number | null = 100000;
+  @Input() maxFileSize?: number | null = null;
   /** The maximum number of files allowed if multiple is true */
   @Input() maxFiles?: number | null = null;
   /** Is the user dragging a file over the drop zone? */
@@ -65,8 +66,25 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy {
     files: [],
     fileSizes: [],
     fileTypes: [],
+    icons: [],
     errors: null,
   });
+
+  /** Icons to display based on extension */
+  private fileIcons = {
+    pdf: 'pi pi-file-pdf',
+    doc: 'pi pi-file-word',
+    docx: 'pi pi-file-word',
+    xls: 'pi pi-file-excel',
+    xlsx: 'pi pi-file-excel',
+    ppt: 'pi pi-file-powerpoint',
+    pptx: 'pi pi-file-powerpoint',
+    jpg: 'pi pi-file-image',
+    jpeg: 'pi pi-file-image',
+    png: 'pi pi-file-image',
+    gif: 'pi pi-file-image',
+    bmp: 'pi pi-file-image',
+  };
 
   @Output() filesOutput = new EventEmitter();
 
@@ -174,8 +192,10 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy {
         const split = file.name.split('.');
         return split[split.length - 1];
       }),
+      icons: files.map((file) => this.getFileIcon(file)),
       errors: null,
     };
+
     // Check for errors and assign to state object
     const errors = this.errorCheck(state);
     state.errors = errors;
@@ -196,12 +216,15 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy {
     };
 
     // Generate file reader version
-    files.forEach((file) => {
+    files.forEach((file, i) => {
       // Only create fileReader entities for images for security reasons
       if (file.type.startsWith('image/')) {
         const reader = new FileReader();
         reader.onload = () => {
-          filesOutput.fileReader?.push(reader.result);
+          if (filesOutput.fileReader) {
+            filesOutput.fileReader[i] = reader.result;
+          }
+          // filesOutput.fileReader?.push(reader.result);
           // When all fileReader files have finished loading,
           if (files.length === filesOutput.fileReader?.length) {
             this.filesOutput$.next(filesOutput); // Push the fileoutput to the observable
@@ -210,13 +233,25 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy {
         };
         reader.readAsDataURL(file);
       } else {
-        filesOutput.fileReader?.push(null);
+        if (filesOutput.fileReader) {
+          filesOutput.fileReader[i] = null;
+        }
         if (files.length === filesOutput.fileReader?.length) {
           this.filesOutput$.next(filesOutput); // Push the fileoutput to the observable
           this.filesOutput.emit(filesOutput); // Send files to parent
         }
       }
     });
+  }
+
+  /**
+   * Get the icon to use for this file
+   * @param file
+   * @returns
+   */
+  public getFileIcon(file: File): string {
+    const extension = file.name.split('.').pop()?.toLowerCase();
+    return (extension && this.fileIcons[extension]) || 'pi pi-file-o';
   }
 
   /**
