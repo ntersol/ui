@@ -1,5 +1,9 @@
 {
   "name": "@ntersol/file-uploader",
-  "version": "1.0.1",
-  "license": "MIT"
+  "version": "1.0.3",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": ">11.0.1",
+    "primeicons": ">5.0.0"
+  }
 }
