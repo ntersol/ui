@@ -15,7 +15,17 @@
     ></p-message>
   </div>
 
-  <label class="nts-file-uploader-label" [for]="id" [hidden]="comp?.filesOutput">
+  <label
+    class="nts-file-uploader-label"
+    [for]="id"
+    [hidden]="comp?.filesOutput"
+    [ngClass]="{
+      'nts-file-uploader-dragover': isDragOver
+    }"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
     <div class="nts-file-uploader-icon" [ngClass]="{ 'custom-icon': iconCustom }" [innerHtml]="iconCustom"></div>
     <div class="nts-file-uploader-title" *ngIf="title" [innerHtml]="title"></div>
     <div class="nts-file-uploader-description" *ngIf="description" [innerHtml]="description"></div>

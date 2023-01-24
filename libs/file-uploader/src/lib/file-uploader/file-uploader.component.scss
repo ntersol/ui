@@ -5,8 +5,10 @@
   border: 2px dashed #ccc;
   background: #f8f8f8;
   text-align: center;
-  &:hover {
+  &:hover,
+  &.nts-file-uploader-dragover {
     background: #eaeaea;
+    border: 2px dashed rgb(150, 150, 150);
   }
 }
 .nts-file-uploader-icon {

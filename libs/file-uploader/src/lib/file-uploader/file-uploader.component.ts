@@ -56,6 +56,8 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy {
   @Input() maxFileSize?: number | null = 100000;
   /** The maximum number of files allowed if multiple is true */
   @Input() maxFiles?: number | null = null;
+  /** Is the user dragging a file over the drop zone? */
+  public isDragOver = false;
 
   public filesOutput$ = new BehaviorSubject<FilesOutput | null>(null);
 
@@ -93,6 +95,37 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy {
     const fileInput = e.target as HTMLInputElement;
     const fileList = fileInput.files as FileList;
     this.stateChange(fileList);
+  }
+
+  /**
+   * Handles the dragover event on the drop area
+   * @param event - DragEvent
+   */
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = true;
+  }
+
+  /**
+   * Handles the dragleave event on the drop area
+   * @param event - DragEvent
+   */
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = false;
+  }
+
+  /**
+   * Handles the drop event on the drop area
+   * @param event - DragEvent
+   */
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = false;
+    const files = event?.dataTransfer?.files;
+    if (files) {
+      this.stateChange(files);
+    }
   }
 
   /**
@@ -199,7 +232,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy {
     } else if (bytes >= 1000) {
       return `${(bytes / 1000).toFixed(2)} KB`;
     } else {
-      return `${bytes} bytes.`;
+      return `${bytes} bytes`;
     }
   }
 
