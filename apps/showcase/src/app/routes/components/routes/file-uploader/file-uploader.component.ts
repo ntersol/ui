@@ -26,6 +26,7 @@ export class FileUploaderComponent implements OnInit {
     // Set up function to get result of fileupload
     public filesOutput(files: FilesOutput | null) {
       console.log('Output', files);
+      // Upload files
     }
   `;
 
