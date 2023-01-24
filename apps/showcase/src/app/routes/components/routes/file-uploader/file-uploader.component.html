@@ -1,0 +1,36 @@
+<div class="author"><strong>Author:</strong> Jerrol Krause</div>
+<h1>File Uploader</h1>
+<p>
+  This file uploader component allows users to easily manage file uploads. You will still need to perform the upload to
+  your API after a user has selected their files. It features a intuitive and user-friendly design, with the following
+  capabilities:
+</p>
+<ul>
+  <li>Support for multiple file selection</li>
+  <li>Drag and drop functionality for easy file selection</li>
+  <li>Real-time file validation, checking for file size and type restrictions</li>
+  <li>File previews, including image previews for image files</li>
+  <li>The ability to show a preview of the uploaded files and metadata such as file name and file size</li>
+  <li>The ability to show the corresponding icon for the file type using the file extension</li>
+  <li>Error handling for upload restrictions</li>
+  <li>The ability to remove a single file out of multiple selected</li>
+</ul>
+<hr />
+
+<p-tabView>
+  <!-- Documentation -->
+  <p-tabPanel header="Documentation">
+    <h2>Import</h2>
+    <pre><code class="language-ts" [innerHtml]="import"></code></pre>
+    <h2>HTML</h2>
+    <pre><code class="language-html" [innerHtml]="exampleHTML"></code></pre>
+    <h2>Typescript</h2>
+    <pre><code class="language-ts" [innerHtml]="inputFieldTs"></code></pre>
+    <h2>FilesOutput Interface</h2>
+    <pre><code class="language-ts" [innerHtml]="handlersTs"></code></pre>
+  </p-tabPanel>
+  <!-- Example -->
+  <p-tabPanel header="Example">
+    <nts-file-uploader (filesOutput)="filesOutput($event)"></nts-file-uploader>
+  </p-tabPanel>
+</p-tabView>

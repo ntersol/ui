@@ -288,6 +288,119 @@
       },
       "tags": []
     },
+    "file-uploader": {
+      "projectType": "library",
+      "root": "libs/file-uploader",
+      "sourceRoot": "libs/file-uploader/src",
+      "prefix": "file-uploader",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "libs/file-uploader/tsconfig.lib.json",
+            "project": "libs/file-uploader/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/file-uploader/tsconfig.lib.prod.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/file-uploader/src/**/*.ts", "libs/file-uploader/src/**/*.html"]
+          },
+          "outputs": ["{options.outputFile}"]
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/file-uploader"],
+          "options": {
+            "jestConfig": "libs/file-uploader/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "patch": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "cd libs/file-uploader/ && npm version patch"
+          }
+        },
+        "readme": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd libs/file-uploader/ && npx typedoc --plugin typedoc-plugin-markdown src/lib/file-uploader.module.ts --tsconfig ./tsconfig.json",
+              "cp libs/file-uploader/docs/README.md libs/file-uploader/README.md"
+            ],
+            "parallel": false
+          }
+        },
+        "pack": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "cd dist/libs/file-uploader/ && npm pack",
+              "cd dist/libs/file-uploader/ && npm publish --access public"
+            ],
+            "parallel": false
+          }
+        },
+        "publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "ng run file-uploader:patch",
+              "ng run file-uploader:build:production",
+              "ng run file-uploader:pack"
+            ],
+            "parallel": false
+          }
+        },
+        "auto-publish": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "ng run file-uploader:publish"
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/file-uploader/.storybook"
+            },
+            "projectBuildConfig": "file-uploader:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/file-uploader",
+            "config": {
+              "configFolder": "libs/file-uploader/.storybook"
+            },
+            "projectBuildConfig": "file-uploader:build-storybook"
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
     "forms": {
       "projectType": "library",
       "root": "libs/forms",

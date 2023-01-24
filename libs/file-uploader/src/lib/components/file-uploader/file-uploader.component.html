@@ -1,0 +1,75 @@
+<div
+  class="nts-file-uploader"
+  *ngIf="{
+    filesOutput: filesOutput$ | async,
+    state: state$ | async
+  } as comp"
+>
+  <!-- Error handling -->
+  <div class="nts-file-uploader-error" *ngIf="comp.state?.errors?.length">
+    <p-message
+      styleClass="w-100 mb-1"
+      severity="error"
+      [text]="error"
+      *ngFor="let error of comp.state?.errors"
+    ></p-message>
+  </div>
+
+  <label
+    class="nts-file-uploader-label"
+    [for]="id"
+    [hidden]="comp?.filesOutput"
+    [ngClass]="{ 'nts-file-uploader-dragover': isDragOver }"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    <div class="nts-file-uploader-icon" [ngClass]="{ 'custom-icon': iconCustom }" [innerHtml]="iconCustom"></div>
+    <div class="nts-file-uploader-title" *ngIf="title" [innerHtml]="title"></div>
+    <div class="nts-file-uploader-description" *ngIf="description" [innerHtml]="description"></div>
+    <input
+      [id]="id"
+      class="nts-file-uploader-input"
+      [multiple]="multiple ? 'multiple' : null"
+      type="file"
+      (change)="filesChanged($event)"
+    />
+  </label>
+  <div [hidden]="!comp?.filesOutput">
+    <a class="nts-file-uploader-reset" (click)="reset()" *ngIf="multiple && (comp?.filesOutput?.files?.length || 0) > 1"
+      >Remove All</a
+    >
+    <p><strong>Files to be uploaded</strong></p>
+    <div class="nts-file-row" *ngFor="let url of comp?.filesOutput?.fileReader; let i = index">
+      <div class="preview" style="max-width: 20%">
+        <img class="nts-file-uploader-img" width="50px" *ngIf="url" [src]="url" />
+        <i class="nts-file-uploader-file-icon" *ngIf="!url" [class]="(comp?.state?.icons)![i] || 'pi pi-file-o'"></i>
+      </div>
+
+      <div
+        class="filename"
+        style="max-width: 50%"
+        *ngIf="comp?.filesOutput?.files?.length"
+        [innerHtml]="comp!.filesOutput!.files![i].name"
+      ></div>
+
+      <div
+        class="filesize"
+        style="max-width: 20%"
+        *ngIf="comp?.state?.fileSizes?.length"
+        [innerHtml]="(comp?.state?.fileSizes)![i]"
+      ></div>
+
+      <div class="nts-remove" style="max-width: 10%">
+        <button
+          (click)="removeFile(i)"
+          type="button"
+          icon="pi pi-times"
+          class="p-element p-button p-component p-button-icon-only"
+        >
+          <span class="p-button-icon pi pi-times" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
