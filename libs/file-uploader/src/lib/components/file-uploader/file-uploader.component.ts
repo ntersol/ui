@@ -8,7 +8,7 @@ export interface FilesOutput {
   files: File[] | null;
   /** Object urls created with URL.createObjectURL() in blob format */
   urls: string[] | null;
-  /** Base64 encoded version generated using fileReader */
+  /** Base64 encoded version generated using fileReader. Only images will have this, other filetypes will be null */
   fileReader: (string | ArrayBuffer | null)[] | null;
 }
 
@@ -86,7 +86,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy {
     bmp: 'pi pi-file-image',
   };
 
-  @Output() filesOutput = new EventEmitter();
+  @Output() filesOutput = new EventEmitter<FilesOutput | null>();
 
   constructor() {}
 

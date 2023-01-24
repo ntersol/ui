@@ -2,19 +2,21 @@
 <h1>File Uploader</h1>
 <p>A component to simplify the file upload box including preview and data conversion</p>
 <hr />
-<nts-file-uploader (filesOutput)="filesOutput($event)"></nts-file-uploader>
+
 <p-tabView>
   <!-- Documentation -->
   <p-tabPanel header="Documentation">
     <h2>Import</h2>
     <pre><code class="language-ts" [innerHtml]="import"></code></pre>
-    <p>typescript - input data example</p>
-    <pre><code class="language-ts" [innerHtml]="inputFieldTs"></code></pre>
-    <p>typescript - event handlers example</p>
-    <pre><code class="language-ts" [innerHtml]="handlersTs"></code></pre>
-    <p>html</p>
+    <p>HTML</p>
     <pre><code class="language-html" [innerHtml]="exampleHTML"></code></pre>
+    <p>Typescript</p>
+    <pre><code class="language-ts" [innerHtml]="inputFieldTs"></code></pre>
+    <p>FilesOutput Interface</p>
+    <pre><code class="language-ts" [innerHtml]="handlersTs"></code></pre>
   </p-tabPanel>
   <!-- Example -->
-  <p-tabPanel header="Example"> </p-tabPanel>
+  <p-tabPanel header="Example">
+    <nts-file-uploader (filesOutput)="filesOutput($event)"></nts-file-uploader>
+  </p-tabPanel>
 </p-tabView>

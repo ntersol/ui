@@ -1,3 +1,4 @@
+import { FilesOutput } from '@ntersol/file-uploader';
 import { Component, OnInit } from '@angular/core';
 import { HighlightService } from '../../../../shared/services/highlight.service';
 
@@ -16,51 +17,33 @@ export class FileUploaderComponent implements OnInit {
   }
 
   public import = `
-  import { NtsTagsModule } from '@ntersol/tags';`;
+  import { NtsFileUploaderModule } from '@ntersol/file-uploader';`;
 
   public inputFieldTs: string = `
-    public tags: NtsTags.TagDef[] = [
-      {
-        guid: '1',
-        tagText: 'First tag',
-        description: 'this is the first tag',
-        textColor: '#f26',
-        backgroundColor: 'black',
-      },
-      {
-        guid: '2',
-        tagText: 'Second tag',
-        description: 'this is the second tag',
-        textColor: '#040354',
-        backgroundColor: '#fff',
-      }
-    ];
+    // Import emitter type
+    import { FilesOutput } from '@ntersol/file-uploader';
+
+    // Set up function to get result of fileupload
+    public filesOutput(files: FilesOutput | null) {
+      console.log('Output', files);
+    }
   `;
 
   public handlersTs: string = `
-    public onCreate(tag: NtsTags.TagDef) {
-      console.log('--create new--');
-      console.log(tag);
-    }
-
-    public onUpdate(tag: NtsTags.TagDef) {
-      console.log('--update--');
-      console.log(tag);
-    }
-
-    public onDelete(tag: NtsTags.TagDef) {
-      console.log('--delete--');
-      console.log(tag);
-    }
+  export interface FilesOutput {
+    /** Filelist as returned directly form a file input */
+    fileList: FileList | null;
+    /** Individual files from the fileList in an array */
+    files: File[] | null;
+    /** Object urls created with URL.createObjectURL() in blob format */
+    urls: string[] | null;
+    /** Base64 encoded version generated using fileReader. Only images will have this, other filetypes will be null */
+    fileReader: (string | ArrayBuffer | null)[] | null;
+  }
   `;
 
   public exampleHTML: string = this.htmlEncode(`
-  <nts-tags
-    [tags]="tags"
-    (tagCreated)="onCreate($event)"
-    (tagUpdated)="onUpdate($event)"
-    (tagDeleted)="onDelete($event)">
-  </nts-tags>`);
+  <nts-file-uploader (filesOutput)="filesOutput($event)"></nts-file-uploader>`);
 
   public testTags: any[] = [
     {
@@ -83,7 +66,7 @@ export class FileUploaderComponent implements OnInit {
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  public filesOutput(files: any) {
+  public filesOutput(files: FilesOutput | null) {
     console.log('Output', files);
   }
 }
