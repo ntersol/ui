@@ -144,7 +144,7 @@
     "@ntersol/forms": "0.0.10",
     "@scullyio/init": "2.1.21",
     "@scullyio/ng-lib": "2.1.0",
-    "@scullyio/scully": "2.1.0",
+    "@scullyio/scully": "2.1.41",
     "@scullyio/scully-plugin-base-href-rewrite": "2.1.21",
     "@scullyio/scully-plugin-puppeteer": "2.1.0",
     "reinstall": "^2.0.0",
