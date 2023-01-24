@@ -17,6 +17,10 @@ export class FileUploaderComponent implements OnInit {
   }
 
   public import = `
+  // Install
+  npm i @ntersol/file-uploader
+
+  // Import
   import { NtsFileUploaderModule } from '@ntersol/file-uploader';`;
 
   public inputFieldTs: string = `
