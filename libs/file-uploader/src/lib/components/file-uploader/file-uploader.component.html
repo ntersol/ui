@@ -46,7 +46,16 @@
     <p *ngIf="canRemove && titleResults">
       <strong [innerHTML]="titleResults"> </strong>
     </p>
-    <div class="nts-file-row" *ngFor="let url of comp?.filesOutput?.fileReader; let i = index">
+    <div
+      class="nts-file-row"
+      *ngFor="let url of comp?.filesOutput?.fileReader; let i = index"
+      (dragstart)="dragStart(i)"
+      (dragover)="dragOver($event)"
+      (drop)="drop($event, i)"
+      [draggable]="canReorder"
+      [class.drag-over]="dragIndex === i"
+      [class.dragging]="dragIndex === i"
+    >
       <div class="preview" style="max-width: 20%">
         <img class="nts-file-uploader-img" width="50px" *ngIf="url" [src]="url" />
         <i class="nts-file-uploader-file-icon" *ngIf="!url" [class]="(comp?.state?.icons)![i] || 'pi pi-file-o'"></i>
@@ -76,7 +85,6 @@
           <span class="p-button-icon pi pi-times" aria-hidden="true"></span>
         </button>
       </div>
-
     </div>
   </div>
 </div>

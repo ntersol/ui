@@ -38,6 +38,14 @@
   border: 1px solid #ccc;
   box-shadow: 3px 3px 10px rgb(0 0 0 / 20%);
 }
+.drag-over {
+  background: #f9f9f9;
+}
+.dragging2 {
+  background: red !important;
+  cursor: grabbing;
+  border: 1px solid #eeeeee;
+}
 .nts-file-uploader-reset {
   float: right;
   cursor: pointer;

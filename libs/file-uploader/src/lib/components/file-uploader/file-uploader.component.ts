@@ -76,8 +76,13 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   @Input() maxFiles?: number | null = null;
   /** Can the user remove the files currently being displayed */
   @Input() canRemove = true;
+  /** Can the user reorder the files currently being displayed */
+  @Input() canReorder = false;
+
   /** Is the user dragging a file over the drop zone? */
   public isDragOver = false;
+  /** Keep track of which item is being dragged */
+  public dragIndex: number | null = null;
 
   @ViewChild('input', { static: false }) input?: ElementRef<HTMLInputElement>;
 
@@ -417,6 +422,50 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     return `${fileTypesDescription} ${maxSizeDescription}`;
+  }
+
+  dragStart(index: number) {
+    // Set the drag index to the index of the element being dragged
+    this.dragIndex = index;
+  }
+
+  dragOver(event: Event) {
+    // Prevent the default dragover event to allow drop
+    event.preventDefault();
+  }
+
+  /**
+   * Handles the drop event and reorders the list.
+   *
+   * @param {Event} event - The DOM event that was fired when the item was dropped
+   * @param {number} index - The index of the item that the dragged item was dropped on
+   */
+  drop(event: Event, index: number) {
+    console.log('drop', event, index);
+
+    // Reorder the items array
+    event.preventDefault();
+
+    this.state$.pipe(take(1)).subscribe((state) => {
+      if (!state.files?.length || this.dragIndex === null) {
+        return;
+      }
+      const files = [...state.files];
+      const dragIndex = this.dragIndex;
+
+      if (dragIndex < index) {
+        for (let i = dragIndex; i < index; i++) {
+          [files[i], files[i + 1]] = [files[i + 1], files[i]];
+        }
+      } else {
+        for (let i = dragIndex; i > index; i--) {
+          [files[i], files[i - 1]] = [files[i - 1], files[i]];
+        }
+      }
+      this.dragIndex = null;
+      console.log(files);
+      this.reloadFiles(files);
+    });
   }
 
   ngOnDestroy(): void {}
