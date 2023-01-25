@@ -33,7 +33,11 @@
   </p-tabPanel>
   <!-- Example -->
   <p-tabPanel header="Example">
-    <nts-file-uploader [files]="files$ | async" (filesOutput)="filesOutput($event)"></nts-file-uploader>
+    <nts-file-uploader
+      [canReorder]="true"
+      [files]="files$ | async"
+      (filesOutput)="filesOutput($event)"
+    ></nts-file-uploader>
     <hr />
     <button class="p-button" (click)="reloadFiles()">Reload Files</button>
   </p-tabPanel>
