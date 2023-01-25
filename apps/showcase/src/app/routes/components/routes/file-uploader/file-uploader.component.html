@@ -14,6 +14,7 @@
   <li>The ability to show the corresponding icon for the file type using the file extension</li>
   <li>Error handling for upload restrictions</li>
   <li>The ability to remove a single file out of multiple selected</li>
+  <li>The ability to reload previously uploaded files</li>
 </ul>
 <hr />
 
@@ -31,6 +32,8 @@
   </p-tabPanel>
   <!-- Example -->
   <p-tabPanel header="Example">
-    <nts-file-uploader (filesOutput)="filesOutput($event)"></nts-file-uploader>
+    <nts-file-uploader [files]="files$ | async" (filesOutput)="filesOutput($event)"></nts-file-uploader>
+    <hr />
+    <button class="p-button" (click)="reloadFiles()">Reload Files</button>
   </p-tabPanel>
 </p-tabView>

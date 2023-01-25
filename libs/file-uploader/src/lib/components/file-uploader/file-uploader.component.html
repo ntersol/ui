@@ -25,9 +25,10 @@
     (drop)="onDrop($event)"
   >
     <div class="nts-file-uploader-icon" [ngClass]="{ 'custom-icon': iconCustom }" [innerHtml]="iconCustom"></div>
-    <div class="nts-file-uploader-title" *ngIf="title" [innerHtml]="title"></div>
-    <div class="nts-file-uploader-description" *ngIf="description" [innerHtml]="description"></div>
+    <div class="nts-file-uploader-title" *ngIf="titleUpload" [innerHtml]="titleUpload"></div>
+    <div class="nts-file-uploader-description" *ngIf="descriptionUpload" [innerHtml]="descriptionUpload"></div>
     <input
+      #input
       [id]="id"
       class="nts-file-uploader-input"
       [multiple]="multiple ? 'multiple' : null"
@@ -36,10 +37,15 @@
     />
   </label>
   <div [hidden]="!comp?.filesOutput">
-    <a class="nts-file-uploader-reset" (click)="reset()" *ngIf="multiple && (comp?.filesOutput?.files?.length || 0) > 1"
+    <a
+      class="nts-file-uploader-reset"
+      (click)="reset()"
+      *ngIf="canRemove && multiple && (comp?.filesOutput?.files?.length || 0) > 1"
       >Remove All</a
     >
-    <p><strong>Files to be uploaded</strong></p>
+    <p *ngIf="canRemove && titleResults">
+      <strong [innerHTML]="titleResults"> </strong>
+    </p>
     <div class="nts-file-row" *ngFor="let url of comp?.filesOutput?.fileReader; let i = index">
       <div class="preview" style="max-width: 20%">
         <img class="nts-file-uploader-img" width="50px" *ngIf="url" [src]="url" />
@@ -60,7 +66,7 @@
         [innerHtml]="(comp?.state?.fileSizes)![i]"
       ></div>
 
-      <div class="nts-remove" style="max-width: 10%">
+      <div class="nts-remove" style="max-width: 10%" *ngIf="canRemove">
         <button
           (click)="removeFile(i)"
           type="button"
@@ -70,6 +76,7 @@
           <span class="p-button-icon pi pi-times" aria-hidden="true"></span>
         </button>
       </div>
+
     </div>
   </div>
 </div>

@@ -1,4 +1,17 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { BehaviorSubject, take } from 'rxjs';
 
 export interface FilesOutput {
@@ -30,7 +43,7 @@ interface State {
  * - Emits an event when the file is uploaded successfully
  *
  * @example
- * <nts-file-uploader (filesChanged)="yourFunction($event)"></nts-file-uploader>
+ * <nts-file-uploader [files]=filesToDisplay (filesChanged)="yourFunction($event)"></nts-file-uploader>
  *
  * @output {EventEmitter<File>} filesChanged -
  */
@@ -40,15 +53,19 @@ interface State {
   styleUrls: ['./file-uploader.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NtsFileUploaderComponent implements OnInit, OnDestroy {
+export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+  /** Files from the parent component to display in the uploader */
+  @Input() files: File[] | null = null;
   /** Wrapper ID */
   @Input() id: string | null = 'nts-file-uploader-input-' + Math.floor(Math.random() * 1000000);
   /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
   @Input() iconCustom?: string | null = null;
-  /** Title that appears below the icon */
-  @Input() title?: string | null = 'Click or drag here to upload';
+  /** Title that appears below the icon on the upload box */
+  @Input() titleUpload?: string | null = 'Click or drag here to upload';
   /** Description that appears below the title */
-  @Input() description: string | null = null;
+  @Input() descriptionUpload: string | null = null;
+  /** Title that appears above the documents that the user has added */
+  @Input() titleResults?: string | null = 'Files to be uploaded';
   /** Allow the user to upload multiple files */
   @Input() multiple?: boolean | null = true;
   /** A string array of allowed mimetypes, IE ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'] */
@@ -57,8 +74,12 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy {
   @Input() maxFileSize?: number | null = null;
   /** The maximum number of files allowed if multiple is true */
   @Input() maxFiles?: number | null = null;
+  /** Can the user remove the files currently being displayed */
+  @Input() canRemove = true;
   /** Is the user dragging a file over the drop zone? */
   public isDragOver = false;
+
+  @ViewChild('input', { static: false }) input?: ElementRef<HTMLInputElement>;
 
   public filesOutput$ = new BehaviorSubject<FilesOutput | null>(null);
 
@@ -86,15 +107,46 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy {
     bmp: 'pi pi-file-image',
   };
 
+  /** Is DOM loaded and available */
+  private loaded = false;
+
   @Output() filesOutput = new EventEmitter<FilesOutput | null>();
 
   constructor() {}
 
   ngOnInit(): void {
     // If no description supplied and at least one restriction exists, autogen description
-    if (!this.description && (this.allowedFileTypes || this.maxFileSize)) {
-      this.description = this.getDescription(this.allowedFileTypes, this.maxFileSize);
+    if (!this.descriptionUpload && (this.allowedFileTypes || this.maxFileSize)) {
+      this.descriptionUpload = this.getDescription(this.allowedFileTypes, this.maxFileSize);
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['files'] && this.loaded) {
+      this.reloadFiles(this.files);
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.loaded = true;
+    this.reloadFiles(this.files);
+  }
+
+  /**
+   * Take files passed in from the parent and update the DOM
+   * This allows the parent to reload files into this component such as in an edit option
+   * @param files
+   * @returns
+   */
+  private reloadFiles(files?: File[] | null) {
+    if (!this.loaded || !files?.length || !this.input?.nativeElement) {
+      return;
+    }
+
+    const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
+    files.forEach((file) => dt.items.add(file));
+    this.input.nativeElement.files = dt.files; // Update input
+    this.stateChange(dt.files); // Make state change
   }
 
   /**

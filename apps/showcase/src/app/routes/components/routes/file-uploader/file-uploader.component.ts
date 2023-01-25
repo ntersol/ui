@@ -1,6 +1,7 @@
 import { FilesOutput } from '@ntersol/file-uploader';
 import { Component, OnInit } from '@angular/core';
 import { HighlightService } from '../../../../shared/services/highlight.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'file-uploader',
@@ -8,6 +9,9 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
   styleUrls: ['./file-uploader.component.scss'],
 })
 export class FileUploaderComponent implements OnInit {
+  public files$ = new BehaviorSubject<File[] | null>(null);
+  public files: FilesOutput | null = null;
+
   constructor(private highlight: HighlightService) {}
 
   ngOnInit(): void {}
@@ -72,6 +76,13 @@ export class FileUploaderComponent implements OnInit {
   }
 
   public filesOutput(files: FilesOutput | null) {
-    console.log('Output', files);
+    console.log('Parent output', files);
+    if (files) {
+      this.files = files;
+    }
+  }
+
+  public reloadFiles() {
+    this.files$.next(this.files?.files ?? null);
   }
 }
