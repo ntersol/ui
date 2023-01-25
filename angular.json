@@ -1042,7 +1042,7 @@
         "move-coverage": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["cp -avr coverage dist/apps/showcase/"]
+            "commands": ["xcopy \"coverage dist/apps/showcase/\""]
           }
         },
         "curate": {
@@ -1065,12 +1065,7 @@
         "deploy": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "ng run showcase:scully-build",
-              "ng run showcase:move-coverage",
-              "ng run showcase:curate",
-              "ng run showcase:gh"
-            ],
+            "commands": ["ng run showcase:scully-build", "ng run showcase:curate", "ng run showcase:gh"],
             "parallel": false
           }
         },
@@ -1080,7 +1075,7 @@
             "commands": [
               "ng run showcase:build:production",
               "npx scully --project showcase --scanRoutes",
-              "cp -a dist/static/. dist/apps/showcase/"
+              "xcopy \"dist/static\" \"dist/apps/showcase\" /s /y"
             ],
             "parallel": false
           }
