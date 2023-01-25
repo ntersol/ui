@@ -77,7 +77,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   /** Can the user remove the files currently being displayed */
   @Input() canRemove = true;
   /** Can the user reorder the files currently being displayed */
-  @Input() canReorder = true;
+  @Input() canReorder = false;
 
   /** Is the user dragging a file over the drop zone? */
   public isDragOver = false;
@@ -375,7 +375,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
       const allowedTypes = this.allowedFileTypes
         .map((type) => {
           const split = type.split('/');
-          return split[1].toUpperCase();
+          return split[1];
         })
         .reduce((prev, curr, index) => {
           // Check if this is the last item in the array
@@ -444,8 +444,6 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
    * @param {number} index - The index of the item that the dragged item was dropped on
    */
   drop(event: Event, index: number) {
-    console.log('drop', event, index);
-
     // Reorder the items array
     event.preventDefault();
     this.state$.pipe(take(1)).subscribe((state) => {
@@ -465,7 +463,6 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
         }
       }
       this.dragIndex = null;
-      console.log(files);
       this.reloadFiles(files);
     });
   }
