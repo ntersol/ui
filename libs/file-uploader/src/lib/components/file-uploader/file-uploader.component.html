@@ -36,7 +36,11 @@
       (change)="filesChanged($event)"
     />
   </label>
-  <div [hidden]="!comp?.filesOutput">
+  <div
+    class="nts-file-uploader-results"
+    [ngClass]="{ 'is-dragging': dragIndex !== null }"
+    [hidden]="!comp?.filesOutput"
+  >
     <a
       class="nts-file-uploader-reset"
       (click)="reset()"
@@ -50,11 +54,14 @@
       class="nts-file-row"
       *ngFor="let url of comp?.filesOutput?.fileReader; let i = index"
       (dragstart)="dragStart(i)"
-      (dragover)="dragOver($event)"
+      (dragover)="dragOver($event, i)"
       (drop)="drop($event, i)"
+      (dragend)="dragOverIndex = null"
       [draggable]="canReorder"
-      [class.drag-over]="dragIndex === i"
-      [class.dragging]="dragIndex === i"
+      [ngClass]="{
+        dragging: dragIndex === i,
+        'dragged-over': dragOverIndex === i && dragIndex !== i
+      }"
     >
       <div class="preview" style="max-width: 20%">
         <img class="nts-file-uploader-img" width="50px" *ngIf="url" [src]="url" />
@@ -74,6 +81,10 @@
         *ngIf="comp?.state?.fileSizes?.length"
         [innerHtml]="(comp?.state?.fileSizes)![i]"
       ></div>
+
+      <div class="reorder" *ngIf="canReorder">
+        <a><i class="pi pi-arrows-alt"></i></a>
+      </div>
 
       <div class="nts-remove" style="max-width: 10%" *ngIf="canRemove">
         <button

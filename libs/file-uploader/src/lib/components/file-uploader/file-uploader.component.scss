@@ -38,21 +38,26 @@
   border: 1px solid #ccc;
   box-shadow: 3px 3px 10px rgb(0 0 0 / 20%);
 }
-.drag-over {
+.dragging {
   background: #f9f9f9;
+  cursor: grabbing !important;
 }
-.dragging2 {
-  background: red !important;
-  cursor: grabbing;
-  border: 1px solid #eeeeee;
+.dragged-over {
+  border: 1px solid rgb(150, 150, 150) !important;
 }
+.reorder a {
+  cursor: grab;
+}
+
 .nts-file-uploader-reset {
   float: right;
   cursor: pointer;
 }
+
 .nts-file-row {
   display: flex;
   align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0);
   border-bottom: 1px solid #efefef;
   & > div {
     flex: 1 1 auto;
