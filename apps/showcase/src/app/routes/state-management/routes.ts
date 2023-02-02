@@ -6,8 +6,20 @@ import { StoreCommunicationComponent } from './routes/store-communication/store-
 
 import { StateManagementComponent } from './state-management.component';
 import { StateManagementModule } from './state-management.module';
+import { CacheMapComponent } from './routes/operators/cache-map/cache-map.component';
+import { BetterDistinctUntilChangedComponent } from './routes/operators/better-distinct-until-changed/better-distinct-until-changed.component';
 
 const routes: Routes = [
+  {
+    path: 'operators/cache-map',
+    component: CacheMapComponent,
+    data: { title: 'Cache Map Operator' },
+  },
+  {
+    path: 'operators/better-distinct-until-changed',
+    component: BetterDistinctUntilChangedComponent,
+    data: { title: 'Better DistinctUntilChanged Operator' },
+  },
   {
     path: 'api-store-creator',
     component: ApiStoreCreatorComponent,

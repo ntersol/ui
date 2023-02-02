@@ -15,6 +15,8 @@ import { UiStoreCreatorComponent } from './routes/ui-store-creator/ui-store-crea
 import { StoreCommunicationComponent } from './routes/store-communication/store-communication.component';
 import { RouteUiStateService, RouteUiStateStore, RouteUiStateQuery } from './shared/state/ui/route-ui-state.service';
 import { SiteModule } from '../../site.module';
+import { CacheMapComponent } from './routes/operators/cache-map/cache-map.component';
+import { BetterDistinctUntilChangedComponent } from './routes/operators/better-distinct-until-changed/better-distinct-until-changed.component';
 
 @NgModule({
   imports: [CommonModule, SiteModule, routing, TabViewModule, NtsTableModule, NtsFormsModule, NtsStateManagementModule],
@@ -24,6 +26,8 @@ import { SiteModule } from '../../site.module';
     UiStoreCreatorComponent,
     ExampleComponent,
     StoreCommunicationComponent,
+    CacheMapComponent,
+    BetterDistinctUntilChangedComponent,
   ],
   providers: [RouteUiStateService, RouteUiStateStore, RouteUiStateQuery],
   exports: [],

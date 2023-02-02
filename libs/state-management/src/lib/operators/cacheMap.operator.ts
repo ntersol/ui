@@ -13,16 +13,17 @@ interface CacheItem<t> {
 }
 type Cache<t = unknown> = Record<string, CacheItem<t>>;
 type Options<t> = {
+  /** Add a prefix to the unique ID specific to this  */
+  namespace?: string;
   /** How long should this response belong in the cache in seconds */
   ttl?: number | null | undefined;
   /** Supply a function that returns the upstream data and expects a string to use as a unique ID. Overrides the default ID handling and is useful for scenarios where the upstream data is a non-primitive */
-  uniqueIdFn?: (val: t) => string;
+  uniqueIdFn?: (val: t) => string | number;
 };
-/** Store cached data */
-let cache: Cache = {};
 
 /**
- * Caches an observable stream in memory. Works exactly like mergeMap but uses the upstream data to cache data returned from the downstream observable
+ * Caches an observable stream in memory. Works exactly like mergeMap but uses the upstream data to cache data returned from the downstream observable.
+ * Be conscientious of memory management.
  *
  * Prefers the upstream data to be a primitive. Non primitives will be stringified which may still work but likely not reliably
  * @param source
@@ -30,11 +31,13 @@ let cache: Cache = {};
 export const cacheMap =
   <y, t>(dest: (x: t) => Observable<y>, options?: Options<t>) =>
   (source: Observable<t>) => {
+    /** Store cached data */
+    let cache: Cache = {};
     return source.pipe(
       mergeMap((s) => {
         // Generate a uniqueID from the source
         // If custom function supplied, use that
-        const uniqueId = options?.uniqueIdFn ? options.uniqueIdFn(s) : generateUniqueId(s);
+        const uniqueId = options?.uniqueIdFn ? String(options.uniqueIdFn(s)) : generateUniqueId(s);
         // Get current time
         const now = new Date();
         // Get cache item for typesafety
