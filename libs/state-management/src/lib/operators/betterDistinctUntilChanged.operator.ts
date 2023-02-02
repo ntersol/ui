@@ -1,6 +1,31 @@
 import { Observable, OperatorFunction } from 'rxjs';
 
 /**
+ * An advanced version of distinctUntilChanged that will also recursively evaluate arrays and objects to see if they match even if the memory value isn't identical via "==="
+ *
+ * #### Limitations ####
+ * - May be costly for large objects or arrays, use distinctUntilChanged with a custom comparator if that's the case
+ * - Will not work for classes or complex objects with accessors or methods
+ * @param source
+ */
+export function betterDistinctUntilChanged<T>(): OperatorFunction<T, T> {
+  let previousValue: T;
+  return (source: Observable<T>) =>
+    new Observable<T>((observer) => {
+      return source.subscribe({
+        next: (value) => {
+          if (!isEqual(value, previousValue)) {
+            observer.next(value);
+            previousValue = value;
+          }
+        },
+        error: (err) => observer.error(err),
+        complete: () => observer.complete(),
+      });
+    });
+}
+
+/**
  * Check if the input arguments are equal, looks at all javascript types
  * Will not work with classes or complex objects with methods or accessors
  * @param a
@@ -41,28 +66,3 @@ const isEqual = (a?: unknown, b?: unknown): boolean => {
   }
   return false;
 };
-
-/**
- * An advanced version of distinctUntilChanged that will also recursively evaluate arrays and objects to see if they match even if the memory value isn't identical via "==="
- *
- * #### Limitations ####
- * - May be costly for large objects or arrays, use distinctUntilChanged with a custom comparator if that's the case
- * - Will not work for classes or complex objects with accessors or methods
- * @param source
- */
-export function betterDistinctUntilChanged<T>(): OperatorFunction<T, T> {
-  let previousValue: T;
-  return (source: Observable<T>) =>
-    new Observable<T>((observer) => {
-      return source.subscribe({
-        next: (value) => {
-          if (!isEqual(value, previousValue)) {
-            observer.next(value);
-            previousValue = value;
-          }
-        },
-        error: (err) => observer.error(err),
-        complete: () => observer.complete(),
-      });
-    });
-}

@@ -1,5 +1,4 @@
-export * from './operators/httpRequestWithState.util';
-export * from './operators/mapData.util';
+export * from './operators';
 
 export * from './components/api-state/api-state.component';
 export * from './components/error/error.component';

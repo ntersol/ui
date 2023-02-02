@@ -1,41 +1,46 @@
 import { Observable, of } from 'rxjs';
 import { mergeMap, tap } from 'rxjs/operators';
+/**
+ * TODO Items:
+ * - Support a localstorage option. Will need a method to clear localstorage too
+ * - Support a method to clear cache independent of the TTL
+ */
 
 interface CacheItem<t> {
   data: t;
-  expiry?: any;
-  meta?: any;
+  expiry?: number;
+  meta?: unknown;
 }
 type Cache<t = unknown> = Record<string, CacheItem<t>>;
-type Options = {
+type Options<t> = {
   /** How long should this response belong in the cache in seconds */
   ttl?: number | null | undefined;
-  // TODO: Not supported
-  /** Should this data be stored in localstorage instead of memory */
-  localStorage?: boolean; // TODO: Not implemented yet
-  /** Supply a unique ID for this stream. By default the upstream data is used but in the case of non-primitives such as large objects or classes that may not be ideal */
-  uniqueId?: string; // TODO: Not implemented yet
+  /** Supply a function that returns the upstream data and expects a string to use as a unique ID. Overrides the default ID handling and is useful for scenarios where the upstream data is a non-primitive */
+  uniqueIdFn?: (val: t) => string;
 };
 /** Store cached data */
 let cache: Cache = {};
 
 /**
- * Caches an observable stream. Works exactly like mergeMap but uses the upstream data to cache the downstream data
+ * Caches an observable stream in memory. Works exactly like mergeMap but uses the upstream data to cache data returned from the downstream observable
  *
- * Expects the upstream data to be a primitive. Non primitives will be stringified which will still work but likely not reliably
+ * Prefers the upstream data to be a primitive. Non primitives will be stringified which may still work but likely not reliably
  * @param source
  */
 export const cacheMap =
-  <y, t>(dest: (x: t) => Observable<y>, options?: Options) =>
+  <y, t>(dest: (x: t) => Observable<y>, options?: Options<t>) =>
   (source: Observable<t>) => {
     return source.pipe(
       mergeMap((s) => {
         // Generate a uniqueID from the source
-        const uniqueId = generateUniqueId(s);
+        // If custom function supplied, use that
+        const uniqueId = options?.uniqueIdFn ? options.uniqueIdFn(s) : generateUniqueId(s);
         // Get current time
         const now = new Date();
+        // Get cache item for typesafety
+        const cacheItem = cache[uniqueId];
         // Check if current time is greater than cache time, if so clear cache item
-        if (cache[uniqueId] && now.getTime() > cache[uniqueId].expiry) {
+        if (cacheItem?.expiry && now.getTime() > cacheItem.expiry) {
           cache = Object.assign({}, cache);
           delete cache[uniqueId];
         }
@@ -61,7 +66,7 @@ export const cacheMap =
   };
 
 /**
- *  Generate a unique ID from an unknown input
+ * Generate a unique ID from an unknown input
  * @param value
  * @returns
  */
@@ -69,13 +74,5 @@ const generateUniqueId = (value: unknown) => {
   if (typeof value === 'object') {
     return JSON.stringify(value);
   }
-  return slug(value);
+  return String(value);
 };
-
-/** Create a slug value from unknown input */
-const slug = (value: unknown) =>
-  String(value)
-    .trim()
-    .toLowerCase()
-    .replace(/ /gi, '-')
-    .replace(/[^A-Z0-9-]/gi, '');
