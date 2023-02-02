@@ -1,8 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { cacheMap } from '@ntersol/state-management';
-import { BehaviorSubject, filter } from 'rxjs';
-import { Models } from '../../../../../shared/models';
 import { HighlightService } from '../../../../../shared/services/highlight.service';
 import { StateManagementService } from '../../../shared/state-management.service';
 
@@ -95,21 +91,12 @@ export class CacheMapComponent implements OnInit {
       this.sms.dispatch.dispatch(tokenAction);
     }`;
 
-  public userID$ = new BehaviorSubject<number | null>(null);
-
-  public user$ = this.userID$.pipe(
-    filter((x) => !!x),
-    cacheMap((userID) => this.http.get<Models.User>(`//jsonplaceholder.typicode.com/users/${userID}`)),
-  );
-
-  public users$ = this.api.users.selectAll$;
-
-  constructor(private highlight: HighlightService, private http: HttpClient, private api: StateManagementService) {}
+  constructor(private highlight: HighlightService, public api: StateManagementService) {}
 
   ngOnInit(): void {}
 
   public updateUser(id: number) {
-    this.userID$.next(id);
+    this.api.userID$.next(id);
   }
 
   ngAfterViewInit() {

@@ -47,13 +47,13 @@
     <div class="row">
       <div class="col col-12 col-md-6">
         <p><em>Click to load user data</em></p>
-        <ng-container *ngIf="users$ | async as users">
+        <ng-container *ngIf="api.users$ | async as users">
           <div *ngFor="let user of users">
             <a (click)="updateUser(user.id)">{{ user.name }}</a>
           </div>
         </ng-container>
       </div>
-      <div class="col col-12 col-md-6" *ngIf="user$ | async as user">
+      <div class="col col-12 col-md-6" *ngIf="api.user$ | async as user">
         <p><strong>Current User</strong></p>
         <table class="table table-sm table-striped">
           <tbody>

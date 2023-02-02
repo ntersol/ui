@@ -13,8 +13,6 @@ interface CacheItem<t> {
 }
 type Cache<t = unknown> = Record<string, CacheItem<t>>;
 type Options<t> = {
-  /** Add a prefix to the unique ID specific to this  */
-  namespace?: string;
   /** How long should this response belong in the cache in seconds */
   ttl?: number | null | undefined;
   /** Supply a function that returns the upstream data and expects a string to use as a unique ID. Overrides the default ID handling and is useful for scenarios where the upstream data is a non-primitive */
