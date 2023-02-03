@@ -6,6 +6,23 @@ import { mergeMap, tap } from 'rxjs/operators';
  * - Support a method to clear cache independent of the TTL
  */
 
+/** A list of ID's to clear cache */
+let cacheClearIDList: string[] = [];
+
+/**
+ * Manually clear the cache that has the corresponding cacheID set in options
+ *
+ * The cache will not be cleared immediately but only on a subsequent emission
+ * @param cacheId
+ * @returns
+ */
+export const cacheMapClear = (cacheId?: string | null) => {
+  if (!cacheId) {
+    return;
+  }
+  cacheClearIDList.push(cacheId);
+};
+
 interface CacheItem<t> {
   data: t;
   expiry?: number;
@@ -14,18 +31,19 @@ interface CacheItem<t> {
 type Cache<t = unknown> = Record<string, CacheItem<t>>;
 type Options<t> = {
   /** How long should this response belong in the cache in seconds */
-  ttl?: number | null | undefined;
+  ttl?: number | null;
   /** Supply a function that returns the upstream data and expects a string to use as a unique ID. Overrides the default ID handling and is useful for scenarios where the upstream data is a non-primitive */
-  uniqueIdFn?: (val: t) => string | number;
-  /** Should the subsquent request clear the cache */
-  cacheClear?: boolean;
+  uniqueIdFn?: null | ((val: t) => string | number);
+  /** A unique ID to identify this cache. Only used to clear cache. Cache is not cleared immediately, only before next emission */
+  cacheId?: string | null;
 };
 
 /**
- * Caches an observable stream in memory. Works exactly like mergeMap but uses the upstream data to cache data returned from the downstream observable.
- * Be conscientious of memory management.
+ * Caches an observable stream in memory. Works exactly like mergeMap but uses the upstream data source to cache data returned from the downstream observable.
+ * Be conscientious of memory management
  *
  * Prefers the upstream data to be a primitive. Non primitives will be stringified which may still work but likely not reliably
+ *
  * @param source
  */
 export const cacheMap =
@@ -35,9 +53,12 @@ export const cacheMap =
     let cache: Cache = {};
     return source.pipe(
       mergeMap((s) => {
-        // Clear cache if requested
-        if (options?.cacheClear) {
+        // Clear cacheID is set and the cacheID is queued to be cleared
+        if (options?.cacheId && cacheClearIDList.includes(options.cacheId)) {
+          // Clear cache
           cache = {};
+          // Remove ID from cache list
+          cacheClearIDList = cacheClearIDList.filter((id) => id !== options.cacheId);
         }
         // Generate a uniqueID from the source
         // If custom function supplied, use that

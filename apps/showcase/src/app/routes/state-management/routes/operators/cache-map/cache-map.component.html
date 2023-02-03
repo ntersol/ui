@@ -16,6 +16,7 @@
   <li>Uses strict null checking to avoid possible errors from undefined values.</li>
   <li>Returns data from the cache if possible, and only fetches new data from the stream when needed.</li>
   <li>Stores the data returned from the stream in the cache for future use.</li>
+  <li>Has the ability to clear the cache manually on demand</li>
 </ul>
 <hr />
 
@@ -23,17 +24,20 @@
   <p-tabPanel header="Documentation">
     <h2>Install</h2>
     <pre>
-            <code class="language-ts" [innerHtml]="install"></code>
-        </pre>
+        <code class="language-ts" [innerHtml]="install"></code>
+    </pre>
     <p>Use exactly like you would use mergeMap or switchMap</p>
     <pre>
-            <code class="language-ts" [innerHtml]="inner"></code>
-        </pre>
-
+        <code class="language-ts" [innerHtml]="inner"></code>
+    </pre>
     <p>Options</p>
     <pre>
-                <code class="language-ts" [innerHtml]="usage1"></code>
-            </pre>
+        <code class="language-ts" [innerHtml]="usage1"></code>
+   </pre>
+    <p>Manual Cache Clear</p>
+    <pre>
+        <code class="language-ts" [innerHtml]="usage2"></code>
+   </pre>
   </p-tabPanel>
 
   <p-tabPanel header="Example">
@@ -43,6 +47,7 @@
     </p>
     <hr />
 
+    <button class="p-button" style="float: right" (click)="api.clearCache('users')">Clear Cache</button>
     <h2>Available Users</h2>
     <div class="row">
       <div class="col col-12 col-md-6">
