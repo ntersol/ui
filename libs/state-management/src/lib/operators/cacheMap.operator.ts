@@ -17,6 +17,8 @@ type Options<t> = {
   ttl?: number | null | undefined;
   /** Supply a function that returns the upstream data and expects a string to use as a unique ID. Overrides the default ID handling and is useful for scenarios where the upstream data is a non-primitive */
   uniqueIdFn?: (val: t) => string | number;
+  /** Should the subsquent request clear the cache */
+  cacheClear?: boolean;
 };
 
 /**
@@ -33,6 +35,10 @@ export const cacheMap =
     let cache: Cache = {};
     return source.pipe(
       mergeMap((s) => {
+        // Clear cache if requested
+        if (options?.cacheClear) {
+          cache = {};
+        }
         // Generate a uniqueID from the source
         // If custom function supplied, use that
         const uniqueId = options?.uniqueIdFn ? String(options.uniqueIdFn(s)) : generateUniqueId(s);
