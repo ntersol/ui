@@ -7,7 +7,7 @@ import { StoreCommunicationComponent } from './routes/store-communication/store-
 import { StateManagementComponent } from './state-management.component';
 import { StateManagementModule } from './state-management.module';
 import { CacheMapComponent } from './routes/operators/cache-map/cache-map.component';
-import { BetterDistinctUntilChangedComponent } from './routes/operators/better-distinct-until-changed/better-distinct-until-changed.component';
+import { SmartDistinctUntilChangedComponent } from './routes/operators/smart-distinct-until-changed/smart-distinct-until-changed.component';
 
 const routes: Routes = [
   {
@@ -16,8 +16,8 @@ const routes: Routes = [
     data: { title: 'Cache Map Operator' },
   },
   {
-    path: 'operators/better-distinct-until-changed',
-    component: BetterDistinctUntilChangedComponent,
+    path: 'operators/smart-distinct-until-changed',
+    component: SmartDistinctUntilChangedComponent,
     data: { title: 'Better DistinctUntilChanged Operator' },
   },
   {
