@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'operators/smart-distinct-until-changed',
     component: SmartDistinctUntilChangedComponent,
-    data: { title: 'Better DistinctUntilChanged Operator' },
+    data: { title: 'Smart DistinctUntilChanged Operator' },
   },
   {
     path: 'api-store-creator',

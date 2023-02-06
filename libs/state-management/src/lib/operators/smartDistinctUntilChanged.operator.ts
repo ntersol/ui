@@ -14,10 +14,16 @@ export function smartDistinctUntilChanged<T>(): OperatorFunction<T, T> {
     new Observable<T>((observer) => {
       return source.subscribe({
         next: (value) => {
-          // console.log(1, value, previousValue, isEqual(value, previousValue));
           if (!isEqual(value, previousValue)) {
             observer.next(value);
-            previousValue = value;
+            // Check that structuredClone is available for deep cloning
+            if (isStructuredCloneAvailable()) {
+              previousValue = structuredClone(value);
+            } else {
+              // Using parse/stringify works for simple examples but is problematic for things complex objects with methods or circular references
+              // Used for older browsers
+              previousValue = JSON.parse(JSON.stringify(value));
+            }
           }
         },
         error: (err) => observer.error(err),
@@ -68,4 +74,18 @@ const isEqual = (a?: unknown, b?: unknown): boolean => {
     return true;
   }
   return false;
+};
+
+/** Node JS check for SSR */
+export const isNode = typeof process !== 'undefined' && process.versions != null && process.versions.node != null;
+export const isBrowser = !isNode;
+
+/** Check if isStructuredCloneAvailable is available in the API */
+const isStructuredCloneAvailable = () => {
+  return (
+    isBrowser &&
+    typeof window !== 'undefined' &&
+    typeof window.postMessage === 'function' &&
+    typeof window.Worker !== 'undefined'
+  );
 };

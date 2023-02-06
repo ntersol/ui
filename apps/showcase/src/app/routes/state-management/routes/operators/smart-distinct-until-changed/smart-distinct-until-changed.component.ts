@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { smartDistinctUntilChanged } from '@ntersol/state-management';
 import { BehaviorSubject, tap } from 'rxjs';
 import { HighlightService } from '../../../../../shared/services/highlight.service';
 import { StateManagementService } from '../../../shared/state-management.service';
 
+@UntilDestroy()
 @Component({
   selector: 'nts-smart-distinct-until-changed',
   templateUrl: './smart-distinct-until-changed.component.html',
   styleUrls: ['./smart-distinct-until-changed.component.scss'],
 })
-export class SmartDistinctUntilChangedComponent implements OnInit {
+export class SmartDistinctUntilChangedComponent implements OnInit, OnDestroy {
   public install = `
   npm i @ntersol/state-management --save`;
 
@@ -46,7 +48,7 @@ export class SmartDistinctUntilChangedComponent implements OnInit {
   constructor(private highlight: HighlightService, public api: StateManagementService) {}
 
   ngOnInit(): void {
-    this.source$.subscribe();
+    this.source$.pipe(untilDestroyed(this)).subscribe();
   }
 
   public testPipe() {
@@ -93,4 +95,6 @@ export class SmartDistinctUntilChangedComponent implements OnInit {
   ngAfterViewInit() {
     this.highlight.highlightAll();
   }
+
+  ngOnDestroy(): void {}
 }

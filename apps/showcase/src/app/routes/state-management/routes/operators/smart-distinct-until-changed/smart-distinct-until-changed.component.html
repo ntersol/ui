@@ -1,21 +1,26 @@
 <div class="author"><strong>Author:</strong> Jerrol Krause</div>
 <h1>SmartDistinctUntilChanged</h1>
 <p>
-  A custom RXJS operator that can be used to check if the current emission from an observable stream is the same as the
-  previous emission. Unlike the standard distinctUntilChanged operator, this operator recursively evaluates arrays and
-  objects to see if they match, even if the memory value isn't identical via "===".
+  A custom RXJS operator that can be used to check to check if the current emission from an observable stream is the
+  same as the previous emission. Unlike the standard "distinctUntilChanged" operator, this operator recursively
+  evaluates arrays and objects to see if they match even if the memory value isn't identical via "===".
 </p>
 
 <p><strong>Features:</strong></p>
 <ul>
-  <li>Supports all javascript types, including arrays and objects</li>
-  <li>Recursively evaluates arrays and objects to check for equality</li>
-  <li>Can be used with any observable stream</li>
+  <li>Works with RXJS observables to check for duplicates in an emission stream.</li>
+  <li>Recursively evaluates arrays and objects to see if they match even if the memory value isn't identical.</li>
+  <li>Supports primitive values, objects, and arrays.</li>
+  <li>Has a fallback solution for older browsers that don't support "structuredClone".</li>
+  <li>Has NodeJS/SSR support</li>
 </ul>
 <p><strong>Limitations:</strong></p>
 <ul>
   <li>May be costly for large objects or arrays, use distinctUntilChanged with a custom comparator instead</li>
-  <li>Will not work with classes or complex objects with methods or accessors</li>
+  <li>
+    Will not work with classes or complex objects with methods or accessors on older browsers that do not support
+    "structuredClone"
+  </li>
 </ul>
 <hr />
 
@@ -32,7 +37,7 @@
   </p-tabPanel>
 
   <p-tabPanel header="Example">
-    <p>Open console and observe console changes</p>
+    <p>Open console and observe console changes.</p>
     <button class="p-button" (click)="testPipe()">Test Pipe</button>
   </p-tabPanel>
   <!--
