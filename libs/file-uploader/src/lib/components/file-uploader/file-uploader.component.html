@@ -85,6 +85,7 @@
   -->
   <label
     class="nts-file-uploader-label"
+    [hidden]="comp?.filesOutput && !canAddAdditionalFiles"
     [for]="id"
     [ngClass]="{ 'nts-file-uploader-dragover': isDragOver }"
     (dragover)="onDragOver($event)"

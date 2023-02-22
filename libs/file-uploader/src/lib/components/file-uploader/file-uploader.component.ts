@@ -23,6 +23,8 @@ export interface FilesOutput {
   urls: string[] | null;
   /** Base64 encoded version generated using fileReader. Only images will have this, other filetypes will be null */
   fileReader: (string | ArrayBuffer | null)[] | null;
+  /** Files in FormData format with a key of 'file' */
+  formData: FormData | null;
 }
 
 interface State {
@@ -78,6 +80,8 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   @Input() canRemove = true;
   /** Can the user reorder the files currently being displayed */
   @Input() canReorder = false;
+  /** Can the user add additional files after the initial addition */
+  @Input() canAddAdditionalFiles = true;
 
   /** Is the user dragging a file over the drop zone? */
   public isDragOver = false;
@@ -268,14 +272,19 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
       return;
     }
 
+    // Generate new filelist
     const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
-    // Add files to datatransfer
-    Array.from(state.files).forEach((file) => dt.items.add(file));
+    Array.from(state.files).forEach((file) => dt.items.add(file)); // Add files to datatransfer
+
+    // Create FormData entity
+    const formData = new FormData();
+    files.forEach((file) => formData.append('file', file)); // Attach files
 
     // Hold output of different formats
     const filesOutput: FilesOutput = {
       fileList: dt.files,
       files: files,
+      formData: formData,
       urls: files.map((file) => URL.createObjectURL(file)),
       fileReader: [],
     };
