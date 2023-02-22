@@ -17,6 +17,11 @@ import {
 } from './api-store.utils';
 
 /**
+ * TODO:
+ * - Make fresh API call on error
+ */
+
+/**
  * Automatically create an api store to manage interaction between a local flux store and a remote api
  */
 export class NtsApiStoreCreator<t> extends NtsBaseStore {

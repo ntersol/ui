@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NtsStateManagementService } from '@ntersol/state-management';
+import { cacheMap, NtsStateManagementService, cacheMapClear } from '@ntersol/state-management';
+import { BehaviorSubject, filter } from 'rxjs';
 import { Models } from '../../../shared/models';
 
 export enum StoreIds {
@@ -34,7 +36,18 @@ export class StateManagementService {
     { persistId: 'uiStore' },
   );
 
-  constructor(public sms: NtsStateManagementService) {
+  public userID$ = new BehaviorSubject<number | null>(null);
+
+  public user$ = this.userID$.pipe(
+    filter((x) => !!x),
+    cacheMap((userID) => this.http.get<Models.User>(`//jsonplaceholder.typicode.com/users/${userID}`), {
+      cacheId: 'users',
+    }),
+  );
+
+  public users$ = this.users.selectAll$;
+
+  constructor(public sms: NtsStateManagementService, private http: HttpClient) {
     /**
     this.uiStore.select$('isString').subscribe(x => console.log(x));
 
@@ -54,5 +67,9 @@ export class StateManagementService {
    */
     // this.users.events$.subscribe(x => console.log('User store events', x));
     // ntsBaseStore().events$.subscribe(x => console.log('Global store events', x));
+  }
+
+  public clearCache(id: string) {
+    cacheMapClear(id);
   }
 }
