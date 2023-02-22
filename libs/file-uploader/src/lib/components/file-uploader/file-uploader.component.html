@@ -15,27 +15,7 @@
     ></p-message>
   </div>
 
-  <label
-    class="nts-file-uploader-label"
-    [for]="id"
-    [hidden]="comp?.filesOutput"
-    [ngClass]="{ 'nts-file-uploader-dragover': isDragOver }"
-    (dragover)="onDragOver($event)"
-    (dragleave)="onDragLeave($event)"
-    (drop)="onDrop($event)"
-  >
-    <div class="nts-file-uploader-icon" [ngClass]="{ 'custom-icon': iconCustom }" [innerHtml]="iconCustom"></div>
-    <div class="nts-file-uploader-title" *ngIf="titleUpload" [innerHtml]="titleUpload"></div>
-    <div class="nts-file-uploader-description" *ngIf="descriptionUpload" [innerHtml]="descriptionUpload"></div>
-    <input
-      #input
-      [id]="id"
-      class="nts-file-uploader-input"
-      [multiple]="multiple ? 'multiple' : null"
-      type="file"
-      (change)="filesChanged($event)"
-    />
-  </label>
+  <!-- File upload results -->
   <div
     class="nts-file-uploader-results"
     [ngClass]="{ 'is-dragging': dragIndex !== null }"
@@ -98,4 +78,29 @@
       </div>
     </div>
   </div>
+
+  <!--
+    Label/initial
+     [hidden]="comp?.filesOutput"
+  -->
+  <label
+    class="nts-file-uploader-label"
+    [for]="id"
+    [ngClass]="{ 'nts-file-uploader-dragover': isDragOver }"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    <div class="nts-file-uploader-icon" [ngClass]="{ 'custom-icon': iconCustom }" [innerHtml]="iconCustom"></div>
+    <div class="nts-file-uploader-title" *ngIf="titleUpload" [innerHtml]="titleUpload"></div>
+    <div class="nts-file-uploader-description" *ngIf="descriptionUpload" [innerHtml]="descriptionUpload"></div>
+    <input
+      #input
+      [id]="id"
+      class="nts-file-uploader-input"
+      [multiple]="multiple ? 'multiple' : null"
+      type="file"
+      (change)="filesChanged($event)"
+    />
+  </label>
 </div>

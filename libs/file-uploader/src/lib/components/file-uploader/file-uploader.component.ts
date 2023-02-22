@@ -61,7 +61,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
   @Input() iconCustom?: string | null = null;
   /** Title that appears below the icon on the upload box */
-  @Input() titleUpload?: string | null = 'Click or drag here to upload';
+  @Input() titleUpload?: string | null = 'Click or drag here to add files for upload';
   /** Description that appears below the title */
   @Input() descriptionUpload: string | null = null;
   /** Title that appears above the documents that the user has added */
@@ -153,7 +153,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
     files.forEach((file) => dt.items.add(file));
     this.input.nativeElement.files = dt.files; // Update input
-    this.stateChange(dt.files); // Make state change
+    this.stateChange(Array.from(dt.files)); // Make state change
   }
 
   /**
@@ -162,6 +162,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   public reset() {
     this.filesOutput$.next(null);
     this.filesOutput.emit(null);
+    this.stateChange([]);
   }
 
   /**
@@ -169,9 +170,13 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
    * @param e
    */
   public filesChanged(e: Event) {
-    const fileInput = e.target as HTMLInputElement;
-    const fileList = fileInput.files as FileList;
-    this.stateChange(fileList);
+    this.state$.pipe(take(1)).subscribe((stateSrc) => {
+      const fileInput = e.target as HTMLInputElement;
+      const fileList = fileInput.files as FileList;
+      // Extract the list of files from the input
+      const files = stateSrc.files.length ? [...stateSrc.files, ...Array.from(fileList)] : Array.from(fileList);
+      this.stateChange(files);
+    });
   }
 
   /**
@@ -201,7 +206,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     this.isDragOver = false;
     const files = event?.dataTransfer?.files;
     if (files) {
-      this.stateChange(files);
+      this.stateChange(Array.from(files));
     }
   }
 
@@ -225,7 +230,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
         this.reset();
       } else if (input) {
         input.files = dt.files; // Assign filelist back to input control
-        this.stateChange(dt.files);
+        this.stateChange(Array.from(dt.files));
       }
     });
   }
@@ -234,14 +239,11 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
    * Handles the change event of a file input
    * @param {Event} e - The change event object
    */
-  public stateChange(fileList?: FileList | null) {
+  public stateChange(files?: File[] | null) {
     // Nill Check
-    if (!fileList) {
+    if (!files) {
       return;
     }
-
-    // Extract the list of files from the input
-    const files = Array.from(fileList);
 
     // Generate initial state
     const state: State = {
@@ -266,9 +268,13 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
       return;
     }
 
+    const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
+    // Add files to datatransfer
+    Array.from(state.files).forEach((file) => dt.items.add(file));
+
     // Hold output of different formats
     const filesOutput: FilesOutput = {
-      fileList: fileList,
+      fileList: dt.files,
       files: files,
       urls: files.map((file) => URL.createObjectURL(file)),
       fileReader: [],
