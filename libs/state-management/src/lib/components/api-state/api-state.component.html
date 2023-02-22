@@ -20,5 +20,5 @@
   </ng-container>
 
   <!-- Content from parent -->
-  <ng-content></ng-content>
+  <ng-content *ngIf="stateSrc?.data !== null"></ng-content>
 </div>
