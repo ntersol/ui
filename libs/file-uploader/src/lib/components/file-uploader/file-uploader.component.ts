@@ -63,7 +63,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
   @Input() iconCustomUpload?: string | null = null;
   /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
-  @Input() iconCustomReorder?: string | null = null;
+  @Input() iconCustomReorder?: string | null = '<i class="pi pi-arrows-alt"></i>';
   /** Title that appears below the icon on the upload box */
   @Input() titleUpload?: string | null = 'Click or drag here to add files for upload';
   /** Title that appears below the icon on the upload box when the additional upload option is set */

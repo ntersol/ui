@@ -72,9 +72,7 @@
       ></div>
 
       <div class="reorder" style="max-width: 10%" *ngIf="canReorder">
-        <a [ngClass]="{ 'custom-icon-reorder': iconCustomReorder }" [innerHtml]="iconCustomReorder">
-          <i class="pi pi-arrows-alt"></i>
-        </a>
+        <a [ngClass]="{ 'custom-icon-reorder': iconCustomReorder }" [innerHtml]="iconCustomReorder"> </a>
       </div>
 
       <div class="nts-remove" style="max-width: 10%" *ngIf="canRemove">
@@ -91,8 +89,7 @@
   </div>
 
   <!--
-    Label/initial
-     [hidden]="comp?.filesOutput"
+    Label/initial screen
   -->
   <label
     class="nts-file-uploader-label"
@@ -124,6 +121,7 @@
         <div class="nts-file-uploader-description" *ngIf="descriptionUpload" [innerHtml]="descriptionUpload"></div>
       </div>
     </div>
+    <!-- Main file input -->
     <input
       #input
       [id]="id"
