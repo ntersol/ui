@@ -2,8 +2,9 @@ import { Observable, of } from 'rxjs';
 import { mergeMap, tap } from 'rxjs/operators';
 /**
  * TODO Items:
+ * - Support option where only non-nil results are cached
+ * - Add concatMap like throttling to preserve order of requests?
  * - Support a localstorage option. Will need a method to clear localstorage too
- * - Support a method to clear cache independent of the TTL
  */
 
 /** A list of ID's to clear cache */
