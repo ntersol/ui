@@ -21,6 +21,17 @@
     height: initial;
   }
 }
+.nts-can-add-additional .nts-file-icon-upload-wrapper {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center !important;
+  .nts-file-uploader-icon {
+    height: 50px;
+    margin: initial;
+    margin-right: 2rem;
+  }
+}
 .nts-file-uploader-file-icon {
   font-size: 2rem;
 }

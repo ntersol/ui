@@ -61,9 +61,13 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   /** Wrapper ID */
   @Input() id: string | null = 'nts-file-uploader-input-' + Math.floor(Math.random() * 1000000);
   /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
-  @Input() iconCustom?: string | null = null;
+  @Input() iconCustomUpload?: string | null = null;
+  /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
+  @Input() iconCustomReorder?: string | null = null;
   /** Title that appears below the icon on the upload box */
   @Input() titleUpload?: string | null = 'Click or drag here to add files for upload';
+  /** Title that appears below the icon on the upload box when the additional upload option is set */
+  @Input() titleUploadAddAdditional?: string | null = 'Click or drag here to add additional files for upload';
   /** Description that appears below the title */
   @Input() descriptionUpload: string | null = null;
   /** Title that appears above the documents that the user has added */

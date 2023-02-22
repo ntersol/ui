@@ -50,7 +50,6 @@
 
       <div
         class="filename"
-        style="max-width: 50%"
         *ngIf="comp?.filesOutput?.files?.length"
         [innerHtml]="comp!.filesOutput!.files![i].name"
       ></div>
@@ -62,8 +61,10 @@
         [innerHtml]="(comp?.state?.fileSizes)![i]"
       ></div>
 
-      <div class="reorder" *ngIf="canReorder">
-        <a><i class="pi pi-arrows-alt"></i></a>
+      <div class="reorder" style="max-width: 10%" *ngIf="canReorder">
+        <a [ngClass]="{ 'custom-icon-reorder': iconCustomReorder }" [innerHtml]="iconCustomReorder">
+          <i class="pi pi-arrows-alt"></i>
+        </a>
       </div>
 
       <div class="nts-remove" style="max-width: 10%" *ngIf="canRemove">
@@ -87,14 +88,32 @@
     class="nts-file-uploader-label"
     [hidden]="comp?.filesOutput && !canAddAdditionalFiles"
     [for]="id"
-    [ngClass]="{ 'nts-file-uploader-dragover': isDragOver }"
+    [ngClass]="{
+      'nts-file-uploader-dragover': isDragOver,
+      'nts-can-add-additional': comp?.filesOutput && canAddAdditionalFiles
+    }"
     (dragover)="onDragOver($event)"
     (dragleave)="onDragLeave($event)"
     (drop)="onDrop($event)"
   >
-    <div class="nts-file-uploader-icon" [ngClass]="{ 'custom-icon': iconCustom }" [innerHtml]="iconCustom"></div>
-    <div class="nts-file-uploader-title" *ngIf="titleUpload" [innerHtml]="titleUpload"></div>
-    <div class="nts-file-uploader-description" *ngIf="descriptionUpload" [innerHtml]="descriptionUpload"></div>
+    <div class="nts-file-icon-upload-wrapper">
+      <div
+        class="nts-file-uploader-icon"
+        [ngClass]="{ 'custom-icon-upload': iconCustomUpload }"
+        [innerHtml]="iconCustomUpload"
+      ></div>
+      <div>
+        <div
+          class="nts-file-uploader-title"
+          *ngIf="comp.state?.files?.length && canAddAdditionalFiles && titleUploadAddAdditional"
+          [innerHtml]="titleUploadAddAdditional"
+        ></div>
+        <ng-template #noAddAdditional>
+          <div class="nts-file-uploader-title" *ngIf="titleUpload" [innerHtml]="titleUpload"></div>
+        </ng-template>
+        <div class="nts-file-uploader-description" *ngIf="descriptionUpload" [innerHtml]="descriptionUpload"></div>
+      </div>
+    </div>
     <input
       #input
       [id]="id"
