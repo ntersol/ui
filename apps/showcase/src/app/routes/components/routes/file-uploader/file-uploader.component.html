@@ -22,6 +22,11 @@
 <p-tabView>
   <!-- Documentation -->
   <p-tabPanel header="Documentation">
+    <nts-file-uploader
+      [canReorder]="true"
+      [files]="files$ | async"
+      (filesOutput)="filesOutput($event)"
+    ></nts-file-uploader>
     <h2>Import</h2>
     <pre><code class="language-ts" [innerHtml]="import"></code></pre>
     <h2>HTML</h2>

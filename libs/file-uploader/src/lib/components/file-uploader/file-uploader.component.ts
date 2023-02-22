@@ -23,6 +23,8 @@ export interface FilesOutput {
   urls: string[] | null;
   /** Base64 encoded version generated using fileReader. Only images will have this, other filetypes will be null */
   fileReader: (string | ArrayBuffer | null)[] | null;
+  /** Files in FormData format with a key of 'file' */
+  formData: FormData | null;
 }
 
 interface State {
@@ -59,13 +61,17 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   /** Wrapper ID */
   @Input() id: string | null = 'nts-file-uploader-input-' + Math.floor(Math.random() * 1000000);
   /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
-  @Input() iconCustom?: string | null = null;
+  @Input() iconCustomUpload?: string | null = null;
+  /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
+  @Input() iconCustomReorder?: string | null = '<i class="pi pi-arrows-alt"></i>';
   /** Title that appears below the icon on the upload box */
-  @Input() titleUpload?: string | null = 'Click or drag here to upload';
+  @Input() titleUpload?: string | null = 'Click or drag here to add files for upload';
+  /** Title that appears below the icon on the upload box when the additional upload option is set */
+  @Input() titleUploadAddAdditional?: string | null = 'Click or drag here to add additional files for upload';
   /** Description that appears below the title */
   @Input() descriptionUpload: string | null = null;
   /** Title that appears above the documents that the user has added */
-  @Input() titleResults?: string | null = 'Files to be uploaded';
+  @Input() titleResults?: string | null = null;
   /** Allow the user to upload multiple files */
   @Input() multiple?: boolean | null = true;
   /** A string array of allowed mimetypes, IE ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'] */
@@ -78,6 +84,8 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   @Input() canRemove = true;
   /** Can the user reorder the files currently being displayed */
   @Input() canReorder = false;
+  /** Can the user add additional files after the initial addition */
+  @Input() canAddAdditionalFiles = true;
 
   /** Is the user dragging a file over the drop zone? */
   public isDragOver = false;
@@ -153,7 +161,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
     files.forEach((file) => dt.items.add(file));
     this.input.nativeElement.files = dt.files; // Update input
-    this.stateChange(dt.files); // Make state change
+    this.stateChange(Array.from(dt.files)); // Make state change
   }
 
   /**
@@ -162,6 +170,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   public reset() {
     this.filesOutput$.next(null);
     this.filesOutput.emit(null);
+    this.stateChange([]);
   }
 
   /**
@@ -169,9 +178,13 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
    * @param e
    */
   public filesChanged(e: Event) {
-    const fileInput = e.target as HTMLInputElement;
-    const fileList = fileInput.files as FileList;
-    this.stateChange(fileList);
+    this.state$.pipe(take(1)).subscribe((stateSrc) => {
+      const fileInput = e.target as HTMLInputElement;
+      const fileList = fileInput.files as FileList;
+      // Extract the list of files from the input
+      const files = stateSrc.files.length ? [...stateSrc.files, ...Array.from(fileList)] : Array.from(fileList);
+      this.stateChange(files);
+    });
   }
 
   /**
@@ -201,7 +214,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     this.isDragOver = false;
     const files = event?.dataTransfer?.files;
     if (files) {
-      this.stateChange(files);
+      this.stateChange(Array.from(files));
     }
   }
 
@@ -225,7 +238,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
         this.reset();
       } else if (input) {
         input.files = dt.files; // Assign filelist back to input control
-        this.stateChange(dt.files);
+        this.stateChange(Array.from(dt.files));
       }
     });
   }
@@ -234,14 +247,11 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
    * Handles the change event of a file input
    * @param {Event} e - The change event object
    */
-  public stateChange(fileList?: FileList | null) {
+  public stateChange(files?: File[] | null) {
     // Nill Check
-    if (!fileList) {
+    if (!files) {
       return;
     }
-
-    // Extract the list of files from the input
-    const files = Array.from(fileList);
 
     // Generate initial state
     const state: State = {
@@ -266,10 +276,19 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
       return;
     }
 
+    // Generate new filelist
+    const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
+    Array.from(state.files).forEach((file) => dt.items.add(file)); // Add files to datatransfer
+
+    // Create FormData entity
+    const formData = new FormData();
+    files.forEach((file) => formData.append('file', file)); // Attach files
+
     // Hold output of different formats
     const filesOutput: FilesOutput = {
-      fileList: fileList,
+      fileList: dt.files,
       files: files,
+      formData: formData,
       urls: files.map((file) => URL.createObjectURL(file)),
       fileReader: [],
     };

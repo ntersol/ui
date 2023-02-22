@@ -15,27 +15,7 @@
     ></p-message>
   </div>
 
-  <label
-    class="nts-file-uploader-label"
-    [for]="id"
-    [hidden]="comp?.filesOutput"
-    [ngClass]="{ 'nts-file-uploader-dragover': isDragOver }"
-    (dragover)="onDragOver($event)"
-    (dragleave)="onDragLeave($event)"
-    (drop)="onDrop($event)"
-  >
-    <div class="nts-file-uploader-icon" [ngClass]="{ 'custom-icon': iconCustom }" [innerHtml]="iconCustom"></div>
-    <div class="nts-file-uploader-title" *ngIf="titleUpload" [innerHtml]="titleUpload"></div>
-    <div class="nts-file-uploader-description" *ngIf="descriptionUpload" [innerHtml]="descriptionUpload"></div>
-    <input
-      #input
-      [id]="id"
-      class="nts-file-uploader-input"
-      [multiple]="multiple ? 'multiple' : null"
-      type="file"
-      (change)="filesChanged($event)"
-    />
-  </label>
+  <!-- File upload results -->
   <div
     class="nts-file-uploader-results"
     [ngClass]="{ 'is-dragging': dragIndex !== null }"
@@ -47,9 +27,19 @@
       *ngIf="canRemove && multiple && (comp?.filesOutput?.files?.length || 0) > 1"
       >Remove All</a
     >
-    <p *ngIf="canRemove && titleResults">
+
+    <!-- Upload title -->
+    <p *ngIf="titleResults">
       <strong [innerHTML]="titleResults"> </strong>
     </p>
+    <p *ngIf="!titleResults">
+      <strong *ngIf="(comp?.filesOutput?.files?.length || 0) >= 2">
+        Files to be uploaded ({{ comp?.filesOutput?.files?.length || 0 }})
+      </strong>
+      <strong *ngIf="(comp?.filesOutput?.files?.length || 0) === 1">File to be uploaded </strong>
+    </p>
+
+    <!-- Output results -->
     <div
       class="nts-file-row"
       *ngFor="let url of comp?.filesOutput?.fileReader; let i = index"
@@ -70,7 +60,6 @@
 
       <div
         class="filename"
-        style="max-width: 50%"
         *ngIf="comp?.filesOutput?.files?.length"
         [innerHtml]="comp!.filesOutput!.files![i].name"
       ></div>
@@ -82,8 +71,8 @@
         [innerHtml]="(comp?.state?.fileSizes)![i]"
       ></div>
 
-      <div class="reorder" *ngIf="canReorder">
-        <a><i class="pi pi-arrows-alt"></i></a>
+      <div class="reorder" style="max-width: 10%" *ngIf="canReorder">
+        <a [ngClass]="{ 'custom-icon-reorder': iconCustomReorder }" [innerHtml]="iconCustomReorder"> </a>
       </div>
 
       <div class="nts-remove" style="max-width: 10%" *ngIf="canRemove">
@@ -98,4 +87,48 @@
       </div>
     </div>
   </div>
+
+  <!--
+    Label/initial screen
+  -->
+  <label
+    class="nts-file-uploader-label"
+    [hidden]="comp?.filesOutput && !canAddAdditionalFiles"
+    [for]="id"
+    [ngClass]="{
+      'nts-file-uploader-dragover': isDragOver,
+      'nts-can-add-additional': comp?.filesOutput && canAddAdditionalFiles
+    }"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    <div class="nts-file-icon-upload-wrapper">
+      <div
+        class="nts-file-uploader-icon"
+        [ngClass]="{ 'custom-icon-upload': iconCustomUpload }"
+        [innerHtml]="iconCustomUpload"
+      ></div>
+      <div>
+        <div
+          *ngIf="comp.state?.files?.length && canAddAdditionalFiles && titleUploadAddAdditional; else noAddAdditional"
+          class="nts-file-uploader-title"
+          [innerHtml]="titleUploadAddAdditional"
+        ></div>
+        <ng-template #noAddAdditional>
+          <div class="nts-file-uploader-title" *ngIf="titleUpload" [innerHtml]="titleUpload"></div>
+        </ng-template>
+        <div class="nts-file-uploader-description" *ngIf="descriptionUpload" [innerHtml]="descriptionUpload"></div>
+      </div>
+    </div>
+    <!-- Main file input -->
+    <input
+      #input
+      [id]="id"
+      class="nts-file-uploader-input"
+      [multiple]="multiple ? 'multiple' : null"
+      type="file"
+      (change)="filesChanged($event)"
+    />
+  </label>
 </div>
