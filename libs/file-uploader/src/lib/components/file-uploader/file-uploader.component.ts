@@ -71,7 +71,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   /** Description that appears below the title */
   @Input() descriptionUpload: string | null = null;
   /** Title that appears above the documents that the user has added */
-  @Input() titleResults?: string | null = 'Files to be uploaded';
+  @Input() titleResults?: string | null = null;
   /** Allow the user to upload multiple files */
   @Input() multiple?: boolean | null = true;
   /** A string array of allowed mimetypes, IE ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'] */

@@ -27,9 +27,19 @@
       *ngIf="canRemove && multiple && (comp?.filesOutput?.files?.length || 0) > 1"
       >Remove All</a
     >
-    <p *ngIf="canRemove && titleResults">
+
+    <!-- Upload title -->
+    <p *ngIf="titleResults">
       <strong [innerHTML]="titleResults"> </strong>
     </p>
+    <p *ngIf="!titleResults">
+      <strong *ngIf="(comp?.filesOutput?.files?.length || 0) >= 2">
+        Files to be uploaded ({{ comp?.filesOutput?.files?.length || 0 }})
+      </strong>
+      <strong *ngIf="(comp?.filesOutput?.files?.length || 0) === 1">File to be uploaded </strong>
+    </p>
+
+    <!-- Output results -->
     <div
       class="nts-file-row"
       *ngFor="let url of comp?.filesOutput?.fileReader; let i = index"
@@ -104,8 +114,8 @@
       ></div>
       <div>
         <div
+          *ngIf="comp.state?.files?.length && canAddAdditionalFiles && titleUploadAddAdditional; else noAddAdditional"
           class="nts-file-uploader-title"
-          *ngIf="comp.state?.files?.length && canAddAdditionalFiles && titleUploadAddAdditional"
           [innerHtml]="titleUploadAddAdditional"
         ></div>
         <ng-template #noAddAdditional>
