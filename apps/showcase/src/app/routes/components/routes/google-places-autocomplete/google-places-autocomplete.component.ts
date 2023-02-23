@@ -12,7 +12,7 @@ import { HighlightService } from '../../../../shared/services/highlight.service'
 export class GooglePlacesAutocompleteComponent implements OnInit, OnDestroy {
   public exampleTSInstall = `
   // Install this library
-  npm i @ntersol/services --save`;
+  npm i @ntersol/google-places-autocomplete --save`;
 
   public html2 = this.highlight.htmlEncode(`
   <nts-google-places-autocomplete
