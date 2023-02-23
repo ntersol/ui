@@ -16,6 +16,9 @@ Build a package, append `:production` for a prod build
 Deploy update to NPM
 `nx run {libname}:publish`
 
+Deploy documentation website to https://ntersol.github.io/ui/
+`ng run showcase:deploy`
+
 ## Documentation Quick Links
 
 Generating package documentation with storybook
