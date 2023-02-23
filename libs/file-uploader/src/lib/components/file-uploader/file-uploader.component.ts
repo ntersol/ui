@@ -75,7 +75,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   /** Allow the user to upload multiple files */
   @Input() multiple?: boolean | null = true;
   /** A string array of allowed mimetypes, IE ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'] */
-  @Input() allowedFileTypes?: string[] | null = null;
+  @Input() allowedFileTypes?: string[] | null = ['image/jpeg', 'image/png', 'image/gif'];
   /** The maximum number of bytes that the user is allowed to upload. In the event of multiple files, will be the sum of them all */
   @Input() maxFileSize?: number | null = null;
   /** The maximum number of files allowed if multiple is true */
@@ -158,10 +158,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
       return;
     }
 
-    const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
-    files.forEach((file) => dt.items.add(file));
-    this.input.nativeElement.files = dt.files; // Update input
-    this.stateChange(Array.from(dt.files)); // Make state change
+    this.updateFileInput(files);
   }
 
   /**
@@ -225,32 +222,52 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   public removeFile(index: number) {
     // Get latest state
     this.state$.pipe(take(1)).subscribe((state) => {
-      const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
-      // Remove the selected item and add the other files to the datatransfer
-      Array.from(state.files)
-        .filter((_file, i) => i !== index)
-        .forEach((file) => dt.items.add(file));
-
-      // Get the input and attach the new filelist, notify the parent and update state
-      const input = document.getElementById(this.id || '') as HTMLInputElement;
-      // If all items in filelist have been removed, reset file input
-      if (!Array.from(dt.files).length) {
+      // Remove the selected item
+      const files = state.files.filter((_file, i) => i !== index); // .forEach((file) => dt.items.add(file));
+      // If no files, reset all
+      if (!files.length) {
         this.reset();
-      } else if (input) {
-        input.files = dt.files; // Assign filelist back to input control
-        this.stateChange(Array.from(dt.files));
+      } else {
+        this.updateFileInput(files); // Update files in input
       }
     });
+  }
+
+  /**
+   * Update the files in the file input
+   * @param files
+   */
+  public updateFileInput(files: File[] | null, updateState = true) {
+    if (this.input?.nativeElement) {
+      this.input.nativeElement.value = ''; // Reset files
+      if (files?.length) {
+        const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
+        // Add any files
+        files.forEach((file) => dt.items.add(file));
+        this.input.nativeElement.files = dt.files; // Assign filelist back to input control
+      }
+      if (updateState) {
+        this.stateChange(files);
+      }
+    }
   }
 
   /**
    * Handles the change event of a file input
    * @param {Event} e - The change event object
    */
-  public stateChange(files?: File[] | null) {
+  public stateChange(filesSrc?: File[] | null) {
     // Nill Check
-    if (!files) {
+    if (!filesSrc) {
       return;
+    }
+
+    let files = filesSrc;
+
+    // If filetype restrictions are present, remove them from the file array
+    if (this.allowedFileTypes?.length) {
+      files = files.filter((file) => this.allowedFileTypes?.includes(file.type));
+      this.updateFileInput(files, false);
     }
 
     // Generate initial state
@@ -266,15 +283,21 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     };
 
     // Check for errors and assign to state object
-    const errors = this.errorCheck(state);
+    const errors = this.errorCheck(files);
     state.errors = errors;
     // Update state
     this.state$.next(state);
 
+    /**
     // If errors found, end processing
-    if (errors) {
+    if (errors && this.input?.nativeElement) {
+      // Reset files
+      const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
+      this.input.nativeElement.files = dt.files; // Assign filelist back to input control
+      console.log(this.input?.nativeElement.files, dt);
       return;
     }
+     */
 
     // Generate new filelist
     const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
@@ -354,16 +377,17 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
    * @param state
    * @returns
    */
-  private errorCheck(state: State) {
+  private errorCheck(files: File[]) {
     const errors: string[] = [];
-    const totalFileSize = state.files.reduce((a, b) => a + b.size, 0);
+    const totalFileSize = files.reduce((a, b) => a + b.size, 0);
+    const fileSizes = files.map((file) => this.formatFileSize(file.size));
     const isValid = this.allowedFileTypes?.length
-      ? state.files.every((file) => this.allowedFileTypes?.includes(file.type))
+      ? files.every((file) => this.allowedFileTypes?.includes(file.type))
       : true;
 
     // Max filesize
     if (this.maxFileSize && this.maxFileSize < totalFileSize) {
-      this.multiple && state.fileSizes?.length > 1
+      this.multiple && fileSizes?.length > 1
         ? errors.push(
             `The files you are trying to upload exceeds the maximum allowed filesize. The maximum allowed filesize is ${this.formatFileSize(
               this.maxFileSize,
@@ -381,11 +405,11 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     // Max files
-    if (this.maxFiles && this.maxFiles < state.fileSizes.length) {
+    if (this.maxFiles && this.maxFiles < fileSizes.length) {
       errors.push(
         `You have exceeded the maximum number of files that can be uploaded at once. The maximum allowed number of files is ${
           this.maxFiles
-        }, but you attempted to upload ${state.fileSizes.length + 1}. Please reduce the number of files and try again.`,
+        }, but you attempted to upload ${fileSizes.length + 1}. Please reduce the number of files and try again.`,
       );
     }
 
