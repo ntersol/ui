@@ -36,14 +36,9 @@ interface State {
 }
 
 /**
- * NtsFileUploaderComponent
- *
- * This component handles file uploads and provides the following features:
- * - Validates the file type and size before uploading
- * - Displays a preview of the selected image
- * - Allows the user to remove the selected file
- * - Emits an event when the file is uploaded successfully
- *
+ * A class for handling file uploads and management.
+ * This class provides methods for updating and removing files from the file input control, as well as managing the state of the files selected.
+ * @author Jerrol Krause
  * @example
  * <nts-file-uploader [files]=filesToDisplay (filesChanged)="yourFunction($event)"></nts-file-uploader>
  *
@@ -58,11 +53,11 @@ interface State {
 export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
   /** Files from the parent component to display in the uploader */
   @Input() files: File[] | null = null;
-  /** Wrapper ID */
+  /** File Input ID */
   @Input() id: string | null = 'nts-file-uploader-input-' + Math.floor(Math.random() * 1000000);
-  /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
+  /** Use a custom icon for upload, IE  <i class="pi pi-check"></i>*/
   @Input() iconCustomUpload?: string | null = null;
-  /** Use a custom icon, IE  <i class="pi pi-check"></i>*/
+  /** Use a custom icon for reorder, IE  <i class="pi pi-check"></i>*/
   @Input() iconCustomReorder?: string | null = '<i class="pi pi-arrows-alt"></i>';
   /** Title that appears below the icon on the upload box */
   @Input() titleUpload?: string | null = 'Click or drag here to add files for upload';
@@ -72,10 +67,11 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   @Input() descriptionUpload: string | null = null;
   /** Title that appears above the documents that the user has added */
   @Input() titleResults?: string | null = null;
+
   /** Allow the user to upload multiple files */
   @Input() multiple?: boolean | null = true;
   /** A string array of allowed mimetypes, IE ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'] */
-  @Input() allowedFileTypes?: string[] | null = ['image/jpeg', 'image/png', 'image/gif'];
+  @Input() allowedFileTypes?: string[] | null = null;
   /** The maximum number of bytes that the user is allowed to upload. In the event of multiple files, will be the sum of them all */
   @Input() maxFileSize?: number | null = null;
   /** The maximum number of files allowed if multiple is true */
@@ -148,29 +144,6 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   }
 
   /**
-   * Take files passed in from the parent and update the DOM
-   * This allows the parent to reload files into this component such as in an edit option
-   * @param files
-   * @returns
-   */
-  private reloadFiles(files?: File[] | null) {
-    if (!this.loaded || !files?.length || !this.input?.nativeElement) {
-      return;
-    }
-
-    this.updateFileInput(files);
-  }
-
-  /**
-   * Reset file uploader and remove all files
-   */
-  public reset() {
-    this.filesOutput$.next(null);
-    this.filesOutput.emit(null);
-    this.stateChange([]);
-  }
-
-  /**
    * When files are changed in the input
    * @param e
    */
@@ -182,74 +155,6 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
       const files = stateSrc.files.length ? [...stateSrc.files, ...Array.from(fileList)] : Array.from(fileList);
       this.stateChange(files);
     });
-  }
-
-  /**
-   * Handles the dragover event on the drop area
-   * @param event - DragEvent
-   */
-  onDragOver(event: DragEvent) {
-    event.preventDefault();
-    this.isDragOver = true;
-  }
-
-  /**
-   * Handles the dragleave event on the drop area
-   * @param event - DragEvent
-   */
-  onDragLeave(event: DragEvent) {
-    event.preventDefault();
-    this.isDragOver = false;
-  }
-
-  /**
-   * Handles the drop event on the drop area
-   * @param event - DragEvent
-   */
-  onDrop(event: DragEvent) {
-    event.preventDefault();
-    this.isDragOver = false;
-    const files = event?.dataTransfer?.files;
-    if (files) {
-      this.stateChange(Array.from(files));
-    }
-  }
-
-  /**
-   * Remove a file from the list
-   * @param index
-   */
-  public removeFile(index: number) {
-    // Get latest state
-    this.state$.pipe(take(1)).subscribe((state) => {
-      // Remove the selected item
-      const files = state.files.filter((_file, i) => i !== index); // .forEach((file) => dt.items.add(file));
-      // If no files, reset all
-      if (!files.length) {
-        this.reset();
-      } else {
-        this.updateFileInput(files); // Update files in input
-      }
-    });
-  }
-
-  /**
-   * Update the files in the file input
-   * @param files
-   */
-  public updateFileInput(files: File[] | null, updateState = true) {
-    if (this.input?.nativeElement) {
-      this.input.nativeElement.value = ''; // Reset files
-      if (files?.length) {
-        const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
-        // Add any files
-        files.forEach((file) => dt.items.add(file));
-        this.input.nativeElement.files = dt.files; // Assign filelist back to input control
-      }
-      if (updateState) {
-        this.stateChange(files);
-      }
-    }
   }
 
   /**
@@ -279,25 +184,11 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
         return split[split.length - 1];
       }),
       icons: files.map((file) => this.getFileIcon(file)),
-      errors: null,
+      errors: this.errorCheck(filesSrc), // Errors look at source files to show any that were removed
     };
 
-    // Check for errors and assign to state object
-    const errors = this.errorCheck(files);
-    state.errors = errors;
-    // Update state
+    // Update state entity
     this.state$.next(state);
-
-    /**
-    // If errors found, end processing
-    if (errors && this.input?.nativeElement) {
-      // Reset files
-      const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
-      this.input.nativeElement.files = dt.files; // Assign filelist back to input control
-      console.log(this.input?.nativeElement.files, dt);
-      return;
-    }
-     */
 
     // Generate new filelist
     const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
@@ -346,6 +237,68 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
   }
 
   /**
+   * Take files passed in from the parent and update the DOM
+   * This allows the parent to reload files into this component such as in an edit option
+   * @param files
+   * @returns
+   */
+  private reloadFiles(files?: File[] | null) {
+    if (!this.loaded || !files?.length || !this.input?.nativeElement) {
+      return;
+    }
+
+    this.updateFileInput(files);
+  }
+
+  /**
+   * Reset file uploader and remove all files
+   */
+  public reset() {
+    this.filesOutput$.next(null);
+    this.filesOutput.emit(null);
+    this.stateChange([]);
+  }
+
+  /**
+   * Update the file input with the specified files.
+   *
+   * @param {File[] | null} files - An array of files to be added to the file input.
+   * @param {boolean} [updateState=true] - A flag indicating whether the state should be updated.
+   */
+  public updateFileInput(files: File[] | null, updateState = true) {
+    if (this.input?.nativeElement) {
+      this.input.nativeElement.value = ''; // Reset files
+      if (files?.length) {
+        const dt = new DataTransfer(); // Datatransfer is a way to create a new FileList
+        // Add any files
+        files.forEach((file) => dt.items.add(file));
+        this.input.nativeElement.files = dt.files; // Assign filelist back to input control
+      }
+      if (updateState) {
+        this.stateChange(files);
+      }
+    }
+  }
+
+  /**
+   * Remove a file from the list
+   * @param index
+   */
+  public removeFile(index: number) {
+    // Get latest state
+    this.state$.pipe(take(1)).subscribe((state) => {
+      // Remove the selected item
+      const files = state.files.filter((_file, i) => i !== index); // .forEach((file) => dt.items.add(file));
+      // If no files, reset all
+      if (!files.length) {
+        this.reset();
+      } else {
+        this.updateFileInput(files); // Update files in input
+      }
+    });
+  }
+
+  /**
    * Get the icon to use for this file
    * @param file
    * @returns
@@ -360,7 +313,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
    * @param bytes
    * @returns
    */
-  private formatFileSize(bytes: number) {
+  private formatFileSize(bytes: number): string {
     if (bytes >= 1000000000) {
       return `${(bytes / 1000000000).toFixed(2)} GB`;
     } else if (bytes >= 1000000) {
@@ -377,7 +330,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
    * @param state
    * @returns
    */
-  private errorCheck(files: File[]) {
+  private errorCheck(files: File[]): string[] | null {
     const errors: string[] = [];
     const totalFileSize = files.reduce((a, b) => a + b.size, 0);
     const fileSizes = files.map((file) => this.formatFileSize(file.size));
@@ -431,7 +384,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
           }
         });
       errors.push(
-        `The files you are trying to upload are of the wrong type. You can only upload ${allowedTypes}. Please select the correct file type and try again."`,
+        `The file(s) you are trying to upload are of the wrong type and has been removed. You can only upload ${allowedTypes}. Please select the correct file type and try again.`,
       );
     }
 
@@ -467,6 +420,37 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     }
 
     return `${fileTypesDescription} ${maxSizeDescription}`;
+  }
+
+  /**
+   * Handles the dragover event on the drop area
+   * @param event - DragEvent
+   */
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = true;
+  }
+
+  /**
+   * Handles the dragleave event on the drop area
+   * @param event - DragEvent
+   */
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = false;
+  }
+
+  /**
+   * Handles the drop event on the drop area
+   * @param event - DragEvent
+   */
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = false;
+    const files = event?.dataTransfer?.files;
+    if (files) {
+      this.stateChange(Array.from(files));
+    }
   }
 
   dragStart(index: number) {
