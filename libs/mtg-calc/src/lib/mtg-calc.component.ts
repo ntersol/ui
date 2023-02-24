@@ -57,7 +57,10 @@ export class MtgCalcComponent {
         if (this.config.chartOptions) {
           this.config.chartOptions.data.datasets[0].data = [finalData.loanAmount, finalData.interestTotal];
         }
-        this.monthlyChart.data.datasets[0].data = [finalData.firstMonthPrinciple, finalData.firstMonthInterest];
+        if (this.monthlyChart) {
+          this.monthlyChart.data.datasets[0].data = [finalData.firstMonthPrinciple, finalData.firstMonthInterest];
+        }
+
         if (this.monthlyPieChart) {
           this.monthlyPieChart.refresh();
         }

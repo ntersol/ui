@@ -69,7 +69,7 @@ describe('MtgCalcComponent', () => {
     it('should set _config to default with no value passed in', () => {
       component.config = {};
       const DEF = DEFAULT;
-      expect(component._config).toEqual(DEF);
+      expect(component.config).toEqual(DEF);
     });
 
     it('should call calculatePayments', () => {
