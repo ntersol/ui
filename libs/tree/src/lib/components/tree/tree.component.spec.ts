@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NtsTreeComponent } from './tree.component';
+import { TreeModule } from 'primeng/tree';
 
 describe('NtsTreeComponent', () => {
   let component: NtsTreeComponent;
@@ -8,6 +9,7 @@ describe('NtsTreeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NtsTreeComponent],
+      imports: [TreeModule],
     }).compileComponents();
   }));
 
