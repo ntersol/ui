@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TabViewModule } from 'primeng/tabview';
 
 import { NtsFileUploaderComponent } from './file-uploader.component';
 
@@ -9,6 +10,7 @@ describe('FileUploaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NtsFileUploaderComponent],
+      imports: [TabViewModule],
     }).compileComponents();
   });
 
