@@ -345,8 +345,8 @@ export class HtmlMarkerLayer extends layer.BubbleLayer {
     if (this._map && zoom >= this._options.minZoom && zoom <= this._options.maxZoom) {
       this._hasMarkers = true;
       const shapes = this._map.layers.getRenderedShapes(undefined, this, this._options.filter);
-      const newMarkers = [];
-      const newMarkerIds = [];
+      const newMarkers: NtsAzureMaps.IHtmlMarker[] = [];
+      const newMarkerIds: any[] = [];
       let id: any;
       let properties: any;
       let position: any;
