@@ -1,5 +1,5 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SmartDistinctUntilChangedComponent } from './smart-distinct-until-changed.component';
 
 describe('SmartDistinctUntilChangedComponent', () => {
@@ -9,6 +9,7 @@ describe('SmartDistinctUntilChangedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SmartDistinctUntilChangedComponent],
+      imports: [HttpClientTestingModule],
     }).compileComponents();
   });
 

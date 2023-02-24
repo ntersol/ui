@@ -3,4 +3,7 @@ export const local = {
   endpoints: {
     // apiUrl: './',
   },
+  settings: {
+    enableServiceWorker: false,
+  },
 };
