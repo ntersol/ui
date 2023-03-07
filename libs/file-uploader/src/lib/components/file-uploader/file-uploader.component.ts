@@ -12,7 +12,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { BehaviorSubject, delay, of, take } from 'rxjs';
+import { BehaviorSubject, take, timer } from 'rxjs';
 
 export interface FilesOutput {
   /** Filelist as returned directly form a file input */
@@ -255,9 +255,7 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     this.canEmit = false;
     this.updateFileInput(files);
     // Add 1ms delay to reenable upload ability
-    of(null)
-      .pipe(delay(1), take(1))
-      .subscribe(() => (this.canEmit = true));
+    timer(1).subscribe(() => (this.canEmit = true));
   }
 
   /**
