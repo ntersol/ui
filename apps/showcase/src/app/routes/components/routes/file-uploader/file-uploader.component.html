@@ -144,12 +144,10 @@
   </p-tabPanel>
   <!-- Example -->
   <p-tabPanel header="Example">
-    <nts-file-uploader
-      [canReorder]="true"
-      [files]="files$ | async"
-      (filesOutput)="filesOutput($event)"
-    ></nts-file-uploader>
+    <nts-file-uploader [canReorder]="true" [files]="svc.files" (filesOutput)="filesOutput($event)"></nts-file-uploader>
     <hr />
+    <!--
     <button class="p-button" (click)="reloadFiles()">Reload Files</button>
+    -->
   </p-tabPanel>
 </p-tabView>
