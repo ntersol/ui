@@ -12,7 +12,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { BehaviorSubject, take } from 'rxjs';
+import { BehaviorSubject, take, timer } from 'rxjs';
 
 export interface FilesOutput {
   /** Filelist as returned directly form a file input */
@@ -120,6 +120,8 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
 
   /** Is DOM loaded and available */
   private loaded = false;
+  /** Can the component emit new files to the parent? Used to prevent file upload loops */
+  private canEmit = true;
 
   @Output() filesOutput = new EventEmitter<FilesOutput | null>();
 
@@ -220,7 +222,6 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
           // When all fileReader files have finished loading,
           if (files.length === filesOutput.fileReader?.length) {
             this.filesOutput$.next(filesOutput); // Push the fileoutput to the observable
-            this.filesOutput.emit(filesOutput); // Send files to parent
           }
         };
         reader.readAsDataURL(file);
@@ -230,10 +231,15 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
         }
         if (files.length === filesOutput.fileReader?.length) {
           this.filesOutput$.next(filesOutput); // Push the fileoutput to the observable
-          this.filesOutput.emit(filesOutput); // Send files to parent
         }
       }
     });
+
+    // Send files to parent
+    // canEmit prevents reload loops
+    if (this.canEmit) {
+      this.filesOutput.emit(filesOutput);
+    }
   }
 
   /**
@@ -246,8 +252,10 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     if (!this.loaded || !files?.length || !this.input?.nativeElement) {
       return;
     }
-
+    this.canEmit = false;
     this.updateFileInput(files);
+    // Add 1ms delay to reenable upload ability
+    timer(1).subscribe(() => (this.canEmit = true));
   }
 
   /**
