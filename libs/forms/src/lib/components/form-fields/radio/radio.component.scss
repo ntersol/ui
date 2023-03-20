@@ -1,0 +1,16 @@
+.nts-radio {
+  .p-inputgroup > .p-float-label {
+    position: initial;
+  }
+  .nts-radio-options {
+    width: 100%;
+  }
+  .p-float-label label {
+    top: 4px;
+    position: relative;
+    cursor: pointer;
+  }
+  .nts-radio-label {
+    margin-bottom: 0!important;
+  }
+}

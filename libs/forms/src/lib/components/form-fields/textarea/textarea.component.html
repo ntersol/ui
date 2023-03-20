@@ -1,0 +1,31 @@
+<div class="input-textarea">
+  <cmg-clear2-ui-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [focused]="focused"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [automationId]="automationId"
+    [control]="formControl"
+    [formGroup]="formGroup"
+    [validators]="validators"
+  >
+    <textarea
+      pInputTextarea
+      [id]="id || (label || placeholder | ntsSlug)"
+      [name]="name || (label || placeholder | ntsSlug)"
+      [ngClass]="styleClass"
+      [placeholder]="placeholder ?? ''"
+      [formControl]="formControl"
+      [rows]="5"
+      [cols]="30"
+      [maxlength]="maxlength"
+      [autoResize]="autoResize"
+      (focus)="focus($event)"
+      (blur)="blur($event)"
+      (keyup)="onKeyup.emit($event)"
+      (click)="onClick.emit($event)"
+    ></textarea>
+  </cmg-clear2-ui-input>
+</div>

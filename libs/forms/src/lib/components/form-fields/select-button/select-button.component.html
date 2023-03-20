@@ -1,0 +1,27 @@
+<div class="input-selectbutton" [ngClass]="{'input-selectbutton-full': fullWidth}">
+  <cmg-clear2-ui-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [focused]="focused"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [automationId]="automationId"
+    [control]="formControl"
+    [formGroup]="formGroup"
+    [validators]="validators"
+  >
+    <div class="w-100">
+      <p-selectButton
+        [formControl]="formControl"
+        [id]="id || (label || placeholder | ntsSlug)"
+        [options]="options"
+        [multiple]="multiple"
+        [dataKey]="dataKey"
+        optionLabel="label"
+        optionValue="value"
+        (onOptionClick)="onOptionClick($event)"
+      ></p-selectButton>
+    </div>
+  </cmg-clear2-ui-input>
+</div>

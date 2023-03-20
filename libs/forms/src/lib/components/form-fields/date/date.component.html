@@ -1,0 +1,28 @@
+<div class="input-date">
+  <cmg-clear2-ui-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [focused]="focused"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [automationId]="automationId"
+    [control]="formControl"
+    [formGroup]="formGroup"
+    [validators]="validators"
+  >
+    <div class="w-100">
+      <p-calendar
+        [formControl]="formControl"
+        [placeholder]="placeholder ? placeholder : 'mm/dd/yyyy'"
+        [id]="id || (label || placeholder | ntsSlug)"
+        [name]="name || (label || placeholder | ntsSlug)"
+        appendTo="body"
+        [styleClass]="styleClass"
+        [inline]="inline"
+        [showIcon]="showIcon || true"
+        [dateFormat]="dateFormat"
+      ></p-calendar>
+    </div>
+  </cmg-clear2-ui-input>
+</div>

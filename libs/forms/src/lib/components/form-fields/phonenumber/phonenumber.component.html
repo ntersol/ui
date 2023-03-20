@@ -1,0 +1,27 @@
+<div class="input-phonenumber">
+  <cmg-clear2-ui-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [focused]="focused"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [automationId]="automationId"
+    [control]="formControl"
+    [formGroup]="formGroup"
+    [validators]="validators"
+  >
+    <p-inputMask
+      #field
+      [id]="id || (label || placeholder | ntsSlug)"
+      [name]="name || (label || placeholder | ntsSlug)"
+      [placeholder]="placeholder ? placeholder : '(___) ___-____'"
+      [ngClass]="styleClass"
+      mask="(999) 999-9999"
+      [unmask]="unmask"
+      [formControl]="formControl"
+      (onFocus)="focused = true; cursorPositionSet(field, 1)"
+      (onBlur)="focused = false"
+    ></p-inputMask>
+  </cmg-clear2-ui-input>
+</div>

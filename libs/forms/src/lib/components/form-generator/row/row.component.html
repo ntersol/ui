@@ -1,0 +1,15 @@
+<div *ngIf="visible$ | async" class="form-generator-row" [attr.id]="row.id || null" [ngClass]="row.cssClasses" [ngStyle]="row.inlineStyles">
+  <ng-container *ngIf="row.columns?.length; else noColumns">
+    <ng-container *ngFor="let column of row.columns; let i = index">
+      <div
+        *ngIf="visibleColumns[i] | async"
+        class="form-generator-column col col-12 col-md-{{ column.width }}"
+        [attr.id]="column.id || null"
+        [ngClass]="column.cssClasses"
+        [ngStyle]="column.inlineStyles"
+      >
+        <cmg-clear2-ui-column [formGroup]="formGroup" [column]="column" [datafields]="datafields" [options]="options"></cmg-clear2-ui-column>
+      </div> </ng-container
+  ></ng-container>
+  <ng-template #noColumns> No columns supplied </ng-template>
+</div>

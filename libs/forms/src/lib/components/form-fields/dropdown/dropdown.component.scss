@@ -1,0 +1,12 @@
+:host {
+}
+
+.nts-dropdown {
+  p-dropdown,
+  .p-dropdown {
+    width: 100% !important;
+  }
+  .p-float-label .p-placeholder {
+    opacity: 1;
+  }
+}

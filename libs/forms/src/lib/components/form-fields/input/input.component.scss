@@ -1,0 +1,87 @@
+$smallText: 80%;
+
+:host {
+  display: block;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+#form-generator .nts-form-field {
+  ::placeholder {
+    opacity: 0.6 !important;
+  }
+
+  input:hover,
+  .p-dropdown:hover,
+  textarea:hover,
+  select:hover {
+    background: rgba(0, 0, 0, 0.03);
+  }
+
+  .p-inputtext,
+  .p-inputnumber,
+  w-100 {
+    width: 100% !important;
+  }
+  .nts-form-field-hint {
+    font-size: $smallText;
+    padding-left: 5px;
+    padding-top: 4px;
+  }
+  .nts-form-field-errors {
+    padding-left: 5px;
+  }
+  .p-inputtext.ng-dirty.ng-invalid {
+    border-color: initial;
+  }
+  .p-float-label > label {
+    color: #949494;
+  }
+  .p-float-label .p-inputwrapper-filled ~ label,
+  .p-float-label .p-inputwrapper-focus ~ label,
+  .p-float-label > label.float,
+  .p-float-label > .p-component:focus ~ label {
+    color: #000;
+  }
+
+  .p-float-label > .ng-invalid.ng-dirty + label {
+    color: initial;
+  }
+
+  .p-inputgroup-addon {
+    padding: 0 0.75rem;
+  }
+
+  .required {
+    color: red;
+    font-weight: 800;
+  }
+
+  /* Error handling */
+  &.nts-form-field-has-errors {
+    $errorColor: red;
+    .p-inputtext.ng-touched.ng-invalid,
+    p-dropdown.ng-touched.ng-invalid .p-dropdown,
+    .p-selectbutton .p-button,
+    .p-inputnumber-input, .p-inputgroup-addon {
+      border-color: $errorColor !important;
+      border-width: 2px !important;
+    }
+
+    .p-buttonset .p-button {
+      border-left-width: 0px !important;
+    }
+    .p-buttonset .p-button:first-child {
+      border-left-width: 2px !important;
+    }
+
+    .p-float-label > .ng-invalid.ng-touched + label {
+      color: $errorColor;
+    }
+    .nts-form-field-errors {
+      color: $errorColor;
+    }
+    .nts-form-field-error {
+      font-size: $smallText;
+    }
+  }
+}

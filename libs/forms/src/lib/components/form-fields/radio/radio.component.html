@@ -1,0 +1,29 @@
+<div class="nts-radio">
+  <cmg-clear2-ui-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [focused]="focused"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [control]="formControl"
+    [automationId]="automationId"
+    [formGroup]="formGroup"
+    [validators]="validators"
+  >
+    <div class="nts-radio-options">
+      <div *ngFor="let option of options; let i = index">
+        <div class="field-radiobutton">
+          <p-radioButton
+            [id]="id || (label || placeholder | ntsSlug)"
+            [name]="name || (label || placeholder | ntsSlug)"
+            [inputId]="(option.value | ntsSlug) + i"
+            [formControl]="formControl"
+            [value]="option.value"
+          ></p-radioButton>
+          <label class="nts-radio-label" [for]="(option.value | ntsSlug) + i">{{ option.label }}</label>
+        </div>
+      </div>
+    </div>
+  </cmg-clear2-ui-input>
+</div>
