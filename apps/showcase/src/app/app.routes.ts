@@ -81,6 +81,11 @@ export const ROUTES: Routes = [
       },
 
       {
+        path: 'forms',
+        loadChildren: () => import('./routes/forms/forms.module').then((m) => m.FormsModule),
+      },
+
+      {
         path: 'services',
         loadChildren: () => import('./routes/services/services.module').then((m) => m.ServicesModule),
       },
