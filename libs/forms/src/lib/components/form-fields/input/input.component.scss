@@ -5,7 +5,7 @@ $smallText: 80%;
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-#form-generator .nts-form-field {
+.nts-form-field {
   ::placeholder {
     opacity: 0.6 !important;
   }
@@ -62,7 +62,8 @@ $smallText: 80%;
     .p-inputtext.ng-touched.ng-invalid,
     p-dropdown.ng-touched.ng-invalid .p-dropdown,
     .p-selectbutton .p-button,
-    .p-inputnumber-input, .p-inputgroup-addon {
+    .p-inputnumber-input,
+    .p-inputgroup-addon {
       border-color: $errorColor !important;
       border-width: 2px !important;
     }

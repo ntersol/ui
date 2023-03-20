@@ -2,18 +2,18 @@
   <nts-form-field-input
     [label]="label"
     [placeholder]="placeholder"
-    [focused]="focused"
     [prefix]="prefix"
     [suffix]="suffix"
     [hint]="hint"
     [automationId]="automationId"
     [control]="formControl"
     [validators]="validators"
+    [id]="id || formFieldID"
   >
     <div class="w-100">
       <p-selectButton
         [formControl]="formControl"
-        [id]="id || (label || placeholder | ntsSlug)"
+        [id]="id || formFieldID"
         [options]="options ?? []"
         [multiple]="multiple ?? false"
         [dataKey]="dataKey ?? ''"

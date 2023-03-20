@@ -9,10 +9,15 @@
     'nts-form-field-is-disabled': state.isDisabled,
     'nts-form-field-required': state.required
   }"
-  [attr.automation-id]="automationId || label || placeholder | ntsSlug"
+  [attr.automation-id]="automationId || (label || placeholder | ntsSlug)"
 >
   <!-- Label -->
-  <label class="p-float-label-top" *ngIf="label$ | async as labelSrc" [innerHtml]="!!state.required ? labelSrc + requiredTag : labelSrc"></label>
+  <label
+    *ngIf="label$ | async as labelSrc"
+    class="p-float-label-top"
+    [for]="id"
+    [innerHtml]="!!state.required ? labelSrc + requiredTag : labelSrc"
+  ></label>
 
   <div class="p-inputgroup">
     <!-- Prefix -->
@@ -32,9 +37,9 @@
       <!--
            Add support for default Angular validators
         <ng-container [ngSwitch]="error[0]">
-         
-                       
-                  
+
+
+
           <ng-container *ngSwitchCase="'required'"> {{ label || placeholder || 'This field' }} is <strong>required</strong> </ng-container>
           <ng-container *ngSwitchCase="'email'"> Email address is <strong>required</strong> </ng-container>
           <ng-container *ngSwitchCase="'minlength'">
@@ -55,7 +60,7 @@
             Please enter a number that is less than
             <strong>{{ formControl?.errors?.max?.max }}</strong>
           </ng-container>
-          
+
           <ng-container *ngSwitchDefault>
             <span [innerHtml]="error[1]"></span>
           </ng-container>

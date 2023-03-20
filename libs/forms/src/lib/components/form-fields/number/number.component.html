@@ -2,13 +2,13 @@
   <nts-form-field-input
     [label]="label"
     [placeholder]="placeholder"
-    [focused]="focused"
     [prefix]="prefix"
     [suffix]="suffix"
     [hint]="hint"
     [automationId]="automationId"
     [control]="formControl"
     [validators]="validators"
+    [id]="id || formFieldID"
   >
     <div class="w-100">
       <p-inputNumber
@@ -21,7 +21,7 @@
         [useGrouping]="useGrouping"
         [minFractionDigits]="minFractionDigits"
         [maxFractionDigits]="maxFractionDigits"
-        [id]="id"
+        [id]="id || formFieldID"
         [ngClass]="styleClass ?? ''"
         [name]="name ?? ''"
         [min]="min ?? 0"

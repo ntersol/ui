@@ -22,8 +22,7 @@ export class BaseFormFieldComponent<t> implements OnDestroy {
   @Input() placeholder?: string | null = null;
   /** Floating label that appears in front of the content and moves above it when focused */
   @Input() label?: string | null = null;
-  /** Is this control focused */
-  @Input() focused?: boolean | null = false;
+
   /** An icon of text that will appear BEFORE the input */
   @Input() prefix?: string | null = null;
   /** An icon of text that will appear AFTER the input */
@@ -81,6 +80,11 @@ export class BaseFormFieldComponent<t> implements OnDestroy {
       console.warn('Unable to find that abstract control');
     }
   }
+
+  /** Is this control focused */
+  public focused?: boolean | null = false;
+
+  @Input() formFieldID = 'form-field-' + Math.floor(Math.random() * 1000000000);
 
   /** When the input is focused */
   @Output() onFocus = new EventEmitter<FocusEvent>();

@@ -2,19 +2,19 @@
   <nts-form-field-input
     [label]="label"
     [placeholder]="placeholder"
-    [focused]="focused"
     [prefix]="prefix"
     [suffix]="suffix"
     [hint]="hint"
     [control]="formControl"
     [automationId]="automationId"
     [validators]="validators"
+    [id]="id || formFieldID"
   >
     <div class="nts-radio-options">
       <div *ngFor="let option of options; let i = index">
         <div class="field-radiobutton">
           <p-radioButton
-            [id]="id || (label || placeholder | ntsSlug)"
+            [id]="id || formFieldID"
             [name]="name || (label || placeholder | ntsSlug)"
             [inputId]="(option.value | ntsSlug) + i"
             [formControl]="formControl"

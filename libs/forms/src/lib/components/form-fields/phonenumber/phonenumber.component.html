@@ -2,17 +2,17 @@
   <nts-form-field-input
     [label]="label"
     [placeholder]="placeholder"
-    [focused]="focused"
     [prefix]="prefix"
     [suffix]="suffix"
     [hint]="hint"
     [automationId]="automationId"
     [control]="formControl"
     [validators]="validators"
+    [id]="id || formFieldID"
   >
     <p-inputMask
       #field
-      [id]="id || (label || placeholder | ntsSlug)"
+      [id]="id || formFieldID"
       [name]="name || (label || placeholder | ntsSlug)"
       [placeholder]="placeholder ? placeholder : '(___) ___-____'"
       [ngClass]="styleClass ?? ''"

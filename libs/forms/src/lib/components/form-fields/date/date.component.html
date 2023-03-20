@@ -2,19 +2,19 @@
   <nts-form-field-input
     [label]="label"
     [placeholder]="placeholder"
-    [focused]="focused"
     [prefix]="prefix"
     [suffix]="suffix"
     [hint]="hint"
     [automationId]="automationId"
     [control]="formControl"
     [validators]="validators"
+    [id]="id || formFieldID"
   >
     <div class="w-100">
       <p-calendar
         [formControl]="formControl"
         [placeholder]="placeholder ? placeholder : 'mm/dd/yyyy'"
-        [id]="id || (label || placeholder | ntsSlug)"
+        [id]="id || formFieldID"
         [name]="name || (label || placeholder | ntsSlug)"
         appendTo="body"
         [styleClass]="styleClass ?? ''"

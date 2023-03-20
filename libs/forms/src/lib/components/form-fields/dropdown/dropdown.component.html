@@ -2,13 +2,13 @@
   <nts-form-field-input
     [label]="label"
     [placeholder]="placeholder"
-    [focused]="focused"
     [prefix]="prefix"
     [suffix]="suffix"
     [hint]="hint"
     [control]="formControl"
     [automationId]="automationId"
     [validators]="validators"
+    [id]="id || formFieldID"
   >
     <p-dropdown
       [options]="optionsUpdated ?? []"
@@ -16,6 +16,7 @@
       [optionValue]="'value'"
       [optionDisabled]="optionDisabled"
       [name]="name ?? ''"
+      [id]="id || formFieldID"
       [scrollHeight]="scrollHeight"
       [style]="style"
       [styleClass]="styleClass ?? ''"
