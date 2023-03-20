@@ -8,36 +8,35 @@
     [hint]="hint"
     [automationId]="automationId"
     [control]="formControl"
-    [formGroup]="formGroup"
     [validators]="validators"
   >
-  <div class="w-100">
-    <p-inputNumber
-      #num
-      currency="USD"
-      locale="en-US"
-      [formControl]="formControl"
-      [placeholder]="placeholder"
-      [mode]="mode"
-      [useGrouping]="useGrouping"
-      [minFractionDigits]="minFractionDigits"
-      [maxFractionDigits]="maxFractionDigits"
-      [id]="id"
-      [ngClass]="styleClass"
-      [name]="name"
-      [min]="min"
-      [max]="max"
-      [maxlength]="maxLength"
-      [showButtons]="showButtons"
-      [prefix]="currencySymbol"
-      [useGrouping]="useGrouping"
-      (onFocus)="focus($event)"
-      (onBlur)="blur($event)"
-      (keyup)="onKeyup.emit($event)"
-      (click)="onClick.emit($event)"
-      (onInput)="onInput($event)"
-    >
-    </p-inputNumber>
-</div>
+    <div class="w-100">
+      <p-inputNumber
+        #num
+        currency="USD"
+        locale="en-US"
+        [formControl]="formControl"
+        [placeholder]="placeholder ?? ''"
+        [mode]="mode"
+        [useGrouping]="useGrouping"
+        [minFractionDigits]="minFractionDigits"
+        [maxFractionDigits]="maxFractionDigits"
+        [id]="id"
+        [ngClass]="styleClass ?? ''"
+        [name]="name ?? ''"
+        [min]="min ?? 0"
+        [max]="max ?? 9999999999999999999999999999999"
+        [maxlength]="maxLength ?? 9999999999999999999999999999999"
+        [showButtons]="showButtons"
+        [prefix]="currencySymbol ?? ''"
+        [useGrouping]="useGrouping"
+        (onFocus)="focus($event)"
+        (onBlur)="blur($event)"
+        (keyup)="onKeyup.emit($event)"
+        (click)="onClick.emit($event)"
+        (onInput)="onInput($event)"
+      >
+      </p-inputNumber>
+    </div>
   </cmg-clear2-ui-input>
 </div>

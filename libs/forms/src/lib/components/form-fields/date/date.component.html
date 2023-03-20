@@ -8,7 +8,6 @@
     [hint]="hint"
     [automationId]="automationId"
     [control]="formControl"
-    [formGroup]="formGroup"
     [validators]="validators"
   >
     <div class="w-100">
@@ -18,10 +17,10 @@
         [id]="id || (label || placeholder | ntsSlug)"
         [name]="name || (label || placeholder | ntsSlug)"
         appendTo="body"
-        [styleClass]="styleClass"
+        [styleClass]="styleClass ?? ''"
         [inline]="inline"
         [showIcon]="showIcon || true"
-        [dateFormat]="dateFormat"
+        [dateFormat]="dateFormat ?? ''"
       ></p-calendar>
     </div>
   </cmg-clear2-ui-input>

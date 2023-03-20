@@ -8,16 +8,15 @@
     [hint]="hint"
     [automationId]="automationId"
     [control]="formControl"
-    [formGroup]="formGroup"
     [validators]="validators"
-    >
+  >
     <input
       #input
       class="p-inputtext p-component p-element"
       type="text"
       [id]="id || (label || placeholder | ntsSlug)"
       [name]="name || (label || placeholder | ntsSlug)"
-      [ngClass]="styleClass"
+      [ngClass]="styleClass ?? ''"
       [placeholder]="placeholder ?? ''"
       (focus)="focus($event)"
       (blur)="blur($event)"

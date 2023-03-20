@@ -24,7 +24,7 @@ export class NtsGooglePlacesAutocompleteComponent implements OnInit, OnDestroy, 
   @Input() apiKey?: string | null = null;
   @Input() id = 'nts-autocomplete-' + Math.floor(Math.random() * 1000000000);
   @Input() classes = 'form-control';
-  @Input() formGroup: FormGroup | null = null;
+  @Input() formGroup?: FormGroup | null = null;
   //
   @Input() address: string | null = null;
   @Input() city: string | null = null;

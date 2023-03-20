@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Optional, Output, Self } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Optional,
+  Output,
+  Self,
+} from '@angular/core';
 import { FormControl, AbstractControl, FormGroup, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Forms } from '../../forms.model';
@@ -53,8 +62,8 @@ export class BaseFormFieldComponent<t> implements OnDestroy {
     return !!this.formControl?.enabled ?? false;
   }
 
-  /** Main form group */
-  @Input() formGroup?: FormGroup | null = null;
+  /** Main form group. Named slighly different to avoid collision with the formGroup */
+  public formGroup?: FormGroup | null = null;
 
   /** Form control  */
   @Input() formControl = new FormControl();
@@ -90,10 +99,11 @@ export class BaseFormFieldComponent<t> implements OnDestroy {
   constructor(
     @Self()
     @Optional()
-    private ngControl?: NgControl
+    private ngControl?: NgControl,
   ) {
     if (this.ngControl?.control) {
       this.control = this.ngControl.control;
+      this.formGroup = this.control?.root as FormGroup;
     }
   }
 

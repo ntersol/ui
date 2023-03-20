@@ -8,7 +8,6 @@
     [hint]="hint"
     [automationId]="automationId"
     [control]="formControl"
-    [formGroup]="formGroup"
     [validators]="validators"
   >
     <p-inputMask
@@ -16,7 +15,7 @@
       [id]="id || (label || placeholder | ntsSlug)"
       [name]="name || (label || placeholder | ntsSlug)"
       [placeholder]="placeholder ? placeholder : '(___) ___-____'"
-      [ngClass]="styleClass"
+      [ngClass]="styleClass ?? ''"
       mask="(999) 999-9999"
       [unmask]="unmask"
       [formControl]="formControl"

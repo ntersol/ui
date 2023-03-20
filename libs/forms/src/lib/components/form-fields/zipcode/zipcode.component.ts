@@ -8,8 +8,10 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BaseFormFieldComponent } from '../form-field.base';
 
+@UntilDestroy()
 @Component({
   selector: 'cmg-clear2-ui-zipcode',
   templateUrl: './zipcode.component.html',
@@ -35,7 +37,7 @@ export class ZipcodeComponent extends BaseFormFieldComponent<string> implements 
 
       // When internal zip control changes
       this.subs.push(
-        this.formControl.valueChanges.subscribe((zip) => {
+        this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe((zip) => {
           if (zip === null) {
             return;
           }

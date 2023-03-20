@@ -1,13 +1,25 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   OnChanges,
   OnDestroy,
   OnInit,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-import { startWith, debounceTime, map, distinctUntilChanged, Observable, combineLatest, of, tap } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import {
+  startWith,
+  debounceTime,
+  map,
+  distinctUntilChanged,
+  Observable,
+  combineLatest,
+  of,
+  tap,
+  BehaviorSubject,
+} from 'rxjs';
 
 import { Forms } from '../../../forms.model';
 import { isRequired } from '../../../utils';
@@ -35,12 +47,12 @@ interface InputState {
 })
 export class InputComponent<t> extends BaseFormFieldComponent<t> implements OnInit, OnChanges, OnDestroy {
   // Dynamic content
-  public label$!: Observable<string | null>;
-  public prefix$!: Observable<string | null>;
-  public suffix$!: Observable<string | null>;
-  public hint$!: Observable<string | null>;
+  public label$: Observable<string | null> = new BehaviorSubject<string | null>(null);
+  public prefix$: Observable<string | null> = new BehaviorSubject<string | null>(null);
+  public suffix$: Observable<string | null> = new BehaviorSubject<string | null>(null);
+  public hint$: Observable<string | null> = new BehaviorSubject<string | null>(null);
   // Main state entity
-  public inputState$!: Observable<InputState | null>;
+  public inputState$: Observable<InputState | null> = new BehaviorSubject<InputState | null>(null);
 
   /** DOM element for showing required status */
   public requiredTag = `<sup class="required">*</sup>`;
@@ -66,7 +78,7 @@ export class InputComponent<t> extends BaseFormFieldComponent<t> implements OnIn
       this.hint$ = expressionReplacer$(this.formGroup, this.hint);
     }
 
-    // If input control changes, updae validators
+    // If input control changes, update validators
     if ((changes['control'] || changes['validators']) && this.validators) {
       validatorsAdd(this.formControl, this.validators);
     }
