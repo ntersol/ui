@@ -149,9 +149,9 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
    * When files are changed in the input
    * @param e
    */
-  public filesChanged(e: Event) {
+  public filesChanged(fileInput: HTMLInputElement) {
     this.state$.pipe(take(1)).subscribe((stateSrc) => {
-      const fileInput = e.target as HTMLInputElement;
+      // const fileInput = e.target as HTMLInputElement;
       const fileList = fileInput.files as FileList;
       // Extract the list of files from the input
       const files = stateSrc.files.length ? [...stateSrc.files, ...Array.from(fileList)] : Array.from(fileList);
@@ -265,6 +265,9 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     this.filesOutput$.next(null);
     this.filesOutput.emit(null);
     this.stateChange([]);
+    if (this.input?.nativeElement) {
+      this.input.nativeElement.value = ''; // Reset files
+    }
   }
 
   /**
@@ -448,19 +451,6 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     this.isDragOver = false;
   }
 
-  /**
-   * Handles the drop event on the drop area
-   * @param event - DragEvent
-   */
-  onDrop(event: DragEvent) {
-    event.preventDefault();
-    this.isDragOver = false;
-    const files = event?.dataTransfer?.files;
-    if (files) {
-      this.stateChange(Array.from(files));
-    }
-  }
-
   dragStart(index: number) {
     // Set the drag index to the index of the element being dragged
     this.dragIndex = index;
@@ -470,6 +460,20 @@ export class NtsFileUploaderComponent implements OnInit, OnDestroy, OnChanges, A
     // Prevent the default dragover event to allow drop
     event.preventDefault();
     this.dragOverIndex = index;
+  }
+
+  /**
+   * Handles the drop event on the drop area
+   * @param event - DragEvent
+   */
+  onDrop(event: DragEvent, fileInput: HTMLInputElement) {
+    event.preventDefault();
+    this.isDragOver = false;
+    const files = event?.dataTransfer?.files;
+    const fileList = fileInput.files as FileList;
+    if (files) {
+      this.stateChange([...Array.from(fileList), ...Array.from(files)]);
+    }
   }
 
   /**
