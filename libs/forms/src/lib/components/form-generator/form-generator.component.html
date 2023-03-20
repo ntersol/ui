@@ -1,26 +1,26 @@
 <div id="form-generator">
   <div class="form-generator-main" *ngIf="formModel && formGroup; else noModel">
     <ng-container *ngFor="let model of formModel">
-      <cmg-clear2-ui-container
+      <nts-form-field-container
         [container]="model"
         [formGroup]="formGroup"
         [datafields]="datafields"
         *ngIf="model.type === 'container'"
-      ></cmg-clear2-ui-container>
-      <cmg-clear2-ui-row
+      ></nts-form-field-container>
+      <nts-form-field-row
         [row]="model"
         [formGroup]="formGroup"
         [datafields]="datafields"
         *ngIf="model.type === 'row'"
         [options]="options"
-      ></cmg-clear2-ui-row>
-      <cmg-clear2-ui-content
+      ></nts-form-field-row>
+      <nts-form-field-content
         *ngIf="model.type !== 'row' && model.type !== 'container'"
         [datafields]="datafields"
         [formGroup]="formGroup"
         [content]="model"
         [options]="options"
-      ></cmg-clear2-ui-content>
+      ></nts-form-field-content>
     </ng-container>
   </div>
   <ng-template #noModel> No Form Model found </ng-template>

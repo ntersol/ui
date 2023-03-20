@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } 
 import { BaseFormFieldComponent } from '../form-field.base';
 
 @Component({
-  selector: 'cmg-clear2-ui-number',
+  selector: 'nts-form-field-number',
   templateUrl: './number.component.html',
   styleUrls: ['./number.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

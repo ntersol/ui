@@ -7,26 +7,26 @@
 >
   <ng-container *ngIf="container.content; else noContent">
     <ng-container *ngFor="let model of container.content">
-      <cmg-clear2-ui-container
+      <nts-form-field-container
         *ngIf="model.type === 'container'"
         [container]="model"
         [formGroup]="formGroup"
         [datafields]="datafields"
-      ></cmg-clear2-ui-container>
-      <cmg-clear2-ui-row
+      ></nts-form-field-container>
+      <nts-form-field-row
         *ngIf="model.type === 'row'"
         [row]="model"
         [formGroup]="formGroup"
         [datafields]="datafields"
         [options]="options"
-      ></cmg-clear2-ui-row>
-      <cmg-clear2-ui-content
+      ></nts-form-field-row>
+      <nts-form-field-content
         *ngIf="model.type !== 'row' && model.type !== 'container'"
         [datafields]="datafields"
         [formGroup]="formGroup"
         [content]="model"
         [options]="options"
-      ></cmg-clear2-ui-content>
+      ></nts-form-field-content>
     </ng-container>
   </ng-container>
   <ng-template #noContent> No content supplied for container </ng-template>

@@ -3,7 +3,7 @@ import { take, timer } from 'rxjs';
 import { BaseFormFieldComponent } from '../form-field.base';
 
 @Component({
-  selector: 'cmg-clear2-ui-phonenumber',
+  selector: 'nts-form-field-phonenumber',
   templateUrl: './phonenumber.component.html',
   styleUrls: ['./phonenumber.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

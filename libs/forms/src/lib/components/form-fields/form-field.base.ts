@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 import { Forms } from '../../forms.model';
 
 @Component({
-  selector: 'cmg-clear2-ui-base-form-field',
+  selector: 'nts-base-form-field',
   template: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

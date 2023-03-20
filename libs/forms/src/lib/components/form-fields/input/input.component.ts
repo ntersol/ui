@@ -39,7 +39,7 @@ interface InputState {
 }
 
 @Component({
-  selector: 'cmg-clear2-ui-input',
+  selector: 'nts-form-field-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

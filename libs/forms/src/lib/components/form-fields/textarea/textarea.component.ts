@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChil
 import { BaseFormFieldComponent } from '../form-field.base';
 
 @Component({
-  selector: 'cmg-clear2-ui-textarea',
+  selector: 'nts-form-field-textarea',
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

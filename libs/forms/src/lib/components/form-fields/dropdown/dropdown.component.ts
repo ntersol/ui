@@ -3,7 +3,7 @@ import { Forms } from '../../../forms.model';
 import { BaseFormFieldComponent } from '../form-field.base';
 
 @Component({
-  selector: 'cmg-clear2-ui-dropdown',
+  selector: 'nts-form-field-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
   encapsulation: ViewEncapsulation.None,

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'cmg-clear2-ui-feature',
+  selector: 'nts-form-field-feature',
   templateUrl: './feature.component.html',
   styleUrls: ['./feature.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

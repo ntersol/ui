@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Forms } from '../../../forms.model';
 
 @Component({
-  selector: 'cmg-clear2-ui-content',
+  selector: 'nts-form-field-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -11,7 +11,7 @@ import { debounceTime, filter, startWith } from 'rxjs';
 import { BaseFormFieldComponent } from '../form-field.base';
 
 @Component({
-  selector: 'cmg-clear2-ui-date',
+  selector: 'nts-form-field-date',
   templateUrl: './date.component.html',
   styleUrls: ['./date.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

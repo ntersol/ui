@@ -5,7 +5,7 @@ import { Forms } from '../../../forms.model';
 import { dynamicPropertyEvaluation$ } from '../../../utils';
 
 @Component({
-  selector: 'cmg-clear2-ui-form-field',
+  selector: 'nts-form-field-form-field',
   templateUrl: './form-field.component.html',
   styleUrls: ['./form-field.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

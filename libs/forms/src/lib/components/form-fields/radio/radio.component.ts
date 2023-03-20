@@ -3,7 +3,7 @@ import { Forms } from '../../../forms.model';
 import { BaseFormFieldComponent } from '../form-field.base';
 
 @Component({
-  selector: 'cmg-clear2-ui-radio',
+  selector: 'nts-form-field-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

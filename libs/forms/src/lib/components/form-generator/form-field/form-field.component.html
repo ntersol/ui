@@ -6,7 +6,7 @@
   [ngStyle]="formField.inlineStyles"
 >
   <!-- Text Field -->
-  <cmg-clear2-ui-text
+  <nts-form-field-text
     *ngIf="formField.formFieldType === 'text'"
     [label]="formField.label"
     [placeholder]="formField.placeholder"
@@ -23,10 +23,10 @@
     [formGroup]="formGroup"
     [validators]="formField.validators"
     [disabled]="disabled$ | async"
-  ></cmg-clear2-ui-text>
+  ></nts-form-field-text>
 
   <!-- TextArea Field -->
-  <cmg-clear2-ui-textarea
+  <nts-form-field-textarea
     *ngIf="formField.formFieldType === 'textarea'"
     [label]="formField.label"
     [placeholder]="formField.placeholder"
@@ -45,10 +45,10 @@
     [formGroup]="formGroup"
     [validators]="formField.validators"
     [disabled]="disabled$ | async"
-  ></cmg-clear2-ui-textarea>
+  ></nts-form-field-textarea>
 
   <!-- Date Field -->
-  <cmg-clear2-ui-date
+  <nts-form-field-date
     *ngIf="formField.formFieldType === 'date'"
     [label]="formField.label"
     [placeholder]="formField.placeholder"
@@ -66,9 +66,9 @@
     [dateFormat]="formField.dateFormat"
     [validators]="formField.validators"
     [disabled]="disabled$ | async"
-  ></cmg-clear2-ui-date>
+  ></nts-form-field-date>
 
-  <cmg-clear2-ui-select-button
+  <nts-form-field-select-button
     *ngIf="formField.formFieldType === 'selectButton'"
     [options]="formField.options"
     [label]="formField.label"
@@ -82,11 +82,13 @@
     [dataKey]="formField.dataKey"
     [validators]="formField.validators"
     [disabled]="disabled$ | async"
-  ></cmg-clear2-ui-select-button>
+  ></nts-form-field-select-button>
 
-  <cmg-clear2-ui-dropdown
+  <nts-form-field-dropdown
     *ngIf="formField.formFieldType === 'dropdown'"
-    [options]="formField.datafield && datafields[formField.datafield] ? datafields[formField.datafield] : formField.options"
+    [options]="
+      formField.datafield && datafields[formField.datafield] ? datafields[formField.datafield] : formField.options
+    "
     [label]="formField.label"
     [hint]="formField.hint"
     [automationId]="formField.automationId"
@@ -101,9 +103,9 @@
     [showClear]="formField.showClear"
     [insertEmptyOption]="formField.insertEmptyOption"
     [disabled]="disabled$ | async"
-  ></cmg-clear2-ui-dropdown>
+  ></nts-form-field-dropdown>
 
-  <cmg-clear2-ui-phonenumber
+  <nts-form-field-phonenumber
     *ngIf="formField.formFieldType === 'phoneNumber'"
     [label]="formField.label"
     [prefix]="formField.prefix"
@@ -118,9 +120,9 @@
     [name]="formField.name"
     [validators]="formField.validators"
     [disabled]="disabled$ | async"
-  ></cmg-clear2-ui-phonenumber>
+  ></nts-form-field-phonenumber>
 
-  <cmg-clear2-ui-email
+  <nts-form-field-email
     *ngIf="formField.formFieldType === 'email'"
     [label]="formField.label"
     [placeholder]="formField.placeholder"
@@ -135,9 +137,9 @@
     [formGroup]="formGroup"
     [validators]="formField.validators"
     [disabled]="disabled$ | async"
-  ></cmg-clear2-ui-email>
+  ></nts-form-field-email>
 
-  <cmg-clear2-ui-number
+  <nts-form-field-number
     *ngIf="formField.formFieldType === 'number'"
     [label]="formField.label"
     [placeholder]="formField.placeholder"
@@ -162,11 +164,13 @@
     [maxLength]="formField.maxLength"
     [validators]="formField.validators"
     [disabled]="disabled$ | async"
-  ></cmg-clear2-ui-number>
+  ></nts-form-field-number>
 
-  <cmg-clear2-ui-radio
+  <nts-form-field-radio
     *ngIf="formField.formFieldType === 'radio'"
-    [options]="formField.datafield && datafields[formField.datafield] ? datafields[formField.datafield] : formField.options"
+    [options]="
+      formField.datafield && datafields[formField.datafield] ? datafields[formField.datafield] : formField.options
+    "
     [label]="formField.label"
     [hint]="formField.hint"
     [automationId]="formField.automationId"
@@ -174,9 +178,9 @@
     [validators]="formField.validators"
     [disabled]="disabled$ | async"
     [formGroup]="formGroup"
-  ></cmg-clear2-ui-radio>
+  ></nts-form-field-radio>
 
-  <cmg-clear2-ui-zipcode
+  <nts-form-field-zipcode
     *ngIf="formField.formFieldType === 'zipcode'"
     [label]="formField.label"
     [placeholder]="formField.placeholder"
@@ -194,7 +198,7 @@
     [validators]="formField.validators"
     [disabled]="disabled$ | async"
   >
-  </cmg-clear2-ui-zipcode>
+  </nts-form-field-zipcode>
 
   <div style="color: red" *ngIf="!formGroup.get(formField.field)">
     Unable to find a form control at <strong>{{ formField.field }}</strong>

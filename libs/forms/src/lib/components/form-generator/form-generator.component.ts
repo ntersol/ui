@@ -10,7 +10,7 @@ import { is } from '../../utils';
  */
 
 @Component({
-  selector: 'cmg-clear2-ui-form-generator',
+  selector: 'nts-form-generator',
   templateUrl: './form-generator.component.html',
   styleUrls: ['./form-generator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

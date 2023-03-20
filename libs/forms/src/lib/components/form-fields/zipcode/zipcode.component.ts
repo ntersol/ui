@@ -13,7 +13,7 @@ import { BaseFormFieldComponent } from '../form-field.base';
 
 @UntilDestroy()
 @Component({
-  selector: 'cmg-clear2-ui-zipcode',
+  selector: 'nts-form-field-zipcode',
   templateUrl: './zipcode.component.html',
   styleUrls: ['./zipcode.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -3,7 +3,7 @@ import { Forms } from '../../../forms.model';
 import { BaseFormFieldComponent } from '../form-field.base';
 
 @Component({
-  selector: 'cmg-clear2-ui-select-button',
+  selector: 'nts-form-field-select-button',
   templateUrl: './select-button.component.html',
   styleUrls: ['./select-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

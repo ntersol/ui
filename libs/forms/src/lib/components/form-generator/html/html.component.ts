@@ -5,7 +5,7 @@ import { Forms } from '../../../forms.model';
 import { dynamicPropertyEvaluation$, expressionReplacer, expressionReplacer$ } from '../../../utils';
 
 @Component({
-  selector: 'cmg-clear2-ui-html',
+  selector: 'nts-form-field-html',
   templateUrl: './html.component.html',
   styleUrls: ['./html.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,7 +17,7 @@ export class HtmlComponent implements OnInit, OnChanges {
 
   public visible$!: Observable<boolean>;
   public html$!: Observable<string>;
-  
+
   constructor() {}
 
   ngOnInit(): void {}
