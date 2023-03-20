@@ -1,0 +1,33 @@
+<div class="nts-dropdown">
+  <cmg-clear2-ui-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [focused]="focused"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [control]="formControl"
+    [automationId]="automationId"
+    [formGroup]="formGroup"
+    [validators]="validators"
+  >
+    <p-dropdown
+      [options]="optionsUpdated"
+      [optionLabel]="'label'"
+      [optionValue]="'value'"
+      [optionDisabled]="optionDisabled"
+      [name]="name"
+      [scrollHeight]="scrollHeight ?? '200px'"
+      [style]="style"
+      [styleClass]="styleClass"
+      [panelStyle]="panelStyle"
+      [panelStyleClass]="panelStyleClass"
+      [placeholder]="placeholder ?? ''"
+      [appendTo]="appendTo"
+      [virtualScroll]="virtualScroll"
+      [showClear]="showClear"
+      [formControl]="formControl"
+    >
+    </p-dropdown>
+  </cmg-clear2-ui-input>
+</div>

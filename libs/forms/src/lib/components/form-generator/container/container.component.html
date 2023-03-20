@@ -1,0 +1,33 @@
+<div
+  class="form-generator-container"
+  *ngIf="visible$ | async"
+  [attr.id]="container.id || null"
+  [ngClass]="container.cssClasses"
+  [ngStyle]="container.inlineStyles"
+>
+  <ng-container *ngIf="container.content; else noContent">
+    <ng-container *ngFor="let model of container.content">
+      <cmg-clear2-ui-container
+        *ngIf="model.type === 'container'"
+        [container]="model"
+        [formGroup]="formGroup"
+        [datafields]="datafields"
+      ></cmg-clear2-ui-container>
+      <cmg-clear2-ui-row
+        *ngIf="model.type === 'row'"
+        [row]="model"
+        [formGroup]="formGroup"
+        [datafields]="datafields"
+        [options]="options"
+      ></cmg-clear2-ui-row>
+      <cmg-clear2-ui-content
+        *ngIf="model.type !== 'row' && model.type !== 'container'"
+        [datafields]="datafields"
+        [formGroup]="formGroup"
+        [content]="model"
+        [options]="options"
+      ></cmg-clear2-ui-content>
+    </ng-container>
+  </ng-container>
+  <ng-template #noContent> No content supplied for container </ng-template>
+</div>

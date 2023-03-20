@@ -1,0 +1,36 @@
+<div id="form-generator">
+  <div class="form-generator-main" *ngIf="formModel && formGroup; else noModel">
+    <ng-container *ngFor="let model of formModel">
+      <cmg-clear2-ui-container
+        [container]="model"
+        [formGroup]="formGroup"
+        [datafields]="datafields"
+        *ngIf="model.type === 'container'"
+      ></cmg-clear2-ui-container>
+      <cmg-clear2-ui-row
+        [row]="model"
+        [formGroup]="formGroup"
+        [datafields]="datafields"
+        *ngIf="model.type === 'row'"
+        [options]="options"
+      ></cmg-clear2-ui-row>
+      <cmg-clear2-ui-content
+        *ngIf="model.type !== 'row' && model.type !== 'container'"
+        [datafields]="datafields"
+        [formGroup]="formGroup"
+        [content]="model"
+        [options]="options"
+      ></cmg-clear2-ui-content>
+    </ng-container>
+  </div>
+  <ng-template #noModel> No Form Model found </ng-template>
+  <div class="form-generator-footer text-right">
+    <ng-content select="[beforeSubmitButton]"></ng-content>
+    <button class="p-button" (click)="submit()" [ngClass]="options?.submitButton?.classes" [disabled]="disableSubmit">
+      <span class="mr-2" [innerHtml]="options.submitButton.icon" *ngIf="options?.submitButton?.icon"></span>
+      {{ options?.submitButton?.label ?? 'Submit' }}
+    </button>
+
+    <ng-content select="[afterSubmitButton]"></ng-content>
+  </div>
+</div>

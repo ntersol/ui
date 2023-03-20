@@ -1,0 +1,8 @@
+<cmg-clear2-ui-html [formGroup]="formGroup" [content]="content" [options]="options" *ngIf="content.type === 'html'"></cmg-clear2-ui-html>
+<cmg-clear2-ui-form-field
+  [formGroup]="formGroup"
+  [formField]="content"
+  [options]="options"
+  [datafields]="datafields"
+  *ngIf="content.type === 'formField'"
+></cmg-clear2-ui-form-field>

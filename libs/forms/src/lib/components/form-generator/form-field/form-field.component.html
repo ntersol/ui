@@ -1,0 +1,202 @@
+<div
+  class="form-generator-formfield"
+  *ngIf="visible$ | async"
+  [attr.id]="formField.id || null"
+  [ngClass]="formField.cssClasses"
+  [ngStyle]="formField.inlineStyles"
+>
+  <!-- Text Field -->
+  <cmg-clear2-ui-text
+    *ngIf="formField.formFieldType === 'text'"
+    [label]="formField.label"
+    [placeholder]="formField.placeholder"
+    [focused]="formField.focused"
+    [prefix]="formField.prefix"
+    [suffix]="formField.suffix"
+    [hint]="formField.hint"
+    [automationId]="formField.automationId"
+    [id]="formField.id"
+    [name]="formField.name"
+    [minLength]="formField.minLength"
+    [maxLength]="formField.maxLength"
+    [control]="formGroup.get(formField.field)"
+    [formGroup]="formGroup"
+    [validators]="formField.validators"
+    [disabled]="disabled$ | async"
+  ></cmg-clear2-ui-text>
+
+  <!-- TextArea Field -->
+  <cmg-clear2-ui-textarea
+    *ngIf="formField.formFieldType === 'textarea'"
+    [label]="formField.label"
+    [placeholder]="formField.placeholder"
+    [focused]="formField.focused"
+    [prefix]="formField.prefix"
+    [suffix]="formField.suffix"
+    [hint]="formField.hint"
+    [automationId]="formField.automationId"
+    [id]="formField.id"
+    [name]="formField.name"
+    [rows]="formField.rows"
+    [columns]="formField.columns"
+    [maxlength]="formField.maxlength"
+    [autoResize]="formField.autoResize"
+    [control]="formGroup.get(formField.field)"
+    [formGroup]="formGroup"
+    [validators]="formField.validators"
+    [disabled]="disabled$ | async"
+  ></cmg-clear2-ui-textarea>
+
+  <!-- Date Field -->
+  <cmg-clear2-ui-date
+    *ngIf="formField.formFieldType === 'date'"
+    [label]="formField.label"
+    [placeholder]="formField.placeholder"
+    [focused]="formField.focused"
+    [prefix]="formField.prefix"
+    [suffix]="formField.suffix"
+    [hint]="formField.hint"
+    [automationId]="formField.automationId"
+    [id]="formField.id"
+    [name]="formField.name"
+    [control]="formGroup.get(formField.field)"
+    [formGroup]="formGroup"
+    [inline]="formField.inline"
+    [showIcon]="formField.showIcon"
+    [dateFormat]="formField.dateFormat"
+    [validators]="formField.validators"
+    [disabled]="disabled$ | async"
+  ></cmg-clear2-ui-date>
+
+  <cmg-clear2-ui-select-button
+    *ngIf="formField.formFieldType === 'selectButton'"
+    [options]="formField.options"
+    [label]="formField.label"
+    [hint]="formField.hint"
+    [automationId]="formField.automationId"
+    [id]="formField.id"
+    [control]="formGroup.get(formField.field)"
+    [formGroup]="formGroup"
+    [multiple]="formField.multiple"
+    [canUnselect]="formField.canUnselect"
+    [dataKey]="formField.dataKey"
+    [validators]="formField.validators"
+    [disabled]="disabled$ | async"
+  ></cmg-clear2-ui-select-button>
+
+  <cmg-clear2-ui-dropdown
+    *ngIf="formField.formFieldType === 'dropdown'"
+    [options]="formField.datafield && datafields[formField.datafield] ? datafields[formField.datafield] : formField.options"
+    [label]="formField.label"
+    [hint]="formField.hint"
+    [automationId]="formField.automationId"
+    [id]="formField.id"
+    [placeholder]="formField.placeholder"
+    [control]="formGroup.get(formField.field)"
+    [formGroup]="formGroup"
+    [validators]="formField.validators"
+    [scrollHeight]="formField.scrollHeight"
+    [appendTo]="formField.appendTo"
+    [virtualScroll]="formField.virtualScroll"
+    [showClear]="formField.showClear"
+    [insertEmptyOption]="formField.insertEmptyOption"
+    [disabled]="disabled$ | async"
+  ></cmg-clear2-ui-dropdown>
+
+  <cmg-clear2-ui-phonenumber
+    *ngIf="formField.formFieldType === 'phoneNumber'"
+    [label]="formField.label"
+    [prefix]="formField.prefix"
+    [suffix]="formField.suffix"
+    [hint]="formField.hint"
+    [placeholder]="formField.placeholder"
+    [control]="formGroup.get(formField.field)"
+    [formGroup]="formGroup"
+    [focused]="formField.focused"
+    [automationId]="formField.automationId"
+    [id]="formField.id"
+    [name]="formField.name"
+    [validators]="formField.validators"
+    [disabled]="disabled$ | async"
+  ></cmg-clear2-ui-phonenumber>
+
+  <cmg-clear2-ui-email
+    *ngIf="formField.formFieldType === 'email'"
+    [label]="formField.label"
+    [placeholder]="formField.placeholder"
+    [focused]="formField.focused"
+    [prefix]="formField.prefix"
+    [suffix]="formField.suffix"
+    [hint]="formField.hint"
+    [automationId]="formField.automationId"
+    [id]="formField.id"
+    [name]="formField.name"
+    [control]="formGroup.get(formField.field)"
+    [formGroup]="formGroup"
+    [validators]="formField.validators"
+    [disabled]="disabled$ | async"
+  ></cmg-clear2-ui-email>
+
+  <cmg-clear2-ui-number
+    *ngIf="formField.formFieldType === 'number'"
+    [label]="formField.label"
+    [placeholder]="formField.placeholder"
+    [focused]="formField.focused"
+    [prefix]="formField.prefix"
+    [suffix]="formField.suffix"
+    [hint]="formField.hint"
+    [automationId]="formField.automationId"
+    [id]="formField.id"
+    [name]="formField.name"
+    [maxLength]="formField.maxLength"
+    [control]="formGroup.get(formField.field)"
+    [formGroup]="formGroup"
+    [mode]="formField.mode"
+    [currencySymbol]="formField.currencySymbol"
+    [min]="formField.min"
+    [max]="formField.max"
+    [useGrouping]="formField.useGrouping"
+    [minFractionDigits]="formField.minFractionDigits"
+    [maxFractionDigits]="formField.maxFractionDigits"
+    [buttonLayout]="formField.buttonLayout"
+    [maxLength]="formField.maxLength"
+    [validators]="formField.validators"
+    [disabled]="disabled$ | async"
+  ></cmg-clear2-ui-number>
+
+  <cmg-clear2-ui-radio
+    *ngIf="formField.formFieldType === 'radio'"
+    [options]="formField.datafield && datafields[formField.datafield] ? datafields[formField.datafield] : formField.options"
+    [label]="formField.label"
+    [hint]="formField.hint"
+    [automationId]="formField.automationId"
+    [id]="formField.id"
+    [validators]="formField.validators"
+    [disabled]="disabled$ | async"
+    [formGroup]="formGroup"
+  ></cmg-clear2-ui-radio>
+
+  <cmg-clear2-ui-zipcode
+    *ngIf="formField.formFieldType === 'zipcode'"
+    [label]="formField.label"
+    [placeholder]="formField.placeholder"
+    [focused]="formField.focused"
+    [prefix]="formField.prefix"
+    [suffix]="formField.suffix"
+    [hint]="formField.hint"
+    [automationId]="formField.automationId"
+    [id]="formField.id"
+    [name]="formField.name"
+    [allowNineDigitCodes]="formField.allowNineDigitCodes"
+    [dataType]="formField.dataType"
+    [control]="formGroup.get(formField.field)"
+    [formGroup]="formGroup"
+    [validators]="formField.validators"
+    [disabled]="disabled$ | async"
+  >
+  </cmg-clear2-ui-zipcode>
+
+  <div style="color: red" *ngIf="!formGroup.get(formField.field)">
+    Unable to find a form control at <strong>{{ formField.field }}</strong>
+  </div>
+</div>

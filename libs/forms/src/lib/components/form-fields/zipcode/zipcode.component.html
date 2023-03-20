@@ -1,0 +1,30 @@
+<div class="input-text">
+  <cmg-clear2-ui-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [focused]="focused"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [automationId]="automationId"
+    [control]="formControl"
+    [formGroup]="formGroup"
+    [validators]="validators"
+    >
+    <input
+      #input
+      class="p-inputtext p-component p-element"
+      type="text"
+      [id]="id || (label || placeholder | ntsSlug)"
+      [name]="name || (label || placeholder | ntsSlug)"
+      [ngClass]="styleClass"
+      [placeholder]="placeholder ?? ''"
+      (focus)="focus($event)"
+      (blur)="blur($event)"
+      (keyup)="onKeyup.emit($event)"
+      (click)="onClick.emit($event)"
+      [formControl]="formControl"
+      [maxlength]="allowNineDigitCodes ? 10 : 5"
+    />
+  </cmg-clear2-ui-input>
+</div>

@@ -1,0 +1,22 @@
+<ng-container *ngFor="let content of column.content">
+  <cmg-clear2-ui-container
+    *ngIf="content.type === 'container'"
+    [container]="content"
+    [formGroup]="formGroup"
+    [datafields]="datafields"
+  ></cmg-clear2-ui-container>
+  <cmg-clear2-ui-row
+    *ngIf="content.type === 'row'"
+    [row]="content"
+    [formGroup]="formGroup"
+    [datafields]="datafields"
+    [options]="options"
+  ></cmg-clear2-ui-row>
+  <cmg-clear2-ui-content
+    *ngIf="content.type !== 'row' && content.type !== 'container'"
+    [datafields]="datafields"
+    [formGroup]="formGroup"
+    [content]="content"
+    [options]="options"
+  ></cmg-clear2-ui-content>
+</ng-container>

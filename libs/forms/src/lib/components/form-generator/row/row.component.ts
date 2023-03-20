@@ -1,0 +1,31 @@
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Forms } from '../../../forms.model';
+import { dynamicPropertyEvaluation$ } from '../../../utils';
+
+@Component({
+  selector: 'cmg-clear2-ui-row',
+  templateUrl: './row.component.html',
+  styleUrls: ['./row.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class RowComponent implements OnInit, OnChanges {
+  @Input() row?: Forms.Row<unknown> | null = null;
+  @Input() formGroup?: FormGroup | null = null;
+  @Input() options?: Forms.FormOptions | null = null;
+  @Input() datafields: Forms.Datafields = {};
+
+  public visible$!: Observable<boolean>;
+  public visibleColumns: Observable<boolean>[] = [];
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['formGroup'] && this.formGroup) {
+      this.visible$ = dynamicPropertyEvaluation$(this.row.visible, this.formGroup);
+      this.visibleColumns = this.row.columns.map((c) => dynamicPropertyEvaluation$(c.visible, this.formGroup));
+    }
+  }
+}
