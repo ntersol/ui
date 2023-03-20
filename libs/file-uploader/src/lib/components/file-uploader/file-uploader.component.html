@@ -101,7 +101,7 @@
     }"
     (dragover)="onDragOver($event)"
     (dragleave)="onDragLeave($event)"
-    (drop)="onDrop($event)"
+    (drop)="onDrop($event, input)"
   >
     <div class="nts-file-icon-upload-wrapper">
       <div
@@ -128,7 +128,7 @@
       class="nts-file-uploader-input"
       [multiple]="multiple ? 'multiple' : null"
       type="file"
-      (change)="filesChanged($event)"
+      (change)="filesChanged(input)"
     />
   </label>
 </div>
