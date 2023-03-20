@@ -11,16 +11,19 @@
     [id]="id || formFieldID"
   >
     <div class="w-100">
-      <p-selectButton
-        [formControl]="formControl"
-        [id]="id || formFieldID"
-        [options]="options ?? []"
-        [multiple]="multiple ?? false"
-        [dataKey]="dataKey ?? ''"
-        optionLabel="label"
-        optionValue="value"
-        (onOptionClick)="onOptionClick($event)"
-      ></p-selectButton>
+      <ng-container *ngIf="options?.length; else noOptions">
+        <p-selectButton
+          [formControl]="formControl"
+          [id]="id || formFieldID"
+          [options]="options ?? []"
+          [multiple]="multiple ?? false"
+          [dataKey]="dataKey ?? ''"
+          optionLabel="label"
+          optionValue="value"
+          (onOptionClick)="onOptionClick($event)"
+        ></p-selectButton>
+      </ng-container>
+      <ng-template #noOptions> <em>No options supplied for this select button</em> </ng-template>
     </div>
   </nts-form-field-input>
 </div>
