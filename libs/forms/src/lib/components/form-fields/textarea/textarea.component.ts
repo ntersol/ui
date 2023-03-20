@@ -18,7 +18,7 @@ export class TextAreaComponent extends BaseFormFieldComponent<string> implements
   /**  */
   @Input() autoResize = false;
 
-  @ViewChild('input') input: ElementRef;
+  @ViewChild('input', { static: true }) input!: ElementRef;
 
   constructor() {
     super();

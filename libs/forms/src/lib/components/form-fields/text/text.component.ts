@@ -13,7 +13,7 @@ export class TextComponent extends BaseFormFieldComponent<string> implements OnI
   /** The MINIMUM number of characters allowed by this input */
   @Input() minLength?: number | null = null;
 
-  @ViewChild('input') input: ElementRef;
+  @ViewChild('input', { static: true }) input!: ElementRef;
 
   constructor() {
     super();

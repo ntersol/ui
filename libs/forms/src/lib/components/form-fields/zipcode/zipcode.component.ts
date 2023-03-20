@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { BaseFormFieldComponent } from '../form-field.base';
 
 @Component({
@@ -11,7 +20,7 @@ export class ZipcodeComponent extends BaseFormFieldComponent<string> implements 
   @Input() dataType?: 'string' | 'number' | null;
   @Input() allowNineDigitCodes?: boolean | null;
 
-  @ViewChild('input') input: ElementRef;
+  @ViewChild('input', { static: true }) input!: ElementRef;
 
   constructor() {
     super();
@@ -41,7 +50,7 @@ export class ZipcodeComponent extends BaseFormFieldComponent<string> implements 
           zipNew = this.dataType === 'number' && !this.allowNineDigitCodes ? parseInt(zipNew) : String(zipNew);
           // Patch data back into the control
           this.formControl.patchValue(zipNew, { emitEvent: false });
-        })
+        }),
       );
     }
   }

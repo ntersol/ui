@@ -17,7 +17,7 @@ export class SelectButtonComponent extends BaseFormFieldComponent<string> implem
   @Input() canUnselect?: boolean | null = null;
 
   // Store the previous value of the user selection, used to unselect
-  private lastValue = '';
+  private lastValue: string | null = '';
 
   constructor() {
     super();

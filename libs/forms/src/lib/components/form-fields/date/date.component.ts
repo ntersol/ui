@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewEncapsulation,
+} from '@angular/core';
 import { debounceTime, filter, startWith } from 'rxjs';
 import { BaseFormFieldComponent } from '../form-field.base';
 
@@ -33,11 +41,11 @@ export class DateComponent extends BaseFormFieldComponent<string> implements OnI
         // NgPrime date control requires a date type
         this.formControl.valueChanges
           .pipe(
-            startWith(this.formControl.getRawValue()),
+            startWith(this.formControl.value),
             filter((x) => typeof x === 'string'),
-            debounceTime(1)
+            debounceTime(1),
           )
-          .subscribe((x) => this.formControl.patchValue(new Date(x)))
+          .subscribe((x) => this.formControl.patchValue(new Date(x))),
       );
     }
   }

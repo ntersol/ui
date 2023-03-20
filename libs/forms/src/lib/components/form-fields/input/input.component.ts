@@ -1,7 +1,17 @@
-import { ChangeDetectionStrategy, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  ViewEncapsulation,
+} from '@angular/core';
 import { startWith, debounceTime, map, distinctUntilChanged, Observable, combineLatest, of, tap } from 'rxjs';
-import { expressionReplacer$, isRequired } from '../../../utils';
+
 import { Forms } from '../../../forms.model';
+import { isRequired } from '../../../utils';
+import { expressionReplacer$ } from '../../../utils/expression-replacer.util';
 import { required } from '../../../validators/src/misc.validators';
 import { validatorsAdd } from '../../../validators/validators.util';
 import { BaseFormFieldComponent } from '../form-field.base';
@@ -13,7 +23,7 @@ interface InputState {
   isDisabled: boolean;
   isInvalid: boolean;
   required: boolean;
-  errors: any[];
+  errors: any[] | null;
 }
 
 @Component({
@@ -25,12 +35,12 @@ interface InputState {
 })
 export class InputComponent<t> extends BaseFormFieldComponent<t> implements OnInit, OnChanges, OnDestroy {
   // Dynamic content
-  public label$!: Observable<string>;
-  public prefix$!: Observable<string>;
-  public suffix$!: Observable<string>;
-  public hint$!: Observable<string>;
+  public label$!: Observable<string | null>;
+  public prefix$!: Observable<string | null>;
+  public suffix$!: Observable<string | null>;
+  public hint$!: Observable<string | null>;
   // Main state entity
-  public inputState$!: Observable<InputState>;
+  public inputState$!: Observable<InputState | null>;
 
   /** DOM element for showing required status */
   public requiredTag = `<sup class="required">*</sup>`;
@@ -68,38 +78,44 @@ export class InputComponent<t> extends BaseFormFieldComponent<t> implements OnIn
           startWith(this.formControl.value),
           debounceTime(1),
           map((val) => val !== null && val !== undefined && val !== ''),
-          distinctUntilChanged()
+          distinctUntilChanged(),
         ),
         showErrors: this.formControl.statusChanges.pipe(
           startWith(this.formControl?.status),
           debounceTime(1),
           map((x) => x === 'INVALID' && !!this.formControl?.touched),
-          distinctUntilChanged()
+          distinctUntilChanged(),
         ),
         isValid: this.formControl.statusChanges.pipe(
           startWith(this.formControl?.status),
           debounceTime(1),
           map((x) => x === 'VALID'),
-          distinctUntilChanged()
+          distinctUntilChanged(),
         ),
         isDisabled: this.formControl.statusChanges.pipe(
           startWith(this.formControl?.status),
           debounceTime(1),
           map((x) => x === 'DISABLED'),
-          distinctUntilChanged()
+          distinctUntilChanged(),
         ),
         isInvalid: this.formControl.statusChanges.pipe(
           startWith(this.formControl?.status),
           debounceTime(1),
           map((x) => x === 'INVALID'),
-          distinctUntilChanged()
+          distinctUntilChanged(),
         ),
         errors: this.formControl.statusChanges.pipe(
           startWith(this.formControl?.errors),
           debounceTime(1),
-          map(() =>
-            !this.formControl?.errors ? null : Object.keys(this.formControl.errors).reduce((a, b) => [...a, this.formControl.errors[b]], [])
-          )
+          map(() => {
+            if (!this.formControl?.errors) {
+              return null;
+            }
+            return Object.keys(this.formControl.errors).reduce(
+              (a, b) => (this.formControl?.errors ? [...a, this.formControl?.errors[b]] : [...a]),
+              [] as string[],
+            );
+          }),
         ),
         required: of(isRequired(this.formControl)),
       }).pipe(debounceTime(1));

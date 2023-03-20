@@ -5,7 +5,7 @@ import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map
 
 /**
  * Return an observable that combines and dynamic data as defined using Angular curly braces expressions
- * 
+ *
  * Looks in the form group to determine the correct data
  * @example
  * 'Borrower Name: {{nameFull}}', // Returns 'Borrower Name: John User'
@@ -13,8 +13,8 @@ import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map
  * @param str
  * @returns
  */
-export const expressionReplacer$ = (formGroup?: FormGroup, str?: string | null): Observable<string | null> => {
-  let strSubject$: Observable<string> = new BehaviorSubject(str);
+export const expressionReplacer$ = (formGroup?: FormGroup | null, str?: string | null): Observable<string | null> => {
+  let strSubject$: Observable<string | null> = new BehaviorSubject(str ?? null);
   // Nil check, return default string
   if (!formGroup || !str) {
     return strSubject$;
@@ -39,7 +39,7 @@ export const expressionReplacer$ = (formGroup?: FormGroup, str?: string | null):
         // Return control, start with default value and set nil values to empty string
         return control.valueChanges.pipe(
           startWith(control.value),
-          map((val) => val ?? '')
+          map((val) => val ?? ''),
         );
       } else {
         // No curly braces, just return string in array as is
@@ -66,7 +66,7 @@ export const expressionReplacer = (model: FormGroup, str: string | null | undefi
     ? str
         // Get all mustache replacements
         .replace(/[^{{\}\}]+(?=})/g, (strNew) => {
-          let pipes = strNew.split('|');
+          const pipes = strNew.split('|');
           // Remove first item in the array since its the value
           // All remaining items in the pipes array are ouoes
           strNew = pipes?.shift()?.trim() || '';
