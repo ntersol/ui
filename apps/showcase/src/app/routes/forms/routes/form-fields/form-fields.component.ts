@@ -8,13 +8,6 @@ import { FileUploadService } from '../../../components/routes/file-uploader/file
   styleUrls: ['./form-fields.component.scss'],
 })
 export class FormFieldsComponent implements OnInit {
-  public options = [
-    { label: 'California', value: 'CA' },
-    { label: 'Washington', value: 'WA' },
-    { label: 'Tennessee', value: 'TN' },
-    { label: 'Arizona', value: 'AZ' },
-  ];
-
   public import = `
   // Install
   npm i @ntersol/file-uploader

@@ -1,0 +1,42 @@
+<form>
+  <p>
+    <strong>Kitchen Sink</strong><br />
+    <nts-form-field-text
+      label="Label"
+      placeholder="Placeholder"
+      hint="This is a hint"
+      suffix="suffix"
+      prefix="prefix"
+      automationId="automationID"
+      [control]="form.get('sink')"
+    ></nts-form-field-text>
+  </p>
+  <hr />
+  <p>
+    <strong>Text Field</strong><br />
+    <nts-form-field-text label="Text Field" [control]="form.get('text')"></nts-form-field-text>
+  </p>
+  <p><nts-form-field-number label="Number" [control]="form.get('number')"></nts-form-field-number></p>
+  <p><nts-form-field-date label="Date" [control]="form.get('date')"></nts-form-field-date></p>
+  <p>
+    <nts-form-field-dropdown
+      label="Dropdown"
+      [options]="options"
+      [control]="form.get('dropdown')"
+    ></nts-form-field-dropdown>
+  </p>
+  <p><nts-form-field-email label="Email" [control]="form.get('email')"></nts-form-field-email></p>
+  <p>
+    <nts-form-field-phonenumber label="Phone Number" [control]="form.get('phoneNumber')"></nts-form-field-phonenumber>
+  </p>
+  <p><nts-form-field-radio label="Radio" [options]="options" [control]="form.get('radio')"></nts-form-field-radio></p>
+  <p>
+    <nts-form-field-select-button
+      label="Select Button"
+      [options]="options"
+      [control]="form.get('selectButton')"
+    ></nts-form-field-select-button>
+  </p>
+  <p><nts-form-field-textarea label="Text Area" [control]="form.get('textArea')"></nts-form-field-textarea></p>
+  <p><nts-form-field-zipcode label="Zipcode" [control]="form.get('zipCode')"></nts-form-field-zipcode></p>
+</form>

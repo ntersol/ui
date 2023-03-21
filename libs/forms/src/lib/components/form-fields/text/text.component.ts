@@ -19,9 +19,7 @@ export class TextComponent extends BaseFormFieldComponent<string> implements OnI
     super();
   }
 
-  ngOnInit(): void {
-    console.log(this.formFieldID);
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     if (!this.input) {

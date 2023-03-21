@@ -9,14 +9,14 @@ import { BaseFormFieldComponent } from '../form-field.base';
   encapsulation: ViewEncapsulation.None,
 })
 export class NumberComponent extends BaseFormFieldComponent<string> implements OnInit {
-  /** The MAXIMUM number of characters allowed by this input, NOT max number */
-  @Input() maxLength: number | null = null;
   /** Show or hide spinner buttons */
   @Input() showButtons = true;
   /** Min number to allow, NOT min characters */
   @Input() min: number | null = null;
   /** Max number to allow, NOT max characters */
   @Input() max: number | null = null;
+  /** The MAXIMUM number of characters allowed by this input, NOT max number */
+  @Input() maxLength: number | null = null;
   /** Decimal will allow decimal points, currency will prepend a currency symbol */
   @Input() mode: 'decimal' | 'currency' = 'decimal';
   /** Use a comma to separate thousands/millions/etc */
