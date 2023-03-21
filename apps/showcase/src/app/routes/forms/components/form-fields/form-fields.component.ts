@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { requiredValidator } from 'libs/forms/src/lib/validators/src/misc.validators';
 
 @Component({
   selector: 'nts-form-fields-demo',
@@ -8,10 +9,10 @@ import { FormBuilder } from '@angular/forms';
 })
 export class FormFieldsDemoComponent implements OnInit {
   public form = this.fb.group({
-    sink: [null],
-    text: [null],
-    textField: [null],
-    number: [null],
+    sink: [null, requiredValidator],
+    text: [null, requiredValidator],
+    textField: [null, requiredValidator],
+    number: [null, requiredValidator],
     date: [''],
     dropdown: [''],
     email: [''],
@@ -33,5 +34,11 @@ export class FormFieldsDemoComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe(console.log);
+  }
+
+  public submit() {
+    this.form.markAllAsTouched();
+    this.form.patchValue(this.form.value);
+    console.log(this.form.invalid);
   }
 }

@@ -1,14 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   OnChanges,
   OnDestroy,
   OnInit,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import {
   startWith,
   debounceTime,
@@ -24,7 +22,6 @@ import {
 import { Forms } from '../../../forms.model';
 import { isRequired } from '../../../utils';
 import { expressionReplacer$ } from '../../../utils/expression-replacer.util';
-import { required } from '../../../validators/src/misc.validators';
 import { validatorsAdd } from '../../../validators/validators.util';
 import { BaseFormFieldComponent } from '../form-field.base';
 
@@ -123,6 +120,7 @@ export class InputComponent<t> extends BaseFormFieldComponent<t> implements OnIn
             if (!this.formControl?.errors) {
               return null;
             }
+            console.log(this.formControl.errors);
             return Object.keys(this.formControl.errors).reduce(
               (a, b) => (this.formControl?.errors ? [...a, this.formControl?.errors[b]] : [...a]),
               [] as string[],
@@ -134,6 +132,7 @@ export class InputComponent<t> extends BaseFormFieldComponent<t> implements OnIn
     }
   }
 
+  /**
   private validatorsManage(validators: Forms.Validators) {
     // console.log(this.validators);
     // console.log(this.formControl.hasValidator(required));
@@ -144,4 +143,5 @@ export class InputComponent<t> extends BaseFormFieldComponent<t> implements OnIn
     });
     console.log(this.formControl.hasValidator(required));
   }
+   */
 }

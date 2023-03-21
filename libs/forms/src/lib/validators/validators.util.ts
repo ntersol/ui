@@ -1,4 +1,4 @@
-import { email, required } from './src/misc.validators';
+import { emailValidator, requiredValidator } from './src/misc.validators';
 import { FormControl } from '@angular/forms';
 import { Forms } from '../forms.model';
 
@@ -8,7 +8,7 @@ import { Forms } from '../forms.model';
  * @param validators
  */
 export const validatorsAdd = (formControl?: FormControl, validators?: Forms.Validators) => {
-  if(!formControl || !validators) {
+  if (!formControl || !validators) {
     return;
   }
   // Ensure type safety
@@ -16,11 +16,11 @@ export const validatorsAdd = (formControl?: FormControl, validators?: Forms.Vali
   // Loop through keys, attach typesafe validators
   // Only add if validator hasn't already been added
   keys.forEach((key) => {
-    if (key === 'required' && !formControl.hasValidator(required)) {
-      formControl.addValidators(required);
+    if (key === 'required' && !formControl.hasValidator(requiredValidator)) {
+      formControl.addValidators(requiredValidator);
     }
-    if (key === 'email' && !formControl.hasValidator(email)) {
-      formControl.addValidators(email);
+    if (key === 'email' && !formControl.hasValidator(emailValidator)) {
+      formControl.addValidators(emailValidator);
     }
   });
 };

@@ -1,5 +1,5 @@
-import { NtsForms } from "../../forms.models";
-import { baseValidator } from "./_base.validators";
+import { NtsValidators } from '../validators.models';
+import { baseValidator } from './_base.validators';
 
 /**
  * Form value must have characters equal to
@@ -7,13 +7,21 @@ import { baseValidator } from "./_base.validators";
  * @param options
  * @returns
  */
-export const charsIsEqualTo = (compareValueSrc: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => baseValidator(
+export const charsIsEqualToValidator = (
+  compareValueSrc: number | NtsValidators.Config,
+  options?: NtsValidators.Options,
+) =>
+  baseValidator(
     compareValueSrc,
     {
-        id: 'charsIsEqualTo',
-        evaluatorFn: (compareValue, formValue) => (typeof formValue === 'string' || typeof formValue === 'number') && String(formValue).length === compareValue,
-        errorMessageDefault: compareValue => `Please enter exactly <strong>${compareValue} characters</strong>`
-    }, options);
+      id: 'charsIsEqualTo',
+      evaluatorFn: (compareValue: number, formValue: unknown) =>
+        (typeof formValue === 'string' || typeof formValue === 'number') && String(formValue).length === compareValue,
+      errorMessageDefault: (compareValue: unknown) =>
+        `Please enter exactly <strong>${compareValue} characters</strong>`,
+    },
+    options,
+  );
 
 /**
  * Form value must have characters greater than
@@ -21,13 +29,21 @@ export const charsIsEqualTo = (compareValueSrc: number | NtsForms.Config, option
  * @param options
  * @returns
  */
-export const charsIsGreaterThan = (compareValueSrc: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => baseValidator(
+export const charsIsGreaterThanValidator = (
+  compareValueSrc: number | NtsValidators.Config,
+  options?: NtsValidators.Options,
+) =>
+  baseValidator(
     compareValueSrc,
     {
-        id: 'charsIsGreaterThan',
-        evaluatorFn: (compareValue, formValue) => (typeof formValue === 'string' || typeof formValue === 'number') && String(formValue).length > compareValue,
-        errorMessageDefault: compareValue => `Please enter more than <strong>${compareValue} characters</strong>`
-    }, options);
+      id: 'charsIsGreaterThan',
+      evaluatorFn: (compareValue: number, formValue: unknown) =>
+        (typeof formValue === 'string' || typeof formValue === 'number') && String(formValue).length > compareValue,
+      errorMessageDefault: (compareValue: unknown) =>
+        `Please enter more than <strong>${compareValue} characters</strong>`,
+    },
+    options,
+  );
 
 /**
  * Form value must have characters less than
@@ -35,10 +51,18 @@ export const charsIsGreaterThan = (compareValueSrc: number | NtsForms.Config, op
  * @param options
  * @returns
  *  */
-export const charsIsLessThan = (compareValueSrc: number | NtsForms.Config, options?: NtsForms.ValidatorOptions) => baseValidator(
+export const charsIsLessThanValidator = (
+  compareValueSrc: number | NtsValidators.Config,
+  options?: NtsValidators.Options,
+) =>
+  baseValidator(
     compareValueSrc,
     {
-        id: 'charsIsLessThan',
-        evaluatorFn: (compareValue, formValue) => (typeof formValue === 'string' || typeof formValue === 'number') && String(formValue).length < compareValue,
-        errorMessageDefault: compareValue => `Please enter less than <strong>${compareValue} characters</strong>`
-    }, options);
+      id: 'charsIsLessThan',
+      evaluatorFn: (compareValue: number, formValue: unknown) =>
+        (typeof formValue === 'string' || typeof formValue === 'number') && String(formValue).length < compareValue,
+      errorMessageDefault: (compareValue: unknown) =>
+        `Please enter less than <strong>${compareValue} characters</strong>`,
+    },
+    options,
+  );

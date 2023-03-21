@@ -1,4 +1,4 @@
-<form>
+<form (ngSubmit)="submit()">
   <p>
     <strong>Kitchen Sink</strong><br />
     <nts-form-field-text
@@ -39,4 +39,7 @@
   </p>
   <p><nts-form-field-textarea label="Text Area" [control]="form.get('textArea')"></nts-form-field-textarea></p>
   <p><nts-form-field-zipcode label="Zipcode" [control]="form.get('zipCode')"></nts-form-field-zipcode></p>
+  <p>
+    <button pButton type="submit">Submit</button>
+  </p>
 </form>
