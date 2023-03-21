@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { requiredValidator } from 'libs/forms/src/lib/validators/src/misc.validators';
+import { requiredValidator, numberIsGreaterThanValidator } from 'libs/forms/src/lib/validators';
 
 @Component({
   selector: 'nts-form-fields-demo',
@@ -12,7 +12,7 @@ export class FormFieldsDemoComponent implements OnInit {
     sink: [null, requiredValidator],
     text: [null, requiredValidator],
     textField: [null, requiredValidator],
-    number: [null, requiredValidator],
+    number: [null, numberIsGreaterThanValidator(5)],
     date: [''],
     dropdown: [''],
     email: [''],

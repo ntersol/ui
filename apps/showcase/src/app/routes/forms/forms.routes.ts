@@ -4,6 +4,7 @@ import { FormsComponent } from './forms.component';
 import { FormsModule } from './forms.module';
 import { FormFieldsComponent } from './routes/form-fields/form-fields.component';
 import { FormGeneratorComponent } from './routes/form-generator/form-generator.component';
+import { ValidatorsComponent } from './routes/validators/validators.component';
 import { WizardComponent } from './routes/wizard/wizard.component';
 
 const routes: Routes = [
@@ -26,6 +27,11 @@ const routes: Routes = [
         path: 'wizard',
         component: WizardComponent,
         data: { title: 'Wizard' },
+      },
+      {
+        path: 'validators',
+        component: ValidatorsComponent,
+        data: { title: 'Validators' },
       },
     ],
   },

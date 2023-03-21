@@ -7,7 +7,10 @@ import { baseValidator } from './_base.validators';
  * @param options
  * @returns
  */
-export const numberIsGreaterThan = (compareValueSrc: number | NtsValidators.Config, options?: NtsValidators.Options) =>
+export const numberIsGreaterThanValidator = (
+  compareValueSrc: number | NtsValidators.Config,
+  options?: NtsValidators.Options,
+) =>
   baseValidator(
     compareValueSrc,
     {
@@ -29,7 +32,10 @@ export const numberIsGreaterThan = (compareValueSrc: number | NtsValidators.Conf
  * @param options
  * @returns
  */
-export const numberIsLessThan = (compareValueSrc: number | NtsValidators.Config, options?: NtsValidators.Options) =>
+export const numberIsLessThanValidator = (
+  compareValueSrc: number | NtsValidators.Config,
+  options?: NtsValidators.Options,
+) =>
   baseValidator(
     compareValueSrc,
     {

@@ -9,9 +9,10 @@ import { FormGeneratorComponent } from './routes/form-generator/form-generator.c
 import { WizardComponent } from './routes/wizard/wizard.component';
 import { NtsFormsModule } from '@ntersol/forms';
 import { FormFieldsDemoComponent } from './components/form-fields/form-fields.component';
+import { ValidatorsComponent } from './routes/validators/validators.component';
 
 @NgModule({
-  declarations: [FormsComponent, FormFieldsComponent, FormGeneratorComponent, WizardComponent, FormFieldsDemoComponent],
+  declarations: [FormsComponent, FormFieldsComponent, FormGeneratorComponent, WizardComponent, FormFieldsDemoComponent, ValidatorsComponent],
   imports: [CommonModule, SiteModule, routing, TabViewModule, routing, NtsFormsModule],
 })
 export class FormsModule {}
