@@ -9,11 +9,17 @@ import { BaseFormFieldComponent } from '../form-field.base';
   encapsulation: ViewEncapsulation.None,
 })
 export class DropdownComponent extends BaseFormFieldComponent<string> implements OnInit, OnChanges {
+  /** Options to display for the dropdown */
   @Input() options?: Forms.FieldOptions[] | null = null;
+  /** A unique ID used for  trackFn */
   @Input() dataKey?: string | null = null;
+  /** The property for the label */
   @Input() optionLabel = 'label';
+  /** The property for the value */
   @Input() optionValue = 'value';
+  /** Name of the disabled field of an option. */
   @Input() optionDisabled = 'disabled';
+  /** The default height of the dropdown */
   @Input() scrollHeight = '200px';
   /** Append popup to this DOM element, can use "body" or another template variable */
   @Input() appendTo: any = null;
@@ -26,13 +32,13 @@ export class DropdownComponent extends BaseFormFieldComponent<string> implements
 
   @Input() override placeholder = '-- Please Select --';
 
-  // Add in empty option if selected
-  public optionsUpdated?: Forms.FieldOptions[] | null = null;
-
   /** Style of the dropdown panel */
   @Input() panelStyle = '';
   /** Css class */
   @Input() panelStyleClass = '';
+
+  // Add in empty option if selected
+  public optionsUpdated?: Forms.FieldOptions[] | null = null;
 
   constructor() {
     super();
@@ -43,7 +49,10 @@ export class DropdownComponent extends BaseFormFieldComponent<string> implements
   ngOnChanges(changes: SimpleChanges): void {
     // If insertEmptyOption is set, append that option to the options array
     if (changes['options'] || changes['insertEmptyOption']) {
-      this.optionsUpdated = this.insertEmptyOption && this.options ? [{ label: this.placeholder || '', value: null }, ...this.options] : this.options;
+      this.optionsUpdated =
+        this.insertEmptyOption && this.options
+          ? [{ label: this.placeholder || '', value: null }, ...this.options]
+          : this.options;
     }
   }
 }

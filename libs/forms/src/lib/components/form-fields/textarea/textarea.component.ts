@@ -8,14 +8,13 @@ import { BaseFormFieldComponent } from '../form-field.base';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextAreaComponent extends BaseFormFieldComponent<string> implements OnInit {
-  /** # of vertical rows  */
+  /** The number of rows (vertical) displayed in the textarea  */
   @Input() rows = 4;
-  /** Max # of characters  */
+  /** The maximum number of characters allowed in the textarea. If null, there is no maximum limit  */
   @Input() maxlength?: number | null = null;
-  /** # of horizontal columns  */
+  /** The number of columns (horizontal) displayed in the textarea */
   @Input() columns?: number | null = null;
-
-  /**  */
+  /** When present, textarea size changes as being typed */
   @Input() autoResize = false;
 
   @ViewChild('input', { static: true }) input!: ElementRef;

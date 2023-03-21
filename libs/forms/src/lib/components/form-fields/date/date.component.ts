@@ -21,8 +21,11 @@ import { BaseFormFieldComponent } from '../form-field.base';
 export class DateComponent extends BaseFormFieldComponent<string> implements OnInit, OnChanges, OnDestroy {
   /** Standard html placeholder text */
   @Input() override placeholder = 'mm/dd/yyyy';
+  /** When enabled, displays the calendar as inline. Default is false for popup mode. */
   @Input() inline = false;
+  /** Show the calendar icon on the input */
   @Input() showIcon = true;
+  /** Format of the date which can also be defined at locale settings. */
   @Input() dateFormat?: string | null = null;
 
   constructor() {

@@ -19,8 +19,10 @@ import { BaseFormFieldComponent } from '../form-field.base';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZipcodeComponent extends BaseFormFieldComponent<string> implements OnInit, OnChanges {
-  @Input() dataType?: 'string' | 'number' | null;
-  @Input() allowNineDigitCodes?: boolean | null;
+  /** Should the data be returned to the model as a string or a number  */
+  @Input() dataType?: 'string' | 'number' | null = 'string';
+  /** Allow support for 9 digit zip codes instead of just 5 */
+  @Input() allowNineDigitCodes?: boolean | null = false;
 
   @ViewChild('input', { static: true }) input!: ElementRef;
 

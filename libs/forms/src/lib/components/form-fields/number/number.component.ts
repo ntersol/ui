@@ -10,7 +10,7 @@ import { BaseFormFieldComponent } from '../form-field.base';
 })
 export class NumberComponent extends BaseFormFieldComponent<string> implements OnInit {
   /** Show or hide spinner buttons */
-  @Input() showButtons = true;
+  @Input() showButtons = false;
   /** Min number to allow, NOT min characters */
   @Input() min: number | null = null;
   /** Max number to allow, NOT max characters */

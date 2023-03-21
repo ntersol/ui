@@ -10,9 +10,13 @@ import { BaseFormFieldComponent } from '../form-field.base';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioComponent extends BaseFormFieldComponent<any[]> implements OnInit {
+  /** Specifies the options to be displayed in the radio */
   @Input() options?: Forms.FieldOptions[] | null = null;
+  /** Specifies the unique identifier for the options, used for the track function */
   @Input() dataKey?: string | null = null;
+  /** Specifies the property of the option to use as the label to be displayed */
   @Input() optionLabel = 'label';
+  /** Specifies the property of the option to use as the value that will be bound to the form control */
   @Input() optionValue = 'value';
 
   constructor() {

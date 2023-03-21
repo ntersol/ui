@@ -10,10 +10,15 @@ import { BaseFormFieldComponent } from '../form-field.base';
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectButtonComponent extends BaseFormFieldComponent<string> implements OnInit {
+  /** Specifies the options to be displayed in the button */
   @Input() options?: Forms.FieldOptions[] | null = null;
+  /** Specifies whether multiple options can be selected */
   @Input() multiple?: boolean | null = null;
+  /** pecifies the unique identifier for the options, used for the track function */
   @Input() dataKey?: string | null = null;
+  /** Specifies whether the dropdown should take up the full width of its container */
   @Input() fullWidth = true;
+  /** Specifies whether an option can be unselected once it has been selected */
   @Input() canUnselect?: boolean | null = null;
 
   // Store the previous value of the user selection, used to unselect
