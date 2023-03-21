@@ -1,8 +1,7 @@
 <form (ngSubmit)="submit()">
   <p>
-    <strong>Kitchen Sink</strong><br />
     <nts-form-field-text
-      label="Label"
+      label="Kitchen Sink Example"
       placeholder="Placeholder"
       hint="This is a hint"
       suffix="suffix"
@@ -11,34 +10,64 @@
       [control]="form.get('sink')"
     ></nts-form-field-text>
   </p>
+  <pre><code class="language-ts" [innerHtml]="sink"></code></pre>
+
   <hr />
   <p>
-    <strong>Text Field</strong><br />
-    <nts-form-field-text label="Text Field" [control]="form.get('text')"></nts-form-field-text>
+    <nts-form-field-text label="Text Example" [control]="form.get('text')"></nts-form-field-text>
   </p>
-  <p><nts-form-field-number label="Number" [control]="form.get('number')"></nts-form-field-number></p>
-  <p><nts-form-field-date label="Date" [control]="form.get('date')"></nts-form-field-date></p>
+  <pre><code class="language-ts" [innerHtml]="text"></code></pre>
+  <hr />
+  <p><nts-form-field-number label="Number Example" [control]="form.get('number')"></nts-form-field-number></p>
+  <pre><code class="language-ts" [innerHtml]="number"></code></pre>
+  <hr />
+  <p>
+    <nts-form-field-number
+      label="Currency Example"
+      mode="currency"
+      [control]="form.get('currency')"
+    ></nts-form-field-number>
+  </p>
+  <hr />
+  <p><nts-form-field-date label="Date Example" [control]="form.get('date')"></nts-form-field-date></p>
+  <hr />
   <p>
     <nts-form-field-dropdown
-      label="Dropdown"
+      label="Dropdown Example"
       [options]="options"
       [control]="form.get('dropdown')"
     ></nts-form-field-dropdown>
   </p>
-  <p><nts-form-field-email label="Email" [control]="form.get('email')"></nts-form-field-email></p>
+  <hr />
+  <p><nts-form-field-email label="Email  Example" [control]="form.get('email')"></nts-form-field-email></p>
+  <hr />
   <p>
-    <nts-form-field-phonenumber label="Phone Number" [control]="form.get('phoneNumber')"></nts-form-field-phonenumber>
+    <nts-form-field-phonenumber
+      label="Phone Number Example"
+      [control]="form.get('phoneNumber')"
+    ></nts-form-field-phonenumber>
   </p>
-  <p><nts-form-field-radio label="Radio" [options]="options" [control]="form.get('radio')"></nts-form-field-radio></p>
+  <hr />
+  <p>
+    <nts-form-field-radio
+      label="Radio Example"
+      [options]="options"
+      [control]="form.get('radio')"
+    ></nts-form-field-radio>
+  </p>
+  <hr />
   <p>
     <nts-form-field-select-button
-      label="Select Button"
+      label="Select Button Example"
       [options]="options"
       [control]="form.get('selectButton')"
     ></nts-form-field-select-button>
   </p>
-  <p><nts-form-field-textarea label="Text Area" [control]="form.get('textArea')"></nts-form-field-textarea></p>
-  <p><nts-form-field-zipcode label="Zipcode" [control]="form.get('zipCode')"></nts-form-field-zipcode></p>
+  <hr />
+  <p><nts-form-field-textarea label="Text Area Example" [control]="form.get('textArea')"></nts-form-field-textarea></p>
+  <hr />
+  <p><nts-form-field-zipcode label="Zipcode Example" [control]="form.get('zipCode')"></nts-form-field-zipcode></p>
+  <hr />
   <p>
     <button pButton type="submit">Submit</button>
   </p>
