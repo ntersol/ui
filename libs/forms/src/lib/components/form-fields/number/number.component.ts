@@ -12,21 +12,19 @@ export class NumberComponent extends BaseFormFieldComponent<string> implements O
   /** The MAXIMUM number of characters allowed by this input, NOT max number */
   @Input() maxLength: number | null = null;
   /** Show or hide spinner buttons */
-  @Input() showButtons = false;
+  @Input() showButtons = true;
   /** Min number to allow, NOT min characters */
   @Input() min: number | null = null;
   /** Max number to allow, NOT max characters */
   @Input() max: number | null = null;
-
+  /** Decimal will allow decimal points, currency will prepend a currency symbol */
   @Input() mode: 'decimal' | 'currency' = 'decimal';
   /** Use a comma to separate thousands/millions/etc */
   @Input() useGrouping = true;
   /** The minimum number of fraction digits to use */
-  @Input() minFractionDigits = 2;
+  @Input() minFractionDigits = 0;
   /** The maximum number of fraction digits to use */
   @Input() maxFractionDigits = 2;
-  /** Orientation */
-  @Input() buttonLayout?: 'stacked' | 'horizontal' | 'vertical' | null = 'stacked';
   /** Use a comma to separate thousands/millions/etc */
   @Input() currencySymbol: string | null = null;
 
