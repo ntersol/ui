@@ -3,6 +3,7 @@ import {
   Component,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
   ViewEncapsulation,
@@ -17,7 +18,7 @@ import { BaseFormFieldComponent } from '../form-field.base';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class DateComponent extends BaseFormFieldComponent<string> implements OnInit, OnChanges {
+export class DateComponent extends BaseFormFieldComponent<string> implements OnInit, OnChanges, OnDestroy {
   /** Standard html placeholder text */
   @Input() override placeholder = 'mm/dd/yyyy';
   @Input() inline = false;
@@ -42,11 +43,14 @@ export class DateComponent extends BaseFormFieldComponent<string> implements OnI
         this.formControl.valueChanges
           .pipe(
             startWith(this.formControl.value),
-            filter((x) => typeof x === 'string'),
+            filter((x) => !!x && typeof x === 'string'),
             debounceTime(1),
           )
           .subscribe((x) => this.formControl.patchValue(new Date(x))),
       );
     }
   }
+
+  // Base class unsubs in ondestroy
+  // ngOnDestroy(): void {   }
 }
