@@ -1,8 +1,8 @@
 <div
   class="form-generator-html"
   *ngIf="visible$ | async"
-  [attr.id]="content.id || null"
-  [ngClass]="content.cssClasses"
-  [ngStyle]="content.inlineStyles"
+  [attr.id]="content?.id || null"
+  [ngClass]="content?.cssClasses ?? ''"
+  [ngStyle]="content?.inlineStyles ?? null"
   [innerHtml]="html$ | async"
 ></div>

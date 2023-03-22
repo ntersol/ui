@@ -53,7 +53,7 @@ export const expressionReplacer$ = (formGroup?: FormGroup | null, str?: string |
 };
 
 /**
- *  eplace expressions from a model for a static object
+ *  Replace expressions from a model for a static object
  * @param str
  * @param form
  * @param indexes

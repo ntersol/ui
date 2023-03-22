@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleCha
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Forms } from '../../../forms.model';
-import { dynamicPropertyEvaluation$ } from '../../../utils';
+import { dynamicPropertyEvaluation$ } from '../../../utils/dynamic-property-evaluation.util';
 
 @Component({
   selector: 'nts-form-field-container',
@@ -12,9 +12,9 @@ import { dynamicPropertyEvaluation$ } from '../../../utils';
 })
 export class ContainerComponent implements OnInit, OnChanges {
   @Input() container?: Forms.Container<unknown> | null = null;
-  @Input() formGroup?: FormGroup | null = null;
+  @Input() formGroup = new FormGroup({});
   @Input() options?: Forms.FormOptions | null = null;
-  @Input() datafields: Forms.Datafields = {};
+  @Input() datafields?: Forms.Datafields = {};
 
   public visible$!: Observable<boolean>;
   constructor() {}
@@ -23,7 +23,7 @@ export class ContainerComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['formGroup'] && this.formGroup) {
-      this.visible$ = dynamicPropertyEvaluation$(this.container.visible, this.formGroup);
+      this.visible$ = dynamicPropertyEvaluation$(this.container?.visible, this.formGroup);
     }
   }
 }

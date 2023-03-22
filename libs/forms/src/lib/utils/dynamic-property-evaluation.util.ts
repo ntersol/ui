@@ -10,7 +10,7 @@ import { is } from './is.util';
  * @returns
  */
 const getControl = (field: string, formGroup: FormGroup) => {
-  const control = formGroup.get(field) as FormControl<unknown>;
+  const control = formGroup.get(field) as FormControl;
   // If no control, return a floating control to avoid breaking the form group
   if (!control) {
     console.warn('Unable to find a control of ', field);
@@ -35,7 +35,7 @@ interface Options {
 export const dynamicPropertyEvaluation$ = (
   src?: null | boolean | string | Forms.Rule<unknown>,
   formGroup?: FormGroup | null,
-  options?: Options | null
+  options?: Options | null,
 ): Observable<boolean> => {
   // Set default observable
   let value$ = of(options?.defaultValue ?? true); // Default to true if no default specified
@@ -63,8 +63,8 @@ export const dynamicPropertyEvaluation$ = (
 
     const control = getControl(path, formGroup);
     value$ = control.valueChanges.pipe(
-      startWith(control.getRawValue()),
-      map(() => (isTruthy ? !!control.getRawValue() : !control.getRawValue())) // Ensure truthy/falsey value
+      startWith(control.value),
+      map(() => (isTruthy ? !!control.value : !control.value)), // Ensure truthy/falsey value
     );
     /**
      * Rules engine type
@@ -72,10 +72,10 @@ export const dynamicPropertyEvaluation$ = (
   } else if (is.rule(src)) {
     const control = getControl(src.field, formGroup);
     value$ = control.valueChanges.pipe(
-      startWith(control.getRawValue()),
+      startWith(control.value),
       map(() => {
         const value = src.value;
-        const formControlValue = control.getRawValue();
+        const formControlValue = control.value;
         // Calculate operators
         // TODO: Add support for more operators
         switch (src.operator) {
@@ -96,9 +96,10 @@ export const dynamicPropertyEvaluation$ = (
             }
             return !value.includes(formControlValue);
           default:
+            console.warn('That operator is not yet supported');
             return true;
         }
-      })
+      }),
     );
     /**
      * Incorrect type

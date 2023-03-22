@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormGeneratorComponent } from './form-generator.component';
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldsModule } from '../form-fields';
+import { FormGeneratorComponent } from './form-generator.component';
 import { ColumnComponent } from './column/column.component';
 import { ContentComponent } from './content/content.component';
 import { FeatureComponent } from './feature/feature.component';
@@ -21,7 +22,7 @@ import { ContainerComponent } from './container/container.component';
     HtmlComponent,
     FormFieldComponent,
     FeatureComponent,
-    ContentComponent
+    ContentComponent,
   ],
   exports: [FormGeneratorComponent],
 })

@@ -1,12 +1,12 @@
 <div
   class="form-generator-container"
   *ngIf="visible$ | async"
-  [attr.id]="container.id || null"
-  [ngClass]="container.cssClasses"
-  [ngStyle]="container.inlineStyles"
+  [attr.id]="container?.id ?? ''"
+  [ngClass]="container?.cssClasses ?? ''"
+  [ngStyle]="container?.inlineStyles ?? null"
 >
-  <ng-container *ngIf="container.content; else noContent">
-    <ng-container *ngFor="let model of container.content">
+  <ng-container *ngIf="container?.content; else noContent">
+    <ng-container *ngFor="let model of container?.content">
       <nts-form-field-container
         *ngIf="model.type === 'container'"
         [container]="model"

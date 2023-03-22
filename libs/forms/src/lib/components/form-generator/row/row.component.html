@@ -1,18 +1,18 @@
 <div
   *ngIf="visible$ | async"
   class="form-generator-row"
-  [attr.id]="row.id || null"
-  [ngClass]="row.cssClasses"
-  [ngStyle]="row.inlineStyles"
+  [attr.id]="row?.id || null"
+  [ngClass]="row?.cssClasses ?? ''"
+  [ngStyle]="row?.inlineStyles ?? null"
 >
-  <ng-container *ngIf="row.columns?.length; else noColumns">
-    <ng-container *ngFor="let column of row.columns; let i = index">
+  <ng-container *ngIf="row?.columns?.length; else noColumns">
+    <ng-container *ngFor="let column of row?.columns; let i = index">
       <div
         *ngIf="visibleColumns[i] | async"
         class="form-generator-column col col-12 col-md-{{ column.width }}"
-        [attr.id]="column.id || null"
-        [ngClass]="column.cssClasses"
-        [ngStyle]="column.inlineStyles"
+        [attr.id]="column?.id || null"
+        [ngClass]="column?.cssClasses ?? ''"
+        [ngStyle]="column?.inlineStyles ?? null"
       >
         <nts-form-field-column
           [formGroup]="formGroup"

@@ -1,4 +1,4 @@
-<ng-container *ngFor="let content of column.content">
+<ng-container *ngFor="let content of column?.content">
   <nts-form-field-container
     *ngIf="content.type === 'container'"
     [container]="content"

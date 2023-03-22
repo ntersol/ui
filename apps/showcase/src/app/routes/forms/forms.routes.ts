@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsComponent } from './forms.component';
 import { FormsModule } from './forms.module';
 import { FormFieldsComponent } from './routes/form-fields/form-fields.component';
-import { FormGeneratorComponent } from './routes/form-generator/form-generator.component';
+import { FormGeneratorRouteComponent } from './routes/form-generator/form-generator.component';
 import { ValidatorsComponent } from './routes/validators/validators.component';
 import { WizardComponent } from './routes/wizard/wizard.component';
 
@@ -20,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: 'form-generator',
-        component: FormGeneratorComponent,
+        component: FormGeneratorRouteComponent,
         data: { title: 'Form Generator' },
       },
       {

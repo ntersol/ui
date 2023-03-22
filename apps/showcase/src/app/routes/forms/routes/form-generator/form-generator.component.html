@@ -1,1 +1,25 @@
-<p>form-generator works!</p>
+<div class="author"><strong>Author:</strong> Jerrol Krause</div>
+
+<h1>Form Generator</h1>
+
+<hr />
+
+<nts-form-generator></nts-form-generator>
+
+<p-tabView>
+  <!-- Documentation -->
+  <p-tabPanel header="Documentation">
+    <h2>Import</h2>
+    <pre><code class="language-ts" [innerHtml]="import"></code></pre>
+    <h2>HTML</h2>
+    <pre><code class="language-html" [innerHtml]="exampleHTML"></code></pre>
+    <h2>Typescript/FormGroup Creation</h2>
+    <pre><code class="language-ts" [innerHtml]="inputFieldTs"></code></pre>
+
+    <hr />
+  </p-tabPanel>
+  <!-- Example -->
+  <p-tabPanel header="Examples & APIs">
+    <nts-form-fields-demo></nts-form-fields-demo>
+  </p-tabPanel>
+</p-tabView>

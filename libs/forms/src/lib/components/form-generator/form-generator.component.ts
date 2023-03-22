@@ -17,12 +17,15 @@ import { is } from '../../utils';
 })
 export class FormGeneratorComponent implements OnInit {
   @Input() formModel?: Forms.Form<unknown> | null = [];
-  @Input() formGroup?: FormGroup | null = null;
+  /** Main form group */
+  @Input() formGroup: FormGroup | null = null;
+  /** Form Options */
   @Input() options?: Forms.FormOptions | null = null;
-  @Input() datafields: Forms.Datafields = {};
+  /** Datafields for dynamic data */
+  @Input() datafields?: Forms.Datafields = {};
   /** Disable submit button */
   @Input() disableSubmit = false;
-
+  /** When the use submis */
   @Output() completed = new EventEmitter();
 
   constructor() {}
@@ -34,19 +37,19 @@ export class FormGeneratorComponent implements OnInit {
    * @returns
    */
   public submit() {
-    if (is.node) {
+    if (is.node || !this.formGroup) {
       return;
     }
     this.formGroup.patchValue(this.formGroup.value);
     this.formGroup.markAllAsTouched();
-    if (this.formGroup.invalid) {
+    if (this.formGroup?.invalid) {
       // Wait for DOM to update with new validation states
       setTimeout(() => {
         // Get all errors on page
         const errors = document.getElementsByClassName('nts-form-field-has-errors');
         if (errors?.length) {
-          // Get top of first error bounding box, scroll to the top of that bo
-          const y = errors[0].getBoundingClientRect().top + window.pageYOffset + (this.options.errorScrollOffset ?? 0);
+          // Get top of first error bounding box, scroll to the top of that box
+          const y = errors[0].getBoundingClientRect().top + window.pageYOffset + (this.options?.errorScrollOffset ?? 0);
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
       }, 100);

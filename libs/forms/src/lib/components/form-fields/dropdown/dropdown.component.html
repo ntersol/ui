@@ -17,15 +17,15 @@
       [optionDisabled]="optionDisabled"
       [name]="name ?? ''"
       [inputId]="id || formFieldID"
-      [scrollHeight]="scrollHeight"
+      [scrollHeight]="scrollHeight ?? '200px'"
       [style]="style"
       [styleClass]="styleClass ?? ''"
       [panelStyle]="panelStyle"
       [panelStyleClass]="panelStyleClass"
       [placeholder]="placeholder"
       [appendTo]="appendTo"
-      [virtualScroll]="virtualScroll"
-      [showClear]="showClear"
+      [virtualScroll]="virtualScroll ?? false"
+      [showClear]="showClear ?? false"
       [formControl]="formControl"
     >
     </p-dropdown>

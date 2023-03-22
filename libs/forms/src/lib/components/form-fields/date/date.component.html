@@ -18,8 +18,8 @@
         [name]="name || (label || placeholder | ntsSlug)"
         appendTo="body"
         [styleClass]="styleClass ?? ''"
-        [inline]="inline"
-        [showIcon]="showIcon || true"
+        [inline]="inline ?? false"
+        [showIcon]="showIcon ?? true"
         [dateFormat]="dateFormat ?? ''"
       ></p-calendar>
     </div>

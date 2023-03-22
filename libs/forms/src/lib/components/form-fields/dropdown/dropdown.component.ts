@@ -20,15 +20,15 @@ export class DropdownComponent extends BaseFormFieldComponent<string> implements
   /** Name of the disabled field of an option. */
   @Input() optionDisabled = 'disabled';
   /** The default height of the dropdown */
-  @Input() scrollHeight = '200px';
+  @Input() scrollHeight?: string | null = '200px';
   /** Append popup to this DOM element, can use "body" or another template variable */
   @Input() appendTo: any = null;
   /** Use virtual scroll to handle a large list */
-  @Input() virtualScroll = false;
+  @Input() virtualScroll?: boolean | null = false;
   /** Show an "X" which lets the user clear this value */
-  @Input() showClear = false;
+  @Input() showClear?: boolean | null = false;
   /** If true, inserts an empty option with the label of the placeholder and a value of null at the top of the list. Essentially a selectable null option  */
-  @Input() insertEmptyOption = false;
+  @Input() insertEmptyOption?: boolean | null = false;
 
   @Input() override placeholder = '-- Please Select --';
 

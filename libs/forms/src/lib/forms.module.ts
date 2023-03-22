@@ -34,6 +34,14 @@ import { SelectButtonComponent } from './components/form-fields/select-button/se
 import { TextAreaComponent } from './components/form-fields/textarea/textarea.component';
 import { ZipcodeComponent } from './components/form-fields/zipcode/zipcode.component';
 import { InputComponent } from './components/form-fields/input/input.component';
+import { FormGeneratorComponent } from './components/form-generator/form-generator.component';
+import { ColumnComponent } from './components/form-generator/column/column.component';
+import { ContainerComponent } from './components/form-generator/container/container.component';
+import { ContentComponent } from './components/form-generator/content/content.component';
+import { FeatureComponent } from './components/form-generator/feature/feature.component';
+import { FormFieldComponent } from './components/form-generator/form-field/form-field.component';
+import { HtmlComponent } from './components/form-generator/html/html.component';
+import { RowComponent } from './components/form-generator/row/row.component';
 
 const COMPONENTS = [
   NtsFormFieldComponent,
@@ -51,10 +59,24 @@ const COMPONENTS = [
   RadioComponent,
   TextAreaComponent,
   ZipcodeComponent,
+  // Form Generator
+  // Only exporting the root component not that child ones
+  FormGeneratorComponent,
 ];
 
 @NgModule({
-  declarations: [COMPONENTS, InputComponent, SlugPipe],
+  declarations: [
+    COMPONENTS,
+    ContainerComponent,
+    RowComponent,
+    ColumnComponent,
+    HtmlComponent,
+    FormFieldComponent,
+    FeatureComponent,
+    ContentComponent,
+    InputComponent,
+    SlugPipe,
+  ],
   imports: [
     FormsModule,
     ReactiveFormsModule,

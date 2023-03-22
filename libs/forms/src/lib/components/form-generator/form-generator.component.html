@@ -26,8 +26,13 @@
   <ng-template #noModel> No Form Model found </ng-template>
   <div class="form-generator-footer text-right">
     <ng-content select="[beforeSubmitButton]"></ng-content>
-    <button class="p-button" (click)="submit()" [ngClass]="options?.submitButton?.classes" [disabled]="disableSubmit">
-      <span class="mr-2" [innerHtml]="options.submitButton.icon" *ngIf="options?.submitButton?.icon"></span>
+    <button
+      class="p-button"
+      (click)="submit()"
+      [ngClass]="options?.submitButton?.classes ?? ''"
+      [disabled]="disableSubmit"
+    >
+      <span class="mr-2" [innerHtml]="options?.submitButton?.icon" *ngIf="options?.submitButton?.icon"></span>
       {{ options?.submitButton?.label ?? 'Submit' }}
     </button>
 

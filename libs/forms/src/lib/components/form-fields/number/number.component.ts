@@ -10,23 +10,23 @@ import { BaseFormFieldComponent } from '../form-field.base';
 })
 export class NumberComponent extends BaseFormFieldComponent<string> implements OnInit {
   /** Show or hide spinner buttons */
-  @Input() showButtons = false;
+  @Input() showButtons?: boolean | null = false;
   /** Min number to allow, NOT min characters */
-  @Input() min: number | null = null;
+  @Input() min?: number | null = null;
   /** Max number to allow, NOT max characters */
-  @Input() max: number | null = null;
+  @Input() max?: number | null = null;
   /** The MAXIMUM number of characters allowed by this input, NOT max number */
-  @Input() maxLength: number | null = null;
+  @Input() maxLength?: number | null = null;
   /** Decimal will allow decimal points, currency will prepend a currency symbol */
-  @Input() mode: 'decimal' | 'currency' = 'decimal';
+  @Input() mode?: 'decimal' | 'currency' | null = 'decimal';
   /** Use a comma to separate thousands/millions/etc */
-  @Input() useGrouping = true;
+  @Input() useGrouping?: boolean | null = true;
   /** The minimum number of fraction digits to use */
-  @Input() minFractionDigits = 0;
+  @Input() minFractionDigits?: number | null = 0;
   /** The maximum number of fraction digits to use */
-  @Input() maxFractionDigits = 2;
+  @Input() maxFractionDigits?: number | null = 2;
   /** Use a comma to separate thousands/millions/etc */
-  @Input() currencySymbol: string | null = null;
+  @Input() currencySymbol?: string | null = null;
 
   constructor() {
     super();

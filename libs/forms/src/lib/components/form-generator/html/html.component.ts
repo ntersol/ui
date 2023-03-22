@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Forms } from '../../../forms.model';
-import { dynamicPropertyEvaluation$, expressionReplacer, expressionReplacer$ } from '../../../utils';
+import { dynamicPropertyEvaluation$ } from '../../../utils/dynamic-property-evaluation.util';
+import { expressionReplacer$ } from '../../../utils/expression-replacer.util';
 
 @Component({
   selector: 'nts-form-field-html',
@@ -13,10 +14,10 @@ import { dynamicPropertyEvaluation$, expressionReplacer, expressionReplacer$ } f
 export class HtmlComponent implements OnInit, OnChanges {
   @Input() content?: Forms.Html<unknown> | null = null;
   @Input() options?: Forms.FormOptions | null = null;
-  @Input() formGroup?: FormGroup | null = null;
+  @Input() formGroup = new FormGroup({});
 
   public visible$!: Observable<boolean>;
-  public html$!: Observable<string>;
+  public html$!: Observable<string | null>;
 
   constructor() {}
 
@@ -24,8 +25,8 @@ export class HtmlComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['formGroup'] && this.formGroup) {
-      this.visible$ = dynamicPropertyEvaluation$(this.content.visible, this.formGroup);
-      this.html$ = expressionReplacer$(this.formGroup, this.content.html);
+      this.visible$ = dynamicPropertyEvaluation$(this.content?.visible, this.formGroup);
+      this.html$ = expressionReplacer$(this.formGroup, this.content?.html);
     }
   }
 }
