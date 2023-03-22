@@ -10,21 +10,33 @@ import { FileUploadService } from '../../../components/routes/file-uploader/file
 export class FormFieldsComponent implements OnInit {
   public import = `
   // Install
-  npm i @ntersol/file-uploader
+  npm i @ntersol/forms
 
   // Import
-  import { NtsFileUploaderModule } from '@ntersol/file-uploader';`;
+  import { NtsFormsModule } from '@ntersol/forms';
+
+  // Import into module
+  @NgModule({
+      declarations: [...],
+      imports: [..., NtsFormsModule],
+  })`;
 
   public inputFieldTs: string = `
-    // Import emitter type
-    import { FilesOutput } from '@ntersol/file-uploader';
+  public form = this.fb.group({
+    kitchenSink: [null],
+    ...
+  });`;
 
-    // Set up function to get result of fileupload
-    public filesOutput(files: FilesOutput | null) {
-      console.log('Output', files);
-      // Upload files
-    }
-  `;
+  public exampleHTML: string = this.highlight.htmlEncode(`
+  <nts-form-field-text
+          label="Kitchen Sink Example"
+          placeholder="Placeholder"
+          hint="This is a hint"
+          suffix="suffix"
+          prefix="prefix"
+          automationId="automationID"
+          [control]="form.get('kitchenSink')"
+  ></nts-form-field-text>`);
 
   public handlersTs: string = `
   export interface FilesOutput {
@@ -38,9 +50,6 @@ export class FormFieldsComponent implements OnInit {
     fileReader: (string | ArrayBuffer | null)[] | null;
   }
   `;
-
-  public exampleHTML: string = this.highlight.htmlEncode(`
-  <nts-file-uploader (filesOutput)="filesOutput($event)"></nts-file-uploader>`);
 
   constructor(private highlight: HighlightService, public svc: FileUploadService) {}
 

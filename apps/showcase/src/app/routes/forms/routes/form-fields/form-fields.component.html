@@ -1,26 +1,21 @@
 <div class="author"><strong>Author:</strong> Jerrol Krause</div>
 
-<nts-form-fields-demo></nts-form-fields-demo>
-
-<h1>File Uploader</h1>
+<h1>Form Fields</h1>
 <p>
-  This file uploader component allows users to easily manage file uploads. You will still need to perform the upload to
-  your API after a user has selected their files. It features a intuitive and user-friendly design, with the following
-  capabilities:
+  This is a library designed to make building and managing forms quicker and more consistent. Its key features include:
 </p>
 <ul>
-  <li>Support for multiple file selection</li>
-  <li>Drag and drop functionality for easy file selection</li>
-  <li>Real-time file validation, checking for file size and type restrictions</li>
-  <li>File previews, including image previews for image files</li>
-  <li>The ability to show a preview of the uploaded files and metadata such as file name and file size</li>
-  <li>The ability to show the corresponding icon for the file type using the file extension</li>
-  <li>Error handling for upload restrictions</li>
-  <li>The ability to remove a single file out of multiple selected</li>
-  <li>The ability to reload and display previously uploaded files</li>
-  <li>The ability to reorder files</li>
-  <li>The ability to add additional files after initial selection</li>
+  <li>Streamlined design to speed up the process of creating and managing forms</li>
+  <li>Consistent support and styling for standard form elements such as labels, placeholders, and hints</li>
+  <li>Ability to create forms and fields from models</li>
+  <li>Improved error handling with on-blur validation for initial errors and real-time validation after</li>
+  <li>Support for advanced validators, allowing for more precise and customized validation of form inputs</li>
+  <li>
+    A wide range of form controls, including zip code, phone number, and currency inputs, all with self contained
+    business logic and validation.
+  </li>
 </ul>
+
 <hr />
 
 <p-tabView>
@@ -30,126 +25,13 @@
     <pre><code class="language-ts" [innerHtml]="import"></code></pre>
     <h2>HTML</h2>
     <pre><code class="language-html" [innerHtml]="exampleHTML"></code></pre>
-    <h2>Typescript</h2>
+    <h2>Typescript/FormGroup Creation</h2>
     <pre><code class="language-ts" [innerHtml]="inputFieldTs"></code></pre>
-    <h2>FilesOutput Interface</h2>
-    <pre><code class="language-ts" [innerHtml]="handlersTs"></code></pre>
+
     <hr />
-    <h2>API</h2>
-    <table class="table table-sm table-striped">
-      <thead>
-        <tr>
-          <th>Property Name</th>
-          <th style="width: 120px">Type</th>
-          <th>Default Value</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>files</td>
-          <td>File[] | null</td>
-          <td>null</td>
-          <td>Files from the parent component to display in the uploader</td>
-        </tr>
-        <tr>
-          <td>id</td>
-          <td>string | null</td>
-          <td>'nts-file-uploader-input-' + Math.floor(Math.random() * 1000000)</td>
-          <td>File input ID</td>
-        </tr>
-        <tr>
-          <td>iconCustomUpload</td>
-          <td>string | null</td>
-          <td>null</td>
-          <td>Use a custom icon for upload, IE &lt;i class="pi pi-check"&gt;&lt;/i&gt;</td>
-        </tr>
-        <tr>
-          <td>iconCustomReorder</td>
-          <td>string | null</td>
-          <td>'&lt;i class="pi pi-arrows-alt"&gt;&lt;/i&gt;'</td>
-          <td>Use a custom icon for reorder, IE &lt;i class="pi pi-check"&gt;&lt;/i&gt;</td>
-        </tr>
-        <tr>
-          <td>titleUpload</td>
-          <td>string | null</td>
-          <td>'Click or drag here to add files for upload'</td>
-          <td>Title that appears below the icon on the upload box</td>
-        </tr>
-        <tr>
-          <td>titleUploadAddAdditional</td>
-          <td>string | null</td>
-          <td>'Click or drag here to add additional files for upload'</td>
-          <td>Title that appears below the icon on the upload box when the additional upload option is set</td>
-        </tr>
-        <tr>
-          <td>descriptionUpload</td>
-          <td>string | null</td>
-          <td>null</td>
-          <td>Description that appears below the title</td>
-        </tr>
-        <tr>
-          <td>titleResults</td>
-          <td>string | null</td>
-          <td>null</td>
-          <td>Title that appears above the documents that the user has added</td>
-        </tr>
-        <tr>
-          <td>multiple</td>
-          <td>boolean | null</td>
-          <td>true</td>
-          <td>Allow the user to upload multiple files</td>
-        </tr>
-        <tr>
-          <td>allowedFileTypes</td>
-          <td>string[] | null</td>
-          <td>null</td>
-          <td>
-            A string array of allowed mimetypes, IE ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml',
-            'image/webp']
-          </td>
-        </tr>
-        <tr>
-          <td>maxFileSize</td>
-          <td>number | null</td>
-          <td>null</td>
-          <td>
-            The maximum number of bytes that the user is allowed to upload. In the event of multiple files, will be the
-            sum of them all
-          </td>
-        </tr>
-        <tr>
-          <td>maxFiles</td>
-          <td>number | null</td>
-          <td>null</td>
-          <td>The maximum number of files allowed if multiple is true</td>
-        </tr>
-        <tr>
-          <td>canRemove</td>
-          <td>boolean</td>
-          <td>true</td>
-          <td>Can the user remove the files currently being displayed</td>
-        </tr>
-        <tr>
-          <td>canReorder</td>
-          <td>boolean</td>
-          <td>false</td>
-          <td>Can the user reorder the files currently being displayed</td>
-        </tr>
-        <tr>
-          <td>canAddAdditionalFiles</td>
-          <td>boolean</td>
-          <td>true</td>
-          <td>Can the user add additional files after the initial addition</td>
-        </tr>
-      </tbody>
-    </table>
   </p-tabPanel>
   <!-- Example -->
-  <p-tabPanel header="Example">
-    <hr />
-    <!--
-    <button class="p-button" (click)="reloadFiles()">Reload Files</button>
-    -->
+  <p-tabPanel header="Examples & APIs">
+    <nts-form-fields-demo></nts-form-fields-demo>
   </p-tabPanel>
 </p-tabView>

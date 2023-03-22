@@ -41,7 +41,7 @@ export class BaseFormFieldComponent<t> implements OnDestroy {
   /** Any inline style */
   @Input() style?: string | null = '';
 
-  /** Any inline style */
+  /** Validators to attach through the template. Not preferred. */
   @Input() validators?: Forms.Validators | null = null;
   /**
    * Enable/disable this control, uses the form control method instead of template property.
@@ -61,9 +61,6 @@ export class BaseFormFieldComponent<t> implements OnDestroy {
     return !!this.formControl?.enabled ?? false;
   }
 
-  /** Main form group. Named slighly different to avoid collision with the formGroup */
-  public formGroup?: FormGroup | null = null;
-
   /** Form control  */
   @Input() formControl = new FormControl();
 
@@ -81,10 +78,8 @@ export class BaseFormFieldComponent<t> implements OnDestroy {
     }
   }
 
-  /** Is this control focused */
-  public focused?: boolean | null = false;
-
-  @Input() formFieldID = 'form-field-' + Math.floor(Math.random() * 1000000000);
+  /** Input ID to use if no ID supplied. Links up label and the form ID */
+  public formFieldID = 'form-field-' + Math.floor(Math.random() * 1000000000);
 
   /** When the input is focused */
   @Output() onFocus = new EventEmitter<FocusEvent>();
@@ -96,6 +91,12 @@ export class BaseFormFieldComponent<t> implements OnDestroy {
   @Output() onChange = new EventEmitter<t>();
   /** On keyup event on the input */
   @Output() onKeyup = new EventEmitter<KeyboardEvent>();
+
+  /** Is this control focused */
+  public focused?: boolean | null = false;
+
+  /** Main form group. Named slighly different to avoid collision with the formGroup */
+  public formGroup?: FormGroup | null = null;
 
   /** Manage subs used by this class and it's children */
   protected subs: Subscription[] = [];
@@ -109,6 +110,7 @@ export class BaseFormFieldComponent<t> implements OnDestroy {
       this.control = this.ngControl.control;
       this.formGroup = this.control?.root as FormGroup;
     }
+    console.log(this);
   }
 
   /**
