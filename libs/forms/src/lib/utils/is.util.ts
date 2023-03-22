@@ -40,8 +40,8 @@ export const is = {
     return false;
   },
   contentType: {
-    html: <t>(obj: any): obj is Forms.Html<t> => obj && obj.type === 'html' && typeof obj.html === 'string',
-    formField: <t>(obj: any): obj is Forms.FormField<t> =>
+    html: (obj: any): obj is Forms.Html => obj && obj.type === 'html' && typeof obj.html === 'string',
+    formField: (obj: any): obj is Forms.FormField =>
       obj.type === 'formField' && obj.formFieldType !== undefined && obj.field !== undefined,
   },
 };

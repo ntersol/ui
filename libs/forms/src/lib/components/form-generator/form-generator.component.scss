@@ -1,4 +1,14 @@
-.form-generator-footer {
-    display:flex;
+$verticalSpacing: 1.5rem;
+
+#form-generator {
+  .form-generator-main {
+    margin-bottom: $verticalSpacing;
+  }
+  .nts-form-field-content {
+    margin-bottom: $verticalSpacing;
+  }
+  .form-generator-footer {
+    display: flex;
     justify-content: flex-end;
+  }
 }

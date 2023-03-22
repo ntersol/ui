@@ -10,7 +10,7 @@ import { is } from '../../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColumnComponent implements OnInit {
-  @Input() column?: Forms.Column<unknown> | null = null;
+  @Input() column?: Forms.Column | null = null;
   @Input() formGroup = new FormGroup({});
   @Input() options?: Forms.FormOptions | null = null;
   @Input() datafields?: Forms.Datafields = {};

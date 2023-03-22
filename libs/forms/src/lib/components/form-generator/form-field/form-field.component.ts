@@ -11,7 +11,7 @@ import { dynamicPropertyEvaluation$ } from '../../../utils/dynamic-property-eval
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormFieldComponent implements OnInit, OnChanges {
-  @Input() formField?: Forms.FormField<unknown> | null = null;
+  @Input() formField?: Forms.FormField | null = null;
   @Input() formGroup = new FormGroup({});
   @Input() options?: Forms.FormOptions | null = null;
   @Input() datafields?: Forms.Datafields = {};

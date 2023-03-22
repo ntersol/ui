@@ -10,7 +10,7 @@ import { is } from '../../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContentComponent implements OnInit {
-  @Input() content?: Forms.Content<unknown> | null = null;
+  @Input() content?: Forms.Content | null = null;
   @Input() formGroup = new FormGroup({});
   @Input() options?: Forms.FormOptions | null = null;
   @Input() datafields?: Forms.Datafields = {};

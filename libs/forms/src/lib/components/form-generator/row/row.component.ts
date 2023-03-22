@@ -11,7 +11,7 @@ import { dynamicPropertyEvaluation$ } from '../../../utils/dynamic-property-eval
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RowComponent implements OnInit, OnChanges {
-  @Input() row?: Forms.Row<unknown> | null = null;
+  @Input() row?: Forms.Row | null = null;
   @Input() formGroup = new FormGroup({});
   @Input() options?: Forms.FormOptions | null = null;
   @Input() datafields?: Forms.Datafields = {};

@@ -12,7 +12,7 @@ import { expressionReplacer$ } from '../../../utils/expression-replacer.util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HtmlComponent implements OnInit, OnChanges {
-  @Input() content?: Forms.Html<unknown> | null = null;
+  @Input() content?: Forms.Html | null = null;
   @Input() options?: Forms.FormOptions | null = null;
   @Input() formGroup = new FormGroup({});
 

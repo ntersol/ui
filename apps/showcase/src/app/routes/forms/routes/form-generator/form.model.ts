@@ -1,5 +1,4 @@
 import { Forms } from 'libs/forms/src/lib/forms.model';
-import { Paths } from 'libs/forms/src/lib/utils/types.util';
 
 interface User {
   nameFirst?: string;
@@ -9,13 +8,29 @@ interface User {
     state?: string;
   };
   emails?: string[];
-  emails2?: { address?: string; url?: string }[];
 }
+
+export const userModel: User = {
+  nameFirst: '',
+  nameLast: '',
+  address: {
+    city: '',
+    state: '',
+  },
+  emails: [],
+};
 
 export const formModel: Forms.FormGenerator = [
   {
     type: 'formField',
     formFieldType: 'text',
-    field: 'emails2',
+    label: 'First Name',
+    field: 'nameFirst',
+  },
+  {
+    type: 'formField',
+    formFieldType: 'text',
+    label: 'Last Name',
+    field: 'nameLast',
   },
 ];

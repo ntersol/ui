@@ -1,13 +1,15 @@
-<nts-form-field-html
-  *ngIf="is.contentType.html(content)"
-  [formGroup]="formGroup"
-  [content]="content"
-  [options]="options"
-></nts-form-field-html>
-<nts-form-field-form-field
-  *ngIf="is.contentType.formField(content)"
-  [formGroup]="formGroup"
-  [formField]="content"
-  [options]="options"
-  [datafields]="datafields"
-></nts-form-field-form-field>
+<div class="nts-form-field-content">
+  <nts-form-field-html
+    *ngIf="is.contentType.html(content)"
+    [formGroup]="formGroup"
+    [content]="content"
+    [options]="options"
+  ></nts-form-field-html>
+  <nts-form-field-form-field
+    *ngIf="is.contentType.formField(content)"
+    [formGroup]="formGroup"
+    [formField]="content"
+    [options]="options"
+    [datafields]="datafields"
+  ></nts-form-field-form-field>
+</div>

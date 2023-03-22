@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Forms } from '../../forms.model';
 import { is } from '../../utils';
@@ -14,18 +22,20 @@ import { is } from '../../utils';
   templateUrl: './form-generator.component.html',
   styleUrls: ['./form-generator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class FormGeneratorComponent implements OnInit {
-  @Input() formModel?: Forms.FormGenerator<unknown> | null = [];
+  /** Model to generate the form */
+  @Input() formModel?: Forms.FormGenerator | null = [];
   /** Main form group */
   @Input() formGroup: FormGroup | null = null;
   /** Form Options */
   @Input() options?: Forms.FormOptions | null = null;
   /** Datafields for dynamic data */
   @Input() datafields?: Forms.Datafields = {};
-  /** Disable submit button */
+  /** Disable submit button. Otherwise will rely on the form validators to allow submission */
   @Input() disableSubmit = false;
-  /** When the use submis */
+  /** When the user submits the form */
   @Output() completed = new EventEmitter();
 
   constructor() {}

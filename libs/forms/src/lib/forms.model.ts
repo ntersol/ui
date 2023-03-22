@@ -1,12 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/prefer-namespace-keyword, @typescript-eslint/no-namespace
 export module Forms {
   /** Main form generator model, generic type currently not supported due to infinite recusions issue. Perhaps in a later version of TS */
-  export type FormGenerator<t = any> = FormContentTypes<t>;
+  export type FormGenerator = FormContentTypes;
 
-  type FormContentTypes<t> = (Content<t> | Row<t> | Container<t>)[];
+  type FormContentTypes = (Content | Row | Container)[];
 
   /** Base properties that apply to all content types  */
-  interface FormContentTypeSrc<t> {
+  interface FormContentTypeSrc {
     type: string;
     /** CSS ID to apply to the parent container of this element*/
     id?: string | null;
@@ -34,16 +34,20 @@ export module Forms {
         value: 'Purchase',
       }
      */
-    visible?: DynamicProperty<t>;
+    visible?: DynamicProperty;
   }
 
   /** Supported values for evaluating dynamic properties */
-  export type DynamicProperty<t> = null | boolean | string | Rule;
+  export type DynamicProperty = null | boolean | string | Rule;
 
   export interface FormOptions {
-    submitButton: {
+    /** Change the style of the submit button */
+    submitButton?: {
+      /** Text label */
       label?: string | null;
+      /** Icon to use */
       icon?: string | null;
+      /** Any custom css classes */
       classes?: string | null;
     };
     /** When the user clicks the submit button and an error occurs, the page will scroll to the first error. This value will modify the final position of the scroll and can be negative or positive. Useful for situactions where the error is under a sticky header or fixed element. */
@@ -51,41 +55,41 @@ export module Forms {
   }
 
   /** Container is used for wrapping or grouping other content types */
-  export interface Container<t> extends FormContentTypeSrc<t> {
+  export interface Container extends FormContentTypeSrc {
     type: 'container';
-    content: FormContentTypes<t>;
+    content: FormContentTypes;
   }
 
-  export interface Row<t> extends FormContentTypeSrc<t> {
+  export interface Row extends FormContentTypeSrc {
     type: 'row';
-    columns: Column<t>[];
+    columns: Column[];
   }
 
-  export interface Column<t> extends FormContentTypeSrc<t> {
+  export interface Column extends FormContentTypeSrc {
     type: 'column';
     width: number;
-    content: FormContentTypes<t>;
+    content: FormContentTypes;
   }
 
-  export type Content<t> = Html<t> | FormField<t>;
+  export type Content = Html | FormField;
 
-  export interface Html<t> extends FormContentTypeSrc<t> {
+  export interface Html extends FormContentTypeSrc {
     type: 'html';
     html: string;
   }
 
   /** Available form field types */
-  export type FormField<t> =
-    | TextField<t>
-    | DateField<t>
-    | SelectButtonField<t>
-    | DropdownField<t>
-    | PhoneNumberField<t>
-    | EmailField<t>
-    | NumberField<t>
-    | RadioField<t>
-    | TextAreaField<t>
-    | ZipCodeField<t>;
+  export type FormField =
+    | TextField
+    | DateField
+    | SelectButtonField
+    | DropdownField
+    | PhoneNumberField
+    | EmailField
+    | NumberField
+    | RadioField
+    | TextAreaField
+    | ZipCodeField;
 
   /** Enum for form field types */
   export type FormFieldType =
@@ -106,7 +110,7 @@ export module Forms {
   }
 
   /** Props that apply to all form field types, IE input, dropdown, radio, etc */
-  interface FieldProps<t> extends FormContentTypeSrc<t> {
+  interface FieldProps extends FormContentTypeSrc {
     // Required props
     type: 'formField';
     /** Which type of form element is this */
@@ -144,7 +148,7 @@ export module Forms {
           value: 'Purchase',
         }
        */
-    disabled?: DynamicProperty<t>;
+    disabled?: DynamicProperty;
   }
 
   export interface Validators {
@@ -163,7 +167,7 @@ export module Forms {
   }
 
   // Props that apply to only allow typed user input, IE inputs but not dropdowns or radios
-  interface FieldInputSrc<t> extends FieldProps<t> {
+  interface FieldInputSrc extends FieldProps {
     // Optional props
     /** Standard html placeholder text */
     placeholder?: string | null;
@@ -177,7 +181,7 @@ export module Forms {
     name?: string | null;
   }
 
-  export interface TextField<t> extends FieldInputSrc<t> {
+  export interface TextField extends FieldInputSrc {
     formFieldType: 'text';
     /** The MAXIMUM number of characters allowed by this input */
     maxLength?: number | null;
@@ -185,7 +189,7 @@ export module Forms {
     minLength?: number | null;
   }
 
-  export interface TextAreaField<t> extends FieldInputSrc<t> {
+  export interface TextAreaField extends FieldInputSrc {
     formFieldType: 'textarea';
     /** 	When present, textarea size expands vertically as the user types */
     autoResize?: boolean | null;
@@ -195,11 +199,11 @@ export module Forms {
     maxlength?: number | null;
   }
 
-  export interface PhoneNumberField<t> extends FieldInputSrc<t> {
+  export interface PhoneNumberField extends FieldInputSrc {
     formFieldType: 'phoneNumber';
   }
 
-  export interface ZipCodeField<t> extends FieldInputSrc<t> {
+  export interface ZipCodeField extends FieldInputSrc {
     formFieldType: 'zipcode';
     /** Determine if the value should be either a string or a number. Default string. Number is only supported if allowNineDigitCodes isn't true since the hyphen is required */
     dataType?: 'string' | 'number' | null;
@@ -207,7 +211,7 @@ export module Forms {
     allowNineDigitCodes?: boolean | null;
   }
 
-  export interface DateField<t> extends FieldInputSrc<t> {
+  export interface DateField extends FieldInputSrc {
     formFieldType: 'date';
     // Prime config options
     inline?: boolean | null;
@@ -221,10 +225,10 @@ export module Forms {
   type Datafield = { datafield: string };
   type FieldPropsOptions = Options | Datafield;
   /** Field props for controls that need an array of data like selects or radios */
-  // type FieldPropsOptions<t> = FieldProps<t> & temp3;
+  // type FieldPropsOptions = FieldProps & temp3;
 
-  // export type SelectButtonField<t> = SelectButtonFieldSrc<t> & FieldPropsOptions;
-  export interface SelectButtonField<t> extends FieldProps<t> {
+  // export type SelectButtonField = SelectButtonFieldSrc & FieldPropsOptions;
+  export interface SelectButtonField extends FieldProps {
     formFieldType: 'selectButton';
     options?: FieldOptions[];
     datafield?: string;
@@ -236,8 +240,8 @@ export module Forms {
     fullWidth?: boolean | null;
   }
 
-  // export type DropdownField<t> = DropdownFieldSrc<t> & FieldPropsOptions;
-  export interface DropdownField<t> extends FieldProps<t> {
+  // export type DropdownField = DropdownFieldSrc & FieldPropsOptions;
+  export interface DropdownField extends FieldProps {
     formFieldType: 'dropdown';
     options?: FieldOptions[];
     datafield?: string | null;
@@ -255,21 +259,21 @@ export module Forms {
     insertEmptyOption?: boolean | null;
   }
 
-  // export type RadioField<t> = RadioFieldSrc<t> & FieldPropsOptions;
-  export interface RadioField<t> extends FieldProps<t> {
+  // export type RadioField = RadioFieldSrc & FieldPropsOptions;
+  export interface RadioField extends FieldProps {
     formFieldType: 'radio';
     options?: FieldOptions[];
     datafield?: string;
   }
 
-  export interface EmailField<t> extends FieldInputSrc<t> {
+  export interface EmailField extends FieldInputSrc {
     formFieldType: 'email';
   }
 
   /** Datafields are dynamic options for populating fields from a remote source like an API */
   export type Datafields = Record<string, FieldOptions[]>;
 
-  export interface NumberField<t> extends FieldInputSrc<t> {
+  export interface NumberField extends FieldInputSrc {
     formFieldType: 'number';
     /** The MAXIMUM number of characters allowed by this input */
     maxLength?: number | null;

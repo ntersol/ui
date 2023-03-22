@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Forms } from 'libs/forms/src/lib/forms.model';
 import { HighlightService } from '../../../../shared/services/highlight.service';
-import { formModel } from './form.model';
+import { formModel, userModel } from './form.model';
 
 @Component({
   selector: 'nts-form-generator-route',
@@ -52,10 +54,13 @@ export class FormGeneratorRouteComponent implements OnInit {
   `;
 
   public formModel = formModel;
+  public formGroup = this.fb.group(userModel);
 
-  constructor(private highlight: HighlightService) {}
+  constructor(private highlight: HighlightService, private fb: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.formGroup.valueChanges.subscribe((x) => console.warn(x));
+  }
 
   ngAfterViewInit() {
     this.highlight.highlightAll();
