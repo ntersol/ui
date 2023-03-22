@@ -16,7 +16,7 @@ import { is } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormGeneratorComponent implements OnInit {
-  @Input() formModel?: Forms.Form<unknown> | null = [];
+  @Input() formModel?: Forms.FormGenerator<unknown> | null = [];
   /** Main form group */
   @Input() formGroup: FormGroup | null = null;
   /** Form Options */

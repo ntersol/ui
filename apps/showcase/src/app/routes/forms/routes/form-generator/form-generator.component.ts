@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HighlightService } from '../../../../shared/services/highlight.service';
+import { formModel } from './form.model';
 
 @Component({
   selector: 'nts-form-generator-route',
@@ -49,6 +50,8 @@ export class FormGeneratorRouteComponent implements OnInit {
     fileReader: (string | ArrayBuffer | null)[] | null;
   }
   `;
+
+  public formModel = formModel;
 
   constructor(private highlight: HighlightService) {}
 

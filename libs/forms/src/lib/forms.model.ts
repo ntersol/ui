@@ -2,8 +2,10 @@ import { Paths } from './utils/types.util';
 
 // eslint-disable-next-line @typescript-eslint/prefer-namespace-keyword, @typescript-eslint/no-namespace
 export module Forms {
+  /** Main form generator model, the type is the form model */
+  export type FormGenerator<t = any> = FormContentTypes<t>;
+
   type FormContentTypes<t> = (Content<t> | Row<t> | Container<t>)[];
-  export type Form<t> = FormContentTypes<t>;
 
   /** Base properties that apply to all content types  */
   interface FormContentTypeSrc<t> {
