@@ -1,8 +1,6 @@
-import { Paths } from './utils/types.util';
-
 // eslint-disable-next-line @typescript-eslint/prefer-namespace-keyword, @typescript-eslint/no-namespace
 export module Forms {
-  /** Main form generator model, the type is the form model */
+  /** Main form generator model, generic type currently not supported due to infinite recusions issue. Perhaps in a later version of TS */
   export type FormGenerator<t = any> = FormContentTypes<t>;
 
   type FormContentTypes<t> = (Content<t> | Row<t> | Container<t>)[];
@@ -40,7 +38,7 @@ export module Forms {
   }
 
   /** Supported values for evaluating dynamic properties */
-  export type DynamicProperty<t> = null | boolean | string | Rule<t>;
+  export type DynamicProperty<t> = null | boolean | string | Rule;
 
   export interface FormOptions {
     submitButton: {
@@ -114,7 +112,7 @@ export module Forms {
     /** Which type of form element is this */
     formFieldType: FormFieldType;
     /** Path/location in the form group of the form control using Angular dot notation, IE `user.data.firstname` */
-    field: Paths<t>;
+    field: string;
     // Optional props
     /** Label that appears above the control */
     label?: string | null;
@@ -287,8 +285,8 @@ export module Forms {
     buttonLayout?: 'stacked' | 'horizontal' | 'vertical' | null;
   }
 
-  export interface Rule<t> {
-    field: Paths<t>;
+  export interface Rule {
+    field: string;
     operator: 'eq' | 'ne' | 'in' | 'nin';
     value: unknown;
   }

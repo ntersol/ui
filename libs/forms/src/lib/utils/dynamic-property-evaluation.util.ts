@@ -33,7 +33,7 @@ interface Options {
  * @returns
  */
 export const dynamicPropertyEvaluation$ = (
-  src?: null | boolean | string | Forms.Rule<unknown>,
+  src?: null | boolean | string | Forms.Rule,
   formGroup?: FormGroup | null,
   options?: Options | null,
 ): Observable<boolean> => {

@@ -110,7 +110,6 @@ export class BaseFormFieldComponent<t> implements OnDestroy {
       this.control = this.ngControl.control;
       this.formGroup = this.control?.root as FormGroup;
     }
-    console.log(this);
   }
 
   /**

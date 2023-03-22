@@ -9,7 +9,7 @@ declare const process: any;
 export const is = {
   node: typeof process !== 'undefined' && process.versions != null && process.versions.node != null,
   browser: typeof process === 'undefined',
-  rule: (val?: unknown | null): val is Forms.Rule<unknown> => {
+  rule: (val?: unknown | null): val is Forms.Rule => {
     if (
       val &&
       typeof val === 'object' &&
