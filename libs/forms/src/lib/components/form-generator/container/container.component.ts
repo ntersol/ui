@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Forms } from '../../../forms.model';
 import { dynamicPropertyEvaluation$ } from '../../../utils/dynamic-property-evaluation.util';
 
@@ -16,7 +16,7 @@ export class ContainerComponent implements OnInit, OnChanges {
   @Input() options?: Forms.FormOptions | null = null;
   @Input() datafields?: Forms.Datafields = {};
 
-  public visible$!: Observable<boolean>;
+  public visible$: Observable<boolean> = new BehaviorSubject(true);
   constructor() {}
 
   ngOnInit(): void {}

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Forms } from '../../../forms.model';
 import { dynamicPropertyEvaluation$ } from '../../../utils/dynamic-property-evaluation.util';
 import { expressionReplacer$ } from '../../../utils/expression-replacer.util';
@@ -16,8 +16,8 @@ export class HtmlComponent implements OnInit, OnChanges {
   @Input() options?: Forms.FormOptions | null = null;
   @Input() formGroup = new FormGroup({});
 
-  public visible$!: Observable<boolean>;
-  public html$!: Observable<string | null>;
+  public visible$: Observable<boolean> = new BehaviorSubject(true);
+  public html$: Observable<string | null> = new BehaviorSubject(null);
 
   constructor() {}
 
