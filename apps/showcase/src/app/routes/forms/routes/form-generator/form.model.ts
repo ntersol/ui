@@ -235,7 +235,7 @@ export const dynamnicModel: Forms.FormGenerator = [
   },
 ];
 
-export const dynamnicModel: Forms.FormGenerator = [
+export const dynamnicModel2: Forms.FormGenerator = [
   {
     type: 'html',
     html: `
