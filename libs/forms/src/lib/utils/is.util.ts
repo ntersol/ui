@@ -7,6 +7,8 @@ declare const process: any;
  * Typeguards for form field types
  */
 export const is = {
+  nill: <T>(value: T | null | undefined): value is T => value === null || value === undefined,
+  notNill: <T>(value: T | null | undefined): value is T => value !== null && value !== undefined,
   node: typeof process !== 'undefined' && process.versions != null && process.versions.node != null,
   browser: typeof process === 'undefined',
   rule: (val?: unknown | null): val is Forms.Rule => {

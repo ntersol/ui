@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleCha
 import { FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Forms } from '../../../forms.model';
+import { is } from '../../../utils';
 import { dynamicPropertyEvaluation$ } from '../../../utils/dynamic-property-evaluation.util';
 import { expressionReplacer$ } from '../../../utils/expression-replacer.util';
 
@@ -24,8 +25,11 @@ export class HtmlComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['formGroup'] && this.formGroup) {
+    // Only update observable if visible is present
+    if (changes['formGroup'] && this.formGroup && is.notNill(this.content?.visible)) {
       this.visible$ = dynamicPropertyEvaluation$(this.content?.visible, this.formGroup);
+    }
+    if (changes['formGroup'] && this.formGroup) {
       this.html$ = expressionReplacer$(this.formGroup, this.content?.html);
     }
   }

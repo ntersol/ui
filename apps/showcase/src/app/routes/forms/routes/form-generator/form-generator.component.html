@@ -87,20 +87,16 @@
         <pre><code class="language-ts" [innerHtml]="htmlCode"></code></pre>
       </p-accordionTab>
 
-      <p-accordionTab header="Dynamic Content">
-        <h2>Dynamic Content</h2>
+      <p-accordionTab header="Dynamic Visibility">
+        <h2>Visibility</h2>
         <p>
-          By using Angular curly braces, this form generation tool enables you to dynamically insert user-entered data
-          into static content areas of the form in realtime, providing a personalized experience for the user and making
-          the form more engaging. Data comes from the form root. The properties should use Angular dot notation for
-          accessing reactive form data, IE "loanApplication.borrowers.0.name.age".
+          All content types have a visibility property which can be set dynamically based on actions taken in the form.
         </p>
-        <p>Dynamic content is available in: HTML content and form field labels/prefixes/suffixes/hints.</p>
         <hr />
         <h2>Example</h2>
         <nts-form-generator
-          [formModel]="dynamnicModel"
-          [formGroup]="dynamicForm"
+          [formModel]="visibilityModel"
+          [formGroup]="visibilityForm"
           (completed)="completed($event)"
         ></nts-form-generator>
         <hr />

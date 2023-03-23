@@ -235,28 +235,97 @@ export const dynamnicModel: Forms.FormGenerator = [
   },
 ];
 
-export const dynamnicModel2: Forms.FormGenerator = [
+export const visibilityModel: Forms.FormGenerator = [
   {
-    type: 'html',
-    html: `
-      <h1>Borrower Name: {{nameFirst}} {{nameLast}}</h1>`,
-  },
-  {
-    type: 'formField',
-    formFieldType: 'text',
-    label: 'First Name',
-    field: 'nameFirst',
-  },
-  {
-    type: 'formField',
-    formFieldType: 'text',
-    label: 'Last Name',
-    field: 'nameLast',
-  },
-  {
-    type: 'formField',
-    formFieldType: 'number',
-    label: 'Age of <strong>{{nameFirst}} {{nameLast}}</strong>',
-    field: 'age',
+    type: 'row',
+    columns: [
+      {
+        type: 'column',
+        width: 6,
+        content: [
+          {
+            type: 'formField',
+            formFieldType: 'radio',
+            label: 'Toggle Content',
+            field: 'toggle',
+            options: [
+              { label: 'Show', value: true },
+              { label: 'Hide', value: false },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'column',
+        width: 6,
+        content: [
+          {
+            type: 'container',
+            visible: 'toggle',
+            content: [
+              {
+                type: 'html',
+                html: 'Container content type',
+              },
+            ],
+          },
+          {
+            type: 'html',
+            html: '<hr/>',
+          },
+
+          {
+            type: 'row',
+            visible: 'toggle',
+            columns: [
+              {
+                type: 'column',
+                width: 12,
+                content: [
+                  {
+                    type: 'html',
+                    html: 'Row content type',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: 'html',
+            html: '<hr/>',
+          },
+          {
+            type: 'row',
+            columns: [
+              {
+                type: 'column',
+                width: 6,
+                content: [
+                  {
+                    type: 'html',
+                    html: 'Column content type',
+                  },
+                ],
+              },
+              {
+                type: 'column',
+                visible: 'toggle',
+                width: 6,
+                content: [
+                  {
+                    type: 'html',
+                    html: 'Column content type',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: 'html',
+            html: '<hr/>',
+          },
+        ],
+      },
+    ],
   },
 ];

@@ -2,7 +2,15 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HighlightService } from '../../../../shared/services/highlight.service';
 import { dynamicCode, formFields, htmlCode, layoutCode } from './form.code-examples';
-import { dynamnicModel, formFieldsModel, formModel, htmlModel, layoutModel, userModel } from './form.model';
+import {
+  dynamnicModel,
+  formFieldsModel,
+  formModel,
+  htmlModel,
+  layoutModel,
+  userModel,
+  visibilityModel,
+} from './form.model';
 
 @Component({
   selector: 'nts-form-generator-route',
@@ -121,6 +129,11 @@ export class FormGeneratorRouteComponent implements OnInit {
     age: null,
   });
   public dynamicCode = this.highlight.htmlEncode(dynamicCode);
+
+  public visibilityModel = visibilityModel;
+  public visibilityForm = this.fb.group({
+    toggle: [true],
+  });
 
   constructor(private highlight: HighlightService, private fb: FormBuilder) {}
 

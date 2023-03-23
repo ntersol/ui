@@ -14,7 +14,6 @@ import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map
  * @returns
  */
 export const expressionReplacer$ = (formGroup?: FormGroup | null, str?: string | null): Observable<string | null> => {
-  console.log(formGroup, str);
   let strSubject$: Observable<string | null> = new BehaviorSubject(str ?? null);
   // Nil check, return default string
   if (!formGroup || !str) {

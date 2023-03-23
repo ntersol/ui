@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleCha
 import { FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Forms } from '../../../forms.model';
+import { is } from '../../../utils';
 import { dynamicPropertyEvaluation$ } from '../../../utils/dynamic-property-evaluation.util';
 
 @Component({
@@ -23,10 +24,15 @@ export class RowComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['formGroup'] && this.formGroup) {
+    // Only update observable if visible is present
+    if (changes['formGroup'] && this.formGroup && is.notNill(this.row?.visible)) {
       this.visible$ = dynamicPropertyEvaluation$(this.row?.visible, this.formGroup);
+    }
+    if (changes['formGroup'] && this.formGroup) {
       this.visibleColumns = this.row
-        ? this.row.columns.map((c) => dynamicPropertyEvaluation$(c.visible, this.formGroup))
+        ? this.row.columns.map((c) =>
+            is.notNill(c.visible) ? dynamicPropertyEvaluation$(c.visible, this.formGroup) : new BehaviorSubject(true),
+          )
         : [];
     }
   }

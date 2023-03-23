@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleCha
 import { FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Forms } from '../../../forms.model';
+import { is } from '../../../utils';
 import { dynamicPropertyEvaluation$ } from '../../../utils/dynamic-property-evaluation.util';
 
 @Component({
@@ -22,8 +23,9 @@ export class ContainerComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['formGroup'] && this.formGroup) {
+    if (changes['formGroup'] && this.formGroup && is.notNill(this.container?.visible)) {
       this.visible$ = dynamicPropertyEvaluation$(this.container?.visible, this.formGroup);
+      this.visible$.subscribe(console.log);
     }
   }
 }
