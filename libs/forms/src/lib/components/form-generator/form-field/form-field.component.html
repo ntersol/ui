@@ -135,7 +135,6 @@
       [validators]="formField.validators"
       [disabled]="disabled$ | async"
     ></nts-form-field-email>
-
     <nts-form-field-number
       *ngIf="formField.formFieldType === 'number'"
       [label]="formField.label"
@@ -156,7 +155,6 @@
       [useGrouping]="formField.useGrouping"
       [minFractionDigits]="formField.minFractionDigits"
       [maxFractionDigits]="formField.maxFractionDigits"
-      [maxLength]="formField.maxLength"
       [validators]="formField.validators"
       [disabled]="disabled$ | async"
     ></nts-form-field-number>

@@ -7,6 +7,7 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import {
   startWith,
   debounceTime,
@@ -61,16 +62,20 @@ export class InputComponent<t> extends BaseFormFieldComponent<t> implements OnIn
 
   ngOnChanges(changes: SimpleChanges): void {
     // If input control, formgroup or value changes, update state
-    if (changes['formGroup'] || changes['control'] || changes['label']) {
+    if (changes['control']) {
+      this.formGroup = this.formControl.root as FormGroup;
+    }
+    // If input control, formgroup or value changes, update state
+    if (changes['control'] || changes['label']) {
       this.label$ = expressionReplacer$(this.formGroup, this.label);
     }
-    if (changes['formGroup'] || changes['control'] || changes['prefix']) {
+    if (changes['control'] || changes['prefix']) {
       this.prefix$ = expressionReplacer$(this.formGroup, this.prefix);
     }
-    if (changes['formGroup'] || changes['control'] || changes['suffix']) {
+    if (changes['control'] || changes['suffix']) {
       this.suffix$ = expressionReplacer$(this.formGroup, this.suffix);
     }
-    if (changes['formGroup'] || changes['control'] || changes['hint']) {
+    if (changes['control'] || changes['hint']) {
       this.hint$ = expressionReplacer$(this.formGroup, this.hint);
     }
 
@@ -119,7 +124,6 @@ export class InputComponent<t> extends BaseFormFieldComponent<t> implements OnIn
             if (!this.formControl?.errors) {
               return null;
             }
-            console.log(this.formControl.errors);
             return Object.keys(this.formControl.errors).reduce(
               (a, b) => (this.formControl?.errors ? [...a, this.formControl?.errors[b]] : [...a]),
               [] as string[],

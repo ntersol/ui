@@ -14,6 +14,7 @@ import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map
  * @returns
  */
 export const expressionReplacer$ = (formGroup?: FormGroup | null, str?: string | null): Observable<string | null> => {
+  console.log(formGroup, str);
   let strSubject$: Observable<string | null> = new BehaviorSubject(str ?? null);
   // Nil check, return default string
   if (!formGroup || !str) {
@@ -22,7 +23,7 @@ export const expressionReplacer$ = (formGroup?: FormGroup | null, str?: string |
   // If string has double curly braces
   if (str && typeof str === 'string' && str.match(/[^{{\}\}]+(?=})/g)) {
     // Split the string by the curly braces
-    const content = str.split(/\s*(\{\{.*?\}\})\s*/g);
+    const content = str.split(/(\{\{.*?\}\})/g);
     // Loop through the new string array
     const stringData: Observable<string>[] = content.map((c) => {
       // If the current index contains double curly braces

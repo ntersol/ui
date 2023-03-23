@@ -36,7 +36,7 @@ export class FormGeneratorComponent implements OnInit {
   /** Disable submit button. Otherwise will rely on the form validators to allow submission */
   @Input() disableSubmit = false;
   /** When the user submits the form */
-  @Output() completed = new EventEmitter();
+  @Output() completed = new EventEmitter<unknown>();
 
   constructor() {}
 

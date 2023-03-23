@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HighlightService } from '../../../../shared/services/highlight.service';
-import { FileUploadService } from '../../../components/routes/file-uploader/file-uploader.service';
 
 @Component({
   selector: 'nts-form-fields-demo',
@@ -132,11 +131,9 @@ export class FormFieldsDemoComponent implements OnInit, AfterViewInit {
   ></nts-form-field-zipcode>
   `);
 
-  constructor(private fb: FormBuilder, private highlight: HighlightService, public svc: FileUploadService) {}
+  constructor(private fb: FormBuilder, private highlight: HighlightService) {}
 
-  ngOnInit(): void {
-    this.form.valueChanges.subscribe(console.log);
-  }
+  ngOnInit(): void {}
 
   public submit() {
     this.form.markAllAsTouched();
