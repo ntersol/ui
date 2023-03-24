@@ -81,7 +81,6 @@ const COMPONENTS = [
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-
     ReactiveFormsModule,
     CalendarModule,
     InputTextModule,
