@@ -13,7 +13,8 @@ export class ColumnComponent implements OnInit {
   @Input() column?: Forms.Column | null = null;
   @Input() formGroup = new FormGroup({});
   @Input() options?: Forms.FormOptions | null = null;
-  @Input() datafields?: Forms.Datafields = {};
+  /** Datafields for dynamic data */
+  @Input() datafields?: Forms.Datafields | null = {};
 
   public is = is;
 

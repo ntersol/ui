@@ -15,7 +15,8 @@ export class RowComponent implements OnInit, OnChanges {
   @Input() row?: Forms.Row | null = null;
   @Input() formGroup = new FormGroup({});
   @Input() options?: Forms.FormOptions | null = null;
-  @Input() datafields?: Forms.Datafields = {};
+  /** Datafields for dynamic data */
+  @Input() datafields?: Forms.Datafields | null = {};
 
   public visible$: Observable<boolean> = new BehaviorSubject(true);
   public visibleColumns: Observable<boolean>[] = [];

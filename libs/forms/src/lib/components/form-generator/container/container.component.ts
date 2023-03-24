@@ -15,7 +15,8 @@ export class ContainerComponent implements OnInit, OnChanges {
   @Input() container?: Forms.Container | null = null;
   @Input() formGroup = new FormGroup({});
   @Input() options?: Forms.FormOptions | null = null;
-  @Input() datafields?: Forms.Datafields = {};
+  /** Datafields for dynamic data */
+  @Input() datafields?: Forms.Datafields | null = {};
 
   public visible$: Observable<boolean> = new BehaviorSubject(true);
   constructor() {}

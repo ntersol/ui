@@ -32,7 +32,7 @@ export class FormGeneratorComponent implements OnInit {
   /** Form Options */
   @Input() options?: Forms.FormOptions | null = null;
   /** Datafields for dynamic data */
-  @Input() datafields?: Forms.Datafields = {};
+  @Input() datafields?: Forms.Datafields | null = {};
   /** Disable submit button. Otherwise will rely on the form validators to allow submission */
   @Input() disableSubmit = false;
   /** When the user submits the form */
