@@ -2,6 +2,7 @@ export * from './lib/forms.module';
 export * from './lib/components/form-fields';
 export * from './lib//components/form-generator';
 export * from './lib/utils';
+export * from './lib/validators';
 
 // Legacy
 export * from './lib/components/autocomplete/autocomplete.component';

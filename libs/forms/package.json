@@ -2,6 +2,10 @@
   "name": "@ntersol/forms",
   "version": "2.0.0",
   "license": "MIT",
+  "exports": {
+    "./": "./src",
+    "./validators": "./src/lib/validators"
+  },
   "peerDependencies": {
     "@angular/common": ">11.0.1"
   }
