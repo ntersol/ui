@@ -133,6 +133,7 @@ export class FormGeneratorRouteComponent implements OnInit {
   public visibilityModel = visibilityModel;
   public visibilityForm = this.fb.group({
     toggle: true,
+    toggle2: null,
   });
 
   constructor(private highlight: HighlightService, private fb: FormBuilder) {}

@@ -343,4 +343,59 @@ export const visibilityModel: Forms.FormGenerator = [
       },
     ],
   },
+
+  {
+    type: 'row',
+    columns: [
+      {
+        type: 'column',
+        width: 6,
+        content: [
+          {
+            type: 'html',
+            html: 'Rules Engine Example',
+          },
+          {
+            type: 'formField',
+            formFieldType: 'text',
+            label: 'Toggle Content',
+            field: 'toggle2',
+            hint: 'Enter a number over 5 to toggle visibility',
+          },
+        ],
+      },
+      {
+        type: 'column',
+        width: 6,
+        content: [
+          {
+            type: 'html',
+            html: 'No number has been entered',
+            cssClasses: 'border',
+            visible: '!toggle2',
+          },
+          {
+            type: 'html',
+            html: 'The number is greater than 5',
+            cssClasses: 'border',
+            visible: {
+              field: 'toggle2',
+              operator: 'gt',
+              value: 5,
+            },
+          },
+          {
+            type: 'html',
+            html: 'The number is less than 5',
+            cssClasses: 'border',
+            visible: {
+              field: 'toggle2',
+              operator: 'lt',
+              value: 5,
+            },
+          },
+        ],
+      },
+    ],
+  },
 ];

@@ -291,7 +291,7 @@ export module Forms {
 
   export interface Rule {
     field: string;
-    operator: 'eq' | 'ne' | 'in' | 'nin';
+    operator: 'eq' | 'ne' | 'in' | 'nin' | 'gt' | 'lt';
     value: unknown;
   }
 }

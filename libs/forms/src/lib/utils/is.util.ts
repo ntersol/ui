@@ -7,6 +7,8 @@ declare const process: any;
  * Typeguards for form field types
  */
 export const is = {
+  stringOrNumber: (value: any | null | undefined): value is string | number =>
+    typeof value === 'string' || typeof value === 'number',
   nill: <T>(value: T | null | undefined): value is T => value === null || value === undefined,
   notNill: <T>(value: T | null | undefined): value is T => value !== null && value !== undefined,
   node: typeof process !== 'undefined' && process.versions != null && process.versions.node != null,

@@ -96,6 +96,20 @@ export const dynamicPropertyEvaluation$ = (
               return true;
             }
             return !value.includes(formControlValue);
+          case 'gt': // Greater than
+            if (is.stringOrNumber(value) && is.stringOrNumber(formControlValue)) {
+              const srcValue = typeof value === 'string' ? parseInt(value) : value;
+              const compareValue = typeof formControlValue === 'string' ? parseInt(formControlValue) : formControlValue;
+              return compareValue > srcValue;
+            }
+            return false;
+          case 'lt': // Greater than
+            if (is.stringOrNumber(value) && is.stringOrNumber(formControlValue)) {
+              const srcValue = typeof value === 'string' ? parseInt(value) : value;
+              const compareValue = typeof formControlValue === 'string' ? parseInt(formControlValue) : formControlValue;
+              return compareValue < srcValue;
+            }
+            return false;
           default:
             console.warn('That operator is not yet supported');
             return true;

@@ -23,5 +23,7 @@ export class RadioComponent extends BaseFormFieldComponent<any[]> implements OnI
     super();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log();
+  }
 }

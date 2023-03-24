@@ -169,6 +169,7 @@
       [label]="formField.label"
       [hint]="formField.hint"
       [automationId]="formField.automationId"
+      [control]="formGroup.get(formField.field)"
       [id]="formField.id"
       [validators]="formField.validators"
       [disabled]="disabled$ | async"
