@@ -19,7 +19,7 @@ export class DataFieldsComponent implements OnInit {
   ></nts-form-generator>
 
   // Typescript using RXJS, colors and sizes can come from an API
-  public datafields$ = combineLatest([colors$, sizes$]).pipe(
+  public datafields$: Observable<NtsForms.Datafields> = combineLatest([colors$, sizes$]).pipe(
     map(([colors, sizes]) => {
       // The key of the object is used by the form model to extra data
       return {
@@ -30,7 +30,7 @@ export class DataFieldsComponent implements OnInit {
   );
 
   // Static example of model
-  const datafields: Datafields = {
+  const datafields: NtsForms.Datafields = {
     colors: [
       { label: "Red", value: "#FF0000" },
       { label: "Green", value: "#00FF00" },
@@ -45,7 +45,7 @@ export class DataFieldsComponent implements OnInit {
 
   // In the form model
   // The "datafield" property corresponds to the root level key in the datafields object
-  public model: Forms.FormGenerator = [
+  public model: NtsForms.FormGenerator = [
     {
       type: 'formField',
       formFieldType: 'dropdown',
