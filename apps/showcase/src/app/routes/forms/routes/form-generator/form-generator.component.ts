@@ -1,16 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HighlightService } from '../../../../shared/services/highlight.service';
-import { dynamicCode, formFields, htmlCode, layoutCode, visibilityCode, visibilityCode2 } from './form.code-examples';
-import {
-  dynamnicModel,
-  formFieldsModel,
-  formModel,
-  htmlModel,
-  layoutModel,
-  userModel,
-  visibilityModel,
-} from './form.model';
+import { dynamicCode, formFields, htmlCode, layoutCode } from './form.code-examples';
+import { dynamnicModel, formFieldsModel, formModel, htmlModel, layoutModel, userModel } from './form.model';
 
 @Component({
   selector: 'nts-form-generator-route',
@@ -130,19 +122,9 @@ export class FormGeneratorRouteComponent implements OnInit {
   });
   public dynamicCode = this.highlight.htmlEncode(dynamicCode);
 
-  public visibilityModel = visibilityModel;
-  public visibilityForm = this.fb.group({
-    toggle: true,
-    toggle2: null,
-  });
-  public visibilityCode = visibilityCode;
-  public visiblityCode2 = visibilityCode2;
-
   constructor(private highlight: HighlightService, private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-    this.visibilityForm.valueChanges.subscribe((x) => console.warn(x));
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.highlight.highlightAll();
