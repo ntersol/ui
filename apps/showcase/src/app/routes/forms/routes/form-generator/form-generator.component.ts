@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HighlightService } from '../../../../shared/services/highlight.service';
-import { dynamicCode, formFields, htmlCode, layoutCode } from './form.code-examples';
+import { dynamicCode, formFields, htmlCode, layoutCode, visibilityCode, visibilityCode2 } from './form.code-examples';
 import {
   dynamnicModel,
   formFieldsModel,
@@ -135,6 +135,8 @@ export class FormGeneratorRouteComponent implements OnInit {
     toggle: true,
     toggle2: null,
   });
+  public visibilityCode = visibilityCode;
+  public visiblityCode2 = visibilityCode2;
 
   constructor(private highlight: HighlightService, private fb: FormBuilder) {}
 
