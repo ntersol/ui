@@ -37,7 +37,6 @@ export const dynamicPropertyEvaluation$ = (
   formGroup?: FormGroup | null,
   options?: Options | null,
 ): Observable<boolean> => {
-  console.log('dynamicPropertyEvaluation$', src, formGroup, options);
   // Set default observable
   let value$ = of(options?.defaultValue ?? true); // Default to true if no default specified
   // Nill check, return default

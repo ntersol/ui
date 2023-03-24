@@ -26,7 +26,6 @@ export class ContainerComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['formGroup'] && this.formGroup && is.notNill(this.container?.visible)) {
       this.visible$ = dynamicPropertyEvaluation$(this.container?.visible, this.formGroup);
-      this.visible$.subscribe(console.log);
     }
   }
 }
