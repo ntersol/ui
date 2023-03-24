@@ -93,11 +93,11 @@
           Form generator has a visibility property that supports advanced features to control the visibility of all form
           elements. This property allows you to specify a boolean value to show or hide a control, or a string path to a
           form control to evaluate its value and determine its visibility. String paths use Angular dot notation for
-          accessing form controls, IE "loanApplication.0.borrower.name".You can also use the "!" operator to indicate
-          negative values, such as "!"true, which evaluates to false. In addition, this visibility property supports a
-          rules engine that enables you to create complex visibility conditions using logical operators like "and" and
-          "or". With this feature, you can easily create dynamic forms that show or hide controls based on user input or
-          other conditions.
+          accessing form controls (IE "loanApplication.0.borrower.name") and look for a truthy or falsey value. You can
+          also use the "!" operator to indicate negative values, such as "!"true, which evaluates to false. In addition,
+          this visibility property supports a rules engine that enables you to create complex visibility conditions
+          using logical operators like "eq" and "gt". With this feature, you can easily create dynamic forms that show
+          or hide controls based on user input or other conditions.
         </p>
         <p>For the rules engine, available operators are: 'eq' | 'ne' | 'in' | 'nin' | 'gt' | 'lt'</p>
         <hr />
