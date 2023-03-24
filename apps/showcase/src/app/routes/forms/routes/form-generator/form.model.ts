@@ -262,10 +262,22 @@ export const visibilityModel: Forms.FormGenerator = [
           {
             type: 'container',
             visible: 'toggle',
+            cssClasses: 'border',
             content: [
               {
                 type: 'html',
                 html: 'Container content type',
+              },
+            ],
+          },
+          {
+            type: 'container',
+            visible: '!toggle',
+            cssClasses: 'border',
+            content: [
+              {
+                type: 'html',
+                html: 'Container content type reversed',
               },
             ],
           },
@@ -277,6 +289,7 @@ export const visibilityModel: Forms.FormGenerator = [
           {
             type: 'row',
             visible: 'toggle',
+            cssClasses: 'border',
             columns: [
               {
                 type: 'column',
@@ -299,6 +312,8 @@ export const visibilityModel: Forms.FormGenerator = [
             columns: [
               {
                 type: 'column',
+                visible: 'toggle',
+                cssClasses: 'border',
                 width: 6,
                 content: [
                   {
@@ -309,12 +324,12 @@ export const visibilityModel: Forms.FormGenerator = [
               },
               {
                 type: 'column',
-                visible: 'toggle',
                 width: 6,
+                cssClasses: 'border',
                 content: [
                   {
                     type: 'html',
-                    html: 'Column content type',
+                    html: 'Column content type not hidable',
                   },
                 ],
               },

@@ -132,13 +132,13 @@ export class FormGeneratorRouteComponent implements OnInit {
 
   public visibilityModel = visibilityModel;
   public visibilityForm = this.fb.group({
-    toggle: [true],
+    toggle: true,
   });
 
   constructor(private highlight: HighlightService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.formGroup.valueChanges.subscribe((x) => console.warn(x));
+    this.visibilityForm.valueChanges.subscribe((x) => console.warn(x));
   }
 
   ngAfterViewInit() {

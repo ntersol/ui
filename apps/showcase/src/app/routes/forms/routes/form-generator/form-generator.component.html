@@ -90,7 +90,13 @@
       <p-accordionTab header="Dynamic Visibility">
         <h2>Visibility</h2>
         <p>
-          All content types have a visibility property which can be set dynamically based on actions taken in the form.
+          Form generator has a visibility property that supports advanced features to control the visibility of form
+          controls. This property allows you to specify a boolean value to show or hide a control, or a string path to a
+          form control to evaluate its value and determine its visibility. You can also use the "!" operator to indicate
+          negative values, such as "!"true, which evaluates to false. In addition, this visibility property supports a
+          rules engine that enables you to create complex visibility conditions using logical operators like "and" and
+          "or". With this feature, you can easily create dynamic forms that show or hide controls based on user input or
+          other conditions.
         </p>
         <hr />
         <h2>Example</h2>
