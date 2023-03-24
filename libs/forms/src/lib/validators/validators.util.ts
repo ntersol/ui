@@ -1,13 +1,13 @@
 import { emailValidator, requiredValidator } from './src/misc.validators';
 import { FormControl } from '@angular/forms';
-import { Forms } from '../forms.model';
+import { NtsForms } from '../forms.model';
 
 /**
  * Dynamically attach validators to a form control. Will check for existing control first
  * @param formControl
  * @param validators
  */
-export const validatorsAdd = (formControl?: FormControl, validators?: Forms.Validators) => {
+export const validatorsAdd = (formControl?: FormControl, validators?: NtsForms.Validators) => {
   if (!formControl || !validators) {
     return;
   }

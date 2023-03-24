@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/prefer-namespace-keyword, @typescript-eslint/no-namespace
-export module Forms {
+export module NtsForms {
   /** Main form generator model, generic type currently not supported due to infinite recusions issue. Perhaps in a later version of TS */
   export type FormGenerator = FormContentTypes;
 

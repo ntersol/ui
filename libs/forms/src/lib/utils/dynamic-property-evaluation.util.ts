@@ -1,6 +1,6 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, Observable, of, startWith, tap } from 'rxjs';
-import { Forms } from '../forms.model';
+import { NtsForms } from '../forms.model';
 import { is } from './is.util';
 
 /**
@@ -33,7 +33,7 @@ interface Options {
  * @returns
  */
 export const dynamicPropertyEvaluation$ = (
-  src?: null | boolean | string | Forms.Rule,
+  src?: null | boolean | string | NtsForms.Rule,
   formGroup?: FormGroup | null,
   options?: Options | null,
 ): Observable<boolean> => {

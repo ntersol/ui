@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { Forms } from '../../../forms.model';
+import { NtsForms } from '../../../forms.model';
 import { BaseFormFieldComponent } from '../form-field.base';
 
 @Component({
@@ -10,7 +10,7 @@ import { BaseFormFieldComponent } from '../form-field.base';
 })
 export class DropdownComponent extends BaseFormFieldComponent<string> implements OnInit, OnChanges {
   /** Options to display for the dropdown */
-  @Input() options?: Forms.FieldOptions[] | null = null;
+  @Input() options?: NtsForms.FieldOptions[] | null = null;
   /** A unique ID used for  trackFn */
   @Input() dataKey?: string | null = null;
   /** The property for the label */
@@ -38,7 +38,7 @@ export class DropdownComponent extends BaseFormFieldComponent<string> implements
   @Input() panelStyleClass = '';
 
   // Add in empty option if selected
-  public optionsUpdated?: Forms.FieldOptions[] | null = null;
+  public optionsUpdated?: NtsForms.FieldOptions[] | null = null;
 
   constructor() {
     super();

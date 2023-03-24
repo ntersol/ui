@@ -1,4 +1,4 @@
-import { Forms } from 'libs/forms/src/lib/forms.model';
+import { NtsForms } from 'libs/forms/src/lib/forms.model';
 
 interface User {
   nameFirst?: string;
@@ -24,7 +24,7 @@ export const userModel: User = {
   emails: [],
 };
 
-export const formModel: Forms.FormGenerator = [
+export const formModel: NtsForms.FormGenerator = [
   {
     type: 'formField',
     formFieldType: 'text',
@@ -56,7 +56,7 @@ export const formModel: Forms.FormGenerator = [
   },
 ];
 
-export const layoutModel: Forms.FormGenerator = [
+export const layoutModel: NtsForms.FormGenerator = [
   {
     type: 'container',
     cssClasses: 'layout-border',
@@ -101,7 +101,7 @@ export const layoutModel: Forms.FormGenerator = [
   },
 ];
 
-export const formFieldsModel: Forms.FormGenerator = [
+export const formFieldsModel: NtsForms.FormGenerator = [
   {
     type: 'formField',
     formFieldType: 'text',
@@ -193,7 +193,7 @@ export const formFieldsModel: Forms.FormGenerator = [
   },
 ];
 
-export const htmlModel: Forms.FormGenerator = [
+export const htmlModel: NtsForms.FormGenerator = [
   {
     type: 'html',
     html: `
@@ -209,7 +209,7 @@ export const htmlModel: Forms.FormGenerator = [
   },
 ];
 
-export const dynamnicModel: Forms.FormGenerator = [
+export const dynamnicModel: NtsForms.FormGenerator = [
   {
     type: 'html',
     html: `

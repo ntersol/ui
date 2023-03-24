@@ -1,5 +1,5 @@
 import { SelectItem } from 'primeng/api';
-import { Forms } from '../forms.model';
+import { NtsForms } from '../forms.model';
 
 declare const process: any;
 
@@ -13,7 +13,7 @@ export const is = {
   notNill: <T>(value: T | null | undefined): value is T => value !== null && value !== undefined,
   node: typeof process !== 'undefined' && process.versions != null && process.versions.node != null,
   browser: typeof process === 'undefined',
-  rule: (val?: unknown | null): val is Forms.Rule => {
+  rule: (val?: unknown | null): val is NtsForms.Rule => {
     if (
       val &&
       typeof val === 'object' &&
@@ -44,8 +44,8 @@ export const is = {
     return false;
   },
   contentType: {
-    html: (obj: any): obj is Forms.Html => obj && obj.type === 'html' && typeof obj.html === 'string',
-    formField: (obj: any): obj is Forms.FormField =>
+    html: (obj: any): obj is NtsForms.Html => obj && obj.type === 'html' && typeof obj.html === 'string',
+    formField: (obj: any): obj is NtsForms.FormField =>
       obj.type === 'formField' && obj.formFieldType !== undefined && obj.field !== undefined,
   },
 };

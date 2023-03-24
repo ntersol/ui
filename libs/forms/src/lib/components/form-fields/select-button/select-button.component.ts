@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { Forms } from '../../../forms.model';
+import { NtsForms } from '../../../forms.model';
 import { BaseFormFieldComponent } from '../form-field.base';
 
 @Component({
@@ -11,7 +11,7 @@ import { BaseFormFieldComponent } from '../form-field.base';
 })
 export class SelectButtonComponent extends BaseFormFieldComponent<string> implements OnInit {
   /** Specifies the options to be displayed in the button */
-  @Input() options?: Forms.FieldOptions[] | null = null;
+  @Input() options?: NtsForms.FieldOptions[] | null = null;
   /** Specifies whether multiple options can be selected */
   @Input() multiple?: boolean | null = null;
   /** pecifies the unique identifier for the options, used for the track function */

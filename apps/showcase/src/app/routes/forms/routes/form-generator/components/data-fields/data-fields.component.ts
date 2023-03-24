@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Forms } from 'libs/forms/src/lib/forms.model';
+import { NtsForms } from 'libs/forms/src/lib/forms.model';
 import { combineLatest, map, Observable, of } from 'rxjs';
 import { HighlightService } from '../../../../../../shared/services/highlight.service';
 
@@ -55,7 +55,7 @@ export class DataFieldsComponent implements OnInit {
   ];
   `);
 
-  public model: Forms.FormGenerator = [
+  public model: NtsForms.FormGenerator = [
     { type: 'formField', formFieldType: 'dropdown', datafield: 'colors', field: 'dropdown' },
   ];
 
@@ -64,7 +64,7 @@ export class DataFieldsComponent implements OnInit {
   });
 
   public; // Typescript using RXJS, colors and sizes can come from an API
-  public datafields$: Observable<Forms.Datafields> = combineLatest([
+  public datafields$: Observable<NtsForms.Datafields> = combineLatest([
     of([
       { label: 'Red', value: '#FF0000' },
       { label: 'Green', value: '#00FF00' },

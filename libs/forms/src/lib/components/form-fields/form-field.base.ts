@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormControl, AbstractControl, FormGroup, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Forms } from '../../forms.model';
+import { NtsForms } from '../../forms.model';
 
 @Component({
   selector: 'nts-base-form-field',
@@ -42,7 +42,7 @@ export class BaseFormFieldComponent<t> implements OnDestroy {
   @Input() style?: string | null = '';
 
   /** Validators to attach through the template. Not preferred. */
-  @Input() validators?: Forms.Validators | null = null;
+  @Input() validators?: NtsForms.Validators | null = null;
   /**
    * Enable/disable this control, uses the form control method instead of template property.
    * Setting the disabled property should be done in the formgroup itself but this

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Forms } from 'libs/forms/src/lib/forms.model';
+import { NtsForms } from 'libs/forms/src/lib/forms.model';
 
 @Component({
   selector: 'nts-visibility',
@@ -8,7 +8,7 @@ import { Forms } from 'libs/forms/src/lib/forms.model';
   styleUrls: ['./visibility.component.scss'],
 })
 export class VisibilityComponent implements OnInit {
-  public visibilityModel: Forms.FormGenerator = [
+  public visibilityModel: NtsForms.FormGenerator = [
     {
       type: 'row',
       columns: [

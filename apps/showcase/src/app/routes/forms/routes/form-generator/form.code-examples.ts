@@ -1,5 +1,5 @@
 export const layoutCode = `
-export const layoutModel: Forms.FormGenerator = [
+export const layoutModel: NtsForms.FormGenerator = [
   {
     type: 'container',
     cssClasses: 'layout-border',
@@ -46,7 +46,7 @@ export const layoutModel: Forms.FormGenerator = [
 `;
 
 export const formFields = `
-export const formFieldsModel: Forms.FormGenerator = [
+export const formFieldsModel: NtsForms.FormGenerator = [
     {
       type: 'formField',
       formFieldType: 'text',

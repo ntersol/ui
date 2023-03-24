@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Forms } from '../../../forms.model';
+import { NtsForms } from '../../../forms.model';
 import { is } from '../../../utils';
 import { dynamicPropertyEvaluation$ } from '../../../utils/dynamic-property-evaluation.util';
 
@@ -12,11 +12,11 @@ import { dynamicPropertyEvaluation$ } from '../../../utils/dynamic-property-eval
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RowComponent implements OnInit, OnChanges {
-  @Input() row?: Forms.Row | null = null;
+  @Input() row?: NtsForms.Row | null = null;
   @Input() formGroup = new FormGroup({});
-  @Input() options?: Forms.FormOptions | null = null;
+  @Input() options?: NtsForms.FormOptions | null = null;
   /** Datafields for dynamic data */
-  @Input() datafields?: Forms.Datafields | null = {};
+  @Input() datafields?: NtsForms.Datafields | null = {};
 
   public visible$: Observable<boolean> = new BehaviorSubject(true);
   public visibleColumns: Observable<boolean>[] = [];

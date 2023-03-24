@@ -39,7 +39,7 @@ export class FormGeneratorRouteComponent implements OnInit {
 
   public handlersTs: string = `
   // Form model
-  formModel: Forms.FormGenerator = [
+  formModel: NtsForms.FormGenerator = [
     {
       type: 'formField',
       formFieldType: 'text',

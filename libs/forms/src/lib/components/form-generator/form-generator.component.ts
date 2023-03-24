@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Forms } from '../../forms.model';
+import { NtsForms } from '../../forms.model';
 import { is } from '../../utils';
 
 /**
@@ -26,13 +26,13 @@ import { is } from '../../utils';
 })
 export class FormGeneratorComponent implements OnInit {
   /** Model to generate the form */
-  @Input() formModel?: Forms.FormGenerator | null = [];
+  @Input() formModel?: NtsForms.FormGenerator | null = [];
   /** Main form group */
   @Input() formGroup: FormGroup | null = null;
   /** Form Options */
-  @Input() options?: Forms.FormOptions | null = null;
+  @Input() options?: NtsForms.FormOptions | null = null;
   /** Datafields for dynamic data */
-  @Input() datafields?: Forms.Datafields | null = {};
+  @Input() datafields?: NtsForms.Datafields | null = {};
   /** Disable submit button. Otherwise will rely on the form validators to allow submission */
   @Input() disableSubmit = false;
   /** When the user submits the form */
