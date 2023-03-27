@@ -41,8 +41,12 @@ export module NtsForms {
   export type DynamicProperty = null | boolean | string | Rule;
 
   export interface FormOptions {
+    /** Do not show footer including submit button */
+    hideFooter?: boolean | null;
     /** Change the style of the submit button */
     submitButton?: {
+      /** Do not show the submit button */
+      hide?: boolean | null;
       /** Text label */
       label?: string | null;
       /** Icon to use */

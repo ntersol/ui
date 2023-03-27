@@ -9,6 +9,9 @@ $verticalSpacing: 1.5rem;
   }
   .form-generator-footer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    & > div {
+      display: flex;
+    }
   }
 }

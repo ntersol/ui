@@ -24,18 +24,26 @@
     </ng-container>
   </div>
   <ng-template #noModel> <span class="red">No form model or formgroup found</span> </ng-template>
-  <div class="form-generator-footer text-right">
-    <ng-content select="[beforeSubmitButton]"></ng-content>
-    <button
-      class="p-button"
-      (click)="submit()"
-      [ngClass]="options?.submitButton?.classes ?? ''"
-      [disabled]="disableSubmit"
-    >
-      <span class="mr-2" [innerHtml]="options?.submitButton?.icon" *ngIf="options?.submitButton?.icon"></span>
-      {{ options?.submitButton?.label ?? 'Submit' }}
-    </button>
+  <div class="form-generator-footer" *ngIf="!options?.hideFooter">
+    <!-- Left footer content -->
+    <div>
+      <ng-content select="[footerContentLeft]"></ng-content>
+    </div>
 
-    <ng-content select="[afterSubmitButton]"></ng-content>
+    <div>
+      <ng-content select="[beforeSubmitButton]"> </ng-content>
+      <button
+        *ngIf="!options?.submitButton?.hide"
+        class="p-button"
+        (click)="submit()"
+        [ngClass]="options?.submitButton?.classes ?? ''"
+        [disabled]="disableSubmit"
+      >
+        <span class="mr-2" [innerHtml]="options?.submitButton?.icon" *ngIf="options?.submitButton?.icon"></span>
+        {{ options?.submitButton?.label ?? 'Submit' }}
+      </button>
+
+      <ng-content select="[afterSubmitButton]"></ng-content>
+    </div>
   </div>
 </div>
