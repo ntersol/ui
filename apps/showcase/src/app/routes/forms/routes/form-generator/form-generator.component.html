@@ -18,13 +18,6 @@
   <p-tabPanel header="Examples">
     <h2>Key Features</h2>
     <p-accordion>
-      <p-accordionTab header="Custom Footer">
-        <nts-form-generator [formModel]="formModel" [formGroup]="formGroup" (completed)="completed($event)">
-          <div footerContentLeft>Actions Left</div>
-          <div beforeSubmitButton>Before Submit Button</div>
-          <div afterSubmitButton>After Submit Button</div>
-        </nts-form-generator>
-      </p-accordionTab>
       <p-accordionTab header="Basic Example">
         <h2>Basic Example</h2>
         <nts-form-generator
@@ -100,6 +93,9 @@
 
       <p-accordionTab header="Datafields">
         <nts-data-fields></nts-data-fields>
+      </p-accordionTab>
+      <p-accordionTab header="Custom Footer">
+        <nts-custom-footer></nts-custom-footer>
       </p-accordionTab>
     </p-accordion>
   </p-tabPanel>

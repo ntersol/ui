@@ -30,20 +30,25 @@
       <ng-content select="[footerContentLeft]"></ng-content>
     </div>
 
-    <div>
-      <ng-content select="[beforeSubmitButton]"> </ng-content>
-      <button
-        *ngIf="!options?.submitButton?.hide"
-        class="p-button"
-        (click)="submit()"
-        [ngClass]="options?.submitButton?.classes ?? ''"
-        [disabled]="disableSubmit"
-      >
-        <span class="mr-2" [innerHtml]="options?.submitButton?.icon" *ngIf="options?.submitButton?.icon"></span>
-        {{ options?.submitButton?.label ?? 'Submit' }}
-      </button>
+    <div class="text-right">
+      <div #contentRight>
+        <ng-content select="[footerContentRight]"></ng-content>
+      </div>
+      <div class="d-flex" *ngIf="!contentRight.innerHTML.trim()">
+        <ng-content select="[beforeSubmitButton]"></ng-content>
+        <button
+          *ngIf="!options?.submitButton?.hide"
+          class="p-button"
+          (click)="submit()"
+          [ngClass]="options?.submitButton?.classes ?? ''"
+          [disabled]="disableSubmit"
+        >
+          <span class="mr-2" [innerHtml]="options?.submitButton?.icon" *ngIf="options?.submitButton?.icon"></span>
+          {{ options?.submitButton?.label ?? 'Submit' }}
+        </button>
 
-      <ng-content select="[afterSubmitButton]"></ng-content>
+        <ng-content select="[afterSubmitButton]"></ng-content>
+      </div>
     </div>
   </div>
 </div>

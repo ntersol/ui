@@ -12,6 +12,7 @@ import { FormFieldsDemoComponent } from './components/form-fields/form-fields.co
 import { ValidatorsComponent } from './routes/validators/validators.component';
 import { DataFieldsComponent } from './routes/form-generator/components/data-fields/data-fields.component';
 import { VisibilityComponent } from './routes/form-generator/components/visibility/visibility.component';
+import { CustomFooterComponent } from './routes/form-generator/components/custom-footer/custom-footer.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { VisibilityComponent } from './routes/form-generator/components/visibili
     ValidatorsComponent,
     DataFieldsComponent,
     VisibilityComponent,
+    CustomFooterComponent,
   ],
   imports: [CommonModule, SiteModule, routing, TabViewModule, routing, NtsFormsModule],
 })
