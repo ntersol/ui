@@ -14,6 +14,7 @@ import { DataFieldsComponent } from './routes/form-generator/components/data-fie
 import { VisibilityComponent } from './routes/form-generator/components/visibility/visibility.component';
 import { CustomFooterComponent } from './routes/form-generator/components/custom-footer/custom-footer.component';
 import { DynamicContentComponent } from './routes/form-generator/components/dynamic-content/dynamic-content.component';
+import { BasicComponent } from './routes/form-generator/components/basic/basic.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { DynamicContentComponent } from './routes/form-generator/components/dyna
     VisibilityComponent,
     CustomFooterComponent,
     DynamicContentComponent,
+    BasicComponent,
   ],
   imports: [CommonModule, SiteModule, routing, TabViewModule, routing, NtsFormsModule],
 })
