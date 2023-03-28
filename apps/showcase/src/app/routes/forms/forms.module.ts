@@ -15,6 +15,8 @@ import { VisibilityComponent } from './routes/form-generator/components/visibili
 import { CustomFooterComponent } from './routes/form-generator/components/custom-footer/custom-footer.component';
 import { DynamicContentComponent } from './routes/form-generator/components/dynamic-content/dynamic-content.component';
 import { BasicComponent } from './routes/form-generator/components/basic/basic.component';
+import { LayoutDemoComponent } from './routes/form-generator/components/layout-demo/layout-demo.component';
+import { HtmlDemoComponent } from './routes/form-generator/components/html-demo/html-demo.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { BasicComponent } from './routes/form-generator/components/basic/basic.c
     CustomFooterComponent,
     DynamicContentComponent,
     BasicComponent,
+    LayoutDemoComponent,
+    HtmlDemoComponent,
   ],
   imports: [CommonModule, SiteModule, routing, TabViewModule, routing, NtsFormsModule],
 })
