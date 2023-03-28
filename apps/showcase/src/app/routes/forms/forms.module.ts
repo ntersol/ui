@@ -13,6 +13,7 @@ import { ValidatorsComponent } from './routes/validators/validators.component';
 import { DataFieldsComponent } from './routes/form-generator/components/data-fields/data-fields.component';
 import { VisibilityComponent } from './routes/form-generator/components/visibility/visibility.component';
 import { CustomFooterComponent } from './routes/form-generator/components/custom-footer/custom-footer.component';
+import { DynamicContentComponent } from './routes/form-generator/components/dynamic-content/dynamic-content.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CustomFooterComponent } from './routes/form-generator/components/custom
     DataFieldsComponent,
     VisibilityComponent,
     CustomFooterComponent,
+    DynamicContentComponent,
   ],
   imports: [CommonModule, SiteModule, routing, TabViewModule, routing, NtsFormsModule],
 })
