@@ -7,15 +7,13 @@
 >
   <ng-container *ngIf="container?.content; else noContent">
     <ng-container *ngFor="let model of container?.content">
-      <!--
-      <nts-form-field-container-content
+      <nts-form-field-container
         *ngIf="model.type === 'container'"
         [container]="model"
         [formGroup]="formGroup"
         [datafields]="datafields"
       >
-      </nts-form-field-container-content>
-      -->
+      </nts-form-field-container>
       <nts-form-field-row
         *ngIf="model.type === 'row'"
         [row]="model"

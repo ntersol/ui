@@ -128,8 +128,49 @@ export const layoutModel: NtsForms.FormGenerator = [
   {
     type: 'container',
     content: [
-      { type: 'html', html: '<hr/>' },
-      { type: 'container', content: [{ type: 'html', html: '<hr/>' }] },
+      { type: 'html', html: '<h3>Nested Containers</h3>' },
+      {
+        type: 'container',
+        cssClasses: 'border',
+        content: [
+          { type: 'html', html: '<h3>Content Level 1</h3>', cssClasses: 'border-sub' },
+          { type: 'container', content: [{ type: 'html', html: 'Content  Level 2' }] },
+          {
+            type: 'row',
+            columns: [
+              {
+                type: 'column',
+                width: 6,
+                content: [
+                  {
+                    type: 'container',
+                    cssClasses: 'border-sub2',
+                    content: [
+                      { type: 'html', html: 'Content  Level 3' },
+                      {
+                        type: 'container',
+                        cssClasses: 'border',
+                        content: [{ type: 'html', html: 'Content  Level 4' }],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: 'column',
+                width: 6,
+                content: [
+                  {
+                    type: 'container',
+                    cssClasses: 'border-sub2',
+                    content: [{ type: 'html', html: 'Content  Level 3' }],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 ];
