@@ -16,7 +16,7 @@ import { dynamicPropertyEvaluation$ } from '../../../utils/dynamic-property-eval
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContainerContentComponent implements OnInit, OnChanges {
-  @Input() container?: NtsForms.Container | null = null;
+  @Input() container?: NtsForms.ContainerContent | null = null;
   @Input() formGroup = new FormGroup({});
   @Input() options?: NtsForms.FormOptions | null = null;
   /** Datafields for dynamic data */
