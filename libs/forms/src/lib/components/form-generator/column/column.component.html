@@ -5,6 +5,7 @@
     [formGroup]="formGroup"
     [datafields]="datafields"
   ></nts-form-field-container>
+  <!--
   <nts-form-field-row
     *ngIf="content.type === 'row'"
     [row]="content"
@@ -12,6 +13,7 @@
     [datafields]="datafields"
     [options]="options"
   ></nts-form-field-row>
+  -->
   <nts-form-field-content
     *ngIf="content.type !== 'row' && content.type !== 'container'"
     [datafields]="datafields"

@@ -44,6 +44,10 @@
           responsive layouts and contain columns which hold content. Layout content types are not required, IE you can
           have form content directly in the form generator without either a container or rows.
         </p>
+        <p>
+          Currently only a single level of rows > columns are supported. This is due to a limitation in the compiler
+          preventing circular dependencies.
+        </p>
         <hr />
         <h2>Example</h2>
         <nts-form-generator
