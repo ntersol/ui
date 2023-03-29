@@ -1,1 +1,12 @@
-<p>html-demo works!</p>
+<nts-html-demo></nts-html-demo>
+<h2>HTML</h2>
+<p>
+  Use normal HTML embedded within the form. Uses Angular's [innerHtml] to render which means css classes are kept but
+  inline styles are stripped out.
+</p>
+<hr />
+<h2>Example</h2>
+<nts-form-generator [formModel]="htmlModel" [formGroup]="formGroup"></nts-form-generator>
+<hr />
+<h2>Code</h2>
+<pre><code class="language-ts" [innerHtml]="htmlCode"></code></pre>

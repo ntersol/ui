@@ -85,52 +85,11 @@ export class FormGeneratorRouteComponent implements OnInit {
   });
   `;
 
-  public layoutCode = layoutCode;
-
-  public formGroup = this.fb.group(userModel);
-
-  public formModel = formModel;
-  public formFieldsModel = formFieldsModel;
-
-  public layoutForm = this.fb.group({
-    sink: [null],
-    text: [null],
-    textField: [null],
-    number: [null],
-    number2: [null],
-    number3: [null],
-    currency: [null],
-    date: [''],
-    dropdown: [''],
-    email: [''],
-    phoneNumber: [''],
-    radio: [''],
-    selectButton: [''],
-    textArea: [''],
-    zipCode: [''],
-  });
-  public layoutModel = layoutModel;
-  public formFields = formFields;
-  public htmlModel = htmlModel;
-  public htmlCode = this.highlight.htmlEncode(htmlCode);
-
-  public dynamnicModel = dynamnicModel;
-  public dynamicForm = this.fb.group({
-    nameFirst: null,
-    nameLast: null,
-    age: null,
-  });
-  public dynamicCode = this.highlight.htmlEncode(dynamicCode);
-
   constructor(private highlight: HighlightService, private fb: FormBuilder) {}
 
   ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.highlight.highlightAll();
-  }
-
-  public completed(model: any) {
-    console.log('Form submitted!', model);
   }
 }

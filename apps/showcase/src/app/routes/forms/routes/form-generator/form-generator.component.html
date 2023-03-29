@@ -32,69 +32,9 @@
         <nts-basic></nts-basic>
       </p-accordionTab>
       <p-accordionTab header="Layout">
-        <h2>Layout</h2>
-        <p>
-          Layout content types are used to build responsive form with containers, rows, and columns and involve dividing
-          the form into separate sections (containers) and organizing the form elements into rows and columns within
-          those sections.
-        </p>
-        <p>
-          There are 3 varieties of layout content types: containers, rows and columns. Containers are wrappers around
-          other content types and are used to to group other elements or provide styling. Rows form the basis of
-          responsive layouts and contain columns which hold content. Layout content types are not required, IE you can
-          have form content directly in the form generator without either a container or rows.
-        </p>
-        <p>
-          Currently only a single level of rows > columns are supported. This is due to a limitation in the compiler
-          preventing circular dependencies.
-        </p>
-        <hr />
-        <h2>Example</h2>
-        <nts-form-generator
-          [formModel]="layoutModel"
-          [formGroup]="formGroup"
-          (completed)="completed($event)"
-        ></nts-form-generator>
-        <hr />
-        <h2>Code</h2>
-        <pre><code class="language-ts" [innerHtml]="layoutCode"></code></pre>
+        <nts-layout-demo></nts-layout-demo>
       </p-accordionTab>
-      <p-accordionTab header="Form Fields">
-        <h2>Form Fields</h2>
-        <p>
-          This form generation tool offers a wide variety of form fields including text inputs, radio buttons,
-          checkboxes, dropdown menus, and more to help you create custom forms to suit your specific needs.
-        </p>
-        <p>Labels, prefixes, suffixes and hints support HTML.</p>
-        <p>See the <a routerLink="/forms/form-fields">form fields page</a> for more detailed information</p>
-        <hr />
-        <h2>Example</h2>
-        <nts-form-generator
-          [formModel]="formFieldsModel"
-          [formGroup]="layoutForm"
-          (completed)="completed($event)"
-        ></nts-form-generator>
-        <hr />
-        <h2>Code</h2>
-        <pre><code class="language-ts" [innerHtml]="formFields"></code></pre>
-      </p-accordionTab>
-      <p-accordionTab header="HTML">
-        <h2>HTML</h2>
-        <p>
-          Use normal HTML embedded within the form. Uses Angular's [innerHtml] to render which means css classes are
-          kept but inline styles are stripped out.
-        </p>
-        <hr />
-        <h2>Example</h2>
-        <nts-form-generator
-          [formModel]="htmlModel"
-          [formGroup]="formGroup"
-          (completed)="completed($event)"
-        ></nts-form-generator>
-        <hr />
-        <h2>Code</h2>
-        <pre><code class="language-ts" [innerHtml]="htmlCode"></code></pre>
-      </p-accordionTab>
+      <p-accordionTab header="HTML"> </p-accordionTab>
       <p-accordionTab header="Dynamic Visibility">
         <nts-visibility></nts-visibility>
       </p-accordionTab>
