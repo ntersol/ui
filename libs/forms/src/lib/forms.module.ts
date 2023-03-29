@@ -63,7 +63,9 @@ const COMPONENTS = [
   // Only exporting the root component not that child ones
   FormGeneratorComponent,
 ];
-
+/**
+ * A form generator library that generates HTML forms based on a configuration object or schema.
+ */
 @NgModule({
   declarations: [
     COMPONENTS,

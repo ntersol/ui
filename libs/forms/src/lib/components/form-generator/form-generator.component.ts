@@ -12,11 +12,22 @@ import { NtsForms } from '../../forms.model';
 import { is } from '../../utils';
 
 /**
- * TODO:
+ * This is a component that generates a form based on a provided model, with options for dynamic data fields and validation, and emits the completed form data when the user submits it.
+ *
+ * @example
+ * <nts-form-generator
+  [formModel]="myFormModel"
+  [formGroup]="myFormGroup"
+  [options]="myFormOptions"
+  [datafields]="myDatafields"
+  [disableSubmit]="false"
+  (completed)="onFormCompleted($event)"
+></nts-form-generator>
+ *
+ * @TODO:
  * - Possible issue with required fields and dynamic visibility. IE required field is shown then hidden
  * - SSR support
  */
-
 @Component({
   selector: 'nts-form-generator',
   templateUrl: './form-generator.component.html',
