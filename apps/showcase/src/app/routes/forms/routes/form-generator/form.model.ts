@@ -84,11 +84,36 @@ export const layoutModel: NtsForms.FormGenerator = [
                     label: 'First Name',
                     field: 'nameFirst',
                   },
+
                   {
                     type: 'formField',
                     formFieldType: 'text',
                     label: 'Last Name',
                     field: 'nameLast',
+                  },
+
+                  {
+                    type: 'container',
+                    cssClasses: 'border-sub',
+                    content: [
+                      {
+                        type: 'html',
+                        html: '<h2>Address Info</h2>',
+                      },
+                      {
+                        type: 'formField',
+                        formFieldType: 'text',
+                        label: 'City',
+                        field: 'city',
+                      },
+
+                      {
+                        type: 'formField',
+                        formFieldType: 'text',
+                        label: 'State',
+                        field: 'state',
+                      },
+                    ],
                   },
                 ],
               },
@@ -97,6 +122,14 @@ export const layoutModel: NtsForms.FormGenerator = [
           },
         ],
       },
+    ],
+  },
+  { type: 'html', html: '<hr/>' },
+  {
+    type: 'container',
+    content: [
+      { type: 'html', html: '<hr/>' },
+      { type: 'container', content: [{ type: 'html', html: '<hr/>' }] },
     ],
   },
 ];

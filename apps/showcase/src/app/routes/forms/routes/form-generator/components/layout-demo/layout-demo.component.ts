@@ -14,6 +14,8 @@ export class LayoutDemoComponent implements OnInit {
   public layoutForm = this.fb.group({
     nameFirst: [null],
     nameLast: [null],
+    city: [null],
+    state: [null],
   });
   public layoutModel = layoutModel;
   constructor(private fb: FormBuilder) {}
