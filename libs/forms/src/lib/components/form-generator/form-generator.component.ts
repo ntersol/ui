@@ -24,7 +24,8 @@ import { is } from '../../utils';
   (completed)="onFormCompleted($event)"
 ></nts-form-generator>
  *
- * @TODO:
+ * @TODO
+ * - Add support for feature components
  * - Possible issue with required fields and dynamic visibility. IE required field is shown then hidden
  * - SSR support
  */
