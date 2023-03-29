@@ -1,11 +1,12 @@
 <ng-container *ngFor="let content of column?.content">
+  <!--
   <nts-form-field-container
     *ngIf="content.type === 'container'"
     [container]="content"
     [formGroup]="formGroup"
     [datafields]="datafields"
   ></nts-form-field-container>
-  <!--
+
   <nts-form-field-row
     *ngIf="content.type === 'row'"
     [row]="content"
