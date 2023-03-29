@@ -72,10 +72,16 @@ export module NtsForms {
   export interface Column extends FormContentTypeSrc {
     type: 'column';
     width: number;
-    content: FormContentTypes;
+    content: Content[];
   }
 
-  export type Content = Html | FormField;
+  /** ContainerContent is a dupe of Container. This is a workaround for circular dependencies */
+  export interface ContainerContent extends FormContentTypeSrc {
+    type: 'container';
+    content: Content[];
+  }
+
+  export type Content = Html | FormField | ContainerContent;
 
   export interface Html extends FormContentTypeSrc {
     type: 'html';

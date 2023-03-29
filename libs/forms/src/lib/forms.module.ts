@@ -42,6 +42,7 @@ import { FeatureComponent } from './components/form-generator/feature/feature.co
 import { FormFieldComponent } from './components/form-generator/form-field/form-field.component';
 import { HtmlComponent } from './components/form-generator/html/html.component';
 import { RowComponent } from './components/form-generator/row/row.component';
+import { ContainerContentComponent } from './components/form-generator/container-content/container-content.component';
 
 const COMPONENTS = [
   NtsFormFieldComponent,
@@ -70,12 +71,14 @@ const COMPONENTS = [
   declarations: [
     COMPONENTS,
     ContainerComponent,
+    ContainerContentComponent,
     RowComponent,
     ColumnComponent,
     HtmlComponent,
     FormFieldComponent,
     FeatureComponent,
     ContentComponent,
+
     InputComponent,
     SlugPipe,
   ],

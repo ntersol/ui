@@ -1,12 +1,5 @@
 <ng-container *ngFor="let content of column?.content">
   <!--
-  <nts-form-field-container
-    *ngIf="content.type === 'container'"
-    [container]="content"
-    [formGroup]="formGroup"
-    [datafields]="datafields"
-  ></nts-form-field-container>
-
   <nts-form-field-row
     *ngIf="content.type === 'row'"
     [row]="content"
@@ -15,8 +8,16 @@
     [options]="options"
   ></nts-form-field-row>
   -->
+  <!-- Contain container is a dupe of container. Needs to be separate to prevent circular dependencies -->
+  <nts-form-field-container-content
+    *ngIf="content.type === 'container'"
+    [container]="content"
+    [formGroup]="formGroup"
+    [datafields]="datafields"
+  >
+  </nts-form-field-container-content>
   <nts-form-field-content
-    *ngIf="content.type !== 'row' && content.type !== 'container'"
+    *ngIf="content.type !== 'container'"
     [datafields]="datafields"
     [formGroup]="formGroup"
     [content]="content"

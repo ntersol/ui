@@ -10,111 +10,93 @@ import { NtsForms } from 'libs/forms/src/lib/forms.model';
 export class VisibilityComponent implements OnInit {
   public visibilityModel: NtsForms.FormGenerator = [
     {
+      type: 'formField',
+      formFieldType: 'radio',
+      label: 'Toggle Content',
+      field: 'toggle',
+      options: [
+        { label: 'Show', value: true },
+        { label: 'Hide', value: false },
+      ],
+    },
+    {
+      type: 'container',
+      visible: 'toggle',
+      cssClasses: 'border',
+      content: [
+        {
+          type: 'html',
+          html: 'Container content type',
+        },
+      ],
+    },
+    {
+      type: 'container',
+      visible: '!toggle',
+      cssClasses: 'border',
+      content: [
+        {
+          type: 'html',
+          html: 'Container content type reversed',
+        },
+      ],
+    },
+    {
+      type: 'html',
+      html: '<hr/>',
+    },
+    {
       type: 'row',
+      visible: 'toggle',
+      cssClasses: 'border',
       columns: [
         {
           type: 'column',
-          width: 6,
+          width: 12,
           content: [
             {
-              type: 'formField',
-              formFieldType: 'radio',
-              label: 'Toggle Content',
-              field: 'toggle',
-              options: [
-                { label: 'Show', value: true },
-                { label: 'Hide', value: false },
-              ],
-            },
-          ],
-        },
-        {
-          type: 'column',
-          width: 6,
-          content: [
-            {
-              type: 'container',
-              visible: 'toggle',
-              cssClasses: 'border',
-              content: [
-                {
-                  type: 'html',
-                  html: 'Container content type',
-                },
-              ],
-            },
-            {
-              type: 'container',
-              visible: '!toggle',
-              cssClasses: 'border',
-              content: [
-                {
-                  type: 'html',
-                  html: 'Container content type reversed',
-                },
-              ],
-            },
-            {
               type: 'html',
-              html: '<hr/>',
-            },
-
-            {
-              type: 'row',
-              visible: 'toggle',
-              cssClasses: 'border',
-              columns: [
-                {
-                  type: 'column',
-                  width: 12,
-                  content: [
-                    {
-                      type: 'html',
-                      html: 'Row content type',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              type: 'html',
-              html: '<hr/>',
-            },
-            {
-              type: 'row',
-              columns: [
-                {
-                  type: 'column',
-                  visible: 'toggle',
-                  cssClasses: 'border',
-                  width: 6,
-                  content: [
-                    {
-                      type: 'html',
-                      html: 'Column content type',
-                    },
-                  ],
-                },
-                {
-                  type: 'column',
-                  width: 6,
-                  cssClasses: 'border',
-                  content: [
-                    {
-                      type: 'html',
-                      html: 'Column content type not hidable',
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              type: 'html',
-              html: '<hr/>',
+              html: 'Row content type',
             },
           ],
         },
       ],
+    },
+    {
+      type: 'html',
+      html: '<hr/>',
+    },
+    {
+      type: 'row',
+      columns: [
+        {
+          type: 'column',
+          visible: 'toggle',
+          cssClasses: 'border',
+          width: 6,
+          content: [
+            {
+              type: 'html',
+              html: 'Column content type',
+            },
+          ],
+        },
+        {
+          type: 'column',
+          width: 6,
+          cssClasses: 'border',
+          content: [
+            {
+              type: 'html',
+              html: 'Column content type not hidable',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'html',
+      html: '<hr/>',
     },
 
     {
