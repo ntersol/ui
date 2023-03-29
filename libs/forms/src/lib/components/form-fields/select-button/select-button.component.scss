@@ -1,0 +1,10 @@
+.input-selectbutton {
+  &.input-selectbutton-full .p-selectbutton.p-buttonset {
+    display: flex;
+    flex-flow: row;
+    .p-button {
+      width: 100%;
+      padding: 0.75rem 0.5rem;
+    }
+  }
+}

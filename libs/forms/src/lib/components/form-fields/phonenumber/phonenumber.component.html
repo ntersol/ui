@@ -1,0 +1,26 @@
+<div class="input-phonenumber">
+  <nts-form-field-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [automationId]="automationId"
+    [control]="formControl"
+    [validators]="validators"
+    [id]="id || formFieldID"
+  >
+    <p-inputMask
+      #field
+      [id]="id || formFieldID"
+      [name]="name || (label || placeholder | ntsSlug)"
+      [placeholder]="placeholder ? placeholder : '(___) ___-____'"
+      [ngClass]="styleClass ?? ''"
+      mask="(999) 999-9999"
+      [unmask]="unmask"
+      [formControl]="formControl"
+      (onFocus)="focused = true; cursorPositionSet(field, 1)"
+      (onBlur)="focused = false"
+    ></p-inputMask>
+  </nts-form-field-input>
+</div>

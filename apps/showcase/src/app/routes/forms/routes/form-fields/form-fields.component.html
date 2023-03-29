@@ -1,0 +1,42 @@
+<div class="author"><strong>Author:</strong> Jerrol Krause</div>
+
+<h1>Form Fields</h1>
+<p>
+  This is a library designed to make building and managing forms quicker and more consistent. Its key features include:
+</p>
+<ul>
+  <li>Streamlined design to speed up the process of creating and managing forms</li>
+  <li>Consistent support and styling for standard form elements such as labels, placeholders, and hints</li>
+  <li>Ability to create forms and fields from models</li>
+  <li>Improved error handling with on-blur validation for initial errors and real-time validation after</li>
+  <li>Support for advanced validators, allowing for more precise and customized validation of form inputs</li>
+  <li>
+    A wide range of form controls, including zip code, phone number, and currency inputs, all with self contained
+    business logic and validation.
+  </li>
+</ul>
+
+<hr />
+
+<p-tabView>
+  <!-- Documentation -->
+  <p-tabPanel header="Documentation">
+    <h2>Import</h2>
+    <pre><code class="language-ts" [innerHtml]="import"></code></pre>
+    <h2>HTML</h2>
+    <pre><code class="language-html" [innerHtml]="exampleHTML"></code></pre>
+    <h2>Typescript/FormGroup Creation</h2>
+    <pre><code class="language-ts" [innerHtml]="inputFieldTs"></code></pre>
+    <hr />
+  </p-tabPanel>
+  <!-- Example -->
+  <p-tabPanel header="Examples & APIs">
+    <!--
+      Still need...
+    export type NtsFormFieldType = | 'numberStepper' | 'password' | 'colorpicker' | 'ssn' | 'checkbox' |
+    'checkboxBoolean' | 'toggle' | 'autoComplete' | 'date' | 'month' | 'buttons' | 'buttonsStacked' | 'buttonGroup' |
+    'buttonToggle';
+    -->
+    <nts-form-fields-demo></nts-form-fields-demo>
+  </p-tabPanel>
+</p-tabView>

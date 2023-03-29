@@ -1,0 +1,621 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <p-accordion>
+    <p-accordionTab header="Universal Options">
+      <p>Example of the shared inputs and properties available to all form fields</p>
+      <p>
+        <nts-form-field-text
+          label="Kitchen Sink Example"
+          placeholder="Placeholder"
+          hint="This is a hint"
+          suffix="suffix"
+          prefix="prefix"
+          automationId="automationID"
+          [control]="form.get('sink')"
+        ></nts-form-field-text>
+      </p>
+      <pre><code class="language-ts" [innerHtml]="sink"></code></pre>
+      <h2>Inputs</h2>
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>placeholder</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>Standard html placeholder text</td>
+          </tr>
+          <tr>
+            <td>label</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>Floating label that appears in front of the content and moves above it when focused</td>
+          </tr>
+          <tr>
+            <td>prefix</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>An icon of text that will appear BEFORE the input</td>
+          </tr>
+          <tr>
+            <td>suffix</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>An icon of text that will appear AFTER the input</td>
+          </tr>
+          <tr>
+            <td>hint</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>Small text that appears beneath the control</td>
+          </tr>
+          <tr>
+            <td>automationId</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>A unique ID to use to help facilitate automated testing. Can be different than ID if ID is fixed</td>
+          </tr>
+          <tr>
+            <td>id</td>
+            <td>string | null</td>
+            <td>''</td>
+            <td>Text to use for ID attribute</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>Text to use for name attribute</td>
+          </tr>
+          <tr>
+            <td>styleClass</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>Any css classes</td>
+          </tr>
+          <tr>
+            <td>style</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>Any inline style</td>
+          </tr>
+          <tr>
+            <td>validators</td>
+            <td>Forms.Validators | null</td>
+            <td>null</td>
+            <td>Validators to attach through the template. Not preferred.</td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td>boolean | null</td>
+            <td></td>
+            <td>
+              Enable/disable this control, uses the form control method instead of template property. Setting the
+              disabled property should be done in the formgroup itself but this allows a parent component to set it via
+              an input which makes it easier to model drive
+            </td>
+          </tr>
+          <tr>
+            <td>formControl</td>
+            <td>FormControl</td>
+            <td>new FormControl()</td>
+            <td>Form control</td>
+          </tr>
+          <tr>
+            <td>control</td>
+            <td>AbstractControl | null | undefined</td>
+            <td></td>
+            <td>
+              Using an @Input() of "formControl" has a lot of problems with strict templates. Attempting to use the
+              following syntax fails the compiler test: [formControl]="form?.get('zipcode')" because the formControl
+              directive does not support the return type of that get request (AbstractControl | null | undefined). This
+              is a workaround for that limitation
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>Outputs</h2>
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>onFocus</td>
+            <td>EventEmitter&lt;FocusEvent&gt;</td>
+            <td>New EventEmitter&lt;FocusEvent&gt;()</td>
+            <td>When the input is focused</td>
+          </tr>
+          <tr>
+            <td>onBlur</td>
+            <td>EventEmitter&lt;FocusEvent&gt;</td>
+            <td>New EventEmitter&lt;FocusEvent&gt;()</td>
+            <td>When the input is blurred</td>
+          </tr>
+          <tr>
+            <td>onClick</td>
+            <td>EventEmitter&lt;MouseEvent&gt;</td>
+            <td>New EventEmitter&lt;MouseEvent&gt;()</td>
+            <td>When the input is clicked</td>
+          </tr>
+          <tr>
+            <td>onChange</td>
+            <td>EventEmitter&lt;t&gt;</td>
+            <td>New EventEmitter&lt;t&gt;()</td>
+            <td>When data on the input is changed</td>
+          </tr>
+          <tr>
+            <td>onKeyup</td>
+            <td>EventEmitter&lt;KeyboardEvent&gt;</td>
+            <td>New EventEmitter&lt;KeyboardEvent&gt;()</td>
+            <td>On keyup event on the input</td>
+          </tr>
+        </tbody>
+      </table>
+    </p-accordionTab>
+    <p-accordionTab header="Text">
+      <p>
+        <nts-form-field-text label="Text Example" [control]="form.get('text')"></nts-form-field-text>
+      </p>
+      <pre><code class="language-ts" [innerHtml]="text"></code></pre>
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>maxLength</td>
+            <td>number | null</td>
+            <td>null</td>
+            <td>The maximum number of characters allowed by this input.</td>
+          </tr>
+          <tr>
+            <td>minLength</td>
+            <td>number | null</td>
+            <td>null</td>
+            <td>The minimum number of characters allowed by this input.</td>
+          </tr>
+        </tbody>
+      </table>
+    </p-accordionTab>
+    <p-accordionTab header="Numbers & Currency">
+      <p><nts-form-field-number label="Number Example" [control]="form.get('number')"></nts-form-field-number></p>
+      <p>
+        <nts-form-field-number
+          label="Currency Example"
+          mode="currency"
+          [control]="form.get('currency')"
+        ></nts-form-field-number>
+      </p>
+      <pre><code class="language-ts" [innerHtml]="number"></code></pre>
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>showButtons</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Whether to show or hide spinner buttons.</td>
+          </tr>
+          <tr>
+            <td>min</td>
+            <td>number | null</td>
+            <td>null</td>
+            <td>The minimum number to allow (not minimum characters).</td>
+          </tr>
+          <tr>
+            <td>max</td>
+            <td>number | null</td>
+            <td>null</td>
+            <td>The maximum number to allow (not maximum characters).</td>
+          </tr>
+          <tr>
+            <td>maxLength</td>
+            <td>number | null</td>
+            <td>null</td>
+            <td>The maximum number of characters allowed by this input (not maximum number).</td>
+          </tr>
+          <tr>
+            <td>mode</td>
+            <td>'decimal' | 'currency'</td>
+            <td>'decimal'</td>
+            <td>The mode of the input: 'decimal' to allow decimal points, 'currency' to prepend a currency symbol.</td>
+          </tr>
+          <tr>
+            <td>useGrouping</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Whether to use a comma to separate thousands/millions/etc.</td>
+          </tr>
+          <tr>
+            <td>minFractionDigits</td>
+            <td>number</td>
+            <td>0</td>
+            <td>The minimum number of fraction digits to use.</td>
+          </tr>
+          <tr>
+            <td>maxFractionDigits</td>
+            <td>number</td>
+            <td>2</td>
+            <td>The maximum number of fraction digits to use.</td>
+          </tr>
+          <tr>
+            <td>currencySymbol</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>The currency symbol to use when mode is set to 'currency'.</td>
+          </tr>
+        </tbody>
+      </table>
+    </p-accordionTab>
+    <p-accordionTab header="Date/Calendar "
+      ><p><nts-form-field-date label="Date Example" [control]="form.get('date')"></nts-form-field-date></p>
+      <pre><code class="language-ts" [innerHtml]="date"></code></pre>
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>placeholder</td>
+            <td>string</td>
+            <td>'mm/dd/yyyy'</td>
+            <td>The standard HTML placeholder text to display in the input field.</td>
+          </tr>
+          <tr>
+            <td>inline</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Whether to display the calendar as inline. Default is false for popup mode.</td>
+          </tr>
+          <tr>
+            <td>showIcon</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Whether to show the calendar icon on the input field.</td>
+          </tr>
+          <tr>
+            <td>dateFormat</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>Format of the date which can also be defined at locale settings.</td>
+          </tr>
+        </tbody>
+      </table></p-accordionTab
+    >
+    <p-accordionTab header="Dropdown">
+      <p>
+        <nts-form-field-dropdown
+          label="Dropdown Example"
+          [options]="options"
+          [control]="form.get('dropdown')"
+        ></nts-form-field-dropdown>
+      </p>
+      <pre><code class="language-ts" [innerHtml]="dropdown"></code></pre>
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>options</td>
+            <td>Forms.FieldOptions[] | null</td>
+            <td>null</td>
+            <td>The options to display for the dropdown.</td>
+          </tr>
+          <tr>
+            <td>dataKey</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>A unique ID used for trackFn.</td>
+          </tr>
+          <tr>
+            <td>optionLabel</td>
+            <td>string</td>
+            <td>'label'</td>
+            <td>The property name for the label.</td>
+          </tr>
+          <tr>
+            <td>optionValue</td>
+            <td>string</td>
+            <td>'value'</td>
+            <td>The property name for the value.</td>
+          </tr>
+          <tr>
+            <td>optionDisabled</td>
+            <td>string</td>
+            <td>'disabled'</td>
+            <td>The name of the disabled field of an option.</td>
+          </tr>
+          <tr>
+            <td>scrollHeight</td>
+            <td>string</td>
+            <td>'200px'</td>
+            <td>The default height of the dropdown panel.</td>
+          </tr>
+          <tr>
+            <td>appendTo</td>
+            <td>any</td>
+            <td>null</td>
+            <td>The DOM element to which to append the dropdown panel. Can be 'body' or another template variable.</td>
+          </tr>
+          <tr>
+            <td>virtualScroll</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Whether to use virtual scroll to handle a large list of options.</td>
+          </tr>
+          <tr>
+            <td>showClear</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Whether to show an "X" which lets the user clear the selected value.</td>
+          </tr>
+          <tr>
+            <td>insertEmptyOption</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>
+              If true, inserts an empty option with the label of the placeholder and a value of null at the top of the
+              list. Essentially a selectable null option.
+            </td>
+          </tr>
+          <tr>
+            <td>placeholder</td>
+            <td>string</td>
+            <td>'-- Please Select --'</td>
+            <td>The placeholder text to display when no option is selected.</td>
+          </tr>
+          <tr>
+            <td>panelStyle</td>
+            <td>string</td>
+            <td>''</td>
+            <td>The style of the dropdown panel.</td>
+          </tr>
+          <tr>
+            <td>panelStyleClass</td>
+            <td>string</td>
+            <td>''</td>
+            <td>The CSS class to apply to the dropdown panel.</td>
+          </tr>
+        </tbody>
+      </table>
+    </p-accordionTab>
+    <p-accordionTab header="Email">
+      <p><nts-form-field-email label="Email Example" [control]="form.get('email')"></nts-form-field-email></p>
+      <pre><code class="language-ts" [innerHtml]="email"></code></pre>
+    </p-accordionTab>
+    <p-accordionTab header="Phone Number">
+      <p>
+        <nts-form-field-phonenumber
+          label="Phone Number Example"
+          [control]="form.get('phoneNumber')"
+        ></nts-form-field-phonenumber>
+      </p>
+      <pre><code class="language-ts" [innerHtml]="phone"></code></pre>
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>unmask</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>
+              Specifies whether form controls with input masks should return the raw data or the masked/formatted data.
+              If set to true, unmasking is enabled and the raw data will be returned. If set to false, the masked data
+              will be returned.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </p-accordionTab>
+    <p-accordionTab header="Radio">
+      <p>
+        <nts-form-field-radio
+          label="Radio Example"
+          [options]="options"
+          [control]="form.get('radio')"
+        ></nts-form-field-radio>
+      </p>
+      <pre><code class="language-ts" [innerHtml]="radio"></code></pre>
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>options</td>
+            <td>Forms.FieldOptions[] | null</td>
+            <td>null</td>
+            <td>Specifies the options to be displayed in the dropdown.</td>
+          </tr>
+          <tr>
+            <td>dataKey</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>Specifies the unique identifier for the options, used for the track function.</td>
+          </tr>
+          <tr>
+            <td>optionLabel</td>
+            <td>string</td>
+            <td>'label'</td>
+            <td>Specifies the property of the option to use as the label to be displayed.</td>
+          </tr>
+          <tr>
+            <td>optionValue</td>
+            <td>string</td>
+            <td>'value'</td>
+            <td>Specifies the property of the option to use as the value that will be bound to the form control.</td>
+          </tr>
+        </tbody>
+      </table>
+    </p-accordionTab>
+    <p-accordionTab header="Select Button">
+      <p>
+        <nts-form-field-select-button
+          label="Select Button Example"
+          [options]="options"
+          [control]="form.get('selectButton')"
+        ></nts-form-field-select-button>
+      </p>
+      <pre><code class="language-ts" [innerHtml]="select"></code></pre>
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>options</td>
+            <td>Forms.FieldOptions[] | null</td>
+            <td>null</td>
+            <td>Specifies the options to be displayed in the dropdown.</td>
+          </tr>
+          <tr>
+            <td>multiple</td>
+            <td>boolean | null</td>
+            <td>null</td>
+            <td>Specifies whether multiple options can be selected.</td>
+          </tr>
+          <tr>
+            <td>dataKey</td>
+            <td>string | null</td>
+            <td>null</td>
+            <td>Specifies the unique identifier for the options, used for the track function.</td>
+          </tr>
+          <tr>
+            <td>fullWidth</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Specifies whether the dropdown should take up the full width of its container.</td>
+          </tr>
+          <tr>
+            <td>canUnselect</td>
+            <td>boolean | null</td>
+            <td>null</td>
+            <td>Specifies whether an option can be unselected once it has been selected.</td>
+          </tr>
+        </tbody>
+      </table>
+    </p-accordionTab>
+    <p-accordionTab header="Text Area">
+      <p>
+        <nts-form-field-textarea label="Text Area Example" [control]="form.get('textArea')"></nts-form-field-textarea>
+      </p>
+      <pre><code class="language-ts" [innerHtml]="textarea"></code></pre>
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>rows</td>
+            <td>number</td>
+            <td>4</td>
+            <td>The number of rows (vertical) displayed in the textarea.</td>
+          </tr>
+          <tr>
+            <td>maxlength</td>
+            <td>number | null</td>
+            <td>null</td>
+            <td>The maximum number of characters allowed in the textarea. If null, there is no maximum limit.</td>
+          </tr>
+          <tr>
+            <td>columns</td>
+            <td>number | null</td>
+            <td>null</td>
+            <td>The number of columns (horizontal) displayed in the textarea.</td>
+          </tr>
+          <tr>
+            <td>autoResize</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>When present, textarea size changes as being typed</td>
+          </tr>
+        </tbody>
+      </table>
+    </p-accordionTab>
+    <p-accordionTab header="Zipcode">
+      <p><nts-form-field-zipcode label="Zipcode Example" [control]="form.get('zipCode')"></nts-form-field-zipcode></p>
+      <pre><code class="language-ts" [innerHtml]="zip"></code></pre>
+      <table class="table table-sm table-striped">
+        <thead>
+          <tr>
+            <th>Property Name</th>
+            <th>Type</th>
+            <th>Default Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>dataType</td>
+            <td>'string' | 'number' | null</td>
+            <td>string</td>
+            <td>Specifies whether the input data should be returned to the model as a string or a number.</td>
+          </tr>
+          <tr>
+            <td>allowNineDigitCodes</td>
+            <td>boolean | null</td>
+            <td>false</td>
+            <td>Specifies whether the input should allow for 9-digit zip codes instead of just 5-digit codes.</td>
+          </tr>
+        </tbody>
+      </table>
+    </p-accordionTab>
+  </p-accordion>
+</form>

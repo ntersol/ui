@@ -1,0 +1,27 @@
+<div class="input-date">
+  <nts-form-field-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [automationId]="automationId"
+    [control]="formControl"
+    [validators]="validators"
+    [id]="id || formFieldID"
+  >
+    <div class="w-100">
+      <p-calendar
+        [formControl]="formControl"
+        [placeholder]="placeholder ? placeholder : 'mm/dd/yyyy'"
+        [inputId]="id || formFieldID"
+        [name]="name || (label || placeholder | ntsSlug)"
+        appendTo="body"
+        [styleClass]="styleClass ?? ''"
+        [inline]="inline ?? false"
+        [showIcon]="showIcon ?? true"
+        [dateFormat]="dateFormat ?? ''"
+      ></p-calendar>
+    </div>
+  </nts-form-field-input>
+</div>

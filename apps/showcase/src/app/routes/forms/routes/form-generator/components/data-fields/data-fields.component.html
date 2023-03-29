@@ -1,0 +1,20 @@
+<h2>Datafields</h2>
+<p>
+  Datafields are a powerful feature that allows you to supply dynamic data to the form generator. With datafields, you
+  can define a set of field options that can be populated from a remote source like an API, making it easy to create
+  forms with dynamic dropdowns, checkboxes, and other fields that can be updated based on user input or other
+  conditions. The Datafields type defines a record that maps string keys to arrays of FieldOptions objects. Each
+  FieldOptions object represents a possible option for a field and contains a label and a value property. By defining
+  datafields, you can create forms that are more flexible and responsive to user input, providing a better user
+  experience and making it easier to collect the data you need.
+</p>
+
+<hr />
+<h2>Example</h2>
+
+<nts-form-generator [formModel]="model" [formGroup]="formGroup" [datafields]="datafields$ | async"></nts-form-generator>
+
+<hr />
+<h2>Code</h2>
+<p>String values</p>
+<pre><code class="language-ts" [innerHtml]="code"></code></pre>

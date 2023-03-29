@@ -1,8 +1,15 @@
 {
   "name": "@ntersol/forms",
-  "version": "0.0.11",
+  "version": "2.0.1",
   "license": "MIT",
+  "exports": {
+    "./validators": "./src/lib/validators"
+  },
   "peerDependencies": {
-    "@angular/common": ">11.0.1"
+    "@angular/common": ">=11.0.1",
+    "@angular/core": ">=11.0.1",
+    "primeng": ">=11.0.1",
+    "rxjs": ">=6.0.0",
+    "primeicons": ">=5.0.0"
   }
 }

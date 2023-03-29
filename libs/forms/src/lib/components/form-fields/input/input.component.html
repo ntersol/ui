@@ -1,0 +1,71 @@
+<div
+  *ngIf="inputState$ | async as state"
+  class="nts-form-field"
+  [ngClass]="{
+    'nts-form-field-has-errors': state.showErrors,
+    'nts-form-field-has-data': state.hasData,
+    'nts-form-field-is-valid': state.isValid,
+    'nts-form-field-is-invalid': state.isInvalid,
+    'nts-form-field-is-disabled': state.isDisabled,
+    'nts-form-field-required': state.required
+  }"
+  [attr.automation-id]="automationId || (label || placeholder | ntsSlug)"
+>
+  <!-- Label -->
+  <label
+    *ngIf="label$ | async as labelSrc"
+    class="p-float-label-top"
+    [for]="id"
+    [innerHtml]="!!state.required ? labelSrc + requiredTag : labelSrc"
+  ></label>
+
+  <div class="p-inputgroup">
+    <!-- Prefix -->
+    <span class="p-inputgroup-addon" *ngIf="prefix$ | async as prefixSrc" [innerHtml]="prefixSrc"></span>
+    <ng-content></ng-content>
+    <!-- Suffix -->
+    <span class="p-inputgroup-addon" *ngIf="suffix$ | async as suffixSrc" [innerHtml]="suffixSrc"></span>
+  </div>
+
+  <!-- Hint -->
+  <div class="nts-form-field-hint" *ngIf="hint$ | async as hintSrc" [innerHtml]="hintSrc"></div>
+
+  <!-- Errors -->
+  <div class="nts-form-field-errors pt-1 anim-fade-in" *ngIf="state.showErrors">
+    <ng-container *ngIf="state.errors">
+      <div class="nts-form-field-error" *ngFor="let error of state.errors" [innerHtml]="error"></div>
+      <!--
+           Add support for default Angular validators
+        <ng-container [ngSwitch]="error[0]">
+
+
+
+          <ng-container *ngSwitchCase="'required'"> {{ label || placeholder || 'This field' }} is <strong>required</strong> </ng-container>
+          <ng-container *ngSwitchCase="'email'"> Email address is <strong>required</strong> </ng-container>
+          <ng-container *ngSwitchCase="'minlength'">
+            Please enter at least
+            <strong>{{ formControl?.errors?.minlength?.requiredLength }}</strong>
+            characters
+          </ng-container>
+          <ng-container *ngSwitchCase="'maxlength'">
+            Please enter less than
+            <strong>{{ formControl?.errors?.maxlength?.requiredLength }}</strong>
+            characters
+          </ng-container>
+          <ng-container *ngSwitchCase="'min'">
+            Please enter a number that is greater than
+            <strong>{{ formControl?.errors?.min?.min }}</strong>
+          </ng-container>
+          <ng-container *ngSwitchCase="'max'">
+            Please enter a number that is less than
+            <strong>{{ formControl?.errors?.max?.max }}</strong>
+          </ng-container>
+
+          <ng-container *ngSwitchDefault>
+            <span [innerHtml]="error[1]"></span>
+          </ng-container>
+          </ng-container>
+        -->
+    </ng-container>
+  </div>
+</div>

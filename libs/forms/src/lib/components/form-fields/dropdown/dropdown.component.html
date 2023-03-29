@@ -1,0 +1,33 @@
+<div class="nts-dropdown">
+  <nts-form-field-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [control]="formControl"
+    [automationId]="automationId"
+    [validators]="validators"
+    [id]="id || formFieldID"
+  >
+    <p-dropdown
+      [options]="optionsUpdated ?? []"
+      [optionLabel]="'label'"
+      [optionValue]="'value'"
+      [optionDisabled]="optionDisabled"
+      [name]="name ?? ''"
+      [inputId]="id || formFieldID"
+      [scrollHeight]="scrollHeight ?? '200px'"
+      [style]="style"
+      [styleClass]="styleClass ?? ''"
+      [panelStyle]="panelStyle"
+      [panelStyleClass]="panelStyleClass"
+      [placeholder]="placeholder"
+      [appendTo]="appendTo"
+      [virtualScroll]="virtualScroll ?? false"
+      [showClear]="showClear ?? false"
+      [formControl]="formControl"
+    >
+    </p-dropdown>
+  </nts-form-field-input>
+</div>

@@ -1,0 +1,30 @@
+<div class="input-textarea">
+  <nts-form-field-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [automationId]="automationId"
+    [control]="formControl"
+    [validators]="validators"
+    [id]="id || formFieldID"
+  >
+    <textarea
+      pInputTextarea
+      [id]="id || formFieldID"
+      [name]="name || (label || placeholder | ntsSlug)"
+      [ngClass]="styleClass ?? ''"
+      [placeholder]="placeholder ?? ''"
+      [formControl]="formControl"
+      [rows]="rows ?? 4"
+      [cols]="columns ?? 30"
+      [maxlength]="maxlength ?? null"
+      [autoResize]="autoResize ?? false"
+      (focus)="focus($event)"
+      (blur)="blur($event)"
+      (keyup)="onKeyup.emit($event)"
+      (click)="onClick.emit($event)"
+    ></textarea>
+  </nts-form-field-input>
+</div>

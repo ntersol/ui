@@ -1,0 +1,41 @@
+<h2>Custom Footer</h2>
+<p>
+  Introducing a customizable footer for the form generator that allows you to add custom content and tailor the footer
+  to your specific needs. With the <strong>footerContentLeft</strong> and
+  <strong>footerContentRight</strong> directives, you can add custom content to the left and right of the footer,
+  respectively, including replacing the default submit button with your own custom button. If you choose not to replace
+  the submit button, you can use the beforeSubmitButton and afterSubmitButton directives to insert custom content before
+  or after the submit button. With these customizable footer options, you can create forms that look and feel exactly
+  the way you want them to, providing a seamless user experience and making it easy to collect the data you need.
+</p>
+<p>Available Directives:</p>
+<ul>
+  <li><code>footerContentLeft</code>: Directly places custom content into the left of the footer.</li>
+  <li>
+    <code>footerContentRight</code>: Replaces the content on the right of the footer, including the submit button, with
+    custom content.
+  </li>
+  <li><code>beforeSubmitButton</code>: Inserts custom content before the default submit button in the footer.</li>
+  <li><code>afterSubmitButton</code>: Inserts custom content after the default submit button in the footer.</li>
+</ul>
+
+<hr />
+<h2>Examples</h2>
+<p>Custom buttons before and after submit button</p>
+<nts-form-generator [formModel]="formModel" [formGroup]="formGroup">
+  <div beforeSubmitButton><button pButton class="mr-2">Before Submit</button></div>
+  <div afterSubmitButton><button pButton class="ml-2">After Submit</button></div>
+</nts-form-generator>
+<hr />
+<p>Custom left and right footer</p>
+<nts-form-generator [formModel]="formModel" [formGroup]="formGroup">
+  <div footerContentLeft>
+    <button pButton>Undo Changes</button>
+  </div>
+  <div footerContentRight>
+    <button pButton>Custom Submit</button>
+  </div>
+</nts-form-generator>
+<hr />
+<h2>Code</h2>
+<pre><code class="language-html" [innerHtml]="layoutCode"></code></pre>

@@ -1,0 +1,42 @@
+<div class="input-number">
+  <nts-form-field-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [automationId]="automationId"
+    [control]="formControl"
+    [validators]="validators"
+    [id]="id || formFieldID"
+  >
+    <div class="w-100">
+      <p-inputNumber
+        #num
+        currency="USD"
+        locale="en-US"
+        [formControl]="formControl"
+        [placeholder]="placeholder ?? ''"
+        [mode]="mode ?? 'decimal'"
+        [useGrouping]="useGrouping ?? true"
+        [minFractionDigits]="minFractionDigits ?? 0"
+        [maxFractionDigits]="maxFractionDigits ?? 2"
+        [inputId]="id || formFieldID"
+        [ngClass]="styleClass ?? ''"
+        [name]="name ?? ''"
+        [min]="min ?? 0"
+        [max]="max ?? 9999999999999999999999999999999"
+        [maxlength]="maxLength ?? 9999999999999999999999999999999"
+        [showButtons]="showButtons ?? false"
+        [prefix]="currencySymbol ?? ''"
+        [useGrouping]="useGrouping ?? true"
+        (onFocus)="focus($event)"
+        (onBlur)="blur($event)"
+        (keyup)="onKeyup.emit($event)"
+        (click)="onClick.emit($event)"
+        (onInput)="onInput($event)"
+      >
+      </p-inputNumber>
+    </div>
+  </nts-form-field-input>
+</div>

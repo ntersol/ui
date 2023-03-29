@@ -1,0 +1,28 @@
+<div class="input-text">
+  <nts-form-field-input
+    [label]="label"
+    [placeholder]="placeholder"
+    [prefix]="prefix"
+    [suffix]="suffix"
+    [hint]="hint"
+    [automationId]="automationId"
+    [control]="formControl"
+    [validators]="validators"
+    [id]="id || formFieldID"
+  >
+    <input
+      #input
+      class="p-inputtext p-component p-element"
+      type="text"
+      [id]="id || formFieldID"
+      [name]="name || (label || placeholder | ntsSlug)"
+      [ngClass]="styleClass ?? ''"
+      [placeholder]="placeholder ?? ''"
+      (focus)="focus($event)"
+      (blur)="blur($event)"
+      (keyup)="onKeyup.emit($event)"
+      (click)="onClick.emit($event)"
+      [formControl]="formControl"
+    />
+  </nts-form-field-input>
+</div>

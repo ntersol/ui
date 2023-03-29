@@ -1,0 +1,23 @@
+$verticalSpacing: 1.5rem;
+
+#form-generator {
+  .form-generator-main {
+    margin-bottom: $verticalSpacing;
+  }
+  .form-generator-formfield {
+    margin-bottom: $verticalSpacing;
+  }
+  .form-generator-footer {
+    display: flex;
+    justify-content: space-between;
+    & > div {
+      display: flex;
+    }
+  }
+  .text-right {
+    text-align: right;
+  }
+  .d-flex {
+    display: flex;
+  }
+}

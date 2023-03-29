@@ -1,0 +1,21 @@
+<h2>Layout</h2>
+<p>
+  Layout content types are used to build responsive form with containers, rows, and columns and involve dividing the
+  form into separate sections (containers) and organizing the form elements into rows and columns within those sections.
+</p>
+<p>
+  There are 3 varieties of layout content types: containers, rows and columns. Containers are wrappers around other
+  content types and are used to to group other elements or provide styling. Rows form the basis of responsive layouts
+  and contain columns which hold content. Layout content types are not required, IE you can have form content directly
+  in the form generator without either a container or rows.
+</p>
+<p>
+  Currently only a single level of rows > columns are supported. This is due to a limitation in the compiler preventing
+  circular dependencies.
+</p>
+<hr />
+<h2>Example</h2>
+<nts-form-generator [formModel]="layoutModel" [formGroup]="layoutForm"></nts-form-generator>
+<hr />
+<h2>Code</h2>
+<pre><code class="language-ts" [innerHtml]="layoutCode"></code></pre>

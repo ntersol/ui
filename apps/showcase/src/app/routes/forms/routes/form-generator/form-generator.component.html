@@ -1,0 +1,54 @@
+<div class="author"><strong>Author:</strong> Jerrol Krause</div>
+
+<h1>Form Generator</h1>
+<p>The form generator is a tool for creating dynamic and customizable forms with features such as:</p>
+<ul>
+  <li>Model-driven approach for easy form creation and management.</li>
+  <li>Valid JSON for easy use with a REST API</li>
+  <li>Responsive layout for optimal display on various devices</li>
+  <li>A variety of form fields to choose from including input, dropdown, radio, and more</li>
+  <li>Support for HTML and dynamic content, allowing for flexible and personalized forms</li>
+  <li>Dynamic visibility for showing and hiding fields based on user input</li>
+  <li>Data fields to display information from external sources such as a REST API</li>
+  <li>Customizable footer to add additional information or links.</li>
+</ul>
+<hr />
+
+<p-tabView>
+  <!-- Documentation -->
+  <p-tabPanel header="Documentation">
+    <h2>Import</h2>
+    <pre><code class="language-ts" [innerHtml]="import"></code></pre>
+    <h2>HTML</h2>
+    <pre><code class="language-html" [innerHtml]="exampleHTML"></code></pre>
+    <h2>Typescript</h2>
+    <pre><code class="language-ts" [innerHtml]="handlersTs"></code></pre>
+  </p-tabPanel>
+  <!-- Example -->
+  <p-tabPanel header="Examples & Features">
+    <h2>Available Features</h2>
+    <p-accordion>
+      <p-accordionTab header="Basic Example">
+        <nts-basic></nts-basic>
+      </p-accordionTab>
+      <p-accordionTab header="Layout">
+        <nts-layout-demo></nts-layout-demo>
+      </p-accordionTab>
+      <p-accordionTab header="HTML">
+        <nts-html-demo></nts-html-demo>
+      </p-accordionTab>
+      <p-accordionTab header="Dynamic Visibility">
+        <nts-visibility></nts-visibility>
+      </p-accordionTab>
+      <p-accordionTab header="Dynamic Content">
+        <nts-dynamic-content></nts-dynamic-content>
+      </p-accordionTab>
+      <p-accordionTab header="Datafields">
+        <nts-data-fields></nts-data-fields>
+      </p-accordionTab>
+      <p-accordionTab header="Custom Footer">
+        <nts-custom-footer></nts-custom-footer>
+      </p-accordionTab>
+    </p-accordion>
+  </p-tabPanel>
+</p-tabView>
