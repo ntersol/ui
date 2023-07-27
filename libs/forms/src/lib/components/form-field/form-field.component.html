@@ -268,7 +268,7 @@
   <div class="nts-form-field-hint" [innerHtml]="hint" *ngIf="hint"></div>
 
   <!-- Errors -->
-  <div *ngIf="formControl?.invalid && formControl?.touched && formControl?.errors && showError" class="red pt-1 anim-fade-in">
+  <div *ngIf="showError && formControl?.errors && formControl?.invalid && (formControl?.dirty || formControl?.touched)" class="red pt-1 anim-fade-in">
     <div *ngIf="errorCustom && formControl?.errors?.required" [innerHtml]="errorCustom"></div>
     <div *ngIf="!errorCustom && formControl?.errors?.required" class="small">
       <!-- Use label if supplied -->
