@@ -42,6 +42,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   @Input() paginateRows = 0;
   /** Shows a dropdown with how many results per page */
   @Input() rowsPerPageOptions: number[] = [];
+  /** Responsive behavior */
+  @Input() responsiveLayout = 'scroll';
 
   @Input() rowTrackBy: any = null; // Function | null
 

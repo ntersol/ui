@@ -23,7 +23,8 @@ export class ShowcaseTableComponent {
 
   public columns: NtsTable.Column[] = [
     { header: 'Name', field: 'name' },
-    { header: 'Skill', field: 'skill', sortable: false }
+    { header: 'Skill', field: 'skill', sortable: false },
+    { header: 'Favorite Phrase', field: 'favoritePhrase', sortable: false },
   ];
 
   public headerText?: string | null = 'Bob\'s Burgers Characters';
@@ -153,6 +154,7 @@ export class ShowcaseTableComponent {
   public columns: NtsTable.Column[] = [
     { header: 'Name', field: 'name', width: '200px' },
     { header: 'Skill', field: 'skill', sortable: false },
+    { header: 'Favorite Phrase', field: 'favoritePhrase', sortable: false },
   ];
 
   public headerText?: string | null = "Bob's Burgers Characters";
