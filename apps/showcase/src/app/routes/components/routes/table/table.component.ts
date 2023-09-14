@@ -147,7 +147,11 @@ export class ShowcaseTableComponent {
     { name: 'Bob', skill: 'cooking burgers', favoritePhrase: 'omg.' },
     { name: 'Linda', skill: 'singing', favoritePhrase: 'Ow! My face!' },
     { name: 'Gene', skill: 'keyboard', favoritePhrase: '??' },
-    { name: 'Tina', skill: 'running without moving arms', favoritePhrase: 'uhhhhhhh' },
+    {
+      name: 'Tina',
+      skill: 'running without moving arms and having a great time no matter what',
+      favoritePhrase: 'uhhhhhhh',
+    },
     { name: 'Louise', skill: 'guilty conscience', favoritePhrase: 'No' },
   ]);
 

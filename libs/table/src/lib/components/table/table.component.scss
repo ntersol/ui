@@ -63,18 +63,20 @@
     transform: translate(20px, 0px);
   }
   @media (max-width: 998px) {
-    overflow-x: auto;
-    &:before {
-      content: '\2190  Swipe to scroll left to right  \2192';
-      font-family: Arial;
-      font-size: 0.75rem;
-      padding-left: 5px;
-      color: #a94442;
-      position: relative;
-    }
-    td,
-    th {
-      white-space: nowrap;
+    .p-datatable-responsive-scroll {
+      overflow-x: auto;
+      &:before {
+        content: '\2190  Swipe to scroll left to right  \2192';
+        font-family: Arial;
+        font-size: 0.75rem;
+        padding-left: 5px;
+        color: #a94442;
+        position: relative;
+      }
+      td,
+      th {
+        white-space: nowrap;
+      }
     }
   }
   &.nts-table-compact {
@@ -84,6 +86,42 @@
     }
     .p-widget {
       font-size: 12px !important;
+    }
+  }
+  /* Responsive styles for mobile screens */
+  @media (max-width: 768px) {
+    .p-datatable-responsive-stack {
+      .p-datatable-tbody > tr {
+        & > td {
+          border-width: 0px;
+          align-items: baseline !important;
+        }
+        td:last-child {
+          border-bottom-width: 1px;
+        }
+        td::before {
+          content: attr(data-label);
+          float: left;
+          font-weight: bold;
+          margin-right: 7px;
+        }
+      }
+      /*
+      .p-datatable-tbody > tr > td {
+        border-width: 0px;
+        align-items: baseline;
+      }
+      tr td:last-child {
+        border-bottom-width: 1px;
+      }
+      */
+      /* Add pseudo-element to display headers next to data
+      td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        margin-right: 10px;
+      }*/
     }
   }
 }

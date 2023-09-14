@@ -43,7 +43,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   /** Shows a dropdown with how many results per page */
   @Input() rowsPerPageOptions: number[] = [];
   /** Responsive behavior */
-  @Input() responsiveLayout = 'scroll';
+  @Input() responsiveLayout: 'scroll' | 'stack' = 'scroll';
 
   @Input() rowTrackBy: any = null; // Function | null
 

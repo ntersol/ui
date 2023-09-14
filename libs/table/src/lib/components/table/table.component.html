@@ -87,6 +87,7 @@
         <!-- Loop through columns -->
         <td
           *ngFor="let col of columns"
+          [attr.data-label]="col.header"
           [ngClass]="[
             'nts-table-td-' + (col.field | slug),
             'nts-table-td-type-' + (col.type | slug),
@@ -136,11 +137,6 @@
                   {{ rowData[col.field] }}
                 </div>
               </ng-container>
-              <!--
-              <ng-container *ngSwitchCase="'phoneNumber'">
-                    <a href="tel:{{rowData[col.field] | phoneNumber}}">{{ rowData[col.field] | phoneNumber }}</a>
-                  </ng-container>
-              -->
               <ng-container *ngSwitchDefault>
                 {{ rowData[col.field] }}
               </ng-container>
