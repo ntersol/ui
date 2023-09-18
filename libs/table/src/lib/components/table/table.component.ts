@@ -27,7 +27,7 @@ import { NtsTable } from '../../table.models';
 })
 export class TableComponent implements OnInit, OnChanges, OnDestroy {
   /** Rows */
-  @Input() rows: any[] | null = [];
+  @Input() rows: unknown[] | null = [];
   /** Columns */
   @Input() columns: NtsTable.Column[] = [];
   /** Custom header text */
@@ -77,15 +77,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor() {}
 
-  ngOnInit() {
-    if (this.rows) {
-      this.rowsSrc = [...this.rows];
-    }
-
-    this.updateShouldShowExpandRow();
-    this.paginator =
-      !!this.rows?.length && !!this.paginateRows && this.rows.length > this.paginateRows ? !!this.paginateRows : false;
-  }
+  ngOnInit() {}
 
   ngOnChanges(model: SimpleChanges) {
     // When filter term changes
@@ -97,14 +89,12 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
       this.rowsSrc = [...this.rows];
     }
 
-    /**
-    if (this.tableHeaders) {
-      setTimeout(() => {
-        // this.columnWidthsPercent = this.columnWidthFix(this.tableHeaders.toArray());
-        this.ref.markForCheck();
-      });
+    if (model.rows || model.paginateRows) {
+      this.paginator =
+        !!this.rows?.length && !!this.paginateRows && this.rows.length > this.paginateRows
+          ? !!this.paginateRows
+          : false;
     }
-     */
 
     this.updateShouldShowExpandRow();
   }
@@ -132,23 +122,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   /**
-   * Create an array of column width percentages
-   *
-   * @param th
-
-  private columnWidthFix(th: ElementRef<any>[]) {
-    if (!th || !th.length) {
-      return null;
-    }
-    const widthsPx = th.map((x) => x.nativeElement.clientWidth);
-    const tableWidth = widthsPx.reduce((a, b) => a + b);
-    if (!tableWidth) {
-      return null;
-    }
-    return widthsPx.map((x) => Math.floor((x / tableWidth) * 100));
-  }
-  */
-
+   * Handle toggling of the row expansion
+   */
   private updateShouldShowExpandRow() {
     this.shouldShowExpandRow =
       !!this.templates['expansion'] && !!this.templates['expansion'].templateExpansion && !!this.dataKey;
